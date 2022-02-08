@@ -1,0 +1,31 @@
+:root {
+  --bg-color: #ffffff;
+  --bg-color-20: #b9b9b9;
+  --title-color: #ffffff;
+  --section-title-color: #ffffff;
+  --project--bg-color: #ffffff;
+
+  --grid-item-size: 90px;
+  --section-width: 70%;
+
+  --small-text: 1rem;
+  --medium-text: 1.5rem;
+  --big-text: 2rem;
+
+  /*--header-color: #ff9500;*/
+  --header-color: #ff7f50;
+  --nav-link-text: #000000;
+  --nav-link-text-hover: #ffffff;
+}
+
+.header {
+  background-color: var(--header-color);
+}
+
+.timers-wrapper {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.timer {
+}
