@@ -64,7 +64,7 @@ html {
   height: 250px;
   overflow: hidden;
 
-  background-color: var(--theme-color);
+  /*background-color: var(--theme-color);*/
   border-radius: 50%;
 }
 

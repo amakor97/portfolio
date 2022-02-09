@@ -42,14 +42,24 @@ function showAddTimerWindow(e) {
     e.preventDefault();
     let form = e.currentTarget.parentElement;
     const timerInput = form.querySelector(".add-form__input-time");
-    timerContainer.innerHTML = `<div class="timer__circle">
-    <div class="timer__circle-segment"></div>
-  </div>
-  <!--<canvas class="timer__circle"></canvas>-->
+    timerContainer.innerHTML = `<canvas class="timer__circle" width="200" height="200"></canvas>
   <div class="timer__percent">74,843%</div>
   <div class="timer__settings">
     <button>*</button>
   </div>`;
+
+    let canvas = timerContainer.querySelector(".timer__circle");
+    console.log(canvas);
+    let ctx = canvas.getContext("2d");
+
+
+    console.log(ctx);
+    /*ctx.beginPath();
+    ctx.moveTo(100,100);
+    ctx.lineTo(200,100);
+ctx.arc(100, 100, 100, 0, 2*Math.PI/100*77);
+ctx.lineTo(100,100);
+ctx.stroke();*/
 
     let timerInfo = {};
     timerInfo.id = timers;
@@ -61,10 +71,25 @@ function showAddTimerWindow(e) {
     timerData.push(timerInfo);
     console.log(timerData);
     createNewBox();
-    calcValues(timers);
+    calcValues(ctx, timers);
+    //drawTimer(ctx, timers);
     timers++;
   })
 
+}
+
+function drawTimer(ctx, i) {
+  let percentValue = timerData[i].remainingTime*100/timerData[i].initialTime;;
+  
+  setInterval(function(){
+    ctx.clearRect(0, 0, ctx.width, ctx.height);
+    ctx.beginPath();
+    ctx.moveTo(100,100);
+    ctx.lineTo(200,100);
+ctx.arc(100, 100, 100, 0, 2*Math.PI/100*percentValue);
+ctx.lineTo(100,100);
+ctx.stroke();
+  }, 1000);
 }
 
 function addNewTimer() {
@@ -91,8 +116,8 @@ function createNewBox() {
   wrapper.appendChild(newTimer);
 }
 
-function calcValues(i) {
-  let percentValue = timerData[i].remainingTime*100/timerData[i].initialTime;;
+function calcValues(ctx, i) {
+  let percentValue = timerData[i].remainingTime*100/timerData[i].initialTime;
   let percentContainers = document.querySelectorAll(".timer__percent");
   percentContainers[i].innerHTML = `${percentValue}%`;
   setInterval(function(){
@@ -100,11 +125,20 @@ function calcValues(i) {
         percentValue = timerData[i].remainingTime*100/timerData[i].initialTime;
         percentContainers[i].innerHTML = `${Math.floor(percentValue*100)/100}%`;
         console.log(percentValue, i);
-        timerData[i].remainingTime -= 1;
+        timerData[i].remainingTime -= 0.1;
+        
+        ctx.beginPath();
+        ctx.clearRect(0, 0, 200, 200);
+        ctx.moveTo(100,100);
+        ctx.lineTo(200,100);
+        ctx.arc(100, 100, 100, 0, 2*Math.PI/100*percentValue);
+        ctx.lineTo(100,100);
+        ctx.stroke();
+
       } else {
         percentContainers[i].innerHTML = "finished";
       }
-  }, 1000);
+  }, 100);
 }
 
 /*
