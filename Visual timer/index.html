@@ -15,12 +15,18 @@
     <main>
       <section class="timers-wrapper">
         <article class="timer">
-          <div>Placeholder for visual representation</div>
-          <div>74,843%</div>
+          <div class="timer__circle">
+            <div class="timer__circle-segment"></div>
+          </div>
+          <!--<canvas class="timer__circle"></canvas>-->
+          <div class="timer__percent">74,843%</div>
+          <div class="timer__settings">
+            <button>*</button>
+          </div>
         </article>
         <article class="timer">
-          <button>+</button>
-          <p>Add new timer</p>
+          <button class="timer__add-timer-btn js-add-timer-btn">+</button>
+          <p class="timer__text">Add new timer</p>
         </article>
       </section>
     </main>
