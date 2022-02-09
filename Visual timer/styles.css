@@ -42,12 +42,14 @@ html {
 }
 
 .timer {
+  position: relative;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 300px;
-  padding: 0 0 0 2rem;
+  padding: 0 0 0 0;
   margin: 0 auto 2rem;
   overflow: hidden;
 
@@ -107,4 +109,17 @@ html {
   font-size: 5rem;
 
   background-color: rgba(0, 255, 0, 0.3);
+}
+
+.add-form {
+  position: absolute;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  height: 100%;
+
+  background-color: #b9b9b9;
 }
