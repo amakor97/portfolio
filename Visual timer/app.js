@@ -75,8 +75,16 @@ function showAddTimerWindow(e) {
 
       if (timerData[boxIndex].status == "running") {
         timerData[boxIndex].status = "paused";
+        timerData[boxIndex].timestampWhenPaused = new Date().getTime();
+        console.log("paused timestamp:", timerData[boxIndex].timestampWhenPaused);
       } else {
+        //timerData[boxIndex].timestamp = new Date().getTime();
         timerData[boxIndex].status = "running";
+        timerData[boxIndex].timestampWhenRunning = new Date().getTime();
+        console.log("running timestamp:", timerData[boxIndex].timestampWhenRunning);
+        timerData[boxIndex].pauseDelayTimestamp = timerData[boxIndex].timestampWhenRunning - timerData[boxIndex].timestampWhenPaused;
+        console.log("delay: ", timerData[boxIndex].pauseDelayTimestamp);
+        timerData[boxIndex].timestamp += timerData[boxIndex].pauseDelayTimestamp;
       }
     })
     
@@ -130,11 +138,20 @@ function calcValues2() {
           if (document.hidden) {
             timer.remainingTime -= 1;
           } else {
-            timer.remainingTime -= 0.1;
+            //timer.remainingTime -= 1;
+            console.log("initial: ", timer.timestamp);
+            let currentTimestamp = new Date().getTime();
+            console.log("cur:", currentTimestamp);
+            let timeDif = currentTimestamp - timer.timestamp; //!!!
+            console.log("difference:",timeDif);
+            let remTime = timer.initialTime*1000 - timeDif;
+            console.log("calculated remtime:", remTime);
+            timer.remainingTime = remTime/1000;
+            timeInSecsContainers[index].innerHTML = `Rem. time: ${remTime/1000} secs`;
           }
           percentContainers[index].innerHTML = `${Math.floor(percentValue*100)/100}%`;
           //title.innerHTML = timer.remainingTime;
-          timeInSecsContainers[index].innerHTML = `Rem. time: ${Math.round(timer.remainingTime)} secs`;
+          //timeInSecsContainers[index].innerHTML = `Rem. time: ${Math.round(timer.remainingTime)} secs`;
           drawTimer2(ctx, percentValue);
         } else {
           percentContainers[index].innerHTML = "finished";
@@ -147,7 +164,7 @@ function calcValues2() {
   if (document.hidden) {
     setTimeout(calcValues2, 0);
   } else {
-  setTimeout(calcValues2, 100);
+  setTimeout(calcValues2, 50);
   }
 }
 
