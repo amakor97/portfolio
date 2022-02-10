@@ -66,6 +66,8 @@ html {
 
   /*background-color: var(--theme-color);*/
   border-radius: 50%;
+
+  /*transform: rotate(90deg);*/
 }
 
 .timer__circle-segment {
