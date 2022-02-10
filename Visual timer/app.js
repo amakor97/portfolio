@@ -34,6 +34,7 @@ function showAddTimerWindow(e) {
                               </form>`;
 
   const submitBtn = timerContainer.querySelector(".add-form__submit");
+
   submitBtn.addEventListener("click", function(e){
     e.preventDefault();
     const form = e.currentTarget.parentElement;
@@ -41,28 +42,60 @@ function showAddTimerWindow(e) {
     
     timerContainer.innerHTML = `<canvas class="timer__circle" width="200" height="200"></canvas>
                                 <div class="timer__percent">74,843%</div>
+                                <div class="timer__text js-remaining-secs">Rem. time in secs</div>
                                 <div class="timer__settings">
                                   <button>*</button>
+                                  <button class="js-pause-timer-btn">P</button>
+                                  <button class="js-del-timer-btn">D</button>
                                 </div>`;
 
     let canvas = timerContainer.querySelector(".timer__circle");
     console.log(canvas);
     let ctx = canvas.getContext("2d");
 
-    console.log(ctx);
-
     let timerInfo = {};
     timerInfo.id = timers;
     timerInfo.type = type;
     timerInfo.initialTime = timerInput.value;
     timerInfo.remainingTime = timerInfo.initialTime;
-    timerInfo.status = 1;
+    timerInfo.status = "running";
     timerInfo.timestamp = new Date().getTime();
     timerData.push(timerInfo);
     console.log(timerData);
+    let id = timers;
+
+    const pauseBtn = timerContainer.querySelector(".js-pause-timer-btn");
+    pauseBtn.addEventListener("click", function(e){
+      
+      let currentBox = e.currentTarget.parentElement.parentElement;
+      let timersBoxes = document.querySelectorAll(".timer");
+      console.log(timersBoxes);
+      let boxIndex = Array.prototype.indexOf.call(timersBoxes, currentBox);
+      console.log("index: ", boxIndex);
+
+      if (timerData[boxIndex].status == "running") {
+        timerData[boxIndex].status = "paused";
+      } else {
+        timerData[boxIndex].status = "running";
+      }
+    })
+    
+    
+    const delBtn = timerContainer.querySelector(".js-del-timer-btn");
+    delBtn.addEventListener("click", function(e){
+      let currentBox = e.currentTarget.parentElement.parentElement;
+      let timersBoxes = document.querySelectorAll(".timer");
+      let boxIndex = Array.prototype.indexOf.call(timersBoxes, currentBox);
+      console.log("index: ", boxIndex);
+      timerData.splice(boxIndex, 1);
+      
+      wrapper.removeChild(timersBoxes[boxIndex]);
+      console.log(timerData);
+    })
+
+    console.log(ctx);
     
     createNewBox();
-    calcValues(ctx, timers);
     timers++;
   })
 }
@@ -81,26 +114,33 @@ function createNewBox() {
   wrapper.appendChild(newTimer);
 }
 
-function calcValues(ctx, i) {
-  let percentValue = timerData[i].remainingTime*100/timerData[i].initialTime;
-  let percentContainers = document.querySelectorAll(".timer__percent");
-  percentContainers[i].innerHTML = `${percentValue}%`;
-
-  setInterval(function(){
-      if(percentValue > 0) {
-        percentValue = timerData[i].remainingTime*100/timerData[i].initialTime;
-        percentContainers[i].innerHTML = `${Math.floor(percentValue*100)/100}%`;
-        console.log(percentValue, i);
-        timerData[i].remainingTime -= 0.1;
-        if(percentValue > 0) {
+function calcValues2() {
+  if (timerData.length !== 0) {
+    let canvases = document.querySelectorAll(".timer__circle");
+    let percentContainers = document.querySelectorAll(".timer__percent");
+    let timeInSecsContainers = document.querySelectorAll(".js-remaining-secs");
+    timerData.forEach(function(timer, index) {
+      if (timer.status !== "paused") {
+        let ctx = canvases[index].getContext("2d");
+        let percentValue = timer.remainingTime*100/timer.initialTime;
+        
+        if (percentValue > 0) {
+          timer.remainingTime -= 0.1;
+          percentContainers[index].innerHTML = `${Math.floor(percentValue*100)/100}%`;
+          timeInSecsContainers[index].innerHTML = `Rem. time: ${Math.round(timer.remainingTime)} secs`;
           drawTimer2(ctx, percentValue);
+        } else {
+          percentContainers[index].innerHTML = "finished";
+          drawCircle(ctx);
         }
-      } else {
-        drawCircle(ctx);
-        percentContainers[i].innerHTML = "finished";
       }
-  }, 100);
+
+    })
+  }
+  setTimeout(calcValues2, 100);
 }
+
+calcValues2();
 
 function drawTimer2(ctx, percentValue) {
   ctx.beginPath();
@@ -108,23 +148,23 @@ function drawTimer2(ctx, percentValue) {
   ctx.moveTo(100,100);
   ctx.lineWidth = 2;
   ctx.lineTo(100,0);
-  console.log(percentValue);
-  console.log((2*Math.PI/100*(1-percentValue)));
+  //console.log(percentValue);
+  //console.log((2*Math.PI/100*(1-percentValue)));
   if((2*Math.PI/100*(1-percentValue)) < 0) {
   //ctx.arc(100, 100, 100, 3*Math.PI/2, ((2*Math.PI/100*percentValue) + 3*Math.PI/2), false);
     ctx.arc(100,100, 100, 3*Math.PI/2, ((2*Math.PI/100*(1-percentValue)) + 3*Math.PI/2), true);
   }
   ctx.lineTo(100,100);
-  ctx.fillStyle = "red";
+  ctx.fillStyle = "lightgrey";
   ctx.fill();
-  ctx.strokeStyle = "green";
+  ctx.strokeStyle = "grey";
   ctx.stroke();
 
   if((2*Math.PI/100*(1-percentValue)) < 0) {
     ctx.beginPath();
     ctx.lineWidth = 4;
     ctx.arc(100,100, 100, 3*Math.PI/2, ((2*Math.PI/100*(1-percentValue)) + 3*Math.PI/2), true);
-    ctx.strokeStyle = "green";
+    ctx.strokeStyle = "grey";
     ctx.stroke();
   }
 }
@@ -133,7 +173,8 @@ function drawCircle(ctx) {
   ctx.beginPath();
   ctx.clearRect(0, 0, 200, 200);
   ctx.arc(100, 100, 100, 0, 2*Math.PI);
-  ctx.strokeStyle = "green";
+  ctx.lineWidth = 4;
+  ctx.strokeStyle = "grey";
   ctx.stroke();
 }
 
@@ -159,4 +200,24 @@ function drawTimer(ctx, percentValue) {
 }
 
 
+function calcValues(ctx, i) {
+  let percentValue = timerData[i].remainingTime*100/timerData[i].initialTime;
+  let percentContainers = document.querySelectorAll(".timer__percent");
+  percentContainers[i].innerHTML = `${percentValue}%`;
+
+  setInterval(function(){
+      if(percentValue > 0) {
+        percentValue = timerData[i].remainingTime*100/timerData[i].initialTime;
+        
+        //timerData[i].remainingTime -= 0.1;
+        if(percentValue > 0) {
+          //drawTimer2(ctx, percentValue);
+          //percentContainers[i].innerHTML = `${Math.floor(percentValue*100)/100}%`;
+        }
+      } else {
+        drawCircle(ctx);
+        percentContainers[i].innerHTML = "finished";
+      }
+  }, 100);
+}
 
