@@ -114,6 +114,8 @@ function createNewBox() {
   wrapper.appendChild(newTimer);
 }
 
+//let title = document.querySelector(".js-title");
+
 function calcValues2() {
   if (timerData.length !== 0) {
     let canvases = document.querySelectorAll(".timer__circle");
@@ -125,8 +127,13 @@ function calcValues2() {
         let percentValue = timer.remainingTime*100/timer.initialTime;
         
         if (percentValue > 0) {
-          timer.remainingTime -= 0.1;
+          if (document.hidden) {
+            timer.remainingTime -= 1;
+          } else {
+            timer.remainingTime -= 0.1;
+          }
           percentContainers[index].innerHTML = `${Math.floor(percentValue*100)/100}%`;
+          //title.innerHTML = timer.remainingTime;
           timeInSecsContainers[index].innerHTML = `Rem. time: ${Math.round(timer.remainingTime)} secs`;
           drawTimer2(ctx, percentValue);
         } else {
@@ -137,7 +144,11 @@ function calcValues2() {
 
     })
   }
+  if (document.hidden) {
+    setTimeout(calcValues2, 0);
+  } else {
   setTimeout(calcValues2, 100);
+  }
 }
 
 calcValues2();
