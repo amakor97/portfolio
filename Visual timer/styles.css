@@ -49,7 +49,7 @@ html {
   align-items: center;
   width: 100%;
   height: 300px;
-  padding: 0 0 0 0;
+  padding: 0 0 0 2rem;
   margin: 0 auto 2rem;
   overflow: hidden;
 
@@ -60,8 +60,8 @@ html {
 .timer__circle {
   position: relative;
 
-  width: 250px;
-  height: 250px;
+  min-width: 250px;
+  min-height: 250px;
   overflow: hidden;
 
   /*background-color: var(--theme-color);*/
@@ -79,19 +79,41 @@ html {
   background-color: white;
 }
 
+.timer__text-wrapper {
+  display: flex;
+  /*flex-direction: column;*/
+  width: 65%;
+  height: 70%;
+}
+
 .timer__percent {
-  font-size: 5rem;
+  align-self: flex-end;
+  width: 50%;
+
+  font-size: 8rem;
+  font-weight: bold;
 
   background-color: rgba(0, 255, 0, 0.3);
 }
 
 .timer__settings {
   display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
   height: 100%;
   padding: 1rem;
 
   background-color: #b9b9b9;
+}
+
+.timer__settings-btn {
+}
+
+.btn {
+  padding: 1rem;
+
+  cursor: pointer;
 }
 
 .timer__add-timer-btn {
@@ -111,8 +133,14 @@ html {
   background-color: rgba(0, 255, 0, 0.3);
 }
 
+.timer__text--remaining {
+  font-size: 2rem;
+}
+
 .add-form {
   position: absolute;
+  top: 0;
+  left: 0;
 
   display: flex;
   justify-content: center;
@@ -122,4 +150,10 @@ html {
   height: 100%;
 
   background-color: #b9b9b9;
+}
+
+.add-form__input-time {
+  padding: 1rem;
+
+  font-size: 1.5rem;
 }

@@ -23,16 +23,26 @@ function showAddTimerWindow(e) {
   let timerContainer = e.currentTarget.parentElement;
   
   timerContainer.innerHTML = `<form class="timer__add-window add-form">
+                                <!--
                                 <label for="type-circle">Circle
                                   <input type="radio" id="type-circle" name="type" />
                                 </label>
                                 <label for="type-line">Line
                                   <input type="radio" id="type-line" name="type" />
                                 </label>
-                                <input class="add-form__input-time" type="number" />
-                                <input class="add-form__submit" type="submit" />
+                                -->
+                                <input class="add-form__input-time js-input-number" type="number" min="0"/>
+                                <input class="add-form__submit btn" type="submit" />
                               </form>`;
 
+  const inputNumber = timerContainer.querySelector(".js-input-number");
+  inputNumber.addEventListener("input", function(){
+    if (this.value < 0) {
+      this.value = 0;
+    }
+  }) 
+
+ 
   const submitBtn = timerContainer.querySelector(".add-form__submit");
 
   submitBtn.addEventListener("click", function(e){
@@ -41,12 +51,14 @@ function showAddTimerWindow(e) {
     const timerInput = form.querySelector(".add-form__input-time");
     
     timerContainer.innerHTML = `<canvas class="timer__circle" width="200" height="200"></canvas>
-                                <div class="timer__percent">74,843%</div>
-                                <div class="timer__text js-remaining-secs">Rem. time in secs</div>
-                                <div class="timer__settings">
-                                  <button>*</button>
-                                  <button class="js-pause-timer-btn">P</button>
-                                  <button class="js-del-timer-btn">D</button>
+                                <div class="timer__text-wrapper">
+                                  <div class="timer__percent">74,843%</div>
+                                  <div class="timer__text timer__text--remaining js-remaining-secs">Rem. time in secs</div>
+                                </div>
+                                  <div class="timer__settings">
+                                  <button class="btn">*</button>
+                                  <button class="js-pause-timer-btn btn">Pause</button>
+                                  <button class="js-del-timer-btn btn">Delete</button>
                                 </div>`;
 
     let canvas = timerContainer.querySelector(".timer__circle");
@@ -132,29 +144,30 @@ function calcValues2() {
     timerData.forEach(function(timer, index) {
       if (timer.status !== "paused") {
         let ctx = canvases[index].getContext("2d");
-        let percentValue = timer.remainingTime*100/timer.initialTime;
         
+        
+        //console.log("initial: ", timer.timestamp);
+        let currentTimestamp = new Date().getTime();
+        //console.log("cur:", currentTimestamp);
+        let timeDif = currentTimestamp - timer.timestamp; //!!!
+        //console.log("difference:",timeDif);
+        let remTime = timer.initialTime*1000 - timeDif;
+        //console.log("calculated remtime:", remTime);
+        timer.remainingTime = remTime/1000;
+
+        let percentValue = timer.remainingTime*100/timer.initialTime;
+
         if (percentValue > 0) {
-          if (document.hidden) {
-            timer.remainingTime -= 1;
-          } else {
-            //timer.remainingTime -= 1;
-            console.log("initial: ", timer.timestamp);
-            let currentTimestamp = new Date().getTime();
-            console.log("cur:", currentTimestamp);
-            let timeDif = currentTimestamp - timer.timestamp; //!!!
-            console.log("difference:",timeDif);
-            let remTime = timer.initialTime*1000 - timeDif;
-            console.log("calculated remtime:", remTime);
-            timer.remainingTime = remTime/1000;
-            timeInSecsContainers[index].innerHTML = `Rem. time: ${remTime/1000} secs`;
-          }
-          percentContainers[index].innerHTML = `${Math.floor(percentValue*100)/100}%`;
+          
+          
+          timeInSecsContainers[index].innerHTML = `Rem. time: ${(remTime/1000).toFixed(3)} secs`;
+          percentContainers[index].innerHTML = `${(Math.round(percentValue*100)/100).toFixed(2)}%`;
           //title.innerHTML = timer.remainingTime;
           //timeInSecsContainers[index].innerHTML = `Rem. time: ${Math.round(timer.remainingTime)} secs`;
           drawTimer2(ctx, percentValue);
         } else {
           percentContainers[index].innerHTML = "finished";
+          timeInSecsContainers[index].innerHTML = `finished`;
           drawCircle(ctx);
         }
       }
@@ -164,7 +177,7 @@ function calcValues2() {
   if (document.hidden) {
     setTimeout(calcValues2, 0);
   } else {
-  setTimeout(calcValues2, 50);
+  setTimeout(calcValues2, 100);
   }
 }
 
