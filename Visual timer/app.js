@@ -68,7 +68,7 @@ function showAddTimerWindow(e) {
     timerInfo.status = "running";
     timerInfo.timestamp = new Date().getTime();
     timerData.push(timerInfo);
-
+    addToLocalStorage(timerInfo);
     
     const pauseBtn = timerContainer.querySelector(".js-pause-timer-btn");
     pauseBtn.addEventListener("click", function(e){
@@ -88,9 +88,31 @@ function showAddTimerWindow(e) {
     
     const delBtn = timerContainer.querySelector(".js-del-timer-btn");
     delBtn.addEventListener("click", function(e){
-      let timerIndex = getTimerIndex(e);
-      timerData.splice(timerIndex, 1);
-      wrapper.removeChild(allTimers[timerIndex]);
+      //let timerIndex = getTimerIndex(e);
+      //timerData.splice(timerIndex, 1);
+      //wrapper.removeChild(allTimers[timerIndex]);
+      //removeFromLocalStorage(timerIndex);
+
+      /*timerData.forEach(function(timer){
+        if (timer.id == timerInfo.id) {
+          renewAllTimers();
+          console.log(timerInfo.id);
+          wrapper.removeChild(timerContainer);
+          timerData.splice(timer.id, 1);
+        }
+      })*/
+
+      //renewAllTimers();
+
+      wrapper.removeChild(timerContainer);
+      
+      timerData.forEach(function(timer, index){
+        if (timer.id == timerInfo.id) { 
+          timerData.splice(index, 1);
+        }
+      })
+      //timerData.splice(timerInfo.id, 1);
+      timersCounter--;
     })
 
     
@@ -100,6 +122,7 @@ function showAddTimerWindow(e) {
 }
 
 function getTimerIndex(e) {
+  
   let currentBox = e.currentTarget.parentElement.parentElement;
   renewAllTimers();
   let timerIndex = Array.prototype.indexOf.call(allTimers, currentBox);
@@ -201,3 +224,29 @@ function drawCircle(ctx) {
 
 
 
+/* local storage */
+
+
+
+function getLocalStorage() {
+  return localStorage.getItem("data")
+  ? JSON.parse(localStorage.getItem("data"))
+  : [];
+}
+
+function addToLocalStorage(timerInfo) {
+  let timerDataInStorage = getLocalStorage();
+  timerDataInStorage.push(timerInfo);
+  localStorage.setItem("data", JSON.stringify(timerDataInStorage));
+}
+
+function removeFromLocalStorage(id) {
+  let timerDataInStorage = getLocalStorage();
+  timerDataInStorage.splice(id, 1);
+  /*timerDataInStorage = timerDataInStorage.filter(function(timer){
+    if(timer.id !== id){
+      return timer;
+    }
+  })*/
+  localStorage.setItem("data", JSON.stringify(timerDataInStorage));
+}
