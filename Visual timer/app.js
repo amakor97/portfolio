@@ -144,8 +144,45 @@ function calcValues() {
 }
 
 
-calcValues();
+function displayInHTML() {
+  if (timerData.length !== 0) {
+    let canvases = document.querySelectorAll(".timer__circle");
+    let percentContainers = document.querySelectorAll(".timer__percent");
+    let timeInSecsContainers = document.querySelectorAll(".js-remaining-secs");
 
+    timerData.forEach(function(timer, index) {
+      if (timer.status !== "paused") {
+        let ctx = canvases[index].getContext("2d");
+        let remTimeMs = calcRemainingTimeMs(timer);
+        let percentValue = calcPercentValue(timer);
+
+        if (percentValue > 0) {
+          timeInSecsContainers[index].innerHTML = `Rem. time: ${(remTimeMs/1000).toFixed(3)} secs`;
+          percentContainers[index].innerHTML = `${(Math.round(percentValue*100)/100).toFixed(2)}%`;
+          drawTimer(ctx, percentValue);
+        } else {
+          percentContainers[index].innerHTML = "finished";
+          timeInSecsContainers[index].innerHTML = "finished";
+          drawCircle(ctx);
+        }
+      }
+    })
+  }
+  setTimeout(displayInHTML, 100);
+}
+
+let calcPercentValue = (timer) => timer.remainingTime*100/timer.initialTime;
+
+function calcRemainingTimeMs(timer) {
+  let currentTimestamp = new Date().getTime();
+  let timeDif = currentTimestamp - timer.timestamp;
+  let remTimeMs = timer.initialTime*1000 - timeDif;
+  timer.remainingTime = remTimeMs/1000;
+  return remTimeMs;
+}
+
+//calcValues();
+displayInHTML();
 
 function pauseHandler(index) {
   if (timerData[index].status == "running") {
