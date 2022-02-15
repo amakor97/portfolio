@@ -7,16 +7,8 @@ let timersCounter = 0;
 let type = "circle";
 
 
-//data structure:
-// id: 0, 1, 2...
-// type: circle/line
-// initial time
-// remaining time
-// status: running/paused
-
 
 let addTimerBtn = document.querySelector(".js-add-timer-btn");
-console.log(addTimerBtn);
 addTimerBtn.addEventListener("click", showAddTimerWindow);
 
 
@@ -36,6 +28,7 @@ function showAddTimerWindow(e) {
                                 <button class="add-form__submit btn" type="submit"/>Add timer</button>
                               </form>`;
 
+
   const inputNumber = timerContainer.querySelector(".js-input-number");
   inputNumber.addEventListener("input", function(){
     if (this.value < 0) {
@@ -54,11 +47,12 @@ function showAddTimerWindow(e) {
                                   <div class="timer__percent">Percents</div>
                                   <div class="timer__text timer__text--remaining js-remaining-secs">Rem. time in secs</div>
                                 </div>
-                                  <div class="timer__settings">
+                                <div class="timer__settings">
                                   <button class="btn">*</button>
                                   <button class="js-pause-timer-btn btn">Pause</button>
                                   <button class="js-del-timer-btn btn">Delete</button>
                                 </div>`;
+
 
     let timerInfo = {};
     timerInfo.id = timersCounter;
@@ -68,36 +62,23 @@ function showAddTimerWindow(e) {
     timerInfo.status = "running";
     timerInfo.timestamp = new Date().getTime();
     timerData.push(timerInfo);
-    //addToLocalStorage(timerInfo);
+
     
     const pauseBtn = timerContainer.querySelector(".js-pause-timer-btn");
     pauseBtn.addEventListener("click", function(e){
-      let timerIndex = getTimerIndex(e, timerInfo.id);
-      console.log(timerIndex);
-
-      if (timerData[timerIndex].status == "running") {
-        timerData[timerIndex].status = "paused";
-        timerData[timerIndex].timestampWhenPaused = new Date().getTime();
-      } else {
-        timerData[timerIndex].status = "running";
-        timerData[timerIndex].timestampWhenRunned = new Date().getTime();
-        timerData[timerIndex].pauseDelayTimeMs = timerData[timerIndex].timestampWhenRunned - timerData[timerIndex].timestampWhenPaused
-        timerData[timerIndex].timestamp += timerData[timerIndex].pauseDelayTimeMs;
-      }
+      let index = getTimerIndex(timerInfo.id);
+      pauseHandler(index);
     })
     
     
     const delBtn = timerContainer.querySelector(".js-del-timer-btn");
     delBtn.addEventListener("click", function(e){
-
       wrapper.removeChild(timerContainer);
-      timerData.forEach(function(timer, index){
-        if (timer.id == timerInfo.id) { 
-          timerData.splice(index, 1);
-        }
-      })
-
-      //timersCounter--;
+      let index = getTimerIndex(timerInfo.id);
+      timerData.splice(index, 1);
+      if (timerData.length == 0) {
+        timersCounter = 0;
+      }
     })
 
     
@@ -107,31 +88,17 @@ function showAddTimerWindow(e) {
 }
 
 
-function getTimerIndex(e, id) {  
+function getTimerIndex(id) {  
   let timerIndex = undefined;
   console.log(id);
   timerData.forEach(function(timer, index){
     if (timer.id == id) { 
-      console.log("requiredId", timer.id);
-      console.log("index", index);
       timerIndex = index;
     }
   })
-  console.log(timerIndex);
   return timerIndex;
-  /*
-  let currentBox = e.currentTarget.parentElement.parentElement;
-  renewAllTimers();
-  let timerIndex = Array.prototype.indexOf.call(allTimers, currentBox);
-  console.log("old index", timerIndex);
-  return timerIndex;
-  */
 }
 
-
-function renewAllTimers() {
-  allTimers = document.querySelectorAll(".timer");
-}
 
 
 function createNewBox() {
@@ -183,6 +150,22 @@ function calcValues() {
 
 calcValues();
 
+function pauseHandler(index) {
+  if (timerData[index].status == "running") {
+    timerData[index].status = "paused";
+    timerData[index].timestampWhenPaused = new Date().getTime();
+  } else {
+    timerData[index].status = "running";
+    timerData[index].timestampWhenRunned = new Date().getTime();
+    
+    timerData[index].pauseDelayTimeMs = 
+    timerData[index].timestampWhenRunned - 
+    timerData[index].timestampWhenPaused;
+    
+    timerData[index].timestamp += 
+    timerData[index].pauseDelayTimeMs;
+  }
+}
 
 /* drawing */
 
@@ -222,4 +205,5 @@ function drawCircle(ctx) {
   ctx.strokeStyle = "grey";
   ctx.stroke();
 }
+
 
