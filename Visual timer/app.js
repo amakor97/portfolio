@@ -7,8 +7,8 @@ let timersCounter = 0;
 let type = "circle";
 
 
-let initialTimer = createEmptyTimer();
-fillEmptyTimer(initialTimer);
+//let initialTimer = createEmptyTimer();
+  //fillEmptyTimer(initialTimer);
 
 
 function showAddTimerWindow(e) {
@@ -25,31 +25,19 @@ function showAddTimerWindow(e) {
   const submitBtn = timerContainer.querySelector(".add-form__submit");
   submitBtn.addEventListener("click", function(e){
     e.preventDefault();
-    fillReadyTimer(timerContainer);
-    
+
     let timerInfo = {};
     timerInfo.id = timersCounter;
     timerInfo.type = type;
     timerInfo.initialTime = inputNumber.value;
     timerInfo.remainingTime = timerInfo.initialTime;
+    timerInfo.remTimeMs = timerInfo.remainingTime*1000;
     timerInfo.status = "running";
     timerInfo.timestamp = new Date().getTime();
+    timerInfo.percentValue = 100;
     timerData.push(timerInfo);
 
-    const pauseBtn = timerContainer.querySelector(".js-pause-timer-btn");
-    pauseBtn.addEventListener("click", function(e){
-      let index = getTimerIndex(timerInfo.id);
-      pauseHandler(index);
-    })
-        
-    const delBtn = timerContainer.querySelector(".js-del-timer-btn");
-    delBtn.addEventListener("click", function(e){
-      let index = getTimerIndex(timerInfo.id);
-      deleteTimer(timerContainer, index);
-      if (timerData.length == 0) {
-        timersCounter = 0;
-      }
-    })
+    fillReadyTimer(timerContainer, timerInfo.id);
 
     let newTimer = createEmptyTimer();
     fillEmptyTimer(newTimer);
@@ -57,7 +45,7 @@ function showAddTimerWindow(e) {
   })
 }
 
-
+//function 
 
 function getTimerIndex(id) {  
   let timerIndex = undefined;
@@ -94,11 +82,13 @@ function fillEmptyTimer(emptyTimer) {
   emptyTimer.appendChild(introText);
 }
 
+
 function clearChilds(element) {
   while (element.firstChild) {
     element.removeChild(element.lastChild);
   }
 }
+
 
 function fillSettingUpTimer(settingUpTimer) {
   clearChilds(settingUpTimer);
@@ -122,14 +112,13 @@ function fillSettingUpTimer(settingUpTimer) {
 }
 
 
-function fillReadyTimer(readyTimer) {
+function fillReadyTimer(readyTimer, id) {
   clearChilds(readyTimer);
 
   let canvas = document.createElement("canvas");
   canvas.classList.add("timer__circle", "js-timer-canvas");
   canvas.width = "200";
   canvas.height = "200";
-  
   readyTimer.appendChild(canvas);
 
   
@@ -161,11 +150,25 @@ function fillReadyTimer(readyTimer) {
   let pauseBtn = document.createElement("button");
   pauseBtn.classList.add("js-pause-timer-btn", "btn");
   pauseBtn.textContent = "Pause";
-  timerControlsContainer.appendChild(pauseBtn);
+  
+  pauseBtn.addEventListener("click", function(e){
+    let index = getTimerIndex(id);
+    pauseHandler(index);
+  })
+  timerControlsContainer.appendChild(pauseBtn);  
 
   let delBtn = document.createElement("button");
   delBtn.classList.add("js-del-timer-btn", "btn");
   delBtn.textContent = "Delete";
+
+  delBtn.addEventListener("click", function(e){
+    let index = getTimerIndex(id);
+    deleteTimer(readyTimer, index);
+    if (timerData.length == 0) {
+      timersCounter = 0;
+      localStorage.setItem("data", []);
+    }
+  })
   timerControlsContainer.appendChild(delBtn);
 
   readyTimer.appendChild(timerControlsContainer);
@@ -213,21 +216,27 @@ function displayInHTML() {
     let timeInSecsContainers = document.querySelectorAll(".js-remaining-secs");
 
     timerData.forEach(function(timer, index) {
-      if (timer.status !== "paused") {
-        let ctx = canvases[index].getContext("2d");
-        let remTimeMs = calcRemainingTimeMs(timer);
-        let percentValue = calcPercentValue(timer);
+      
+      //percentContainers[index].innerHTML = `${(Math.round(timer.percentValue*100)/100).toFixed(2)}%`;
 
-        if (percentValue > 0) {
-          timeInSecsContainers[index].innerHTML = `Rem. time: ${(remTimeMs/1000).toFixed(3)} secs`;
-          percentContainers[index].innerHTML = `${(Math.round(percentValue*100)/100).toFixed(2)}%`;
-          drawTimer(ctx, percentValue);
+      if (timer.status !== "paused") {     //fix that?
+        let ctx = canvases[index].getContext("2d");
+        timer.remTimeMs = calcRemainingTimeMs(timer);
+        timer.percentValue = calcPercentValue(timer);
+
+        if (timer.percentValue > 0) {
+          timeInSecsContainers[index].innerHTML = `Rem. time: ${(timer.remTimeMs/1000).toFixed(3)} secs`;
+          percentContainers[index].innerHTML = `${(Math.round(timer.percentValue*100)/100).toFixed(2)}%`;
+          drawTimer(ctx, timer.percentValue);
         } else {
           percentContainers[index].innerHTML = "finished";
           timeInSecsContainers[index].innerHTML = "finished";
           drawCircle(ctx);
         }
-      }
+      } /*else {
+        percentContainers[index].innerHTML = "paused";
+        timeInSecsContainers[index].innerHTML = "paused";
+      }*/
     })
   }
   setTimeout(displayInHTML, 100);
@@ -247,6 +256,7 @@ function calcRemainingTimeMs(timer) {
 displayInHTML();
 
 function pauseHandler(index) {
+  console.log("pause handler is called");
   if (timerData[index].status == "running") {
     timerData[index].status = "paused";
     timerData[index].timestampWhenPaused = new Date().getTime();
@@ -313,12 +323,49 @@ function drawCircle(ctx) {
 /* test localStorage */
 
 
-/*
+window.onload = function() {
+  let testValue = JSON.parse(localStorage.getItem("data"));
+  console.log(testValue);
+  if ((testValue) && (testValue.length > 0)) {
+    timerData = [...testValue];
+    timersCounter = timerData.length;
+  } else {
+    timerData = [];
+  }
+
+  if (timerData.length > 0) {
+
+    timerData.forEach(function(timer, index) {
+      let emptyTimer = createEmptyTimer();
+      console.log(timer.id);
+      fillReadyTimer(emptyTimer, timer.id);
+
+      let canvas = emptyTimer.querySelector(".timer__circle");
+      let ctx = canvas.getContext("2d");
+      let percentContainer = emptyTimer.querySelector(".timer__percent");
+      let timeInSecsContainer = emptyTimer.querySelector(".js-remaining-secs");
+      
+      if (timer.percentValue > 0) {
+        timeInSecsContainer.innerHTML = `Rem. time: ${(timer.remTimeMs/1000).toFixed(3)} secs`;
+        percentContainer.innerHTML = `${(Math.round(timer.percentValue*100)/100).toFixed(2)}%`;
+        drawTimer(ctx, timer.percentValue);
+      } else {
+        percentContainer.innerHTML = "finished";
+        timeInSecsContainer.innerHTML = "finished";
+        drawCircle(ctx);
+      }
+
+    })
+  }
+
+
+  let initialTimer = createEmptyTimer();
+  fillEmptyTimer(initialTimer);
+}
+
 
 window.onbeforeunload = function(){
-  let testkey = "1";
-  let testvalue = "2";
+  let testkey = "data";
+  let testvalue = JSON.stringify(timerData);
   localStorage.setItem(testkey, testvalue)
 };
-
-*/
