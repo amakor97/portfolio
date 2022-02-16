@@ -71,6 +71,8 @@ function getTimerIndex(id) {
 }
 
 
+/* fill functions */
+
 function createEmptyTimer() {
   let newTimer = document.createElement("article");
   newTimer.classList.add("timer");
@@ -80,33 +82,93 @@ function createEmptyTimer() {
 
 
 function fillEmptyTimer(emptyTimer) {
-  emptyTimer.innerHTML = `<button class="timer__add-timer-btn js-add-timer-btn">+</button>
-  <p class="timer__text">Add new timer</p>`;
-
-  let addTimerBtn = emptyTimer.querySelector(".js-add-timer-btn");
+  let addTimerBtn = document.createElement("button");
+  addTimerBtn.classList.add("timer__add-timer-btn", "js-add-timer-btn");
+  addTimerBtn.textContent = "+";
   addTimerBtn.addEventListener("click", showAddTimerWindow);
+  emptyTimer.appendChild(addTimerBtn);
+  
+  let introText = document.createElement("p");
+  introText.classList.add("timer__text");
+  introText.textContent = "Add new timer";
+  emptyTimer.appendChild(introText);
 }
 
+function clearChilds(element) {
+  while (element.firstChild) {
+    element.removeChild(element.lastChild);
+  }
+}
 
 function fillSettingUpTimer(settingUpTimer) {
-  settingUpTimer.innerHTML = `<form class="timer__add-window add-form">
-                                <input class="add-form__input-time js-input-number" type="number" min="0"/>
-                                <button class="add-form__submit btn" type="submit"/>Add timer</button>
-                              </form>`;
+  clearChilds(settingUpTimer);
+
+  let addForm = document.createElement("form");
+  addForm.classList.add("timer__add-window", "add-form");
+
+  let inputNumber = document.createElement("input");
+  inputNumber.classList.add("add-form__input-time", "js-input-number");
+  inputNumber.type = "number";
+  inputNumber.min = "0";
+  addForm.appendChild(inputNumber);
+
+  let dataSubmitBtn = document.createElement("button");
+  dataSubmitBtn.classList.add("add-form__submit", "btn");
+  dataSubmitBtn.type = "submit";
+  dataSubmitBtn.textContent = "Add timer";
+  addForm.appendChild(dataSubmitBtn);
+
+  settingUpTimer.appendChild(addForm);
 }
 
 
 function fillReadyTimer(readyTimer) {
-  readyTimer.innerHTML = `<canvas class="timer__circle js-timer-canvas" width="200" height="200"></canvas>
-                          <div class="timer__text-wrapper">
-                            <div class="timer__percent">Percents</div>
-                            <div class="timer__text timer__text--remaining js-remaining-secs">Rem. time in secs</div>
-                          </div>
-                          <div class="timer__settings">
-                            <button class="btn">*</button>
-                            <button class="js-pause-timer-btn btn">Pause</button>
-                            <button class="js-del-timer-btn btn">Delete</button>
-                          </div>`;
+  clearChilds(readyTimer);
+
+  let canvas = document.createElement("canvas");
+  canvas.classList.add("timer__circle", "js-timer-canvas");
+  canvas.width = "200";
+  canvas.height = "200";
+  
+  readyTimer.appendChild(canvas);
+
+  
+  let timerTextContainer = document.createElement("div");
+  timerTextContainer.classList.add("timer__text-wrapper");
+
+  let timerPercentContainer = document.createElement("div");
+  timerPercentContainer.classList.add("timer__percent");
+  timerPercentContainer.textContent = "Percent";
+  timerTextContainer.appendChild(timerPercentContainer);
+
+  let timerSecsContainer = document.createElement("div");
+  timerSecsContainer.classList.add("timer__text", "timer__text--remaining",
+  "js-remaining-secs");
+  timerSecsContainer.textContent = "Rem. time in secs";
+  timerTextContainer.appendChild(timerSecsContainer);
+
+  readyTimer.appendChild(timerTextContainer);
+
+
+  let timerControlsContainer = document.createElement("div");
+  timerControlsContainer.classList.add("timer__settings");
+
+  let settingsBtn = document.createElement("button");
+  settingsBtn.classList.add("btn");
+  settingsBtn.textContent = "*";
+  timerControlsContainer.appendChild(settingsBtn);
+
+  let pauseBtn = document.createElement("button");
+  pauseBtn.classList.add("js-pause-timer-btn", "btn");
+  pauseBtn.textContent = "Pause";
+  timerControlsContainer.appendChild(pauseBtn);
+
+  let delBtn = document.createElement("button");
+  delBtn.classList.add("js-del-timer-btn", "btn");
+  delBtn.textContent = "Delete";
+  timerControlsContainer.appendChild(delBtn);
+
+  readyTimer.appendChild(timerControlsContainer);
 }
 
 
@@ -207,7 +269,8 @@ function deleteTimer(timer, index) {
   timerData.splice(index, 1);
 }
 
-/* drawing */
+
+/* drawing functions */
 
 function drawTimer(ctx, percentValue) {
   //console.log(2*Math.PI/100*(1-percentValue));  //there is a problem when sometimes the circle is not as accurate as it should be
@@ -247,3 +310,15 @@ function drawCircle(ctx) {
 }
 
 
+/* test localStorage */
+
+
+/*
+
+window.onbeforeunload = function(){
+  let testkey = "1";
+  let testvalue = "2";
+  localStorage.setItem(testkey, testvalue)
+};
+
+*/

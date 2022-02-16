@@ -27,6 +27,12 @@ html {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 12px;
+  }
+}
+
 .header {
   display: flex;
   align-items: center;
@@ -68,6 +74,13 @@ html {
   border-radius: 50%;
 }
 
+@media screen and (max-width: 768px) {
+  .timer__circle {
+    min-width: 100px;
+    min-height: 100px;
+  }
+}
+
 .timer__circle-segment {
   position: absolute;
   top: 0;
@@ -94,6 +107,12 @@ html {
   font-weight: bold;
 
   background-color: rgba(0, 255, 0, 0.3);
+}
+
+@media screen and (max-width: 768px) {
+  .timer__percent {
+    font-size: 5rem;
+  }
 }
 
 .timer__settings {
@@ -131,6 +150,12 @@ html {
   font-size: 3rem;
 
   background-color: rgba(0, 255, 0, 0.3);
+}
+
+@media screen and (max-width: 768px) {
+  .timer__text {
+    font-size: 2rem;
+  }
 }
 
 .timer__text--remaining {
