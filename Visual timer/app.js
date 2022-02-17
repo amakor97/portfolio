@@ -7,20 +7,21 @@ let timersCounter = 0;
 let type = "circle";
 
 
-//let initialTimer = createEmptyTimer();
-  //fillEmptyTimer(initialTimer);
-
-
 function showAddTimerWindow(e) {
   let timerContainer = e.currentTarget.parentElement;
   fillSettingUpTimer(timerContainer);
 
   const inputNumber = timerContainer.querySelector(".js-input-number");
   inputNumber.addEventListener("input", function(){
-    if (this.value < 0) {
+    if ((this.value) && (this.value < 0)) {
       this.value = 0;
     }
-  }) 
+  })
+
+  const inputFinishTime = timerContainer.querySelector(".js-input-finish-time");
+  inputFinishTime.addEventListener("input", function(){
+
+  })
 
   const submitBtn = timerContainer.querySelector(".add-form__submit");
   submitBtn.addEventListener("click", function(e){
@@ -28,12 +29,25 @@ function showAddTimerWindow(e) {
 
     let timerInfo = {};
     timerInfo.id = timersCounter;
+    timerInfo.timestamp = new Date().getTime();
     timerInfo.type = type;
-    timerInfo.initialTime = inputNumber.value;
+    if (inputNumber.value) {
+      timerInfo.initialTime = inputNumber.value;
+    } else {
+      console.log(inputFinishTime.value);
+      let finish = inputFinishTime.value;
+      console.log(new Date(finish).getTime());
+      let finishTimestamp = new Date(finish).getTime();
+      let dif = finishTimestamp - timerInfo.timestamp;
+      console.log(dif);
+      console.log(Math.floor(dif/1000));
+      timerInfo.initialTime = Math.round(dif/1000);
+    }
     timerInfo.remainingTime = timerInfo.initialTime;
     timerInfo.remTimeMs = timerInfo.remainingTime*1000;
     timerInfo.status = "running";
-    timerInfo.timestamp = new Date().getTime();
+    
+    console.log(timerInfo.timestamp);
     timerInfo.percentValue = 100;
     timerData.push(timerInfo);
 
@@ -96,17 +110,71 @@ function fillSettingUpTimer(settingUpTimer) {
   let addForm = document.createElement("form");
   addForm.classList.add("timer__add-window", "add-form");
 
+  let inputFinishType1Label = document.createElement("label");
+  inputFinishType1Label.textContent = "Amount of seconds";
+  addForm.appendChild(inputFinishType1Label);
+  let forAttrFinish1 = document.createAttribute("for");
+  forAttrFinish1.value = `finishType1`;
+  inputFinishType1Label.setAttributeNode(forAttrFinish1);
+
+  let inputFinishType1 = document.createElement("input");
+  inputFinishType1.type = "radio";
+  inputFinishType1.name = "finishType";
+  inputFinishType1.id = "finishType1";
+  addForm.appendChild(inputFinishType1);
+  inputFinishType1.addEventListener("input", function() {
+
+  })
+
+  let inputFinishType2Label = document.createElement("label");
+  inputFinishType2Label.textContent = "Precise finish time";
+  addForm.appendChild(inputFinishType2Label);
+  let forAttrFinish2 = document.createAttribute("for");
+  forAttrFinish2.value = `finishType1`;
+  inputFinishType2Label.setAttributeNode(forAttrFinish2);
+
+  let inputFinishType2 = document.createElement("input");
+  inputFinishType2.type = "radio";
+  inputFinishType2.name = "finishType";
+  inputFinishType2.id = "finishType2";
+  addForm.appendChild(inputFinishType2);
+
+  let inputNumberLabel = document.createElement("label");
+  inputNumberLabel.textContent = "Please, enter the amount of seconds";
+  addForm.appendChild(inputNumberLabel);
+  let forAttr = document.createAttribute("for");
+  forAttr.value = `InputNumber${timersCounter}`;
+  inputNumberLabel.setAttributeNode(forAttr);
+
   let inputNumber = document.createElement("input");
   inputNumber.classList.add("add-form__input-time", "js-input-number");
   inputNumber.type = "number";
   inputNumber.min = "0";
+  inputNumber.id = `InputNumber${timersCounter}`;
   addForm.appendChild(inputNumber);
+
+  let inputFinishTime = document.createElement("input");
+  inputFinishTime.classList.add("add-form__input-time", "js-input-finish-time");
+  inputFinishTime.type = "datetime-local";
+  addForm.appendChild(inputFinishTime);
 
   let dataSubmitBtn = document.createElement("button");
   dataSubmitBtn.classList.add("add-form__submit", "btn");
   dataSubmitBtn.type = "submit";
   dataSubmitBtn.textContent = "Add timer";
   addForm.appendChild(dataSubmitBtn);
+
+
+  inputFinishType1.addEventListener("input", function() {
+    console.log("secs");
+    inputNumber.disabled = false;
+    inputFinishTime.disabled = true;
+  })
+  inputFinishType2.addEventListener("input", function() {
+    console.log("time");  
+    inputNumber.disabled = true;
+    inputFinishTime.disabled = false;
+  })
 
   settingUpTimer.appendChild(addForm);
 }
