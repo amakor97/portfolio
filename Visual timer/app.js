@@ -150,10 +150,14 @@ function fillReadyTimer(readyTimer, id) {
   let pauseBtn = document.createElement("button");
   pauseBtn.classList.add("js-pause-timer-btn", "btn");
   pauseBtn.textContent = "Pause";
+  let index = getTimerIndex(id);
+  if (timerData[index].status == "paused") {
+    pauseBtn.textContent = "Run";
+  }
   
   pauseBtn.addEventListener("click", function(e){
     let index = getTimerIndex(id);
-    pauseHandler(index);
+    pauseHandler(e, index);
   })
   timerControlsContainer.appendChild(pauseBtn);  
 
@@ -176,70 +180,38 @@ function fillReadyTimer(readyTimer, id) {
 
 
 
-
-
 function calcValues() {
   if (timerData.length !== 0) {
-    let canvases = document.querySelectorAll(".timer__circle");
-    let percentContainers = document.querySelectorAll(".timer__percent");
-    let timeInSecsContainers = document.querySelectorAll(".js-remaining-secs");
-    
-    timerData.forEach(function(timer, index) {
-      if (timer.status !== "paused") {
-        let ctx = canvases[index].getContext("2d");
-        let currentTimestamp = new Date().getTime();
-        let timeDif = currentTimestamp - timer.timestamp;
-        let remTimeMs = timer.initialTime*1000 - timeDif;
-        timer.remainingTime = remTimeMs/1000;
-        let percentValue = timer.remainingTime*100/timer.initialTime;
+    let timers = document.querySelectorAll(".timer");
 
-        if (percentValue > 0) {
-          timeInSecsContainers[index].innerHTML = `Rem. time: ${(remTimeMs/1000).toFixed(3)} secs`;
-          percentContainers[index].innerHTML = `${(Math.round(percentValue*100)/100).toFixed(2)}%`;
-          drawTimer(ctx, percentValue);
-        } else {
-          percentContainers[index].innerHTML = "finished";
-          timeInSecsContainers[index].innerHTML = `finished`;
-          drawCircle(ctx);
-        }
-      }
+    timerData.forEach(function(timer, index) {
+    let currentTimer = timers[index];
+      if (timer.status !== "paused") {     
+        timer.remTimeMs = calcRemainingTimeMs(timer);
+        timer.percentValue = calcPercentValue(timer);
+        displayInHTML(currentTimer, timer);
+      } 
     })
   }
   setTimeout(calcValues, 100);
 }
 
 
-function displayInHTML() {
-  if (timerData.length !== 0) {
-    let canvases = document.querySelectorAll(".timer__circle");
-    let percentContainers = document.querySelectorAll(".timer__percent");
-    let timeInSecsContainers = document.querySelectorAll(".js-remaining-secs");
+function displayInHTML(timerContainer, timerSingleData) {
+  let canvas = timerContainer.querySelector(".timer__circle");
+  let ctx = canvas.getContext("2d");
+  let percentContainer = timerContainer.querySelector(".timer__percent");
+  let timeContainer = timerContainer.querySelector(".js-remaining-secs");
 
-    timerData.forEach(function(timer, index) {
-      
-      //percentContainers[index].innerHTML = `${(Math.round(timer.percentValue*100)/100).toFixed(2)}%`;
-
-      if (timer.status !== "paused") {     //fix that?
-        let ctx = canvases[index].getContext("2d");
-        timer.remTimeMs = calcRemainingTimeMs(timer);
-        timer.percentValue = calcPercentValue(timer);
-
-        if (timer.percentValue > 0) {
-          timeInSecsContainers[index].innerHTML = `Rem. time: ${(timer.remTimeMs/1000).toFixed(3)} secs`;
-          percentContainers[index].innerHTML = `${(Math.round(timer.percentValue*100)/100).toFixed(2)}%`;
-          drawTimer(ctx, timer.percentValue);
-        } else {
-          percentContainers[index].innerHTML = "finished";
-          timeInSecsContainers[index].innerHTML = "finished";
-          drawCircle(ctx);
-        }
-      } /*else {
-        percentContainers[index].innerHTML = "paused";
-        timeInSecsContainers[index].innerHTML = "paused";
-      }*/
-    })
+  if (timerSingleData.percentValue > 0) {
+    percentContainer.innerHTML = `${(Math.round(timerSingleData.percentValue*100)/100).toFixed(2)}%`;
+    timeContainer.innerHTML = `Rem. time: ${(timerSingleData.remTimeMs/1000).toFixed(3)} secs`;
+    drawTimer(ctx, timerSingleData.percentValue);
+  } else {
+    percentContainer.innerHTML = "Done!";
+    timeContainer.innerHTML = "Finished!";
+    drawCircle(ctx);
   }
-  setTimeout(displayInHTML, 100);
 }
 
 let calcPercentValue = (timer) => timer.remainingTime*100/timer.initialTime;
@@ -252,14 +224,15 @@ function calcRemainingTimeMs(timer) {
   return remTimeMs;
 }
 
-//calcValues();
-displayInHTML();
+calcValues();
 
-function pauseHandler(index) {
+function pauseHandler(e, index) {
   console.log("pause handler is called");
+  let btn = e.currentTarget;
   if (timerData[index].status == "running") {
     timerData[index].status = "paused";
     timerData[index].timestampWhenPaused = new Date().getTime();
+    btn.textContent = "Run";
   } else {
     timerData[index].status = "running";
     timerData[index].timestampWhenRunned = new Date().getTime();
@@ -270,6 +243,8 @@ function pauseHandler(index) {
     
     timerData[index].timestamp += 
     timerData[index].pauseDelayTimeMs;
+
+    btn.textContent = "Pause";
   }
 }
 
@@ -320,8 +295,7 @@ function drawCircle(ctx) {
 }
 
 
-/* test localStorage */
-
+/* localStorage functions */
 
 window.onload = function() {
   let testValue = JSON.parse(localStorage.getItem("data"));
@@ -340,21 +314,7 @@ window.onload = function() {
       console.log(timer.id);
       fillReadyTimer(emptyTimer, timer.id);
 
-      let canvas = emptyTimer.querySelector(".timer__circle");
-      let ctx = canvas.getContext("2d");
-      let percentContainer = emptyTimer.querySelector(".timer__percent");
-      let timeInSecsContainer = emptyTimer.querySelector(".js-remaining-secs");
-      
-      if (timer.percentValue > 0) {
-        timeInSecsContainer.innerHTML = `Rem. time: ${(timer.remTimeMs/1000).toFixed(3)} secs`;
-        percentContainer.innerHTML = `${(Math.round(timer.percentValue*100)/100).toFixed(2)}%`;
-        drawTimer(ctx, timer.percentValue);
-      } else {
-        percentContainer.innerHTML = "finished";
-        timeInSecsContainer.innerHTML = "finished";
-        drawCircle(ctx);
-      }
-
+      displayInHTML(emptyTimer, timer);
     })
   }
 
