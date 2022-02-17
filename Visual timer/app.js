@@ -12,16 +12,8 @@ function showAddTimerWindow(e) {
   fillSettingUpTimer(timerContainer);
 
   const inputNumber = timerContainer.querySelector(".js-input-number");
-  inputNumber.addEventListener("input", function(){
-    if ((this.value) && (this.value < 0)) {
-      this.value = 0;
-    }
-  })
 
   const inputFinishTime = timerContainer.querySelector(".js-input-finish-time");
-  inputFinishTime.addEventListener("input", function(){
-
-  })
 
   const submitBtn = timerContainer.querySelector(".add-form__submit");
   submitBtn.addEventListener("click", function(e){
@@ -34,20 +26,19 @@ function showAddTimerWindow(e) {
     if (inputNumber.value) {
       timerInfo.initialTime = inputNumber.value;
     } else {
-      console.log(inputFinishTime.value);
       let finish = inputFinishTime.value;
-      console.log(new Date(finish).getTime());
       let finishTimestamp = new Date(finish).getTime();
       let dif = finishTimestamp - timerInfo.timestamp;
-      console.log(dif);
-      console.log(Math.floor(dif/1000));
       timerInfo.initialTime = Math.round(dif/1000);
     }
+    if (timerInfo.initialTime < 0) {
+      timerInfo.initialTime = 0;
+    }
+
     timerInfo.remainingTime = timerInfo.initialTime;
     timerInfo.remTimeMs = timerInfo.remainingTime*1000;
     timerInfo.status = "running";
     
-    console.log(timerInfo.timestamp);
     timerInfo.percentValue = 100;
     timerData.push(timerInfo);
 
@@ -63,7 +54,6 @@ function showAddTimerWindow(e) {
 
 function getTimerIndex(id) {  
   let timerIndex = undefined;
-  console.log(id);
   timerData.forEach(function(timer, index){
     if (timer.id == id) { 
       timerIndex = index;
@@ -110,9 +100,13 @@ function fillSettingUpTimer(settingUpTimer) {
   let addForm = document.createElement("form");
   addForm.classList.add("timer__add-window", "add-form");
 
+  let finishTypeFieldset = document.createElement("fieldset");
+  finishTypeFieldset.classList.add("add-form__fieldset");
+  addForm.appendChild(finishTypeFieldset);
+
   let inputFinishType1Label = document.createElement("label");
   inputFinishType1Label.textContent = "Amount of seconds";
-  addForm.appendChild(inputFinishType1Label);
+  finishTypeFieldset.appendChild(inputFinishType1Label);
   let forAttrFinish1 = document.createAttribute("for");
   forAttrFinish1.value = `finishType1`;
   inputFinishType1Label.setAttributeNode(forAttrFinish1);
@@ -121,27 +115,31 @@ function fillSettingUpTimer(settingUpTimer) {
   inputFinishType1.type = "radio";
   inputFinishType1.name = "finishType";
   inputFinishType1.id = "finishType1";
-  addForm.appendChild(inputFinishType1);
-  inputFinishType1.addEventListener("input", function() {
-
-  })
+  inputFinishType1.checked = true;
+  inputFinishType1Label.appendChild(inputFinishType1);
+  
 
   let inputFinishType2Label = document.createElement("label");
   inputFinishType2Label.textContent = "Precise finish time";
-  addForm.appendChild(inputFinishType2Label);
+  finishTypeFieldset.appendChild(inputFinishType2Label);
   let forAttrFinish2 = document.createAttribute("for");
-  forAttrFinish2.value = `finishType1`;
+  forAttrFinish2.value = `finishType2`;
   inputFinishType2Label.setAttributeNode(forAttrFinish2);
 
   let inputFinishType2 = document.createElement("input");
   inputFinishType2.type = "radio";
   inputFinishType2.name = "finishType";
   inputFinishType2.id = "finishType2";
-  addForm.appendChild(inputFinishType2);
+  inputFinishType2Label.appendChild(inputFinishType2);
+
+  
+  finishTypeFieldset = document.createElement("fieldset");
+  finishTypeFieldset.classList.add("add-form__fieldset");
+  addForm.appendChild(finishTypeFieldset);
 
   let inputNumberLabel = document.createElement("label");
   inputNumberLabel.textContent = "Please, enter the amount of seconds";
-  addForm.appendChild(inputNumberLabel);
+  finishTypeFieldset.appendChild(inputNumberLabel);
   let forAttr = document.createAttribute("for");
   forAttr.value = `InputNumber${timersCounter}`;
   inputNumberLabel.setAttributeNode(forAttr);
@@ -151,12 +149,23 @@ function fillSettingUpTimer(settingUpTimer) {
   inputNumber.type = "number";
   inputNumber.min = "0";
   inputNumber.id = `InputNumber${timersCounter}`;
-  addForm.appendChild(inputNumber);
+  inputNumberLabel.appendChild(inputNumber);
+
+
+  let inputFinishLabel = document.createElement("label");
+  inputFinishLabel.textContent = "Please, enter finish datetime";
+  finishTypeFieldset.appendChild(inputFinishLabel);
+  forAttr = document.createAttribute("for");
+  forAttr.value = `InputFinishTime${timersCounter}`;
+  inputFinishLabel.setAttributeNode(forAttr);
+
 
   let inputFinishTime = document.createElement("input");
   inputFinishTime.classList.add("add-form__input-time", "js-input-finish-time");
   inputFinishTime.type = "datetime-local";
-  addForm.appendChild(inputFinishTime);
+  inputFinishTime.id = `InputFinishTime${timersCounter}`;
+  inputFinishTime.disabled = true;
+  inputFinishLabel.appendChild(inputFinishTime);
 
   let dataSubmitBtn = document.createElement("button");
   dataSubmitBtn.classList.add("add-form__submit", "btn");
@@ -166,12 +175,12 @@ function fillSettingUpTimer(settingUpTimer) {
 
 
   inputFinishType1.addEventListener("input", function() {
-    console.log("secs");
+    inputFinishTime.value = "";
     inputNumber.disabled = false;
     inputFinishTime.disabled = true;
   })
   inputFinishType2.addEventListener("input", function() {
-    console.log("time");  
+    inputNumber.value = "";
     inputNumber.disabled = true;
     inputFinishTime.disabled = false;
   })
@@ -294,8 +303,8 @@ function calcRemainingTimeMs(timer) {
 
 calcValues();
 
+
 function pauseHandler(e, index) {
-  console.log("pause handler is called");
   let btn = e.currentTarget;
   if (timerData[index].status == "running") {
     timerData[index].status = "paused";
@@ -326,16 +335,13 @@ function deleteTimer(timer, index) {
 /* drawing functions */
 
 function drawTimer(ctx, percentValue) {
-  //console.log(2*Math.PI/100*(1-percentValue));  //there is a problem when sometimes the circle is not as accurate as it should be
   ctx.beginPath();
   ctx.clearRect(0, 0, 200, 200);
   ctx.moveTo(100,100);
   ctx.lineWidth = 2;
   ctx.lineTo(100,0);
 
-
   if((2*Math.PI/100*(1-percentValue)) < 0) {
-  //ctx.arc(100, 100, 100, 3*Math.PI/2, ((2*Math.PI/100*percentValue) + 3*Math.PI/2), false);
     ctx.arc(100,100, 100, 3*Math.PI/2, ((2*Math.PI/100*(100-percentValue)) + 3*Math.PI/2), true);
   }
   ctx.lineTo(100,100);
@@ -367,7 +373,6 @@ function drawCircle(ctx) {
 
 window.onload = function() {
   let testValue = JSON.parse(localStorage.getItem("data"));
-  console.log(testValue);
   if ((testValue) && (testValue.length > 0)) {
     timerData = [...testValue];
     timersCounter = timerData.length;
@@ -376,16 +381,12 @@ window.onload = function() {
   }
 
   if (timerData.length > 0) {
-
     timerData.forEach(function(timer, index) {
       let emptyTimer = createEmptyTimer();
-      console.log(timer.id);
       fillReadyTimer(emptyTimer, timer.id);
-
       displayInHTML(emptyTimer, timer);
     })
   }
-
 
   let initialTimer = createEmptyTimer();
   fillEmptyTimer(initialTimer);
