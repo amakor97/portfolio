@@ -12,7 +12,7 @@ function showAddTimerWindow(e) {
   fillSettingUpTimer(timerContainer);
 
   const inputNumber = timerContainer.querySelector(".js-input-number");
-
+  const inputStartTime = timerContainer.querySelector(".js-input-start-time");
   const inputFinishTime = timerContainer.querySelector(".js-input-finish-time");
 
   const submitBtn = timerContainer.querySelector(".add-form__submit");
@@ -21,24 +21,29 @@ function showAddTimerWindow(e) {
 
     let timerInfo = {};
     timerInfo.id = timersCounter;
-    timerInfo.timestamp = new Date().getTime();
+    timerInfo.timestamp = new Date().getTime(); //
     timerInfo.type = type;
-    if (inputNumber.value) {
-      timerInfo.initialTime = inputNumber.value;
+
+    if (!inputStartTime.value) {
+      if (inputNumber.value) {
+        timerInfo.initialTime = inputNumber.value;
+      } else {
+        let finish = inputFinishTime.value;
+        let finishTimestamp = new Date(finish).getTime();
+        let dif = finishTimestamp - timerInfo.timestamp;
+        timerInfo.initialTime = Math.round(dif/1000);
+      }
+      if (timerInfo.initialTime < 0) {
+        timerInfo.initialTime = 0;
+      }
+
+      timerInfo.remainingTime = timerInfo.initialTime;
+      timerInfo.remTimeMs = timerInfo.remainingTime*1000;
+      timerInfo.status = "running";
     } else {
-      let finish = inputFinishTime.value;
-      let finishTimestamp = new Date(finish).getTime();
-      let dif = finishTimestamp - timerInfo.timestamp;
-      timerInfo.initialTime = Math.round(dif/1000);
-    }
-    if (timerInfo.initialTime < 0) {
-      timerInfo.initialTime = 0;
+      console.log("precise time was entered");
     }
 
-    timerInfo.remainingTime = timerInfo.initialTime;
-    timerInfo.remTimeMs = timerInfo.remainingTime*1000;
-    timerInfo.status = "running";
-    
     timerInfo.percentValue = 100;
     timerData.push(timerInfo);
 
@@ -99,6 +104,59 @@ function fillSettingUpTimer(settingUpTimer) {
 
   let addForm = document.createElement("form");
   addForm.classList.add("timer__add-window", "add-form");
+
+  let startTypeFieldset = document.createElement("fieldset");
+  startTypeFieldset.classList.add("add-form__fieldset");
+  addForm.appendChild(startTypeFieldset);
+
+  let startTypeLabel = document.createElement("label");
+  startTypeLabel.textContent = "Start now";
+  startTypeFieldset.appendChild(startTypeLabel);
+  let forAttrStart = document.createAttribute("for");
+  forAttrStart.value = "startType1";
+  startTypeLabel.setAttributeNode(forAttrStart);
+
+  let startTypeInput1 = document.createElement("input");
+  startTypeInput1.type = "radio";
+  startTypeInput1.name = "startType";
+  startTypeInput1.id = "startType1";
+  startTypeInput1.checked = true;
+  startTypeLabel.appendChild(startTypeInput1);
+
+  startTypeLabel = document.createElement("label");
+  startTypeLabel.textContent = "Precise start time";
+  startTypeFieldset.appendChild(startTypeLabel);
+  forAttrStart = document.createAttribute("for");
+  forAttrStart.value = "startType2";
+  startTypeLabel.setAttributeNode(forAttrStart);
+
+  let startTypeInput2 = document.createElement("input");
+  startTypeInput2.type = "radio";
+  startTypeInput2.name = "startType";
+  startTypeInput2.id = "startType2";
+  startTypeLabel.appendChild(startTypeInput2);
+
+
+  startTypeFieldset = document.createElement("fieldset");
+  startTypeFieldset.classList.add("add-form__fieldset");
+  addForm.appendChild(startTypeFieldset);
+
+  let inputStartLabel = document.createElement("label");
+  inputStartLabel.textContent = "Please, enter start datetime";
+  startTypeFieldset.appendChild(inputStartLabel);
+  forAttrStart = document.createAttribute("for");
+  forAttrStart.value = `inputStart`;
+  inputStartLabel.setAttributeNode(forAttrStart);
+  
+  let inputStartTime = document.createElement("input");
+  inputStartTime.classList.add("add-form__input-time", "js-input-start-time");
+  inputStartTime.type = "datetime-local";
+  inputStartTime.id = `inputStart`;
+  inputStartTime.disabled = true;
+  inputStartLabel.appendChild(inputStartTime);
+
+
+
 
   let finishTypeFieldset = document.createElement("fieldset");
   finishTypeFieldset.classList.add("add-form__fieldset");
@@ -172,6 +230,15 @@ function fillSettingUpTimer(settingUpTimer) {
   dataSubmitBtn.type = "submit";
   dataSubmitBtn.textContent = "Add timer";
   addForm.appendChild(dataSubmitBtn);
+
+
+  startTypeInput1.addEventListener("input", function() {
+    inputStartTime.disabled = true;
+    inputStartTime.value = "";
+  })
+  startTypeInput2.addEventListener("input", function() {
+    inputStartTime.disabled = false;
+  })
 
 
   inputFinishType1.addEventListener("input", function() {
