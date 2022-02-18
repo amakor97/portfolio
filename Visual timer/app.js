@@ -23,11 +23,15 @@ function showAddTimerWindow(e) {
     timerInfo.id = timersCounter;
     timerInfo.timestamp = new Date().getTime(); //
     timerInfo.type = type;
+    
 
     if (!inputStartTime.value) {
+      timerInfo.delayedStart = false;
       if (inputNumber.value) {
+        timerInfo.startTimestamp =new Date().getTime();
         timerInfo.initialTime = inputNumber.value;
       } else {
+        timerInfo.preciseFinish = true;
         let finish = inputFinishTime.value;
         let finishTimestamp = new Date(finish).getTime();
         let dif = finishTimestamp - timerInfo.timestamp;
@@ -40,11 +44,53 @@ function showAddTimerWindow(e) {
       timerInfo.remainingTime = timerInfo.initialTime;
       timerInfo.remTimeMs = timerInfo.remainingTime*1000;
       timerInfo.status = "running";
-    } else {
-      console.log("precise time was entered");
+      timerInfo.percentValue = 100;
+    } 
+    
+    else {
+      timerInfo.delayedStart = true;
+      console.log("precise start time was entered");
+      let start = inputStartTime.value;
+      console.log(start);
+      let startTimestamp = new Date(start).getTime();
+      timerInfo.startTimestamp = new Date(start).getTime();
+      console.log(timerInfo.startTimestamp, typeof(timerInfo.startTimestamp));
+      
+      if (timerInfo.startTimestamp > timerInfo.timestamp) {
+        console.log("timer will start soon");
+      } else {
+        console.log("timer is already running");
+      } 
+      console.log("start:", timerInfo.startTimestamp);
+
+      if (inputNumber.value) {
+        console.log("amount of secs");
+        let secs = inputNumber.value;
+        let secsInMs = secs*1000;
+
+        timerInfo.finishTimestamp = timerInfo.startTimestamp + secsInMs;
+        console.log("finish:", timerInfo.finishTimestamp);
+        let dif = timerInfo.finishTimestamp - timerInfo.startTimestamp;
+        let dif2 = new Date().getTime();
+        //dif = finishTimestamp - dif2;
+        timerInfo.initialTime = Math.round(dif/1000);
+        timerInfo.status = "running";
+        timerInfo.percentValue = 100;
+        console.log(timerInfo.percentValue);
+      }
+      if (inputFinishTime.value) {
+        console.log("precise finish time");
+        timerInfo.preciseFinish = true;
+        let finish = inputFinishTime.value;
+        let finishTimestamp = new Date(finish).getTime();
+        let dif = finishTimestamp - timerInfo.startTimestamp;
+        timerInfo.initialTime = Math.round(dif/1000);
+      }
+      timerInfo.remainingTime = timerInfo.initialTime;
+      timerInfo.remTimeMs = timerInfo.remainingTime*1000;
     }
 
-    timerInfo.percentValue = 100;
+    
     timerData.push(timerInfo);
 
     fillReadyTimer(timerContainer, timerInfo.id);
@@ -326,15 +372,35 @@ function fillReadyTimer(readyTimer, id) {
 
 function calcValues() {
   if (timerData.length !== 0) {
+    console.log(timerData[0].startTimestamp, typeof(timerData[0].startTimestamp));
     let timers = document.querySelectorAll(".timer");
 
     timerData.forEach(function(timer, index) {
-    let currentTimer = timers[index];
-      if (timer.status !== "paused") {     
-        timer.remTimeMs = calcRemainingTimeMs(timer);
-        timer.percentValue = calcPercentValue(timer);
-        displayInHTML(currentTimer, timer);
-      } 
+    let timestamp = new Date().getTime();
+    console.log(timestamp);
+    console.log(timer.startTimestamp);
+    console.log(timer.percentValue);
+    console.log(timer.remainingTime);
+    if (timer.delayedStart === true) {
+      if (timestamp >= timer.startTimestamp) {
+        let currentTimer = timers[index];
+          if (timer.status !== "paused") {   
+            console.log("calculating");  
+            timer.remTimeMs = calcRemainingTimeMs(timer);
+            timer.percentValue = calcPercentValue(timer);
+            displayInHTML(currentTimer, timer);
+          } 
+        }
+      }
+      else {
+        let currentTimer = timers[index];
+          if (timer.status !== "paused") {   
+            console.log("calculating");  
+            timer.remTimeMs = calcRemainingTimeMs(timer);
+            timer.percentValue = calcPercentValue(timer);
+            displayInHTML(currentTimer, timer);
+          } 
+      }
     })
   }
   setTimeout(calcValues, 100);
@@ -360,9 +426,19 @@ function displayInHTML(timerContainer, timerSingleData) {
 
 let calcPercentValue = (timer) => timer.remainingTime*100/timer.initialTime;
 
+function calcPercentValue2(timer) {
+
+}
+
 function calcRemainingTimeMs(timer) {
   let currentTimestamp = new Date().getTime();
-  let timeDif = currentTimestamp - timer.timestamp;
+  let timeDif = undefined;
+  if (timer.delayedStart === true) {
+    timeDif = currentTimestamp - timer.startTimestamp;
+  } else {
+    timeDif = currentTimestamp - timer.timestamp;
+  }
+
   let remTimeMs = timer.initialTime*1000 - timeDif;
   timer.remainingTime = remTimeMs/1000;
   return remTimeMs;
@@ -372,23 +448,34 @@ calcValues();
 
 
 function pauseHandler(e, index) {
+  console.log("pause is called");
   let btn = e.currentTarget;
-  if (timerData[index].status == "running") {
-    timerData[index].status = "paused";
-    timerData[index].timestampWhenPaused = new Date().getTime();
-    btn.textContent = "Run";
-  } else {
-    timerData[index].status = "running";
-    timerData[index].timestampWhenRunned = new Date().getTime();
-    
-    timerData[index].pauseDelayTimeMs = 
-    timerData[index].timestampWhenRunned - 
-    timerData[index].timestampWhenPaused;
-    
-    timerData[index].timestamp += 
-    timerData[index].pauseDelayTimeMs;
+  if (timerData[index].preciseFinish !== true) {
+    if (timerData[index].status == "running") {
+      timerData[index].status = "paused";
+      timerData[index].timestampWhenPaused = new Date().getTime();
+      btn.textContent = "Run";
+    } else {
+      timerData[index].status = "running";
+      timerData[index].timestampWhenRunned = new Date().getTime();
+      
+      timerData[index].pauseDelayTimeMs = 
+      timerData[index].timestampWhenRunned - 
+      timerData[index].timestampWhenPaused;
+      
+      timerData[index].timestamp += 
+      timerData[index].pauseDelayTimeMs;
 
-    btn.textContent = "Pause";
+      console.log("start timestamp", timerData[index].startTimestamp);
+      console.log("pause delay", timerData[index].pauseDelayTimeMs);
+      timerData[index].startTimestamp = timerData[index].startTimestamp + 
+      timerData[index].pauseDelayTimeMs;
+      console.log("start timestamp",timerData[index].startTimestamp);
+
+      timerData[index].finishTimestamp += 
+      timerData[index].pauseDelayTimeMs;
+      btn.textContent = "Pause";
+    }
   }
 }
 
