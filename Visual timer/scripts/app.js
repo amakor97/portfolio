@@ -1,0 +1,342 @@
+"use strict";
+const wrapper = document.querySelector(".timers-wrapper");
+let timerData = [];
+let allTimers = [];
+
+let timersCounter = 0;
+let type = "circle";
+
+
+function getNewId() {
+  let newId = 0;
+  let isIdFree = true;
+  if (timerData.length > 0) {
+    for (let i = 0; i < timerData.length;) {
+      if (newId == timerData[i].id) {
+        console.log("matched, needed a higher id");
+        newId++;
+        i = 0;
+      } else {
+        i++;
+      }
+    }
+  } else {
+    newId = 0;
+  }
+  return newId;
+}
+
+function showAddTimerWindow(e) {
+  let timerContainer = e.currentTarget.parentElement;
+  fillSettingUpTimer(timerContainer);
+
+  const inputNumber = timerContainer.querySelector(".js-input-number");
+  const inputStartTime = timerContainer.querySelector(".js-input-start-time");
+  const inputFinishTime = timerContainer.querySelector(".js-input-finish-time");
+
+  const submitBtn = timerContainer.querySelector(".add-form__submit");
+  submitBtn.addEventListener("click", function(e){
+    e.preventDefault();
+
+    let timerInfo = {};
+    //timerInfo.id = timersCounter;
+    timerInfo.id = getNewId();
+    timerInfo.timestamp = new Date().getTime(); //
+    timerInfo.type = type;
+    
+
+    if (!inputStartTime.value) {
+      timerInfo.delayedStart = false;
+      if (inputNumber.value) {
+        timerInfo.startTimestamp =new Date().getTime();
+        timerInfo.initialTime = inputNumber.value;
+      } else {
+        timerInfo.preciseFinish = true;
+        let finish = inputFinishTime.value;
+        let finishTimestamp = new Date(finish).getTime();
+        let dif = finishTimestamp - timerInfo.timestamp;
+        timerInfo.initialTime = Math.round(dif/1000);
+      }
+      if (timerInfo.initialTime < 0) {
+        timerInfo.initialTime = 0;
+      }
+
+      timerInfo.remainingTime = timerInfo.initialTime;
+      timerInfo.remTimeMs = timerInfo.remainingTime*1000;
+      timerInfo.status = "running";
+      timerInfo.percentValue = 100;
+    } 
+    
+    else {
+      timerInfo.delayedStart = true;
+      console.log("precise start time was entered");
+      let start = inputStartTime.value;
+      console.log(start);
+      let startTimestamp = new Date(start).getTime();
+      timerInfo.startTimestamp = new Date(start).getTime();
+      console.log(timerInfo.startTimestamp, typeof(timerInfo.startTimestamp));
+      
+      if (timerInfo.startTimestamp > timerInfo.timestamp) {
+        console.log("timer will start soon");
+      } else {
+        console.log("timer is already running");
+      } 
+      console.log("start:", timerInfo.startTimestamp);
+
+      if (inputNumber.value) {
+        console.log("amount of secs");
+        let secs = inputNumber.value;
+        let secsInMs = secs*1000;
+
+        timerInfo.finishTimestamp = timerInfo.startTimestamp + secsInMs;
+        console.log("finish:", timerInfo.finishTimestamp);
+        let dif = timerInfo.finishTimestamp - timerInfo.startTimestamp;
+        let dif2 = new Date().getTime();
+        //dif = finishTimestamp - dif2;
+        timerInfo.initialTime = Math.round(dif/1000);
+        timerInfo.status = "running";
+        timerInfo.percentValue = 100;
+        console.log(timerInfo.percentValue);
+      }
+      if (inputFinishTime.value) {
+        console.log("precise finish time");
+        timerInfo.preciseFinish = true;
+        let finish = inputFinishTime.value;
+        let finishTimestamp = new Date(finish).getTime();
+        if (startTimestamp >= finishTimestamp) {
+          console.log("kek");
+          finishTimestamp = startTimestamp;
+        }
+        let dif = finishTimestamp - timerInfo.startTimestamp;
+        timerInfo.initialTime = Math.round(dif/1000);
+        timerInfo.percentValue = 100;
+      }
+      timerInfo.remainingTime = timerInfo.initialTime;
+      timerInfo.remTimeMs = timerInfo.remainingTime*1000;
+    }
+
+    
+    timerData.push(timerInfo);
+    console.log(timerData);
+
+
+    fillReadyTimer(timerContainer, timerInfo.id);
+
+    
+    const pauseBtn = timerContainer.querySelector(".js-pause-timer-btn");
+    pauseBtn.addEventListener("click", function(e){
+      let index = getTimerIndex(timerInfo.id);
+      pauseHandler(e, index);
+    })
+
+    const delBtn = timerContainer.querySelector(".js-del-timer-btn");
+    delBtn.addEventListener("click", function(e){
+      let index = getTimerIndex(timerInfo.id);
+      deleteTimer(timerContainer, index);
+      if (timerData.length == 0) {
+        timersCounter = 0;
+        localStorage.setItem("data", []);
+      }
+    })
+
+
+    let newTimer = createEmptyTimer();
+    fillEmptyTimer(newTimer);
+    let addTimerBtn = newTimer.querySelector(".js-add-timer-btn");
+    addTimerBtn.addEventListener("click", showAddTimerWindow);
+    timersCounter++;
+  })
+}
+
+//function 
+
+function getTimerIndex(id) {  
+  let timerIndex = undefined;
+  timerData.forEach(function(timer, index){
+    if (timer.id == id) { 
+      timerIndex = index;
+    }
+  })
+  return timerIndex;
+}
+
+
+/* fill functions */
+
+import { createEmptyTimer } from "./DOMManipulations.js";
+import { fillEmptyTimer } from "./DOMManipulations.js";
+import { fillSettingUpTimer } from "./DOMManipulations.js";
+import { fillReadyTimer } from "./DOMManipulations.js";
+import { clearChilds } from "./DOMManipulations.js";
+
+
+function calcValues() {
+  if (timerData.length !== 0) {
+    let timers = document.querySelectorAll(".timer");
+
+    timerData.forEach(function(timer, index) {
+    let timestamp = new Date().getTime();
+    if (timer.delayedStart === true) {
+      if (timestamp >= timer.startTimestamp) {
+        let currentTimer = timers[index];
+          if (timer.status !== "paused") {   
+            console.log("calculating");  
+            timer.remTimeMs = calcRemainingTimeMs(timer);
+            timer.percentValue = calcPercentValue(timer);
+            displayInHTML(currentTimer, timer);
+          } 
+        }
+      }
+      else {
+        let currentTimer = timers[index];
+          if (timer.status !== "paused") {   
+            timer.remTimeMs = calcRemainingTimeMs(timer);
+            timer.percentValue = calcPercentValue(timer);
+            displayInHTML(currentTimer, timer);
+          } 
+      }
+    })
+  }
+  setTimeout(calcValues, 100);
+}
+
+
+function displayInHTML(timerContainer, timerSingleData) {
+  let canvas = timerContainer.querySelector(".timer__circle");
+  let ctx = canvas.getContext("2d");
+  let percentContainer = timerContainer.querySelector(".timer__percent");
+  let timeContainer = timerContainer.querySelector(".js-remaining-secs");
+
+  if (timerSingleData.percentValue > 0) {
+    percentContainer.innerHTML = `${(Math.round(timerSingleData.percentValue*100)/100).toFixed(2)}%`;
+    timeContainer.innerHTML = `Rem. time: ${(timerSingleData.remTimeMs/1000).toFixed(3)} secs`;
+    drawTimer(ctx, timerSingleData.percentValue);
+  } else {
+    percentContainer.innerHTML = "Done!";
+    timeContainer.innerHTML = "Finished!";
+    drawCircle(ctx);
+  }
+}
+
+let calcPercentValue = (timer) => timer.remainingTime*100/timer.initialTime;
+
+function calcPercentValue2(timer) {
+
+}
+
+function calcRemainingTimeMs(timer) {
+  let currentTimestamp = new Date().getTime();
+  let timeDif = undefined;
+  if (timer.delayedStart === true) {
+    timeDif = currentTimestamp - timer.startTimestamp;
+  } else {
+    timeDif = currentTimestamp - timer.timestamp;
+  }
+
+  let remTimeMs = timer.initialTime*1000 - timeDif;
+  timer.remainingTime = remTimeMs/1000;
+  return remTimeMs;
+}
+
+calcValues();
+
+
+function pauseHandler(e, index) {
+  console.log("pause is called");
+  let btn = e.currentTarget;
+  if (timerData[index].preciseFinish !== true) {
+    if (timerData[index].status == "running") {
+      timerData[index].status = "paused";
+      timerData[index].timestampWhenPaused = new Date().getTime();
+      btn.textContent = "Run";
+    } else {
+      timerData[index].status = "running";
+      timerData[index].timestampWhenRunned = new Date().getTime();
+      
+      timerData[index].pauseDelayTimeMs = 
+      timerData[index].timestampWhenRunned - 
+      timerData[index].timestampWhenPaused;
+      
+      timerData[index].timestamp += 
+      timerData[index].pauseDelayTimeMs;
+
+      console.log("start timestamp", timerData[index].startTimestamp);
+      console.log("pause delay", timerData[index].pauseDelayTimeMs);
+      timerData[index].startTimestamp = timerData[index].startTimestamp + 
+      timerData[index].pauseDelayTimeMs;
+      console.log("start timestamp",timerData[index].startTimestamp);
+
+      timerData[index].finishTimestamp += 
+      timerData[index].pauseDelayTimeMs;
+      btn.textContent = "Pause";
+    }
+  }
+}
+
+
+function deleteTimer(timer, index) {
+  wrapper.removeChild(timer);
+  timerData.splice(index, 1);
+}
+
+
+/* drawing functions */
+
+import { drawTimer } from "./drawing.js";
+import { drawCircle } from "./drawing.js";
+
+
+/* localStorage functions */
+
+window.onload = function() {
+  let testValue = JSON.parse(localStorage.getItem("data"));
+  if ((testValue) && (testValue.length > 0)) {
+    timerData = [...testValue];
+    console.log(timerData);
+    timersCounter = timerData.length;
+  } else {
+    timerData = [];
+  }
+
+  if (timerData.length > 0) {
+    timerData.forEach(function(timer) {
+      let emptyTimer = createEmptyTimer();
+      fillReadyTimer(emptyTimer, timer.id);
+
+
+      const pauseBtn = emptyTimer.querySelector(".js-pause-timer-btn");
+      let index = getTimerIndex(timer.id);
+      if (timerData[index].status == "paused") {
+        pauseBtn.textContent = "Run";
+      }
+      pauseBtn.addEventListener("click", function(e){
+        let index = getTimerIndex(timer.id);
+        pauseHandler(e, index);
+      })
+
+      const delBtn = emptyTimer.querySelector(".js-del-timer-btn");
+      delBtn.addEventListener("click", function(e){
+        let index = getTimerIndex(timer.id);
+        deleteTimer(emptyTimer, index);
+        if (timerData.length == 0) {
+          timersCounter = 0;
+          localStorage.setItem("data", []);
+        }
+      })
+
+      displayInHTML(emptyTimer, timer);
+    })
+  }
+
+  let initialTimer = createEmptyTimer();
+  fillEmptyTimer(initialTimer);
+  let addTimerBtn = initialTimer.querySelector(".js-add-timer-btn");
+  addTimerBtn.addEventListener("click", showAddTimerWindow);
+}
+
+
+window.onbeforeunload = function(){
+  let testkey = "data";
+  let testvalue = JSON.stringify(timerData);
+  localStorage.setItem(testkey, testvalue)
+};
