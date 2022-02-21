@@ -83,6 +83,10 @@ function showAddTimerWindow(e) {
         timerInfo.preciseFinish = true;
         let finish = inputFinishTime.value;
         let finishTimestamp = new Date(finish).getTime();
+        if (startTimestamp >= finishTimestamp) {
+          console.log("kek");
+          finishTimestamp = startTimestamp;
+        }
         let dif = finishTimestamp - timerInfo.startTimestamp;
         timerInfo.initialTime = Math.round(dif/1000);
       }
