@@ -207,7 +207,7 @@ html {
 }
 
 .add-form__fieldset {
-  display: flex;
+  /*display: flex;*/
   flex-direction: column;
   padding: 5px;
 
@@ -218,4 +218,16 @@ html {
   padding: 1rem;
 
   font-size: 1.5rem;
+}
+
+.add-form__input-amount {
+  width: 90px;
+  padding: 1rem;
+
+  font-size: 1.5rem;
+}
+
+label {
+  display: inline-block;
+  width: fit-content;
 }
