@@ -34,6 +34,11 @@ function showAddTimerWindow(e) {
   const inputStartTime = timerContainer.querySelector(".js-input-start-time");
   const inputFinishTime = timerContainer.querySelector(".js-input-finish-time");
 
+  const inputDays = timerContainer.querySelector(".js-input-days");
+  const inputHours = timerContainer.querySelector(".js-input-hours");
+  const inputMins = timerContainer.querySelector(".js-input-mins");
+  const inputSecs = timerContainer.querySelector(".js-input-secs");
+
   const submitBtn = timerContainer.querySelector(".add-form__submit");
   submitBtn.addEventListener("click", function(e){
     e.preventDefault();
@@ -50,7 +55,22 @@ function showAddTimerWindow(e) {
       if (inputNumber.value) {
         timerInfo.startTimestamp =new Date().getTime();
         timerInfo.initialTime = inputNumber.value;
-      } else {
+      } 
+
+       else if ((inputDays.value) || (inputHours.value) || (inputMins.value) || (inputSecs.value)) {
+        console.log("days:", inputDays.value);
+        console.log("hours:", inputHours.value);
+        console.log("mins:", inputMins.value);
+        console.log("secs:", inputSecs.value);
+
+        timerInfo.startTimestamp =new Date().getTime();
+        
+        timerInfo.initialTime = inputDays.value*60*60*24 + +inputHours.value*60*60 + +inputMins.value*60 + +inputSecs.value;
+        timerInfo.status = "running";
+        timerInfo.percentValue = 100;
+      }
+      
+      else {
         timerInfo.preciseFinish = true;
         let finish = inputFinishTime.value;
         let finishTimestamp = new Date(finish).getTime();
@@ -102,7 +122,25 @@ function showAddTimerWindow(e) {
         timerInfo.percentValue = 100;
         console.log(timerInfo.percentValue);
       }
-      if (inputFinishTime.value) {
+
+      else if ((inputDays.value) || (inputHours.value) || (inputMins.value) || (inputSecs.value)) {
+        console.log("days:", inputDays.value);
+        console.log("hours:", inputHours.value);
+        console.log("mins:", inputMins.value);
+        console.log("secs:", inputSecs.value);
+
+        console.log("marker");
+        ////// fix here 
+        //timerInfo.startTimestamp = new Date().getTime();
+        let secsAmount = inputDays.value*60*60*24 + +inputHours.value*60*60 + +inputMins.value*60 + +inputSecs.value;
+        timerInfo.finishTimestamp = timerInfo.startTimestamp + secsAmount*1000;
+        let dif = timerInfo.finishTimestamp - timerInfo.startTimestamp;
+        timerInfo.initialTime = Math.round(dif/1000);
+        timerInfo.status = "running";
+        timerInfo.percentValue = 100;
+      }
+
+      else {
         console.log("precise finish time");
         timerInfo.preciseFinish = true;
         let finish = inputFinishTime.value;
@@ -218,7 +256,8 @@ function calcTimeToStart(index) {
 
 function displayTimeToStart(timerContainer, timerSingleData) {
   let timeContainer = timerContainer.querySelector(".js-remaining-secs");
-  timeContainer.innerHTML = `Time to start: ${(timerSingleData.timeToStart/1000).toFixed(3)} secs`;
+  //timeContainer.innerHTML = `Time to start: ${(timerSingleData.timeToStart/1000).toFixed(3)} secs`;
+  displayTime(timerContainer, timerSingleData.timeToStart);
 }
 
 function displayInHTML(timerContainer, timerSingleData) {
