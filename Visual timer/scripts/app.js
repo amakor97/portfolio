@@ -78,6 +78,10 @@ function showAddTimerWindow(e) {
       
       if (timerInfo.startTimestamp > timerInfo.timestamp) {
         console.log("timer will start soon");
+        timerInfo.notStartedYet = true;
+        console.log(timerInfo.notStartedYet);
+        timerInfo.timeToStart = timerInfo.startTimestamp - timerInfo.timestamp;
+        console.log("time to start", timerInfo.timeToStart);
       } else {
         console.log("timer is already running");
       } 
@@ -179,27 +183,43 @@ function calcValues() {
     if (timer.delayedStart === true) {
       if (timestamp >= timer.startTimestamp) {
         let currentTimer = timers[index];
-          if (timer.status !== "paused") {   
-            console.log("calculating");  
-            timer.remTimeMs = calcRemainingTimeMs(timer);
-            timer.percentValue = calcPercentValue(timer);
-            displayInHTML(currentTimer, timer);
-          } 
+        if (timer.status !== "paused") {   
+          console.log("calculating");  
+          timer.remTimeMs = calcRemainingTimeMs(timer);
+          timer.percentValue = calcPercentValue(timer);
+          displayInHTML(currentTimer, timer);
         }
+      } else {
+        if (timer.timeToStart) {
+          let currentTimer = timers[index];
+          calcTimeToStart(index);
+          displayTimeToStart(currentTimer, timer);
+        } 
       }
-      else {
+    } else {
         let currentTimer = timers[index];
-          if (timer.status !== "paused") {   
-            timer.remTimeMs = calcRemainingTimeMs(timer);
-            timer.percentValue = calcPercentValue(timer);
-            displayInHTML(currentTimer, timer);
-          } 
+        if (timer.status !== "paused") {   
+          timer.remTimeMs = calcRemainingTimeMs(timer);
+          timer.percentValue = calcPercentValue(timer);
+          displayInHTML(currentTimer, timer);
+        }   
       }
     })
   }
   setTimeout(calcValues, 100);
 }
 
+function calcTimeToStart(index) {
+  let currentTimestamp = new Date().getTime();
+  timerData[index].timeToStart = timerData[index].startTimestamp - currentTimestamp;
+  console.log(timerData[index].timeToStart);
+}
+
+
+function displayTimeToStart(timerContainer, timerSingleData) {
+  let timeContainer = timerContainer.querySelector(".js-remaining-secs");
+  timeContainer.innerHTML = `Time to start: ${(timerSingleData.timeToStart/1000).toFixed(3)} secs`;
+}
 
 function displayInHTML(timerContainer, timerSingleData) {
   let canvas = timerContainer.querySelector(".timer__circle");
