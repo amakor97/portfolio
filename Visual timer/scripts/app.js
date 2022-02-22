@@ -229,13 +229,39 @@ function displayInHTML(timerContainer, timerSingleData) {
 
   if (timerSingleData.percentValue > 0) {
     percentContainer.innerHTML = `${(Math.round(timerSingleData.percentValue*100)/100).toFixed(2)}%`;
-    timeContainer.innerHTML = `Rem. time: ${(timerSingleData.remTimeMs/1000).toFixed(3)} secs`;
+    //timeContainer.innerHTML = `Rem. time: ${(timerSingleData.remTimeMs/1000).toFixed(3)} secs`;
+    let remMins = calcRemainingMins(timerSingleData.remTimeMs);
+    //timeContainer.innerHTML = `Rem. time: ${remMins} mins, ${(timerSingleData.remTimeMs/1000).toFixed(3)} secs`;
+    displayTime(timerContainer, timerSingleData.remTimeMs);
     drawTimer(ctx, timerSingleData.percentValue);
   } else {
     percentContainer.innerHTML = "Done!";
     timeContainer.innerHTML = "Finished!";
     drawCircle(ctx);
   }
+}
+
+function displayTime(timerContainer, remTimeMs) {
+  let timeContainer = timerContainer.querySelector(".js-remaining-secs");
+
+  let remainingDays = Math.floor(remTimeMs/1000/60/60/24);
+  let remainingHours = Math.floor(remTimeMs/1000/60/60 - remainingDays*24);
+  let remainingMins = Math.floor(remTimeMs/1000/60 - remainingDays*60*24 - remainingHours*60);
+  let remainingSecs = (remTimeMs/1000 - remainingDays*60*60*24 - remainingHours*60*60 - remainingMins*60).toFixed(3);
+
+  if (remainingDays > 0) {
+    timeContainer.innerHTML = `Rem. time: ${remainingDays} days, ${remainingHours} hours, ${remainingMins} mins, ${remainingSecs} secs`;
+  } else if (remainingHours > 0) {
+    timeContainer.innerHTML = `Rem. time: ${remainingHours} hours, ${remainingMins} mins, ${remainingSecs} secs`;
+  } else if (remainingMins > 0) {
+    timeContainer.innerHTML = `Rem. time: ${remainingMins} mins, ${remainingSecs} secs`;
+  } else {
+    timeContainer.innerHTML = `Rem. time: ${remainingSecs} secs`;
+  }
+}
+
+function calcRemainingMins(timeMs) {
+  return Math.floor(timeMs/1000/60);
 }
 
 let calcPercentValue = (timer) => timer.remainingTime*100/timer.initialTime;
