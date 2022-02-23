@@ -406,6 +406,23 @@ window.onload = function() {
       let emptyTimer = createEmptyTimer();
       fillReadyTimer(emptyTimer, timer.id);
 
+      const settingsBtn = emptyTimer.querySelector(".js-settings-btn");
+      settingsBtn.addEventListener("click", function(e) {
+      let index = getTimerIndex(timer.id);
+      console.log(index);
+      let fixedLabel = emptyTimer.querySelector(".js-settings-fixed-label");
+      let fixedInput = emptyTimer.querySelector(".js-settings-fixed-input");
+      fixedInput.value = timer.fixedNumber;
+      fixedInput.addEventListener("input", function() {
+        timer.fixedNumber = fixedInput.value;
+      })
+
+      console.log(fixedLabel);
+      fixedLabel.classList.toggle("add-form__label--hidden");
+      fixedInput.classList.toggle("add-form__input-amount--hidden");
+    })
+
+
 
       const pauseBtn = emptyTimer.querySelector(".js-pause-timer-btn");
       let index = getTimerIndex(timer.id);

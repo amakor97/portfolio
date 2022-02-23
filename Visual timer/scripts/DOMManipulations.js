@@ -16,7 +16,7 @@ window.onload = function() {
 
 export function createEmptyTimer() {
   let newTimer = document.createElement("article");
-  newTimer.classList.add("timer");
+  newTimer.classList.add("timer", "timer--intro-layout");
   wrapper.appendChild(newTimer);
   return newTimer;
 }
@@ -29,7 +29,7 @@ export function fillEmptyTimer(emptyTimer) {
   emptyTimer.appendChild(addTimerBtn);
   
   let introText = document.createElement("p");
-  introText.classList.add("timer__text");
+  introText.classList.add("timer__text-intro");
   introText.textContent = "Add new timer";
   emptyTimer.appendChild(introText);
 }
@@ -37,13 +37,18 @@ export function fillEmptyTimer(emptyTimer) {
 
 export function fillSettingUpTimer(settingUpTimer) {
   clearChilds(settingUpTimer);
+  settingUpTimer.classList.remove("timer--intro-layout");
 
   let addForm = document.createElement("form");
   addForm.classList.add("timer__add-window", "add-form");
 
+  let startFieldset = document.createElement("fieldset");
+  startFieldset.classList.add("add-form__fieldset");
+  addForm.appendChild(startFieldset);
+
   let startTypeFieldset = document.createElement("fieldset");
   startTypeFieldset.classList.add("add-form__fieldset");
-  addForm.appendChild(startTypeFieldset);
+  startFieldset.appendChild(startTypeFieldset);
 
   let startTypeLabel = document.createElement("label");
   startTypeLabel.textContent = "Start now";
@@ -75,17 +80,18 @@ export function fillSettingUpTimer(settingUpTimer) {
 
   startTypeFieldset = document.createElement("fieldset");
   startTypeFieldset.classList.add("add-form__fieldset");
-  addForm.appendChild(startTypeFieldset);
+  startFieldset.appendChild(startTypeFieldset);
 
   let inputStartLabel = document.createElement("label");
   inputStartLabel.textContent = "Please, enter start datetime";
+  inputStartLabel.classList.add("add-form__label--hidden");
   startTypeFieldset.appendChild(inputStartLabel);
   forAttrStart = document.createAttribute("for");
   forAttrStart.value = `inputStartDatetime`;
   inputStartLabel.setAttributeNode(forAttrStart);
   
   let inputStartTime = document.createElement("input");
-  inputStartTime.classList.add("add-form__input-time", "js-input-start-time");
+  inputStartTime.classList.add("add-form__input-time", "add-form__input--hidden", "js-input-start-time");
   inputStartTime.type = "datetime-local";
   inputStartTime.id = `inputStartDatetime`;
   inputStartTime.disabled = true;
@@ -93,9 +99,14 @@ export function fillSettingUpTimer(settingUpTimer) {
 
 
 
+  let finishFieldset = document.createElement("fieldset");
+  finishFieldset.classList.add("add-form__fieldset");
+  addForm.appendChild(finishFieldset);
+
+
   let finishTypeFieldset = document.createElement("fieldset");
   finishTypeFieldset.classList.add("add-form__fieldset");
-  addForm.appendChild(finishTypeFieldset);
+  finishFieldset.appendChild(finishTypeFieldset);
 
   let inputFinishType1Label = document.createElement("label");
   inputFinishType1Label.textContent = "Amount of seconds";
@@ -142,7 +153,7 @@ export function fillSettingUpTimer(settingUpTimer) {
   
   finishTypeFieldset = document.createElement("fieldset");
   finishTypeFieldset.classList.add("add-form__fieldset");
-  addForm.appendChild(finishTypeFieldset);
+  finishFieldset.appendChild(finishTypeFieldset);
 
   let inputNumberLabel = document.createElement("label");
   inputNumberLabel.textContent = "Please, enter the amount of seconds";
@@ -159,10 +170,14 @@ export function fillSettingUpTimer(settingUpTimer) {
   inputNumberLabel.appendChild(inputNumber);
 
 
+  let timeUnitsFieldset = document.createElement("fieldset");
+  timeUnitsFieldset.classList.add("add-form__fieldset", "add-form__fieldset--hidden", "add-form__fieldset--days");
+  finishTypeFieldset.appendChild(timeUnitsFieldset);
+
   
   let inputDaysLabel = document.createElement("label");
   inputDaysLabel.textContent = "Days";
-  finishTypeFieldset.appendChild(inputDaysLabel);
+  timeUnitsFieldset.appendChild(inputDaysLabel);
   forAttr = document.createAttribute("for");
   forAttr.value = "InputDaysAmount";
   inputDaysLabel.setAttributeNode(forAttr);
@@ -183,7 +198,7 @@ export function fillSettingUpTimer(settingUpTimer) {
 
   let inputHoursLabel = document.createElement("label");
   inputHoursLabel.textContent = "Hours";
-  finishTypeFieldset.appendChild(inputHoursLabel);
+  timeUnitsFieldset.appendChild(inputHoursLabel);
   forAttr = document.createAttribute("for");
   forAttr.value = "InputHoursAmount";
   inputHoursLabel.setAttributeNode(forAttr);
@@ -205,7 +220,7 @@ export function fillSettingUpTimer(settingUpTimer) {
 
   let inputMinsLabel = document.createElement("label");
   inputMinsLabel.textContent = "Mins";
-  finishTypeFieldset.appendChild(inputMinsLabel);
+  timeUnitsFieldset.appendChild(inputMinsLabel);
   forAttr = document.createAttribute("for");
   forAttr.value = "InputMinsAmount";
   inputMinsLabel.setAttributeNode(forAttr);
@@ -227,7 +242,7 @@ export function fillSettingUpTimer(settingUpTimer) {
 
   let inputSecsLabel = document.createElement("label");
   inputSecsLabel.textContent = "Secs";
-  finishTypeFieldset.appendChild(inputSecsLabel);
+  timeUnitsFieldset.appendChild(inputSecsLabel);
   forAttr = document.createAttribute("for");
   forAttr.value = "InputSecsAmount";
   inputSecsLabel.setAttributeNode(forAttr);
@@ -249,7 +264,7 @@ export function fillSettingUpTimer(settingUpTimer) {
 
   let inputFixedLabel = document.createElement("label");
   inputFixedLabel.textContent = "Fixed number";
-  finishTypeFieldset.appendChild(inputFixedLabel);
+  addForm.appendChild(inputFixedLabel);
   forAttr = document.createAttribute("for");
   forAttr.value = "InputFixedNumber";
   inputFixedLabel.setAttributeNode(forAttr);
@@ -270,13 +285,14 @@ export function fillSettingUpTimer(settingUpTimer) {
 
   let inputFinishLabel = document.createElement("label");
   inputFinishLabel.textContent = "Please, enter finish datetime";
+  inputFinishLabel.classList.add("add-form__label--hidden");
   finishTypeFieldset.appendChild(inputFinishLabel);
   forAttr = document.createAttribute("for");
   forAttr.value = `InputFinishTime`;
   inputFinishLabel.setAttributeNode(forAttr);
 
   let inputFinishTime = document.createElement("input");
-  inputFinishTime.classList.add("add-form__input-time", "js-input-finish-time");
+  inputFinishTime.classList.add("add-form__input-time", "add-form__input--hidden", "js-input-finish-time");
   inputFinishTime.type = "datetime-local";
   inputFinishTime.id = `InputFinishTime`;
   inputFinishTime.disabled = true;
@@ -293,9 +309,13 @@ export function fillSettingUpTimer(settingUpTimer) {
   startTypeInput1.addEventListener("input", function() {
     inputStartTime.disabled = true;
     inputStartTime.value = "";
+    inputStartLabel.classList.toggle("add-form__label--hidden");
+    inputStartTime.classList.toggle("add-form__input--hidden");
   })
   startTypeInput2.addEventListener("input", function() {
     inputStartTime.disabled = false;
+    inputStartLabel.classList.toggle("add-form__label--hidden");
+    inputStartTime.classList.toggle("add-form__input--hidden");
   })
 
 
@@ -305,6 +325,12 @@ export function fillSettingUpTimer(settingUpTimer) {
     inputHours.value = "";
     inputMins.value = "";
     inputSecs.value = "";
+
+    inputNumberLabel.classList.remove("add-form__label--hidden");
+    inputNumber.classList.remove("add-form__input--hidden");
+    timeUnitsFieldset.classList.add("add-form__fieldset--hidden");
+    inputFinishLabel.classList.add("add-form__label--hidden");
+    inputFinishTime.classList.add("add-form__input--hidden");
 
     inputNumber.disabled = false;
     inputDays.disabled = true;
@@ -317,6 +343,12 @@ export function fillSettingUpTimer(settingUpTimer) {
   inputFinishType2.addEventListener("input", function() {
     inputFinishTime.value = "";
     inputNumber.value = "";
+
+    inputNumberLabel.classList.add("add-form__label--hidden");
+    inputNumber.classList.add("add-form__input--hidden");
+    timeUnitsFieldset.classList.remove("add-form__fieldset--hidden");
+    inputFinishLabel.classList.add("add-form__label--hidden");
+    inputFinishTime.classList.add("add-form__input--hidden");
 
     inputNumber.disabled = true;
     inputDays.disabled = false;
@@ -332,6 +364,12 @@ export function fillSettingUpTimer(settingUpTimer) {
     inputHours.value = "";
     inputMins.value = "";
     inputSecs.value = "";
+
+    inputNumberLabel.classList.add("add-form__label--hidden");
+    inputNumber.classList.add("add-form__input--hidden");
+    timeUnitsFieldset.classList.add("add-form__fieldset--hidden");
+    inputFinishLabel.classList.remove("add-form__label--hidden");
+    inputFinishTime.classList.remove("add-form__input--hidden");
 
     inputNumber.disabled = true;
     inputDays.disabled = true;
