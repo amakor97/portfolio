@@ -246,7 +246,27 @@ export function fillSettingUpTimer(settingUpTimer) {
   inputSecs.id = `InputSecsAmount`;
   inputSecsLabel.appendChild(inputSecs);
 
+
+  let inputFixedLabel = document.createElement("label");
+  inputFixedLabel.textContent = "Fixed number";
+  finishTypeFieldset.appendChild(inputFixedLabel);
+  forAttr = document.createAttribute("for");
+  forAttr.value = "InputFixedNumber";
+  inputFixedLabel.setAttributeNode(forAttr);
   
+  let inputFixed = document.createElement("input");
+  inputFixed.classList.add("add-form__input-amount", "js-input-fixed");
+  inputFixed.type = "number";
+  inputFixed.min = "0";
+  inputFixed.max = "5";
+  inputFixed.addEventListener("input", function() {
+    if ((this.value < 0) || (this.value > 5)) {
+      this.value = 2;
+    }
+  })
+  inputFixed.id = "InputFixedNumber";
+  inputFixedLabel.appendChild(inputFixed);
+
   let inputFinishLabel = document.createElement("label");
   inputFinishLabel.textContent = "Please, enter finish datetime";
   finishTypeFieldset.appendChild(inputFinishLabel);

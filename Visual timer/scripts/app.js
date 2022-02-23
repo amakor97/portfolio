@@ -39,6 +39,9 @@ function showAddTimerWindow(e) {
   const inputMins = timerContainer.querySelector(".js-input-mins");
   const inputSecs = timerContainer.querySelector(".js-input-secs");
 
+  const inputFixed = timerContainer.querySelector(".js-input-fixed");
+
+
   const submitBtn = timerContainer.querySelector(".add-form__submit");
   submitBtn.addEventListener("click", function(e){
     e.preventDefault();
@@ -48,7 +51,7 @@ function showAddTimerWindow(e) {
     timerInfo.id = getNewId();
     timerInfo.timestamp = new Date().getTime(); //
     timerInfo.type = type;
-    
+    timerInfo.fixedNumber = inputFixed.value;
 
     if (!inputStartTime.value) {
       timerInfo.delayedStart = false;
@@ -267,8 +270,8 @@ function displayInHTML(timerContainer, timerSingleData) {
   let timeContainer = timerContainer.querySelector(".js-remaining-secs");
 
   if (timerSingleData.percentValue > 0) {
-    percentContainer.innerHTML = `${(Math.round(timerSingleData.percentValue*100)/100).toFixed(2)}%`;
-    //timeContainer.innerHTML = `Rem. time: ${(timerSingleData.remTimeMs/1000).toFixed(3)} secs`;
+    percentContainer.innerHTML = `${(Math.round(timerSingleData.percentValue*100000)/100000).toFixed(timerSingleData.fixedNumber)}%`;
+        //timeContainer.innerHTML = `Rem. time: ${(timerSingleData.remTimeMs/1000).toFixed(3)} secs`;
     let remMins = calcRemainingMins(timerSingleData.remTimeMs);
     //timeContainer.innerHTML = `Rem. time: ${remMins} mins, ${(timerSingleData.remTimeMs/1000).toFixed(3)} secs`;
     displayTime(timerContainer, timerSingleData.remTimeMs);
