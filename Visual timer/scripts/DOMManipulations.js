@@ -259,8 +259,9 @@ export function fillSettingUpTimer(settingUpTimer) {
   inputFixed.type = "number";
   inputFixed.min = "0";
   inputFixed.max = "5";
+  inputFixed.value = 2;
   inputFixed.addEventListener("input", function() {
-    if ((this.value < 0) || (this.value > 5)) {
+    if ((inputFixed.value == "") || (this.value < 0) || (this.value > 5)) {
       this.value = 2;
     }
   })
@@ -377,7 +378,7 @@ export function fillReadyTimer(readyTimer, id) {
   timerControlsContainer.classList.add("timer__settings");
 
   let settingsBtn = document.createElement("button");
-  settingsBtn.classList.add("btn");
+  settingsBtn.classList.add("btn", "js-settings-btn");
   settingsBtn.textContent = "*";
   timerControlsContainer.appendChild(settingsBtn);
 
@@ -386,7 +387,27 @@ export function fillReadyTimer(readyTimer, id) {
   pauseBtn.textContent = "Pause";
   
   
+  let inputFixedLabel = document.createElement("label");
+  inputFixedLabel.textContent = "Fixed number";
+  inputFixedLabel.classList.add("add-form__label--hidden", "js-settings-fixed-label");
+  timerControlsContainer.appendChild(inputFixedLabel);
+  let forAttr = document.createAttribute("for");
+  let uniqueId = new Date().getTime();
+  forAttr.value = uniqueId;
+  inputFixedLabel.setAttributeNode(forAttr);
   
+  let inputFixed = document.createElement("input");
+  inputFixed.classList.add("add-form__input-amount", "add-form__input-amount--hidden", "js-settings-fixed-input");
+  inputFixed.type = "number";
+  inputFixed.min = "0";
+  inputFixed.max = "5";
+  inputFixed.addEventListener("input", function() {
+    if ((this.value < 0) || (this.value > 5)) {
+      this.value = 2;
+    }
+  })
+  inputFixed.id = uniqueId;
+  inputFixedLabel.appendChild(inputFixed);
   
 
   

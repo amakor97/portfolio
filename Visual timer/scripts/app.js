@@ -66,7 +66,7 @@ function showAddTimerWindow(e) {
         console.log("mins:", inputMins.value);
         console.log("secs:", inputSecs.value);
 
-        timerInfo.startTimestamp =new Date().getTime();
+        timerInfo.startTimestamp = new Date().getTime();
         
         timerInfo.initialTime = inputDays.value*60*60*24 + +inputHours.value*60*60 + +inputMins.value*60 + +inputSecs.value;
         timerInfo.status = "running";
@@ -167,6 +167,21 @@ function showAddTimerWindow(e) {
 
     fillReadyTimer(timerContainer, timerInfo.id);
 
+    const settingsBtn = timerContainer.querySelector(".js-settings-btn");
+    settingsBtn.addEventListener("click", function(e) {
+      let index = getTimerIndex(timerInfo.id);
+      console.log(index);
+      let fixedLabel = timerContainer.querySelector(".js-settings-fixed-label");
+      let fixedInput = timerContainer.querySelector(".js-settings-fixed-input");
+      fixedInput.value = timerData[index].fixedNumber;
+      fixedInput.addEventListener("input", function() {
+        timerData[index].fixedNumber = fixedInput.value;
+      })
+
+      console.log(fixedLabel);
+      fixedLabel.classList.toggle("add-form__label--hidden");
+      fixedInput.classList.toggle("add-form__input-amount--hidden");
+    })
     
     const pauseBtn = timerContainer.querySelector(".js-pause-timer-btn");
     pauseBtn.addEventListener("click", function(e){
