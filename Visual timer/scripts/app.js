@@ -13,7 +13,6 @@ function getNewId() {
   if (timerData.length > 0) {
     for (let i = 0; i < timerData.length;) {
       if (newId == timerData[i].id) {
-        console.log("matched, needed a higher id");
         newId++;
         i = 0;
       } else {
@@ -61,10 +60,6 @@ function showAddTimerWindow(e) {
       } 
 
        else if ((inputDays.value) || (inputHours.value) || (inputMins.value) || (inputSecs.value)) {
-        console.log("days:", inputDays.value);
-        console.log("hours:", inputHours.value);
-        console.log("mins:", inputMins.value);
-        console.log("secs:", inputSecs.value);
 
         timerInfo.startTimestamp = new Date().getTime();
         
@@ -92,47 +87,31 @@ function showAddTimerWindow(e) {
     
     else {
       timerInfo.delayedStart = true;
-      console.log("precise start time was entered");
-      let start = inputStartTime.value;
-      console.log(start);
+      let start = inputStartTime.value
       let startTimestamp = new Date(start).getTime();
       timerInfo.startTimestamp = new Date(start).getTime();
-      console.log(timerInfo.startTimestamp, typeof(timerInfo.startTimestamp));
       
       if (timerInfo.startTimestamp > timerInfo.timestamp) {
-        console.log("timer will start soon");
         timerInfo.notStartedYet = true;
-        console.log(timerInfo.notStartedYet);
         timerInfo.timeToStart = timerInfo.startTimestamp - timerInfo.timestamp;
-        console.log("time to start", timerInfo.timeToStart);
       } else {
-        console.log("timer is already running");
-      } 
-      console.log("start:", timerInfo.startTimestamp);
+        timerInfo.notStartedYet = false;
+      }
 
       if (inputNumber.value) {
-        console.log("amount of secs");
         let secs = inputNumber.value;
         let secsInMs = secs*1000;
 
         timerInfo.finishTimestamp = timerInfo.startTimestamp + secsInMs;
-        console.log("finish:", timerInfo.finishTimestamp);
         let dif = timerInfo.finishTimestamp - timerInfo.startTimestamp;
         let dif2 = new Date().getTime();
         //dif = finishTimestamp - dif2;
         timerInfo.initialTime = Math.round(dif/1000);
         timerInfo.status = "running";
         timerInfo.percentValue = 100;
-        console.log(timerInfo.percentValue);
       }
 
       else if ((inputDays.value) || (inputHours.value) || (inputMins.value) || (inputSecs.value)) {
-        console.log("days:", inputDays.value);
-        console.log("hours:", inputHours.value);
-        console.log("mins:", inputMins.value);
-        console.log("secs:", inputSecs.value);
-
-        console.log("marker");
         ////// fix here 
         //timerInfo.startTimestamp = new Date().getTime();
         let secsAmount = inputDays.value*60*60*24 + +inputHours.value*60*60 + +inputMins.value*60 + +inputSecs.value;
@@ -144,12 +123,10 @@ function showAddTimerWindow(e) {
       }
 
       else {
-        console.log("precise finish time");
         timerInfo.preciseFinish = true;
         let finish = inputFinishTime.value;
         let finishTimestamp = new Date(finish).getTime();
         if (startTimestamp >= finishTimestamp) {
-          console.log("kek");
           finishTimestamp = startTimestamp;
         }
         let dif = finishTimestamp - timerInfo.startTimestamp;
@@ -162,7 +139,6 @@ function showAddTimerWindow(e) {
 
     
     timerData.push(timerInfo);
-    console.log(timerData);
 
 
     fillReadyTimer(timerContainer, timerInfo.id);
@@ -170,7 +146,6 @@ function showAddTimerWindow(e) {
     const settingsBtn = timerContainer.querySelector(".js-settings-btn");
     settingsBtn.addEventListener("click", function(e) {
       let index = getTimerIndex(timerInfo.id);
-      console.log(index);
       let fixedLabel = timerContainer.querySelector(".js-settings-fixed-label");
       let fixedInput = timerContainer.querySelector(".js-settings-fixed-input");
       fixedInput.value = timerData[index].fixedNumber;
@@ -178,7 +153,6 @@ function showAddTimerWindow(e) {
         timerData[index].fixedNumber = fixedInput.value;
       })
 
-      console.log(fixedLabel);
       fixedLabel.classList.toggle("add-form__label--hidden");
       fixedInput.classList.toggle("add-form__input-amount--hidden");
     })
@@ -240,7 +214,6 @@ function calcValues() {
       if (timestamp >= timer.startTimestamp) {
         let currentTimer = timers[index];
         if (timer.status !== "paused") {   
-          console.log("calculating");  
           timer.remTimeMs = calcRemainingTimeMs(timer);
           timer.percentValue = calcPercentValue(timer);
           displayInHTML(currentTimer, timer);
@@ -268,7 +241,6 @@ function calcValues() {
 function calcTimeToStart(index) {
   let currentTimestamp = new Date().getTime();
   timerData[index].timeToStart = timerData[index].startTimestamp - currentTimestamp;
-  console.log(timerData[index].timeToStart);
 }
 
 
@@ -345,7 +317,6 @@ calcValues();
 
 
 function pauseHandler(e, index) {
-  console.log("pause is called");
   let btn = e.currentTarget;
   if (timerData[index].preciseFinish !== true) {
     if (timerData[index].status == "running") {
@@ -363,11 +334,8 @@ function pauseHandler(e, index) {
       timerData[index].timestamp += 
       timerData[index].pauseDelayTimeMs;
 
-      console.log("start timestamp", timerData[index].startTimestamp);
-      console.log("pause delay", timerData[index].pauseDelayTimeMs);
       timerData[index].startTimestamp = timerData[index].startTimestamp + 
       timerData[index].pauseDelayTimeMs;
-      console.log("start timestamp",timerData[index].startTimestamp);
 
       timerData[index].finishTimestamp += 
       timerData[index].pauseDelayTimeMs;
@@ -395,7 +363,6 @@ window.onload = function() {
   let testValue = JSON.parse(localStorage.getItem("data"));
   if ((testValue) && (testValue.length > 0)) {
     timerData = [...testValue];
-    console.log(timerData);
     timersCounter = timerData.length;
   } else {
     timerData = [];
@@ -409,7 +376,6 @@ window.onload = function() {
       const settingsBtn = emptyTimer.querySelector(".js-settings-btn");
       settingsBtn.addEventListener("click", function(e) {
       let index = getTimerIndex(timer.id);
-      console.log(index);
       let fixedLabel = emptyTimer.querySelector(".js-settings-fixed-label");
       let fixedInput = emptyTimer.querySelector(".js-settings-fixed-input");
       fixedInput.value = timer.fixedNumber;
@@ -417,7 +383,6 @@ window.onload = function() {
         timer.fixedNumber = fixedInput.value;
       })
 
-      console.log(fixedLabel);
       fixedLabel.classList.toggle("add-form__label--hidden");
       fixedInput.classList.toggle("add-form__input-amount--hidden");
     })

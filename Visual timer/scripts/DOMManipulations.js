@@ -1,17 +1,6 @@
 "use strict";
 
 const wrapper = document.querySelector(".timers-wrapper");
-console.log(wrapper);
-
-let timersCounter = 0;
-
-
-window.onload = function() {
-  let testValue = JSON.parse(localStorage.getItem("data"));
-  if ((testValue) && (testValue.length > 0)) {
-    timersCounter = testValue.length;
-  }
-}
 
 
 export function createEmptyTimer() {
@@ -380,7 +369,6 @@ export function fillSettingUpTimer(settingUpTimer) {
   })
 
   settingUpTimer.appendChild(addForm);
-  //timersCounter++;
 }
 
 
