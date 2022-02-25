@@ -25,7 +25,7 @@ function getNewId() {
   return newId;
 }
 
-function showAddTimerWindow(e) {
+export function showAddTimerWindow(e) {
   let timerContainer = e.currentTarget.parentElement;
   fillSettingUpTimer(timerContainer);
 
@@ -176,8 +176,8 @@ function showAddTimerWindow(e) {
 
     let newTimer = createEmptyTimer();
     fillEmptyTimer(newTimer);
-    let addTimerBtn = newTimer.querySelector(".js-add-timer-btn");
-    addTimerBtn.addEventListener("click", showAddTimerWindow);
+    //let addTimerBtn = newTimer.querySelector(".js-add-timer-btn");
+    //addTimerBtn.addEventListener("click", showAddTimerWindow);
     timersCounter++;
   })
 }
@@ -415,8 +415,8 @@ window.onload = function() {
 
   let initialTimer = createEmptyTimer();
   fillEmptyTimer(initialTimer);
-  let addTimerBtn = initialTimer.querySelector(".js-add-timer-btn");
-  addTimerBtn.addEventListener("click", showAddTimerWindow);
+  //let addTimerBtn = initialTimer.querySelector(".js-add-timer-btn");
+  //addTimerBtn.addEventListener("click", showAddTimerWindow);
 }
 
 
