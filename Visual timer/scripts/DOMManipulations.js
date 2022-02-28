@@ -3,8 +3,7 @@
 const wrapper = document.querySelector(".timers-wrapper");
 
 
-import { showAddTimerWindow } from "./app.js";
-//import { getTimerIndex } from "./app.js";
+import { createNewTimer } from "./app.js";
 import { pauseHandler } from "./app.js";
 import { deleteTimer } from "./app.js";
 import { timerData } from "./app.js";
@@ -21,7 +20,7 @@ export function fillEmptyTimer(emptyTimer) {
   let addTimerBtn = document.createElement("button");
   addTimerBtn.classList.add("timer__add-timer-btn", "js-add-timer-btn");
   addTimerBtn.textContent = "+";
-  addTimerBtn.addEventListener("click", showAddTimerWindow);
+  addTimerBtn.addEventListener("click", createNewTimer);
 
   emptyTimer.appendChild(addTimerBtn);
   
@@ -258,7 +257,7 @@ export function fillSettingUpTimer(settingUpTimer) {
 
 
   let dataSubmitBtn = document.createElement("button");
-  dataSubmitBtn.classList.add("add-form__submit", "btn");
+  dataSubmitBtn.classList.add("js-create-ready-timer", "btn");
   dataSubmitBtn.type = "submit";
   dataSubmitBtn.textContent = "Add timer";
   addForm.appendChild(dataSubmitBtn);

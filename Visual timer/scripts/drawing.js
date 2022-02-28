@@ -14,7 +14,6 @@ export function drawTimer(ctx, percentValue) {
   ctx.lineWidth = LINE_WIDTH;
   ctx.lineTo(CANVAS_SIZE/2, 0);
 
-  //if((2*Math.PI/100*(1-percentValue)) < 0) {
   if (percentValue > 0) {
     
     //drawing an arc from 90deg (100%) to 90deg (0%) counter-clockwise
