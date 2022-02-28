@@ -1,6 +1,6 @@
 "use strict";
 const wrapper = document.querySelector(".timers-wrapper");
-let timerData = [];
+export let timerData = [];
 let allTimers = [];
 
 let timersCounter = 0;
@@ -143,6 +143,7 @@ export function showAddTimerWindow(e) {
 
     fillReadyTimer(timerContainer, timerInfo.id);
 
+    /*
     const settingsBtn = timerContainer.querySelector(".js-settings-btn");
     settingsBtn.addEventListener("click", function(e) {
       let index = getTimerIndex(timerInfo.id);
@@ -156,13 +157,18 @@ export function showAddTimerWindow(e) {
       fixedLabel.classList.toggle("add-form__label--hidden");
       fixedInput.classList.toggle("add-form__input-amount--hidden");
     })
-    
+    */
+
+
+    /*
     const pauseBtn = timerContainer.querySelector(".js-pause-timer-btn");
     pauseBtn.addEventListener("click", function(e){
       let index = getTimerIndex(timerInfo.id);
       pauseHandler(e, index);
     })
+    */
 
+    /*
     const delBtn = timerContainer.querySelector(".js-del-timer-btn");
     delBtn.addEventListener("click", function(e){
       let index = getTimerIndex(timerInfo.id);
@@ -172,7 +178,7 @@ export function showAddTimerWindow(e) {
         localStorage.setItem("data", []);
       }
     })
-
+    */
 
     let newTimer = createEmptyTimer();
     fillEmptyTimer(newTimer);
@@ -184,7 +190,7 @@ export function showAddTimerWindow(e) {
 
 //function 
 
-function getTimerIndex(id) {  
+export function getTimerIndex(id) {  
   let timerIndex = undefined;
   timerData.forEach(function(timer, index){
     if (timer.id == id) { 
@@ -201,7 +207,7 @@ import { createEmptyTimer } from "./DOMManipulations.js";
 import { fillEmptyTimer } from "./DOMManipulations.js";
 import { fillSettingUpTimer } from "./DOMManipulations.js";
 import { fillReadyTimer } from "./DOMManipulations.js";
-import { clearChilds } from "./DOMManipulations.js";
+//import { clearChilds } from "./DOMManipulations.js";
 
 
 function calcValues() {
@@ -316,7 +322,7 @@ function calcRemainingTimeMs(timer) {
 calcValues();
 
 
-function pauseHandler(e, index) {
+export function pauseHandler(e, index) {
   let btn = e.currentTarget;
   if (timerData[index].preciseFinish !== true) {
     if (timerData[index].status == "running") {
@@ -345,7 +351,7 @@ function pauseHandler(e, index) {
 }
 
 
-function deleteTimer(timer, index) {
+export function deleteTimer(timer, index) {
   wrapper.removeChild(timer);
   timerData.splice(index, 1);
 }
@@ -372,7 +378,7 @@ window.onload = function() {
     timerData.forEach(function(timer) {
       let emptyTimer = createEmptyTimer();
       fillReadyTimer(emptyTimer, timer.id);
-
+      /*
       const settingsBtn = emptyTimer.querySelector(".js-settings-btn");
       settingsBtn.addEventListener("click", function(e) {
       let index = getTimerIndex(timer.id);
@@ -382,10 +388,11 @@ window.onload = function() {
       fixedInput.addEventListener("input", function() {
         timer.fixedNumber = fixedInput.value;
       })
-
+      
       fixedLabel.classList.toggle("add-form__label--hidden");
       fixedInput.classList.toggle("add-form__input-amount--hidden");
     })
+    */
 
 
 
@@ -394,11 +401,14 @@ window.onload = function() {
       if (timerData[index].status == "paused") {
         pauseBtn.textContent = "Run";
       }
+      /*
       pauseBtn.addEventListener("click", function(e){
         let index = getTimerIndex(timer.id);
         pauseHandler(e, index);
       })
+      */
 
+      /*
       const delBtn = emptyTimer.querySelector(".js-del-timer-btn");
       delBtn.addEventListener("click", function(e){
         let index = getTimerIndex(timer.id);
@@ -408,6 +418,7 @@ window.onload = function() {
           localStorage.setItem("data", []);
         }
       })
+      */
 
       displayInHTML(emptyTimer, timer);
     })

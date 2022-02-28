@@ -256,6 +256,11 @@ label {
   gap: 5vw;
 }
 
+.timer--ready-layout {
+  justify-content: start;
+  gap: 5vw;
+}
+
 .add-form__label--hidden {
   display: none;
 }

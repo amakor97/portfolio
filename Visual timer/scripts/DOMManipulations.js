@@ -4,7 +4,10 @@ const wrapper = document.querySelector(".timers-wrapper");
 
 
 import { showAddTimerWindow } from "./app.js";
-
+//import { getTimerIndex } from "./app.js";
+import { pauseHandler } from "./app.js";
+import { deleteTimer } from "./app.js";
+import { timerData } from "./app.js";
 
 export function createEmptyTimer() {
   let newTimer = document.createElement("article");
@@ -38,6 +41,7 @@ function createLabel(text, forAttrValue) {
   return label;
 }
 
+
 function createInput(type, name, id, isChecked, isDisabled) {
   let input = document.createElement("input");
   input.type = type;
@@ -69,32 +73,32 @@ export function fillSettingUpTimer(settingUpTimer) {
   let startTypeLabel1 = createLabel("Start now", "startType1");
   //startTypeLabel1.classList.add("");
   startTypeFieldset.appendChild(startTypeLabel1);
-  
-  let startTypeInput1 = createInput("radio", "startType", "startType1", true, false);
+  let startTypeInput1 = createInput("radio", "startType", "startType1", 
+  true, false);
   startTypeLabel1.appendChild(startTypeInput1);
   
   
-
   let startTypeLabel2 = createLabel("Presice start time", "startType2");
   //startTypeLabel2.classList.add("");
   startTypeFieldset.appendChild(startTypeLabel2);
-  
-  let startTypeInput2 = createInput("radio", "startType", "startType2", false, false);
+  let startTypeInput2 = createInput("radio", "startType", "startType2", 
+  false, false);
   startTypeLabel2.appendChild(startTypeInput2);
   
   
-
   startTypeFieldset = document.createElement("fieldset");
   startTypeFieldset.classList.add("add-form__fieldset");
   startFieldset.appendChild(startTypeFieldset);
 
   
-  let inputStartLabel = createLabel("Please, enter start datetime", "inputStartDatetime");
+  let inputStartLabel = createLabel("Please, enter start datetime", 
+  "inputStartDatetime");
   inputStartLabel.classList.add("add-form__label--hidden");
   startTypeFieldset.appendChild(inputStartLabel);
-
-  let inputStartTime = createInput("datetime-local", "startTime", "inputStartDatetime", false, true);
-  inputStartTime.classList.add("add-form__input-time", "add-form__input--hidden", "js-input-start-time");
+  let inputStartTime = createInput("datetime-local", "startTime", 
+  "inputStartDatetime", false, true);
+  inputStartTime.classList.add("add-form__input-time", 
+  "add-form__input--hidden", "js-input-start-time");
   inputStartLabel.appendChild(inputStartTime);
 
   
@@ -111,17 +115,18 @@ export function fillSettingUpTimer(settingUpTimer) {
   let inputFinishType1Label = createLabel("Amount of seconds", "finishType1");
   //inputFinishTypeLabel1.classList.add("");
   finishTypeFieldset.appendChild(inputFinishType1Label);
-
-  let inputFinishType1 = createInput("radio", "finishType", "finishType1", true, false);
+  let inputFinishType1 = createInput("radio", "finishType", "finishType1", 
+  true, false);
   //inputFinishType1.classList.add("");
   inputFinishType1Label.appendChild(inputFinishType1);
 
   
-  let inputFinishType2Label = createLabel("Amount of different units", "finishType2");
+  let inputFinishType2Label = createLabel("Amount of different units", 
+  "finishType2");
   //inputFinishType2Label.classList.add("");
   finishTypeFieldset.appendChild(inputFinishType2Label);
-
-  let inputFinishType2 = createInput("radio", "finishType", "finishType2", false, false);
+  let inputFinishType2 = createInput("radio", "finishType", "finishType2", 
+  false, false);
   //inputFinishType2.classList.add("");
   inputFinishType2Label.appendChild(inputFinishType2);
 
@@ -129,11 +134,10 @@ export function fillSettingUpTimer(settingUpTimer) {
   let inputFinishType3Label = createLabel("Precise finish time", "finishType3");
   //inputFinishType3Label.classList.add("");
   finishTypeFieldset.appendChild(inputFinishType3Label);
-  
-  let inputFinishType3 = createInput("radio", "finishType", "finishType3", false, false);
+  let inputFinishType3 = createInput("radio", "finishType", "finishType3", 
+  false, false);
   //inputFinishType3.classList.add("");
   inputFinishType3Label.appendChild(inputFinishType3);
-
 
 
   finishTypeFieldset = document.createElement("fieldset");
@@ -141,11 +145,12 @@ export function fillSettingUpTimer(settingUpTimer) {
   finishFieldset.appendChild(finishTypeFieldset);
 
   
-  let inputNumberLabel = createLabel("Please, enter the amount of seconds", "InputOnlySecondsAmount");
+  let inputNumberLabel = createLabel("Please, enter the amount of seconds", 
+  "InputOnlySecondsAmount");
   //inputNumberLabel.classList.add("");
   finishTypeFieldset.appendChild(inputNumberLabel);
-
-  let inputNumber = createInput("number", "onlySecsInput", "InputOnlySecondsAmount", false, false);
+  let inputNumber = createInput("number", "onlySecsInput", 
+  "InputOnlySecondsAmount", false, false);
   inputNumber.classList.add("add-form__input-time", "js-input-number");
   inputNumber.min = "0";
   inputNumberLabel.appendChild(inputNumber);
@@ -159,8 +164,9 @@ export function fillSettingUpTimer(settingUpTimer) {
   let inputDaysLabel = createLabel("Days", "InputDaysAmount");
   //inputDaysLabel.classList.add("");
   timeUnitsFieldset.appendChild(inputDaysLabel);
-  
-  let inputDays = createInput("number", "inputDays", "InputDaysAmount", false, true);
+
+  let inputDays = createInput("number", "inputDays", "InputDaysAmount", 
+  false, true);
   inputDays.classList.add("add-form__input-amount", "js-input-days");
   inputDays.min = "0";
   inputDays.addEventListener("input", function() {
@@ -175,7 +181,8 @@ export function fillSettingUpTimer(settingUpTimer) {
   //inputHoursLabel.classList.add("");
   timeUnitsFieldset.appendChild(inputHoursLabel); 
   
-  let inputHours = createInput("number", "InputHours", "InputHoursAmount", false, true);
+  let inputHours = createInput("number", "InputHours", "InputHoursAmount", 
+  false, true);
   inputHours.classList.add("add-form__input-amount", "js-input-hours");
   inputHours.min = "0";
   inputHours.max = "23";
@@ -186,11 +193,13 @@ export function fillSettingUpTimer(settingUpTimer) {
   })
   inputHoursLabel.appendChild(inputHours);
   
+
   let inputMinsLabel = createLabel("Mins", "InputMinsAmount");
   //inputMinsLabel.classList.add("");
   timeUnitsFieldset.appendChild(inputMinsLabel);
   
-  let inputMins = createInput("number", "InputMins", "InputMinsAmount", false, true);
+  let inputMins = createInput("number", "InputMins", "InputMinsAmount", 
+  false, true);
   inputMins.classList.add("add-form__input-amount", "js-input-mins");
   inputMins.min = "0";
   inputMins.max = "59";
@@ -202,12 +211,12 @@ export function fillSettingUpTimer(settingUpTimer) {
   inputMinsLabel.appendChild(inputMins);
 
 
-  
   let inputSecsLabel = createLabel("Secs", "InputSecsAmount");
   //inputSecsLabel.classList.add("");
   timeUnitsFieldset.appendChild(inputSecsLabel);
   
-  let inputSecs = createInput("number", "InputSecs", "InputSecsAmount", false, true);
+  let inputSecs = createInput("number", "InputSecs", "InputSecsAmount", 
+  false, true);
   inputSecs.classList.add("add-form__input-amount", "js-input-secs");
   inputSecs.min = "0";
   inputSecs.max = "59";
@@ -218,23 +227,24 @@ export function fillSettingUpTimer(settingUpTimer) {
   })
   inputSecsLabel.appendChild(inputSecs);
 
-
   
-  let inputFinishLabel = createLabel("Please, enter finish datetime", "InputFinishTime");
+  let inputFinishLabel = createLabel("Please, enter finish datetime", 
+  "InputFinishTime");
   //inputFinishLabel.classList.add("");
   finishTypeFieldset.appendChild(inputFinishLabel);
-  
-  let inputFinishTime = createInput("datetime-local", "inputFinish", "InputFinishTime", false, true);
-  inputFinishTime.classList.add("add-form__input-time", "add-form__input--hidden", "js-input-finish-time");
+  let inputFinishTime = createInput("datetime-local", "inputFinish", 
+  "InputFinishTime", false, true);
+  inputFinishTime.classList.add("add-form__input-time", 
+  "add-form__input--hidden", "js-input-finish-time");
   inputFinishLabel.appendChild(inputFinishTime);
-
 
   
   let inputFixedLabel = createLabel("Fixed number", "InputFixedNumber");
   //inputFixedLabel.classList.add("");
   addForm.appendChild(inputFixedLabel);
   
-  let inputFixed = createInput("number", "fixedInput", "InputFixedNumber", false, false);
+  let inputFixed = createInput("number", "fixedInput", "InputFixedNumber", 
+  false, false);
   inputFixed.classList.add("add-form__input-amount", "js-input-fixed");
   inputFixed.min = "0";
   inputFixed.max = "5";
@@ -332,16 +342,15 @@ export function fillSettingUpTimer(settingUpTimer) {
 
 
 
-
 export function fillReadyTimer(readyTimer, id) {
   clearChilds(readyTimer);
+  readyTimer.classList.add("timer--ready-layout");
 
   let canvas = document.createElement("canvas");
   canvas.classList.add("timer__circle", "js-timer-canvas");
   canvas.width = "200";
   canvas.height = "200";
   readyTimer.appendChild(canvas);
-
   
   let timerTextContainer = document.createElement("div");
   timerTextContainer.classList.add("timer__text-wrapper");
@@ -366,27 +375,25 @@ export function fillReadyTimer(readyTimer, id) {
   let settingsBtn = document.createElement("button");
   settingsBtn.classList.add("btn", "js-settings-btn");
   settingsBtn.textContent = "*";
+  
+
   timerControlsContainer.appendChild(settingsBtn);
 
   let pauseBtn = document.createElement("button");
   pauseBtn.classList.add("js-pause-timer-btn", "btn");
   pauseBtn.textContent = "Pause";
+
+  pauseBtn.addEventListener("click", function(e){
+    let index = getTimerIndex(id);
+    pauseHandler(e, index);
+  })
+
   
   let uniqueId = new Date().getTime();
   let inputFixedLabel = createLabel("Fixed number", uniqueId);
   inputFixedLabel.classList.add("add-form__label--hidden", "js-settings-fixed-label");
   timerControlsContainer.appendChild(inputFixedLabel);
 
-  /*
-  let inputFixedLabel = document.createElement("label");
-  inputFixedLabel.textContent = "Fixed number";
-  inputFixedLabel.classList.add("add-form__label--hidden", "js-settings-fixed-label");
-  timerControlsContainer.appendChild(inputFixedLabel);
-  let forAttr = document.createAttribute("for");
-  let uniqueId = new Date().getTime();
-  forAttr.value = uniqueId;
-  inputFixedLabel.setAttributeNode(forAttr);
-  */
 
   let inputFixed = createInput("number", "inputFixed", uniqueId, false, false);
   inputFixed.classList.add("add-form__input-amount", "add-form__input-amount--hidden", "js-settings-fixed-input");
@@ -399,20 +406,16 @@ export function fillReadyTimer(readyTimer, id) {
   })
   inputFixedLabel.appendChild(inputFixed);
 
-  /*
-  let inputFixed = document.createElement("input");
-  inputFixed.classList.add("add-form__input-amount", "add-form__input-amount--hidden", "js-settings-fixed-input");
-  inputFixed.type = "number";
-  inputFixed.min = "0";
-  inputFixed.max = "5";
-  inputFixed.addEventListener("change", function() {
-    if ((this.value < 0) || (this.value > 5)) {
-      this.value = 2;
-    }
+  settingsBtn.addEventListener("click", function(e) {
+    let index = getTimerIndex(id);
+    inputFixed.value = timerData[index].fixedNumber;
+    inputFixed.addEventListener("input", function() {
+      timerData[index].fixedNumber = inputFixed.value;
+    })
+
+    inputFixedLabel.classList.toggle("add-form__label--hidden");
+    inputFixed.classList.toggle("add-form__input-amount--hidden");
   })
-  inputFixed.id = uniqueId;
-  inputFixedLabel.appendChild(inputFixed);
-  */
 
   
   timerControlsContainer.appendChild(pauseBtn);  
@@ -421,14 +424,32 @@ export function fillReadyTimer(readyTimer, id) {
   delBtn.classList.add("js-del-timer-btn", "btn");
   delBtn.textContent = "Delete";
 
-  timerControlsContainer.appendChild(delBtn);
+  delBtn.addEventListener("click", function(e){
+    let index = getTimerIndex(id);
+    deleteTimer(readyTimer, index);
+    if (timerData.length == 0) {
+      localStorage.setItem("data", []);
+    }
+  })
 
+  timerControlsContainer.appendChild(delBtn);
   readyTimer.appendChild(timerControlsContainer);
 }
 
 
-export function clearChilds(element) {
+function clearChilds(element) {
   while (element.firstChild) {
     element.removeChild(element.lastChild);
   }
+}
+
+
+function getTimerIndex(id) {  
+  let timerIndex = undefined;
+  timerData.forEach(function(timer, index){
+    if (timer.id == id) { 
+      timerIndex = index;
+    }
+  })
+  return timerIndex;
 }
