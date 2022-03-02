@@ -35,15 +35,28 @@ html {
 
 .header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   height: 4rem;
   margin-bottom: 3rem;
+  padding: 0 5%;
 
   background-color: var(--theme-color);
 }
 
 .header__title {
   font-size: 2rem;
+}
+
+.nav__link {
+  font-size: 1.5rem;
+  font-style: italic;
+  color: #000000;
+  text-decoration: none;
+}
+
+.nav__link:hover {
+  text-decoration: underline;
 }
 
 .timers-wrapper {
