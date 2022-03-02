@@ -8,6 +8,7 @@ import { pauseHandler } from "./app.js";
 import { deleteTimer } from "./app.js";
 import { timerData } from "./app.js";
 
+
 export function createEmptyTimer() {
   let newTimer = document.createElement("article");
   newTimer.classList.add("timer", "timer--intro-layout");

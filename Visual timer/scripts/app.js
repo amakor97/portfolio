@@ -3,20 +3,58 @@ const wrapper = document.querySelector(".timers-wrapper");
 export let timerData = [];
 
 
-function getNewId() {
-  let newId = 0;
-  if (timerData.length > 0) {
-    for (let i = 0; i < timerData.length;) {
-      if (newId == timerData[i].id) {
-        newId++;
-        i = 0;
-      } else {
-        i++;
-      }
-    }
+/* drawing functions */
+
+import { drawTimer } from "./drawing.js";
+import { drawCircle } from "./drawing.js";
+
+
+/* filling functions */
+
+import { createEmptyTimer } from "./DOMManipulations.js";
+import { fillEmptyTimer } from "./DOMManipulations.js";
+import { fillSettingUpTimer } from "./DOMManipulations.js";
+import { fillReadyTimer } from "./DOMManipulations.js";
+
+
+/* localStorage functions */
+
+window.onload = function() {
+  let testValue = JSON.parse(localStorage.getItem("data"));
+  if ((testValue) && (testValue.length > 0)) {
+    timerData = [...testValue];
+  } else {
+    timerData = [];
   }
-  return newId;
+
+  if (timerData.length > 0) {
+    timerData.forEach(function(timer) {
+      let emptyTimer = createEmptyTimer();
+      fillReadyTimer(emptyTimer, timer.id);
+
+      const pauseBtn = emptyTimer.querySelector(".js-pause-timer-btn");
+      let index = getTimerIndex(timer.id);
+      if (timerData[index].status == "paused") {
+        pauseBtn.textContent = "Run";
+      }
+
+      displayInHTML(emptyTimer, timer);
+    })
+  }
+
+  let initialTimer = createEmptyTimer();
+  fillEmptyTimer(initialTimer);
 }
+
+
+window.onbeforeunload = function(){
+  let testkey = "data";
+  let testvalue = JSON.stringify(timerData);
+  localStorage.setItem(testkey, testvalue)
+};
+
+
+/* main */
 
 export function createNewTimer(e) {
   let timerContainer = e.currentTarget.parentElement;
@@ -144,26 +182,8 @@ export function createNewTimer(e) {
   })
 }
 
-//function 
 
-export function getTimerIndex(id) {  
-  let timerIndex = undefined;
-  timerData.forEach(function(timer, index){
-    if (timer.id == id) { 
-      timerIndex = index;
-    }
-  })
-  return timerIndex;
-}
-
-
-/* fill functions */
-
-import { createEmptyTimer } from "./DOMManipulations.js";
-import { fillEmptyTimer } from "./DOMManipulations.js";
-import { fillSettingUpTimer } from "./DOMManipulations.js";
-import { fillReadyTimer } from "./DOMManipulations.js";
-
+/* calculating functions */
 
 function calcValues() {
   if (timerData.length !== 0) {
@@ -199,6 +219,7 @@ function calcValues() {
   setTimeout(calcValues, 100);
 }
 
+
 function calcTimeToStart(index) {
   let currentTimestamp = new Date().getTime();
   timerData[index].timeToStart = timerData[index].startTimestamp 
@@ -206,9 +227,30 @@ function calcTimeToStart(index) {
 }
 
 
+let calcPercentValue = (timer) => timer.remainingTime*100/timer.initialTime;
+
+
+function calcRemainingTimeMs(timer) {
+  let currentTimestamp = new Date().getTime();
+  let timeDif = undefined;
+  if (timer.delayedStart === true) {
+    timeDif = currentTimestamp - timer.startTimestamp;
+  } else {
+    timeDif = currentTimestamp - timer.timestamp;
+  }
+
+  let remTimeMs = timer.initialTime*1000 - timeDif;
+  timer.remainingTime = remTimeMs/1000;
+  return remTimeMs;
+}
+
+
+/* displaying functions */
+
 function displayTimeToStart(timerContainer, timerSingleData) {
   displayTime(timerContainer, timerSingleData.timeToStart);
 }
+
 
 function displayInHTML(timerContainer, timerSingleData) {
   let canvas = timerContainer.querySelector(".timer__circle");
@@ -227,6 +269,7 @@ function displayInHTML(timerContainer, timerSingleData) {
     drawCircle(ctx);
   }
 }
+
 
 function displayTime(timerContainer, remTimeMs) {
   let timeContainer = timerContainer.querySelector(".js-remaining-secs");
@@ -253,25 +296,12 @@ function displayTime(timerContainer, remTimeMs) {
 }
 
 
-let calcPercentValue = (timer) => timer.remainingTime*100/timer.initialTime;
-
-
-function calcRemainingTimeMs(timer) {
-  let currentTimestamp = new Date().getTime();
-  let timeDif = undefined;
-  if (timer.delayedStart === true) {
-    timeDif = currentTimestamp - timer.startTimestamp;
-  } else {
-    timeDif = currentTimestamp - timer.timestamp;
-  }
-
-  let remTimeMs = timer.initialTime*1000 - timeDif;
-  timer.remainingTime = remTimeMs/1000;
-  return remTimeMs;
-}
+/* first calculating */
 
 calcValues();
 
+
+/* support functions */
 
 export function pauseHandler(e, index) {
   let btn = e.currentTarget;
@@ -302,50 +332,40 @@ export function pauseHandler(e, index) {
 }
 
 
+function getNewId() {
+  let newId = 0;
+  if (timerData.length > 0) {
+    for (let i = 0; i < timerData.length;) {
+      if (newId == timerData[i].id) {
+        newId++;
+        i = 0;
+      } else {
+        i++;
+      }
+    }
+  }
+  return newId;
+}
+
+
+export function getTimerIndex(id) {  
+  let timerIndex = undefined;
+  timerData.forEach(function(timer, index){
+    if (timer.id == id) { 
+      timerIndex = index;
+    }
+  })
+  return timerIndex;
+}
+
+
 export function deleteTimer(timer, index) {
   wrapper.removeChild(timer);
   timerData.splice(index, 1);
 }
 
 
-/* drawing functions */
-
-import { drawTimer } from "./drawing.js";
-import { drawCircle } from "./drawing.js";
 
 
-/* localStorage functions */
-
-window.onload = function() {
-  let testValue = JSON.parse(localStorage.getItem("data"));
-  if ((testValue) && (testValue.length > 0)) {
-    timerData = [...testValue];
-  } else {
-    timerData = [];
-  }
-
-  if (timerData.length > 0) {
-    timerData.forEach(function(timer) {
-      let emptyTimer = createEmptyTimer();
-      fillReadyTimer(emptyTimer, timer.id);
-
-      const pauseBtn = emptyTimer.querySelector(".js-pause-timer-btn");
-      let index = getTimerIndex(timer.id);
-      if (timerData[index].status == "paused") {
-        pauseBtn.textContent = "Run";
-      }
-
-      displayInHTML(emptyTimer, timer);
-    })
-  }
-
-  let initialTimer = createEmptyTimer();
-  fillEmptyTimer(initialTimer);
-}
 
 
-window.onbeforeunload = function(){
-  let testkey = "data";
-  let testvalue = JSON.stringify(timerData);
-  localStorage.setItem(testkey, testvalue)
-};
