@@ -32,12 +32,9 @@ export function fillEmptyTimer(emptyTimer) {
 }
 
 
-function createLabel(text, forAttrValue) {
+function createLabel(text) {
   let label = document.createElement("label");
   label.textContent = text;
-  let forAttr = document.createAttribute("for");
-  forAttr.value = forAttrValue;
-  label.setAttributeNode(forAttr);
   return label;
 }
 
@@ -70,7 +67,7 @@ export function fillSettingUpTimer(settingUpTimer) {
   startFieldset.appendChild(startTypeFieldset);
 
   
-  let startTypeLabel1 = createLabel("Start now", "startType1");
+  let startTypeLabel1 = createLabel("Start now");
   //startTypeLabel1.classList.add("");
   startTypeFieldset.appendChild(startTypeLabel1);
   let startTypeInput1 = createInput("radio", "startType", "startType1", 
@@ -78,7 +75,7 @@ export function fillSettingUpTimer(settingUpTimer) {
   startTypeLabel1.appendChild(startTypeInput1);
   
   
-  let startTypeLabel2 = createLabel("Presice start time", "startType2");
+  let startTypeLabel2 = createLabel("Presice start time");
   //startTypeLabel2.classList.add("");
   startTypeFieldset.appendChild(startTypeLabel2);
   let startTypeInput2 = createInput("radio", "startType", "startType2", 
@@ -91,8 +88,7 @@ export function fillSettingUpTimer(settingUpTimer) {
   startFieldset.appendChild(startTypeFieldset);
 
   
-  let inputStartLabel = createLabel("Please, enter start datetime", 
-  "inputStartDatetime");
+  let inputStartLabel = createLabel("Please, enter start datetime");
   inputStartLabel.classList.add("add-form__label--hidden");
   startTypeFieldset.appendChild(inputStartLabel);
   let inputStartTime = createInput("datetime-local", "startTime", 
@@ -112,7 +108,7 @@ export function fillSettingUpTimer(settingUpTimer) {
   finishFieldset.appendChild(finishTypeFieldset);
 
   
-  let inputFinishType1Label = createLabel("Amount of seconds", "finishType1");
+  let inputFinishType1Label = createLabel("Amount of seconds");
   //inputFinishTypeLabel1.classList.add("");
   finishTypeFieldset.appendChild(inputFinishType1Label);
   let inputFinishType1 = createInput("radio", "finishType", "finishType1", 
@@ -121,8 +117,7 @@ export function fillSettingUpTimer(settingUpTimer) {
   inputFinishType1Label.appendChild(inputFinishType1);
 
   
-  let inputFinishType2Label = createLabel("Amount of different units", 
-  "finishType2");
+  let inputFinishType2Label = createLabel("Amount of different units");
   //inputFinishType2Label.classList.add("");
   finishTypeFieldset.appendChild(inputFinishType2Label);
   let inputFinishType2 = createInput("radio", "finishType", "finishType2", 
@@ -131,7 +126,7 @@ export function fillSettingUpTimer(settingUpTimer) {
   inputFinishType2Label.appendChild(inputFinishType2);
 
   
-  let inputFinishType3Label = createLabel("Precise finish time", "finishType3");
+  let inputFinishType3Label = createLabel("Precise finish time");
   //inputFinishType3Label.classList.add("");
   finishTypeFieldset.appendChild(inputFinishType3Label);
   let inputFinishType3 = createInput("radio", "finishType", "finishType3", 
@@ -145,8 +140,7 @@ export function fillSettingUpTimer(settingUpTimer) {
   finishFieldset.appendChild(finishTypeFieldset);
 
   
-  let inputNumberLabel = createLabel("Please, enter the amount of seconds", 
-  "InputOnlySecondsAmount");
+  let inputNumberLabel = createLabel("Please, enter the amount of seconds");
   //inputNumberLabel.classList.add("");
   finishTypeFieldset.appendChild(inputNumberLabel);
   let inputNumber = createInput("number", "onlySecsInput", 
@@ -161,7 +155,7 @@ export function fillSettingUpTimer(settingUpTimer) {
   finishTypeFieldset.appendChild(timeUnitsFieldset);
 
   
-  let inputDaysLabel = createLabel("Days", "InputDaysAmount");
+  let inputDaysLabel = createLabel("Days");
   //inputDaysLabel.classList.add("");
   timeUnitsFieldset.appendChild(inputDaysLabel);
 
@@ -177,7 +171,7 @@ export function fillSettingUpTimer(settingUpTimer) {
   inputDaysLabel.appendChild(inputDays);
 
   
-  let inputHoursLabel = createLabel("Hours", "InputHoursAmount");
+  let inputHoursLabel = createLabel("Hours");
   //inputHoursLabel.classList.add("");
   timeUnitsFieldset.appendChild(inputHoursLabel); 
   
@@ -194,7 +188,7 @@ export function fillSettingUpTimer(settingUpTimer) {
   inputHoursLabel.appendChild(inputHours);
   
 
-  let inputMinsLabel = createLabel("Mins", "InputMinsAmount");
+  let inputMinsLabel = createLabel("Mins");
   //inputMinsLabel.classList.add("");
   timeUnitsFieldset.appendChild(inputMinsLabel);
   
@@ -211,7 +205,7 @@ export function fillSettingUpTimer(settingUpTimer) {
   inputMinsLabel.appendChild(inputMins);
 
 
-  let inputSecsLabel = createLabel("Secs", "InputSecsAmount");
+  let inputSecsLabel = createLabel("Secs");
   //inputSecsLabel.classList.add("");
   timeUnitsFieldset.appendChild(inputSecsLabel);
   
@@ -228,8 +222,7 @@ export function fillSettingUpTimer(settingUpTimer) {
   inputSecsLabel.appendChild(inputSecs);
 
   
-  let inputFinishLabel = createLabel("Please, enter finish datetime", 
-  "InputFinishTime");
+  let inputFinishLabel = createLabel("Please, enter finish datetime");
   //inputFinishLabel.classList.add("");
   finishTypeFieldset.appendChild(inputFinishLabel);
   let inputFinishTime = createInput("datetime-local", "inputFinish", 
@@ -239,7 +232,7 @@ export function fillSettingUpTimer(settingUpTimer) {
   inputFinishLabel.appendChild(inputFinishTime);
 
   
-  let inputFixedLabel = createLabel("Fixed number", "InputFixedNumber");
+  let inputFixedLabel = createLabel("Fixed number");
   //inputFixedLabel.classList.add("");
   addForm.appendChild(inputFixedLabel);
   
