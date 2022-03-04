@@ -62,11 +62,14 @@ export function fillSettingUpTimer(settingUpTimer) {
   startFieldset.classList.add("add-form__fieldset");
   addForm.appendChild(startFieldset);
 
+  let startLegeng = document.createElement("legend");
+  startLegeng.textContent = "Start settings";
+  startFieldset.appendChild(startLegeng);
+
   let startTypeFieldset = document.createElement("fieldset");
   startTypeFieldset.classList.add("add-form__fieldset");
   startFieldset.appendChild(startTypeFieldset);
 
-  
   let startTypeLabel1 = createLabel("Start now");
   //startTypeLabel1.classList.add("");
   startTypeFieldset.appendChild(startTypeLabel1);
@@ -83,14 +86,15 @@ export function fillSettingUpTimer(settingUpTimer) {
   startTypeLabel2.appendChild(startTypeInput2);
   
   
-  startTypeFieldset = document.createElement("fieldset");
-  startTypeFieldset.classList.add("add-form__fieldset");
-  startFieldset.appendChild(startTypeFieldset);
+  let startTimeFieldset = document.createElement("fieldset");
+  startTimeFieldset.classList.add("add-form__fieldset", "add-form__fieldset--hidden");
+  startFieldset.appendChild(startTimeFieldset);
 
   
   let inputStartLabel = createLabel("Please, enter start datetime");
-  inputStartLabel.classList.add("add-form__label--hidden");
-  startTypeFieldset.appendChild(inputStartLabel);
+  //inputStartLabel.classList.add("add-form__label--hidden");
+  inputStartLabel.classList.add("add-form__label--big-input");
+  startTimeFieldset.appendChild(inputStartLabel);
   let inputStartTime = createInput("datetime-local", "startTime", 
   "inputStartDatetime", false, true);
   inputStartTime.classList.add("add-form__input-time", 
@@ -101,6 +105,10 @@ export function fillSettingUpTimer(settingUpTimer) {
   let finishFieldset = document.createElement("fieldset");
   finishFieldset.classList.add("add-form__fieldset");
   addForm.appendChild(finishFieldset);
+
+  let finishLegend = document.createElement("legend");
+  finishLegend.textContent = "Finish settings";
+  finishFieldset.appendChild(finishLegend);
 
 
   let finishTypeFieldset = document.createElement("fieldset");
@@ -142,6 +150,7 @@ export function fillSettingUpTimer(settingUpTimer) {
   
   let inputNumberLabel = createLabel("Please, enter the amount of seconds");
   //inputNumberLabel.classList.add("");
+  inputNumberLabel.classList.add("add-form__label--big-input");
   finishTypeFieldset.appendChild(inputNumberLabel);
   let inputNumber = createInput("number", "onlySecsInput", 
   "InputOnlySecondsAmount", false, false);
@@ -157,6 +166,7 @@ export function fillSettingUpTimer(settingUpTimer) {
   
   let inputDaysLabel = createLabel("Days");
   //inputDaysLabel.classList.add("");
+  inputDaysLabel.classList.add("add-form__label--small-input");
   timeUnitsFieldset.appendChild(inputDaysLabel);
 
   let inputDays = createInput("number", "inputDays", "InputDaysAmount", 
@@ -173,6 +183,7 @@ export function fillSettingUpTimer(settingUpTimer) {
   
   let inputHoursLabel = createLabel("Hours");
   //inputHoursLabel.classList.add("");
+  inputHoursLabel.classList.add("add-form__label--small-input");
   timeUnitsFieldset.appendChild(inputHoursLabel); 
   
   let inputHours = createInput("number", "InputHours", "InputHoursAmount", 
@@ -190,6 +201,7 @@ export function fillSettingUpTimer(settingUpTimer) {
 
   let inputMinsLabel = createLabel("Mins");
   //inputMinsLabel.classList.add("");
+  inputMinsLabel.classList.add("add-form__label--small-input");
   timeUnitsFieldset.appendChild(inputMinsLabel);
   
   let inputMins = createInput("number", "InputMins", "InputMinsAmount", 
@@ -207,6 +219,7 @@ export function fillSettingUpTimer(settingUpTimer) {
 
   let inputSecsLabel = createLabel("Secs");
   //inputSecsLabel.classList.add("");
+  inputSecsLabel.classList.add("add-form__label--small-input");
   timeUnitsFieldset.appendChild(inputSecsLabel);
   
   let inputSecs = createInput("number", "InputSecs", "InputSecsAmount", 
@@ -224,6 +237,7 @@ export function fillSettingUpTimer(settingUpTimer) {
   
   let inputFinishLabel = createLabel("Please, enter finish datetime");
   //inputFinishLabel.classList.add("");
+  inputFinishLabel.classList.add("add-form__label--hidden", "add-form__label--big-input");
   finishTypeFieldset.appendChild(inputFinishLabel);
   let inputFinishTime = createInput("datetime-local", "inputFinish", 
   "InputFinishTime", false, true);
@@ -260,12 +274,12 @@ export function fillSettingUpTimer(settingUpTimer) {
   startTypeInput1.addEventListener("input", function() {
     inputStartTime.disabled = true;
     inputStartTime.value = "";
-    inputStartLabel.classList.toggle("add-form__label--hidden");
+    startTimeFieldset.classList.toggle("add-form__fieldset--hidden");
     inputStartTime.classList.toggle("add-form__input--hidden");
   })
   startTypeInput2.addEventListener("input", function() {
     inputStartTime.disabled = false;
-    inputStartLabel.classList.toggle("add-form__label--hidden");
+    startTimeFieldset.classList.toggle("add-form__fieldset--hidden");
     inputStartTime.classList.toggle("add-form__input--hidden");
   })
 
