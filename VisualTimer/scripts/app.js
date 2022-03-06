@@ -135,7 +135,7 @@ export function createNewTimer(e) {
         let dif = timerInfo.finishTimestamp - timerInfo.startTimestamp;
         //timerInfo.initialTime = Math.round(dif/1000);
         timerInfo.initialTime = Math.round(secs);
-        //timerInfo.status = "running";
+        timerInfo.status = "running";
         //timerInfo.percentValue = 100;
       }
 
@@ -150,7 +150,7 @@ export function createNewTimer(e) {
         let dif = timerInfo.finishTimestamp - timerInfo.startTimestamp;
         //timerInfo.initialTime = Math.round(dif/1000);
         timerInfo.initialTime = Math.round(secsAmount);
-        //timerInfo.status = "running";
+        timerInfo.status = "running";
         //timerInfo.percentValue = 100;
       }
 
@@ -167,7 +167,7 @@ export function createNewTimer(e) {
         //timerInfo.status = "Running"; 
       }
 
-      timerInfo.status = "Running"; 
+      //timerInfo.status = "running"; 
       timerInfo.percentValue = 100;
       timerInfo.remainingTime = timerInfo.initialTime;
       timerInfo.remTimeMs = timerInfo.remainingTime*1000;
