@@ -202,7 +202,7 @@ html {
   transition: all 1s;
 }
 
-.timer__settings--wide {
+.timer__settings_wide {
   width: 20rem;
 }
 
@@ -237,7 +237,7 @@ html {
   border-radius: 20px;
 }
 
-.timer__settings-btn--icon {
+.timer__settings-btn_icon {
   font-size: 0;
 }
 
@@ -295,12 +295,12 @@ html {
   }
 }
 
-.timer__text--remaining {
+.timer__text_remaining {
   font-size: 2rem;
 }
 
 @media screen and (max-width: 665px) {
-  .timer__text--remaining {
+  .timer__text_remaining {
     text-align: center;
   }
 }
@@ -347,7 +347,7 @@ html {
   border: 1px solid black;
 }
 
-.add-form__fieldset--days {
+.add-form__fieldset_days {
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -383,7 +383,7 @@ html {
   }
 }
 
-.add-form__input-amount--hidden {
+.add-form__input-amount_hidden {
   display: none;
 }
 
@@ -404,26 +404,26 @@ label {
   }
 }
 
-.timer--intro-layout {
+.timer_intro-layout {
   justify-content: start;
   gap: 5rem;
 }
 
 @media screen and (max-width: 665px) {
-  .timer--intro-layout {
+  .timer_intro-layout {
     flex-direction: column-reverse;
     justify-content: center;
     gap: 5rem;
   }
 }
 
-.timer--ready-layout {
+.timer_ready-layout {
   justify-content: start;
   gap: 3%;
 }
 
 @media screen and (max-width: 665px) {
-  .timer--ready-layout {
+  .timer_ready-layout {
     flex-direction: column;
     justify-content: center;
 
@@ -432,35 +432,35 @@ label {
   }
 }
 
-.add-form__label--no-displayed {
+.add-form__label_no-displayed {
   display: none;
 }
 
-.add-form__label--hidden {
+.add-form__label_hidden {
   visibility: hidden;
 }
 
-.add-form__button--hidden {
+.add-form__button_hidden {
   visibility: hidden;
 }
 
-.add-form__input--hidden {
+.add-form__input_hidden {
   display: none;
 }
 
-.add-form__fieldset--no-displayed {
+.add-form__fieldset_no-displayed {
   display: none;
 }
 
-.add-form__fieldset--hidden {
+.add-form__fieldset_hidden {
   visibility: hidden;
 }
 
-.add-form__label--small-input {
+.add-form__label_small-input {
   width: fit-content;
   width: 50%;
 }
 
-.add-form__label--big-input {
+.add-form__label_big-input {
   width: min-content;
 }

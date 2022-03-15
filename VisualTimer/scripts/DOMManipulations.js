@@ -11,7 +11,7 @@ import { timerData } from "./app.js";
 
 export function createEmptyTimer() {
   let newTimer = document.createElement("article");
-  newTimer.classList.add("timer", "timer--intro-layout");
+  newTimer.classList.add("timer", "timer_intro-layout");
   wrapper.appendChild(newTimer);
   return newTimer;
 }
@@ -64,7 +64,7 @@ function createInput(type, name, id, isChecked, isDisabled) {
 
 export function fillSettingUpTimer(settingUpTimer) {
   clearChilds(settingUpTimer);
-  settingUpTimer.classList.remove("timer--intro-layout");
+  settingUpTimer.classList.remove("timer_intro-layout");
 
   let addForm = document.createElement("form");
   addForm.classList.add("timer__add-window", "add-form");
@@ -99,23 +99,23 @@ export function fillSettingUpTimer(settingUpTimer) {
   
   
   let startTimeFieldset = document.createElement("fieldset");
-  startTimeFieldset.classList.add("add-form__fieldset", "add-form__fieldset--no-displayed");
+  startTimeFieldset.classList.add("add-form__fieldset", "add-form__fieldset_no-displayed");
   startFieldset.appendChild(startTimeFieldset);
 
   
   let inputStartLabel = createLabel("Please, enter start datetime");
-  //inputStartLabel.classList.add("add-form__label--no-displayed");
-  inputStartLabel.classList.add("add-form__label--big-input");
+  //inputStartLabel.classList.add("add-form__label_no-displayed");
+  inputStartLabel.classList.add("add-form__label_big-input");
   startTimeFieldset.appendChild(inputStartLabel);
   let inputStartTime = createInput("datetime-local", "startTime", 
   "inputStartDatetime", false, true);
   inputStartTime.classList.add("add-form__input-time", 
-  "add-form__input--hidden", "js-input-start-time");
+  "add-form__input_hidden", "js-input-start-time");
   inputStartLabel.appendChild(inputStartTime);
 
   
   let finishFieldset = document.createElement("fieldset");
-  finishFieldset.classList.add("add-form__fieldset", "add-form__fieldset--hidden");
+  finishFieldset.classList.add("add-form__fieldset", "add-form__fieldset_hidden");
   addForm.appendChild(finishFieldset);
 
   let finishLegend = document.createElement("legend");
@@ -162,7 +162,7 @@ export function fillSettingUpTimer(settingUpTimer) {
   
   let inputNumberLabel = createLabel("Please, enter the amount of seconds");
   //inputNumberLabel.classList.add("");
-  inputNumberLabel.classList.add("add-form__label--big-input", "add-form__label--no-displayed");
+  inputNumberLabel.classList.add("add-form__label_big-input", "add-form__label_no-displayed");
   finishTypeFieldset.appendChild(inputNumberLabel);
   let inputNumber = createInput("number", "onlySecsInput", 
   "InputOnlySecondsAmount", false, false);
@@ -172,13 +172,13 @@ export function fillSettingUpTimer(settingUpTimer) {
 
 
   let timeUnitsFieldset = document.createElement("fieldset");
-  timeUnitsFieldset.classList.add("add-form__fieldset", "add-form__fieldset--no-displayed", "add-form__fieldset--days");
+  timeUnitsFieldset.classList.add("add-form__fieldset", "add-form__fieldset_no-displayed", "add-form__fieldset_days");
   finishTypeFieldset.appendChild(timeUnitsFieldset);
 
   
   let inputDaysLabel = createLabel("Days");
   //inputDaysLabel.classList.add("");
-  inputDaysLabel.classList.add("add-form__label--small-input");
+  inputDaysLabel.classList.add("add-form__label_small-input");
   timeUnitsFieldset.appendChild(inputDaysLabel);
 
   let inputDays = createInput("number", "inputDays", "InputDaysAmount", 
@@ -195,7 +195,7 @@ export function fillSettingUpTimer(settingUpTimer) {
   
   let inputHoursLabel = createLabel("Hours");
   //inputHoursLabel.classList.add("");
-  inputHoursLabel.classList.add("add-form__label--small-input");
+  inputHoursLabel.classList.add("add-form__label_small-input");
   timeUnitsFieldset.appendChild(inputHoursLabel); 
   
   let inputHours = createInput("number", "InputHours", "InputHoursAmount", 
@@ -213,7 +213,7 @@ export function fillSettingUpTimer(settingUpTimer) {
 
   let inputMinsLabel = createLabel("Mins");
   //inputMinsLabel.classList.add("");
-  inputMinsLabel.classList.add("add-form__label--small-input");
+  inputMinsLabel.classList.add("add-form__label_small-input");
   timeUnitsFieldset.appendChild(inputMinsLabel);
   
   let inputMins = createInput("number", "InputMins", "InputMinsAmount", 
@@ -231,7 +231,7 @@ export function fillSettingUpTimer(settingUpTimer) {
 
   let inputSecsLabel = createLabel("Secs");
   //inputSecsLabel.classList.add("");
-  inputSecsLabel.classList.add("add-form__label--small-input");
+  inputSecsLabel.classList.add("add-form__label_small-input");
   timeUnitsFieldset.appendChild(inputSecsLabel);
   
   let inputSecs = createInput("number", "InputSecs", "InputSecsAmount", 
@@ -249,18 +249,18 @@ export function fillSettingUpTimer(settingUpTimer) {
   
   let inputFinishLabel = createLabel("Please, enter finish datetime");
   //inputFinishLabel.classList.add("");
-  inputFinishLabel.classList.add("add-form__label--no-displayed", "add-form__label--big-input");
+  inputFinishLabel.classList.add("add-form__label_no-displayed", "add-form__label_big-input");
   finishTypeFieldset.appendChild(inputFinishLabel);
   let inputFinishTime = createInput("datetime-local", "inputFinish", 
   "InputFinishTime", false, true);
   inputFinishTime.classList.add("add-form__input-time", 
-  "add-form__input--hidden", "js-input-finish-time", "js-input-finish");
+  "add-form__input_hidden", "js-input-finish-time", "js-input-finish");
   inputFinishLabel.appendChild(inputFinishTime);
 
   
   let inputFixedLabel = createLabel("Mantissa digits");
   //inputFixedLabel.classList.add("");
-  inputFixedLabel.classList.add("add-form__label--hidden");
+  inputFixedLabel.classList.add("add-form__label_hidden");
   addForm.appendChild(inputFixedLabel);
   
   let inputFixed = createInput("number", "fixedInput", "InputFixedNumber", 
@@ -278,7 +278,7 @@ export function fillSettingUpTimer(settingUpTimer) {
 
 
   let dataSubmitBtn = document.createElement("button");
-  dataSubmitBtn.classList.add("js-create-ready-timer", "add-form__button--hidden", "btn", "timer__settings-btn");
+  dataSubmitBtn.classList.add("js-create-ready-timer", "add-form__button_hidden", "btn", "timer__settings-btn");
   dataSubmitBtn.type = "submit";
   dataSubmitBtn.textContent = "Add timer";
   addForm.appendChild(dataSubmitBtn);
@@ -287,17 +287,17 @@ export function fillSettingUpTimer(settingUpTimer) {
   startTypeInput1.addEventListener("input", function() {
     inputStartTime.disabled = true;
     inputStartTime.value = "";
-    startTimeFieldset.classList.add("add-form__fieldset--no-displayed");
-    inputStartTime.classList.add("add-form__input--hidden");
-    finishFieldset.classList.remove("add-form__fieldset--hidden");
+    startTimeFieldset.classList.add("add-form__fieldset_no-displayed");
+    inputStartTime.classList.add("add-form__input_hidden");
+    finishFieldset.classList.remove("add-form__fieldset_hidden");
   })
   startTypeInput2.addEventListener("input", function() {
     inputStartTime.disabled = false;
-    startTimeFieldset.classList.remove("add-form__fieldset--no-displayed");
-    inputStartTime.classList.remove("add-form__input--hidden");
+    startTimeFieldset.classList.remove("add-form__fieldset_no-displayed");
+    inputStartTime.classList.remove("add-form__input_hidden");
   })
   inputStartTime.addEventListener("change", function() {
-    finishFieldset.classList.remove("add-form__fieldset--hidden");
+    finishFieldset.classList.remove("add-form__fieldset_hidden");
   })
 
 
@@ -308,11 +308,11 @@ export function fillSettingUpTimer(settingUpTimer) {
     inputMins.value = "";
     inputSecs.value = "";
 
-    inputNumberLabel.classList.remove("add-form__label--no-displayed");
-    inputNumber.classList.remove("add-form__input--hidden");
-    timeUnitsFieldset.classList.add("add-form__fieldset--no-displayed");
-    inputFinishLabel.classList.add("add-form__label--no-displayed");
-    inputFinishTime.classList.add("add-form__input--hidden");
+    inputNumberLabel.classList.remove("add-form__label_no-displayed");
+    inputNumber.classList.remove("add-form__input_hidden");
+    timeUnitsFieldset.classList.add("add-form__fieldset_no-displayed");
+    inputFinishLabel.classList.add("add-form__label_no-displayed");
+    inputFinishTime.classList.add("add-form__input_hidden");
 
     inputNumber.disabled = false;
     inputDays.disabled = true;
@@ -326,11 +326,11 @@ export function fillSettingUpTimer(settingUpTimer) {
     inputFinishTime.value = "";
     inputNumber.value = "";
 
-    inputNumberLabel.classList.add("add-form__label--no-displayed");
-    inputNumber.classList.add("add-form__input--hidden");
-    timeUnitsFieldset.classList.remove("add-form__fieldset--no-displayed");
-    inputFinishLabel.classList.add("add-form__label--no-displayed");
-    inputFinishTime.classList.add("add-form__input--hidden");
+    inputNumberLabel.classList.add("add-form__label_no-displayed");
+    inputNumber.classList.add("add-form__input_hidden");
+    timeUnitsFieldset.classList.remove("add-form__fieldset_no-displayed");
+    inputFinishLabel.classList.add("add-form__label_no-displayed");
+    inputFinishTime.classList.add("add-form__input_hidden");
 
     inputNumber.disabled = true;
     inputDays.disabled = false;
@@ -347,11 +347,11 @@ export function fillSettingUpTimer(settingUpTimer) {
     inputMins.value = "";
     inputSecs.value = "";
 
-    inputNumberLabel.classList.add("add-form__label--no-displayed");
-    inputNumber.classList.add("add-form__input--hidden");
-    timeUnitsFieldset.classList.add("add-form__fieldset--no-displayed");
-    inputFinishLabel.classList.remove("add-form__label--no-displayed");
-    inputFinishTime.classList.remove("add-form__input--hidden");
+    inputNumberLabel.classList.add("add-form__label_no-displayed");
+    inputNumber.classList.add("add-form__input_hidden");
+    timeUnitsFieldset.classList.add("add-form__fieldset_no-displayed");
+    inputFinishLabel.classList.remove("add-form__label_no-displayed");
+    inputFinishTime.classList.remove("add-form__input_hidden");
 
     inputNumber.disabled = true;
     inputDays.disabled = true;
@@ -365,8 +365,8 @@ export function fillSettingUpTimer(settingUpTimer) {
   console.log(finishInputs);
   finishInputs.forEach(function(input){
     input.addEventListener("input", function(){
-      inputFixedLabel.classList.remove("add-form__label--hidden");
-      dataSubmitBtn.classList.remove("add-form__button--hidden");
+      inputFixedLabel.classList.remove("add-form__label_hidden");
+      dataSubmitBtn.classList.remove("add-form__button_hidden");
     })
   })
 
@@ -377,7 +377,7 @@ export function fillSettingUpTimer(settingUpTimer) {
 
 export function fillReadyTimer(readyTimer, id) {
   clearChilds(readyTimer);
-  readyTimer.classList.add("timer--ready-layout");
+  readyTimer.classList.add("timer_ready-layout");
 
   let canvas = document.createElement("canvas");
   canvas.classList.add("timer__circle", "js-timer-canvas");
@@ -394,7 +394,7 @@ export function fillReadyTimer(readyTimer, id) {
   timerTextContainer.appendChild(timerPercentContainer);
 
   let timerSecsContainer = document.createElement("div");
-  timerSecsContainer.classList.add("timer__text", "timer__text--remaining",
+  timerSecsContainer.classList.add("timer__text", "timer__text_remaining",
   "js-remaining-secs");
   timerSecsContainer.textContent = "Rem. time:";
   timerTextContainer.appendChild(timerSecsContainer);
@@ -406,7 +406,7 @@ export function fillReadyTimer(readyTimer, id) {
   timerControlsContainer.classList.add("timer__settings");
 
   let settingsBtn = document.createElement("button");
-  settingsBtn.classList.add("btn", "js-settings-btn", "timer__settings-btn", "timer__settings-btn--icon");
+  settingsBtn.classList.add("btn", "js-settings-btn", "timer__settings-btn", "timer__settings-btn_icon");
   
   let settingIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   settingIcon.classList.add("timer__settings-btn-svg");
@@ -420,7 +420,7 @@ export function fillReadyTimer(readyTimer, id) {
   settingsBtn.appendChild(settingIcon);
 
   settingsBtn.addEventListener("click", function(){
-    timerControlsContainer.classList.toggle("timer__settings--wide");
+    timerControlsContainer.classList.toggle("timer__settings_wide");
   })
 
   timerControlsContainer.appendChild(settingsBtn);
@@ -437,12 +437,12 @@ export function fillReadyTimer(readyTimer, id) {
   
   let uniqueId = new Date().getTime();
   let inputFixedLabel = createLabel("Mantissa digits", uniqueId);
-  inputFixedLabel.classList.add("add-form__label--no-displayed", "js-settings-fixed-label");
+  inputFixedLabel.classList.add("add-form__label_no-displayed", "js-settings-fixed-label");
   timerControlsContainer.appendChild(inputFixedLabel);
 
 
   let inputFixed = createInput("number", "inputFixed", uniqueId, false, false);
-  inputFixed.classList.add("add-form__input-amount", "add-form__input-amount--hidden", "js-settings-fixed-input");
+  inputFixed.classList.add("add-form__input-amount", "add-form__input-amount_hidden", "js-settings-fixed-input");
   inputFixed.min = "0";
   inputFixed.max = "5";
   inputFixed.addEventListener("change", function() {
@@ -459,8 +459,8 @@ export function fillReadyTimer(readyTimer, id) {
       timerData[index].fixedNumber = inputFixed.value;
     })
 
-    inputFixedLabel.classList.toggle("add-form__label--no-displayed");
-    inputFixed.classList.toggle("add-form__input-amount--hidden");
+    inputFixedLabel.classList.toggle("add-form__label_no-displayed");
+    inputFixed.classList.toggle("add-form__input-amount_hidden");
   })
 
   
