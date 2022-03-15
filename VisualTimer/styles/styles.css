@@ -5,6 +5,7 @@
 :root {
   --bg-color: #ffffff;
   --bg-color-20: #b9b9b9;
+  --btn-hover: #eeeeee;
   --title-color: #ffffff;
   --section-title-color: #ffffff;
   --project--bg-color: #ffffff;
@@ -25,6 +26,18 @@
 html {
   font-size: 16px;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@media screen and (max-width: 1020px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  html {
+    font-size: 13px;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -77,7 +90,7 @@ html {
   overflow: hidden;
 
   border: 10px solid var(--theme-color);
-  border-radius: 100px;
+  border-radius: 80px;
 }
 
 @media screen and (max-width: 768px) {
@@ -106,8 +119,17 @@ html {
 
 @media screen and (max-width: 768px) {
   .timer__circle {
-    min-width: 100px;
-    min-height: 100px;
+    min-width: 150px;
+    min-height: 150px;
+    max-width: 150px;
+    max-height: 150px;
+  }
+}
+
+@media screen and (max-width: 665px) {
+  .timer__circle {
+    max-width: none;
+    max-height: none;
   }
 }
 
@@ -124,22 +146,23 @@ html {
 
 .timer__text-wrapper {
   display: flex;
-  /*flex-direction: column;*/
-  width: 65%;
+  flex-direction: column-reverse;
+  width: 40%;
   height: 70%;
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 665px) {
   .timer__text-wrapper {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    width: 90%;
     height: auto;
   }
 }
 
 .timer__percent {
-  align-self: flex-end;
-  width: 50%;
+  /*align-self: flex-end;*/
+  /*width: 50%;*/
 
   font-size: 8rem;
   font-weight: bold;
@@ -147,9 +170,9 @@ html {
   /*background-color: rgba(0, 255, 0, 0.3);*/
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 665px) {
   .timer__percent {
-    align-self: flex-start;
+    /*align-self: flex-start;*/
   }
 }
 
@@ -168,13 +191,22 @@ html {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  width: fit-content;
+  width: 10rem;
   height: 100%;
   padding: 1rem;
 
-  background-color: #b9b9b9;
+  background-color: #e1e1e1;
+  border-left: 5px solid var(--theme-color);
+
+  transition: all 1s;
 }
 
-@media screen and (max-width: 420px) {
+.timer__settings--wide {
+  width: 20rem;
+}
+
+@media screen and (max-width: 665px) {
   .timer__settings {
     top: auto;
     left: 0;
@@ -183,10 +215,12 @@ html {
     flex-direction: row;
     width: 100%;
     height: fit-content;
-  }
-}
 
-.timer__settings-btn {
+    border-left: none;
+    border-top: 5px solid var(--theme-color);
+
+    transition: all 1s;
+  }
 }
 
 .btn {
@@ -195,6 +229,26 @@ html {
   font-size: 1.5rem;
 
   cursor: pointer;
+}
+
+.timer__settings-btn {
+  background-color: var(--bg-color);
+  border: 3px solid var(--theme-color);
+  border-radius: 20px;
+}
+
+.timer__settings-btn--icon {
+  font-size: 0;
+}
+
+.timer__settings-btn:hover {
+  background-color: var(--btn-hover);
+  box-shadow: 0 0 10px 0px #808080;
+}
+
+.timer__settings-btn-svg {
+  width: 2rem;
+  height: 2rem;
 }
 
 .timer__add-timer-btn {
@@ -220,15 +274,13 @@ html {
 }
 
 .timer__add-timer-svg {
-  position: relative;
-  z-index: 10;
-
   width: 4rem;
   height: 4rem;
 }
 
 .timer__add-timer-btn:hover {
-  box-shadow: 0 0 10px 0px grey;
+  background-color: var(--btn-hover);
+  box-shadow: 0 0 10px 0px #808080;
 }
 
 .timer__text {
@@ -245,6 +297,12 @@ html {
 
 .timer__text--remaining {
   font-size: 2rem;
+}
+
+@media screen and (max-width: 665px) {
+  .timer__text--remaining {
+    text-align: center;
+  }
 }
 
 .add-form {
@@ -275,7 +333,7 @@ html {
   }
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 665px) {
   .add-form {
     gap: 1rem;
   }
@@ -340,7 +398,7 @@ label {
   font-size: 5rem;
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 665px) {
   .timer__text-intro {
     text-align: center;
   }
@@ -351,7 +409,7 @@ label {
   gap: 5rem;
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 665px) {
   .timer--intro-layout {
     flex-direction: column-reverse;
     justify-content: center;
@@ -361,13 +419,15 @@ label {
 
 .timer--ready-layout {
   justify-content: start;
-  gap: 5vw;
+  gap: 3%;
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 665px) {
   .timer--ready-layout {
     flex-direction: column;
     justify-content: center;
+
+    min-width: 280px;
     padding: 1rem;
   }
 }
