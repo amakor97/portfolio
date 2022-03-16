@@ -10,6 +10,7 @@
   </head>
   <body>
     <header class="header">
+      <div class="header__background-img"></div>
       <nav class="nav">
         <ul class="nav__list">
           <li class="nav__item"><a class="nav__link" href="#">SCANDI</a></li>
@@ -46,62 +47,106 @@
         </div>
       </section>
       <section class="section about">
-        <h2 class="title section-title">О нас</h2>
-        <div class="about__container">
-          <img src="" alt="" class="about__img" />
-          <div class="about__text-wrapper">
-            <p class="about__text">
-              Премиальный европейский текстиль — одно из самых главных
-              направлений работы коллектива. Создавать неповторимые интерьеры
-              для наших дорогих гостей, уделяя внимание мельчайшим деталям — вот
-              то, что по-настоящему вдохновляет дизайнеров нашей студии.
-            </p>
-            <p class="about__text">
-              Наш коллектив сделает все, чтобы после сотрудничества с нами Вам
-              было приятно сказать: «Да! Это именно то, что действительно
-              достойно моего дома!»
-            </p>
-          </div>
-        </div>
-        <div class="about__banner">
-          <span class="about__achievments"> 5 лет опыта </span>
-          <span class="about__achievments"> 100 проектов </span>
-          <span class="about__achievments"> 10 наград </span>
-        </div>
-      </section>
-      <section class="section works">
-        <h2 class="title section__title">Наши работы</h2>
-        <div class="works__container">
-          <div class="works__img-wrapper works__img-wrapper--small">
-            <img src="" alt="" class="works__img works__img--small" />
-            <div class="works__img-overlay">
-              <h3 class="works__img-overlay-title">Квартира-студия 30 кв.м.</h3>
-              <p class="works__img-overlay-text">
-                В квартире были светлые стены и тёплые цвета. Мы
-                сконцентрировались на отсылках к природе и сделали ребятам
-                уютный интерьер, отсылающий к виллам островов Бали.
+        <div class="about__width-container">
+          <h2 class="title about__title">О нас</h2>
+          <div class="about__container">
+            <img
+              src="./img/about/table.jpg"
+              alt="table with plates"
+              class="about__img"
+            />
+            <div class="about__text-wrapper">
+              <p class="about__text">
+                Премиальный европейский текстиль — одно из самых главных
+                направлений работы коллектива. Создавать неповторимые интерьеры
+                для наших дорогих клиентов, уделяя внимание мельчайшим деталям —
+                вот то, что по-настоящему вдохновляет дизайнеров нашей студии.
+              </p>
+              <p class="about__text">
+                Наш коллектив сделает все, чтобы после сотрудничества с нами Вам
+                было приятно сказать: «Да! Это именно то, что действительно
+                достойно моего дома!»
               </p>
             </div>
           </div>
-          <img src="" alt="" class="works__img works__img--big" />
-          <img src="" alt="" class="works__img works__img--big" />
-          <img src="" alt="" class="works__img works__img--small" />
         </div>
-        <a class="link works__link" href="#">Смотреть ещё</a>
+        <div class="banner about__banner">
+          <div class="banner__achievements">
+            <p class="banner__number">5</p>
+            лет опыта
+          </div>
+          <div class="banner__achievements">
+            <p class="banner__number">100</p>
+            проектов
+          </div>
+          <div class="banner__achievements">
+            <p class="banner__number">10</p>
+            наград
+          </div>
+        </div>
+      </section>
+      <section class="section works">
+        <div class="works__width-container">
+          <h2 class="title works__title">Наши работы</h2>
+          <div class="works__container">
+            <div
+              class="works__img-wrapper works__img-wrapper-small js-work-wrapper"
+            >
+              <img
+                src="./img/works/1.jpg"
+                alt=""
+                class="works__img works__img-small"
+              />
+              <div class="works__img-overlay js-wrapper-overlay">
+                <h3 class="works__img-overlay-title">
+                  Квартира-студия 30 кв.м.
+                </h3>
+                <p class="works__img-overlay-text">
+                  В квартире были светлые стены и тёплые цвета. Мы
+                  сконцентрировались <br />
+                  на отсылках к природе и сделали ребятам уютный интерьер,
+                  отсылающий к виллам островов Бали.
+                </p>
+              </div>
+            </div>
+            <div class="works__img-wrapper works__img-wrapper-big">
+              <img
+                src="./img/works/2.jpg"
+                alt=""
+                class="works__img works__img-big"
+              />
+            </div>
+            <div class="works__img-wrapper works__img-wrapper-big">
+              <img
+                src="./img/works/3.jpg"
+                alt=""
+                class="works__img works__img-big"
+              />
+            </div>
+            <div class="works__img-wrapper works__img-wrapper-small">
+              <img
+                src="./img/works/4.jpg"
+                alt=""
+                class="works__img works__img-small"
+              />
+            </div>
+          </div>
+          <a class="link works__link" href="#">Смотреть ещё</a>
+        </div>
       </section>
       <section class="section team">
         <h2 class="title team__title">Команда</h2>
         <div class="team__container">
           <article class="team__card card">
-            <img src="" alt="" class="card__img" />
+            <img src="./img/team/1.jpg" alt="" class="card__img" />
             <p class="card__text">
               Это Маша, наш главный дизайнер. Она отвечает за дизайн-проект,
-              приезжает к вам домой, общается и помогает сделать вашу квартиру
-              красивой и уютной.
+              приезжает к вам домой, общается <br />
+              и помогает сделать вашу квартиру красивой и уютной.
             </p>
           </article>
           <article class="team__card card">
-            <img src="" alt="" class="card__img" />
+            <img src="./img/team/2.jpg" alt="" class="card__img" />
             <p class="card__text">
               С нашим менеджером Сашей вы познакомитесь в первую очередь. Она
               проконсультирует вас, соберёт все документы и ответит на все
@@ -109,50 +154,55 @@
             </p>
           </article>
           <article class="team__card card">
-            <img src="" alt="" class="card__img" />
+            <img src="./img/team/3.jpg" alt="" class="card__img" />
             <p class="card__text">
               Катя тоже занимается дизайном. Она всегда находит общий язык с
-              клиентами и точно знает, как обсутроить дом так, чтобы вам
+              клиентами и точно знает, как обустроить дом так, чтобы вам
               понравилось.
             </p>
           </article>
         </div>
       </section>
       <section class="section algorhytm">
-        <h2 class="title algorhytm__title">Как мы работаем</h2>
-        <div class="algorhytm__container">
-          <article class="algorhytm__item">
-            <span class="algorhytm__item-number">1</span>
-            <p class="algorhytm__item-text">
-              Знакомимся, выезжаем на объект, утверждаем концепцию, подписывем
-              договор.
-            </p>
-          </article>
-          <article class="algorhytm__item">
-            <span class="algorhytm__item-number">2</span>
-            <p class="algorhytm__item-text">
-              Подбираем мебель, текстиль, аксессуры. Делаем 3D- зуализацию.
-            </p>
-          </article>
-          <article class="algorhytm__item">
-            <span class="algorhytm__item-number">3</span>
-            <p class="algorhytm__item-text">
-              Находим нужные магазины, помогаем с доставкой и оплатой товаров.
-            </p>
-          </article>
-          <article class="algorhytm__item">
-            <span class="algorhytm__item-number">4</span>
-            <p class="algorhytm__item-text">
-              Воплощаем проект в жизнь: расставляем мебель и цветы, вешаем
-              шторы, находим места для мелочей
-            </p>
-          </article>
+        <div class="algorhytm__width-container">
+          <h2 class="title algorhytm__title">Как мы работаем</h2>
+          <div class="algorhytm__container">
+            <ol class="algorhytm__list">
+              <li class="algorhytm__step">
+                <p class="algorhytm__step-number">1</p>
+                <p class="algorhytm__step-text algorhytm__step-text_first">
+                  Знакомимся, выезжаем на объект, утверждаем концепцию,
+                  подписывем договор.
+                </p>
+              </li>
+              <li class="algorhytm__step">
+                <p class="algorhytm__step-number">2</p>
+                <p class="algorhytm__step-text">
+                  Подбираем мебель, текстиль, аксессуры. Делаем 3D- зуализацию.
+                </p>
+              </li>
+              <li class="algorhytm__step">
+                <p class="algorhytm__step-number">3</p>
+                <p class="algorhytm__step-text">
+                  Находим нужные магазины, помогаем с доставкой и оплатой
+                  товаров.
+                </p>
+              </li>
+              <li class="algorhytm__step">
+                <p class="algorhytm__step-number">4</p>
+                <p class="algorhytm__step-text">
+                  Воплощаем проект в жизнь: расставляем мебель и цветы, вешаем
+                  шторы, находим места для мелочей
+                </p>
+              </li>
+            </ol>
+          </div>
         </div>
       </section>
       <section class="section reviews">
         <h2 class="title reviews__title">Отзывы</h2>
         <div class="reviews__container">
-          <span class="reviews__arrow"></span>
+          <button class="reviews__arrow"></button>
           <article class="reviews__wrapper review">
             <div class="review__text-wrapper">
               <p class="review__text">
@@ -161,8 +211,8 @@
               </p>
               <p class="review__text">
                 Работа шла быстро, было очень приятно общаться и
-                взаимодествовайть с сотрудниками. Не ожидала, что это будет так
-                легко!
+                взаимодествовайть с&nbsp;сотрудниками. Не ожидала, что это будет
+                так легко!
               </p>
               <p class="review__text">
                 Буду советовать и своим друзьям к вам обращаться!»
@@ -170,20 +220,20 @@
               <p class="review__text review__text-author">Анна Беловская</p>
             </div>
             <div class="review__img-wrapper">
-              <img src="" alt="" class="review__img" />
-              <img src="" alt="" class="review__img" />
+              <img src="./img/reviews/1.jpg" alt="" class="review__img" />
+              <img src="./img/reviews/2.jpg" alt="" class="review__img" />
             </div>
           </article>
-          <span class="reviews__arrow"></span>
+          <button class="reviews__arrow"></button>
         </div>
       </section>
       <section class="application">
         <div class="application__container">
-          <div class="application__wrapper">
+          <div class="application__text-wrapper">
             <h2 class="title application__title">Оставить заявку</h2>
             <p class="application__text">
-              Оставьте свои контакты. Менеджер перезвонит в удобное вам время и
-              ответит на все вопросы.
+              Оставьте свои контакты. Менеджер перезвонит в&nbsp;удобное вам
+              время и ответит на все вопросы.
             </p>
             <form action="" class="form application__form">
               <input
@@ -199,7 +249,7 @@
               <button class="form__submit">Оставить заявку</button>
             </form>
           </div>
-          <img src="" alt="" class="application__map" />
+          <img src="./img/application/1.jpg" alt="" class="application__map" />
         </div>
       </section>
     </main>
@@ -216,5 +266,6 @@
         </ul>
       </div>
     </footer>
+    <script src="./scripts/script.js"></script>
   </body>
 </html>
