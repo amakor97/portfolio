@@ -68,7 +68,7 @@ function getReviewsData() {
   xhr.onload = function() {
     reviewsData = JSON.parse(this.responseText);
   }
-  xhr.open("GET", "../data/reviewsData.json", false);
+  xhr.open("GET", "./data/reviewsData.json", false);
   xhr.send();
 }
 

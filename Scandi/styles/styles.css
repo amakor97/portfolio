@@ -498,6 +498,7 @@
   display: flex;
   justify-content: space-between;
   max-width: 46.333rem;
+  min-height: 31.444rem;
 }
 
 .review__text-wrapper {
@@ -520,6 +521,9 @@
 }
 
 .review__img-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 48.8%;
 
   font-size: 0;
@@ -528,13 +532,14 @@
 .review__img {
   width: 100%;
   height: auto;
-  max-height: 15.056rem;
+  /*max-height: 15.056rem;*/
+  height: 48.88%;
 
   object-fit: cover;
 }
 
 .review__img:not(:last-child) {
-  margin-bottom: 1.333rem;
+  /*margin-bottom: 1.333rem;*/
 }
 
 /*application section*/
