@@ -528,6 +528,7 @@
 .review__img {
   width: 100%;
   height: auto;
+  max-height: 15.056rem;
 
   object-fit: cover;
 }

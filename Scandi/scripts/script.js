@@ -1,6 +1,7 @@
 "use strict";
 
 
+
 //setting up overlays on hovers events over works containers
 
 let workWrappers = document.querySelectorAll(".js-work-wrapper");
@@ -17,6 +18,7 @@ workWrappers.forEach(function(wrapper) {
     })
   }
 })
+
 
 
 //change review arrows color on hover
@@ -37,6 +39,7 @@ arrowBtns.forEach(function(btn) {
 })
 
 
+
 // calculating reviews section margin for setting exactly the same
 // margin-left on application section
 
@@ -53,3 +56,62 @@ function applicationMarginHandle() {
 
 window.addEventListener("resize", applicationMarginHandle);
 window.addEventListener("load", applicationMarginHandle);
+
+
+
+//retrieve reviews from "remote" sourse and display them
+
+let reviewsData = undefined;
+
+function getReviewsData() {
+  const xhr = new XMLHttpRequest();
+  xhr.onload = function() {
+    reviewsData = JSON.parse(this.responseText);
+  }
+  xhr.open("GET", "../data/reviewsData.json", false);
+  xhr.send();
+}
+
+getReviewsData();
+
+reviewsData.forEach(function(review) {
+  review.text = "«" + review.text.replace(/\n/g, "<br /><br />") + "»";
+})
+
+
+const author = document.querySelector(".js-review-author");
+const text = document.querySelector(".js-review-text");
+const pic1 = document.querySelector(".js-review-pic1");
+const pic2 = document.querySelector(".js-review-pic2");
+
+const prevBtn = document.querySelector(".js-reviews-prev-btn");
+const nextBtn = document.querySelector(".js-reviews-next-btn");
+
+let currentReview = 0;
+
+window.addEventListener("DOMContentLoaded", fillReview(currentReview));
+
+function fillReview(number) {
+  const review = reviewsData[number];
+  pic1.src = review.pic1;
+  pic2.src = review.pic2;
+  text.innerHTML = review.text;
+  author.textContent = review.name;
+}
+
+
+nextBtn.addEventListener("click", function() {
+  currentReview++;
+  if (currentReview > reviewsData.length - 1) {
+    currentReview = 0;
+  }
+  fillReview(currentReview);
+})
+
+prevBtn.addEventListener("click", function() {
+  currentReview--;
+  if (currentReview < 0) {
+    currentReview = reviewsData.length - 1;
+  }
+  fillReview(currentReview);
+})
