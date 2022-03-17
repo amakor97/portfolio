@@ -499,6 +499,22 @@
   justify-content: space-between;
   max-width: 46.333rem;
   min-height: 31.444rem;
+
+  opacity: 1;
+
+  transition: opacity 0.5s;
+}
+
+.review_non-visible {
+  visibility: hidden;
+}
+
+.review_visible {
+  opacity: 1;
+}
+
+.review_hidden {
+  opacity: 0;
 }
 
 .review__text-wrapper {

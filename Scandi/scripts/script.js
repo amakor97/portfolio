@@ -84,6 +84,7 @@ const text = document.querySelector(".js-review-text");
 const pic1 = document.querySelector(".js-review-pic1");
 const pic2 = document.querySelector(".js-review-pic2");
 
+const review = document.querySelector(".review");
 const prevBtn = document.querySelector(".js-reviews-prev-btn");
 const nextBtn = document.querySelector(".js-reviews-next-btn");
 
@@ -100,12 +101,18 @@ function fillReview(number) {
 }
 
 
+
 nextBtn.addEventListener("click", function() {
   currentReview++;
   if (currentReview > reviewsData.length - 1) {
     currentReview = 0;
   }
-  fillReview(currentReview);
+  
+  review.classList.add("review_hidden");
+  setTimeout(function() {
+    fillReview(currentReview);
+    review.classList.remove("review_hidden");
+  }, 250);
 })
 
 prevBtn.addEventListener("click", function() {
@@ -113,5 +120,9 @@ prevBtn.addEventListener("click", function() {
   if (currentReview < 0) {
     currentReview = reviewsData.length - 1;
   }
-  fillReview(currentReview);
+  review.classList.add("review_hidden");
+  setTimeout(function() {
+    fillReview(currentReview);
+    review.classList.remove("review_hidden");
+  }, 250);
 })
