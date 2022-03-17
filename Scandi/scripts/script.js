@@ -126,3 +126,17 @@ prevBtn.addEventListener("click", function() {
     review.classList.remove("review_hidden");
   }, 250);
 })
+
+
+//make background for header at some scroll height
+
+const header = document.querySelector(".header");
+
+window.addEventListener("scroll", function() {
+  if (this.scrollY > window.innerHeight/4) {
+    console.log(this.scrollY);
+    header.classList.add("header_backgrounded");
+  } else {
+    header.classList.remove("header_backgrounded");
+  }
+})
