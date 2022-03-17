@@ -128,15 +128,39 @@ prevBtn.addEventListener("click", function() {
 })
 
 
-//make background for header at some scroll height
+//make background and height for header at some scroll height
 
 const header = document.querySelector(".header");
+const nav = document.querySelector(".nav");
 
-window.addEventListener("scroll", function() {
-  if (this.scrollY > window.innerHeight/4) {
-    console.log(this.scrollY);
+window.addEventListener("scroll", scrollClassHandle)
+
+function scrollClassHandle() {
+  if (window.scrollY > window.innerHeight/4) {
     header.classList.add("header_backgrounded");
+    nav.classList.add("nav_small-height");
   } else {
     header.classList.remove("header_backgrounded");
+    nav.classList.remove("nav_small-height");
   }
+}
+
+//scroll handler
+
+const links = document.querySelectorAll(".js-nav-link");
+const fakeHeader = document.querySelector(".header-fake");
+
+links.forEach(function(link) {
+  link.addEventListener("click", function(e) {
+    e.preventDefault();
+    let href = e.currentTarget.getAttribute("href");
+    let targetSection = document.getElementById(href.slice(1));
+    let posY = targetSection.offsetTop;
+
+    let headerHeight = fakeHeader.offsetHeight;
+    window.scrollTo({
+      left: 0, top: posY - headerHeight
+    });
+    console.log(scrollY);
+  })
 })
