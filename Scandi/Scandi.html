@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -7,36 +7,47 @@
     <title>Scandi</title>
     <link rel="stylesheet" href="./styles/reset.css" />
     <link rel="stylesheet" href="./styles/styles.css" />
+    <link rel="icon" href="icon.png" />
   </head>
   <body>
     <header class="header">
       <div class="header__background-img"></div>
       <nav class="nav">
         <ul class="nav__list">
-          <li class="nav__item"><a class="nav__link" href="#">SCANDI</a></li>
           <li class="nav__item">
-            <a class="nav__link" href="#">О компании</a>
-          </li>
-          <li class="nav__item"><a class="nav__link" href="#">Портфолио</a></li>
-          <li class="nav__item"><a class="nav__link" href="#">Команда</a></li>
-          <li class="nav__item">
-            <a class="nav__link" href="#">Как мы работаем</a>
+            <a class="nav__link" href="#intro"
+              ><img src="./img/intro/icon.png" class="nav__link-img" />SCANDI</a
+            >
           </li>
           <li class="nav__item">
-            <a class="nav__link" href="#">Отзывы клиентов</a>
+            <a class="nav__link" href="#about">О компании</a>
           </li>
           <li class="nav__item">
-            <a class="nav__link" href="#">Оставить заявку</a>
+            <a class="nav__link" href="#works">Портфолио</a>
           </li>
           <li class="nav__item">
-            <a class="nav__link" href="#">+7 (981) 000-00-00</a>
+            <a class="nav__link" href="#team">Команда</a>
           </li>
-          <li class="nav__item"><a class="nav__link" href="#">Home</a></li>
+          <li class="nav__item">
+            <a class="nav__link" href="#algorhytm">Как мы работаем</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" href="#reviews">Отзывы клиентов</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" href="#application">Оставить заявку</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" href="tel:+79810000000">+7 (981) 000-00-00</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" href="../../index.html">Home</a>
+          </li>
         </ul>
       </nav>
     </header>
     <main>
-      <section class="intro">
+      <section class="intro" id="intro">
         <div class="intro__container">
           <h1 class="intro__title">Поможем сделать вашу квартиру уютнее</h1>
           <p class="intro__text">
@@ -46,7 +57,7 @@
           <a class="link intro__link" href="#">Оставить заявку</a>
         </div>
       </section>
-      <section class="section about">
+      <section class="section about" id="about">
         <div class="about__width-container">
           <h2 class="title about__title">О нас</h2>
           <div class="about__container">
@@ -85,7 +96,7 @@
           </div>
         </div>
       </section>
-      <section class="section works">
+      <section class="section works" id="works">
         <div class="works__width-container">
           <h2 class="title works__title">Наши работы</h2>
           <div class="works__container">
@@ -94,7 +105,7 @@
             >
               <img
                 src="./img/works/1.jpg"
-                alt=""
+                alt="small bedroom"
                 class="works__img works__img-small"
               />
               <div class="works__img-overlay js-wrapper-overlay">
@@ -103,38 +114,51 @@
                 </h3>
                 <p class="works__img-overlay-text">
                   В квартире были светлые стены и тёплые цвета. Мы
-                  сконцентрировались <br />
-                  на отсылках к природе и сделали ребятам уютный интерьер,
-                  отсылающий к виллам островов Бали.
+                  сконцентрировались на&nbsp;отсылках к природе и сделали
+                  ребятам уютный интерьер, отсылающий к виллам островов Бали.
                 </p>
               </div>
             </div>
             <div class="works__img-wrapper works__img-wrapper-big">
               <img
                 src="./img/works/2.jpg"
-                alt=""
+                alt="dining room with stairs"
                 class="works__img works__img-big"
               />
             </div>
             <div class="works__img-wrapper works__img-wrapper-big">
               <img
                 src="./img/works/3.jpg"
-                alt=""
+                alt="living room"
                 class="works__img works__img-big"
               />
             </div>
             <div class="works__img-wrapper works__img-wrapper-small">
               <img
                 src="./img/works/4.jpg"
-                alt=""
+                alt="small bathroom"
                 class="works__img works__img-small"
               />
             </div>
           </div>
-          <a class="link works__link" href="#">Смотреть ещё</a>
+          <a class="link works__link" href="#"
+            >Смотреть ещё
+            <svg
+              width="61"
+              height="16"
+              viewBox="0 0 61 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M60.7071 8.70711C61.0976 8.31658 61.0976 7.68342 60.7071 7.29289L54.3432 0.928932C53.9526 0.538408 53.3195 0.538408 52.9289 0.928932C52.5384 1.31946 52.5384 1.95262 52.9289 2.34315L58.5858 8L52.9289 13.6569C52.5384 14.0474 52.5384 14.6805 52.9289 15.0711C53.3195 15.4616 53.9526 15.4616 54.3432 15.0711L60.7071 8.70711ZM0 9H60V7H0V9Z"
+                fill="#533738"
+              />
+            </svg>
+          </a>
         </div>
       </section>
-      <section class="section team">
+      <section class="section team" id="team">
         <h2 class="title team__title">Команда</h2>
         <div class="team__container">
           <article class="team__card card">
@@ -163,15 +187,15 @@
           </article>
         </div>
       </section>
-      <section class="section algorhytm">
+      <section class="section algorhytm" id="algorhytm">
         <div class="algorhytm__width-container">
           <h2 class="title algorhytm__title">Как мы работаем</h2>
           <div class="algorhytm__container">
             <ol class="algorhytm__list">
               <li class="algorhytm__step">
                 <p class="algorhytm__step-number">1</p>
-                <p class="algorhytm__step-text algorhytm__step-text_first">
-                  Знакомимся, выезжаем на объект, утверждаем концепцию,
+                <p class="algorhytm__step-text">
+                  Знакомимся, выезжаем на&nbsp;объект, утверждаем концепцию,
                   подписывем договор.
                 </p>
               </li>
@@ -199,10 +223,22 @@
           </div>
         </div>
       </section>
-      <section class="section reviews">
+      <section class="section reviews" id="reviews">
         <h2 class="title reviews__title">Отзывы</h2>
         <div class="reviews__container">
-          <button class="reviews__arrow"></button>
+          <button class="reviews__arrow">
+            <svg
+              width="33"
+              height="16"
+              viewBox="0 0 33 16"
+              xmlns="http://www.w3.org/2000/svg"
+              class="reviews__arrow-svg"
+            >
+              <path
+                d="M0.292892 8.70711C-0.0976295 8.31658 -0.0976295 7.68342 0.292892 7.29289L6.65685 0.928932C7.04738 0.538408 7.68054 0.538408 8.07107 0.928932C8.46159 1.31946 8.46159 1.95262 8.07107 2.34315L2.41421 8L8.07107 13.6569C8.46159 14.0474 8.46159 14.6805 8.07107 15.0711C7.68054 15.4616 7.04738 15.4616 6.65685 15.0711L0.292892 8.70711ZM33 9H1V7H33V9Z"
+              />
+            </svg>
+          </button>
           <article class="reviews__wrapper review">
             <div class="review__text-wrapper">
               <p class="review__text">
@@ -211,7 +247,7 @@
               </p>
               <p class="review__text">
                 Работа шла быстро, было очень приятно общаться и
-                взаимодествовайть с&nbsp;сотрудниками. Не ожидала, что это будет
+                взаимодействовать с&nbsp;сотрудниками. Не ожидала, что это будет
                 так легко!
               </p>
               <p class="review__text">
@@ -224,10 +260,22 @@
               <img src="./img/reviews/2.jpg" alt="" class="review__img" />
             </div>
           </article>
-          <button class="reviews__arrow"></button>
+          <button class="reviews__arrow">
+            <svg
+              width="33"
+              height="16"
+              viewBox="0 0 33 16"
+              xmlns="http://www.w3.org/2000/svg"
+              class="reviews__arrow-svg"
+            >
+              <path
+                d="M32.7071 8.70711C33.0976 8.31658 33.0976 7.68342 32.7071 7.29289L26.3431 0.928932C25.9526 0.538408 25.3195 0.538408 24.9289 0.928932C24.5384 1.31946 24.5384 1.95262 24.9289 2.34315L30.5858 8L24.9289 13.6569C24.5384 14.0474 24.5384 14.6805 24.9289 15.0711C25.3195 15.4616 25.9526 15.4616 26.3431 15.0711L32.7071 8.70711ZM0 9H32V7H0V9Z"
+              />
+            </svg>
+          </button>
         </div>
       </section>
-      <section class="application">
+      <section class="section application" id="application">
         <div class="application__container">
           <div class="application__text-wrapper">
             <h2 class="title application__title">Оставить заявку</h2>
@@ -239,11 +287,13 @@
               <input
                 type="text"
                 class="form__input form__input-name"
+                name="name"
                 placeholder="Ваше имя"
               />
               <input
                 type="text"
                 class="form__input form__input-tel"
+                name="tel"
                 placeholder="Введите телефон"
               />
               <button class="form__submit">Оставить заявку</button>

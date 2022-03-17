@@ -6,8 +6,11 @@
 :root {
   box-sizing: border-box;
   --btn-color: #cc8b86;
+  --btn-hover-color: #fff;
   --text-color-1: #533738;
   --text-color-2: #fff;
+  --svg-arrow-color: #f5f2ed;
+  --svg-arrow-color-hover: #cc8b86;
   --bg-color-1: #f9eae1;
   --bg-color-2: #e5e5e5;
   --bg-color-3: #8d7370;
@@ -20,6 +23,8 @@
   font-family: "Montserrat", Arial, Helvetica, sans-serif;
   font-size: 18px;
   color: var(--text-color-1);
+
+  scroll-behavior: smooth;
 }
 
 .header {
@@ -54,6 +59,8 @@
 .nav__list {
   display: flex;
   justify-content: space-between;
+  padding: 1px;
+
   overflow: hidden;
 }
 
@@ -62,7 +69,10 @@
 }
 
 .nav__link {
+  position: relative;
+
   display: block;
+  padding: 0.5rem;
 
   font-size: 0.889rem;
   font-weight: 400;
@@ -72,8 +82,23 @@
   text-decoration: none;
 }
 
+.nav__item:first-child {
+  padding-left: 1.667rem;
+}
+
 .nav__link:hover {
   text-decoration: underline;
+}
+
+.nav__link-img {
+  position: absolute;
+  top: 0.2rem;
+  left: -0.7rem;
+
+  width: auto;
+  height: 1.389rem;
+
+  vertical-align: middle;
 }
 
 .intro {
@@ -113,8 +138,10 @@
 }
 
 .intro__link {
-  display: inline-block;
-  place-items: center;
+  display: inline-flex;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
   width: 17.167rem;
   height: 4.111rem;
 
@@ -123,10 +150,17 @@
   font-weight: 500;
   font-style: normal;
   text-align: center;
-  line-height: 4.111rem;
 
   background-color: var(--btn-color);
+  border: 5px solid transparent;
   text-decoration: none;
+}
+
+.intro__link:hover {
+  color: var(--btn-color);
+
+  background-color: var(--btn-hover-color);
+  border: 5px solid var(--btn-color);
 }
 
 .title {
@@ -239,6 +273,8 @@
 
 .works__img-wrapper {
   position: relative;
+
+  height: 25.056rem;
 }
 
 .works__img {
@@ -290,7 +326,8 @@
 }
 
 .works__img-overlay-text {
-  width: 85.656%;
+  /*width: 85.656%;*/
+  width: 85%;
 
   font-size: 1rem;
   font-weight: 400;
@@ -308,6 +345,10 @@
   color: var(--text-color-1);
 
   text-decoration: none;
+}
+
+.works__link:hover {
+  text-decoration: underline;
 }
 
 /*team section*/
@@ -435,9 +476,22 @@
   font-size: 0;
 
   background-color: var(--btn-color);
-  border: none;
+  border: 5px solid transparent;
   border-radius: 50%;
   cursor: pointer;
+}
+
+.reviews__arrow:hover {
+  background-color: var(--btn-hover-color);
+  border: 5px solid var(--btn-color);
+}
+
+.reviews__arrow-svg {
+  fill: var(--svg-arrow-color);
+}
+
+.reviews__arrow-svg_hover {
+  fill: var(--svg-arrow-color-hover);
 }
 
 .review {
@@ -461,8 +515,14 @@
   line-height: 1.667rem;
 }
 
+.review__text-author {
+  text-transform: uppercase;
+}
+
 .review__img-wrapper {
   width: 48.8%;
+
+  font-size: 0;
 }
 
 .review__img {
@@ -529,11 +589,21 @@
   padding: 0.5rem 0.2rem;
   margin-bottom: 1.944rem;
 
+  font-family: "Montserrat", Arial, Helvetica, sans-serif;
   color: var(--text-color-2);
 
   background: transparent;
   border: 1px solid transparent;
   border-bottom: 1px solid var(--border-input-color);
+}
+
+.form__input:focus {
+  color: var(--text-color-1);
+
+  background-color: var(--bg-color-4);
+
+  outline: none;
+  border: 1px solid var(--border-input-color);
 }
 
 .form__input::placeholder {
@@ -542,14 +612,12 @@
   color: var(--text-color-2);
 }
 
-.form__input:focus {
-  outline: none;
-  border: 1px solid var(--border-input-color);
+.form__input:focus::placeholder {
+  color: var(--text-color-1);
 }
 
 .form__submit {
   display: inline-block;
-  place-items: center;
   width: 17.167rem;
   height: 4.111rem;
 
@@ -559,11 +627,18 @@
   font-weight: 500;
   font-style: normal;
   text-align: center;
-  line-height: 4.111rem;
 
   background-color: var(--btn-color);
-  border: none;
+  border: 5px solid transparent;
   text-decoration: none;
+  cursor: pointer;
+}
+
+.form__submit:hover {
+  color: var(--btn-color);
+
+  background-color: var(--btn-hover-color);
+  border: 5px solid var(--btn-color);
 }
 
 /*footer section*/
@@ -589,4 +664,14 @@
 
 .footer__item:last-of-type {
   margin-left: auto;
+}
+
+.footer__link {
+  color: var(--text-color-1);
+
+  text-decoration: none;
+}
+
+.footer__link:hover {
+  text-decoration: underline;
 }
