@@ -49,6 +49,7 @@
 
   height: fit-content;
 
+  visibility: hidden;
   border-bottom: 5px solid transparent;
 }
 
@@ -376,16 +377,18 @@
 .works__link {
   display: block;
   width: fit-content;
+  padding-bottom: 2px;
   margin: 0 auto;
 
   font-size: 1.667rem;
   color: var(--text-color-1);
 
+  border-bottom: 2px solid transparent;
   text-decoration: none;
 }
 
 .works__link:hover {
-  text-decoration: underline;
+  border-bottom: 2px solid var(--text-color-1);
 }
 
 /*team section*/
