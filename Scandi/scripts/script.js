@@ -120,6 +120,7 @@ prevBtn.addEventListener("click", function() {
   if (currentReview < 0) {
     currentReview = reviewsData.length - 1;
   }
+
   review.classList.add("review_hidden");
   setTimeout(function() {
     fillReview(currentReview);
@@ -128,12 +129,13 @@ prevBtn.addEventListener("click", function() {
 })
 
 
+
 //make background and height for header at some scroll height
 
 const header = document.querySelector(".header");
 const nav = document.querySelector(".nav");
 
-window.addEventListener("scroll", scrollClassHandle)
+window.addEventListener("scroll", scrollClassHandle);
 
 function scrollClassHandle() {
   if (window.scrollY > window.innerHeight/4) {
@@ -144,6 +146,8 @@ function scrollClassHandle() {
     nav.classList.remove("nav_small-height");
   }
 }
+
+
 
 //scroll handler
 
@@ -161,6 +165,40 @@ links.forEach(function(link) {
     window.scrollTo({
       left: 0, top: posY - headerHeight
     });
-    console.log(scrollY);
   })
 })
+
+
+
+//clickable images
+
+const main = document.querySelector(".main");
+
+let images = document.querySelectorAll(".js-clickable-img");
+images.forEach(function(img) {
+  img.addEventListener("click", function() {
+    createModalImage(this.src);
+  })
+})
+
+let imageWorks = document.querySelectorAll(".js-clickable-work");
+imageWorks.forEach(function(imageWork) {
+  imageWork.addEventListener("click", function() {
+    let image = imageWork.querySelector(".js-clickable-img-work");
+    createModalImage(image.src);
+  })
+})
+
+function createModalImage(src) {
+  let modalContainer = document.createElement("div");
+  modalContainer.classList.add("modal");
+  modalContainer.addEventListener("click", function() {
+    main.removeChild(modalContainer);
+  })
+  main.appendChild(modalContainer);
+
+  let modalImg = document.createElement("img");
+  modalImg.classList.add("modal__img");
+  modalImg.src = src;
+  modalContainer.appendChild(modalImg);
+}

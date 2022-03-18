@@ -47,12 +47,12 @@
             <a class="nav__link" href="tel:+79810000000">+7 (981) 000-00-00</a>
           </li>
           <li class="nav__item">
-            <a class="nav__link" href="/index.html">Home</a>
+            <a class="nav__link" href="/index.html">На главную</a>
           </li>
         </ul>
       </nav>
     </header>
-    <main>
+    <main class="main">
       <section class="intro" id="intro">
         <div class="intro__width-container">
           <div class="intro__background-img"></div>
@@ -73,7 +73,7 @@
             <img
               src="./img/about/table.jpg"
               alt="table with plates"
-              class="about__img"
+              class="about__img js-clickable-img"
             />
             <div class="about__text-wrapper">
               <p class="about__text">
@@ -110,12 +110,12 @@
           <h2 class="title works__title">Наши работы</h2>
           <div class="works__container">
             <div
-              class="works__img-wrapper works__img-wrapper-small js-work-wrapper"
+              class="works__img-wrapper works__img-wrapper-small js-work-wrapper js-clickable-work"
             >
               <img
                 src="./img/works/1.jpg"
                 alt="small bedroom"
-                class="works__img works__img-small"
+                class="works__img works__img-small js-clickable-img-work"
               />
               <div class="works__img-overlay js-wrapper-overlay">
                 <h3 class="works__img-overlay-title">
@@ -132,21 +132,21 @@
               <img
                 src="./img/works/2.jpg"
                 alt="dining room with stairs"
-                class="works__img works__img-big"
+                class="works__img works__img-big js-clickable-img"
               />
             </div>
             <div class="works__img-wrapper works__img-wrapper-big">
               <img
                 src="./img/works/3.jpg"
                 alt="living room"
-                class="works__img works__img-big"
+                class="works__img works__img-big js-clickable-img"
               />
             </div>
             <div class="works__img-wrapper works__img-wrapper-small">
               <img
                 src="./img/works/4.jpg"
                 alt="small bathroom"
-                class="works__img works__img-small"
+                class="works__img works__img-small js-clickable-img"
               />
             </div>
           </div>
@@ -172,7 +172,11 @@
         <h2 class="title team__title">Команда</h2>
         <div class="team__container">
           <article class="team__card card">
-            <img src="./img/team/1.jpg" alt="" class="card__img" />
+            <img
+              src="./img/team/1.jpg"
+              alt="Маша, приятная молодая рыжеволосая девушка"
+              class="card__img js-clickable-img"
+            />
             <p class="card__text">
               Это Маша, наш главный дизайнер. Она отвечает за дизайн-проект,
               приезжает к вам домой, общается <br />
@@ -180,7 +184,11 @@
             </p>
           </article>
           <article class="team__card card">
-            <img src="./img/team/2.jpg" alt="" class="card__img" />
+            <img
+              src="./img/team/2.jpg"
+              alt="Саша, приятная молодая блондинка"
+              class="card__img js-clickable-img"
+            />
             <p class="card__text">
               С нашим менеджером Сашей вы познакомитесь в первую очередь. Она
               проконсультирует вас, соберёт все документы и ответит на все
@@ -188,7 +196,11 @@
             </p>
           </article>
           <article class="team__card card">
-            <img src="./img/team/3.jpg" alt="" class="card__img" />
+            <img
+              src="./img/team/3.jpg"
+              alt="Катя, приятная молодая блондинка"
+              class="card__img js-clickable-img"
+            />
             <p class="card__text">
               Катя тоже занимается дизайном. Она всегда находит общий язык с
               клиентами и точно знает, как обустроить дом так, чтобы вам
@@ -269,12 +281,12 @@
               <img
                 src="./img/reviews/1_1.jpg"
                 alt=""
-                class="review__img js-review-pic1"
+                class="review__img js-review-pic1 js-clickable-img"
               />
               <img
                 src="./img/reviews/1_2.jpg"
                 alt=""
-                class="review__img js-review-pic2"
+                class="review__img js-review-pic2 js-clickable-img"
               />
             </div>
           </article>
@@ -295,29 +307,37 @@
       </section>
       <section class="section application" id="application">
         <div class="application__container">
-          <div class="application__text-wrapper">
-            <h2 class="title application__title">Оставить заявку</h2>
-            <p class="application__text">
-              Оставьте свои контакты. Менеджер перезвонит в&nbsp;удобное вам
-              время и ответит на все вопросы.
-            </p>
-            <form action="" class="form application__form">
-              <input
-                type="text"
-                class="form__input form__input-name"
-                name="name"
-                placeholder="Ваше имя"
-              />
-              <input
-                type="text"
-                class="form__input form__input-tel"
-                name="tel"
-                placeholder="Введите телефон"
-              />
-              <button class="form__submit">Оставить заявку</button>
-            </form>
+          <div class="application__text-container">
+            <div class="application__text-wrapper">
+              <h2 class="title application__title">Оставить заявку</h2>
+              <p class="application__text">
+                Оставьте свои контакты. Менеджер перезвонит в&nbsp;удобное вам
+                время и ответит на все вопросы.
+              </p>
+              <form action="" class="form application__form">
+                <input
+                  type="text"
+                  class="form__input form__input-name"
+                  name="name"
+                  placeholder="Ваше имя"
+                />
+                <input
+                  type="text"
+                  class="form__input form__input-tel"
+                  name="tel"
+                  placeholder="Введите телефон"
+                />
+                <button class="form__submit">Оставить заявку</button>
+              </form>
+            </div>
           </div>
-          <img src="./img/application/1.jpg" alt="" class="application__map" />
+          <div class="application__map-container">
+            <img
+              src="./img/application/1.jpg"
+              alt=""
+              class="application__map js-clickable-img"
+            />
+          </div>
         </div>
       </section>
     </main>
