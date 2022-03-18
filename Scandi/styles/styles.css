@@ -35,7 +35,7 @@
   width: 100%;
   height: fit-content;
 
-  transition: all 0.2s;
+  transition: background-color 0.2s;
 }
 
 .header_backgrounded {
@@ -71,7 +71,7 @@
   padding: 2rem 0;
   margin: 0 auto;
 
-  transition: all 0.2s;
+  transition: padding 0.2s;
 }
 
 .nav_small-height {
@@ -600,10 +600,6 @@
 
   object-fit: cover;
   cursor: pointer;
-}
-
-.review__img:not(:last-child) {
-  /*margin-bottom: 1.333rem;*/
 }
 
 /*application section*/

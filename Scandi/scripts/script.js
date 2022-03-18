@@ -135,18 +135,22 @@ prevBtn.addEventListener("click", function() {
 const header = document.querySelector(".header");
 const nav = document.querySelector(".nav");
 
+window.addEventListener("DOMContentLoaded", scrollClassHandle);
 window.addEventListener("scroll", scrollClassHandle);
 
 function scrollClassHandle() {
-  if (window.scrollY > window.innerHeight/4) {
-    header.classList.add("header_backgrounded");
-    nav.classList.add("nav_small-height");
-  } else {
-    header.classList.remove("header_backgrounded");
-    nav.classList.remove("nav_small-height");
-  }
+  setTimeout(function() {
+    if (window.scrollY < window.innerHeight/4) {
+      nav.classList.remove("nav_small-height");
+      header.classList.remove("header_backgrounded");
+    }
+  }, 200);
 }
 
+function makeHeaderBackgrounded() {
+  header.classList.add("header_backgrounded");
+  nav.classList.add("nav_small-height");
+}
 
 
 //scroll handler
@@ -157,6 +161,7 @@ const fakeHeader = document.querySelector(".header-fake");
 links.forEach(function(link) {
   link.addEventListener("click", function(e) {
     e.preventDefault();
+    makeHeaderBackgrounded();
     let href = e.currentTarget.getAttribute("href");
     let targetSection = document.getElementById(href.slice(1));
     let posY = targetSection.offsetTop;
