@@ -140,18 +140,22 @@ window.addEventListener("scroll", scrollClassHandle);
 
 function scrollClassHandle() {
   setTimeout(function() {
-    if (window.scrollY < window.innerHeight/4) {
-      nav.classList.remove("nav_small-height");
+    if (window.scrollY > window.innerHeight/4) {
+      header.classList.add("header_backgrounded");
+      setTimeout(function() {
+        nav.classList.add("nav_small-height");
+    }, 200);
+  } else {
+    nav.classList.remove("nav_small-height");
       header.classList.remove("header_backgrounded");
     }
-  }, 200);
+  }, 500);
 }
 
 function makeHeaderBackgrounded() {
   header.classList.add("header_backgrounded");
   nav.classList.add("nav_small-height");
 }
-
 
 //scroll handler
 
