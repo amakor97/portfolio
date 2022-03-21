@@ -130,7 +130,7 @@ prevBtn.addEventListener("click", function() {
 
 
 
-//make background and height for header at some scroll height
+//make background and height for header at defined scroll height
 
 const header = document.querySelector(".header");
 const nav = document.querySelector(".nav");
@@ -142,13 +142,15 @@ function scrollClassHandle() {
   setTimeout(function() {
     if (window.scrollY > window.innerHeight/4) {
       header.classList.add("header_backgrounded");
-        setTimeout(function() {
+      setTimeout(function() {
         nav.classList.add("nav_small-height");
     }, 650);
   } else {
-      if (!verticalMenu.classList.contains("nav-vertical_showed")) {
+      if (!isVerticalMenuShowed) {
         setTimeout(function() {
+          if (window.scrollY < window.innerHeight/4) {
           header.classList.remove("header_backgrounded");
+          }
         }, 500);
         
         setTimeout(function() {
@@ -161,18 +163,15 @@ function scrollClassHandle() {
 
 
 
-
-
 //scroll handler
 
-const breakpointWidth = 768;
+const breakpointWidth = 768; //really need?
 
 const links = document.querySelectorAll(".js-section-link");
 const fakeHeader = document.querySelector(".header-fake");
 
 links.forEach(function(link) {
   link.addEventListener("click", function(e) {
-    console.log("x");
     e.preventDefault();
     let href = e.currentTarget.getAttribute("href");
     let targetSection = document.getElementById(href.slice(1));
@@ -202,15 +201,38 @@ const menuSwitcher = document.querySelector("#toggle-menu-btn");
 const verticalMenu = document.querySelector("#verticalMenuId");
 const verticalLinks = document.querySelectorAll(".js-vertical-nav-link");
 
+let isVerticalMenuShowed = false;
+
 menuSwitcher.addEventListener("click", function() {
-  header.classList.add("header_backgrounded");
-  nav.classList.add("nav_vertical-showed");
+  isVerticalMenuShowed = !isVerticalMenuShowed;
+  if (isVerticalMenuShowed) {
+    header.classList.add("header_backgrounded");
+  } else if (window.scrollY < window.innerHeight/4) {
+    setTimeout(function() {
+      header.classList.remove("header_backgrounded");
+    }, 500);
+  }
+
+  
+/*
+  if (!header.classList.contains("header_backgrounded")) {
+    header.classList.add("header_backgrounded");
+  } else if (window.scrollY < window.innerHeight/4) {
+    setTimeout(function() {
+      header.classList.remove("header_backgrounded");
+    }, 500);
+  }
+  */
+  
+  nav.classList.toggle("nav_vertical-showed");
   verticalMenu.classList.toggle("nav-vertical_showed");
 })
 
-//console.log(verticalLinks);
+
 verticalLinks.forEach(function(link) {
   link.addEventListener("click", function() {
+    
+  isVerticalMenuShowed = false;
     setTimeout(function() {
       
       nav.classList.remove("nav_vertical-showed");
@@ -222,6 +244,22 @@ verticalLinks.forEach(function(link) {
   })
 })
 
+
+window.addEventListener("resize", function() {
+  if (this.innerWidth >= 900) {
+    if ((window.scrollY < window.innerHeight/4) && (header.classList.contains("header_backgrounded"))) {
+      setTimeout(function() {
+      header.classList.remove("header_backgrounded");
+      nav.classList.remove("nav_vertical-showed");
+      verticalMenu.classList.remove("nav-vertical_showed");
+    }, 500);
+  }
+  } else {
+    if (nav.classList.contains("nav_vertical-showed")) {
+      header.classList.add("header_backgrounded");
+    }
+  }
+})
 
 
 
@@ -243,6 +281,7 @@ imageWorks.forEach(function(imageWork) {
     createModalImage(image.src);
   })
 })
+
 
 function createModalImage(src) {
   let modalContainer = document.createElement("div");
