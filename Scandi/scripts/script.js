@@ -142,20 +142,26 @@ function scrollClassHandle() {
   setTimeout(function() {
     if (window.scrollY > window.innerHeight/4) {
       header.classList.add("header_backgrounded");
-      setTimeout(function() {
+        setTimeout(function() {
         nav.classList.add("nav_small-height");
-    }, 200);
+    }, 650);
   } else {
-    nav.classList.remove("nav_small-height");
       header.classList.remove("header_backgrounded");
+      setTimeout(function() {
+        nav.classList.remove("nav_small-height");
+    }, 650);
     }
-  }, 500);
+  }, 50);
 }
 
 function makeHeaderBackgrounded() {
   header.classList.add("header_backgrounded");
-  nav.classList.add("nav_small-height");
+  //nav.classList.add("nav_small-height");
 }
+
+
+
+
 
 //scroll handler
 
@@ -165,15 +171,23 @@ const fakeHeader = document.querySelector(".header-fake");
 links.forEach(function(link) {
   link.addEventListener("click", function(e) {
     e.preventDefault();
-    makeHeaderBackgrounded();
     let href = e.currentTarget.getAttribute("href");
     let targetSection = document.getElementById(href.slice(1));
     let posY = targetSection.offsetTop;
 
     let headerHeight = fakeHeader.offsetHeight;
-    window.scrollTo({
-      left: 0, top: posY - headerHeight
-    });
+    if (!header.classList.contains("header_backgrounded")) {
+      makeHeaderBackgrounded();
+      setTimeout(function() {
+        window.scrollTo({
+          left: 0, top: posY - headerHeight
+        });
+      }, 200);
+    } else {
+      window.scrollTo({
+        left: 0, top: posY - headerHeight
+      });
+    }
   })
 })
 

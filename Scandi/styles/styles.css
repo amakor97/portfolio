@@ -36,6 +36,7 @@
   height: fit-content;
 
   transition: background-color 0.2s;
+  -webkit-transform: translateZ(0);
 }
 
 .header_backgrounded {
@@ -72,10 +73,15 @@
   margin: 0 auto;
 
   transition: padding 0.2s;
+  -webkit-transform: translateZ(0);
 }
 
 .nav_small-height {
   padding: 1rem 0;
+}
+
+.nav_big-height {
+  padding: 2rem 0;
 }
 
 .nav__list {
