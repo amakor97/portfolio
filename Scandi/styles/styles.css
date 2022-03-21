@@ -28,6 +28,12 @@
   scroll-behavior: smooth;
 }
 
+@media screen and (max-width: 1200px) {
+  :root {
+    font-size: 16px;
+  }
+}
+
 .header {
   position: fixed;
   z-index: 1;
@@ -80,23 +86,46 @@
   padding: 1rem 0;
 }
 
-.nav_big-height {
-  padding: 2rem 0;
+.nav_vertical-showed {
+  padding-bottom: 0;
 }
 
-.nav__list {
+.nav-horizontal__list {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 1px;
 
   overflow: hidden;
 }
 
-.nav__item {
+.nav-horizontal__item {
   float: left;
 }
 
-.nav__link {
+.nav-horizontal__item:first-child {
+  padding-left: 2rem;
+}
+
+.nav-horizontal__item:last-of-type {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .nav-horizontal__item {
+    display: none;
+  }
+
+  .nav-horizontal__item:first-of-type {
+    display: list-item;
+  }
+
+  .nav-horizontal__item:last-of-type {
+    display: list-item;
+  }
+}
+
+.nav-horizontal__link {
   position: relative;
 
   display: block;
@@ -106,16 +135,31 @@
   font-weight: 400;
   font-style: normal;
   color: var(--text-color-1);
+  text-align: center;
 
   text-decoration: none;
 }
 
-.nav__item:first-child {
-  padding-left: 1.667rem;
+.nav-horizontal__link:hover {
+  text-decoration: underline;
 }
 
-.nav__link:hover {
-  text-decoration: underline;
+.nav-horizontal__menu-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  fill: var(--text-color-1);
+
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.nav-horizontal__menu-btn:hover {
+  border: 2px solid var(--text-color-1);
 }
 
 .nav__link-img {
@@ -127,6 +171,43 @@
   height: 1.389rem;
 
   vertical-align: middle;
+}
+
+.nav-vertical {
+  max-height: 0;
+  overflow: hidden;
+
+  -webkit-transition: max-height 0.5s ease;
+  -moz-transition: max-height 0.5s ease;
+  -o-transition: max-height 0.5s ease;
+  transition: max-height 0.5s ease;
+}
+
+.nav-vertical_showed {
+  max-height: 500px;
+}
+
+.nav-vertical__link {
+  display: block;
+  padding: 0.5rem;
+  padding-left: 1.667rem;
+
+  font-size: 1rem;
+  color: var(--text-color-1);
+  text-decoration: none;
+
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.nav-vertical__link:hover {
+  padding-left: 25px;
+
+  color: var(--text-color-2);
+
+  background-color: var(--bg-color-3);
 }
 
 .intro {

@@ -146,17 +146,17 @@ function scrollClassHandle() {
         nav.classList.add("nav_small-height");
     }, 650);
   } else {
-      header.classList.remove("header_backgrounded");
-      setTimeout(function() {
-        nav.classList.remove("nav_small-height");
-    }, 650);
-    }
-  }, 50);
-}
-
-function makeHeaderBackgrounded() {
-  header.classList.add("header_backgrounded");
-  //nav.classList.add("nav_small-height");
+      if (!verticalMenu.classList.contains("nav-vertical_showed")) {
+        setTimeout(function() {
+          header.classList.remove("header_backgrounded");
+        }, 500);
+        
+        setTimeout(function() {
+          nav.classList.remove("nav_small-height");
+          }, 650);
+        }
+      }
+    }, 50);
 }
 
 
@@ -165,11 +165,14 @@ function makeHeaderBackgrounded() {
 
 //scroll handler
 
-const links = document.querySelectorAll(".js-nav-link");
+const breakpointWidth = 768;
+
+const links = document.querySelectorAll(".js-section-link");
 const fakeHeader = document.querySelector(".header-fake");
 
 links.forEach(function(link) {
   link.addEventListener("click", function(e) {
+    console.log("x");
     e.preventDefault();
     let href = e.currentTarget.getAttribute("href");
     let targetSection = document.getElementById(href.slice(1));
@@ -177,7 +180,7 @@ links.forEach(function(link) {
 
     let headerHeight = fakeHeader.offsetHeight;
     if (!header.classList.contains("header_backgrounded")) {
-      makeHeaderBackgrounded();
+      header.classList.add("header_backgrounded");
       setTimeout(function() {
         window.scrollTo({
           left: 0, top: posY - headerHeight
@@ -190,6 +193,35 @@ links.forEach(function(link) {
     }
   })
 })
+
+
+
+//mobile menu
+
+const menuSwitcher = document.querySelector("#toggle-menu-btn");
+const verticalMenu = document.querySelector("#verticalMenuId");
+const verticalLinks = document.querySelectorAll(".js-vertical-nav-link");
+
+menuSwitcher.addEventListener("click", function() {
+  header.classList.add("header_backgrounded");
+  nav.classList.add("nav_vertical-showed");
+  verticalMenu.classList.toggle("nav-vertical_showed");
+})
+
+//console.log(verticalLinks);
+verticalLinks.forEach(function(link) {
+  link.addEventListener("click", function() {
+    setTimeout(function() {
+      
+      nav.classList.remove("nav_vertical-showed");
+    }, 700);
+
+    setTimeout(function() {
+      verticalMenu.classList.remove("nav-vertical_showed");
+    }, 600);
+  })
+})
+
 
 
 
@@ -225,3 +257,6 @@ function createModalImage(src) {
   modalImg.src = src;
   modalContainer.appendChild(modalImg);
 }
+
+
+
