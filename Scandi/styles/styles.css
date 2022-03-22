@@ -1,6 +1,7 @@
 @font-face {
   font-family: "Montserrat";
   src: url(../fonts/Montserrat-VariableFont_wght.ttf);
+  font-display: swap;
 }
 
 :root {
@@ -333,6 +334,7 @@
 .about__img {
   width: 42.9%;
   height: auto;
+  max-height: 30rem;
 
   object-fit: cover;
   cursor: pointer;

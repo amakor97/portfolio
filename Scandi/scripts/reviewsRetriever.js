@@ -10,16 +10,20 @@ function getReviewsData() {
   const xhr = new XMLHttpRequest();
   xhr.onload = function() {
     reviewsData = JSON.parse(this.responseText);
+    prepareReviewTexts();
+    fillReview(currentReview)
   }
-  xhr.open("GET", "./data/reviewsData.json", false);
+  xhr.open("GET", "./data/reviewsData.json", true);
   xhr.send();
 }
 
 getReviewsData();
 
-reviewsData.forEach(function(review) {
-  review.text = "«" + review.text.replace(/\n/g, "<br /><br />") + "»";
-})
+function prepareReviewTexts() {
+  reviewsData.forEach(function(review) {
+    review.text = "«" + review.text.replace(/\n/g, "<br /><br />") + "»";
+  })
+}
 
 
 const author = document.querySelector(".js-review-author");
@@ -33,7 +37,7 @@ const nextBtn = document.querySelector(".js-reviews-next-btn");
 
 let currentReview = 0;
 
-window.addEventListener("DOMContentLoaded", fillReview(currentReview));
+//window.addEventListener("DOMContentLoaded", fillReview(currentReview));
 
 function fillReview(number) {
   const review = reviewsData[number];

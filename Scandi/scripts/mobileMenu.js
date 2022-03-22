@@ -40,7 +40,7 @@ menuSwitcher.addEventListener("click", function() {
 
 verticalLinks.forEach(function(link) {
   const nav = document.querySelector(".nav");
-  
+
   link.addEventListener("click", function() {
     isVerticalMenuShowed = false;
 
@@ -57,8 +57,8 @@ verticalLinks.forEach(function(link) {
 
 
 //close vertical nav if window width is bigger then breakpoint
-const breakpointWidth = 900;
 
+const breakpointWidth = 900;
 
 window.addEventListener("resize", function() {
   const header = document.querySelector(".header");

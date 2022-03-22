@@ -4,6 +4,7 @@
 import { isVerticalMenuShowed } from "./mobileMenu.js";
 
 
+
 //make background and height for header at defined scroll height
 
 const nav = document.querySelector(".nav");
@@ -37,8 +38,7 @@ function scrollClassHandle() {
 
 
 
-//scroll handler
-
+//links handler
 
 const links = document.querySelectorAll(".js-section-link");
 const fakeHeader = document.querySelector(".header-fake");
