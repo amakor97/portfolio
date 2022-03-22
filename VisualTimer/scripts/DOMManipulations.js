@@ -20,6 +20,7 @@ export function createEmptyTimer() {
 export function fillEmptyTimer(emptyTimer) {
   let addTimerBtn = document.createElement("button");
   addTimerBtn.classList.add("timer__add-timer-btn", "js-add-timer-btn");
+  addTimerBtn.setAttribute("aria-label", "add new timer");
 
   let plusIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   plusIcon.classList.add("timer__add-timer-svg");
@@ -407,6 +408,7 @@ export function fillReadyTimer(readyTimer, id) {
 
   let settingsBtn = document.createElement("button");
   settingsBtn.classList.add("btn", "js-settings-btn", "timer__settings-btn", "timer__settings-btn_icon");
+  settingsBtn.setAttribute("aria-label", "settings");
   
   let settingIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   settingIcon.classList.add("timer__settings-btn-svg");
