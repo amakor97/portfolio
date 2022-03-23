@@ -151,24 +151,29 @@
       </nav>
     </header>
     <main class="main">
-      <section class="intro" id="intro">
-        <img
-          class="intro__background-img"
-          src="./img/intro/intro_screen.jpg"
-          alt="спальня, тумба и декор"
-        />
+      <section class="intro" id="intro" aria-label="Начальный экран">
+        <picture>
+          <source src="img/intro/intro_screen.webp" type="image/webp" />
+          <source src="img/intro/intro_screen.jpg" type="image/jpeg" />
+          <img
+            class="intro__background-img"
+            src="./img/intro/intro_screen.jpg"
+            alt="спальня, тумба и декор"
+          />
+        </picture>
+
         <div class="intro__width-container">
           <div class="intro__container">
             <h1 class="intro__title">Поможем сделать вашу квартиру уютнее</h1>
             <p class="intro__text">
-              Подбираем текстиль, мебель и аксессуары под ваш интерьер, находим
-              магазины и помогаем организовать доставку
+              Подбираем текстиль, мебель и&nbsp;аксессуары под ваш интерьер,
+              находим магазины и помогаем организовать доставку
             </p>
             <a class="link intro__link" href="#application">Оставить заявку</a>
           </div>
         </div>
       </section>
-      <section class="section about" id="about">
+      <section class="section about" id="about" aria-label="О компании">
         <div class="about__width-container">
           <h2 class="title about__title">О нас</h2>
           <div class="about__container">
@@ -207,7 +212,7 @@
           </div>
         </div>
       </section>
-      <section class="section works" id="works">
+      <section class="section works" id="works" aria-label="Портфолио">
         <div class="works__width-container">
           <h2 class="title works__title">Наши работы</h2>
           <div class="works__container">
@@ -270,7 +275,7 @@
           </a>
         </div>
       </section>
-      <section class="section team" id="team">
+      <section class="section team" id="team" aria-label="Наша команда">
         <h2 class="title team__title">Команда</h2>
         <div class="team__container">
           <article class="team__card card">
@@ -311,7 +316,11 @@
           </article>
         </div>
       </section>
-      <section class="section algorhytm" id="algorhytm">
+      <section
+        class="section algorhytm"
+        id="algorhytm"
+        aria-label="Как мы работаем"
+      >
         <div class="algorhytm__width-container">
           <h2 class="title algorhytm__title">Как мы работаем</h2>
           <div class="algorhytm__container">
@@ -347,7 +356,11 @@
           </div>
         </div>
       </section>
-      <section class="section reviews" id="reviews">
+      <section
+        class="section reviews"
+        id="reviews"
+        aria-label="Отзывы клиентов"
+      >
         <h2 class="title reviews__title">Отзывы</h2>
         <div class="reviews__container">
           <button
@@ -413,7 +426,11 @@
           </button>
         </div>
       </section>
-      <section class="section application" id="application">
+      <section
+        class="section application"
+        id="application"
+        aria-label="Оставить заявку"
+      >
         <div class="application__container">
           <div class="application__text-container">
             <div class="application__text-wrapper">
