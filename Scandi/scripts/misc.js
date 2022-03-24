@@ -58,3 +58,12 @@ function createModalImage(src) {
 
 
 
+window.addEventListener("DOMContentLoaded", function() {
+  const heroBgColor = document.querySelector(".intro__background-color");
+  heroBgColor.classList.add("intro__background-color_hidden");
+  setTimeout(function() {
+    heroBgColor.style.zIndex = "0";
+  }, 250)
+})
+
+

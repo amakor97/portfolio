@@ -12,6 +12,19 @@
     <title>Scandi</title>
     <link rel="stylesheet" href="./styles/reset.css" />
     <link rel="stylesheet" href="./styles/styles.css" />
+    <link
+      rel="preload"
+      as="image"
+      href="./img/intro/intro_screen.webp"
+      type="image/webp"
+    />
+    <link rel="preload" as="image" href="./img/intro/intro_screen.jpg" />
+    <link
+      rel="preload"
+      as="font"
+      href="./fonts/Montserrat-VariableFont_wght.ttf"
+      crossorigin="anonymous"
+    />
     <link rel="icon" href="icon.png" />
   </head>
   <body>
@@ -152,6 +165,7 @@
     </header>
     <main class="main">
       <section class="intro" id="intro" aria-label="Начальный экран">
+        <div class="intro__background-color"></div>
         <picture>
           <source src="img/intro/intro_screen.webp" type="image/webp" />
           <source src="img/intro/intro_screen.jpg" type="image/jpeg" />
