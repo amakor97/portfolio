@@ -59,7 +59,7 @@ nextBtn.addEventListener("click", function() {
   setTimeout(function() {
     fillReview(currentReview);
     review.classList.remove("review_hidden");
-  }, 250);
+  }, 500);
 })
 
 prevBtn.addEventListener("click", function() {
@@ -72,5 +72,5 @@ prevBtn.addEventListener("click", function() {
   setTimeout(function() {
     fillReview(currentReview);
     review.classList.remove("review_hidden");
-  }, 250);
+  }, 500);
 })

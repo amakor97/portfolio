@@ -95,7 +95,11 @@
               <a class="nav-horizontal__link" href="/index.html">На главную</a>
             </li>
             <li class="nav-horizontal__item">
-              <button class="nav-horizontal__menu-btn" id="toggle-menu-btn">
+              <button
+                class="nav-horizontal__menu-btn"
+                id="toggle-menu-btn"
+                aria-label="open menu"
+              >
                 <svg width="20" height="20" viewBox="0 0 283.426 283.426">
                   <g>
                     <rect x="0" y="40.84" width="283.426" height="47.735" />
@@ -167,15 +171,17 @@
       <section class="intro" id="intro" aria-label="Начальный экран">
         <div class="intro__background-color"></div>
         <picture>
-          <source src="img/intro/intro_screen.webp" type="image/webp" />
-          <source src="img/intro/intro_screen.jpg" type="image/jpeg" />
+          <source
+            src="./img/intro/intro_screen.webp"
+            as="image"
+            type="image/webp"
+          />
           <img
             class="intro__background-img"
             src="./img/intro/intro_screen.jpg"
             alt="спальня, тумба и декор"
           />
         </picture>
-
         <div class="intro__width-container">
           <div class="intro__container">
             <h1 class="intro__title">Поможем сделать вашу квартиру уютнее</h1>
