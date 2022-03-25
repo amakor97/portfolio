@@ -102,6 +102,12 @@
   color: transparent;
 }
 
+@media screen and (max-width: 900px) {
+  .nav-fake {
+    font-size: 1.2rem;
+  }
+}
+
 .nav {
   max-width: 1200px;
   max-width: 1230px;
@@ -176,6 +182,12 @@
   text-decoration: none;
 }
 
+@media screen and (max-width: 900px) {
+  .nav-horizontal__link {
+    font-size: 1.2rem;
+  }
+}
+
 .nav-horizontal__link:hover {
   text-decoration: underline;
 }
@@ -234,7 +246,7 @@
   padding: 0.5rem;
   padding-left: 1.667rem;
 
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: var(--text-color-1);
   text-decoration: none;
 
@@ -245,7 +257,7 @@
 }
 
 .nav-vertical__link:hover {
-  padding-left: 25px;
+  padding-left: 2rem;
 
   color: var(--text-color-2);
 
