@@ -465,12 +465,14 @@
                   class="form__input form__input-name"
                   name="name"
                   placeholder="Ваше имя"
+                  pattern="[A-Za-z]{3,}"
                 />
                 <input
                   type="text"
                   class="form__input form__input-tel"
                   name="tel"
                   placeholder="Введите телефон"
+                  pattern="[+]?[0-9]{7,11}"
                 />
                 <button class="form__submit">Оставить заявку</button>
               </form>
