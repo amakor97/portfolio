@@ -52,7 +52,15 @@ function createModalImage(src) {
 
   let modalImg = document.createElement("img");
   modalImg.classList.add("modal__img");
+  modalImg.addEventListener("keydown", function(e) {
+    console.log(e.key);
+    if ((e.key == "Enter") || (e.key == " ")) {
+    main.removeChild(modalContainer);
+    }
+  })
+  
   modalImg.src = src;
+  modalImg.tabIndex = "5";
   modalContainer.appendChild(modalImg);
 }
 
