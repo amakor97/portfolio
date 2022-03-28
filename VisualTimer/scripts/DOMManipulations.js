@@ -439,12 +439,14 @@ export function fillReadyTimer(readyTimer, id) {
   
   let uniqueId = new Date().getTime();
   let inputFixedLabel = createLabel("Mantissa digits", uniqueId);
-  inputFixedLabel.classList.add("add-form__label_no-displayed", "js-settings-fixed-label");
+  inputFixedLabel.classList.add("timer__settings-label", 
+  "add-form__label_no-displayed", "js-settings-fixed-label");
   timerControlsContainer.appendChild(inputFixedLabel);
 
 
   let inputFixed = createInput("number", "inputFixed", uniqueId, false, false);
-  inputFixed.classList.add("add-form__input-amount", "add-form__input-amount_hidden", "js-settings-fixed-input");
+  inputFixed.classList.add("timer__settings-input",
+  "timer__settings-input_hidden", "js-settings-fixed-input");
   inputFixed.min = "0";
   inputFixed.max = "5";
   inputFixed.addEventListener("change", function() {
@@ -462,7 +464,7 @@ export function fillReadyTimer(readyTimer, id) {
     })
 
     inputFixedLabel.classList.toggle("add-form__label_no-displayed");
-    inputFixed.classList.toggle("add-form__input-amount_hidden");
+    inputFixed.classList.toggle("timer__settings-input_hidden");
   })
 
   

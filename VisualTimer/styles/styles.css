@@ -251,6 +251,21 @@ html {
   height: 2rem;
 }
 
+.timer__settings-label {
+  width: max-content;
+}
+
+.timer__settings-input {
+  width: 3.5rem;
+  padding: 0.5rem;
+
+  font-size: 1.5rem;
+}
+
+.timer__settings-input_hidden {
+  display: none;
+}
+
 .timer__add-timer-btn {
   position: relative;
 
