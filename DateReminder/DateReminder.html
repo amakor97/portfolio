@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Date Reminder</title>
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="header__title">Date Reminder</h1>
+      <button class="header__info-btn btn">Help</button>
+      <nav class="header__nav nav">
+        <ul class="nav__ul">
+          <li class="nav__item">
+            <a class="nav__link" href="/index.html">Home</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main">
+      <div class="main__date-container date-container">
+        <p class="date-container__day-month">April, 24</p>
+        <p class="date-container__text">Jack's Birthday</p>
+        <button class="date-container__del-btn btn">Del</button>
+      </div>
+      <div class="main__date-container date-container date-container_edit">
+        <form action="" class="date-container__add-form add-form">
+          <input
+            type="number"
+            class="add-form__input add-form__input_number"
+            name="day"
+            id=""
+          />
+          <select
+            name="month"
+            class="add-form__input add-form__input_select"
+            id=""
+          >
+            <option lang="en" value="Jan">Jan</option>
+            <option lang="en" value="Feb">Feb</option>
+            <option lang="en" value="Mar">Mar</option>
+            <option lang="en" value="Apr">Apr</option>
+            <option lang="en" value="May">May</option>
+            <option lang="en" value="Jun">Jun</option>
+            <option lang="en" value="Jul">Jul</option>
+            <option lang="en" value="Aug">Aug</option>
+            <option lang="en" value="Sep">Sep</option>
+            <option lang="en" value="Oct">Oct</option>
+            <option lang="en" value="Nov">Nov</option>
+            <option lang="en" value="Dec">Dec</option>
+          </select>
+          <input
+            type="text"
+            class="add-form__input add-form__input_text"
+            name="text"
+            id=""
+          />
+          <select
+            name="color"
+            class="add-form__input add-form__input_select"
+            id=""
+          >
+            <option lang="en" value="Orange">Orange</option>
+            <option lang="en" value="Blue">Blue</option>
+            <option lang="en" value="Green">Green</option>
+            <option lang="en" value="Pink">Pink</option>
+          </select>
+          <button type="submit">Add</button>
+        </form>
+      </div>
+      <div class="main__date-container date-container date-container_empty">
+        <button class="date-container_add-btn btn">Add</button>
+      </div>
+    </main>
+    <script>
+      let en = document.querySelector("[lang='ru']");
+    </script>
+  </body>
+</html>
