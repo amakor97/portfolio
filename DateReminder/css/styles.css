@@ -16,7 +16,11 @@
   --big-text: 2rem;
 
   /*--header-color: #ff9500;*/
+  --grey-color: #a1a1a1;
   --theme-color: #ff7f50;
+  --cyan-color: #00c5bb;
+  --green-color: #54d100;
+  --purple-color: #9700c5;
   --nav-link-text: #000000;
   --nav-link-text-hover: #ffffff;
 
@@ -69,13 +73,29 @@
   align-items: center;
   width: 100%;
   height: fit-content;
-  min-height: 2rem;
+  min-height: 5rem;
   padding: 1rem;
 
   font-size: 2rem;
 
-  border: 10px solid var(--theme-color);
+  border: 10px solid var(--grey-color);
   border-radius: 25px;
+}
+
+.date-container_orange {
+  border: 10px solid var(--theme-color);
+}
+
+.date-container_cyan {
+  border: 10px solid var(--cyan-color);
+}
+
+.date-container_green {
+  border: 10px solid var(--green-color);
+}
+
+.date-container_purple {
+  border: 10px solid var(--purple-color);
 }
 
 .date-container__day-month {
@@ -87,9 +107,27 @@
 }
 
 .add-form {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  width: 100%;
+
   font-size: 0;
 }
 
 .add-form__input_number {
   width: 3rem;
+}
+
+.add-form__input_text {
+  width: 70%;
+}
+
+.add-form__submit-btn {
+  margin-left: auto;
+}
+
+.btn {
+  width: 2rem;
+  height: 2rem;
 }

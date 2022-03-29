@@ -1,0 +1,204 @@
+"use strict";
+
+import { meaningfullDaysData } from "./app.js";
+
+export function createEmptyDateContainer() {
+  let emptyDateContainer = document.createElement("div");
+  emptyDateContainer.classList.add("main__date-container", "date-container", 
+  "date-container_empty");
+  
+  
+
+  return emptyDateContainer; 
+}
+
+export function fillEmptyDateContainer(elem) {
+  let tmpAddBtn = document.createElement("button");
+  tmpAddBtn.classList.add("date-container_add-btn", "btn", "js-add-btn");
+  tmpAddBtn.textContent = "Add";
+
+  tmpAddBtn.addEventListener("click", switchToAddForm.bind(null, elem));
+
+  elem.appendChild(tmpAddBtn);
+}
+
+function switchToAddForm(elem) {
+  elem.classList.remove("date-container_empty");
+  elem.classList.add("date-container_edit");
+
+  removeChilds(elem);
+
+  let tmpAddForm = createAddForm(elem);
+  elem.appendChild(tmpAddForm);
+}
+
+function removeChilds(elem) {
+  while (elem.lastElementChild) {
+    elem.removeChild(elem.lastElementChild);
+  }
+}
+
+let monthsEn = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", 
+  "Sep", "Oct", "Nov", "Dec"];
+
+function createAddForm(cont) {
+  let tmpAddForm = document.createElement("form");
+  tmpAddForm.classList.add("date-container__add-form", "add-form");
+
+  let inputDay = document.createElement("input");
+  inputDay.type = "number";
+  inputDay.classList.add("add-form__input", "add-form__input_number", "js-input-day");
+  inputDay.name = "day";
+  tmpAddForm.appendChild(inputDay);
+
+
+  
+
+  let selectMonth = document.createElement("select");
+  selectMonth.classList.add("add-form__input", "add-form__input_select", "js-input-month");
+  let selectMonthId = new Date().getTime();
+  selectMonth.id = selectMonthId;
+  tmpAddForm.appendChild(selectMonth);
+
+  for (let i = 0; i < monthsEn.length; i++) {
+    let opt = document.createElement("option");
+    opt.value = monthsEn[i];
+    opt.textContent = monthsEn[i]; 
+    selectMonth.appendChild(opt);
+  }
+
+  let inputText = document.createElement("input");
+  inputText.type = "text";
+  inputText.classList.add("add-form__input", "add-form__input_text", "js-input-text");
+  inputText.name = "text";
+  tmpAddForm.appendChild(inputText);
+
+  let colorsEn = ["Orange", "Cyan", "Green", "Purple"];
+
+  let selectColor = document.createElement("select");
+  selectColor.classList.add("add-form__input", "add-form__input_select", "js-input-color");
+  let selectColorId = new Date().getTime();
+  selectColor.id = selectColorId;
+  tmpAddForm.appendChild(selectColor);
+
+  for (let i = 0; i < colorsEn.length; i++) {
+    let opt = document.createElement("option");
+    opt.value = colorsEn[i];
+    opt.textContent = colorsEn[i];
+    selectColor.appendChild(opt);
+  }
+
+  let submitBtn = document.createElement("button");
+  submitBtn.classList.add("add-form__submit-btn", "btn");
+  submitBtn.type = "button";
+  submitBtn.textContent = "Add";
+
+  submitBtn.addEventListener("click", switchToReadyContainer.bind(null, cont));
+
+  tmpAddForm.appendChild(submitBtn);
+
+  return tmpAddForm;
+}
+
+function switchToReadyContainer(cont) {
+  let dateInfo = getDataFromInputs(cont);
+  removeChilds(cont);
+  cont.classList.remove("date-container_edit");
+  cont.classList.add("date-container_ready");
+
+  meaningfullDaysData.push(dateInfo);
+
+  console.log(meaningfullDaysData);
+  fillReadyContainer(cont, dateInfo);
+
+  let newCont = createEmptyDateContainer();
+  fillEmptyDateContainer(newCont);
+  const main = document.querySelector(".main");
+  main.appendChild(newCont);
+}
+
+
+function getDataFromInputs(cont) {
+  let tmpDateInfo = {};
+  tmpDateInfo.day = cont.querySelector(".js-input-day").value;
+  tmpDateInfo.month = cont.querySelector(".js-input-month").value;
+  tmpDateInfo.text = cont.querySelector(".js-input-text").value;
+  tmpDateInfo.color = cont.querySelector(".js-input-color").value;
+  tmpDateInfo.id = `${tmpDateInfo.day}${tmpDateInfo.month}${new Date().getTime()}`;
+  return tmpDateInfo;
+}
+
+export function fillReadyContainer(elem, dateInfo) {
+  
+
+  let tmpDayMonth = document.createElement("p");
+  tmpDayMonth.classList.add("date-container__day-month");
+  tmpDayMonth.textContent = `${dateInfo.month}, ${dateInfo.day}`;
+  elem.appendChild(tmpDayMonth);
+
+  let tmpText = document.createElement("p");
+  tmpText.classList.add("date-container__text");
+  tmpText.textContent = dateInfo.text;
+  elem.appendChild(tmpText);
+
+  let tmpDelBtn = document.createElement("button");
+  tmpDelBtn.classList.add("date-container__del-btn", "btn");
+  tmpDelBtn.textContent = "Del";
+
+  tmpDelBtn.addEventListener("click", function() {
+    let main = document.querySelector(".main");
+    let index = getMeaningfullDayIndex(dateInfo.id);
+    deleteItem(elem, index);
+    console.log(dateInfo.id);
+    if (meaningfullDaysData.length === 0) {
+      localStorage.setItem("data", []);
+    }
+  });
+
+  switch(dateInfo.color) {
+    case "Orange": {
+      elem.classList.add("date-container_orange");
+      break;
+    }
+    case "Cyan": {
+      elem.classList.add("date-container_cyan");
+      break;
+    }
+    case "Green": {
+      elem.classList.add("date-container_green");
+      break;
+    }
+    case "Purple": {
+      elem.classList.add("date-container_purple");
+      break;
+    }
+    default: {
+      alert("smth went wrong");
+      break;
+    }
+  }
+
+  elem.appendChild(tmpDelBtn);
+}
+
+function getMeaningfullDayIndex(id) {
+  let mDIndex = undefined;
+  meaningfullDaysData.forEach(function(md, index) {
+    if (md.id === id) {
+      mDIndex = index;
+    }
+  })
+  return mDIndex;
+}
+
+function deleteItem(meaningfullDay, index) {
+  const main = document.querySelector(".main");
+  main.removeChild(meaningfullDay);
+  meaningfullDaysData.splice(index, 1);
+}
+
+function getMonthCode(value) {
+  for (i = 0; i < monthsEn.length; i++) {
+    //?
+  }
+}
