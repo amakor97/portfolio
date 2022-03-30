@@ -63,7 +63,7 @@
   margin: 0 auto;
 }
 
-.main__date-container {
+.containers-wrapper__date-container {
   margin-bottom: 3rem;
 }
 
@@ -136,6 +136,8 @@
   position: absolute;
   bottom: 3rem;
   right: 0;
+
+  display: none;
   width: 5rem;
   height: 8rem;
   padding: 1rem;

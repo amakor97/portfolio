@@ -1,10 +1,12 @@
 "use strict";
 
 import { meaningfullDaysData } from "./app.js";
+import { calcDaysToDate, calcMSToDate } from "./nextDateCalc.js";
+import { getDayOfYear } from "./nextDateCalc.js";
 
 export function createEmptyDateContainer() {
   let emptyDateContainer = document.createElement("div");
-  emptyDateContainer.classList.add("main__date-container", "date-container", 
+  emptyDateContainer.classList.add("containers-wrapper__date-container", "date-container", 
   "date-container_empty");
   
   
@@ -130,20 +132,33 @@ function switchToReadyContainer(cont) {
 
   let newCont = createEmptyDateContainer();
   fillEmptyDateContainer(newCont);
-  const main = document.querySelector(".main");
-  main.appendChild(newCont);
+  const wrapper = document.querySelector(".containers-wrapper");
+  wrapper.appendChild(newCont);
 }
 
 
 function getDataFromInputs(cont) {
   let tmpDateInfo = {};
+  
   tmpDateInfo.day = cont.querySelector(".js-input-day").value;
+
+  tmpDateInfo.dayStringed = getCodeAsString(tmpDateInfo.day-1);
+
   tmpDateInfo.month = cont.querySelector(".js-input-month").value;
   tmpDateInfo.monthCode = getMonthCode(tmpDateInfo.month);
   console.log(tmpDateInfo.monthCode);
+  tmpDateInfo.monthCodeStringed = getCodeAsString(tmpDateInfo.monthCode+1);
+  console.log(tmpDateInfo.monthCodeStringed);
+
+  tmpDateInfo.daysCount = getDayOfYear(tmpDateInfo);
+  tmpDateInfo.daysToDate = calcDaysToDate(tmpDateInfo);
+
+
   tmpDateInfo.text = cont.querySelector(".js-input-text").value;
   tmpDateInfo.color = cont.querySelector(".js-input-color").value;
-  tmpDateInfo.id = `${tmpDateInfo.monthCode}${tmpDateInfo.day}${new Date().getTime()}`;
+  tmpDateInfo.id = `${tmpDateInfo.monthCodeStringed}${tmpDateInfo.dayStringed}${new Date().getTime()}`;
+  
+  
   return tmpDateInfo;
 }
 
@@ -165,7 +180,7 @@ export function fillReadyContainer(elem, dateInfo) {
   tmpDelBtn.textContent = "Del";
 
   tmpDelBtn.addEventListener("click", function() {
-    let main = document.querySelector(".main");
+    let wrapper = document.querySelector(".containers-wrapper");
     let index = getMeaningfullDayIndex(dateInfo.id);
     deleteItem(elem, index);
     console.log(dateInfo.id);
@@ -211,23 +226,23 @@ function getMeaningfullDayIndex(id) {
 }
 
 function deleteItem(meaningfullDay, index) {
-  const main = document.querySelector(".main");
-  main.removeChild(meaningfullDay);
+  const wrapper = document.querySelector(".containers-wrapper");
+  wrapper.removeChild(meaningfullDay);
   meaningfullDaysData.splice(index, 1);
 }
 
 function deleteAllContainers() {
-  const main = document.querySelector(".main");
-  while(main.lastChild) {
-    main.removeChild(main.lastChild);
+  const wrapper = document.querySelector(".containers-wrapper");
+  while(wrapper.lastChild) {
+    wrapper.removeChild(wrapper.lastChild);
   }
 }
 
 function renderAllContainers() {
-  const main = document.querySelector(".main");
+  const wrapper = document.querySelector(".containers-wrapper");
   meaningfullDaysData.forEach(function(meaningfullDay) {
     let emptyDateContainer = createEmptyDateContainer();
-    main.appendChild(emptyDateContainer);
+    wrapper.appendChild(emptyDateContainer);
     fillReadyContainer(emptyDateContainer, meaningfullDay);
   })
 }
@@ -235,14 +250,18 @@ function renderAllContainers() {
 function getMonthCode(value) {
   for (let i = 0; i < monthsEn.length; i++) {
     if (value == monthsEn[i]) {
-      if ((i+1) < 10) {
-        return `0${i+1}`
-      } else {
-        return `${i+1}`;
-      }
+      return i;
     }
   }
   console.log("month code is not defined");
+}
+
+function getCodeAsString(code) {
+  if (code < 10) {
+    return `0${code}`;
+  } else {
+    return code.toString();
+  }
 }
 
 function compareDateInfoItems(a, b) {
