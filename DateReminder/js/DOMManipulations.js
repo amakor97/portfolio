@@ -117,6 +117,11 @@ function switchToReadyContainer(cont) {
     meaningfullDaysData.sort(compareDateInfoItems);
   }
 
+  let dateKey = "data";
+  let dateValue = JSON.stringify(meaningfullDaysData);
+  localStorage.setItem(dateKey, dateValue);
+  
+
   if (meaningfullDaysData.length > 1) {
     if (meaningfullDaysData[meaningfullDaysData.length-1].id === dateInfo.id) {
       console.log("new item is last");

@@ -41,7 +41,7 @@ window.addEventListener("load", function() {
 window.onbeforeunload = function(){
   let dateKey = "data";
   let dateValue = JSON.stringify(meaningfullDaysData);
-  localStorage.setItem(dateKey, dateValue)
+  localStorage.setItem(dateKey, dateValue);
 };
 
 

@@ -50,7 +50,7 @@ window.onload = function() {
 window.onbeforeunload = function(){
   let testkey = "data";
   let testvalue = JSON.stringify(timerData);
-  localStorage.setItem(testkey, testvalue)
+  localStorage.setItem(testkey, testvalue);
 };
 
 
@@ -174,6 +174,10 @@ export function createNewTimer(e) {
     }
 
     timerData.push(timerInfo);
+
+    let testkey = "data";
+    let testvalue = JSON.stringify(timerData);
+    localStorage.setItem(testkey, testvalue);
 
     fillReadyTimer(timerContainer, timerInfo.id);
 
