@@ -102,11 +102,28 @@ function createAddForm(cont) {
 
 function switchToReadyContainer(cont) {
   let dateInfo = getDataFromInputs(cont);
+
+  
+  console.log(meaningfullDaysData);
+
   removeChilds(cont);
   cont.classList.remove("date-container_edit");
   cont.classList.add("date-container_ready");
 
   meaningfullDaysData.push(dateInfo);
+  if (meaningfullDaysData.length > 1) {
+    meaningfullDaysData.sort(compareDateInfoItems);
+  }
+
+  if (meaningfullDaysData.length > 1) {
+    if (meaningfullDaysData[meaningfullDaysData.length-1].id === dateInfo.id) {
+      console.log("new item is last");
+    } else {
+      console.log("needs to re-render");
+      deleteAllContainers();
+      renderAllContainers();
+    }
+  }
 
   console.log(meaningfullDaysData);
   fillReadyContainer(cont, dateInfo);
@@ -122,9 +139,11 @@ function getDataFromInputs(cont) {
   let tmpDateInfo = {};
   tmpDateInfo.day = cont.querySelector(".js-input-day").value;
   tmpDateInfo.month = cont.querySelector(".js-input-month").value;
+  tmpDateInfo.monthCode = getMonthCode(tmpDateInfo.month);
+  console.log(tmpDateInfo.monthCode);
   tmpDateInfo.text = cont.querySelector(".js-input-text").value;
   tmpDateInfo.color = cont.querySelector(".js-input-color").value;
-  tmpDateInfo.id = `${tmpDateInfo.day}${tmpDateInfo.month}${new Date().getTime()}`;
+  tmpDateInfo.id = `${tmpDateInfo.monthCode}${tmpDateInfo.day}${new Date().getTime()}`;
   return tmpDateInfo;
 }
 
@@ -197,8 +216,43 @@ function deleteItem(meaningfullDay, index) {
   meaningfullDaysData.splice(index, 1);
 }
 
-function getMonthCode(value) {
-  for (i = 0; i < monthsEn.length; i++) {
-    //?
+function deleteAllContainers() {
+  const main = document.querySelector(".main");
+  while(main.lastChild) {
+    main.removeChild(main.lastChild);
   }
 }
+
+function renderAllContainers() {
+  const main = document.querySelector(".main");
+  meaningfullDaysData.forEach(function(meaningfullDay) {
+    let emptyDateContainer = createEmptyDateContainer();
+    main.appendChild(emptyDateContainer);
+    fillReadyContainer(emptyDateContainer, meaningfullDay);
+  })
+}
+
+function getMonthCode(value) {
+  for (let i = 0; i < monthsEn.length; i++) {
+    if (value == monthsEn[i]) {
+      if ((i+1) < 10) {
+        return `0${i+1}`
+      } else {
+        return `${i+1}`;
+      }
+    }
+  }
+  console.log("month code is not defined");
+}
+
+function compareDateInfoItems(a, b) {
+  console.log(a);
+  if (a.id < b.id) {
+    return -1;
+  } 
+  if (a.id > b.id) {
+    return 1;
+  }
+  return 0;
+}
+

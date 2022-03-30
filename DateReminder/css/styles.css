@@ -131,3 +131,14 @@
   width: 2rem;
   height: 2rem;
 }
+
+.buttons-bar {
+  position: absolute;
+  bottom: 3rem;
+  right: 0;
+  width: 5rem;
+  height: 8rem;
+  padding: 1rem;
+
+  background-color: #00c5bb;
+}
