@@ -3,6 +3,7 @@
 import { meaningfullDaysData } from "./app.js";
 import { calcDaysToDate, calcMSToDate } from "./nextDateCalc.js";
 import { getDayOfYear } from "./nextDateCalc.js";
+import { getNextDate } from "./nextDateCalc.js";
 
 export function createEmptyDateContainer() {
   let emptyDateContainer = document.createElement("div");
@@ -16,7 +17,7 @@ export function createEmptyDateContainer() {
 
 export function fillEmptyDateContainer(elem) {
   let tmpAddBtn = document.createElement("button");
-  tmpAddBtn.classList.add("date-container_add-btn", "btn", "js-add-btn");
+  tmpAddBtn.classList.add("date-container__add-btn", "btn", "js-add-btn");
   tmpAddBtn.textContent = "Add";
 
   tmpAddBtn.addEventListener("click", switchToAddForm.bind(null, elem));
@@ -117,6 +118,8 @@ function switchToReadyContainer(cont) {
     meaningfullDaysData.sort(compareDateInfoItems);
   }
 
+  getNextDate();
+
   let dateKey = "data";
   let dateValue = JSON.stringify(meaningfullDaysData);
   localStorage.setItem(dateKey, dateValue);
@@ -192,6 +195,9 @@ export function fillReadyContainer(elem, dateInfo) {
     if (meaningfullDaysData.length === 0) {
       localStorage.setItem("data", []);
     }
+
+    getNextDate();
+
   });
 
   switch(dateInfo.color) {

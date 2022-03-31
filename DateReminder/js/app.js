@@ -3,6 +3,7 @@
 import { createEmptyDateContainer } from "./DOMManipulations.js";
 import { fillEmptyDateContainer } from "./DOMManipulations.js";
 import { fillReadyContainer } from "./DOMManipulations.js";
+import { checkLeapYear } from "./nextDateCalc.js";
 
 export let meaningfullDaysData = [];
 
@@ -52,41 +53,3 @@ setTimeout(function() {
 
 
 
-function getNextDate() {
-  const nextDates = meaningfullDaysData.filter(checkNext);
-  console.log(nextDates);
-  if (nextDates.length === 0) {
-    console.log("there are no next dates");
-  } else {
-    console.log("there are some next dates");
-    nextDates.sort(compareDateInfoDays);
-    console.log(nextDates);
-    displayAlert(nextDates);
-  }
-}
-
-setTimeout(getNextDate, 500);
-
-function checkNext(dateInfo) {
-  if (dateInfo.daysToDate > 0) {
-    return dateInfo;
-  }
-}
-
-function compareDateInfoDays(a, b) {
-  console.log(a);
-  if (a.daysToDate < b.daysToDate) {
-    return -1;
-  } 
-  if (a.daysToDate > b.daysToDate) {
-    return 1;
-  }
-  return 0;
-}
-
-const alertBox = document.querySelector(".date-alert");
-const alertText = document.querySelector(".date-alert__text");
-
-function displayAlert(dates) {
-  alertText.textContent = `Before next date: ${dates[0].daysToDate}`;
-}
