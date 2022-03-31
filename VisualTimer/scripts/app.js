@@ -370,6 +370,3 @@ export function deleteTimer(timer, index) {
 
 
 
-
-
-

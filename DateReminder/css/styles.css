@@ -31,6 +31,12 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+@media screen and (max-width: 768px) {
+  :root {
+    font-size: 12px;
+  }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -53,6 +59,15 @@
   font-size: 2rem;
 }
 
+.header__info-btn {
+  width: fit-content;
+
+  font-size: 1.5rem;
+  font-style: italic;
+  color: #000000;
+  text-decoration: none;
+}
+
 .nav__link {
   font-size: 1.5rem;
   font-style: italic;
@@ -61,7 +76,7 @@
 }
 
 .nav__link_home {
-  margin-left: 2rem;
+  margin-left: 4rem;
 }
 
 .nav__link:hover {
@@ -71,6 +86,12 @@
 .main {
   width: 50%;
   margin: 0 auto;
+}
+
+@media screen and (max-width: 767px) {
+  .main {
+    width: 90%;
+  }
 }
 
 .containers-wrapper__date-container {
@@ -127,6 +148,8 @@
 
 .date-container__del-btn {
   margin-left: auto;
+
+  border-radius: 50%;
 }
 
 .date-container__add-btn {
@@ -155,8 +178,9 @@
 }
 
 .btn {
-  width: 2.5rem;
-  height: 2.5rem;
+  display: inline-block;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
 }
 
 .buttons-bar {
