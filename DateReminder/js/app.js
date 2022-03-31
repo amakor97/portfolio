@@ -55,10 +55,14 @@ setTimeout(function() {
 function getNextDate() {
   const nextDates = meaningfullDaysData.filter(checkNext);
   console.log(nextDates);
-  nextDates.sort(compareDateInfoDays);
-  console.log(nextDates);
-
-  displayAlert(nextDates);
+  if (nextDates.length === 0) {
+    console.log("there are no next dates");
+  } else {
+    console.log("there are some next dates");
+    nextDates.sort(compareDateInfoDays);
+    console.log(nextDates);
+    displayAlert(nextDates);
+  }
 }
 
 setTimeout(getNextDate, 500);

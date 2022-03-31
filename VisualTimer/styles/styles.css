@@ -19,6 +19,8 @@
 
   /*--header-color: #ff9500;*/
   --theme-color: #ff7f50;
+  --theme-color: #00bfff;
+
   --nav-link-text: #000000;
   --nav-link-text-hover: #ffffff;
 }
@@ -55,6 +57,7 @@ html {
   padding: 0 5%;
 
   background-color: var(--theme-color);
+  box-shadow: 10px 0 10px 0 grey, -10px 0 10px 0 grey;
 }
 
 .header__title {
@@ -91,6 +94,7 @@ html {
 
   border: 10px solid var(--theme-color);
   border-radius: 80px;
+  box-shadow: 5px 5px 5px 0 rgb(176, 176, 176);
 }
 
 @media screen and (max-width: 768px) {
@@ -229,6 +233,7 @@ html {
   font-size: 1.5rem;
 
   cursor: pointer;
+  box-shadow: 5px 5px 5px 0 grey;
 }
 
 .timer__settings-btn {
@@ -244,6 +249,7 @@ html {
 .timer__settings-btn:hover {
   background-color: var(--btn-hover);
   box-shadow: 0 0 10px 0px #808080;
+  box-shadow: none;
 }
 
 .timer__settings-btn-svg {
@@ -285,7 +291,7 @@ html {
   border: 3px solid var(--theme-color);
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 0 5px 0 grey;
+  box-shadow: 5px 5px 5px 0 grey;
 }
 
 .timer__add-timer-svg {
@@ -296,6 +302,7 @@ html {
 .timer__add-timer-btn:hover {
   background-color: var(--btn-hover);
   box-shadow: 0 0 10px 0px #808080;
+  box-shadow: none;
 }
 
 .timer__text {

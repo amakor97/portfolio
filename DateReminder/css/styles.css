@@ -18,7 +18,10 @@
   /*--header-color: #ff9500;*/
   --grey-color: #a1a1a1;
   --theme-color: #ff7f50;
+  --theme-color: #00bfff;
+  --orange-color: #ff7f50;
   --cyan-color: #00c5bb;
+  --cyan-color: #00bfff;
   --green-color: #54d100;
   --purple-color: #9700c5;
   --nav-link-text: #000000;
@@ -83,7 +86,7 @@
 }
 
 .date-container_orange {
-  border: 10px solid var(--theme-color);
+  border: 10px solid var(--orange-color);
 }
 
 .date-container_cyan {
