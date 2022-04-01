@@ -181,6 +181,12 @@
   display: inline-block;
   min-width: 2.5rem;
   min-height: 2.5rem;
+
+  cursor: pointer;
+}
+
+.btn:hover {
+  transform: scale(1.2, 1.2);
 }
 
 .buttons-bar {
