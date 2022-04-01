@@ -47,7 +47,6 @@ export function getCurrentDayOfYear() {
     currentDay++;
   }
 
-  console.log({currentDay});
   return currentDay;
 }
 

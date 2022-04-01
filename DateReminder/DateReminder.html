@@ -26,13 +26,99 @@
       </section>
       <section class="containers-wrapper"></section>
     </main>
-    <aside class="buttons-bar">
-      <button class="buttons-bar__btn btn">Fil</button>
-      <button class="buttons-bar__btn btn">Loa</button>
-      <button class="buttons-bar__btn btn">Sav</button>
+    <aside class="aside">
+      <div class="filter-container">
+        <form action="" class="filter">
+          <select
+            class="filter__select js-filter-start js-filter-input"
+            name="startMonth"
+            id="idd"
+            list="test"
+          >
+            <option value="Jan">Jan</option>
+            <option value="Feb">Feb</option>
+            <option value="Mar">Mar</option>
+            <option value="Apr">Apr</option>
+            <option value="May">May</option>
+            <option value="Jun">Jun</option>
+            <option value="Jul">Jul</option>
+            <option value="Aug">Aug</option>
+            <option value="Sep">Sep</option>
+            <option value="Oct">Oct</option>
+            <option value="Nov">Nov</option>
+            <option value="Dec">Dec</option>
+          </select>
+          <select
+            class="filter__select js-filter-end js-filter-input"
+            name="startMonth"
+            id="idd"
+            list="test"
+          >
+            <option value="Jan">Jan</option>
+            <option value="Feb">Feb</option>
+            <option value="Mar">Mar</option>
+            <option value="Apr">Apr</option>
+            <option value="May">May</option>
+            <option value="Jun">Jun</option>
+            <option value="Jul">Jul</option>
+            <option value="Aug">Aug</option>
+            <option value="Sep">Sep</option>
+            <option value="Oct">Oct</option>
+            <option value="Nov">Nov</option>
+            <option value="Dec" selected>Dec</option>
+          </select>
+          <label class="filter__label"
+            >Orange
+            <input
+              class="filter__checkbox js-filter-orange js-filter-input"
+              type="checkbox"
+              name=""
+              id=""
+              checked
+            />
+          </label>
+          <label class="filter__label"
+            >Cyan
+            <input
+              class="filter__checkbox js-filter-cyan js-filter-input"
+              type="checkbox"
+              name=""
+              id=""
+              checked
+            />
+          </label>
+          <label class="filter__label"
+            >Green
+            <input
+              class="filter__checkbox js-filter-green js-filter-input"
+              type="checkbox"
+              name=""
+              id=""
+              checked
+            />
+          </label>
+          <label class="filter__label"
+            >Purple
+            <input
+              class="filter__checkbox js-filter-purple js-filter-input"
+              type="checkbox"
+              name=""
+              id=""
+              checked
+            />
+          </label>
+        </form>
+      </div>
+      <div class="buttons-bar">
+        <button class="buttons-bar__btn btn">Fil</button>
+        <button class="buttons-bar__btn btn">Loa</button>
+        <button class="buttons-bar__btn btn">Sav</button>
+      </div>
     </aside>
+
     <script src="./js/app.js" type="module"></script>
     <script src="./js/DOMManipulations.js" type="module"></script>
     <script src="./js/nextDateCalc.js" type="module"></script>
+    <script src="./js/filter.js" type="module"></script>
   </body>
 </html>

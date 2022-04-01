@@ -160,6 +160,7 @@ export function fillReadyContainer(elem, dateInfo) {
   tmpDelBtn.addEventListener("click", function() {
     let index = getMeaningfullDayIndex(dateInfo.id);
     deleteItem(elem, index);
+    setItemToLocalStorage();
     if (meaningfullDaysData.length === 0) {
       localStorage.setItem("data", []);
     }
@@ -189,7 +190,7 @@ function deleteItem(meaningfullDay, index) {
 }
 
 
-function deleteAllContainers() {
+export function deleteAllContainers() {
   const wrapper = document.querySelector(".containers-wrapper");
   while(wrapper.lastChild) {
     wrapper.removeChild(wrapper.lastChild);
@@ -207,7 +208,7 @@ function renderAllContainers() {
 }
 
 
-function getMonthCode(value) {
+export function getMonthCode(value) {
   for (let i = 0; i < monthsEn.length; i++) {
     if (value == monthsEn[i]) {
       return i;
