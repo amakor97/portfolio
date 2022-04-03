@@ -8,10 +8,11 @@ import { deleteAllContainers } from "./DOMManipulations.js";
 import { meaningfullDaysData } from "./app.js";
 import { getMonthCode } from "./DOMManipulations.js"
 
+import { getNextDate } from "./nextDateCalc.js"
 
+export function applyContstraints(parentNode) {
+  //con
 
-function applyContstraints() {
-  const wrapper = document.querySelector(".containers-wrapper");
   deleteAllContainers();
 
   let filteredData = meaningfullDaysData.filter(filterData);
@@ -19,12 +20,14 @@ function applyContstraints() {
 
   filteredData.forEach(function(date) {
       let emptyDateContainer = createEmptyDateContainer();
-      wrapper.appendChild(emptyDateContainer);
+      parentNode.appendChild(emptyDateContainer);
       fillReadyContainer(emptyDateContainer, date);
   })
 
+  getNextDate(filteredData);
+
   let emptyDateContainer = createEmptyDateContainer();
-  wrapper.appendChild(emptyDateContainer);
+  parentNode.appendChild(emptyDateContainer);
   fillEmptyDateContainer(emptyDateContainer);
 }
 
@@ -80,9 +83,15 @@ function filterData(item) {
   }
 }
 
+/*
 let filterInputs = document.querySelectorAll(".js-filter-input");
 filterInputs.forEach(function(input) {
   input.addEventListener("change", applyContstraints);
 })
-
+*/
 //setTimeout(applyContstraints, 200);
+
+export function resetConstraints(className) {
+  const filterInputs = document.querySelectorAll(`.${className}`);
+  console.log(filterInputs);
+}

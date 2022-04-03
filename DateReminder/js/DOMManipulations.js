@@ -5,7 +5,7 @@ import { setItemToLocalStorage } from "./app.js";
 import { calcDaysToDate, calcMSToDate } from "./nextDateCalc.js";
 import { getDayOfYear } from "./nextDateCalc.js";
 import { getNextDate } from "./nextDateCalc.js";
-
+import { resetConstraints } from "./filter.js";
 
 export function createEmptyDateContainer() {
   let emptyDateContainer = document.createElement("div");
@@ -100,16 +100,26 @@ function switchToReadyContainer(cont) {
     meaningfullDaysData.sort(compareDatesId);
   }
 
-  getNextDate();
+  const filterSwitcher = document.querySelector(".js-filter-switch");
+  if (filterSwitcher.checked) {
+    filterSwitcher.checked = false;
+  }
+
+  getNextDate(meaningfullDaysData);
   setItemToLocalStorage();
+  //resetConstraints("js-filter-input");
+
+  deleteAllContainers();
+  renderAllContainers();
+
 
   if (meaningfullDaysData.length > 1) {
     if (meaningfullDaysData[meaningfullDaysData.length-1].id === dateInfo.id) {
       console.log("new item is last");
     } else {
       console.log("needs to re-render");
-      deleteAllContainers();
-      renderAllContainers();
+      //deleteAllContainers();
+      //renderAllContainers();
     }
   }
 
@@ -164,7 +174,7 @@ export function fillReadyContainer(elem, dateInfo) {
     if (meaningfullDaysData.length === 0) {
       localStorage.setItem("data", []);
     }
-    getNextDate();
+    getNextDate(meaningfullDaysData);
   });
 
   applyColorToCont(elem, dateInfo.color);
@@ -198,7 +208,7 @@ export function deleteAllContainers() {
 }
 
 
-function renderAllContainers() {
+export function renderAllContainers() {
   const wrapper = document.querySelector(".containers-wrapper");
   meaningfullDaysData.forEach(function(meaningfullDay) {
     let emptyDateContainer = createEmptyDateContainer();

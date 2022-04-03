@@ -4,6 +4,12 @@ import { createEmptyDateContainer } from "./DOMManipulations.js";
 import { fillEmptyDateContainer } from "./DOMManipulations.js";
 import { fillReadyContainer } from "./DOMManipulations.js";
 import { calcDaysToDate } from "./nextDateCalc.js";
+import { getNextDate } from "./nextDateCalc.js";
+
+import { deleteAllContainers } from "./DOMManipulations.js";
+import { renderAllContainers } from "./DOMManipulations.js";
+
+import { applyContstraints } from "./filter.js";
 
 export let meaningfullDaysData = [];
 
@@ -26,6 +32,7 @@ window.onload = function() {
       wrapper.appendChild(emptyDateContainer);
       fillReadyContainer(emptyDateContainer, meaningfullDay);
     })
+    getNextDate(meaningfullDaysData);
   }
 }
 
@@ -44,3 +51,33 @@ window.addEventListener("load", function() {
   fillEmptyDateContainer(tmpDateContainer);
   wrapper.appendChild(tmpDateContainer);
 })
+
+
+
+let filterInputs = document.querySelectorAll(".js-filter-input");
+
+filterInputs.forEach(function(input) {
+  const filterSwitcher = document.querySelector(".js-filter-switch");  //check checked
+  console.log(filterSwitcher);
+  input.addEventListener("change", function() {
+    if (filterSwitcher.checked) {
+      applyContstraints(wrapper);
+    }
+  })
+})
+
+const filterSwitcher = document.querySelector(".js-filter-switch");
+filterSwitcher.addEventListener("change", function() {
+  if (filterSwitcher.checked) {
+    applyContstraints(wrapper);
+  } else {
+    deleteAllContainers();
+    renderAllContainers();
+    getNextDate(meaningfullDaysData);
+
+    let tmpDateContainer = createEmptyDateContainer();
+    fillEmptyDateContainer(tmpDateContainer);
+    wrapper.appendChild(tmpDateContainer);
+  }
+})
+

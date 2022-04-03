@@ -73,25 +73,25 @@ export function checkLeapYear() {
 }
 
 
-export function getNextDate() {
-  if (meaningfullDaysData.length === 0) {
+export function getNextDate(dates) {
+  if (dates.length === 0) {
     alertText.textContent = "";
     return;
   }
 
   let currentDay = getCurrentDayOfYear();
 
-  for (let i = 0; i < meaningfullDaysData.length; i++) {
-    if (currentDay === meaningfullDaysData[i].daysCount) {
-      alertText.textContent = "today";
+  for (let i = 0; i < dates.length; i++) {
+    if (currentDay === dates[i].daysCount) {
+      alertText.textContent = "The next date is today!";
       return;
     }
   }
 
-  const nextDates = meaningfullDaysData.filter(checkNext);
+  const nextDates = dates.filter(checkNext);
   if (nextDates.length === 0) {
     
-    if (meaningfullDaysData[0].daysCount === currentDay) {
+    if (dates[0].daysCount === currentDay) {
       alertText.textContent = "The next date is today!";
       return;
     }
@@ -104,7 +104,7 @@ export function getNextDate() {
     }
     
     let daysToNextPrev = totalDays - currentDay + 
-    meaningfullDaysData[0].daysCount;
+    dates[0].daysCount;
     displayAlert(daysToNextPrev);
 
   } else {
@@ -114,7 +114,7 @@ export function getNextDate() {
   }
 }
 
-setTimeout(getNextDate, 100);
+
 
 
 function checkNext(dateInfo) {
@@ -140,6 +140,6 @@ function compareDatesDays(a, b) {
 const alertBox = document.querySelector(".date-alert");
 const alertText = document.querySelector(".date-alert__text");
 
-function displayAlert(days) {
+export function displayAlert(days) {
   alertText.textContent = `Before next date: ${days}`;
 }
