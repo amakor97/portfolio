@@ -2,10 +2,26 @@
 
 import { meaningfullDaysData } from "./app.js";
 import { setItemToLocalStorage } from "./app.js";
-import { calcDaysToDate, calcMSToDate } from "./nextDateCalc.js";
+
+import { calcDaysToDate } from "./nextDateCalc.js";
 import { getDayOfYear } from "./nextDateCalc.js";
 import { getNextDate } from "./nextDateCalc.js";
-import { resetConstraints } from "./filter.js";
+
+import { getMonthCode } from "./filter.js";
+import { monthsEn } from "./filter.js";
+
+
+export function appendNewContainer(parentNode) {
+  let emptyDateContainer = createEmptyDateContainer();
+  parentNode.appendChild(emptyDateContainer);
+  fillEmptyDateContainer(emptyDateContainer);
+}
+
+export function appendReadyContainer(parentNode, date) {
+  let emptyDateContainer = createEmptyDateContainer();
+  parentNode.appendChild(emptyDateContainer);
+  fillReadyContainer(emptyDateContainer, date);
+}
 
 export function createEmptyDateContainer() {
   let emptyDateContainer = document.createElement("div");
@@ -17,8 +33,21 @@ export function createEmptyDateContainer() {
 
 export function fillEmptyDateContainer(elem) {
   let tmpAddBtn = document.createElement("button");
-  tmpAddBtn.classList.add("date-container__add-btn", "btn", "js-add-btn");
-  tmpAddBtn.textContent = "Add"; //add svg
+  tmpAddBtn.classList.add("date-container__add-btn", "btn", "btn-interactive", "js-add-btn");
+  //tmpAddBtn.textContent = "Add"; //add svg
+
+  let plusIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  plusIcon.classList.add("btn__plus-svg");
+  plusIcon.setAttribute("width", "24");
+  plusIcon.setAttribute("height", "24");
+  plusIcon.setAttributeNS(null, "viewBox", "0 0 24 24");
+
+  let plusIconPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  plusIconPath.setAttribute("d", "M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z");
+  plusIcon.appendChild(plusIconPath);
+
+  tmpAddBtn.appendChild(plusIcon);
+
   tmpAddBtn.addEventListener("click", switchToAddForm.bind(null, elem));
   elem.appendChild(tmpAddBtn);
 }
@@ -42,8 +71,7 @@ function removeChilds(elem) {
 }
 
 
-let monthsEn = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", 
-  "Sep", "Oct", "Nov", "Dec"];
+
 let colorsEn = ["Orange", "Cyan", "Green", "Purple"];
 
 
@@ -77,9 +105,22 @@ function createAddForm(cont) {
   createAppendOptions(colorsEn, selectColor);
 
   let submitBtn = document.createElement("button");
-  submitBtn.classList.add("add-form__submit-btn", "btn");
+  submitBtn.classList.add("add-form__submit-btn", "btn", "btn-interactive");
   submitBtn.type = "button";
   submitBtn.textContent = "Add"; //add svg
+
+  let plusIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  plusIcon.classList.add("btn__plus-svg");
+  plusIcon.setAttribute("width", "24");
+  plusIcon.setAttribute("height", "24");
+  plusIcon.setAttributeNS(null, "viewBox", "0 0 24 24");
+
+  let plusIconPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  plusIconPath.setAttribute("d", "M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z");
+  plusIcon.appendChild(plusIconPath);
+
+  submitBtn.appendChild(plusIcon);
+
   submitBtn.addEventListener("click", switchToReadyContainer.bind(null, cont));
   tmpAddForm.appendChild(submitBtn);
 
@@ -107,7 +148,6 @@ function switchToReadyContainer(cont) {
 
   getNextDate(meaningfullDaysData);
   setItemToLocalStorage();
-  //resetConstraints("js-filter-input");
 
   deleteAllContainers();
   renderAllContainers();
@@ -118,8 +158,6 @@ function switchToReadyContainer(cont) {
       console.log("new item is last");
     } else {
       console.log("needs to re-render");
-      //deleteAllContainers();
-      //renderAllContainers();
     }
   }
 
@@ -164,8 +202,21 @@ export function fillReadyContainer(elem, dateInfo) {
   elem.appendChild(tmpText);
 
   let tmpDelBtn = document.createElement("button");
-  tmpDelBtn.classList.add("date-container__del-btn", "btn");
-  tmpDelBtn.textContent = "Del"; //add svg
+  tmpDelBtn.classList.add("date-container__del-btn", "btn", "btn-interactive");
+  //tmpDelBtn.textContent = "Del"; //add svg
+
+  let plusIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  plusIcon.classList.add("btn__plus-svg");
+  plusIcon.setAttribute("width", "24");
+  plusIcon.setAttribute("height", "24");
+  plusIcon.setAttribute("transform", "rotate(45)");
+  plusIcon.setAttributeNS(null, "viewBox", "0 0 24 24");
+
+  let plusIconPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  plusIconPath.setAttribute("d", "M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z");
+  plusIcon.appendChild(plusIconPath);
+
+  tmpDelBtn.appendChild(plusIcon);
 
   tmpDelBtn.addEventListener("click", function() {
     let index = getMeaningfullDayIndex(dateInfo.id);
@@ -217,14 +268,6 @@ export function renderAllContainers() {
   })
 }
 
-
-export function getMonthCode(value) {
-  for (let i = 0; i < monthsEn.length; i++) {
-    if (value == monthsEn[i]) {
-      return i;
-    }
-  }
-}
 
 
 function getCodeAsString(code) {

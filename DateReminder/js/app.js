@@ -9,7 +9,7 @@ import { getNextDate } from "./nextDateCalc.js";
 import { deleteAllContainers } from "./DOMManipulations.js";
 import { renderAllContainers } from "./DOMManipulations.js";
 
-import { applyContstraints } from "./filter.js";
+import { appendNewContainer, appendReadyContainer } from "./DOMManipulations.js";
 
 export let meaningfullDaysData = [];
 
@@ -50,34 +50,5 @@ window.addEventListener("load", function() {
   let tmpDateContainer = createEmptyDateContainer();
   fillEmptyDateContainer(tmpDateContainer);
   wrapper.appendChild(tmpDateContainer);
-})
-
-
-
-let filterInputs = document.querySelectorAll(".js-filter-input");
-
-filterInputs.forEach(function(input) {
-  const filterSwitcher = document.querySelector(".js-filter-switch");  //check checked
-  console.log(filterSwitcher);
-  input.addEventListener("change", function() {
-    if (filterSwitcher.checked) {
-      applyContstraints(wrapper);
-    }
-  })
-})
-
-const filterSwitcher = document.querySelector(".js-filter-switch");
-filterSwitcher.addEventListener("change", function() {
-  if (filterSwitcher.checked) {
-    applyContstraints(wrapper);
-  } else {
-    deleteAllContainers();
-    renderAllContainers();
-    getNextDate(meaningfullDaysData);
-
-    let tmpDateContainer = createEmptyDateContainer();
-    fillEmptyDateContainer(tmpDateContainer);
-    wrapper.appendChild(tmpDateContainer);
-  }
 })
 

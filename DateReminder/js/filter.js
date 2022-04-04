@@ -1,35 +1,39 @@
 "use strict";
 
-import { createEmptyDateContainer } from "./DOMManipulations.js";
-import { fillEmptyDateContainer } from "./DOMManipulations.js";
-import { fillReadyContainer } from "./DOMManipulations.js";
+
 import { deleteAllContainers } from "./DOMManipulations.js";
+import { renderAllContainers } from "./DOMManipulations.js";
+import { appendReadyContainer } from "./DOMManipulations.js";
+import { appendNewContainer } from "./DOMManipulations.js";
+
+import { getNextDate } from "./nextDateCalc.js";
 
 import { meaningfullDaysData } from "./app.js";
-import { getMonthCode } from "./DOMManipulations.js"
 
-import { getNextDate } from "./nextDateCalc.js"
 
-export function applyContstraints(parentNode) {
-  //con
 
+export const monthsEn = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", 
+  "Sep", "Oct", "Nov", "Dec"];
+
+
+const filterContainer = document.querySelector(".js-filter-container");
+//filterContainer.classList.remove("filter-container_hidden");
+
+
+/* main functions */
+
+function applyContstraints(parentNode, dates) {
   deleteAllContainers();
 
-  let filteredData = meaningfullDaysData.filter(filterData);
-  console.log("result:", filteredData);
-
+  let filteredData = dates.filter(filterData);
   filteredData.forEach(function(date) {
-      let emptyDateContainer = createEmptyDateContainer();
-      parentNode.appendChild(emptyDateContainer);
-      fillReadyContainer(emptyDateContainer, date);
+    appendReadyContainer(parentNode, date);
   })
 
   getNextDate(filteredData);
-
-  let emptyDateContainer = createEmptyDateContainer();
-  parentNode.appendChild(emptyDateContainer);
-  fillEmptyDateContainer(emptyDateContainer);
+  appendNewContainer(parentNode);
 }
+
 
 function filterData(item) {
   const selectStart = document.querySelector(".js-filter-start");
@@ -43,55 +47,78 @@ function filterData(item) {
   const green = document.querySelector(".js-filter-green").checked;
   const purple = document.querySelector(".js-filter-purple").checked;
 
-  console.log({startMonth, endMonth});
-  console.log({orange, cyan, green, purple});
  
   if ((item.monthCode >= startMonth) && (item.monthCode <= endMonth)){
 
-    console.log(item.color);
     switch(item.color) {
       case "Orange": {
         if (orange) {
           return item;
-        } else {
-          break;
-        }
+        } 
+        break;
       }
       case "Cyan": {
         if (cyan) {
           return item;
-        } else {
-          break;
-        }
+        } 
+        break;
       }
       case "Green": {
         if (green) {
           return item;
-        } else {
-          break;
-        }
+        } 
+        break;
       }
       case "Purple": {
         if (purple) {
           return item;
-        } else {
-          break;
-        }
+        } 
+        break;
       }
     }
 
   }
 }
 
-/*
-let filterInputs = document.querySelectorAll(".js-filter-input");
-filterInputs.forEach(function(input) {
-  input.addEventListener("change", applyContstraints);
-})
-*/
-//setTimeout(applyContstraints, 200);
 
-export function resetConstraints(className) {
-  const filterInputs = document.querySelectorAll(`.${className}`);
-  console.log(filterInputs);
+const filterInputs = document.querySelectorAll(".js-filter-input");
+filterInputs.forEach(function(input) {
+  const filterSwitcher = document.querySelector(".js-filter-switch");
+  const wrapper = document.querySelector(".containers-wrapper");
+
+  input.addEventListener("change", function() {
+    if (filterSwitcher.checked) {
+      applyContstraints(wrapper, meaningfullDaysData);
+    }
+  })
+})
+
+
+const filterSwitcher = document.querySelector(".js-filter-switch");
+filterSwitcher.addEventListener("change", function() {
+  const wrapper = document.querySelector(".containers-wrapper");
+  
+  if (filterSwitcher.checked) {
+    applyContstraints(wrapper, meaningfullDaysData);
+  } else {
+    deleteAllContainers();
+    renderAllContainers();
+    getNextDate(meaningfullDaysData);
+    appendNewContainer(wrapper);
+  }
+})
+
+
+export function getMonthCode(value) {
+  for (let i = 0; i < monthsEn.length; i++) {
+    if (value == monthsEn[i]) {
+      return i;
+    }
+  }
 }
+
+
+const filterShowBtn = document.querySelector(".js-filter-show");
+filterShowBtn.addEventListener("click", function() {
+  filterContainer.classList.toggle("filter-container_hidden");
+})

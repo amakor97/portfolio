@@ -1,12 +1,6 @@
 "use strict";
 
-import { meaningfullDaysData } from "./app.js";
-
-
-const MS_IN_SEC = 1000;
-const MS_IN_MIN = MS_IN_SEC*60;
-const MS_IN_HOUR = MS_IN_MIN*60;
-const MS_IN_DAY = MS_IN_HOUR*24;
+import { displayAlert } from "./alertDisplaying.js";
 
 const DAYS_NUMBER_YEAR = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
@@ -21,18 +15,12 @@ function changeFebDays() {
 changeFebDays();
 
 
-export function calcMSToDate(dateInfo) {
-  let msToDay = 0;
-  for (let i = 0; i < dateInfo.monthCode; i++) {
-    msToDay += MS_IN_DAY*DAYS_NUMBER_YEAR[i];
-  }
-}
-
 export function calcDaysToDate(dateInfo) {
   let currentDay = getCurrentDayOfYear();
   let daysToDate = dateInfo.daysCount - currentDay;
   return daysToDate;
 }
+
 
 export function getCurrentDayOfYear() {
   let currentDay = 0;
@@ -74,6 +62,7 @@ export function checkLeapYear() {
 
 
 export function getNextDate(dates) {
+  const alertText = document.querySelector(".date-alert__text");
   if (dates.length === 0) {
     alertText.textContent = "";
     return;
@@ -108,13 +97,10 @@ export function getNextDate(dates) {
     displayAlert(daysToNextPrev);
 
   } else {
-    
     nextDates.sort(compareDatesDays);
     displayAlert(nextDates[0].daysToDate);
   }
 }
-
-
 
 
 function checkNext(dateInfo) {
@@ -135,11 +121,3 @@ function compareDatesDays(a, b) {
 }
 
 
-/* alert displaying */
-
-const alertBox = document.querySelector(".date-alert");
-const alertText = document.querySelector(".date-alert__text");
-
-export function displayAlert(days) {
-  alertText.textContent = `Before next date: ${days}`;
-}

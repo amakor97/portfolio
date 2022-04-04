@@ -27,7 +27,7 @@
       <section class="containers-wrapper"></section>
     </main>
     <aside class="aside">
-      <div class="filter-container">
+      <div class="filter-container filter-container_hidden js-filter-container">
         <label class="filter__main-label"
           >Filter dates
           <input
@@ -119,7 +119,19 @@
         </form>
       </div>
       <div class="buttons-bar">
-        <button class="buttons-bar__btn btn">Fil</button>
+        <button class="buttons-bar__btn btn btn-interactive js-filter-show">
+          <svg
+            enable-background="new 0 0 36 36"
+            height="30px"
+            viewBox="0 0 36 30"
+            width="30px"
+          >
+            <polygon
+              fill="#231F20"
+              points="14,30 22,25 22,17 35.999,0 17.988,0 0,0 14,17 "
+            />
+          </svg>
+        </button>
         <button class="buttons-bar__btn btn">Loa</button>
         <button class="buttons-bar__btn btn">Sav</button>
       </div>
@@ -129,5 +141,6 @@
     <script src="./js/DOMManipulations.js" type="module"></script>
     <script src="./js/nextDateCalc.js" type="module"></script>
     <script src="./js/filter.js" type="module"></script>
+    <script src="./js/alertDisplaying.js" type="module"></script>
   </body>
 </html>

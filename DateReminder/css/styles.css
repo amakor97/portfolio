@@ -185,19 +185,59 @@
   cursor: pointer;
 }
 
+.btn-interactive {
+  padding: 0;
+  font-size: 0;
+}
+
+.btn__plus-svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .btn {
+    min-width: 3rem;
+    min-height: 3rem;
+  }
+}
+
 .btn:hover {
   transform: scale(1.2, 1.2);
 }
 
+.aside {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
 .buttons-bar {
   position: absolute;
-  bottom: 3rem;
+  bottom: 0;
   right: 0;
+  z-index: 5;
 
-  display: none;
   width: 5rem;
-  height: 8rem;
+  height: auto;
   padding: 1rem;
 
-  background-color: #00c5bb;
+  background-color: pink;
+}
+
+.filter-container {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  padding-bottom: 12rem;
+
+  background-color: var(--theme-color);
+}
+
+.filter-container_hidden {
+  display: none;
+}
+
+.filter {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
