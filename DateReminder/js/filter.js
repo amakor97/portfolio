@@ -94,7 +94,7 @@ filterInputs.forEach(function(input) {
 })
 
 
-const filterSwitcher = document.querySelector(".js-filter-switch");
+export const filterSwitcher = document.querySelector(".js-filter-switch");
 filterSwitcher.addEventListener("change", function() {
   const wrapper = document.querySelector(".containers-wrapper");
   

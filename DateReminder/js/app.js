@@ -3,8 +3,16 @@
 import { createEmptyDateContainer } from "./DOMManipulations.js";
 import { fillEmptyDateContainer } from "./DOMManipulations.js";
 import { fillReadyContainer } from "./DOMManipulations.js";
+import { removeChilds} from "./DOMManipulations.js"
+import { renderAllContainers } from "./DOMManipulations.js";
+import { appendNewContainer } from "./DOMManipulations.js";
+
 import { calcDaysToDate } from "./nextDateCalc.js";
 import { getNextDate } from "./nextDateCalc.js";
+
+import { filterSwitcher } from "./filter.js";
+
+import { displayAlert } from "./alertDisplaying.js";
 
 export let meaningfullDaysData = [];
 
@@ -28,6 +36,8 @@ window.onload = function() {
       fillReadyContainer(emptyDateContainer, meaningfullDay);
     })
     getNextDate(meaningfullDaysData);
+  } else {
+    displayAlert(-1);
   }
 }
 
@@ -47,3 +57,14 @@ window.addEventListener("load", function() {
   wrapper.appendChild(tmpDateContainer);
 })
 
+
+
+
+export function getDataFromReader(data) {
+  meaningfullDaysData = data;
+  removeChilds(wrapper);
+  renderAllContainers();
+  appendNewContainer(wrapper);
+  getNextDate(meaningfullDaysData);
+  filterSwitcher.checked = false;
+}

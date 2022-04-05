@@ -10,6 +10,7 @@ import { getNextDate } from "./nextDateCalc.js";
 import { getMonthCode } from "./filter.js";
 import { monthsEn } from "./filter.js";
 
+import { displayAlert } from "./alertDisplaying.js";
 
 
 export function appendNewContainer(parentNode) {
@@ -227,6 +228,7 @@ export function fillReadyContainer(elem, dateInfo) {
     setItemToLocalStorage();
     if (meaningfullDaysData.length === 0) {
       localStorage.setItem("data", []);
+      displayAlert(-1);
     }
     getNextDate(meaningfullDaysData);
   });
