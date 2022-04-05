@@ -11,17 +11,20 @@ import { getMonthCode } from "./filter.js";
 import { monthsEn } from "./filter.js";
 
 
+
 export function appendNewContainer(parentNode) {
   let emptyDateContainer = createEmptyDateContainer();
   parentNode.appendChild(emptyDateContainer);
   fillEmptyDateContainer(emptyDateContainer);
 }
 
+
 export function appendReadyContainer(parentNode, date) {
   let emptyDateContainer = createEmptyDateContainer();
   parentNode.appendChild(emptyDateContainer);
   fillReadyContainer(emptyDateContainer, date);
 }
+
 
 export function createEmptyDateContainer() {
   let emptyDateContainer = document.createElement("div");
@@ -34,7 +37,6 @@ export function createEmptyDateContainer() {
 export function fillEmptyDateContainer(elem) {
   let tmpAddBtn = document.createElement("button");
   tmpAddBtn.classList.add("date-container__add-btn", "btn", "btn-interactive", "js-add-btn");
-  //tmpAddBtn.textContent = "Add"; //add svg
 
   let plusIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   plusIcon.classList.add("btn__plus-svg");
@@ -47,7 +49,6 @@ export function fillEmptyDateContainer(elem) {
   plusIcon.appendChild(plusIconPath);
 
   tmpAddBtn.appendChild(plusIcon);
-
   tmpAddBtn.addEventListener("click", switchToAddForm.bind(null, elem));
   elem.appendChild(tmpAddBtn);
 }
@@ -64,7 +65,7 @@ function switchToAddForm(elem) {
 }
 
 
-function removeChilds(elem) {
+export function removeChilds(elem) {
   while (elem.lastElementChild) {
     elem.removeChild(elem.lastElementChild);
   }
@@ -83,6 +84,7 @@ function createAddForm(cont) {
   inputDay.type = "number";
   inputDay.classList.add("add-form__input", "add-form__input_number", 
   "js-input-day");
+  inputDay.placeholder = "14";
   tmpAddForm.appendChild(inputDay);
 
   let selectMonth = document.createElement("select");
@@ -96,6 +98,7 @@ function createAddForm(cont) {
   inputText.classList.add("add-form__input", "add-form__input_text", 
   "js-input-text");
   inputText.name = "text";
+  inputText.placeholder = "Date description";
   tmpAddForm.appendChild(inputText);
 
   let selectColor = document.createElement("select");
@@ -149,7 +152,7 @@ function switchToReadyContainer(cont) {
   getNextDate(meaningfullDaysData);
   setItemToLocalStorage();
 
-  deleteAllContainers();
+  removeChilds(wrapper);
   renderAllContainers();
 
 
@@ -248,14 +251,6 @@ function deleteItem(meaningfullDay, index) {
   const wrapper = document.querySelector(".containers-wrapper");
   wrapper.removeChild(meaningfullDay);
   meaningfullDaysData.splice(index, 1);
-}
-
-
-export function deleteAllContainers() {
-  const wrapper = document.querySelector(".containers-wrapper");
-  while(wrapper.lastChild) {
-    wrapper.removeChild(wrapper.lastChild);
-  }
 }
 
 

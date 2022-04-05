@@ -62,9 +62,8 @@ export function checkLeapYear() {
 
 
 export function getNextDate(dates) {
-  const alertText = document.querySelector(".date-alert__text");
   if (dates.length === 0) {
-    alertText.textContent = "";
+    displayAlert(-1);
     return;
   }
 
@@ -72,7 +71,7 @@ export function getNextDate(dates) {
 
   for (let i = 0; i < dates.length; i++) {
     if (currentDay === dates[i].daysCount) {
-      alertText.textContent = "The next date is today!";
+      displayAlert(0);
       return;
     }
   }
@@ -81,7 +80,7 @@ export function getNextDate(dates) {
   if (nextDates.length === 0) {
     
     if (dates[0].daysCount === currentDay) {
-      alertText.textContent = "The next date is today!";
+      displayAlert(0);
       return;
     }
 

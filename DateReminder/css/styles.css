@@ -27,6 +27,8 @@
   --nav-link-text: #000000;
   --nav-link-text-hover: #ffffff;
 
+  /*overflow-x: hidden;*/
+
   font-size: 16px;
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -42,11 +44,13 @@
 }
 
 .header {
+  position: fixed;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
   height: 4rem;
-  margin-bottom: 3rem;
   padding: 0 5%;
 
   background-color: var(--theme-color);
@@ -85,6 +89,7 @@
 
 .main {
   width: 50%;
+  padding-top: 6rem;
   margin: 0 auto;
 }
 
@@ -99,8 +104,9 @@
 }
 
 .date-container {
-  display: flex;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: 8rem auto 1fr;
+
   align-items: center;
   width: 100%;
   height: fit-content;
@@ -112,6 +118,10 @@
   border: 10px solid var(--grey-color);
   border-radius: 25px;
   box-shadow: rgb(176, 176, 176) 5px 5px 5px 0px;
+}
+
+.date-container_edit {
+  grid-template-columns: 1fr;
 }
 
 .date-container_orange {
@@ -179,10 +189,13 @@
 
 .btn {
   display: inline-block;
+  width: 2.5rem;
   min-width: 2.5rem;
-  min-height: 2.5rem;
+  height: 2.5rem;
 
   cursor: pointer;
+
+  transition: transform 0.1s;
 }
 
 .btn-interactive {
@@ -191,8 +204,8 @@
 }
 
 .btn__plus-svg {
-  width: 2rem;
-  height: 2rem;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -207,9 +220,13 @@
 }
 
 .aside {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   right: 0;
+  width: 15rem;
+  height: 21rem;
+
+  overflow: hidden;
 }
 
 .buttons-bar {
@@ -218,26 +235,57 @@
   right: 0;
   z-index: 5;
 
-  width: 5rem;
+  display: flex;
+  flex-direction: column;
+  width: auto;
   height: auto;
   padding: 1rem;
 
-  background-color: pink;
+  background-color: var(--theme-color);
+  border-top: 1px solid white;
+  border-left: 1px solid white;
+  border-radius: 0.5rem 0.5rem 0 0.5rem;
+}
+
+.filter-wrapper {
+  overflow: hidden;
 }
 
 .filter-container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
   display: grid;
-  grid-template-rows: auto 1fr;
-  padding-bottom: 12rem;
+  grid-template-rows: 2rem 5rem auto;
+  width: 14rem;
+  height: 20rem;
+  padding: 1.5rem;
+  overflow: hidden;
 
   background-color: var(--theme-color);
+  border-radius: 1rem 1rem 0 1rem;
+  box-shadow: 0 0 10px 0 grey;
+
+  transition: transform 0.5s;
 }
 
 .filter-container_hidden {
-  display: none;
+  transform: translate(14rem, 20rem);
+}
+
+.filter-container__main-label {
+  font-size: 1.2rem;
 }
 
 .filter {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: 2.5rem 1fr 1fr;
+  column-gap: 5px;
+  row-gap: 5px;
+}
+
+.filter__select {
+  width: 100%;
 }

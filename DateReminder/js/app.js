@@ -6,11 +6,6 @@ import { fillReadyContainer } from "./DOMManipulations.js";
 import { calcDaysToDate } from "./nextDateCalc.js";
 import { getNextDate } from "./nextDateCalc.js";
 
-import { deleteAllContainers } from "./DOMManipulations.js";
-import { renderAllContainers } from "./DOMManipulations.js";
-
-import { appendNewContainer, appendReadyContainer } from "./DOMManipulations.js";
-
 export let meaningfullDaysData = [];
 
 const wrapper = document.querySelector(".containers-wrapper");

@@ -1,7 +1,7 @@
 "use strict";
 
 
-import { deleteAllContainers } from "./DOMManipulations.js";
+import { removeChilds } from "./DOMManipulations.js";
 import { renderAllContainers } from "./DOMManipulations.js";
 import { appendReadyContainer } from "./DOMManipulations.js";
 import { appendNewContainer } from "./DOMManipulations.js";
@@ -23,7 +23,7 @@ const filterContainer = document.querySelector(".js-filter-container");
 /* main functions */
 
 function applyContstraints(parentNode, dates) {
-  deleteAllContainers();
+  removeChilds(parentNode);
 
   let filteredData = dates.filter(filterData);
   filteredData.forEach(function(date) {
@@ -101,7 +101,7 @@ filterSwitcher.addEventListener("change", function() {
   if (filterSwitcher.checked) {
     applyContstraints(wrapper, meaningfullDaysData);
   } else {
-    deleteAllContainers();
+    removeChilds(wrapper);
     renderAllContainers();
     getNextDate(meaningfullDaysData);
     appendNewContainer(wrapper);

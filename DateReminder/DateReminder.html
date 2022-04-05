@@ -11,7 +11,7 @@
   <body>
     <header class="header">
       <h1 class="header__title">Date Reminder</h1>
-      <button class="header__info-btn btn">Help</button>
+      <!--<button class="header__info-btn btn">Help</button>-->
       <nav class="header__nav nav">
         <ul class="nav__ul">
           <li class="nav__item">
@@ -27,96 +27,107 @@
       <section class="containers-wrapper"></section>
     </main>
     <aside class="aside">
-      <div class="filter-container filter-container_hidden js-filter-container">
-        <label class="filter__main-label"
-          >Filter dates
-          <input
-            class="filter__checkbox js-filter-switch"
-            type="checkbox"
-            name=""
-            id=""
-          />
-        </label>
-        <form action="" class="filter">
-          <select
-            class="filter__select js-filter-start js-filter-input"
-            name="startMonth"
-            id="idd"
-            list="test"
-          >
-            <option value="Jan">Jan</option>
-            <option value="Feb">Feb</option>
-            <option value="Mar">Mar</option>
-            <option value="Apr">Apr</option>
-            <option value="May">May</option>
-            <option value="Jun">Jun</option>
-            <option value="Jul">Jul</option>
-            <option value="Aug">Aug</option>
-            <option value="Sep">Sep</option>
-            <option value="Oct">Oct</option>
-            <option value="Nov">Nov</option>
-            <option value="Dec">Dec</option>
-          </select>
-          <select
-            class="filter__select js-filter-end js-filter-input"
-            name="startMonth"
-            id="idd"
-            list="test"
-          >
-            <option value="Jan">Jan</option>
-            <option value="Feb">Feb</option>
-            <option value="Mar">Mar</option>
-            <option value="Apr">Apr</option>
-            <option value="May">May</option>
-            <option value="Jun">Jun</option>
-            <option value="Jul">Jul</option>
-            <option value="Aug">Aug</option>
-            <option value="Sep">Sep</option>
-            <option value="Oct">Oct</option>
-            <option value="Nov">Nov</option>
-            <option value="Dec" selected>Dec</option>
-          </select>
-          <label class="filter__label"
-            >Orange
+      <div class="filter-wrapper">
+        <div
+          class="filter-container filter-container_hidden js-filter-container"
+        >
+          <label class="filter-container__main-label"
+            >Filter dates
             <input
-              class="filter__checkbox js-filter-orange js-filter-input"
+              class="filter-container__checkbox js-filter-switch"
               type="checkbox"
               name=""
               id=""
               checked
             />
           </label>
-          <label class="filter__label"
-            >Cyan
-            <input
-              class="filter__checkbox js-filter-cyan js-filter-input"
-              type="checkbox"
-              name=""
-              id=""
-              checked
-            />
-          </label>
-          <label class="filter__label"
-            >Green
-            <input
-              class="filter__checkbox js-filter-green js-filter-input"
-              type="checkbox"
-              name=""
-              id=""
-              checked
-            />
-          </label>
-          <label class="filter__label"
-            >Purple
-            <input
-              class="filter__checkbox js-filter-purple js-filter-input"
-              type="checkbox"
-              name=""
-              id=""
-              checked
-            />
-          </label>
-        </form>
+          <form action="" class="filter">
+            <label for="select-start"
+              >Start
+              <select
+                class="filter__select js-filter-start js-filter-input"
+                name="startMonth"
+                id="select-start"
+                list="test"
+              >
+                <option value="Jan">Jan</option>
+                <option value="Feb">Feb</option>
+                <option value="Mar">Mar</option>
+                <option value="Apr">Apr</option>
+                <option value="May">May</option>
+                <option value="Jun">Jun</option>
+                <option value="Jul">Jul</option>
+                <option value="Aug">Aug</option>
+                <option value="Sep">Sep</option>
+                <option value="Oct">Oct</option>
+                <option value="Nov">Nov</option>
+                <option value="Dec">Dec</option>
+              </select>
+            </label>
+            <label for="select-end"
+              >End
+              <select
+                class="filter__select js-filter-end js-filter-input"
+                name="startMonth"
+                id="select-end"
+                list="test"
+              >
+                <option value="Jan">Jan</option>
+                <option value="Feb">Feb</option>
+                <option value="Mar">Mar</option>
+                <option value="Apr">Apr</option>
+                <option value="May">May</option>
+                <option value="Jun">Jun</option>
+                <option value="Jul">Jul</option>
+                <option value="Aug">Aug</option>
+                <option value="Sep">Sep</option>
+                <option value="Oct">Oct</option>
+                <option value="Nov">Nov</option>
+                <option value="Dec" selected>Dec</option>
+              </select>
+            </label>
+            <label class="filter__label"
+              >Orange
+              <input
+                class="filter__checkbox js-filter-orange js-filter-input"
+                type="checkbox"
+                name=""
+                id=""
+                checked
+              />
+            </label>
+            <label class="filter__label"
+              >Cyan
+              <input
+                class="filter__checkbox js-filter-cyan js-filter-input"
+                type="checkbox"
+                name=""
+                id=""
+                checked
+              />
+            </label>
+            <label class="filter__label"
+              >Green
+              <input
+                class="filter__checkbox js-filter-green js-filter-input"
+                type="checkbox"
+                name=""
+                id=""
+                checked
+              />
+            </label>
+            <label class="filter__label"
+              >Purple
+              <input
+                class="filter__checkbox js-filter-purple js-filter-input"
+                type="checkbox"
+                name=""
+                id=""
+                checked
+              />
+            </label>
+          </form>
+        </div>
       </div>
       <div class="buttons-bar">
         <button class="buttons-bar__btn btn btn-interactive js-filter-show">
