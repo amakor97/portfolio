@@ -279,7 +279,7 @@ export function fillReadyContainer(elem, dateInfo) {
     deleteItem(elem, index);
     setItemToLocalStorage();
     if (meaningfullDaysData.length === 0) {
-      localStorage.setItem("data", []);
+      localStorage.setItem("data_dr", []);
       displayAlert(-1);
     }
     getNextDate(meaningfullDaysData);

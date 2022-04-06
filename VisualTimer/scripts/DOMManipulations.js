@@ -478,7 +478,7 @@ export function fillReadyTimer(readyTimer, id) {
     let index = getTimerIndex(id);
     deleteTimer(readyTimer, index);
     if (timerData.length == 0) {
-      localStorage.setItem("data", []);
+      localStorage.setItem("data_vt", []);
     }
   })
 

@@ -20,7 +20,7 @@ import { fillReadyTimer } from "./DOMManipulations.js";
 /* localStorage functions */
 
 window.onload = function() {
-  let testValue = JSON.parse(localStorage.getItem("data"));
+  let testValue = JSON.parse(localStorage.getItem("data_vt"));
   if ((testValue) && (testValue.length > 0)) {
     timerData = [...testValue];
   } else {
@@ -48,7 +48,7 @@ window.onload = function() {
 
 
 window.onbeforeunload = function(){
-  let testkey = "data";
+  let testkey = "data_vt";
   let testvalue = JSON.stringify(timerData);
   localStorage.setItem(testkey, testvalue);
 };
@@ -175,7 +175,7 @@ export function createNewTimer(e) {
 
     timerData.push(timerInfo);
 
-    let testkey = "data";
+    let testkey = "data_vt";
     let testvalue = JSON.stringify(timerData);
     localStorage.setItem(testkey, testvalue);
 

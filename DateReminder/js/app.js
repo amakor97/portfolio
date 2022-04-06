@@ -21,7 +21,7 @@ const wrapper = document.querySelector(".containers-wrapper");
 
 /* localStorage functions*/
 window.onload = function() {
-  let fromLocalStorage = JSON.parse(localStorage.getItem("data"));
+  let fromLocalStorage = JSON.parse(localStorage.getItem("data_dr"));
   if ((fromLocalStorage) && (fromLocalStorage.length > 0)) {
     meaningfullDaysData = [...fromLocalStorage];
   } else {
@@ -44,7 +44,7 @@ window.onload = function() {
 window.onbeforeunload = setItemToLocalStorage;
 
 export function setItemToLocalStorage() {
-  let dateKey = "data";
+  let dateKey = "data_dr";
   let toLocalStorage = JSON.stringify(meaningfullDaysData);
   localStorage.setItem(dateKey, toLocalStorage);
 }
