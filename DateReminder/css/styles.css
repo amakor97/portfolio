@@ -45,6 +45,7 @@
 
 .header {
   position: fixed;
+  z-index: 10;
 
   display: flex;
   justify-content: space-between;
@@ -200,6 +201,13 @@
   transition: transform 0.1s;
 }
 
+@media screen and (max-width: 768px) {
+  .btn {
+    min-width: 3rem;
+    min-height: 3rem;
+  }
+}
+
 .btn-interactive {
   padding: 0;
 
@@ -213,11 +221,22 @@
   height: 1.5rem;
 }
 
-@media screen and (max-width: 768px) {
-  .btn {
-    min-width: 3rem;
-    min-height: 3rem;
-  }
+.btn__svg {
+  width: 70%;
+  height: 70%;
+
+  fill: white;
+}
+
+.btn__svg-load {
+  width: 80%;
+  height: 80%;
+
+  fill: white;
+}
+
+.btn__svg-load-inner {
+  fill: none;
 }
 
 .btn:hover {
@@ -229,7 +248,7 @@
   bottom: 0;
   right: 0;
   width: 15rem;
-  height: 21rem;
+  height: 23rem;
 
   overflow: hidden;
 }
@@ -254,21 +273,32 @@
 }
 
 .buttons-bar__btn {
-  border: 3px solid white;
+  border: 2px solid white;
   border-radius: 20%;
 }
 
 .buttons-bar__label-input {
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   width: 2.5rem;
   min-width: 2.5rem;
   height: 2.5rem;
 
-  border: 3px solid white;
+  font-size: 0;
+
+  border: 2px solid white;
   border-radius: 20%;
   cursor: pointer;
 
   transition: transform 0.1s;
+}
+
+@media screen and (max-width: 768px) {
+  .buttons-bar__label-input {
+    min-width: 3rem;
+    min-height: 3rem;
+  }
 }
 
 .buttons-bar__input-file {
@@ -300,6 +330,12 @@
   box-shadow: 0 0 10px 0 grey;
 
   transition: transform 0.5s;
+}
+
+@media screen and (max-width: 768px) {
+  .filter-container {
+    height: 22rem;
+  }
 }
 
 .filter-container_hidden {

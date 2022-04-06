@@ -6,6 +6,7 @@ import { setItemToLocalStorage } from "./app.js";
 import { calcDaysToDate } from "./nextDateCalc.js";
 import { getDayOfYear } from "./nextDateCalc.js";
 import { getNextDate } from "./nextDateCalc.js";
+import { checkLeapYear } from "./nextDateCalc.js";
 
 import { getMonthCode } from "./filter.js";
 import { monthsEn } from "./filter.js";
@@ -85,6 +86,9 @@ function createAddForm(cont) {
   inputDay.type = "number";
   inputDay.classList.add("add-form__input", "add-form__input_number", 
   "js-input-day");
+  inputDay.required = true;
+  inputDay.min = "1";
+  inputDay.max = "31";
   inputDay.placeholder = "14";
   tmpAddForm.appendChild(inputDay);
 
@@ -125,10 +129,58 @@ function createAddForm(cont) {
 
   submitBtn.appendChild(plusIcon);
 
-  submitBtn.addEventListener("click", switchToReadyContainer.bind(null, cont));
+  submitBtn.addEventListener("click", function() {
+    if (inputDay.value.length === 0) {
+      inputDay.value = 1;
+    }
+    switchToReadyContainer(cont);
+  })
+  
   tmpAddForm.appendChild(submitBtn);
 
+
+
+  inputDay.addEventListener("change", function() {
+    if ((this.value < 1) || (this.value > 31)) {
+      this.value = 1;
+    }
+    inputDay.value = validateDays(selectMonth.value, inputDay.value);
+  })
+
+  selectMonth.addEventListener("change", function() {
+    if (inputDay.value.length === 0) {
+      inputDay.value = 1;
+    }
+    inputDay.value = validateDays(selectMonth.value, inputDay.value);
+  })
+
   return tmpAddForm;
+}
+
+
+function validateDays(month, day) {
+  let correctedDay = undefined;
+  switch(month) {
+    case "Apr":
+    case "Jun":
+    case "Sep":
+    case "Nov": {
+      if (day > 30) {
+        correctedDay = 30;
+      }
+      break;
+    }
+    case "Feb": {
+      if (day > 28) {
+        correctedDay = 28;
+      }
+    }
+    break;
+  }
+  if (correctedDay === undefined) {
+    correctedDay = day;
+  }
+  return correctedDay;
 }
 
 
