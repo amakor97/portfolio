@@ -8,6 +8,10 @@ Visual timer is an app that lets user create timers and displays a visual demons
 
 The app's logic is based on getting timestamps, so it will work if you switch to another tab. Also, all timers data are saving in local storage when you leave or refresh the page. HTML canvas is used for circle rendering.
 
+### Date reminder
+
+This is a simple date reminder app that allows user to add and remove dates and filter them by months and colors. Data is saving in local storage. Also, there are save and load from local file functions.
+
 ## Layout exmaples
 
 ### Scandi
