@@ -1,0 +1,10 @@
+@font-face {
+  font-family: M1Plus;
+  font-weight: 400;
+  src: url(../fonts/MPLUS1p-regular.ttf);
+}
+
+html:root {
+  font-family: M1Plus;
+  font-size: 16px;
+}

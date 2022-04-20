@@ -1,0 +1,33 @@
+.intro-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 100%;
+  margin: 0 auto 2.1875rem;
+}
+
+.intro-title__logo {
+  display: block;
+  width: 80%;
+  margin: 0 10%;
+  height: auto;
+}
+
+.intro-title__text {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.intro-title__link {
+  margin: 0 auto;
+}

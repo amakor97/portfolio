@@ -1,0 +1,9 @@
+.link {
+  display: inline-block;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 0.813rem 1.75rem 1rem;
+  text-align: center;
+  border: 1px solid black;
+}
