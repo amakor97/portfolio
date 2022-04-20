@@ -248,7 +248,7 @@
   bottom: 0;
   right: 0;
   width: 15rem;
-  height: 23rem;
+  height: 25rem;
 
   overflow: hidden;
 }
@@ -334,7 +334,7 @@
 
 @media screen and (max-width: 768px) {
   .filter-container {
-    height: 22rem;
+    height: 24rem;
   }
 }
 
