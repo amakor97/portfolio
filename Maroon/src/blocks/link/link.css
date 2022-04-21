@@ -1,5 +1,5 @@
 .link {
-  display: inline-block;
+  display: block;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;

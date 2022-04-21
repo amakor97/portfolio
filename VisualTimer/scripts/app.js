@@ -333,6 +333,10 @@ export function pauseHandler(e, index) {
       btn.textContent = "Pause";
     }
   }
+  
+  let testkey = "data_vt";
+  let testvalue = JSON.stringify(timerData);
+  localStorage.setItem(testkey, testvalue);
 }
 
 

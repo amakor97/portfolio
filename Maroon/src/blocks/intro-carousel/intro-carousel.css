@@ -1,0 +1,12 @@
+.intro-carousel {
+  overflow-x: hidden;
+}
+
+.intro-carousel__inner {
+  width: 2000px;
+  font-size: 0;
+}
+
+.intro-carousel__intro-card {
+  margin-right: 1.875rem;
+}
