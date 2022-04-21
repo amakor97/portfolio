@@ -1,6 +1,7 @@
 .intro {
   height: 100vh;
   background-image: url(../blocks/intro/hero.png);
+  background-size: cover;
 }
 
 .intro__container {
@@ -13,8 +14,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  margin: 0 0.9375rem;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin: 0;
 }

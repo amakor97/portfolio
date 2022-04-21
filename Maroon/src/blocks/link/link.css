@@ -4,6 +4,11 @@
   width: -moz-fit-content;
   width: fit-content;
   padding: 0.813rem 1.75rem 1rem;
+  font-family: "M PLUS 1p";
+  font-weight: 500;
+  color: #122947;
   text-align: center;
-  border: 1px solid black;
+  text-decoration: none;
+  border: 1px solid #b3bac1;
+  border-radius: 2px;
 }

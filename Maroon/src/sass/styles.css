@@ -130,23 +130,105 @@ table {
 }
 
 @font-face {
-  font-family: M1Plus;
+  font-family: "M PLUS 1p";
   font-weight: 400;
-  src: url(../fonts/MPLUS1p-regular.ttf);
+  src: url(../fonts/MPLUS1p-Regular.ttf);
+}
+
+@font-face {
+  font-family: "M PLUS 1p";
+  font-weight: 500;
+  src: url(../fonts/MPLUS1p-Medium.ttf);
 }
 
 html:root {
-  font-family: M1Plus;
+  font-family: "M PLUS 1p", Arial, sans-serif;
   font-size: 16px;
+  color: #122947;
 }
 
 .header {
   position: fixed;
+  width: 100vw;
+  height: 2.875rem;
+  padding-top: 1.625rem;
+}
+
+.header__header-nav {
+  margin: 0 0.9375rem;
+}
+
+.header-nav {
+  position: relative;
+}
+
+.header-nav__list {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+
+.header-nav__list-item--btn {
+  margin-right: auto;
+}
+
+.header-nav__list-item--link {
+  margin-left: 10px;
+}
+
+.header-nav__icon-link {
+  display: inline-block;
+  padding: 0.25rem;
+}
+
+.logo-sm--centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  fill: #122947;
+}
+
+.menu-btn {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0.25rem;
+  background: transparent;
+  border: none;
+}
+
+.svg-btn {
+  stroke: #122947;
+}
+
+.svg-link {
+  fill: #122947;
+}
+
+.logo-lg {
+  fill: #122947;
 }
 
 .intro {
   height: 100vh;
   background-image: url(../blocks/intro/hero.png);
+  background-size: cover;
 }
 
 .intro__container {
@@ -159,10 +241,9 @@ html:root {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  margin: 0 0.9375rem;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin: 0;
 }
 
 .intro-title {
@@ -185,13 +266,13 @@ html:root {
 
 .intro-title__logo {
   display: block;
-  width: 80%;
-  margin: 0 10%;
+  width: 76%;
+  margin: 0 12%;
   height: auto;
 }
 
 .intro-title__text {
-  font-size: 1.5rem;
+  font-size: 1rem;
   text-align: center;
 }
 
@@ -201,14 +282,22 @@ html:root {
 
 .intro-link {
   width: 10.625rem;
+  width: 40.625%;
+  max-height: 40vh;
+  height: 34.8vh;
+  text-decoration: none;
 }
 
 .intro-link__img-wrapper {
   width: 100%;
+  height: 85%;
 }
 
 .intro-link__img {
   width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .intro-link__text-wrapper {
@@ -218,6 +307,16 @@ html:root {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 15%;
+}
+
+.intro-link__text {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #122947;
 }
 
 .link {
@@ -226,6 +325,11 @@ html:root {
   width: -moz-fit-content;
   width: fit-content;
   padding: 0.813rem 1.75rem 1rem;
+  font-family: "M PLUS 1p";
+  font-weight: 500;
+  color: #122947;
   text-align: center;
-  border: 1px solid black;
+  text-decoration: none;
+  border: 1px solid #b3bac1;
+  border-radius: 2px;
 }
