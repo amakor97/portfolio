@@ -1,0 +1,19 @@
+.banner {
+  padding-top: 291px;
+  padding-bottom: 3.75rem;
+  background-image: url(../blocks/banner/bg.png);
+  background-size: 100% auto;
+}
+
+.banner__title {
+  margin: 0 auto 1.25rem;
+}
+
+.banner__text {
+  margin: 0 auto 1.875rem;
+  text-align: center;
+}
+
+.banner__link {
+  margin: 0 auto;
+}

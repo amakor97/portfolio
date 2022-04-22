@@ -1,4 +1,5 @@
 .intro-carousel {
+  padding-left: calc(3.125rem + (100vw - 20rem) / 2);
   overflow-x: hidden;
 }
 

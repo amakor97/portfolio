@@ -1,5 +1,8 @@
-.bestsellers__title {
+.bestsellers {
   padding-top: 5rem;
+}
+
+.bestsellers__title {
   margin-bottom: 1.5625rem;
 }
 
@@ -10,10 +13,9 @@
 }
 
 .bestsellers__intro-carousel {
-  padding-left: calc(3.125rem + (100vw - 20rem) / 2);
   margin-bottom: 2.5rem;
 }
 
 .bestsellers__link {
-  margin: auto;
+  margin: 0 auto 5rem;
 }
