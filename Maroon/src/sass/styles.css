@@ -355,16 +355,21 @@ html:root {
   text-align: center;
 }
 
+.section-title__small-font {
+  font-size: 1.375rem;
+  line-height: 1.71875rem;
+}
+
 .bestsellers {
   padding-top: 5rem;
 }
 
 .bestsellers__title {
-  margin-bottom: 1.5625rem;
+  margin: 0 auto 1.5625rem;
 }
 
 .bestsellers__text {
-  margin-bottom: 3.125rem;
+  margin: 0 auto 3.125rem;
   text-align: center;
   line-height: 1.4rem;
 }
@@ -454,5 +459,62 @@ html:root {
 }
 
 .banner__link {
+  margin: 0 auto;
+}
+
+.offer {
+  position: relative;
+  padding-top: 5rem;
+  padding-bottom: 17rem;
+}
+
+.offer__container {
+  width: 90.625%;
+  padding-top: 3.25rem;
+  padding-bottom: 6.185rem;
+  margin: 0 auto;
+  background-color: #f4f1ed;
+}
+
+.offer__title {
+  margin: 0 auto 1.5625rem;
+}
+
+.offer__text {
+  width: 77.931%;
+  margin: 0 auto 1.875rem;
+  text-align: center;
+}
+
+.offer__link {
+  margin: 0 auto;
+}
+
+.offer__img {
+  position: absolute;
+  top: 27.75rem;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  display: block;
+  width: 78.125%;
+  height: 252px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.history {
+  padding-top: 3.75rem;
+  padding-bottom: 3.75rem;
+  background-image: url(../blocks/history/history.png);
+  background-size: cover;
+}
+
+.history__title {
+  width: 75.625%;
+  margin: 0 auto 1.875rem;
+}
+
+.history__link {
   margin: 0 auto;
 }

@@ -1,0 +1,15 @@
+.history {
+  padding-top: 3.75rem;
+  padding-bottom: 3.75rem;
+  background-image: url(../blocks/history/history.png);
+  background-size: cover;
+}
+
+.history__title {
+  width: 75.625%;
+  margin: 0 auto 1.875rem;
+}
+
+.history__link {
+  margin: 0 auto;
+}
