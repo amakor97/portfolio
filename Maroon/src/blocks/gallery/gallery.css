@@ -1,0 +1,33 @@
+.gallery {
+  padding-top: 5rem;
+  background-color: #f8f8f6;
+}
+
+.gallery__title {
+  margin: 0 auto 1.5625rem;
+}
+
+.gallery__text {
+  width: 73.5%;
+  margin: 0 auto 1.875rem;
+  text-align: center;
+}
+
+.gallery__link {
+  margin: 0 auto 3.125rem;
+}
+
+.gallery__imgs-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: 0 0.9375rem;
+  font-size: 0;
+}
+
+.gallery__img {
+  width: 50%;
+  height: auto;
+}

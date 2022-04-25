@@ -1,8 +1,11 @@
+.logo-sm {
+  fill: #122947;
+}
+
 .logo-sm--centered {
   position: absolute;
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  fill: #122947;
 }

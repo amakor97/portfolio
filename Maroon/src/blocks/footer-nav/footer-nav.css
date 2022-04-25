@@ -1,0 +1,18 @@
+.footer-nav__list {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  row-gap: 1.5625rem;
+  width: 12.5rem;
+}
+
+.footer-nav__li {
+  -ms-flex-preferred-size: 50%;
+      flex-basis: 50%;
+}
+
+.footer-nav__link {
+  color: #122947;
+  text-decoration: none;
+}
