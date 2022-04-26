@@ -1,10 +1,27 @@
+@import '../../sass/variables.sass'
+
 .header
   position: fixed
+  z-index: 1
 
   width: 100vw
   height: 2.875rem
+  height: fit-content
 
   padding-top: 1.625rem
 
-.header__header-nav
-  margin: 0 0.9375rem
+  transition: background 0.5s
+
+  &__header-nav
+    margin: 0 0.9375rem
+
+  &__divider
+    display: none
+    margin: 0
+
+    &--showed
+      display: block
+
+  &--backgrounded
+    background:
+      color: $main-bg-color

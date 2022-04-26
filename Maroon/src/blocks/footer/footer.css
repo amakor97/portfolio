@@ -17,16 +17,7 @@
   margin: 0 auto 1.875rem;
 }
 
-.footer__svg-wrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+.footer__social {
   margin-left: -0.25rem;
   margin-bottom: 3.125rem;
 }
@@ -41,7 +32,7 @@
   text-decoration: none;
 }
 
-.footer__hr {
+.footer__divider {
   margin: 0 0 1.6875rem;
   border: 1px solid #d1d1d1;
 }

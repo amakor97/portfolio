@@ -27,4 +27,5 @@ html:root {
   font-size: 16px;
   color: #122947;
   background-color: #f8f8f6;
+  scroll-behavior: smooth;
 }

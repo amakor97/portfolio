@@ -1,0 +1,47 @@
+@import '../../sass/variables.sass'
+
+.menu
+  position: relative
+  z-index: 1
+
+  max-height: 0
+
+  overflow: hidden
+
+  background:
+    color: $main-bg-color
+
+  transition: max-height 1s
+
+  &__container
+    padding-left: 0.9375rem
+
+  &__list
+    margin-bottom: 2rem
+
+  &__link
+    display: block
+    padding: 1.125rem
+    padding-left: 0
+
+    font:
+      family: Raleway
+      weight: 500
+      size: 1.75rem
+
+    color: $main-color
+
+    text:
+      decoration: none
+
+  &__social
+    margin-bottom: 3.25rem
+
+  &__footer
+    height: 4.1875rem
+
+    background:
+      color: $sub-bg-color
+
+  &--showed
+    max-height: 100vh

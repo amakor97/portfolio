@@ -1,10 +1,29 @@
 .header {
   position: fixed;
+  z-index: 1;
   width: 100vw;
   height: 2.875rem;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   padding-top: 1.625rem;
+  -webkit-transition: background 0.5s;
+  transition: background 0.5s;
 }
 
 .header__header-nav {
   margin: 0 0.9375rem;
+}
+
+.header__divider {
+  display: none;
+  margin: 0;
+}
+
+.header__divider--showed {
+  display: block;
+}
+
+.header--backgrounded {
+  background-color: #f8f8f6;
 }
