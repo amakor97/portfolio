@@ -8,10 +8,6 @@
   transition: max-height 1s;
 }
 
-.menu__container {
-  padding-left: 0.9375rem;
-}
-
 .menu__list {
   margin-bottom: 2rem;
 }
@@ -19,7 +15,6 @@
 .menu__link {
   display: block;
   padding: 1.125rem;
-  padding-left: 0;
   font-family: Raleway;
   font-weight: 500;
   font-size: 1.75rem;
@@ -27,7 +22,8 @@
   text-decoration: none;
 }
 
-.menu__social {
+.menu__social-wrapper {
+  padding-left: 0.9375rem;
   margin-bottom: 3.25rem;
 }
 

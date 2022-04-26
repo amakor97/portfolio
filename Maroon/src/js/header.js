@@ -46,7 +46,6 @@ window.addEventListener("load", headerBackgrounder)
 
 
 function headerBackgrounder() {
-  console.log(this.scrollY);
   if (this.scrollY > 0) {
     header.classList.add("header--backgrounded");
     headerDivider.classList.add("header__divider--showed");

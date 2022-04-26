@@ -1,0 +1,15 @@
+.btn {
+  display: block;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 0.6rem 1.75rem;
+  font-family: "M PLUS 1p";
+  font-weight: 500;
+  color: #122947;
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid #b3bac1;
+  border-radius: 2px;
+  background: transparent;
+}

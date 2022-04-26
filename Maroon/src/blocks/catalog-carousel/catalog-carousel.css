@@ -1,0 +1,20 @@
+.catalog-carousel {
+  position: relative;
+  width: 100%;
+  padding-top: 0.5rem;
+  overflow-x: hidden;
+}
+
+.catalog-carousel__inner {
+  width: 400%;
+}
+
+.catalog-carousel__page {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  grid-row-gap: 1.875rem;
+  width: 25%;
+  font-size: 0;
+}
