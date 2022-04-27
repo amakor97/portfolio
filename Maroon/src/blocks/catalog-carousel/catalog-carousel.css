@@ -6,7 +6,15 @@
 }
 
 .catalog-carousel__inner {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[4];
+      grid-template-columns: repeat(4, 1fr);
   width: 400%;
+  -webkit-transition: -webkit-transform 1s;
+  transition: -webkit-transform 1s;
+  transition: transform 1s;
+  transition: transform 1s, -webkit-transform 1s;
 }
 
 .catalog-carousel__page {
@@ -14,7 +22,9 @@
   display: grid;
   -ms-grid-columns: 1fr;
       grid-template-columns: 1fr;
+  -ms-grid-rows: (1fr)[12];
+      grid-template-rows: repeat(12, 1fr);
   grid-row-gap: 1.875rem;
-  width: 25%;
+  width: 100%;
   font-size: 0;
 }

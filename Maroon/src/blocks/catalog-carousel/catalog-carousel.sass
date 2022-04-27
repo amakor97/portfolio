@@ -8,13 +8,23 @@
   overflow-x: hidden
 
   &__inner
+    display: grid
+    grid-template-columns: repeat(4, 1fr)
     width: 400%
+
+    transition: transform 1s
+
+    //scroll-snap-type: x mandatory
 
   &__page
     display: grid
     grid-template-columns: 1fr
+    grid-template-rows: repeat(12, 1fr)
     grid-row-gap: 1.875rem
-    width: 25%
+    width: 100%
+    //width: 320px
 
     font:
       size: 0
+
+    //scroll-snap-align: start
