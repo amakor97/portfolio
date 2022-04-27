@@ -1,0 +1,24 @@
+@import '../../sass/variables.sass'
+
+.sub-carousel
+  position: relative
+
+  width: 100%
+  padding-top: 0.5rem
+  overflow-x: hidden
+
+  font:
+    size: 0
+
+  &__inner
+    display: grid
+    grid-template-columns: repeat(4, 1fr)
+    width: 400%
+
+    transition: transform 1s
+
+  &__page
+    display: grid
+    grid-template-columns: 1fr
+    grid-template-rows: 1fr
+    width: 100%

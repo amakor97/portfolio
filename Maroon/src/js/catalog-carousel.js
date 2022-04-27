@@ -1,5 +1,7 @@
 "use strict";
 
+import { handleCarousel } from "./carouselFunctions.js";
+
 const prevBtn = document.querySelector(".js-catalog-carousel-prev-btn");
 const nextBtn = document.querySelector(".js-catalog-carousel-next-btn");
 
@@ -12,9 +14,11 @@ let carouselPos = 0;
 
 
 //tmp 
-let catalogData = 14;
+let catalogData = 24;
 
 let pageNumber = Math.ceil(catalogData / 12)
+const maxPageElem = document.querySelector(".js-catalog-carousel-max-page");
+maxPageElem.textContent = pageNumber;
 
 console.log({pageNumber});
 
@@ -32,8 +36,20 @@ console.log({testStep});
 let currentPage = 1;
 const currentPageElem = document.querySelector(".js-catalog-carousel-current-page");
 
-nextBtn.addEventListener("click", moveCarousel.bind(null, -step))
-prevBtn.addEventListener("click", moveCarousel.bind(null, step))
+
+
+const catalogCarousel = {
+  "carElem": carousel,
+  "carStep": step,
+  "carPos": carouselPos,
+  "carPageCounter": 1,
+  "carPageCounterElem": currentPageElem,
+}
+
+
+nextBtn.addEventListener("click", handleCarousel.bind(null, catalogCarousel, "next"));
+
+prevBtn.addEventListener("click", handleCarousel.bind(null, catalogCarousel, "prev"));
 
 function moveCarousel(step) {
   if(checkCarouselPos(step)) {
@@ -63,3 +79,34 @@ function changeCurrentPageNumber(step) {
   console.log({currentPage});
 }
 
+
+
+///////////////
+let pageCounterElem = 5;
+
+/*
+const catalogCarousel = [
+  carousel,
+  step,
+  carouselPos,
+  pageCounterElem
+]*/
+
+
+
+//console.log(catalogCarousel);
+
+//handleCarousel(catalogCarousel);
+//console.log(catalogCarousel.carPos);
+/*
+function handleCarousel(carArray) {
+  const carElem = carArray[0];
+  let carStep = carArray[1];
+  let carPos = carArray[2];
+  let carPageCounter = carArray[3];
+
+  console.log({carElem, carStep, carPos, carPageCounter});
+}
+*/
+
+//handleCarousel(catalogCarousel);

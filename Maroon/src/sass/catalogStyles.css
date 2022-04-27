@@ -360,6 +360,7 @@ html:root {
 
 .catalog {
   padding-top: 6.625rem;
+  margin-bottom: 6.25rem;
 }
 
 .catalog__header {
@@ -521,6 +522,47 @@ html:root {
 .carousel-controls__btn {
   padding: 0.25rem;
   font-size: 0;
+  border: none;
+  background: transparent;
+}
+
+.watched__title {
+  width: 70%;
+  margin: 0 auto 2rem;
+}
+
+.watched__sub-carousel {
+  margin: 0 auto 2.1875rem;
+}
+
+.sub-carousel {
+  position: relative;
+  width: 100%;
+  padding-top: 0.5rem;
+  overflow-x: hidden;
+  font-size: 0;
+}
+
+.sub-carousel__inner {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[4];
+      grid-template-columns: repeat(4, 1fr);
+  width: 400%;
+  -webkit-transition: -webkit-transform 1s;
+  transition: -webkit-transform 1s;
+  transition: transform 1s;
+  transition: transform 1s, -webkit-transform 1s;
+}
+
+.sub-carousel__page {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  -ms-grid-rows: 1fr;
+      grid-template-rows: 1fr;
+  width: 100%;
 }
 
 .gallery {

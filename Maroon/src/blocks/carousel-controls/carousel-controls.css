@@ -43,4 +43,6 @@
 .carousel-controls__btn {
   padding: 0.25rem;
   font-size: 0;
+  border: none;
+  background: transparent;
 }
