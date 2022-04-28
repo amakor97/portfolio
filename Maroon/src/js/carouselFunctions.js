@@ -1,31 +1,11 @@
-/*function checkCarouselPos(step) {
-  let tmpPos = carouselPos + step;
-  if ((tmpPos > 0) || (tmpPos <= -100)) {
-    console.log("overflow");
-    return false;
-  }
-  return true;
-}*/
-
-/*function changeCurrentPageNumber(step) {
-  if (step > 0) {
-    currentPage--;
-  } else {
-    currentPage++;
-  }
-  currentPageElem.textContent = currentPage;
-  console.log({currentPage});
-}*/
-
 export function handleCarousel(carObj, dir) {
-  
   if(checkCarouselPos(carObj, dir)) {
     moveCarousel(carObj, dir);
     console.log("needs to change page counter");
     changeCurrentPageNumber(carObj, dir);
   };
-  
 }
+
 
 function changeCurrentPageNumber(carObj, dir) {
   if (dir === "next") {
@@ -36,6 +16,7 @@ function changeCurrentPageNumber(carObj, dir) {
   console.log(carObj.carPageCounter);
   carObj.carPageCounterElem.textContent = carObj.carPageCounter;
 }
+
 
 function checkCarouselPos(carObj, dir) {
   console.log("pos", carObj.carPos);
@@ -56,8 +37,6 @@ function checkCarouselPos(carObj, dir) {
 
 
 function moveCarousel(carObj, dir) {
-  
-
   console.log(carObj.carPos);
   console.log(carObj.carStep);
 
@@ -67,14 +46,6 @@ function moveCarousel(carObj, dir) {
     carObj.carPos += carObj.carStep;
   }
   
-
   console.log("current", carObj.carPos);
-
   carObj.carElem.style.transform = `translateX(${carObj.carPos}%)`;
-  //if(checkCarouselPos(step)) {
-    //changeCurrentPageNumber(step);
-    //carouselPos += step;
-  //};
-  //console.log({carouselPos});
-  //carousel.style.transform = `translateX(${carouselPos}%)`;
 }
