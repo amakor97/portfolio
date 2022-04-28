@@ -71,7 +71,7 @@
           </li>
         </ul>
       </nav>
-      <hr class="header__divider js-header-divider" />
+      <hr class="header__divider header__divider--solid js-header-divider" />
       <nav class="menu header__menu">
         <ul class="menu__list">
           <li class="menu__li">
@@ -127,9 +127,215 @@
     </header>
     <main class="main">
       <section class="catalog">
+        <div class="filter catalog__filter js-filter">
+          <div class="filter__header">
+            <h2 class="section-title filter__title">Каталог</h2>
+            <button class="filter__toggle-btn js-toggle-filter-btn">
+              <svg
+                class="svg-btn"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M1 1L8 8M15 15L8 8M8 8L15 1L1 15"
+                  stroke="#122947"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+          </div>
+          <form class="filter__content">
+            <button class="filter__accordion-btn js-toggle-fieldset-btn">
+              Уход для лица
+            </button>
+            <fieldset class="filter__fieldset">
+              <div class="filter__input-wrapper">
+                <input
+                  class="filter__input-checkbox js-filter-checkbox"
+                  type="checkbox"
+                  name=""
+                  id="face-care-1"
+                />
+                <label for="face-care-1" class="filter__label"> Крема </label>
+              </div>
+              <div class="filter__input-wrapper">
+                <input
+                  class="filter__input-checkbox js-filter-checkbox"
+                  type="checkbox"
+                  name=""
+                  id="face-care-2"
+                />
+                <label for="face-care-2" class="filter__label">
+                  Сыворотки
+                </label>
+              </div>
+              <div class="filter__input-wrapper">
+                <input
+                  class="filter__input-checkbox js-filter-checkbox"
+                  type="checkbox"
+                  name=""
+                  id="face-care-3"
+                />
+                <label for="face-care-3" class="filter__label"> Маски </label>
+              </div>
+              <div class="filter__input-wrapper">
+                <input
+                  class="filter__input-checkbox js-filter-checkbox"
+                  type="checkbox"
+                  name=""
+                  id="face-care-4"
+                />
+                <label for="face-care-4" class="filter__label"> Пенки </label>
+              </div>
+              <div class="filter__input-wrapper">
+                <input
+                  class="filter__input-checkbox js-filter-checkbox"
+                  type="checkbox"
+                  name=""
+                  id="face-care-5"
+                />
+                <label for="face-care-5" class="filter__label"> Тоники </label>
+              </div>
+              <div class="filter__input-wrapper">
+                <input
+                  class="filter__input-checkbox js-filter-checkbox"
+                  type="checkbox"
+                  name=""
+                  id="face-care-6"
+                />
+                <label for="face-care-6" class="filter__label"> Пудры </label>
+              </div>
+            </fieldset>
+            <button class="filter__accordion-btn js-toggle-fieldset-btn">
+              Уход для тела
+            </button>
+            <fieldset class="filter__fieldset">
+              <div class="filter__input-wrapper">
+                <input
+                  class="filter__input-checkbox js-filter-checkbox"
+                  type="checkbox"
+                  name=""
+                  id="body-care-1"
+                />
+                <label for="body-care-1" class="filter__label"> Крема </label>
+              </div>
+              <div class="filter__input-wrapper">
+                <input
+                  class="filter__input-checkbox js-filter-checkbox"
+                  type="checkbox"
+                  name=""
+                  id="body-care-2"
+                />
+                <label for="body-care-2" class="filter__label"> Масла </label>
+              </div>
+              <div class="filter__input-wrapper">
+                <input
+                  class="filter__input-checkbox js-filter-checkbox"
+                  type="checkbox"
+                  name=""
+                  id="body-care-3"
+                />
+                <label for="body-care-3" class="filter__label"> Скрабы </label>
+              </div>
+              <div class="filter__input-wrapper">
+                <input
+                  class="filter__input-checkbox js-filter-checkbox"
+                  type="checkbox"
+                  name=""
+                  id="body-care-4"
+                />
+                <label for="body-care-4" class="filter__label"> Мыло </label>
+              </div>
+              <div class="filter__input-wrapper">
+                <input
+                  class="filter__input-checkbox js-filter-checkbox"
+                  type="checkbox"
+                  name=""
+                  id="body-care-5"
+                />
+                <label for="body-care-5" class="filter__label">
+                  Бомбочки для ванны
+                </label>
+              </div>
+              <div class="filter__input-wrapper">
+                <input
+                  class="filter__input-checkbox js-filter-checkbox"
+                  type="checkbox"
+                  name=""
+                  id="body-care-6"
+                />
+                <label for="body-care-6" class="filter__label">
+                  Соль для ванны
+                </label>
+              </div>
+            </fieldset>
+            <button class="filter__accordion-btn js-toggle-fieldset-btn">
+              Тип кожи
+            </button>
+            <fieldset class="filter__fieldset">
+              <div class="filter__input-wrapper">
+                <input
+                  class="filter__input-checkbox js-filter-checkbox"
+                  type="checkbox"
+                  name=""
+                  id="skin-type-1"
+                />
+                <label for="skin-type-1" class="filter__label">
+                  Нормальная
+                </label>
+              </div>
+              <div class="filter__input-wrapper">
+                <input
+                  class="filter__input-checkbox js-filter-checkbox"
+                  type="checkbox"
+                  name=""
+                  id="skin-type-2"
+                />
+                <label for="skin-type-2" class="filter__label"> Сухая </label>
+              </div>
+              <div class="filter__input-wrapper">
+                <input
+                  class="filter__input-checkbox js-filter-checkbox"
+                  type="checkbox"
+                  name=""
+                  id="skin-type-3"
+                />
+                <label for="skin-type-3" class="filter__label"> Жирная </label>
+              </div>
+              <div class="filter__input-wrapper">
+                <input
+                  class="filter__input-checkbox js-filter-checkbox"
+                  type="checkbox"
+                  name=""
+                  id="skin-type-4"
+                />
+                <label for="skin-type-4" class="filter__label">
+                  Комбинированная
+                </label>
+              </div>
+            </fieldset>
+            <div class="filter__btn-block">
+              <button
+                class="btn btn--small-side-pads filter__control-btn js-apply-filter"
+                type="button"
+              >
+                Применить
+              </button>
+              <button
+                class="btn btn--small-side-pads filter__control-btn"
+                type="reset"
+              >
+                Сбросить
+              </button>
+            </div>
+          </form>
+        </div>
         <div class="catalog__header">
           <h2 class="section-title catalog__title">Каталог</h2>
-          <button class="btn catalog__btn">Фильтр</button>
+          <button class="btn catalog__btn js-toggle-filter-btn">Фильтр</button>
         </div>
         <div class="catalog-carousel catalog__catalog-carousel">
           <div class="catalog-carousel__inner js-catalog-carousel-inner">
@@ -1236,6 +1442,7 @@
       </div>
     </footer>
     <script src="./src/js/header.js"></script>
+    <script src="./src/js/filter.js"></script>
     <script src="./src/js/catalog-carousel.js" type="module"></script>
     <script src="./src/js/watched-carousel.js" type="module"></script>
     <script src="./src/js/carouselFunctions.js" type="module"></script>

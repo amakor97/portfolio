@@ -1,4 +1,6 @@
 .catalog {
+  position: relative;
+  z-index: 0;
   padding-top: 6.625rem;
   margin-bottom: 6.25rem;
 }

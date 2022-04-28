@@ -156,6 +156,7 @@ table {
 html:root {
   font-family: "M PLUS 1p", Arial, sans-serif;
   font-size: 16px;
+  font-smooth: always;
   color: #122947;
   background-color: #f8f8f6;
   scroll-behavior: smooth;
@@ -181,6 +182,10 @@ html:root {
 .header__divider {
   display: none;
   margin: 0;
+}
+
+.header__divider--solid {
+  display: block;
 }
 
 .header__divider--showed {
