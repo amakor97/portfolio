@@ -39,6 +39,7 @@
 
 .footer__text {
   margin: 0 auto 1.375rem;
+  font-size: 0.75rem;
   color: #959595;
   text-decoration: none;
 }

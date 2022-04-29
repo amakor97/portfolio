@@ -1,0 +1,53 @@
+@import '../../sass/variables.sass'
+
+.accordion-btn
+  width: 100%
+  padding: 0.7rem 0
+
+  font:
+    family: "M Plus 1p"
+    weight: 500
+    size: 1.125rem
+
+  color: $main-color
+
+  text:
+    align: left
+
+  background: transparent
+  border: none
+  border-bottom: 1px solid $filter-toggle-btn-color
+
+  &--position
+    border-bottom: none
+
+  &--last
+    border-bottom: none
+
+  &::after
+    display: block
+    content: ""
+    background:
+      image: url("../blocks/accordion-btn/plus.svg")
+      size: 12px 12px
+      position: center
+      repeat: no-repeat
+    width: 12px
+    height: 1.65rem
+    float: right
+    margin-left: 5px
+
+  &--opened
+
+    &::after
+      display: block
+      content: ""
+      background:
+        image: url("../blocks/accordion-btn/minus.svg")
+        size: 12px 12px
+        position: center
+        repeat: no-repeat
+        width: 12px
+      height: 1.65rem
+      float: right
+      margin-left: 5px

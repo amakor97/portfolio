@@ -15,7 +15,7 @@ const toggleFieldsetsBtns = document.querySelectorAll(".js-toggle-fieldset-btn")
 toggleFieldsetsBtns.forEach(function(btn) {
   btn.addEventListener("click", function(e) {
     e.preventDefault();
-    this.classList.toggle("filter__accordion-btn--opened");
+    this.classList.toggle("accordion-btn--opened");
 
     let panel = this.nextElementSibling;
     //console.log(panel);

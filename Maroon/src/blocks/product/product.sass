@@ -1,0 +1,41 @@
+@import '../../sass/variables.sass'
+
+.product
+  padding: 7.5rem 0.9375rem 2.5rem
+
+  &__img
+    width: 100%
+    height: auto
+    margin: 0 0 3.125rem
+
+  &__description
+    padding-bottom: 2.5rem
+    border-bottom: 1px solid $link-border
+
+  &__title
+    margin: 0 0 0.9375rem
+    text-align: left
+
+  &__type
+    margin: 0 0 1.875rem
+    color: $description-color
+
+  &__text
+
+  &__accordion
+    margin: 0 0 2.675rem
+
+  &__panel
+    max-height: 0
+    overflow-y: hidden
+
+    border-bottom: 1px solid $link-border
+
+    transition: max-height 1s
+    transition: max-height 2s, padding 1s
+
+    &--opened
+      max-height: 100vh
+      padding: 0 0 1.25rem
+
+    &:last-of-type

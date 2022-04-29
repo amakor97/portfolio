@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./src/sass/catalogStyles.css" />
   </head>
   <body>
-    <header class="header">
+    <header class="header header--backgrounded-solid">
       <nav class="header-nav header__header-nav">
         <ul class="header-nav__list">
           <li class="header-nav__list-item header-nav__list-item--btn">
@@ -148,7 +148,9 @@
             </button>
           </div>
           <form class="filter__content">
-            <button class="filter__accordion-btn js-toggle-fieldset-btn">
+            <button
+              class="accordion-btn filter__accordion-btn js-toggle-fieldset-btn"
+            >
               Уход для лица
             </button>
             <fieldset class="filter__fieldset">
@@ -209,7 +211,9 @@
                 <label for="face-care-6" class="filter__label"> Пудры </label>
               </div>
             </fieldset>
-            <button class="filter__accordion-btn js-toggle-fieldset-btn">
+            <button
+              class="accordion-btn filter__accordion-btn js-toggle-fieldset-btn"
+            >
               Уход для тела
             </button>
             <fieldset class="filter__fieldset">
@@ -272,7 +276,9 @@
                 </label>
               </div>
             </fieldset>
-            <button class="filter__accordion-btn js-toggle-fieldset-btn">
+            <button
+              class="accordion-btn accordion-btn--last filter__accordion-btn js-toggle-fieldset-btn"
+            >
               Тип кожи
             </button>
             <fieldset class="filter__fieldset">
@@ -334,13 +340,16 @@
           </form>
         </div>
         <div class="catalog__header">
-          <h2 class="section-title catalog__title">Каталог</h2>
+          <h1 class="section-title catalog__title">Каталог</h1>
           <button class="btn catalog__btn js-toggle-filter-btn">Фильтр</button>
         </div>
         <div class="catalog-carousel catalog__catalog-carousel">
           <div class="catalog-carousel__inner js-catalog-carousel-inner">
             <div class="catalog-carousel__page">
-              <a href="#" class="catalog-card catalog-carousel__card">
+              <a
+                href="./positions/rose-face-cream.html"
+                class="catalog-card catalog-carousel__card"
+              >
                 <img
                   class="catalog-card__img"
                   src="./src/blocks/catalog-card/1-high-face-cream-s.png"

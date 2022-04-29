@@ -1,0 +1,46 @@
+.accordion-btn {
+  width: 100%;
+  padding: 0.7rem 0;
+  font-family: "M Plus 1p";
+  font-weight: 500;
+  font-size: 1.125rem;
+  color: #122947;
+  text-align: left;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #dbdce0;
+}
+
+.accordion-btn--position {
+  border-bottom: none;
+}
+
+.accordion-btn--last {
+  border-bottom: none;
+}
+
+.accordion-btn::after {
+  display: block;
+  content: "";
+  background-image: url("../blocks/accordion-btn/plus.svg");
+  background-size: 12px 12px;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 12px;
+  height: 1.65rem;
+  float: right;
+  margin-left: 5px;
+}
+
+.accordion-btn--opened::after {
+  display: block;
+  content: "";
+  background-image: url("../blocks/accordion-btn/minus.svg");
+  background-size: 12px 12px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-width: 12px;
+  height: 1.65rem;
+  float: right;
+  margin-left: 5px;
+}
