@@ -1,3 +1,5 @@
+@import '../../sass/variables.sass'
+
 .header-nav
   position: relative
 
@@ -30,3 +32,17 @@
     padding: 0.25rem
 
   &__menu-btn
+
+  &__logo-link
+
+    &--smartphone
+      display: block
+
+      @media (min-width: $screen-md)
+        display: none
+
+    &--tablet
+      display: none
+
+      @media (min-width: $screen-md)
+        display: block

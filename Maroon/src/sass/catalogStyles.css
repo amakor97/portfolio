@@ -176,6 +176,8 @@ html:root {
 
 .header__header-nav {
   margin: 0 0.9375rem;
+  margin-left: calc(4.6875% - 0.25rem);
+  margin-right: calc(4.6875% - 0.25rem);
 }
 
 .header__divider {
@@ -229,6 +231,26 @@ html:root {
 .header-nav__icon-link {
   display: inline-block;
   padding: 0.25rem;
+}
+
+.header-nav__logo-link--smartphone {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .header-nav__logo-link--smartphone {
+    display: none;
+  }
+}
+
+.header-nav__logo-link--tablet {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .header-nav__logo-link--tablet {
+    display: block;
+  }
 }
 
 .menu {

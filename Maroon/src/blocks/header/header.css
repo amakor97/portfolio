@@ -13,6 +13,8 @@
 
 .header__header-nav {
   margin: 0 0.9375rem;
+  margin-left: calc(4.6875% - 0.25rem);
+  margin-right: calc(4.6875% - 0.25rem);
 }
 
 .header__divider {

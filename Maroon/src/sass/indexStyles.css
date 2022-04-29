@@ -176,6 +176,8 @@ html:root {
 
 .header__header-nav {
   margin: 0 0.9375rem;
+  margin-left: calc(4.6875% - 0.25rem);
+  margin-right: calc(4.6875% - 0.25rem);
 }
 
 .header__divider {
@@ -229,6 +231,26 @@ html:root {
 .header-nav__icon-link {
   display: inline-block;
   padding: 0.25rem;
+}
+
+.header-nav__logo-link--smartphone {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .header-nav__logo-link--smartphone {
+    display: none;
+  }
+}
+
+.header-nav__logo-link--tablet {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .header-nav__logo-link--tablet {
+    display: block;
+  }
 }
 
 .menu {
@@ -303,6 +325,18 @@ html:root {
           transform: translate(-50%, -50%);
 }
 
+.logo-md {
+  fill: #122947;
+}
+
+.logo-md--centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
 .menu-btn {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -333,13 +367,29 @@ html:root {
 .intro {
   height: calc(100vh - 19.414vh);
   padding-top: 19.414vh;
-  background-image: url(../blocks/intro/hero.png);
+  background-image: url(../blocks/intro/hero-m.png);
   background-size: cover;
+  background-position: center;
+}
+
+@media (min-width: 768px) {
+  .intro {
+    height: calc(100vh - 38.818vh);
+    padding-bottom: 19.414vh;
+  }
 }
 
 .intro__container {
   width: 100%;
   height: 28.389vh;
+  margin: 0 auto 2.1875rem;
+}
+
+@media (min-width: 768px) {
+  .intro__container {
+    position: absolute;
+    top: calc(19.414vh + 1.75rem);
+  }
 }
 
 .intro__link-container {
@@ -349,6 +399,15 @@ html:root {
   -ms-flex-pack: distribute;
       justify-content: space-around;
   margin: 0;
+}
+
+@media (min-width: 768px) {
+  .intro__link-container {
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    margin: 0 4.6875%;
+  }
 }
 
 .intro-title {
@@ -366,7 +425,7 @@ html:root {
   width: -moz-fit-content;
   width: fit-content;
   height: 100%;
-  margin: 0 auto 2.1875rem;
+  margin: 0 auto;
 }
 
 .intro-title__logo {
@@ -391,6 +450,14 @@ html:root {
   max-height: 40vh;
   height: 34.8vh;
   text-decoration: none;
+}
+
+@media (min-width: 768px) {
+  .intro-link {
+    width: 15.375rem;
+    height: 21.8125rem;
+    max-height: none;
+  }
 }
 
 .intro-link__img-wrapper {

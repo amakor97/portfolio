@@ -29,3 +29,23 @@
   display: inline-block;
   padding: 0.25rem;
 }
+
+.header-nav__logo-link--smartphone {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .header-nav__logo-link--smartphone {
+    display: none;
+  }
+}
+
+.header-nav__logo-link--tablet {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .header-nav__logo-link--tablet {
+    display: block;
+  }
+}
