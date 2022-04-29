@@ -1,3 +1,11 @@
 .also {
-  padding: 2.5rem 0 0;
+  padding: 2.5rem 0 5rem;
+}
+
+.also__title {
+  margin: 0 0 2.5rem;
+}
+
+.also__sub-carousel {
+  margin: 0 auto 1.6875rem;
 }
