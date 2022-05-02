@@ -5,9 +5,13 @@
 
   padding-top: 5rem
   padding-bottom: 17rem
+  overflow: hidden
 
   background:
     color: $main-bg-color
+
+  @media (min-width: $screen-md)
+    padding-bottom: 5rem
 
   &__container
     width: 90.625%
@@ -18,22 +22,57 @@
     background:
       color: $offer-color
 
+    @media (min-width: $screen-md)
+      padding-left: 3.75rem
+      padding-bottom: 3.75rem
+      margin: 0 4.6875%
+
   &__title
     margin: 0 auto 1.5625rem
+
+    @media (min-width: $screen-md)
+      text-align: left
 
   &__text
     width: 77.931%
     margin: 0 auto 1.875rem
 
+    font:
+      size: 1.125rem
+
     text:
       align: center
+
+    line-height: 1.4rem
+
+    @media (min-width: $screen-md)
+      width: calc(12rem + 20vw)
+      margin-left: 0
+      text:
+        align: left
+
+      line-height: 1.45rem
+
+    &--first
+      display: none
+
+    &--last
+
+      @media (min-width: $screen-md)
+        margin-bottom: 2.8125rem
+
+    @media (min-width: $screen-md)
+      display: block
 
   &__link
     margin: 0 auto
 
+    @media (min-width: $screen-md)
+      margin-left: 0
+
   &__img
     position: absolute
-    top: 27.75rem
+    top: 30rem
     left: 50%
     transform: translateX(-50%)
 
@@ -43,3 +82,11 @@
     //margin: -3.75rem auto 0
 
     object-fit: cover
+
+    @media (min-width: $screen-md)
+      top: 50%
+      left: 64%
+      transform: translate(0, -50%)
+
+      width: 24.875rem
+      height: 25.1875rem

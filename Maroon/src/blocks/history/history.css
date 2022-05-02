@@ -10,6 +10,12 @@
   margin: 0 auto 1.875rem;
 }
 
+@media (min-width: 768px) {
+  .history__title {
+    width: 87%;
+  }
+}
+
 .history__link {
   margin: 0 auto;
 }

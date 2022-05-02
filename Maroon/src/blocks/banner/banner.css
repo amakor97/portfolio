@@ -3,13 +3,15 @@
   width: 100vw;
   padding-top: 18.1875rem;
   padding-bottom: 3.75rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 @media (min-width: 768px) {
   .banner {
     padding-top: 6.0625rem;
     padding-left: 51.953%;
-    height: 17.1875rem;
+    height: 27rem;
   }
 }
 
@@ -18,6 +20,7 @@
   top: 0;
   left: 0;
   z-index: -1;
+  width: 100vw;
   height: 100%;
 }
 
