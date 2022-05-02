@@ -44,3 +44,9 @@
   font-weight: 500;
   color: #122947;
 }
+
+@media (min-width: 768px) {
+  .intro-link__text {
+    font-size: 1rem;
+  }
+}

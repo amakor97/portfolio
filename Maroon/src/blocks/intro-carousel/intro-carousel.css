@@ -1,13 +1,33 @@
 .intro-carousel {
-  padding-left: calc(3.125rem + (100vw - 20rem) / 2);
+  padding-left: 0;
   overflow-x: hidden;
+}
+
+@media (min-width: 768px) {
+  .intro-carousel {
+    padding-left: 0;
+  }
 }
 
 .intro-carousel__inner {
   width: 2000px;
   font-size: 0;
+  -webkit-transition: -webkit-transform 1s;
+  transition: -webkit-transform 1s;
+  transition: transform 1s;
+  transition: transform 1s, -webkit-transform 1s;
+}
+
+@media (min-width: 768px) {
+  .intro-carousel__inner {
+    position: relative;
+  }
 }
 
 .intro-carousel__intro-card {
   margin-right: 1.875rem;
+}
+
+.intro-carousel__intro-card:last-of-type {
+  margin-right: 0;
 }

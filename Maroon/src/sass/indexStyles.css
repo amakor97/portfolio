@@ -491,6 +491,12 @@ html:root {
   color: #122947;
 }
 
+@media (min-width: 768px) {
+  .intro-link__text {
+    font-size: 1rem;
+  }
+}
+
 .link {
   display: block;
   width: -webkit-fit-content;
@@ -523,48 +529,52 @@ html:root {
   text-align: left;
 }
 
-.bestsellers {
-  padding-top: 5rem;
-}
-
-.bestsellers__title {
-  margin: 0 auto 1.5625rem;
-}
-
-.bestsellers__text {
-  margin: 0 auto 3.125rem;
-  text-align: center;
-  line-height: 1.4rem;
-}
-
-.bestsellers__intro-carousel {
-  margin-bottom: 2.5rem;
-}
-
-.bestsellers__link {
-  margin: 0 auto 5rem;
-}
-
 .intro-carousel {
-  padding-left: calc(3.125rem + (100vw - 20rem) / 2);
+  padding-left: 0;
   overflow-x: hidden;
+}
+
+@media (min-width: 768px) {
+  .intro-carousel {
+    padding-left: 0;
+  }
 }
 
 .intro-carousel__inner {
   width: 2000px;
   font-size: 0;
+  -webkit-transition: -webkit-transform 1s;
+  transition: -webkit-transform 1s;
+  transition: transform 1s;
+  transition: transform 1s, -webkit-transform 1s;
+}
+
+@media (min-width: 768px) {
+  .intro-carousel__inner {
+    position: relative;
+  }
 }
 
 .intro-carousel__intro-card {
   margin-right: 1.875rem;
 }
 
+.intro-carousel__intro-card:last-of-type {
+  margin-right: 0;
+}
+
 .intro-card {
   position: relative;
   z-index: 0;
   display: inline-block;
-  width: 220px;
-  height: 297px;
+  width: 13.75rem;
+  height: 18.5625rem;
+}
+
+@media (min-width: 768px) {
+  .intro-card {
+    width: 14.375rem;
+  }
 }
 
 .intro-card__img {
@@ -604,6 +614,134 @@ html:root {
   font-size: 0.8125rem;
   color: #122947;
   border-bottom: 1px solid #122947;
+}
+
+.carousel-controls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: calc(100vw - 1.375rem);
+  padding-left: 0.25rem;
+  margin: 0 auto;
+  font-size: 0.875rem;
+}
+
+.carousel-controls__info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 4rem;
+}
+
+.carousel-controls__arrows {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 5.375rem;
+}
+
+.carousel-controls__btn {
+  padding: 0.25rem;
+  font-size: 0;
+  border: none;
+  background: transparent;
+}
+
+.bestsellers {
+  position: relative;
+  padding-top: 5rem;
+}
+
+@media (min-width: 768px) {
+  .bestsellers {
+    padding-top: 10.5rem;
+    padding-left: 2.8125rem;
+    padding-bottom: 7.5rem;
+    overflow-x: hidden;
+  }
+}
+
+.bestsellers__title {
+  margin: 0 auto 1.5625rem;
+}
+
+@media (min-width: 768px) {
+  .bestsellers__title {
+    text-align: left;
+    margin: 0 auto 1.875rem;
+  }
+}
+
+.bestsellers__text {
+  margin: 0 auto 3.125rem;
+  text-align: center;
+  line-height: 1.4rem;
+}
+
+@media (min-width: 768px) {
+  .bestsellers__text {
+    text-align: left;
+    margin: 0 auto 2.5rem;
+  }
+}
+
+.bestsellers__intro-carousel {
+  margin-bottom: 2.5rem;
+  margin-left: calc(3.125rem + (100vw - 20rem) / 2);
+}
+
+@media (min-width: 768px) {
+  .bestsellers__intro-carousel {
+    position: absolute;
+    top: 7.5rem;
+    padding-left: 0.5rem;
+    padding: 0.5rem;
+    margin-left: calc(3.125rem + (100vw - 25rem) / 2);
+  }
+}
+
+.bestsellers__link {
+  margin: 0 auto 5rem;
+}
+
+@media (min-width: 768px) {
+  .bestsellers__link {
+    margin: 0 auto 5.0625rem 0;
+  }
+}
+
+.bestsellers__carousel-controls {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .bestsellers__carousel-controls {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-right: calc(4.6875% - 0.25rem);
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+  }
 }
 
 .banner {

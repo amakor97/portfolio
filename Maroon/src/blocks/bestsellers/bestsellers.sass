@@ -1,11 +1,24 @@
 @import '../../sass/variables.sass'
 
 .bestsellers
+  position: relative
+
   padding-top: 5rem
 
-  &__title
+  @media (min-width: $screen-md)
+    padding-top: 10.5rem
+    padding-left: 2.8125rem
+    padding-bottom: 7.5rem
 
+    overflow-x: hidden
+    //min-height: 100vh
+
+  &__title
     margin: 0 auto 1.5625rem
+
+    @media (min-width: $screen-md)
+      text-align: left
+      margin: 0 auto 1.875rem
 
   &__text
     margin: 0 auto 3.125rem
@@ -15,8 +28,33 @@
 
     line-height: 1.4rem
 
+    @media (min-width: $screen-md)
+      text-align: left
+      margin: 0 auto 2.5rem
+
   &__intro-carousel
     margin-bottom: 2.5rem
+    margin-left: calc(3.125rem + (100vw - 20rem) / 2)
+
+    @media (min-width: $screen-md)
+      position: absolute
+      top: 7.5rem
+
+      padding-left: 0.5rem
+      padding-top: 0.5rem
+      padding-bottom: 0.5rem
+      margin-left: calc(3.125rem + (100vw - 25rem) / 2)
 
   &__link
     margin: 0 auto 5rem
+
+    @media (min-width: $screen-md)
+      margin: 0 auto 5.0625rem 0
+
+  &__carousel-controls
+    display: none
+
+    @media (min-width: $screen-md)
+      display: flex
+      margin-right: calc(4.6875% - 0.25rem)
+      width: fit-content

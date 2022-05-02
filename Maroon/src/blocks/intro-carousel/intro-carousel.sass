@@ -1,9 +1,12 @@
 @import '../../sass/variables.sass'
 
 .intro-carousel
-  padding-left: calc(3.125rem + (100vw - 20rem) / 2)
+  padding-left: 0
 
   overflow-x: hidden
+
+  @media ( min-width: $screen-md)
+    padding-left: 0
 
   &__inner
     width: 2000px
@@ -11,5 +14,13 @@
     font:
       size: 0
 
+    transition: transform 1s
+
+    @media ( min-width: $screen-md)
+      position: relative
+
   &__intro-card
     margin-right: 1.875rem
+
+    &:last-of-type
+      margin-right: 0

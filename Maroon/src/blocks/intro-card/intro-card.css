@@ -2,8 +2,14 @@
   position: relative;
   z-index: 0;
   display: inline-block;
-  width: 220px;
-  height: 297px;
+  width: 13.75rem;
+  height: 18.5625rem;
+}
+
+@media (min-width: 768px) {
+  .intro-card {
+    width: 14.375rem;
+  }
 }
 
 .intro-card__img {
