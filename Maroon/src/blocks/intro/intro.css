@@ -9,7 +9,8 @@
 @media (min-width: 768px) {
   .intro {
     height: 100vh;
-    padding-bottom: 19.414vh;
+    padding-top: 21.414vh;
+    padding-bottom: 17.414vh;
   }
 }
 
@@ -22,7 +23,7 @@
 @media (min-width: 768px) {
   .intro__container {
     position: absolute;
-    top: calc(19.414vh + 1.75rem);
+    top: calc(21.414vh + 1.75rem);
   }
 }
 

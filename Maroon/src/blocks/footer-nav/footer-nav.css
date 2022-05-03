@@ -7,9 +7,28 @@
   width: 12.5rem;
 }
 
+@media (min-width: 768px) {
+  .footer-nav__list {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    width: 21.1875rem;
+  }
+}
+
 .footer-nav__li {
   -ms-flex-preferred-size: 50%;
       flex-basis: 50%;
+}
+
+@media (min-width: 768px) {
+  .footer-nav__li {
+    -ms-flex-preferred-size: auto;
+        flex-basis: auto;
+  }
 }
 
 .footer-nav__link {

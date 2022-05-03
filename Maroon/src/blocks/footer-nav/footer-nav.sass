@@ -9,9 +9,18 @@
     row-gap: 1.5625rem
     width: 12.5rem
 
+    @media (min-width: $screen-md)
+      display: flex
+      justify-content: space-between
+      width: 21.1875rem
+
   &__li
     flex:
       basis: 50%
+
+    @media (min-width: $screen-md)
+      flex:
+        basis: auto
 
   &__link
     color: $main-color
