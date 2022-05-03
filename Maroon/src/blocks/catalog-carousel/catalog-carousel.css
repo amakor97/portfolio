@@ -28,3 +28,15 @@
   width: 100%;
   font-size: 0;
 }
+
+@media (min-width: 768px) {
+  .catalog-carousel__page {
+    -ms-grid-columns: (1fr)[2];
+        grid-template-columns: repeat(2, 1fr);
+    -ms-grid-rows: (1fr)[6];
+        grid-template-rows: repeat(6, 1fr);
+    -webkit-column-gap: 1.875rem;
+            column-gap: 1.875rem;
+    padding: 0 4.6875%;
+  }
+}

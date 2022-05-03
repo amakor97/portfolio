@@ -23,3 +23,18 @@
     grid-template-columns: 1fr
     grid-template-rows: 1fr
     width: 100%
+
+    @media (min-width: $screen-md)
+      grid-template-columns: 1fr 1fr
+      grid-template-rows: 1fr 1fr
+      column-gap: 1.875rem
+      row-gap: 1.875rem
+      padding: 0 4.6875%
+
+  &__card
+
+    &--hidden
+      display: none
+
+      @media (min-width: $screen-md)
+        display: block

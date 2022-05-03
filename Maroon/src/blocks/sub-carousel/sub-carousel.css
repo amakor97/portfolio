@@ -28,3 +28,26 @@
       grid-template-rows: 1fr;
   width: 100%;
 }
+
+@media (min-width: 768px) {
+  .sub-carousel__page {
+    -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+    -ms-grid-rows: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+    -webkit-column-gap: 1.875rem;
+            column-gap: 1.875rem;
+    row-gap: 1.875rem;
+    padding: 0 4.6875%;
+  }
+}
+
+.sub-carousel__card--hidden {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .sub-carousel__card--hidden {
+    display: block;
+  }
+}

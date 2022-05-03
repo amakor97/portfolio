@@ -654,6 +654,15 @@ html:root {
   font-size: 0.875rem;
 }
 
+@media (min-width: 768px) {
+  .carousel-controls {
+    width: auto;
+    padding-left: 0;
+    margin-left: 4.6875%;
+    margin-right: calc(4.6875% - 0.25rem);
+  }
+}
+
 .carousel-controls__info {
   display: -webkit-box;
   display: -ms-flexbox;

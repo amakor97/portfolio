@@ -7,7 +7,10 @@ const nextBtn = document.querySelector(".js-catalog-carousel-next-btn");
 const carousel = document.querySelector(".js-catalog-carousel-inner");
 const currentPageElem = document.querySelector(".js-catalog-carousel-current-page");
 const maxPageElem = document.querySelector(".js-catalog-carousel-max-page");
- 
+const carouselPages = document.querySelectorAll(".js-catalog-carousel-page");
+console.log(carouselPages);
+
+
 let catalogData = 24;  //length of array of objects
 let displayedCards = 12;  
 let pageNumber = Math.ceil(catalogData / displayedCards);
@@ -33,3 +36,15 @@ nextBtn.addEventListener("click",
 handleCarousel.bind(null, catalogCarousel, "next"));
 prevBtn.addEventListener("click", 
 handleCarousel.bind(null, catalogCarousel, "prev"));
+
+
+
+let fullscreenWidth = screen.width;
+console.log(fullscreenWidth);
+/*
+if (fullscreenWidth >= 768) {
+  carouselPages.forEach(function(page) {
+    page.style.gridTemplateColumns = "repeat(2, 1fr)";
+    page.style.gridTemplateRows = "repeat(6, 1fr)";
+  })
+}*/
