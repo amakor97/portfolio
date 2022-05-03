@@ -1,8 +1,29 @@
 .history {
+  position: relative;
   padding-top: 3.75rem;
   padding-bottom: 3.75rem;
-  background-image: url(../blocks/history/history.png);
-  background-size: cover;
+}
+
+@media (min-width: 768px) {
+  .history {
+    padding: 6.25rem 0;
+  }
+}
+
+.history__bg-img-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100vw;
+  height: 100%;
+}
+
+.history__bg-img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 
 .history__title {
@@ -13,6 +34,7 @@
 @media (min-width: 768px) {
   .history__title {
     width: 87%;
+    line-height: 2.5rem;
   }
 }
 

@@ -94,6 +94,12 @@
      object-fit: cover;
 }
 
+@media (min-width: 335px) {
+  .offer__img {
+    top: calc(30rem - 10vw);
+  }
+}
+
 @media (min-width: 768px) {
   .offer__img {
     top: 50%;

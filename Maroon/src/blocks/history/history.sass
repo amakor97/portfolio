@@ -1,12 +1,32 @@
 @import '../../sass/variables.sass'
 
 .history
+  position: relative
+
   padding-top: 3.75rem
   padding-bottom: 3.75rem
 
   background:
-    image: url(../blocks/history/history.png)
-    size: cover
+    //image: url(../blocks/history/history.png)
+    //size: cover
+
+  @media (min-width: $screen-md)
+    padding: 6.25rem 0
+
+  &__bg-img-wrapper
+    position: absolute
+    top: 0
+    left: 0
+    z-index: -1
+
+    width: 100vw
+    height: 100%
+
+  &__bg-img
+    object-fit: cover
+
+    width: 100%
+    height: 100%
 
   &__title
     width: 78%
@@ -14,6 +34,8 @@
 
     @media (min-width: $screen-md)
       width: 87%
+
+      line-height: 2.5rem
 
   &__link
     margin: 0 auto

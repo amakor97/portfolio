@@ -6,8 +6,24 @@
   background:
     color: $main-bg-color
 
+  @media (min-width: $screen-md)
+    display: flex
+    justify-content: space-between
+    align-items: center
+    flex-direction: row-reverse
+    gap: 3rem
+    margin: 0 4.6875%
+
+  &__container
+    @media (min-width: $screen-md)
+      flex: 1 0 276px
+
   &__title
     margin: 0 auto 1.5625rem
+
+    @media (min-width: $screen-md)
+      text:
+        align: left
 
   &__text
     width: 73.5%
@@ -19,8 +35,18 @@
     line:
       height: 1.4rem
 
+    @media (min-width: $screen-md)
+      width: 100%
+      margin-left: 0
+
+      text:
+        align: left
+
   &__link
     margin: 0 auto 3.125rem
+
+    @media (min-width: $screen-md)
+      margin: 0
 
   &__imgs-container
     display: flex
@@ -30,6 +56,20 @@
 
     font-size: 0
 
+    @media (min-width: $screen-md)
+      max-width: 600px
+      margin: 0
+      flex: 0 0 354px
+
   &__img
     width: 50%
     height: auto
+
+    @media (min-width: 1960px)
+      width: calc(100% * 0.333333)
+
+    &:nth-child(3n)
+      display: none
+
+      @media (min-width: 1960px)
+        display: block
