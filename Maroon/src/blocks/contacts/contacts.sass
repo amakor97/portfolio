@@ -1,6 +1,8 @@
 @import '../../sass/variables.sass'
 
 .contacts
+  position: relative
+
   padding-top: 5rem
   padding-bottom: 5rem
 
@@ -13,8 +15,17 @@
     background:
       color: $offer-color
 
+    @media (min-width: $screen-md)
+      padding-left: 3.75rem
+      padding-bottom: 3.75rem
+      margin: 0
+      margin-left: 4.6875%
+
   &__title
     margin-bottom: 2.1875rem
+
+    @media (min-width: $screen-md)
+      margin-bottom: 2.5rem
 
   &__sub-title
     margin-bottom: 0.9375rem
@@ -22,8 +33,18 @@
     font:
       weight: 500
 
+    @media (min-width: $screen-md)
+      margin-bottom: 1rem
+
+      font:
+        size: 1.125rem
+
   &__text
     margin-bottom: 1.875rem
+    line-height: 1.45rem
+
+    @media (min-width: $screen-md)
+      margin-bottom: 1.5rem
 
   &__social
     margin-left: -0.25rem
@@ -32,10 +53,22 @@
     position: relative
     margin: 0 0.9375rem
 
+    @media (min-width: $screen-md)
+      position: absolute
+      top: 8.5rem
+      right: 0
+
+      margin: 0
+
   &__map
     display: block
     width: 100%
-    height: 281px
+    height: 17.5625rem
+    object-fit: cover
+
+    @media (min-width: $screen-md)
+      width: 23.0625rem
+      height: 23.375rem
 
   &__map-pointer
     position: absolute
