@@ -358,6 +358,18 @@ html:root {
           transform: translate(-50%, -50%);
 }
 
+.logo-md {
+  fill: #122947;
+}
+
+.logo-md--centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
 .menu-btn {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
