@@ -272,6 +272,12 @@ html:root {
   margin-bottom: 2rem;
 }
 
+@media (min-width: 768px) {
+  .menu__list {
+    margin-top: 2rem;
+  }
+}
+
 .menu__link {
   display: block;
   padding: 1.125rem;
@@ -282,14 +288,32 @@ html:root {
   text-decoration: none;
 }
 
+@media (min-width: 768px) {
+  .menu__link {
+    padding-left: 4.6875vw;
+  }
+}
+
 .menu__social-wrapper {
   padding-left: 0.9375rem;
   margin-bottom: 3.25rem;
 }
 
+@media (min-width: 768px) {
+  .menu__social-wrapper {
+    padding-left: 4.6875%;
+  }
+}
+
 .menu__footer {
   height: 4.1875rem;
   background-color: #e5e5e5;
+}
+
+@media (min-width: 768px) {
+  .menu__footer {
+    height: 9.375rem;
+  }
 }
 
 .menu--showed {
