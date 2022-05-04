@@ -1,12 +1,18 @@
 @import '../../sass/variables.sass'
 
 .product
-  padding: 7.5rem 0.9375rem 2.5rem
+  padding: 7.5rem 4.6875% 2.5rem
+
+  @media (min-width: $screen-md)
+    padding: 7.5rem 4.6875% 2.5rem
 
   &__img
     width: 100%
     height: auto
     margin: 0 0 3.125rem
+
+    @media (min-width: $screen-md)
+      height: 29.375rem
 
   &__description
     padding-bottom: 2.5rem

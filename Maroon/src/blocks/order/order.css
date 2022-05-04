@@ -64,6 +64,15 @@
           align-items: center;
 }
 
+@media (min-width: 768px) {
+  .order__final {
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    gap: 3rem;
+  }
+}
+
 .order__cost {
   font-size: 1.375rem;
   font-weight: 500;

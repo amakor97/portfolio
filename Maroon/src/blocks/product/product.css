@@ -1,11 +1,23 @@
 .product {
-  padding: 7.5rem 0.9375rem 2.5rem;
+  padding: 7.5rem 4.6875% 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .product {
+    padding: 7.5rem 4.6875% 2.5rem;
+  }
 }
 
 .product__img {
   width: 100%;
   height: auto;
   margin: 0 0 3.125rem;
+}
+
+@media (min-width: 768px) {
+  .product__img {
+    height: 29.375rem;
+  }
 }
 
 .product__description {

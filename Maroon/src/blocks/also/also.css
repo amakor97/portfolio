@@ -9,3 +9,7 @@
 .also__sub-carousel {
   margin: 0 auto 1.6875rem;
 }
+
+.also__carousel-controls {
+  margin-right: 4.6875vw;
+}

@@ -86,8 +86,18 @@
   }
 }
 
-.gallery__img {
+.gallery__img-link {
+  display: inline-block;
   width: 50%;
+  height: auto;
+}
+
+.gallery__img-link:nth-child(3n) {
+  display: none;
+}
+
+.gallery__img {
+  width: 100%;
   height: auto;
 }
 
@@ -97,12 +107,8 @@
   }
 }
 
-.gallery__img:nth-child(3n) {
-  display: none;
-}
-
-@media (min-width: 1960px) {
-  .gallery__img:nth-child(3n) {
+@media (min-width: 1960px) and (min-width: 1960px) {
+  .gallery__img {
     display: block;
   }
 }

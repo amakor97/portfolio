@@ -406,13 +406,25 @@ html:root {
 }
 
 .product {
-  padding: 7.5rem 0.9375rem 2.5rem;
+  padding: 7.5rem 4.6875% 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .product {
+    padding: 7.5rem 4.6875% 2.5rem;
+  }
 }
 
 .product__img {
   width: 100%;
   height: auto;
   margin: 0 0 3.125rem;
+}
+
+@media (min-width: 768px) {
+  .product__img {
+    height: 29.375rem;
+  }
 }
 
 .product__description {
@@ -562,6 +574,15 @@ html:root {
           align-items: center;
 }
 
+@media (min-width: 768px) {
+  .order__final {
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    gap: 3rem;
+  }
+}
+
 .order__cost {
   font-size: 1.375rem;
   font-weight: 500;
@@ -593,18 +614,6 @@ html:root {
     padding-left: 1.75rem;
     padding-right: 1.75rem;
   }
-}
-
-.also {
-  padding: 2.5rem 0 5rem;
-}
-
-.also__title {
-  margin: 0 0 2.5rem;
-}
-
-.also__sub-carousel {
-  margin: 0 auto 1.6875rem;
 }
 
 .sub-carousel {
@@ -785,6 +794,22 @@ html:root {
   font-size: 0;
   border: none;
   background: transparent;
+}
+
+.also {
+  padding: 2.5rem 0 5rem;
+}
+
+.also__title {
+  margin: 0 0 2.5rem;
+}
+
+.also__sub-carousel {
+  margin: 0 auto 1.6875rem;
+}
+
+.also__carousel-controls {
+  margin-right: 4.6875vw;
 }
 
 .footer {

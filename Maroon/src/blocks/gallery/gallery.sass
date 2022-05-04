@@ -61,15 +61,20 @@
       margin: 0
       flex: 0 0 22.125rem
 
-  &__img
+  &__img-link
+    display: inline-block
     width: 50%
+    height: auto
+
+    &:nth-child(3n)
+      display: none
+
+  &__img
+    width: 100%
     height: auto
 
     @media (min-width: 1960px)
       width: calc(100% * 0.333333)
-
-    &:nth-child(3n)
-      display: none
 
       @media (min-width: 1960px)
         display: block
