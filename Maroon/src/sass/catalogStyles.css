@@ -425,6 +425,12 @@ html:root {
   margin: 0 0.9375rem 2rem;
 }
 
+@media (min-width: 768px) {
+  .catalog__header {
+    margin: 0 4.6875% 2rem;
+  }
+}
+
 .catalog__catalog-carousel {
   margin: 0 auto 2.1875rem;
 }

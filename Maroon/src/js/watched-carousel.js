@@ -8,8 +8,12 @@ const watchedCarousel = document.querySelector(".js-watched-carousel-inner");
 const watchedCurrentPageElem = document.querySelector(".js-watched-carousel-current-page");
 const watchedMaxPageElem = document.querySelector(".js-watched-carousel-max-page");
 
+let fullScreenWidth = screen.width;
+console.log({fullScreenWidth});
+
+
 let watchedData = 8;  //length of array of objects
-let watchedDisplayedCards = 1;
+let watchedDisplayedCards = (fullScreenWidth >= 768) ? 4 : 1;
 let watchedPageNumber = Math.ceil(watchedData / watchedDisplayedCards);
 watchedMaxPageElem.textContent = watchedPageNumber;
 
