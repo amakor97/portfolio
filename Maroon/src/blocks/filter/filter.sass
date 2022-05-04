@@ -21,6 +21,12 @@
     padding-left: 0.2rem
     margin: 0.2rem 0.7375rem 2rem
 
+    @media (min-width: $screen-md)
+      padding-left: 0
+      margin: 0.2rem 0 2rem
+      margin-left: 4.6875%
+      margin-right: calc(4.6875% - 0.25rem)
+
   &__toggle-btn
     padding: 0.2rem
 
@@ -34,6 +40,11 @@
     width: calc(100vw - 4.375rem)
     margin: 0 auto
 
+  &__accordion-btn
+
+    @media (min-width: $screen-md)
+      display: none
+
   &__fieldset
 
     //margin: 0 auto 2.5rem
@@ -44,12 +55,32 @@
     transition: max-height 1s
     transition: max-height 2s, padding 1s
 
+    @media (min-width: $screen-md)
+      display: inline-block
+      max-height: 100vh
+      margin-right: 7.8125vw
+      vertical-align: top
+
     &--opened
       max-height: 100vh
       padding: 1.375rem 0 2.5rem
 
     &:last-of-type
       padding-bottom: 0
+
+      @media (min-width: $screen-md)
+        margin-right: 0
+
+  &__fieldset-title
+    display: none
+
+    @media (min-width: $screen-md)
+      display: block
+      margin-bottom: 2rem
+
+      font:
+        size: 1.125rem
+        weight: 500
 
   &__input-wrapper
     margin: 0 0 1.375rem
@@ -91,6 +122,10 @@
     justify-content: space-between
     align-items: center
     margin: 3.125rem 0 5.5rem
+
+    @media (min-width: $screen-md)
+      width: 18.875rem
+      margin: 3.125rem auto 7.5rem
 
   &--showed
     max-height: 250vh

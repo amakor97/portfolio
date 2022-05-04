@@ -26,6 +26,15 @@
   margin: 0.2rem 0.7375rem 2rem;
 }
 
+@media (min-width: 768px) {
+  .filter__header {
+    padding-left: 0;
+    margin: 0.2rem 0 2rem;
+    margin-left: 4.6875%;
+    margin-right: calc(4.6875% - 0.25rem);
+  }
+}
+
 .filter__toggle-btn {
   padding: 0.2rem;
   font-size: 0;
@@ -38,6 +47,12 @@
   margin: 0 auto;
 }
 
+@media (min-width: 768px) {
+  .filter__accordion-btn {
+    display: none;
+  }
+}
+
 .filter__fieldset {
   max-height: 0;
   overflow-y: hidden;
@@ -47,6 +62,15 @@
   transition: max-height 2s, padding 1s;
 }
 
+@media (min-width: 768px) {
+  .filter__fieldset {
+    display: inline-block;
+    max-height: 100vh;
+    margin-right: 7.8125vw;
+    vertical-align: top;
+  }
+}
+
 .filter__fieldset--opened {
   max-height: 100vh;
   padding: 1.375rem 0 2.5rem;
@@ -54,6 +78,25 @@
 
 .filter__fieldset:last-of-type {
   padding-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .filter__fieldset:last-of-type {
+    margin-right: 0;
+  }
+}
+
+.filter__fieldset-title {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .filter__fieldset-title {
+    display: block;
+    margin-bottom: 2rem;
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
 }
 
 .filter__input-wrapper {
@@ -110,6 +153,13 @@
       -ms-flex-align: center;
           align-items: center;
   margin: 3.125rem 0 5.5rem;
+}
+
+@media (min-width: 768px) {
+  .filter__btn-block {
+    width: 18.875rem;
+    margin: 3.125rem auto 7.5rem;
+  }
 }
 
 .filter--showed {

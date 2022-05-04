@@ -15,7 +15,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin: 0 0.9375rem 2rem;
+  margin: 0 4.6875vw 2rem;
 }
 
 @media (min-width: 768px) {
@@ -26,4 +26,9 @@
 
 .catalog__catalog-carousel {
   margin: 0 auto 2.1875rem;
+}
+
+.catalog__carousel-controls {
+  margin-right: calc(4.6875% - 0.25rem);
+  margin-left: calc(4.6875% - 0.25rem);
 }

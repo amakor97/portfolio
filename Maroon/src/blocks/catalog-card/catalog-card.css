@@ -4,7 +4,9 @@
   -ms-grid-column-align: center;
       justify-self: center;
   width: calc(100vw - 1.875rem);
+  width: 90.625vw;
   height: calc(100vw - 1.875rem);
+  height: 90.625vw;
 }
 
 @media (min-width: 768px) {

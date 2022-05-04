@@ -588,6 +588,13 @@ html:root {
   padding-right: 1.25rem;
 }
 
+@media (min-width: 768px) {
+  .btn--small-side-pads {
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
+  }
+}
+
 .also {
   padding: 2.5rem 0 5rem;
 }
@@ -660,7 +667,9 @@ html:root {
   -ms-grid-column-align: center;
       justify-self: center;
   width: calc(100vw - 1.875rem);
+  width: 90.625vw;
   height: calc(100vw - 1.875rem);
+  height: 90.625vw;
 }
 
 @media (min-width: 768px) {
@@ -712,6 +721,7 @@ html:root {
 }
 
 .carousel-controls {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -721,18 +731,17 @@ html:root {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: calc(100vw - 1.375rem);
-  padding-left: 0.25rem;
   margin: 0 auto;
   font-size: 0.875rem;
 }
 
 @media (min-width: 768px) {
   .carousel-controls {
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
     width: auto;
     padding-left: 0;
-    margin-left: 4.6875%;
-    margin-right: calc(4.6875% - 0.25rem);
   }
 }
 
@@ -747,6 +756,15 @@ html:root {
       -ms-flex-align: center;
           align-items: center;
   width: 4rem;
+}
+
+@media (min-width: 768px) {
+  .carousel-controls__info {
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
 }
 
 .carousel-controls__arrows {
@@ -802,6 +820,12 @@ html:root {
 }
 
 @media (min-width: 768px) {
+  .footer__container:first-of-type {
+    margin-right: calc(4.6875% - 0.75rem);
+  }
+}
+
+@media (min-width: 768px) {
   .footer__container:last-of-type {
     margin-bottom: 0;
   }
@@ -848,6 +872,7 @@ html:root {
 
 @media (min-width: 768px) {
   .footer__social {
+    margin-right: 0;
     margin-bottom: 0;
   }
 }

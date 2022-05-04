@@ -31,6 +31,12 @@
 }
 
 @media (min-width: 768px) {
+  .footer__container:first-of-type {
+    margin-right: calc(4.6875% - 0.75rem);
+  }
+}
+
+@media (min-width: 768px) {
   .footer__container:last-of-type {
     margin-bottom: 0;
   }
@@ -77,6 +83,7 @@
 
 @media (min-width: 768px) {
   .footer__social {
+    margin-right: 0;
     margin-bottom: 0;
   }
 }

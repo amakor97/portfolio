@@ -24,6 +24,13 @@
   .intro__container {
     position: absolute;
     top: calc(21.414vh + 1.75rem);
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+    display: inline-block;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
   }
 }
 

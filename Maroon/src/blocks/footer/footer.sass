@@ -22,6 +22,10 @@
       padding-left: 0
       margin-bottom: 3.75rem
 
+    &:first-of-type
+      @media (min-width: $screen-md)
+        margin-right: calc(4.6875% - 0.75rem)
+
     &:last-of-type
       @media (min-width: $screen-md)
         margin-bottom: 0
@@ -49,6 +53,7 @@
     margin-bottom: 3.125rem
 
     @media (min-width: $screen-md)
+      margin-right: 0
       margin-bottom: 0
 
   &__icon-link
