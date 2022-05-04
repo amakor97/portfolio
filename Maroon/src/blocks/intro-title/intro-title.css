@@ -16,6 +16,14 @@
   margin: 0 auto;
 }
 
+@media (min-width: 1366px) {
+  .intro-title {
+    display: block;
+    width: 100%;
+    margin: 0;
+  }
+}
+
 .intro-title__logo {
   display: block;
   width: 76%;
@@ -23,9 +31,23 @@
   height: auto;
 }
 
+@media (min-width: 1366px) {
+  .intro-title__logo {
+    width: 100%;
+    margin: 0 0 1.875rem;
+  }
+}
+
 .intro-title__text {
   font-size: 1rem;
   text-align: center;
+}
+
+@media (min-width: 1366px) {
+  .intro-title__text {
+    font-size: 1.125rem;
+    margin: 0 0 2.5rem;
+  }
 }
 
 .intro-title__link {

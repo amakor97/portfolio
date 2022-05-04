@@ -14,6 +14,12 @@
   }
 }
 
+@media (min-width: 1366px) {
+  .intro {
+    padding-top: 20.1538vh;
+  }
+}
+
 .intro__container {
   width: 100%;
   height: 28.389vh;
@@ -34,6 +40,13 @@
   }
 }
 
+@media (min-width: 1366px) {
+  .intro__container {
+    top: 29.538vh;
+    width: 17.125rem;
+  }
+}
+
 .intro__link-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -49,5 +62,13 @@
         -ms-flex-pack: justify;
             justify-content: space-between;
     margin: 0 4.6875%;
+  }
+}
+
+@media (min-width: 1366px) {
+  .intro__link-container {
+    width: 64.375rem;
+    height: auto;
+    margin: 0 auto;
   }
 }

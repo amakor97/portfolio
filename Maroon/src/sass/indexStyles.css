@@ -413,6 +413,12 @@ html:root {
   }
 }
 
+@media (min-width: 1366px) {
+  .intro {
+    padding-top: 20.1538vh;
+  }
+}
+
 .intro__container {
   width: 100%;
   height: 28.389vh;
@@ -430,6 +436,13 @@ html:root {
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
+  }
+}
+
+@media (min-width: 1366px) {
+  .intro__container {
+    top: 29.538vh;
+    width: 17.125rem;
   }
 }
 
@@ -451,6 +464,14 @@ html:root {
   }
 }
 
+@media (min-width: 1366px) {
+  .intro__link-container {
+    width: 64.375rem;
+    height: auto;
+    margin: 0 auto;
+  }
+}
+
 .intro-title {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -469,6 +490,14 @@ html:root {
   margin: 0 auto;
 }
 
+@media (min-width: 1366px) {
+  .intro-title {
+    display: block;
+    width: 100%;
+    margin: 0;
+  }
+}
+
 .intro-title__logo {
   display: block;
   width: 76%;
@@ -476,9 +505,23 @@ html:root {
   height: auto;
 }
 
+@media (min-width: 1366px) {
+  .intro-title__logo {
+    width: 100%;
+    margin: 0 0 1.875rem;
+  }
+}
+
 .intro-title__text {
   font-size: 1rem;
   text-align: center;
+}
+
+@media (min-width: 1366px) {
+  .intro-title__text {
+    font-size: 1.125rem;
+    margin: 0 0 2.5rem;
+  }
 }
 
 .intro-title__link {
@@ -501,9 +544,23 @@ html:root {
   }
 }
 
+@media (min-width: 1366px) {
+  .intro-link {
+    width: 20.625rem;
+    height: 28.75rem;
+  }
+}
+
 .intro-link__img-wrapper {
   width: 100%;
   height: 85%;
+}
+
+@media (min-width: 1366px) {
+  .intro-link__img-wrapper {
+    height: 26.375rem;
+    margin-bottom: 1rem;
+  }
 }
 
 .intro-link__img {
@@ -524,6 +581,12 @@ html:root {
       -ms-flex-align: center;
           align-items: center;
   height: 15%;
+}
+
+@media (min-width: 1366px) {
+  .intro-link__text-wrapper {
+    height: auto;
+  }
 }
 
 .intro-link__text {
@@ -818,7 +881,7 @@ html:root {
 
 .banner {
   position: relative;
-  width: 100vw;
+  width: 100%;
   padding-top: 18.1875rem;
   padding-bottom: 3.75rem;
   -webkit-box-sizing: border-box;
@@ -1020,7 +1083,7 @@ html:root {
   top: 0;
   left: 0;
   z-index: -1;
-  width: 100vw;
+  width: 100%;
   height: 100%;
 }
 
