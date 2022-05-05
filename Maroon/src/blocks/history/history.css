@@ -10,6 +10,23 @@
   }
 }
 
+@media (min-width: 1366px) {
+  .history {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    height: 27.0625rem;
+    padding: 7.25rem 0;
+  }
+}
+
 .history__bg-img-wrapper {
   position: absolute;
   top: 0;
@@ -35,6 +52,12 @@
   .history__title {
     width: 87%;
     line-height: 2.5rem;
+  }
+}
+
+@media (min-width: 1366px) {
+  .history__title {
+    width: 50rem;
   }
 }
 
