@@ -12,13 +12,13 @@
   overflow: hidden
 
   @media (min-width: $screen-md)
+    height: 27rem
     padding-top: 6.0625rem
     padding-left: 51.953%
-    height: 27rem
 
-  background:
-    //image: url(../blocks/banner/bg.png)
-    //size: cover
+  @media (min-width: $screen-xxl)
+    height: 25rem
+    padding-left: 58.419%
 
   &__bg-img-wrapper
     position: absolute
@@ -60,6 +60,9 @@
       width: 17.75rem
       margin-left: 0
       margin-bottom: 2.25rem
+
+      font:
+        size: 1.125rem
 
       text:
         align: left

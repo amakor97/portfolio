@@ -12,6 +12,12 @@
   }
 }
 
+@media (min-width: 1366px) {
+  .bestsellers {
+    padding-left: calc(6.125rem + (100vw - 1366px));
+  }
+}
+
 .bestsellers__title {
   margin: 0 auto 1.5625rem;
 }
@@ -49,6 +55,12 @@
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     margin-left: calc(3.125rem + (100vw - 25rem) / 2);
+  }
+}
+
+@media (min-width: 1366px) {
+  .bestsellers__intro-carousel {
+    margin-left: 18.25rem;
   }
 }
 

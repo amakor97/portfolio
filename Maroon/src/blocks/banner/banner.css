@@ -10,9 +10,16 @@
 
 @media (min-width: 768px) {
   .banner {
+    height: 27rem;
     padding-top: 6.0625rem;
     padding-left: 51.953%;
-    height: 27rem;
+  }
+}
+
+@media (min-width: 1366px) {
+  .banner {
+    height: 25rem;
+    padding-left: 58.419%;
   }
 }
 
@@ -58,6 +65,7 @@
     width: 17.75rem;
     margin-left: 0;
     margin-bottom: 2.25rem;
+    font-size: 1.125rem;
     text-align: left;
   }
 }
