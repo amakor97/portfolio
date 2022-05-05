@@ -11,10 +11,23 @@
   transition: background 0.5s;
 }
 
+@media (min-width: 1366px) {
+  .header {
+    padding-top: 2.5rem;
+  }
+}
+
 .header__header-nav {
   margin: 0 0.9375rem;
   margin-left: calc(4.6875% - 0.25rem);
   margin-right: calc(4.6875% - 0.25rem);
+}
+
+@media (min-width: 1366px) {
+  .header__header-nav {
+    margin-left: 7.174%;
+    margin-right: calc(7.174% - 0.25rem);
+  }
 }
 
 .header__divider {

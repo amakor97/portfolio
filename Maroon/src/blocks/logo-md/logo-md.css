@@ -9,3 +9,13 @@
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
 }
+
+@media (min-width: 1366px) {
+  .logo-md--centered {
+    position: relative;
+    top: unset;
+    left: unset;
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+  }
+}

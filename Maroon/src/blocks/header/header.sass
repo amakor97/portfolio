@@ -12,10 +12,17 @@
 
   transition: background 0.5s
 
+  @media (min-width: $screen-xxl)
+    padding-top: 2.5rem
+
   &__header-nav
     margin: 0 0.9375rem
     margin-left: calc(4.6875% - 0.25rem)
     margin-right: calc(4.6875% - 0.25rem)
+
+    @media (min-width: $screen-xxl)
+      margin-left: 7.174%
+      margin-right: calc(7.174% - 0.25rem)
 
   &__divider
     display: none
