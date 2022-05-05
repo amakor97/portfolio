@@ -412,6 +412,12 @@ html:root {
   border-radius: 2px;
 }
 
+@media (min-width: 1366px) {
+  .link {
+    padding: 0.75rem 2rem;
+  }
+}
+
 .section-title {
   font-family: Raleway;
   font-size: 1.75rem;

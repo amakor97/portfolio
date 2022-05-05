@@ -41,8 +41,8 @@
 @media (min-width: 1366px) {
   .gallery__container {
     -webkit-box-flex: 0;
-        -ms-flex: 0 0 23.75rem;
-            flex: 0 0 23.75rem;
+        -ms-flex: 0 0 23.8rem;
+            flex: 0 0 23.8rem;
   }
 }
 
@@ -68,6 +68,12 @@
     width: 100%;
     margin-left: 0;
     text-align: left;
+  }
+}
+
+@media (min-width: 1366px) {
+  .gallery__text {
+    font-size: 1.125rem;
   }
 }
 

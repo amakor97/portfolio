@@ -412,6 +412,12 @@ html:root {
   border-radius: 2px;
 }
 
+@media (min-width: 1366px) {
+  .link {
+    padding: 0.75rem 2rem;
+  }
+}
+
 .section-title {
   font-family: Raleway;
   font-size: 1.75rem;
@@ -999,8 +1005,8 @@ html:root {
 @media (min-width: 1366px) {
   .gallery__container {
     -webkit-box-flex: 0;
-        -ms-flex: 0 0 23.75rem;
-            flex: 0 0 23.75rem;
+        -ms-flex: 0 0 23.8rem;
+            flex: 0 0 23.8rem;
   }
 }
 
@@ -1026,6 +1032,12 @@ html:root {
     width: 100%;
     margin-left: 0;
     text-align: left;
+  }
+}
+
+@media (min-width: 1366px) {
+  .gallery__text {
+    font-size: 1.125rem;
   }
 }
 
