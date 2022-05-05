@@ -14,7 +14,7 @@
 
 @media (min-width: 1366px) {
   .bestsellers {
-    padding-left: calc(6.125rem + (100vw - 1366px));
+    padding-left: 7.174%;
   }
 }
 

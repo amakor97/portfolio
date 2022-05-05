@@ -14,9 +14,16 @@
     gap: 3rem
     margin: 0 4.6875%
 
+  @media (min-width: $screen-xxl)
+    gap: 4.375rem
+    margin: 0 7.174%
+
   &__container
     @media (min-width: $screen-md)
-      flex: 1 0 276px
+      flex: 1 0 17.25rem
+
+    @media (min-width: $screen-xxl)
+      flex: 0 0 23.75rem
 
   &__title
     margin: 0 auto 1.5625rem
@@ -52,22 +59,31 @@
     display: flex
     flex:
       wrap: wrap
+    justify-content: flex-start
     margin: 0 0.9375rem
 
     font-size: 0
 
     @media (min-width: $screen-md)
-      max-width: 37.5rem
       margin: 0
       flex: 0 0 22.125rem
+
+    @media (min-width: $screen-xxl)
+      flex: 0 0 43.75rem
 
   &__img-link
     display: inline-block
     width: 50%
     height: auto
 
+    @media (min-width: $screen-xxl)
+      width: 33.333%
+
     &:nth-child(3n)
       display: none
+
+      @media (min-width: $screen-xxl)
+        display: inline-block
 
   &__img
     width: 100%
