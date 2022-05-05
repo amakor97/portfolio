@@ -5,6 +5,13 @@
   margin-bottom: 6.25rem;
 }
 
+@media (min-width: 1366px) {
+  .catalog {
+    padding-top: 8.625rem;
+    margin-bottom: 8.25rem;
+  }
+}
+
 .catalog__header {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -24,6 +31,12 @@
   }
 }
 
+@media (min-width: 1366px) {
+  .catalog__header {
+    margin: 0 7.174% 2rem;
+  }
+}
+
 .catalog__catalog-carousel {
   margin: 0 auto 2.1875rem;
 }
@@ -31,4 +44,11 @@
 .catalog__carousel-controls {
   margin-right: calc(4.6875% - 0.25rem);
   margin-left: calc(4.6875% - 0.25rem);
+}
+
+@media (min-width: 1366px) {
+  .catalog__carousel-controls {
+    margin-right: calc(7.164% - 0.25rem);
+    margin-left: calc(7.174% - 0.25rem);
+  }
 }

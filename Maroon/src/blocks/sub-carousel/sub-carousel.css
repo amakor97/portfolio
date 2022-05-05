@@ -42,6 +42,16 @@
   }
 }
 
+@media (min-width: 1366px) {
+  .sub-carousel__page {
+    -ms-grid-columns: (1fr)[4];
+        grid-template-columns: repeat(4, 1fr);
+    -ms-grid-rows: 1fr;
+        grid-template-rows: 1fr;
+    padding: 0 7.174%;
+  }
+}
+
 .sub-carousel__card--hidden {
   display: none;
 }

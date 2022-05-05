@@ -844,6 +844,7 @@ html:root {
     left: 50%;
     -webkit-transform: translateX(-50%);
             transform: translateX(-50%);
+    font-size: 1.125rem;
   }
 }
 

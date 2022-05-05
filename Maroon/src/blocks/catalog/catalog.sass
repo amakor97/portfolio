@@ -7,6 +7,10 @@
   padding-top: 6.625rem
   margin-bottom: 6.25rem
 
+  @media (min-width: $screen-xxl)
+    padding-top: 8.625rem
+    margin-bottom: 8.25rem
+
   &__header
     display: flex
     justify-content: space-between
@@ -16,9 +20,16 @@
     @media (min-width: $screen-md)
       margin: 0 4.6875% 2rem
 
+    @media (min-width: $screen-xxl)
+      margin: 0 7.174% 2rem
+
   &__catalog-carousel
     margin: 0 auto 2.1875rem
 
   &__carousel-controls
     margin-right: calc(4.6875% - 0.25rem)
     margin-left: calc(4.6875% - 0.25rem)
+
+    @media (min-width: $screen-xxl)
+      margin-right: calc(7.164% - 0.25rem)
+      margin-left: calc(7.174% - 0.25rem)

@@ -795,6 +795,16 @@ html:root {
   }
 }
 
+@media (min-width: 1366px) {
+  .catalog-carousel__page {
+    -ms-grid-columns: (1fr)[4];
+        grid-template-columns: repeat(4, 1fr);
+    -ms-grid-rows: (1fr)[3];
+        grid-template-rows: repeat(3, 1fr);
+    padding: 0 7.174%;
+  }
+}
+
 .catalog-card {
   position: relative;
   display: inline-block;
@@ -813,9 +823,17 @@ html:root {
   }
 }
 
+@media (min-width: 1366px) {
+  .catalog-card {
+    height: 21.875rem;
+  }
+}
+
 .catalog-card__img {
   width: 100%;
   height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .catalog-card__description {
@@ -898,6 +916,7 @@ html:root {
     left: 50%;
     -webkit-transform: translateX(-50%);
             transform: translateX(-50%);
+    font-size: 1.125rem;
   }
 }
 
@@ -928,6 +947,13 @@ html:root {
   margin-bottom: 6.25rem;
 }
 
+@media (min-width: 1366px) {
+  .catalog {
+    padding-top: 8.625rem;
+    margin-bottom: 8.25rem;
+  }
+}
+
 .catalog__header {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -947,6 +973,12 @@ html:root {
   }
 }
 
+@media (min-width: 1366px) {
+  .catalog__header {
+    margin: 0 7.174% 2rem;
+  }
+}
+
 .catalog__catalog-carousel {
   margin: 0 auto 2.1875rem;
 }
@@ -954,6 +986,13 @@ html:root {
 .catalog__carousel-controls {
   margin-right: calc(4.6875% - 0.25rem);
   margin-left: calc(4.6875% - 0.25rem);
+}
+
+@media (min-width: 1366px) {
+  .catalog__carousel-controls {
+    margin-right: calc(7.164% - 0.25rem);
+    margin-left: calc(7.174% - 0.25rem);
+  }
 }
 
 .sub-carousel {
@@ -1000,6 +1039,16 @@ html:root {
   }
 }
 
+@media (min-width: 1366px) {
+  .sub-carousel__page {
+    -ms-grid-columns: (1fr)[4];
+        grid-template-columns: repeat(4, 1fr);
+    -ms-grid-rows: 1fr;
+        grid-template-rows: 1fr;
+    padding: 0 7.174%;
+  }
+}
+
 .sub-carousel__card--hidden {
   display: none;
 }
@@ -1007,6 +1056,12 @@ html:root {
 @media (min-width: 768px) {
   .sub-carousel__card--hidden {
     display: block;
+  }
+}
+
+@media (min-width: 1366px) {
+  .watched {
+    padding-bottom: 2rem;
   }
 }
 
@@ -1022,6 +1077,13 @@ html:root {
 .watched__carousel-controls {
   margin-right: calc(4.6875% - 0.25rem);
   margin-left: calc(4.6875% - 0.25rem);
+}
+
+@media (min-width: 1366px) {
+  .watched__carousel-controls {
+    margin-right: calc(7.174% - 0.25rem);
+    margin-left: calc(7.174% - 0.25rem);
+  }
 }
 
 .gallery {
