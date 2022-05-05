@@ -1003,6 +1003,15 @@ html:root {
   }
 }
 
+@media (min-width: 1366px) {
+  .offer__container {
+    width: 49.048%;
+    padding-top: 6.25rem;
+    padding-left: 6.25rem;
+    padding-bottom: 6.25rem;
+  }
+}
+
 .offer__title {
   margin: 0 auto 1.5625rem;
 }
@@ -1027,6 +1036,12 @@ html:root {
     margin-left: 0;
     text-align: left;
     line-height: 1.45rem;
+  }
+}
+
+@media (min-width: 1366px) {
+  .offer__text {
+    width: calc(12rem + 11vw);
   }
 }
 
@@ -1083,6 +1098,15 @@ html:root {
             transform: translate(0, -50%);
     width: 24.875rem;
     height: 25.1875rem;
+  }
+}
+
+@media (min-width: 1366px) {
+  .offer__img {
+    left: unset;
+    right: 4.6875%;
+    width: 49.048%;
+    height: 58.724%;
   }
 }
 

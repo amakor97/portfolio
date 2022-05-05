@@ -52,5 +52,6 @@ function headerBackgrounder() {
   } else {
     if (!menu.classList.contains("menu--showed"))
     header.classList.remove("header--backgrounded");
+    headerDivider.classList.remove("header__divider--showed");
   }
 }
