@@ -22,9 +22,17 @@
       padding-left: 0
       margin-bottom: 3.75rem
 
+    @media (min-width: $screen-xxl)
+      margin-left: calc(7.174% - 0.25rem)
+      margin-right: calc(7.174% - 0.25rem)
+
     &:first-of-type
       @media (min-width: $screen-md)
         margin-right: calc(4.6875% - 0.75rem)
+
+      @media (min-width: $screen-xxl)
+        justify-content: flex-start
+        margin-right: calc(7.174% - 0.75rem)
 
     &:last-of-type
       @media (min-width: $screen-md)
@@ -39,6 +47,22 @@
       align-items: center
       padding: 0.25rem
       margin: 0
+
+    @media (min-width: $screen-xxl)
+      margin-right: 4.5rem
+
+  &__logo-svg
+
+    &--sm
+
+      @media (min-width: $screen-md)
+        display: none
+
+    &--md
+      display: none
+
+      @media (min-width: $screen-md)
+        display: block
 
   &__footer-nav
     margin: 0 auto 1.875rem

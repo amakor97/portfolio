@@ -1,3 +1,9 @@
+@media (min-width: 1366px) {
+  .footer-nav {
+    margin-right: auto;
+  }
+}
+
 .footer-nav__list {
   display: -ms-grid;
   display: grid;
