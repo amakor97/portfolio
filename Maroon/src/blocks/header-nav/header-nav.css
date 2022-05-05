@@ -14,6 +14,9 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.header-nav__list--outer {
   width: 100%;
 }
 
@@ -41,6 +44,13 @@
   .header-nav__list-item--link {
     margin-left: 1.875rem;
   }
+}
+
+.header-nav__link {
+  display: inline-block;
+  padding: 0.25rem;
+  color: #122947;
+  text-decoration: none;
 }
 
 .header-nav__icon-link {

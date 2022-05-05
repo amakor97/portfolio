@@ -11,7 +11,9 @@
     display: flex
     justify-content: space-between
     align-items: center
-    width: 100%
+
+    &--outer
+      width: 100%
 
   &__list-item
 
@@ -31,6 +33,15 @@
 
       @media (min-width: $screen-xxl)
         margin-left: 1.875rem
+
+  &__link
+    display: inline-block
+    padding: 0.25rem
+
+    color: $main-color
+
+    text:
+      decoration: none
 
   &__icon-link
     display: inline-block
