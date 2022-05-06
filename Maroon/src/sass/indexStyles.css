@@ -224,6 +224,12 @@ html:root {
   padding-bottom: 1.625rem;
 }
 
+@media (min-width: 1366px) {
+  .header-nav {
+    padding-bottom: 2.5rem;
+  }
+}
+
 .header-nav__list {
   position: relative;
   display: -webkit-box;
@@ -239,6 +245,18 @@ html:root {
 
 .header-nav__list--outer {
   width: 100%;
+}
+
+.header-nav__list--nested {
+  display: none;
+}
+
+@media (min-width: 1366px) {
+  .header-nav__list--nested {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
 }
 
 .header-nav__list-item--btn {

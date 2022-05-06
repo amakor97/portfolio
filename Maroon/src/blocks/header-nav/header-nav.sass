@@ -5,6 +5,9 @@
 
   padding-bottom: 1.625rem
 
+  @media (min-width: $screen-xxl)
+    padding-bottom: 2.5rem
+
   &__list
     position: relative
 
@@ -14,6 +17,12 @@
 
     &--outer
       width: 100%
+
+    &--nested
+      display: none
+
+      @media (min-width: $screen-xxl)
+        display: flex
 
   &__list-item
 

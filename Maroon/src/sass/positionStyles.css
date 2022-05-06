@@ -224,6 +224,12 @@ html:root {
   padding-bottom: 1.625rem;
 }
 
+@media (min-width: 1366px) {
+  .header-nav {
+    padding-bottom: 2.5rem;
+  }
+}
+
 .header-nav__list {
   position: relative;
   display: -webkit-box;
@@ -239,6 +245,18 @@ html:root {
 
 .header-nav__list--outer {
   width: 100%;
+}
+
+.header-nav__list--nested {
+  display: none;
+}
+
+@media (min-width: 1366px) {
+  .header-nav__list--nested {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
 }
 
 .header-nav__list-item--btn {
@@ -528,6 +546,12 @@ html:root {
 @media (min-width: 768px) {
   .product {
     padding: 7.5rem 4.6875% 2.5rem;
+  }
+}
+
+@media (min-width: 1366px) {
+  .product {
+    padding: 9rem 7.174% 2.5rem;
   }
 }
 
@@ -972,6 +996,13 @@ html:root {
 
 .also__carousel-controls {
   margin-right: 4.6875vw;
+}
+
+@media (min-width: 1366px) {
+  .also__carousel-controls {
+    margin-right: calc(7.174% - 0.25rem);
+    margin-left: calc(7.174% - 0.25rem);
+  }
 }
 
 .footer {
