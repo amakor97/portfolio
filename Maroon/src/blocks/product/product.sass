@@ -14,6 +14,20 @@
     @media (min-width: $screen-md)
       height: 29.375rem
 
+    @media (min-width: $screen-xxl)
+      width: 39.375rem
+      width: 46.120vw
+      height: 40.375rem
+
+  &__info
+
+    @media (min-width: $screen-xxl)
+      display: inline-block
+      vertical-align: top
+      width: 40%
+      padding-top: 3rem
+      padding-left: 4.375rem
+
   &__description
     padding-bottom: 2.5rem
     border-bottom: 1px solid $link-border
@@ -28,12 +42,22 @@
 
   &__text
 
+    @media (min-width: $screen-xxl)
+      width: 17rem
+
+      line-height: 1.45rem
+
   &__accordion
     margin: 0 0 2.675rem
 
   &__panel
     max-height: 0
     overflow-y: hidden
+
+    font:
+      size: 0.875rem
+
+    line-height: 1.25rem
 
     border-bottom: 1px solid $link-border
 

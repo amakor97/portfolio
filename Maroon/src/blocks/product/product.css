@@ -20,6 +20,24 @@
   }
 }
 
+@media (min-width: 1366px) {
+  .product__img {
+    width: 39.375rem;
+    width: 46.120vw;
+    height: 40.375rem;
+  }
+}
+
+@media (min-width: 1366px) {
+  .product__info {
+    display: inline-block;
+    vertical-align: top;
+    width: 40%;
+    padding-top: 3rem;
+    padding-left: 4.375rem;
+  }
+}
+
 .product__description {
   padding-bottom: 2.5rem;
   border-bottom: 1px solid #b3bac1;
@@ -35,6 +53,13 @@
   color: #9a9da0;
 }
 
+@media (min-width: 1366px) {
+  .product__text {
+    width: 17rem;
+    line-height: 1.45rem;
+  }
+}
+
 .product__accordion {
   margin: 0 0 2.675rem;
 }
@@ -42,6 +67,8 @@
 .product__panel {
   max-height: 0;
   overflow-y: hidden;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   border-bottom: 1px solid #b3bac1;
   -webkit-transition: max-height 1s;
   transition: max-height 1s;
