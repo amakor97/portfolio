@@ -45,7 +45,7 @@ console.log(filterFieldsets);
 
 window.addEventListener("resize", function() {
   if (this.screen.width >= 768) {
-    console.log(screen.width);
+    //console.log(screen.width);
     for (let i = 0; i < filterFieldsets.length; i++) {
       toggleFieldsetsBtns[i].classList.remove("accordion-btn--opened");
       filterFieldsets[i].classList.remove("filter__fieldset--opened");
