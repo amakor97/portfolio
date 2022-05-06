@@ -12,6 +12,14 @@
   }
 }
 
+@media (min-width: 1630px) {
+  .offer {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 .offer__container {
   width: 90.625%;
   padding-top: 3.25rem;
@@ -35,6 +43,12 @@
     padding-left: 6.25rem;
     padding-bottom: 6.25rem;
     margin-left: 7.174%;
+  }
+}
+
+@media (min-width: 1630px) {
+  .offer__container {
+    margin-left: 0;
   }
 }
 

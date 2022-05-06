@@ -13,6 +13,9 @@
   @media (min-width: $screen-md)
     padding-bottom: 5rem
 
+  @media (min-width: $screen-border)
+    @include centered
+
   &__container
     width: 90.625%
     padding-top: 3.25rem
@@ -33,6 +36,9 @@
       padding-left: 6.25rem
       padding-bottom: 6.25rem
       margin-left: 7.174%
+
+    @media (min-width: $screen-border)
+      margin-left: 0
 
   &__title
     margin: 0 auto 1.5625rem

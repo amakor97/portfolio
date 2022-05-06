@@ -30,6 +30,14 @@
   }
 }
 
+@media (min-width: 1630px) {
+  .gallery {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 @media (min-width: 768px) {
   .gallery__container {
     -webkit-box-flex: 1;

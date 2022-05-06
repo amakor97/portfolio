@@ -20,11 +20,14 @@
       display: flex
       justify-content: space-between
       padding-left: 0
-      margin-bottom: 3.75rem
+      margin-bottom: 3.125rem
 
     @media (min-width: $screen-xxl)
       margin-left: calc(7.174% - 0.25rem)
       margin-right: calc(7.174% - 0.25rem)
+
+    @media (min-width: $screen-border)
+      @include centered
 
     &:first-of-type
       @media (min-width: $screen-md)
@@ -33,6 +36,9 @@
       @media (min-width: $screen-xxl)
         justify-content: flex-start
         margin-right: calc(7.174% - 0.75rem)
+
+      @media (min-width: $screen-border)
+        margin-right: auto
 
     &:last-of-type
       @media (min-width: $screen-md)

@@ -9,6 +9,14 @@
   }
 }
 
+@media (min-width: 1630px) {
+  .header-nav {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 .header-nav__list {
   position: relative;
   display: -webkit-box;
