@@ -12,6 +12,14 @@
   }
 }
 
+@media (min-width: 1630px) {
+  .catalog {
+    max-width: 1400px;
+    padding-left: auto;
+    margin-right: auto;
+  }
+}
+
 .catalog__header {
   display: -webkit-box;
   display: -ms-flexbox;

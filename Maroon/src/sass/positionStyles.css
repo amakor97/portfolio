@@ -563,6 +563,16 @@ html:root {
   }
 }
 
+@media (min-width: 1630px) {
+  .product {
+    max-width: 1400px;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 .product__img {
   width: 100%;
   height: auto;
@@ -992,6 +1002,14 @@ html:root {
 
 .also {
   padding: 2.5rem 0 5rem;
+}
+
+@media (min-width: 1630px) {
+  .also {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .also__title {

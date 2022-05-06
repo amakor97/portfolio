@@ -1027,6 +1027,14 @@ html:root {
   }
 }
 
+@media (min-width: 1630px) {
+  .catalog {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 .catalog__header {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1135,6 +1143,14 @@ html:root {
 @media (min-width: 1366px) {
   .watched {
     padding-bottom: 2rem;
+  }
+}
+
+@media (min-width: 1630px) {
+  .watched {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
