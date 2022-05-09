@@ -670,8 +670,7 @@ html:root {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding-left: 0.2rem;
-  margin: 0.2rem 0.7375rem 2rem;
+  margin: 0.2rem 4.6875% 2rem;
 }
 
 @media (min-width: 768px) {
@@ -695,6 +694,12 @@ html:root {
   font-size: 0;
   background: transparent;
   border: none;
+  cursor: pointer;
+}
+
+.filter__toggle-btn:hover {
+  -webkit-transform: scale(1.25, 1.25);
+          transform: scale(1.25, 1.25);
 }
 
 .filter__content {
@@ -778,6 +783,7 @@ html:root {
 
 .filter__label {
   display: block;
+  cursor: pointer;
 }
 
 .filter__label:last-of-type {
@@ -809,6 +815,10 @@ html:root {
   border-radius: 50%;
   -webkit-box-shadow: inset 0 0 0 1px #f8f8f6;
           box-shadow: inset 0 0 0 1px #f8f8f6;
+}
+
+.filter__input-checkbox:checked + .filter__label {
+  font-weight: 500;
 }
 
 .filter__btn-block {
@@ -854,6 +864,11 @@ html:root {
   background: transparent;
   border: none;
   border-bottom: 1px solid #dbdce0;
+  cursor: pointer;
+}
+
+.accordion-btn:hover {
+  background: #e5e5e5;
 }
 
 .accordion-btn--position {
@@ -917,6 +932,7 @@ html:root {
   -ms-grid-rows: (1fr)[12];
       grid-template-rows: repeat(12, 1fr);
   grid-row-gap: 1.875rem;
+  padding-bottom: 0.5rem;
   width: 100%;
   font-size: 0;
 }
@@ -929,7 +945,8 @@ html:root {
         grid-template-rows: repeat(6, 1fr);
     -webkit-column-gap: 1.875rem;
             column-gap: 1.875rem;
-    padding: 0 4.6875%;
+    padding-left: 4.6875%;
+    padding-right: 4.6875%;
   }
 }
 
@@ -939,7 +956,8 @@ html:root {
         grid-template-columns: repeat(4, 1fr);
     -ms-grid-rows: (1fr)[3];
         grid-template-rows: repeat(3, 1fr);
-    padding: 0 7.174%;
+    padding-left: 7.174%;
+    padding-right: 7.174%;
   }
 }
 
@@ -952,6 +970,11 @@ html:root {
   width: 90.625vw;
   height: calc(100vw - 1.875rem);
   height: 90.625vw;
+}
+
+.catalog-card:hover {
+  -webkit-box-shadow: 0 0 8px 0 #122947;
+          box-shadow: 0 0 8px 0 #122947;
 }
 
 @media (min-width: 768px) {
@@ -1116,7 +1139,7 @@ html:root {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin: 0 4.6875vw 2rem;
+  margin: 0 4.6875% 2rem;
 }
 
 @media (min-width: 768px) {
