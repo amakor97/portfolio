@@ -600,24 +600,32 @@ html:root {
   }
 }
 
-.product__img {
+.product__img-wrapper {
+  display: inline-block;
   width: 100%;
   height: auto;
   margin: 0 0 3.125rem;
 }
 
 @media (min-width: 768px) {
-  .product__img {
+  .product__img-wrapper {
     height: 29.375rem;
   }
 }
 
 @media (min-width: 1366px) {
-  .product__img {
+  .product__img-wrapper {
     width: 39.375rem;
     width: 46.07%;
     height: 40.375rem;
   }
+}
+
+.product__img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 @media (min-width: 1366px) {
