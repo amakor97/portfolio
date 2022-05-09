@@ -1373,8 +1373,8 @@ html:root {
   position: absolute;
   top: 0;
   width: 100%;
-  -webkit-box-shadow: inset 3px 3px 10px 0 #000000;
-          box-shadow: inset 3px 3px 10px 0 #000000;
+  -webkit-box-shadow: inset 0 0 10px 0 #000000;
+          box-shadow: inset 0 0 10px 0 #000000;
 }
 
 @media (min-width: 1366px) {
