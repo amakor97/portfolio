@@ -12,8 +12,14 @@
   left: 50%
   transform: translate(-50%, -50%)
 
+  &:hover
+    transform: translate(-50%, -50%) scale(1.1, 1.1)
+
   @media (min-width: $screen-xxl)
     position: relative
     top: unset
     left: unset
     transform: translate(0, 0)
+
+    &:hover
+      transform: translate(0, 0) scale(1.1, 1.1)

@@ -169,7 +169,7 @@ html:root {
 .header {
   position: fixed;
   z-index: 1;
-  width: 100vw;
+  width: 100%;
   height: 2.875rem;
   height: -webkit-fit-content;
   height: -moz-fit-content;
@@ -314,6 +314,15 @@ html:root {
           transform: scale(1.5, 1.5);
 }
 
+.header-nav__menu-btn {
+  cursor: pointer;
+}
+
+.header-nav__menu-btn:hover {
+  -webkit-transform: scale(1.5, 1.5);
+          transform: scale(1.5, 1.5);
+}
+
 .header-nav__logo-link--smartphone {
   display: block;
 }
@@ -442,8 +451,18 @@ html:root {
   margin-right: 0;
 }
 
+.social__icon-link:hover {
+  -webkit-transform: scale(1.5, 1.5);
+          transform: scale(1.5, 1.5);
+}
+
 .logo-sm {
   fill: #122947;
+}
+
+.logo-sm:hover {
+  -webkit-transform: scale(1.1, 1.1);
+          transform: scale(1.1, 1.1);
 }
 
 .logo-sm--centered {
@@ -452,6 +471,11 @@ html:root {
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
+}
+
+.logo-sm--centered:hover {
+  -webkit-transform: translate(-50%, -50%) scale(1.1, 1.1);
+          transform: translate(-50%, -50%) scale(1.1, 1.1);
 }
 
 .logo-md {
@@ -471,6 +495,11 @@ html:root {
           transform: translate(-50%, -50%);
 }
 
+.logo-md--centered:hover {
+  -webkit-transform: translate(-50%, -50%) scale(1.1, 1.1);
+          transform: translate(-50%, -50%) scale(1.1, 1.1);
+}
+
 @media (min-width: 1366px) {
   .logo-md--centered {
     position: relative;
@@ -478,6 +507,10 @@ html:root {
     left: unset;
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0);
+  }
+  .logo-md--centered:hover {
+    -webkit-transform: translate(0, 0) scale(1.1, 1.1);
+            transform: translate(0, 0) scale(1.1, 1.1);
   }
 }
 
@@ -559,6 +592,7 @@ html:root {
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
+    max-height: 10rem;
   }
 }
 
@@ -827,8 +861,8 @@ html:root {
 }
 
 .intro-card:hover {
-  -webkit-box-shadow: 0 0 10px 5px #e5e5e5;
-          box-shadow: 0 0 10px 5px #e5e5e5;
+  -webkit-box-shadow: 0 0 8px 0px #122947;
+          box-shadow: 0 0 8px 0px #122947;
 }
 
 @media (min-width: 768px) {
@@ -1001,8 +1035,9 @@ html:root {
 }
 
 .bestsellers__intro-carousel {
+  padding: 0.5rem;
   margin-bottom: 2.5rem;
-  margin-left: calc(3.125rem + (100vw - 20rem) / 2);
+  margin-left: calc(2.625rem + (100vw - 20rem) / 2);
 }
 
 @media (min-width: 768px) {
@@ -1490,34 +1525,15 @@ html:root {
   height: auto;
 }
 
-.gallery__img-link::after {
-  content: '';
-  display: block;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  width: 100%;
-}
-
-.gallery__img-link::after:hover {
-  -webkit-box-shadow: inset 0 0 10px 0 #000000;
-          box-shadow: inset 0 0 10px 0 #000000;
-}
-
-.gallery__img-link:hover {
-  -webkit-box-shadow: inset 0 0 20px black;
-          box-shadow: inset 0 0 20px black;
-}
-
 .gallery__img-link:hover::after {
+  position: absolute;
   content: '';
   display: block;
   height: 100%;
-  position: absolute;
-  top: 0;
   width: 100%;
-  -webkit-box-shadow: inset 0 0 10px 0 #000000;
-          box-shadow: inset 0 0 10px 0 #000000;
+  top: 0;
+  -webkit-box-shadow: inset 0 0 8px 0px #122947;
+          box-shadow: inset 0 0 8px 0px #122947;
 }
 
 @media (min-width: 1366px) {
@@ -1539,23 +1555,6 @@ html:root {
 .gallery__img {
   width: 100%;
   height: auto;
-}
-
-.gallery__img:hover {
-  -webkit-box-shadow: inset 0 0 20px black;
-          box-shadow: inset 0 0 20px black;
-}
-
-@media (min-width: 1960px) {
-  .gallery__img {
-    width: calc(100% * 0.333333);
-  }
-}
-
-@media (min-width: 1960px) and (min-width: 1960px) {
-  .gallery__img {
-    display: block;
-  }
 }
 
 .contacts {
@@ -1873,6 +1872,10 @@ html:root {
   }
 }
 
+.footer__text--link:hover {
+  text-decoration: underline;
+}
+
 .footer__copyright {
   vertical-align: middle;
 }
@@ -1919,4 +1922,8 @@ html:root {
 .footer-nav__link {
   color: #122947;
   text-decoration: none;
+}
+
+.footer-nav__link:hover {
+  text-decoration: underline;
 }
