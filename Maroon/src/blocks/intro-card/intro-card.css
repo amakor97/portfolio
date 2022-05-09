@@ -6,6 +6,11 @@
   height: 18.5625rem;
 }
 
+.intro-card:hover {
+  -webkit-box-shadow: 0 0 10px 5px #e5e5e5;
+          box-shadow: 0 0 10px 5px #e5e5e5;
+}
+
 @media (min-width: 768px) {
   .intro-card {
     width: 14.375rem;

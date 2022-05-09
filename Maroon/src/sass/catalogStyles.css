@@ -300,9 +300,18 @@ html:root {
   text-decoration: none;
 }
 
+.header-nav__link:hover {
+  text-decoration: underline;
+}
+
 .header-nav__icon-link {
   display: inline-block;
   padding: 0.25rem;
+}
+
+.header-nav__icon-link:hover {
+  -webkit-transform: scale(1.5, 1.5);
+          transform: scale(1.5, 1.5);
 }
 
 .header-nav__logo-link--smartphone {
@@ -364,11 +373,20 @@ html:root {
   font-size: 1.75rem;
   color: #122947;
   text-decoration: none;
+  -webkit-transition: padding-left 0.5s;
+  transition: padding-left 0.5s;
+}
+
+.menu__link:hover {
+  padding-left: 2.5rem;
 }
 
 @media (min-width: 768px) {
   .menu__link {
     padding-left: 4.6875vw;
+  }
+  .menu__link:hover {
+    padding-left: 9.375vw;
   }
 }
 
@@ -438,6 +456,11 @@ html:root {
 
 .logo-md {
   fill: #122947;
+}
+
+.logo-md:hover {
+  -webkit-transform: scale(1.1, 1.1);
+          transform: scale(1.1, 1.1);
 }
 
 .logo-md--centered {
@@ -512,6 +535,10 @@ html:root {
   border-radius: 2px;
 }
 
+.link:hover {
+  background-color: #e5e5e5;
+}
+
 @media (min-width: 1366px) {
   .link {
     padding: 0.75rem 2rem;
@@ -561,6 +588,11 @@ html:root {
   border: 1px solid #b3bac1;
   border-radius: 2px;
   background: transparent;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #e5e5e5;
 }
 
 .btn--small-side-pads {
@@ -1011,6 +1043,12 @@ html:root {
   font-size: 0;
   border: none;
   background: transparent;
+  cursor: pointer;
+}
+
+.carousel-controls__btn:hover {
+  -webkit-transform: scale(1.25, 1.25);
+          transform: scale(1.25, 1.25);
 }
 
 .catalog {
@@ -1303,9 +1341,40 @@ html:root {
 }
 
 .gallery__img-link {
+  position: relative;
   display: inline-block;
   width: 50%;
   height: auto;
+}
+
+.gallery__img-link::after {
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.gallery__img-link::after:hover {
+  -webkit-box-shadow: inset 0 0 10px 0 #000000;
+          box-shadow: inset 0 0 10px 0 #000000;
+}
+
+.gallery__img-link:hover {
+  -webkit-box-shadow: inset 0 0 20px black;
+          box-shadow: inset 0 0 20px black;
+}
+
+.gallery__img-link:hover::after {
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  -webkit-box-shadow: inset 3px 3px 10px 0 #000000;
+          box-shadow: inset 3px 3px 10px 0 #000000;
 }
 
 @media (min-width: 1366px) {
@@ -1327,6 +1396,11 @@ html:root {
 .gallery__img {
   width: 100%;
   height: auto;
+}
+
+.gallery__img:hover {
+  -webkit-box-shadow: inset 0 0 20px black;
+          box-shadow: inset 0 0 20px black;
 }
 
 @media (min-width: 1960px) {

@@ -300,9 +300,18 @@ html:root {
   text-decoration: none;
 }
 
+.header-nav__link:hover {
+  text-decoration: underline;
+}
+
 .header-nav__icon-link {
   display: inline-block;
   padding: 0.25rem;
+}
+
+.header-nav__icon-link:hover {
+  -webkit-transform: scale(1.5, 1.5);
+          transform: scale(1.5, 1.5);
 }
 
 .header-nav__logo-link--smartphone {
@@ -364,11 +373,20 @@ html:root {
   font-size: 1.75rem;
   color: #122947;
   text-decoration: none;
+  -webkit-transition: padding-left 0.5s;
+  transition: padding-left 0.5s;
+}
+
+.menu__link:hover {
+  padding-left: 2.5rem;
 }
 
 @media (min-width: 768px) {
   .menu__link {
     padding-left: 4.6875vw;
+  }
+  .menu__link:hover {
+    padding-left: 9.375vw;
   }
 }
 
@@ -438,6 +456,11 @@ html:root {
 
 .logo-md {
   fill: #122947;
+}
+
+.logo-md:hover {
+  -webkit-transform: scale(1.1, 1.1);
+          transform: scale(1.1, 1.1);
 }
 
 .logo-md--centered {
@@ -510,6 +533,10 @@ html:root {
   text-decoration: none;
   border: 1px solid #b3bac1;
   border-radius: 2px;
+}
+
+.link:hover {
+  background-color: #e5e5e5;
 }
 
 @media (min-width: 1366px) {
@@ -588,7 +615,7 @@ html:root {
 @media (min-width: 1366px) {
   .product__img {
     width: 39.375rem;
-    width: 46.120vw;
+    width: 46.07%;
     height: 40.375rem;
   }
 }
@@ -787,6 +814,11 @@ html:root {
   border: 1px solid #b3bac1;
   border-radius: 2px;
   background: transparent;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #e5e5e5;
 }
 
 .btn--small-side-pads {
@@ -998,6 +1030,12 @@ html:root {
   font-size: 0;
   border: none;
   background: transparent;
+  cursor: pointer;
+}
+
+.carousel-controls__btn:hover {
+  -webkit-transform: scale(1.25, 1.25);
+          transform: scale(1.25, 1.25);
 }
 
 .also {

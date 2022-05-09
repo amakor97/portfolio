@@ -6,6 +6,12 @@
   text-decoration: none;
 }
 
+.intro-link:hover {
+  background: white;
+  -webkit-box-shadow: 0 0 0 10px white;
+          box-shadow: 0 0 0 10px white;
+}
+
 @media (min-width: 768px) {
   .intro-link {
     width: 15.375rem;

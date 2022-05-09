@@ -26,11 +26,20 @@
   font-size: 1.75rem;
   color: #122947;
   text-decoration: none;
+  -webkit-transition: padding-left 0.5s;
+  transition: padding-left 0.5s;
+}
+
+.menu__link:hover {
+  padding-left: 2.5rem;
 }
 
 @media (min-width: 768px) {
   .menu__link {
     padding-left: 4.6875vw;
+  }
+  .menu__link:hover {
+    padding-left: 9.375vw;
   }
 }
 

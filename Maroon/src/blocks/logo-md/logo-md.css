@@ -2,6 +2,11 @@
   fill: #122947;
 }
 
+.logo-md:hover {
+  -webkit-transform: scale(1.1, 1.1);
+          transform: scale(1.1, 1.1);
+}
+
 .logo-md--centered {
   position: absolute;
   top: 50%;

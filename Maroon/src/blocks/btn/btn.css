@@ -12,6 +12,11 @@
   border: 1px solid #b3bac1;
   border-radius: 2px;
   background: transparent;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #e5e5e5;
 }
 
 .btn--small-side-pads {

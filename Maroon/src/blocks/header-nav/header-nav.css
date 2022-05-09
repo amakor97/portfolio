@@ -79,9 +79,18 @@
   text-decoration: none;
 }
 
+.header-nav__link:hover {
+  text-decoration: underline;
+}
+
 .header-nav__icon-link {
   display: inline-block;
   padding: 0.25rem;
+}
+
+.header-nav__icon-link:hover {
+  -webkit-transform: scale(1.5, 1.5);
+          transform: scale(1.5, 1.5);
 }
 
 .header-nav__logo-link--smartphone {
