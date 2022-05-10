@@ -750,6 +750,12 @@ html:root {
   padding: 1.375rem 0 2.5rem;
 }
 
+@media (min-width: 768px) {
+  .filter__fieldset--second {
+    width: 12rem;
+  }
+}
+
 .filter__fieldset:last-of-type {
   padding-bottom: 0;
 }
@@ -1079,6 +1085,10 @@ html:root {
             transform: translateX(-50%);
     font-size: 1.125rem;
   }
+}
+
+.carousel-controls__current {
+  font-weight: 500;
 }
 
 .carousel-controls__arrows {
@@ -1623,7 +1633,7 @@ html:root {
 
 @media (min-width: 768px) {
   .footer__container:first-of-type {
-    margin-right: calc(4.6875% - 0.75rem);
+    margin-right: calc(4.6875% - 0.5rem);
   }
 }
 
@@ -1632,7 +1642,7 @@ html:root {
     -webkit-box-pack: start;
         -ms-flex-pack: start;
             justify-content: flex-start;
-    margin-right: calc(7.174% - 0.75rem);
+    margin-right: calc(7.174% - 0.25rem);
   }
 }
 
