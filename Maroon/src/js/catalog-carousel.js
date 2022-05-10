@@ -63,8 +63,8 @@ fetch (dataFile)
     "js-catalog-carousel-page");
 
     for (let j = 0; j < displayedCards; j++) {
-      console.log({cardCounter});
-      console.log({catalogData});
+      //console.log({cardCounter});
+      //console.log({catalogData});
       if (cardCounter === catalogData) {
         break;
       }
