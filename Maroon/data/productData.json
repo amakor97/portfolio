@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "name": "High",
+    "type": "крем для лица",
+    "href": "../../../positions/rose-face-cream.html",
+    "srcB": "../../../data/1-high-face-cream.png",
+    "alt": "cream"
+  },
+  {
+    "id": 2,
+    "name": "Rest",
+    "type": "минеральная пудра",
+    "href": "../../../positions/rose-face-cream.html",
+    "srcB": "../../../data/2-rest-mineral-powder.png",
+    "alt": "cream"
+  },
+  {
+    "id": 3,
+    "name": "Rose",
+    "type": "крем для лица",
+    "href": "../../../positions/rose-face-cream.html",
+    "srcB": "../../../data/3-rose-face-cream.png",
+    "alt": "cream"
+  },
+  {
+    "id": 4,
+    "name": "Milk",
+    "type": "масло для тела",
+    "href": "../../../positions/rose-face-cream.html",
+    "srcB": "../../../data/4-milk-body-oil.png",
+    "alt": "cream"
+  },
+  {
+    "id": 5,
+    "name": "Paradise",
+    "type": "минеральная пудра",
+    "href": "../../../positions/rose-face-cream.html",
+    "srcB": "../../../data/5-paradise-mineral-powder.png",
+    "alt": "cream"
+  },
+  {
+    "id": 6,
+    "name": "Sun",
+    "type": "бомбочка для ванн",
+    "href": "../../../positions/rose-face-cream.html",
+    "srcB": "../../../data/6-sun-bath-bomb.png",
+    "alt": "cream"
+  },
+  {
+    "id": 7,
+    "name": "Violet",
+    "type": "крем для лица",
+    "href": "../../../positions/rose-face-cream.html",
+    "srcB": "../../../data/7-violet-face-cream.png",
+    "alt": "cream"
+  }
+]
