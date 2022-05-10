@@ -4,7 +4,9 @@
     "name": "High",
     "type": "крем для лица",
     "href": "../../../positions/rose-face-cream.html",
-    "srcB": "../../../data/1-high-face-cream.png",
+    "src": "../../../data/1-high-face-cream.png",
+    "cost": 990,
+    "volume": "50ml",
     "alt": "cream"
   },
   {
@@ -12,7 +14,9 @@
     "name": "Rest",
     "type": "минеральная пудра",
     "href": "../../../positions/rose-face-cream.html",
-    "srcB": "../../../data/2-rest-mineral-powder.png",
+    "src": "../../../data/2-rest-mineral-powder.png",
+    "cost": 690,
+    "volume": "20g",
     "alt": "cream"
   },
   {
@@ -20,7 +24,9 @@
     "name": "Rose",
     "type": "крем для лица",
     "href": "../../../positions/rose-face-cream.html",
-    "srcB": "../../../data/3-rose-face-cream.png",
+    "src": "../../../data/3-rose-face-cream.png",
+    "cost": 890,
+    "volume": "50ml",
     "alt": "cream"
   },
   {
@@ -28,7 +34,9 @@
     "name": "Milk",
     "type": "масло для тела",
     "href": "../../../positions/rose-face-cream.html",
-    "srcB": "../../../data/4-milk-body-oil.png",
+    "src": "../../../data/4-milk-body-oil.png",
+    "cost": 790,
+    "volume": "150ml",
     "alt": "cream"
   },
   {
@@ -36,7 +44,9 @@
     "name": "Paradise",
     "type": "минеральная пудра",
     "href": "../../../positions/rose-face-cream.html",
-    "srcB": "../../../data/5-paradise-mineral-powder.png",
+    "src": "../../../data/5-paradise-mineral-powder.png",
+    "cost": 590,
+    "volume": "15g",
     "alt": "cream"
   },
   {
@@ -44,7 +54,9 @@
     "name": "Sun",
     "type": "бомбочка для ванн",
     "href": "../../../positions/rose-face-cream.html",
-    "srcB": "../../../data/6-sun-bath-bomb.png",
+    "src": "../../../data/6-sun-bath-bomb.png",
+    "cost": 90,
+    "volume": "20g",
     "alt": "cream"
   },
   {
@@ -52,7 +64,179 @@
     "name": "Violet",
     "type": "крем для лица",
     "href": "../../../positions/rose-face-cream.html",
-    "srcB": "../../../data/7-violet-face-cream.png",
+    "src": "../../../data/7-violet-face-cream.png",
+    "cost": 890,
+    "volume": "50ml",
+    "alt": "cream"
+  },
+  {
+    "id": 8,
+    "name": "Clean",
+    "type": "маска для лица",
+    "href": "../../../positions/rose-face-cream.html",
+    "src": "../../../data/8-clean-face-mask.png",
+    "cost": 490,
+    "volume": "100g",
+    "alt": "cream"
+  },
+  {
+    "id": 9,
+    "name": "Coconut",
+    "type": "масло для тела",
+    "href": "../../../positions/rose-face-cream.html",
+    "src": "../../../data/9-coconut-body-oil.png",
+    "cost": 990,
+    "volume": "300ml",
+    "alt": "cream"
+  },
+  {
+    "id": 10,
+    "name": "Lavender",
+    "type": "мыло ручной работы",
+    "href": "../../../positions/rose-face-cream.html",
+    "src": "../../../data/10-lavender-handmade-soap.png",
+    "cost": 290,
+    "volume": "50g",
+    "alt": "cream"
+  },
+  {
+    "id": 11,
+    "name": "Lotos",
+    "type": "маска для лица",
+    "href": "../../../positions/rose-face-cream.html",
+    "src": "../../../data/11-lotos-face-mask.png",
+    "cost": 890,
+    "volume": "50ml",
+    "alt": "cream"
+  },
+  {
+    "id": 12,
+    "name": "Earth",
+    "type": "бомбочка для ванн",
+    "href": "../../../positions/rose-face-cream.html",
+    "src": "../../../data/12-earth-bath-bomb.png",
+    "cost": 90,
+    "volume": "20g",
+    "alt": "cream"
+  },
+  {
+    "id": 13,
+    "name": "Earth",
+    "type": "бомбочка для ванн",
+    "href": "../../../positions/rose-face-cream.html",
+    "src": "../../../data/12-earth-bath-bomb.png",
+    "cost": 90,
+    "volume": "20g",
+    "alt": "cream"
+  },
+  {
+    "id": 14,
+    "name": "High",
+    "type": "крем для лица",
+    "href": "../../../positions/rose-face-cream.html",
+    "src": "../../../data/1-high-face-cream.png",
+    "cost": 990,
+    "volume": "50ml",
+    "alt": "cream"
+  },
+  {
+    "id": 15,
+    "name": "Rest",
+    "type": "минеральная пудра",
+    "href": "../../../positions/rose-face-cream.html",
+    "src": "../../../data/2-rest-mineral-powder.png",
+    "cost": 690,
+    "volume": "20g",
+    "alt": "cream"
+  },
+  {
+    "id": 16,
+    "name": "Rose",
+    "type": "крем для лица",
+    "href": "../../../positions/rose-face-cream.html",
+    "src": "../../../data/3-rose-face-cream.png",
+    "cost": 890,
+    "volume": "50ml",
+    "alt": "cream"
+  },
+  {
+    "id": 17,
+    "name": "Milk",
+    "type": "масло для тела",
+    "href": "../../../positions/rose-face-cream.html",
+    "src": "../../../data/4-milk-body-oil.png",
+    "cost": 790,
+    "volume": "150ml",
+    "alt": "cream"
+  },
+  {
+    "id": 18,
+    "name": "Paradise",
+    "type": "минеральная пудра",
+    "href": "../../../positions/rose-face-cream.html",
+    "src": "../../../data/5-paradise-mineral-powder.png",
+    "cost": 590,
+    "volume": "15g",
+    "alt": "cream"
+  },
+  {
+    "id": 19,
+    "name": "Sun",
+    "type": "бомбочка для ванн",
+    "href": "../../../positions/rose-face-cream.html",
+    "src": "../../../data/6-sun-bath-bomb.png",
+    "cost": 90,
+    "volume": "20g",
+    "alt": "cream"
+  },
+  {
+    "id": 20,
+    "name": "Violet",
+    "type": "крем для лица",
+    "href": "../../../positions/rose-face-cream.html",
+    "src": "../../../data/7-violet-face-cream.png",
+    "cost": 890,
+    "volume": "50ml",
+    "alt": "cream"
+  },
+  {
+    "id": 21,
+    "name": "Clean",
+    "type": "маска для лица",
+    "href": "../../../positions/rose-face-cream.html",
+    "src": "../../../data/8-clean-face-mask.png",
+    "cost": 490,
+    "volume": "100g",
+    "alt": "cream"
+  },
+  {
+    "id": 22,
+    "name": "Coconut",
+    "type": "масло для тела",
+    "href": "../../../positions/rose-face-cream.html",
+    "src": "../../../data/9-coconut-body-oil.png",
+    "cost": 990,
+    "volume": "300ml",
+    "alt": "cream"
+  },
+  {
+    "id": 23,
+    "name": "Lavender",
+    "type": "мыло ручной работы",
+    "href": "../../../positions/rose-face-cream.html",
+    "src": "../../../data/10-lavender-handmade-soap.png",
+    "cost": 290,
+    "volume": "50g",
+    "alt": "cream"
+  },
+  {
+    "id": 24,
+    "name": "Lotos",
+    "type": "маска для лица",
+    "href": "../../../positions/rose-face-cream.html",
+    "src": "../../../data/11-lotos-face-mask.png",
+    "cost": 890,
+    "volume": "50ml",
     "alt": "cream"
   }
 ]

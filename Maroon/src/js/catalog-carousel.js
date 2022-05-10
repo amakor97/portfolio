@@ -1,6 +1,7 @@
 "use strict";
 
 import { handleCarousel } from "./carouselFunctions.js";
+import { createCatalogCard } from "./fillers/catalogs-filler.js";
 
 const prevBtn = document.querySelector(".js-catalog-carousel-prev-btn");
 const nextBtn = document.querySelector(".js-catalog-carousel-next-btn");
@@ -41,10 +42,39 @@ handleCarousel.bind(null, catalogCarousel, "prev"));
 
 let fullscreenWidth = screen.width;
 console.log(fullscreenWidth);
-/*
-if (fullscreenWidth >= 768) {
-  carouselPages.forEach(function(page) {
-    page.style.gridTemplateColumns = "repeat(2, 1fr)";
-    page.style.gridTemplateRows = "repeat(6, 1fr)";
-  })
-}*/
+
+
+let dataFile = "../../data/productData.json";
+let dataObj = undefined;
+
+fetch (dataFile)
+.then(response => response.json())
+.then( function(json) {
+  dataObj = json;
+  console.log(dataObj);
+  const main = document.querySelector(".main");
+
+  let cardCounter = 0;
+
+  let cardsToRender = catalogData;
+  for (let i = 0; i < pageNumber; i++) {
+    let page = document.createElement("div");
+    page.classList.add("catalog-carousel__page", 
+    "js-catalog-carousel-page");
+
+    for (let j = 0; j < displayedCards; j++) {
+      console.log({cardCounter});
+      console.log({catalogData});
+      if (cardCounter === catalogData) {
+        break;
+      }
+      let card = createCatalogCard(dataObj[cardCounter]);
+      cardCounter++;
+      page.appendChild(card);
+    }
+
+    carousel.append(page);
+  }
+});
+
+

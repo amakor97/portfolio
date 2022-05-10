@@ -16,7 +16,7 @@ export function createBestsellersCard(productData) {
 
 function createImg(productData) {
   let img = document.createElement("img");
-  img.src = productData.srcB;
+  img.src = productData.src;
   img.classList.add("intro-card__img");
   img.alt = productData.alt;
   return img;
