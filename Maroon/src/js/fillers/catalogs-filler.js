@@ -1,11 +1,13 @@
 "use strict";
 
-export function createCatalogCard(productData) {
+export function createCatalogCard(productData, positionFlag) {
   let card = document.createElement("a");
   card.classList.add("catalog-card", "catalog-carousel__card");
-  card.setAttribute("href", productData.href);
+  console.log(positionFlag);
+  console.log(productData.href.slice(11));
+  card.href = positionFlag ? `.${productData.href.slice(11)}` : productData.href;
 
-  let img = createImg(productData);
+  let img = createImg(productData, positionFlag);
   card.appendChild(img);
 
   let description = createDescription(productData);
@@ -14,9 +16,10 @@ export function createCatalogCard(productData) {
   return card;
 }
 
-function createImg(productData) {
+function createImg(productData, positionFlag) {
   let img = document.createElement("img");
-  img.src = productData.src;
+  console.log(positionFlag);
+  img.src = positionFlag ? `./.${productData.src}` : productData.src;
   img.classList.add("catalog-card__img");
   img.alt = productData.alt;
   return img;

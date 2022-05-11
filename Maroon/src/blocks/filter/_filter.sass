@@ -43,6 +43,8 @@
     border: none
     cursor: pointer
 
+    transition: transform 0.5s
+
     &:hover
       transform: scale(1.25, 1.25)
 
@@ -152,6 +154,9 @@
     &:checked + .filter__label
       font:
         weight: 500
+
+    &:disabled + .filter__label
+      color: $description-color
 
   &__btn-block
     display: flex

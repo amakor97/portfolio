@@ -43,14 +43,14 @@ watchedPrevBtn.addEventListener("click",
 handleCarousel.bind(null, subCarousel, "prev"));
 
 
-let dataFile = "../../data/productData.json";
+let dataFile = "./data/productData.json";
 let dataObj = undefined;
 
 fetch (dataFile)
 .then(response => response.json())
 .then(function(json) {
   dataObj = json;
-  console.log(dataObj);
+  //console.log(dataObj);
   const main = document.querySelector(".main");
 
   let cardCounter = 0;

@@ -97,10 +97,15 @@
                 <a href="./catalog.html" class="header-nav__link">Каталог</a>
               </li>
               <li class="header-nav__list-item header-nav__list-item--link">
-                <a href="#" class="header-nav__link">О нас</a>
+                <a href="./index.html#history-id" class="header-nav__link"
+                  >О нас</a
+                >
               </li>
               <li class="header-nav__list-item header-nav__list-item--link">
-                <a href="#" class="header-nav__link">Контакты</a>
+                <a href="#contacts-id" class="header-nav__link">Контакты</a>
+              </li>
+              <li class="header-nav__list-item header-nav__list-item--link">
+                <a href="/index.html" class="header-nav__link">На главную</a>
               </li>
             </ul>
           </li>
@@ -142,6 +147,9 @@
             <a href="./index.html#contacts-id" class="menu__link js-menu-link"
               >Контакты</a
             >
+          </li>
+          <li class="menu__li">
+            <a href="/index.html" class="menu__link js-menu-link">На главную</a>
           </li>
         </ul>
         <div class="menu__social-wrapper">
@@ -194,7 +202,11 @@
               </svg>
             </button>
           </div>
-          <form class="filter__content js-filter-content">
+          <form
+            class="filter__content js-filter-content"
+            method="GET"
+            action="./catalog.html"
+          >
             <button
               class="accordion-btn filter__accordion-btn js-toggle-fieldset-btn"
             >
@@ -204,18 +216,18 @@
               <p class="filter__fieldset-title">Уход для лица</p>
               <div class="filter__input-wrapper">
                 <input
-                  class="filter__input-checkbox js-filter-checkbox"
+                  class="filter__input-checkbox js-face-filter-checkbox js-filter-checkbox"
                   type="checkbox"
-                  name=""
+                  name="face-cream"
                   id="face-care-1"
                 />
                 <label for="face-care-1" class="filter__label"> Крема </label>
               </div>
               <div class="filter__input-wrapper">
                 <input
-                  class="filter__input-checkbox js-filter-checkbox"
+                  class="filter__input-checkbox js-face-filter-checkbox js-filter-checkbox"
                   type="checkbox"
-                  name=""
+                  name="serum"
                   id="face-care-2"
                 />
                 <label for="face-care-2" class="filter__label">
@@ -224,36 +236,38 @@
               </div>
               <div class="filter__input-wrapper">
                 <input
-                  class="filter__input-checkbox js-filter-checkbox"
+                  class="filter__input-checkbox js-face-filter-checkbox js-filter-checkbox"
                   type="checkbox"
-                  name=""
+                  name="mask"
                   id="face-care-3"
                 />
                 <label for="face-care-3" class="filter__label"> Маски </label>
               </div>
               <div class="filter__input-wrapper">
                 <input
-                  class="filter__input-checkbox js-filter-checkbox"
+                  class="filter__input-checkbox js-face-filter-checkbox js-filter-checkbox"
                   type="checkbox"
-                  name=""
+                  name="foam"
                   id="face-care-4"
+                  disabled
                 />
                 <label for="face-care-4" class="filter__label"> Пенки </label>
               </div>
               <div class="filter__input-wrapper">
                 <input
-                  class="filter__input-checkbox js-filter-checkbox"
+                  class="filter__input-checkbox js-face-filter-checkbox js-filter-checkbox"
                   type="checkbox"
-                  name=""
+                  name="tonal-cream"
                   id="face-care-5"
+                  disabled
                 />
                 <label for="face-care-5" class="filter__label"> Тоники </label>
               </div>
               <div class="filter__input-wrapper">
                 <input
-                  class="filter__input-checkbox js-filter-checkbox"
+                  class="filter__input-checkbox js-face-filter-checkbox js-filter-checkbox"
                   type="checkbox"
-                  name=""
+                  name="powder"
                   id="face-care-6"
                 />
                 <label for="face-care-6" class="filter__label"> Пудры </label>
@@ -272,7 +286,7 @@
                 <input
                   class="filter__input-checkbox js-filter-checkbox"
                   type="checkbox"
-                  name=""
+                  name="body-cream"
                   id="body-care-1"
                 />
                 <label for="body-care-1" class="filter__label"> Крема </label>
@@ -281,8 +295,9 @@
                 <input
                   class="filter__input-checkbox js-filter-checkbox"
                   type="checkbox"
-                  name=""
+                  name="oil"
                   id="body-care-2"
+                  disabled
                 />
                 <label for="body-care-2" class="filter__label"> Масла </label>
               </div>
@@ -290,7 +305,7 @@
                 <input
                   class="filter__input-checkbox js-filter-checkbox"
                   type="checkbox"
-                  name=""
+                  name="scrub"
                   id="body-care-3"
                 />
                 <label for="body-care-3" class="filter__label"> Скрабы </label>
@@ -299,8 +314,9 @@
                 <input
                   class="filter__input-checkbox js-filter-checkbox"
                   type="checkbox"
-                  name=""
+                  name="soap"
                   id="body-care-4"
+                  disabled
                 />
                 <label for="body-care-4" class="filter__label"> Мыло </label>
               </div>
@@ -308,7 +324,7 @@
                 <input
                   class="filter__input-checkbox js-filter-checkbox"
                   type="checkbox"
-                  name=""
+                  name="bath-bomb"
                   id="body-care-5"
                 />
                 <label for="body-care-5" class="filter__label">
@@ -319,8 +335,9 @@
                 <input
                   class="filter__input-checkbox js-filter-checkbox"
                   type="checkbox"
-                  name=""
+                  name="bath-salt"
                   id="body-care-6"
+                  disabled
                 />
                 <label for="body-care-6" class="filter__label">
                   Соль для ванны
@@ -338,8 +355,9 @@
                 <input
                   class="filter__input-checkbox js-filter-checkbox"
                   type="checkbox"
-                  name=""
+                  name="normal"
                   id="skin-type-1"
+                  disabled
                 />
                 <label for="skin-type-1" class="filter__label">
                   Нормальная
@@ -349,7 +367,7 @@
                 <input
                   class="filter__input-checkbox js-filter-checkbox"
                   type="checkbox"
-                  name=""
+                  name="dry"
                   id="skin-type-2"
                 />
                 <label for="skin-type-2" class="filter__label"> Сухая </label>
@@ -358,7 +376,7 @@
                 <input
                   class="filter__input-checkbox js-filter-checkbox"
                   type="checkbox"
-                  name=""
+                  name="oily"
                   id="skin-type-3"
                 />
                 <label for="skin-type-3" class="filter__label"> Жирная </label>
@@ -367,8 +385,9 @@
                 <input
                   class="filter__input-checkbox js-filter-checkbox"
                   type="checkbox"
-                  name=""
+                  name="combine"
                   id="skin-type-4"
+                  disabled
                 />
                 <label for="skin-type-4" class="filter__label">
                   Комбинированная
@@ -378,7 +397,7 @@
             <div class="filter__btn-block">
               <button
                 class="btn btn--small-side-pads filter__control-btn js-apply-filter"
-                type="button"
+                type="submit"
               >
                 Применить
               </button>
@@ -396,711 +415,7 @@
           <button class="btn catalog__btn js-toggle-filter-btn">Фильтр</button>
         </div>
         <div class="catalog-carousel catalog__catalog-carousel">
-          <div class="catalog-carousel__inner js-catalog-carousel-inner">
-            <!--<div class="catalog-carousel__page js-catalog-carousel-page">
-              <a
-                href="./positions/rose-face-cream.html"
-                class="catalog-card catalog-carousel__card"
-              >
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/catalog-card/1-high-face-cream-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    High
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    990 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    крем для лица
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    50ml
-                  </p>
-                </div>
-              </a>
-              <a href="#" class="catalog-card catalog-carousel__card">
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/catalog-card/2-mineral-powder-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Rest
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    690 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    минеральная пудра
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    20g
-                  </p>
-                </div>
-              </a>
-              <a href="#" class="catalog-card catalog-carousel__card">
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/catalog-card/3-rose-face-cream-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Rose
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    890 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    крем для лица
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    50ml
-                  </p>
-                </div>
-              </a>
-              <a href="#" class="catalog-card catalog-carousel__card">
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/catalog-card/4-milk-body-oil-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Milk
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    790 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    масло для тела
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    150ml
-                  </p>
-                </div>
-              </a>
-              <a href="#" class="catalog-card catalog-carousel__card">
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/catalog-card/5-paradise-mineral-powder-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Paradise
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    590 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    минеральная пудра
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    15g
-                  </p>
-                </div>
-              </a>
-              <a href="#" class="catalog-card catalog-carousel__card">
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/catalog-card/6-sun-bath-bomb-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Sun
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    90 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    бомбочка для ванны
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    20g
-                  </p>
-                </div>
-              </a>
-              <a href="#" class="catalog-card catalog-carousel__card">
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/catalog-card/7-violet-face-cream-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Violet
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    890 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    крем для лица
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    50ml
-                  </p>
-                </div>
-              </a>
-              <a href="#" class="catalog-card catalog-carousel__card">
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/catalog-card/8-clean-face-mask-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Clean
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    490 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    маска для лица
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    100g
-                  </p>
-                </div>
-              </a>
-              <a href="#" class="catalog-card catalog-carousel__card">
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/catalog-card/9-coconut-body-oil-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Coconut
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    990 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    масло для тела
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    300ml
-                  </p>
-                </div>
-              </a>
-              <a href="#" class="catalog-card catalog-carousel__card">
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/catalog-card/10-lavender-handmade-soap-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Lavender
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    290 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    мыло ручной работы
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    50g
-                  </p>
-                </div>
-              </a>
-              <a href="#" class="catalog-card catalog-carousel__card">
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/catalog-card/11-lotos-face-mask-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Lotos
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    890 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    маска для лица
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    50ml
-                  </p>
-                </div>
-              </a>
-              <a href="#" class="catalog-card catalog-carousel__card">
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/catalog-card/12-earth-bath-bomb-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Earth
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    90 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    бомбочка для ванны
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    20g
-                  </p>
-                </div>
-              </a>
-            </div>
-            <div class="catalog-carousel__page js-catalog-carousel-page">
-              <a href="#" class="catalog-card catalog-carousel__card">
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/catalog-card/1-high-face-cream-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    High
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    990 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    крем для лица
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    50ml
-                  </p>
-                </div>
-              </a>
-              <a href="#" class="catalog-card catalog-carousel__card">
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/catalog-card/2-mineral-powder-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Rest
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    690 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    минеральная пудра
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    20g
-                  </p>
-                </div>
-              </a>
-              <a href="#" class="catalog-card catalog-carousel__card">
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/catalog-card/3-rose-face-cream-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Rose
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    890 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    крем для лица
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    50ml
-                  </p>
-                </div>
-              </a>
-              <a href="#" class="catalog-card catalog-carousel__card">
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/catalog-card/4-milk-body-oil-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Milk
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    790 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    масло для тела
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    150ml
-                  </p>
-                </div>
-              </a>
-              <a href="#" class="catalog-card catalog-carousel__card">
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/catalog-card/5-paradise-mineral-powder-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Paradise
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    590 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    минеральная пудра
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    15g
-                  </p>
-                </div>
-              </a>
-              <a href="#" class="catalog-card catalog-carousel__card">
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/catalog-card/6-sun-bath-bomb-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Sun
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    90 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    бомбочка для ванны
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    20g
-                  </p>
-                </div>
-              </a>
-              <a href="#" class="catalog-card catalog-carousel__card">
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/catalog-card/7-violet-face-cream-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Violet
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    890 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    крем для лица
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    50ml
-                  </p>
-                </div>
-              </a>
-              <a href="#" class="catalog-card catalog-carousel__card">
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/catalog-card/8-clean-face-mask-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Clean
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    490 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    маска для лица
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    100g
-                  </p>
-                </div>
-              </a>
-              <a href="#" class="catalog-card catalog-carousel__card">
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/catalog-card/9-coconut-body-oil-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Coconut
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    990 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    масло для тела
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    300ml
-                  </p>
-                </div>
-              </a>
-              <a href="#" class="catalog-card catalog-carousel__card">
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/catalog-card/10-lavender-handmade-soap-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Lavender
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    290 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    мыло ручной работы
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    50g
-                  </p>
-                </div>
-              </a>
-              <a href="#" class="catalog-card catalog-carousel__card">
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/catalog-card/11-lotos-face-mask-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Lotos
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    890 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    маска для лица
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    50ml
-                  </p>
-                </div>
-              </a>
-              <a href="#" class="catalog-card catalog-carousel__card">
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/catalog-card/12-earth-bath-bomb-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Earth
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    90 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    бомбочка для ванны
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    20g
-                  </p>
-                </div>
-              </a>
-            </div>
-          --></div>
+          <div class="catalog-carousel__inner js-catalog-carousel-inner"></div>
         </div>
         <div class="carousel-controls catalog__carousel-controls">
           <p class="carousel-controls__info">
@@ -1142,263 +457,7 @@
       <section class="watched">
         <h2 class="section-title watched__title">Вы недавно смотрели</h2>
         <div class="sub-carousel watched__sub-carousel">
-          <div class="sub-carousel__inner js-watched-carousel-inner">
-            <!--
-            <div class="sub-carousel__page">
-              <a href="#" class="catalog-card catalog-carousel__card">
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/watched/1-clean-face-mask-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Clean
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    890 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    маска для лица
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    50ml
-                  </p>
-                </div>
-              </a>
-              <a
-                href="#"
-                class="catalog-card catalog-carousel__card sub-carousel__card sub-carousel__card--hidden"
-              >
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/watched/2-lotos-face-mask-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Lotos
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    890 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    маска для лица
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    50ml
-                  </p>
-                </div>
-              </a>
-              <a
-                href="#"
-                class="catalog-card catalog-carousel__card sub-carousel__card sub-carousel__card--hidden"
-              >
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/watched/3-lavender-handmade-soap-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Lavender
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    290 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    мыло ручной работы
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    50g
-                  </p>
-                </div>
-              </a>
-              <a
-                href="#"
-                class="catalog-card catalog-carousel__card sub-carousel__card sub-carousel__card--hidden"
-              >
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/watched/4-coconut-body-oil-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Coconut
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    990 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    масло для тела
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    300ml
-                  </p>
-                </div>
-              </a>
-            </div>
-            <div class="sub-carousel__page">
-              <a href="#" class="catalog-card catalog-carousel__card">
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/watched/1-clean-face-mask-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Clean
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    890 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    маска для лица
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    50ml
-                  </p>
-                </div>
-              </a>
-              <a
-                href="#"
-                class="catalog-card catalog-carousel__card sub-carousel__card sub-carousel__card--hidden"
-              >
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/watched/2-lotos-face-mask-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Lotos
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    890 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    маска для лица
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    50ml
-                  </p>
-                </div>
-              </a>
-              <a
-                href="#"
-                class="catalog-card catalog-carousel__card sub-carousel__card sub-carousel__card--hidden"
-              >
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/watched/3-lavender-handmade-soap-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Lavender
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    290 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    мыло ручной работы
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    50g
-                  </p>
-                </div>
-              </a>
-              <a
-                href="#"
-                class="catalog-card catalog-carousel__card sub-carousel__card sub-carousel__card--hidden"
-              >
-                <img
-                  class="catalog-card__img"
-                  src="./src/blocks/watched/4-coconut-body-oil-s.png"
-                  alt=""
-                />
-                <div class="catalog-card__description">
-                  <p
-                    class="catalog-card__text catalog-card__text--title catalog-card__text--first-lined"
-                  >
-                    Coconut
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--first-lined catalog-card__text--righted"
-                  >
-                    990 &#8381;
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined"
-                  >
-                    масло для тела
-                  </p>
-                  <p
-                    class="catalog-card__text catalog-card__text--second-lined catalog-card__text--righted"
-                  >
-                    300ml
-                  </p>
-                </div>
-              </a>
-            --></div>
-          </div>
+          <div class="sub-carousel__inner js-watched-carousel-inner"></div>
         </div>
         <div class="carousel-controls watched__carousel-controls">
           <p class="carousel-controls__info">
@@ -1605,16 +664,21 @@
         <nav class="footer-nav footer__footer-nav">
           <ul class="footer-nav__list">
             <li class="footer-nav__li">
-              <a href="#" class="footer-nav__link">Каталог</a>
+              <a href="" class="footer-nav__link">Каталог</a>
             </li>
             <li class="footer-nav__li">
-              <a href="#" class="footer-nav__link">О нас</a>
+              <a href="./index.html#history-id" class="footer-nav__link"
+                >О нас</a
+              >
             </li>
             <li class="footer-nav__li">
-              <a href="#" class="footer-nav__link">Магазины</a>
+              <a href="#contacts-id" class="footer-nav__link">Магазины</a>
             </li>
             <li class="footer-nav__li">
-              <a href="#" class="footer-nav__link">Контакты</a>
+              <a href="#contacts-id" class="footer-nav__link">Контакты</a>
+            </li>
+            <li class="footer-nav__li">
+              <a href="/index.html" class="footer-nav__link">На главную</a>
             </li>
           </ul>
         </nav>

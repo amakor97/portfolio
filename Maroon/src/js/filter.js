@@ -32,9 +32,13 @@ toggleFieldsetsBtns.forEach(function(btn) {
 const applyBtn = document.querySelector(".js-apply-filter");
 const filterCheckboxes = document.querySelectorAll(".js-filter-checkbox");
 applyBtn.addEventListener("click", function() {
+  console.log(dataObj);
   filterCheckboxes.forEach(function(input) {
+    let faceFilter = document.querySelectorAll(".js-face-filter-checkbox");
+    console.log(faceFilter);
+  
     if (input.checked === true) {
-      console.log(input);
+      console.log(input.name);
     }
   })
 })
@@ -52,3 +56,8 @@ window.addEventListener("resize", function() {
     }
   }
 })
+
+
+function filterData(data) {
+
+}

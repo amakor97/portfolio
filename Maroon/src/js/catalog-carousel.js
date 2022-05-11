@@ -44,27 +44,28 @@ let fullscreenWidth = screen.width;
 console.log(fullscreenWidth);
 
 
-let dataFile = "../../data/productData.json";
+let dataFile = "./data/productData.json";
 let dataObj = undefined;
 
 fetch (dataFile)
 .then(response => response.json())
 .then( function(json) {
-  dataObj = json;
-  console.log(dataObj);
-  const main = document.querySelector(".main");
+  fillCatalog(json);
+});
+
+
+function fillCatalog(obj) {
+  dataObj = obj;
+  //console.log(dataObj);
 
   let cardCounter = 0;
 
-  let cardsToRender = catalogData;
   for (let i = 0; i < pageNumber; i++) {
     let page = document.createElement("div");
     page.classList.add("catalog-carousel__page", 
     "js-catalog-carousel-page");
 
     for (let j = 0; j < displayedCards; j++) {
-      //console.log({cardCounter});
-      //console.log({catalogData});
       if (cardCounter === catalogData) {
         break;
       }
@@ -75,6 +76,4 @@ fetch (dataFile)
 
     carousel.append(page);
   }
-});
-
-
+}

@@ -40,7 +40,7 @@ introPrevBtn.addEventListener("click", function() {
 
 
 
-let dataFile = "../../data/productData.json";
+let dataFile = "./data/productData.json";
 let dataObj = undefined;
 
 fetch (dataFile)

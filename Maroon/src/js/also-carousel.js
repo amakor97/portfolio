@@ -39,7 +39,7 @@ alsoPrevBtn.addEventListener("click",
 handleCarousel.bind(null, subCarousel, "prev"));
 
 
-let dataFile = "../../data/productData.json";
+let dataFile = "../data/productData.json";
 let dataObj = undefined;
 
 fetch (dataFile)
@@ -63,7 +63,7 @@ fetch (dataFile)
       if (cardCounter === alsoData) {
         break;
       }
-      let card = createCatalogCard(dataObj[cardCounter]);
+      let card = createCatalogCard(dataObj[cardCounter], true);
       cardCounter++;
       page.appendChild(card);
     }
