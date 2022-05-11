@@ -17,3 +17,7 @@ This is a simple date reminder app that allows user to add and remove dates and 
 ### Scandi
 
 This is an example of one-paged fake design company site.
+
+### Maroon
+
+This is an example of three-paged (landing, catalog & one product page) fake e-shop site. Three main layouts for different resolutions (breakpoints are 768px and 1366px). Product data retrieving is made with fetch function, all product cards render dynamically.
