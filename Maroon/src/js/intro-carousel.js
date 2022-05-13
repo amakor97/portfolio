@@ -176,26 +176,26 @@ function swipeAction(sliderObj) {
   }
   
 
-  if (touchIntro.isSwipe) {
+  if (sliderObj.isSwipe) {
     blockCards(cards);
     
     // запрет ухода влево на первом слайде
     if (slideIndex === 0) {
-      if (touchIntro.posInit < touchIntro.posX1) {
+      if (sliderObj.posInit < sliderObj.posX1) {
         setTransform(transform, 0);
         return;
       } else {
-        touchIntro.allowSwipe = true;
+        sliderObj.allowSwipe = true;
       }
     }
 
     // запрет ухода вправо на последнем слайде
     if (slideIndex === (cardsNumber -1)) {
-      if (touchIntro.posInit > touchIntro.posX1) {
-        setTransform(transform, touchIntro.lastTrf);
+      if (sliderObj.posInit > sliderObj.posX1) {
+        setTransform(transform, sliderObj.lastTrf);
         return;
       } else {
-        touchIntro.allowSwipe = true;
+        sliderObj.allowSwipe = true;
       }
     }
     
