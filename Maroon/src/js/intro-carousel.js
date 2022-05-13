@@ -144,11 +144,17 @@ function swipeStart(sliderObj) {
     sliderObj.carousel.style.transition = '';
     
     document.addEventListener('touchmove', function(){
-      swipeAction(touchIntro);
+      swipeAction(sliderObj);
     });
     //document.addEventListener('mousemove', swipeAction);
-    document.addEventListener('touchend', swipeEnd);
-    document.addEventListener('mouseup', swipeEnd);
+    
+    document.addEventListener("touchend", swipeEnd);
+
+    document.addEventListener('touchend', function() {
+      //swipeEnd(sliderObj);
+      //swipeEnd();
+    });
+    //document.addEventListener('mouseup', swipeEnd);
   }
 }
 
@@ -202,7 +208,7 @@ function swipeAction(sliderObj) {
     // запрет протаскивания дальше одного слайда
     if ((sliderObj.posInit > sliderObj.posX1 && transform < sliderObj.nextTrf) 
       || (sliderObj.posInit < sliderObj.posX1 && transform > sliderObj.prevTrf)) {
-      reachEdge();
+      reachEdge(sliderObj);
       return;
     }
 
@@ -211,46 +217,49 @@ function swipeAction(sliderObj) {
   }
 }
 
-function reachEdge() {
-  touchIntro.transition = false;
-  swipeEnd();
-  touchIntro.allowSwipe = true;
+function reachEdge(sliderObj) {
+  sliderObj.transition = false;
+  swipeEnd(sliderObj);
+  sliderObj.allowSwipe = true;
 }
 
 function swipeEnd() {
-  touchIntro.posFinal = touchIntro.posInit - touchIntro.posX1;
+  let sliderObj = touchIntro;
+  sliderObj.posFinal = sliderObj.posInit - sliderObj.posX1;
 
-  touchIntro.isScroll = false;
-  touchIntro.isSwipe = false;
+  sliderObj.isScroll = false;
+  sliderObj.isSwipe = false;
 
   document.removeEventListener('touchmove', swipeAction);
-  document.removeEventListener('mousemove', swipeAction);
   document.removeEventListener('touchend', swipeEnd);
-  document.removeEventListener('mouseup', swipeEnd);
+  //document.removeEventListener('mousemove', swipeAction);
+  //document.removeEventListener('mouseup', swipeEnd);
 
   //sliderList.classList.add('grab');
   //sliderList.classList.remove('grabbing');
+  //console.log(sliderObj);
+  //console.log(sliderObj.allowSwipe, sliderObj.allowSwipe);
 
-  if (touchIntro.allowSwipe) {
-    if (Math.abs(touchIntro.posFinal) > touchIntro.posThreshold) {
-      if (touchIntro.posInit < touchIntro.posX1) {
+  if (sliderObj.allowSwipe) {
+    if (Math.abs(sliderObj.posFinal) > sliderObj.posThreshold) {
+      if (sliderObj.posInit < sliderObj.posX1) {
         slideIndex--;
-        leftCard--;
-      } else if (touchIntro.posInit > touchIntro.posX1) {
+        //leftCard--;
+      } else if (sliderObj.posInit > sliderObj.posX1) {
         slideIndex++;
-        leftCard++;
+        //leftCard++;
       }
     }
 
-    if (touchIntro.posInit !== touchIntro.posX1) {
-      touchIntro.allowSwipe = false;
+    if (sliderObj.posInit !== sliderObj.posX1) {
+      sliderObj.allowSwipe = false;
       slide();
     } else {
-      touchIntro.allowSwipe = true;
+      sliderObj.allowSwipe = true;
     }
 
   } else {
-    touchIntro.allowSwipe = true;
+    sliderObj.allowSwipe = true;
   }
 
 }
