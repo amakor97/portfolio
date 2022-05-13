@@ -14,12 +14,12 @@ const cardInnerWidth = window.innerWidth >= 768 ? 230 : 220;
 const cardMargin = 30;
 
 const introCarouselFullWidth = (cardsNumber > 0) ? cardInnerWidth + (cardInnerWidth + cardMargin)*(cardsNumber - 1) : 0;
-console.log(introCarouselFullWidth);
+//console.log(introCarouselFullWidth);
 
 introCarousel.style.width = introCarouselFullWidth + "px";
 
 const introCarouselStep = cardInnerWidth + cardMargin;
-console.log(introCarouselStep);
+//console.log(introCarouselStep);
 let introCarouselPos = 0;
 let slideIndex = 0;
 
@@ -35,7 +35,7 @@ introNextBtn.addEventListener("click", function() {
     introCarousel.style.transform = `translateX(${transform}px)`;
     leftCard++;
     slideIndex++;
-    console.log({slideIndex});
+    //console.log({slideIndex});
   }
 })
 
@@ -59,21 +59,14 @@ fetch (dataFile)
 .then(response => response.json())
 .then( function(json) {
   dataObj = json;
-  console.log(dataObj);
+  //console.log(dataObj);
   const main = document.querySelector(".main");
   for (let i = 0; i < cardsNumber; i++) {
     let card = createBestsellersCard(dataObj[i]);
     main.appendChild(card);
     introCarousel.appendChild(card);
   }
-
   cards = document.querySelectorAll(".intro-card");
-  console.log(cards);
-  
-  cards.forEach(function(card) {
-    //card.e.preventDefault();
-  })
-
 });
 
 
@@ -81,13 +74,13 @@ fetch (dataFile)
 /// touch
 
 function getEvent() {
-  console.log(event);
   return (event.type.search('touch') !== -1) ? event.touches[0] : event;
 }
 
 let touchIntro = {
   allowSwipe: true,
   transition: true,
+  step: introCarouselStep,
   nextTrf: 0,
   prevTrf: 0,
   posInit: 0,
@@ -137,7 +130,7 @@ function unblockCards(arr) {
 
 function swipeStart() {
   let evt = getEvent();
-  console.log(touchIntro.allowSwipe);
+  //console.log(touchIntro.allowSwipe);
 
   if (touchIntro.allowSwipe) {
 
@@ -148,7 +141,7 @@ function swipeStart() {
 
     touchIntro.posInit = touchIntro.posX1 = evt.clientX;
     touchIntro.posY1 = evt.clientY;
-    //console.log({touchIntro.posInit, posX1, touchIntro.posY1});
+    console.log(touchIntro.posInit, touchIntro.posX1, touchIntro.posY1);
 
     
     introCarousel.style.transition = '';
@@ -166,7 +159,7 @@ function swipeAction() {
   let evt = getEvent();
   let style = introCarousel.style.transform;
   let transform = +style.match(touchIntro.trfRegExp)[0];
-  console.log({transform});
+  //console.log({transform});
   
   touchIntro.posX2 = touchIntro.posX1 - evt.clientX;
   touchIntro.posX1 = evt.clientX;
@@ -203,11 +196,11 @@ function swipeAction() {
         touchIntro.allowSwipe = true;
       }
     }
-    console.log({cardsNumber});
+    //console.log({cardsNumber});
     // запрет ухода вправо на последнем слайде
     if (slideIndex === (cardsNumber -1)) {
-      console.log({cardsNumber});
-      console.log({slideIndex});
+      //console.log({cardsNumber});
+      //console.log({slideIndex});
       if (touchIntro.posInit > touchIntro.posX1) {
         setTransform(transform, touchIntro.lastTrf);
         return;
@@ -278,9 +271,6 @@ function slide() {
     introCarousel.style.transition = 'transform .5s';
   }
   introCarousel.style.transform = `translateX(-${slideIndex * introCarouselStep}px)`;
-
-  //prev.classList.toggle('disabled', slideIndex === 0);
-  //next.classList.toggle('disabled', slideIndex === --slides.length);
 }
 
 function setTransform(transform, compareTransform) {
