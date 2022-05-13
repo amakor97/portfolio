@@ -78,6 +78,7 @@ function getEvent() {
 }
 
 let touchIntro = {
+  carousel: introCarousel,
   allowSwipe: true,
   transition: true,
   step: introCarouselStep,
@@ -130,22 +131,17 @@ function unblockCards(arr) {
 
 function swipeStart(sliderObj) {
   let evt = getEvent();
-  //console.log(sliderObj.allowSwipe);
 
   if (sliderObj.allowSwipe) {
-
     sliderObj.transition = true;
 
-    sliderObj.nextTrf = (slideIndex + 1) * -introCarouselStep;
-    sliderObj.prevTrf = (slideIndex - 1) * -introCarouselStep;
+    sliderObj.nextTrf = (slideIndex + 1) * -sliderObj.step;
+    sliderObj.prevTrf = (slideIndex - 1) * -sliderObj.step;
 
     sliderObj.posInit = sliderObj.posX1 = evt.clientX;
     sliderObj.posY1 = evt.clientY;
-    console.log(sliderObj.posInit, sliderObj.posX1, sliderObj.posY1);
-
     
-    introCarousel.style.transition = '';
-
+    sliderObj.carousel.style.transition = '';
     
     document.addEventListener('touchmove', swipeAction);
     document.addEventListener('mousemove', swipeAction);
@@ -155,18 +151,15 @@ function swipeStart(sliderObj) {
 }
 
 function swipeAction() {
-
   let evt = getEvent();
   let style = introCarousel.style.transform;
   let transform = +style.match(touchIntro.trfRegExp)[0];
-  //console.log({transform});
   
   touchIntro.posX2 = touchIntro.posX1 - evt.clientX;
   touchIntro.posX1 = evt.clientX;
 
   touchIntro.posY2 = touchIntro.posY1 - evt.clientY;
   touchIntro.posY1 = evt.clientY;
-  //console.log({touchIntro.posX2, touchIntro.posY2});
 
   
   // определение действия свайп или скролл
@@ -187,7 +180,6 @@ function swipeAction() {
     blockCards(cards);
     
     // запрет ухода влево на первом слайде
-    
     if (slideIndex === 0) {
       if (touchIntro.posInit < touchIntro.posX1) {
         setTransform(transform, 0);
@@ -196,11 +188,9 @@ function swipeAction() {
         touchIntro.allowSwipe = true;
       }
     }
-    //console.log({cardsNumber});
+
     // запрет ухода вправо на последнем слайде
     if (slideIndex === (cardsNumber -1)) {
-      //console.log({cardsNumber});
-      //console.log({slideIndex});
       if (touchIntro.posInit > touchIntro.posX1) {
         setTransform(transform, touchIntro.lastTrf);
         return;
@@ -209,9 +199,9 @@ function swipeAction() {
       }
     }
     
-    
     // запрет протаскивания дальше одного слайда
-    if (touchIntro.posInit > touchIntro.posX1 && transform < touchIntro.nextTrf || touchIntro.posInit < touchIntro.posX1 && transform > touchIntro.prevTrf) {
+    if (touchIntro.posInit > touchIntro.posX1 && transform < touchIntro.nextTrf 
+      || touchIntro.posInit < touchIntro.posX1 && transform > touchIntro.prevTrf) {
       reachEdge();
       return;
     }
@@ -219,7 +209,6 @@ function swipeAction() {
     // двигаем слайд
     introCarousel.style.transform = `translateX(${transform - touchIntro.posX2}px)`;
   }
-  //console.log({touchIntro.allowSwipe});
 }
 
 function reachEdge() {
