@@ -128,20 +128,20 @@ function unblockCards(arr) {
   })
 }
 
-function swipeStart() {
+function swipeStart(sliderObj) {
   let evt = getEvent();
-  //console.log(touchIntro.allowSwipe);
+  //console.log(sliderObj.allowSwipe);
 
-  if (touchIntro.allowSwipe) {
+  if (sliderObj.allowSwipe) {
 
-    touchIntro.transition = true;
+    sliderObj.transition = true;
 
-    touchIntro.nextTrf = (slideIndex + 1) * -introCarouselStep;
-    touchIntro.prevTrf = (slideIndex - 1) * -introCarouselStep;
+    sliderObj.nextTrf = (slideIndex + 1) * -introCarouselStep;
+    sliderObj.prevTrf = (slideIndex - 1) * -introCarouselStep;
 
-    touchIntro.posInit = touchIntro.posX1 = evt.clientX;
-    touchIntro.posY1 = evt.clientY;
-    console.log(touchIntro.posInit, touchIntro.posX1, touchIntro.posY1);
+    sliderObj.posInit = sliderObj.posX1 = evt.clientX;
+    sliderObj.posY1 = evt.clientY;
+    console.log(sliderObj.posInit, sliderObj.posX1, sliderObj.posY1);
 
     
     introCarousel.style.transition = '';
@@ -286,5 +286,5 @@ introCarousel.addEventListener('transitionend', function() {
   unblockCards(cards);
   touchIntro.allowSwipe = true
 });
-introCarousel.addEventListener('touchstart', swipeStart);
-introCarousel.addEventListener('mousedown', swipeStart);
+introCarousel.addEventListener('touchstart', swipeStart.bind(null, touchIntro));
+introCarousel.addEventListener('mousedown', swipeStart.bind(null, touchIntro));
