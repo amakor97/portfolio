@@ -143,37 +143,37 @@ function swipeStart(sliderObj) {
     
     sliderObj.carousel.style.transition = '';
     
-    document.addEventListener('touchmove', swipeAction);
+    document.addEventListener('touchmove', function(){
+      swipeAction(touchIntro);
+    });
     document.addEventListener('mousemove', swipeAction);
     document.addEventListener('touchend', swipeEnd);
     document.addEventListener('mouseup', swipeEnd);
   }
 }
 
-function swipeAction() {
+function swipeAction(sliderObj) {
   let evt = getEvent();
-  let style = introCarousel.style.transform;
-  let transform = +style.match(touchIntro.trfRegExp)[0];
+  let style = sliderObj.carousel.style.transform;
+  let transform = +style.match(sliderObj.trfRegExp)[0];
   
-  touchIntro.posX2 = touchIntro.posX1 - evt.clientX;
-  touchIntro.posX1 = evt.clientX;
+  sliderObj.posX2 = sliderObj.posX1 - evt.clientX;
+  sliderObj.posX1 = evt.clientX;
 
-  touchIntro.posY2 = touchIntro.posY1 - evt.clientY;
-  touchIntro.posY1 = evt.clientY;
+  sliderObj.posY2 = sliderObj.posY1 - evt.clientY;
+  sliderObj.posY1 = evt.clientY;
 
   
   // определение действия свайп или скролл
-  if (!touchIntro.isSwipe && !touchIntro.isScroll) {
-    let posY = Math.abs(touchIntro.posY2);
-    //console.log({touchIntro.posX2, posY});
-    if (posY > 7 || touchIntro.posX2 === 0) {
-      touchIntro.isScroll = true;
-      touchIntro.allowSwipe = false;
+  if (!sliderObj.isSwipe && !sliderObj.isScroll) {
+    let posY = Math.abs(sliderObj.posY2);
+    if (posY > 7 || sliderObj.posX2 === 0) {
+      sliderObj.isScroll = true;
+      sliderObj.allowSwipe = false;
     } else if (posY < 7) {
-      touchIntro.isSwipe = true;
+      sliderObj.isSwipe = true;
     }
   }
-  //console.log({touchIntro.isSwipe, touchIntro.isScroll});
   
 
   if (touchIntro.isSwipe) {
