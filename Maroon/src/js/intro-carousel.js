@@ -146,7 +146,7 @@ function swipeStart(sliderObj) {
     document.addEventListener('touchmove', function(){
       swipeAction(touchIntro);
     });
-    document.addEventListener('mousemove', swipeAction);
+    //document.addEventListener('mousemove', swipeAction);
     document.addEventListener('touchend', swipeEnd);
     document.addEventListener('mouseup', swipeEnd);
   }
@@ -200,14 +200,14 @@ function swipeAction(sliderObj) {
     }
     
     // запрет протаскивания дальше одного слайда
-    if (touchIntro.posInit > touchIntro.posX1 && transform < touchIntro.nextTrf 
-      || touchIntro.posInit < touchIntro.posX1 && transform > touchIntro.prevTrf) {
+    if ((sliderObj.posInit > sliderObj.posX1 && transform < sliderObj.nextTrf) 
+      || (sliderObj.posInit < sliderObj.posX1 && transform > sliderObj.prevTrf)) {
       reachEdge();
       return;
     }
 
     // двигаем слайд
-    introCarousel.style.transform = `translateX(${transform - touchIntro.posX2}px)`;
+    sliderObj.carousel.style.transform = `translateX(${transform - sliderObj.posX2}px)`;
   }
 }
 
