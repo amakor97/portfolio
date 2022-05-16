@@ -130,13 +130,21 @@ function unblockCards(arr) {
 }
 
 function swipeStart(sliderObj) {
+  console.log("started");
   let evt = getEvent();
 
   if (sliderObj.allowSwipe) {
     sliderObj.transition = true;
 
+    console.log(touchIntro.prevTrf, touchIntro.nextTrf);
+    console.log(sliderObj.prevTrf, sliderObj.nextTrf);
+
     sliderObj.nextTrf = (slideIndex + 1) * -sliderObj.step;
     sliderObj.prevTrf = (slideIndex - 1) * -sliderObj.step;
+
+    console.log("after:"),
+    console.log(touchIntro.prevTrf, touchIntro.nextTrf);
+    console.log(sliderObj.prevTrf, sliderObj.nextTrf);
 
     sliderObj.posInit = sliderObj.posX1 = evt.clientX;
     sliderObj.posY1 = evt.clientY;
@@ -146,14 +154,26 @@ function swipeStart(sliderObj) {
     document.addEventListener('touchmove', function(){
       swipeAction(sliderObj);
     });
-    //document.addEventListener('mousemove', swipeAction);
+    //document.addEventListener('mousemove', swipeAction); 
+    //document.addEventListener("touchend", swipeEnd.bind(null, sliderObj));
+
     
-    document.addEventListener("touchend", swipeEnd);
+
+
+
+    document.addEventListener("touchend", function() {
+      //swipeEnd();
+    })
+    
+    //document.addEventListener("touchend", swipeEnd);
+
+    //document.addEventListener("touchend", swipeEnd.bind(evt));
 
     document.addEventListener('touchend', function() {
-      //swipeEnd(sliderObj);
-      //swipeEnd();
+      swipeEnd(sliderObj); 
     });
+
+
     //document.addEventListener('mouseup', swipeEnd);
   }
 }
@@ -215,6 +235,10 @@ function swipeAction(sliderObj) {
     // двигаем слайд
     sliderObj.carousel.style.transform = `translateX(${transform - sliderObj.posX2}px)`;
   }
+  console.log("action ending");
+  console.log(touchIntro);
+  console.log(sliderObj);
+  console.log("action ended");
 }
 
 function reachEdge(sliderObj) {
@@ -223,12 +247,22 @@ function reachEdge(sliderObj) {
   sliderObj.allowSwipe = true;
 }
 
-function swipeEnd() {
-  let sliderObj = touchIntro;
+function swipeEnd(sliderObj) { //delete param
+  //let sliderObj = touchIntro;  //comment
+  console.log("__", slideIndex);
+  console.log("ending starting");
+  console.log(touchIntro);
+  console.log(sliderObj);
+  console.log("ending started");
+
+  console.log("before", sliderObj);
+
   sliderObj.posFinal = sliderObj.posInit - sliderObj.posX1;
 
   sliderObj.isScroll = false;
   sliderObj.isSwipe = false;
+
+  console.log(sliderObj.posFinal, sliderObj.isScroll, sliderObj.isSwipe);
 
   document.removeEventListener('touchmove', swipeAction);
   document.removeEventListener('touchend', swipeEnd);
@@ -237,8 +271,8 @@ function swipeEnd() {
 
   //sliderList.classList.add('grab');
   //sliderList.classList.remove('grabbing');
-  //console.log(sliderObj);
-  //console.log(sliderObj.allowSwipe, sliderObj.allowSwipe);
+
+  console.log(sliderObj.allowSwipe);
 
   if (sliderObj.allowSwipe) {
     if (Math.abs(sliderObj.posFinal) > sliderObj.posThreshold) {
@@ -262,6 +296,8 @@ function swipeEnd() {
     sliderObj.allowSwipe = true;
   }
 
+  console.log(touchIntro);
+  console.log(sliderObj);
 }
 
 function slide() {
@@ -284,5 +320,7 @@ introCarousel.addEventListener('transitionend', function() {
   unblockCards(cards);
   touchIntro.allowSwipe = true
 });
-introCarousel.addEventListener('touchstart', swipeStart.bind(null, touchIntro));
-introCarousel.addEventListener('mousedown', swipeStart.bind(null, touchIntro));
+introCarousel.addEventListener('touchstart', function() {
+  swipeStart(touchIntro);
+})
+//introCarousel.addEventListener('mousedown', swipeStart.bind(null, touchIntro));
