@@ -2,6 +2,10 @@
 
 import { createBestsellersCard } from "./fillers/bestsellers-filler.js";
 
+import { swipeStartFunction } from "./touch-slider.js";
+import { swipeMoveFunction } from "./touch-slider.js";
+import { swipeEndFunction } from "./touch-slider.js";
+
 const introPrevBtn = document.querySelector(".js-intro-carousel-prev-btn");
 const introNextBtn = document.querySelector(".js-intro-carousel-next-btn");
 const introCarousel = document.querySelector(".js-intro-carousel-inner");
@@ -53,6 +57,7 @@ fetch (dataFile)
 function IntroSlider() {
   let _this = this;
   this.wrap = introCarousel;
+  this.cardsNumber = 7;
   this.sliderWidth = window.innerWidth >= 768 ? 260 : 250;
   this.startX = 0;
   this.sLeft = 0;
@@ -120,7 +125,7 @@ window.onload = function() {
 }
 
 
-
+/*
 function swipeStartFunction(e) {
   console.log("started function");
   let _this = this;
@@ -136,6 +141,7 @@ function swipeStartFunction(e) {
   this.posX1 = e.changedTouches[0].pageX;
   this.posY1 = e.changedTouches[0].pageY;
 }
+
 
 function swipeMoveFunction(e) {
   this.posX2 = this.posX1 - e.changedTouches[0].pageX;
@@ -190,3 +196,4 @@ function swipeEndFunction(e) {
 
   this.wrap.style.transform = `translateX(${newPos}px)`;
 }
+*/

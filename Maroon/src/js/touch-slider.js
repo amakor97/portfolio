@@ -1,200 +1,71 @@
 "use strict";
 
-function getEvent() {
-  console.log(event);
-  return (event.type.search('touch') !== -1) ? event.touches[0] : event;
+export function swipeStartFunction(e) {
+  console.log("called from module");
+  let _this = this;
+  e = e || window.event;
+  this.disX = 0;
+  //e.preventDefault();
+  this.startX = e.changedTouches[0].pageX;
+  console.log("touched X:", this.startX);
+  this.sLeft = this.wrap.style.transform ? 
+  -parseInt(/\d+/.exec(this.wrap.style.transform)[0]) : 0;
+  this.wrap.style.transition = "none";
+
+  this.posX1 = e.changedTouches[0].pageX;
+  this.posY1 = e.changedTouches[0].pageY;
 }
 
-let allowSwipe = true;
-let transition = true;
-let nextTrf = 0;
-let prevTrf = 0;
-let posInit = 0;
-let posX1 = 0;
-let posX2 = 0;
-let posY1 = 0;
-let posY2 = 0;
-let posFinal = 0;
-let trfRegExp = /([-0-9.]+(?=px))/;
-let isSwipe = false;
-let isScroll = false;
-let lastTrf = (6 * introCarouselStep);
-let posThreshold = 30;
+export function swipeMoveFunction(e) {
+  this.posX2 = this.posX1 - e.changedTouches[0].pageX;
+  this.posX1 = e.changedTouches[0].pageX;
 
-function blockCards(arr) {
-  arr.forEach(function(obj) {
-    obj.style.userSelect = "none";
-    obj.style.pointerEvents = "none";
-  })
-}
+  this.posY2 = this.posY1 - e.changedTouches[0].pageY;
+  this.posY1 = e.changedTouches[0].pageY;
 
-function unblockCards(arr) {
-  arr.forEach(function(obj) {
-    //obj.style.userSelect = "all";
-    obj.style.pointerEvents = "all";
-  })
-}
-
-export function swipeStart() {
-  let evt = getEvent();
-  console.log({allowSwipe});
-
-  if (allowSwipe) {
-
-    transition = true;
-
-    nextTrf = (slideIndex + 1) * -introCarouselStep;
-    prevTrf = (slideIndex - 1) * -introCarouselStep;
-
-    posInit = posX1 = evt.clientX;
-    posY1 = evt.clientY;
-    console.log({posInit, posX1, posY1});
-
-    
-    introCarousel.style.transition = '';
-
-    
-    document.addEventListener('touchmove', swipeAction);
-    document.addEventListener('mousemove', swipeAction);
-    document.addEventListener('touchend', swipeEnd);
-    document.addEventListener('mouseup', swipeEnd);
-  }
-}
-
-function swipeAction() {
-
-  let evt = getEvent();
-  let style = introCarousel.style.transform;
-  let transform = +style.match(trfRegExp)[0];
-  console.log({transform});
+  if (!this.isSwipe && !this.isScroll) {
   
-  posX2 = posX1 - evt.clientX;
-  posX1 = evt.clientX;
-
-  posY2 = posY1 - evt.clientY;
-  posY1 = evt.clientY;
-  //console.log({posX2, posY2});
-
-  
-  // определение действия свайп или скролл
-  if (!isSwipe && !isScroll) {
-    let posY = Math.abs(posY2);
-    console.log({posX2, posY});
-    if (posY > 7 || posX2 === 0) {
-      isScroll = true;
-      allowSwipe = false;
-    } else if (posY < 7) {
-      isSwipe = true;
+    let posY = Math.abs(this.posY2);
+    if ((posY > 4) || (this.posX2 === 0)) {
+      this.isScroll = true;
+    } else if (posY < 4) {
+      this.isSwipe = true;
     }
+
+    console.log(this.isScroll, this.isSwipe);
   }
-  console.log({isSwipe, isScroll});
-  
 
-  if (isSwipe) {
-    blockCards(cards);
-    
-    // запрет ухода влево на первом слайде
-    
-    if (slideIndex === 0) {
-      if (posInit < posX1) {
-        setTransform(transform, 0);
-        return;
-      } else {
-        allowSwipe = true;
-      }
-    }
-    console.log({cardsNumber});
-    // запрет ухода вправо на последнем слайде
-    if (slideIndex === (cardsNumber -1)) {
-      console.log({cardsNumber});
-      console.log({slideIndex});
-      if (posInit > posX1) {
-        setTransform(transform, lastTrf);
-        return;
-      } else {
-        allowSwipe = true;
-      }
-    }
-    
-    
-    // запрет протаскивания дальше одного слайда
-    if (posInit > posX1 && transform < nextTrf || posInit < posX1 && transform > prevTrf) {
-      reachEdge();
-      return;
-    }
 
-    // двигаем слайд
-    introCarousel.style.transform = `translateX(${transform - posX2}px)`;
-  }
-  //console.log({allowSwipe});
-}
-
-function reachEdge() {
-  transition = false;
-  swipeEnd();
-  allowSwipe = true;
-}
-
-function swipeEnd() {
-  posFinal = posInit - posX1;
-
-  isScroll = false;
-  isSwipe = false;
-
-  document.removeEventListener('touchmove', swipeAction);
-  document.removeEventListener('mousemove', swipeAction);
-  document.removeEventListener('touchend', swipeEnd);
-  document.removeEventListener('mouseup', swipeEnd);
-
-  //sliderList.classList.add('grab');
-  //sliderList.classList.remove('grabbing');
-
-  if (allowSwipe) {
-    if (Math.abs(posFinal) > posThreshold) {
-      if (posInit < posX1) {
-        slideIndex--;
-        leftCard--;
-      } else if (posInit > posX1) {
-        slideIndex++;
-        leftCard++;
-      }
-    }
-
-    if (posInit !== posX1) {
-      allowSwipe = false;
-      slide();
-    } else {
-      allowSwipe = true;
-    }
-
+  if (this.isSwipe) {
+    console.log("moving");
+    e = e || window.event;
+    this.disX = e.changedTouches[0].pageX - this.startX;
+    this.curLeft = this.disX + this.sLeft;
+    this.wrap.style.transform = `translateX(${this.curLeft}px)`; 
   } else {
-    allowSwipe = true;
+    console.log("scrolling");
   }
-
 }
 
-function slide() {
-  if (transition) {
-    introCarousel.style.transition = 'transform .5s';
-  }
-  introCarousel.style.transform = `translateX(-${slideIndex * introCarouselStep}px)`;
+export function swipeEndFunction(e) {
+  console.log("ending");
 
-  //prev.classList.toggle('disabled', slideIndex === 0);
-  //next.classList.toggle('disabled', slideIndex === --slides.length);
-}
+  this.isScroll = false;
+  this.isSwipe = false;
 
-function setTransform(transform, compareTransform) {
-  if (transform >= compareTransform) {
-    if (transform > compareTransform) {
-      introCarousel.style.transform = `translateX(${compareTransform}px)`;
+  if (this.disX > 50) {
+    if (this.index !== 0) {
+      this.index -= 1;
     }
   }
-  allowSwipe = false;
-}
+  if (this.disX < -50) {
+    if (this.index < (this.cardsNumber - 1)) {
+      this.index += 1;
+    }
+  }
 
-introCarousel.addEventListener('transitionend', function() {
-  unblockCards(cards);
-  allowSwipe = true
-});
-introCarousel.addEventListener('touchstart', swipeStart);
-introCarousel.addEventListener('mousedown', swipeStart);
+  this.wrap.style.transition = "0.5s";
+  let newPos = -this.index*this.sliderWidth;
+
+  this.wrap.style.transform = `translateX(${newPos}px)`;
+}
