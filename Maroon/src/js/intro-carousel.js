@@ -109,8 +109,20 @@ IntroSlider.prototype.movePrev = function() {
   }
 }
 
-IntroSlider.prototype.swipeStart = function(e) {
-  console.log("started");
+
+IntroSlider.prototype.swipeStart = swipeStartFunction;
+IntroSlider.prototype.swipeMove = swipeMoveFunction;
+IntroSlider.prototype.swipeEnd = swipeEndFunction;
+
+window.onload = function() {
+  let introSlider = new IntroSlider();
+  console.log(introSlider);
+}
+
+
+
+function swipeStartFunction(e) {
+  console.log("started function");
   let _this = this;
   e = e || window.event;
   this.disX = 0;
@@ -125,7 +137,7 @@ IntroSlider.prototype.swipeStart = function(e) {
   this.posY1 = e.changedTouches[0].pageY;
 }
 
-IntroSlider.prototype.swipeMove = function(e) {
+function swipeMoveFunction(e) {
   this.posX2 = this.posX1 - e.changedTouches[0].pageX;
   this.posX1 = e.changedTouches[0].pageX;
 
@@ -156,7 +168,7 @@ IntroSlider.prototype.swipeMove = function(e) {
   }
 }
 
-IntroSlider.prototype.swipeEnd = function(e) {
+function swipeEndFunction(e) {
   console.log("ending");
 
   this.isScroll = false;
@@ -178,23 +190,3 @@ IntroSlider.prototype.swipeEnd = function(e) {
 
   this.wrap.style.transform = `translateX(${newPos}px)`;
 }
-
-window.onload = function() {
-  let introSlider = new IntroSlider();
-  console.log(introSlider);
-}
-
-function blockCards(arr) {
-  arr.forEach(function(obj) {
-    obj.style.userSelect = "none";
-    obj.style.pointerEvents = "none";
-  })
-}
-
-function unblockCards(arr) {
-  arr.forEach(function(obj) {
-    //obj.style.userSelect = "all";
-    obj.style.pointerEvents = "all";
-  })
-}
-
