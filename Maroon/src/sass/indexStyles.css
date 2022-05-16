@@ -831,10 +831,6 @@ html:root {
 .intro-carousel__inner {
   width: 2000px;
   font-size: 0;
-  -webkit-transition: -webkit-transform 1s;
-  transition: -webkit-transform 1s;
-  transition: transform 1s;
-  transition: transform 1s, -webkit-transform 1s;
 }
 
 @media (min-width: 768px) {
