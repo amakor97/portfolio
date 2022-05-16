@@ -116,6 +116,7 @@ IntroSlider.prototype.swipeStart = function(e) {
   console.log("started");
   let _this = this;
   e = e || window.event;
+  this.disX = 0;
   //e.preventDefault();
   this.startX = e.changedTouches[0].pageX;
   console.log("touched X:", this.startX);
