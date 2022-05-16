@@ -94,10 +94,10 @@ let touchIntro = {
   posThreshold: 30
 }
 
-function IntroSlider(id) {
+function IntroSlider() {
   let _this = this;
-  this.wrap = document.getElementById(id);
-  this.sliderWidth = 250;
+  this.wrap = introCarousel;
+  this.sliderWidth = window.innerWidth >= 768 ? 260 : 250;
   this.startX = 0;
   this.sLeft = 0;
   this.index = 0;
@@ -110,6 +110,14 @@ function IntroSlider(id) {
   _this.swipeMove.bind(this), false);
   document.addEventListener("touchend", 
   _this.swipeEnd.bind(this), false);
+
+  //blocking swipe or scroll
+  this.isSwipe = false;
+  this.isScroll = false;
+  this.posX1 = 0;
+  this.posX2 = 0;
+  this.posY1 = 0;
+  this.posY2 = 0;
 }
 
 IntroSlider.prototype.swipeStart = function(e) {
@@ -123,19 +131,57 @@ IntroSlider.prototype.swipeStart = function(e) {
   this.sLeft = this.wrap.style.transform ? 
   -parseInt(/\d+/.exec(this.wrap.style.transform)[0]) : 0;
   this.wrap.style.transition = "none";
+
+  this.posX1 = e.changedTouches[0].pageX;
+  this.posY1 = e.changedTouches[0].pageY;
 }
 
 IntroSlider.prototype.swipeMove = function(e) {
-  console.log("moving");
-  e = e || window.event;
-  this.disX = e.changedTouches[0].pageX - this.startX;
-  this.curLeft = this.disX + this.sLeft;
-  console.log("disX", this.disX);
-  this.wrap.style.transform = `translateX(${this.curLeft}px)`; 
+
+  //console.log("x:", e.changedTouches[0].pageX);
+  //console.log("y:", e.changedTouches[0].pageY);
+
+  this.posX2 = this.posX1 - e.changedTouches[0].pageX;
+  this.posX1 = e.changedTouches[0].pageX;
+
+  this.posY2 = this.posY1 - e.changedTouches[0].pageY;
+  this.posY1 = e.changedTouches[0].pageY;
+
+  if (!this.isSwipe && !this.isScroll) {
+    console.log("calculating posY2:", this.posY2);
+    console.log("calculating posX2:", this.posX2);
+  
+    let posY = Math.abs(this.posY2);
+    if ((posY > 4) || (this.posX2 === 0)) {
+      this.isScroll = true;
+    } else if (posY < 4) {
+      this.isSwipe = true;
+    }
+
+    console.log(this.isScroll, this.isSwipe);
+  }
+
+
+  if (this.isSwipe) {
+    console.log("moving");
+    e = e || window.event;
+    this.disX = e.changedTouches[0].pageX - this.startX;
+    this.curLeft = this.disX + this.sLeft;
+    //console.log("disX", this.disX);
+    this.wrap.style.transform = `translateX(${this.curLeft}px)`; 
+  } else {
+    console.log("scrolling");
+  }
+
+  
 }
 
 IntroSlider.prototype.swipeEnd = function(e) {
   console.log("ending");
+
+  this.isScroll = false;
+  this.isSwipe = false;
+
   console.log("disX", this.disX);
   if (this.disX > 50) {
     if (this.index !== 0) {
@@ -159,9 +205,12 @@ IntroSlider.prototype.swipeEnd = function(e) {
 }
 
 window.onload = function() {
-  let introSlider = new IntroSlider("intro-carousel-id");
+  let introSlider = new IntroSlider();
   console.log(introSlider);
 }
+
+
+
 
 function blockCards(arr) {
   arr.forEach(function(obj) {
