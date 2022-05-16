@@ -27,28 +27,6 @@ let leftCard = 1;
 
 introCarousel.style.transform = `translateX(0px)`;
 
-introNextBtn.addEventListener("click", function() {
-  if (slideIndex < (cardsNumber -1)) {
-    let style = introCarousel.style.transform;
-    let transform = +style.match(touchIntro.trfRegExp)[0];
-    transform -= introCarouselStep;
-    introCarousel.style.transform = `translateX(${transform}px)`;
-    leftCard++;
-    slideIndex++;
-    //console.log({slideIndex});
-  }
-})
-
-introPrevBtn.addEventListener("click", function() {
-  if (slideIndex > 0) {
-    let style = introCarousel.style.transform;
-    let transform = +style.match(touchIntro.trfRegExp)[0];
-    transform += introCarouselStep;
-    introCarousel.style.transform = `translateX(${transform}px)`;
-    leftCard--;
-    slideIndex--;
-  }
-})
 
 let cards = [];
 
@@ -72,28 +50,6 @@ fetch (dataFile)
 
 
 /// touch
-
-
-let touchIntro = {
-  carousel: introCarousel,
-  allowSwipe: true,
-  transition: true,
-  step: introCarouselStep,
-  nextTrf: 0,
-  prevTrf: 0,
-  posInit: 0,
-  posX1: 0,
-  posX2: 0,
-  posY1: 0,
-  posY2: 0,
-  posFinal: 0,
-  trfRegExp: /([-0-9.]+(?=px))/,
-  isSwipe: false,
-  isScroll: false,
-  lastTrf: ((cardsNumber-1) * introCarouselStep),
-  posThreshold: 30
-}
-
 function IntroSlider() {
   let _this = this;
   this.wrap = introCarousel;
@@ -118,6 +74,39 @@ function IntroSlider() {
   this.posX2 = 0;
   this.posY1 = 0;
   this.posY2 = 0;
+
+  this.trfRegExp = /([-0-9.]+(?=px))/;
+  this.nextBtn = introNextBtn;
+  this.nextBtn.addEventListener("click", 
+  _this.moveNext.bind(this), false);
+ 
+  this.prevBtn = introPrevBtn;
+  this.prevBtn.addEventListener("click",
+  _this.movePrev.bind(this), false);
+}
+
+IntroSlider.prototype.moveNext = function() {
+  let _this = this;
+  console.log("clicked, current index:", _this.index);
+  if (_this.index < (cardsNumber - 1)) {
+    let style = _this.wrap.style.transform;
+    let transform = +style.match(_this.trfRegExp)[0];
+    transform -= _this.sliderWidth;
+    _this.wrap.style.transform = `translateX(${transform}px)`;
+    _this.index++;
+  }
+}
+
+IntroSlider.prototype.movePrev = function() {
+  let _this = this;
+  console.log("clicked, current index:", _this.index); 
+  if (_this.index > 0) {
+    let style = _this.wrap.style.transform;
+    let transform = +style.match(_this.trfRegExp)[0];
+    transform += _this.sliderWidth;
+    _this.wrap.style.transform = `translateX(${transform}px)`;
+    _this.index--;
+  }
 }
 
 IntroSlider.prototype.swipeStart = function(e) {
@@ -137,10 +126,6 @@ IntroSlider.prototype.swipeStart = function(e) {
 }
 
 IntroSlider.prototype.swipeMove = function(e) {
-
-  //console.log("x:", e.changedTouches[0].pageX);
-  //console.log("y:", e.changedTouches[0].pageY);
-
   this.posX2 = this.posX1 - e.changedTouches[0].pageX;
   this.posX1 = e.changedTouches[0].pageX;
 
@@ -148,8 +133,6 @@ IntroSlider.prototype.swipeMove = function(e) {
   this.posY1 = e.changedTouches[0].pageY;
 
   if (!this.isSwipe && !this.isScroll) {
-    console.log("calculating posY2:", this.posY2);
-    console.log("calculating posX2:", this.posX2);
   
     let posY = Math.abs(this.posY2);
     if ((posY > 4) || (this.posX2 === 0)) {
@@ -167,13 +150,10 @@ IntroSlider.prototype.swipeMove = function(e) {
     e = e || window.event;
     this.disX = e.changedTouches[0].pageX - this.startX;
     this.curLeft = this.disX + this.sLeft;
-    //console.log("disX", this.disX);
     this.wrap.style.transform = `translateX(${this.curLeft}px)`; 
   } else {
     console.log("scrolling");
   }
-
-  
 }
 
 IntroSlider.prototype.swipeEnd = function(e) {
@@ -182,7 +162,6 @@ IntroSlider.prototype.swipeEnd = function(e) {
   this.isScroll = false;
   this.isSwipe = false;
 
-  console.log("disX", this.disX);
   if (this.disX > 50) {
     if (this.index !== 0) {
       this.index -= 1;
@@ -194,12 +173,8 @@ IntroSlider.prototype.swipeEnd = function(e) {
     }
   }
 
-  console.log("new index:", this.index);
-  console.log(this.disX);
-  console.log("sliderWidth:", this.sliderWidth);
   this.wrap.style.transition = "0.5s";
   let newPos = -this.index*this.sliderWidth;
-  console.log("new pos:", newPos);
 
   this.wrap.style.transform = `translateX(${newPos}px)`;
 }
@@ -208,9 +183,6 @@ window.onload = function() {
   let introSlider = new IntroSlider();
   console.log(introSlider);
 }
-
-
-
 
 function blockCards(arr) {
   arr.forEach(function(obj) {
