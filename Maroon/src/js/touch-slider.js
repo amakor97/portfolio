@@ -1,6 +1,6 @@
 "use strict";
 
-let debugMode = true;
+let debugMode = false;
 
 export function swipeStartFunction(e) {
   if (debugMode) {
@@ -156,7 +156,7 @@ export function movePrevFunctiion() {
 
     this.wrap.style.transition = "0.5s";
     this.index--;
-    
+
     let newPos = -this.index*this.sliderWidth;
     this.wrap.style.transform = `translateX(${newPos}px)`;
 

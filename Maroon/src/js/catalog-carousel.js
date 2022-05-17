@@ -1,6 +1,4 @@
 "use strict";
-
-import { handleCarousel } from "./carouselFunctions.js";
 import { createCatalogCard } from "./fillers/catalogs-filler.js";
 
 import { swipeStartFunction } from "./touch-slider.js";
@@ -18,34 +16,38 @@ const carouselPages = document.querySelectorAll(".js-catalog-carousel-page");
 console.log(carouselPages);
 
 
-let catalogData = 24;  //length of array of objects
+let catalogData = 0;  //length of array of objects
 let displayedCards = 12;  
-let pageNumber = Math.ceil(catalogData / displayedCards);
-maxPageElem.textContent = pageNumber;
+let pageNumber = 0;
 
-let carouselFullWidth = 100*pageNumber + "%";
-carousel.style.width = carouselFullWidth;
+let carouselFullWidth = 0;
 carousel.style.gridTemplateColumns = `repeat(${pageNumber}, 1fr)`;
-
-
 
 let fullscreenWidth = screen.width;
 console.log(fullscreenWidth);
-
 
 let dataFile = "./data/productData.json";
 let dataObj = undefined;
 
 fetch (dataFile)
 .then(response => response.json())
-.then( function(json) {
+.then(function(json) {
+  console.log("data length:", json.length);
+  catalogData = json.length;
+  console.log("cards to render:", catalogData);
+
+  pageNumber = Math.ceil(catalogData / displayedCards);
+  carouselFullWidth = 100*pageNumber + "%";
+  carousel.style.width = carouselFullWidth;
+  carousel.style.gridTemplateColumns = `repeat(${pageNumber}, 1fr)`;
+  maxPageElem.textContent = pageNumber;
+
   fillCatalog(json);
 });
 
 
 function fillCatalog(obj) {
   dataObj = obj;
-  //console.log(dataObj);
 
   let cardCounter = 0;
 
@@ -96,7 +98,6 @@ function CatalogSlider() {
   this.posY1 = 0;
   this.posY2 = 0;
 
-  //this.trfRegExp = /([-0-9.]+(?=px))/;
   this.nextBtn = nextBtn;
   this.nextBtn.addEventListener("click", 
   _this.moveNext.bind(this), false);
