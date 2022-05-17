@@ -3,6 +3,12 @@
 import { handleCarousel } from "./carouselFunctions.js";
 import { createCatalogCard } from "./fillers/catalogs-filler.js";
 
+import { swipeStartFunction } from "./touch-slider.js";
+import { swipeMoveFunction } from "./touch-slider.js";
+import { swipeEndFunction } from "./touch-slider.js";
+import { moveNextFunction } from "./touch-slider.js";
+import { movePrevFunctiion } from "./touch-slider.js";
+
 const alsoPrevBtn = document.querySelector(".js-also-carousel-prev-btn");
 const alsoNextBtn = document.querySelector(".js-also-carousel-next-btn");
 const alsoCarousel = document.querySelector(".js-also-carousel-inner");
@@ -21,7 +27,7 @@ const alsoCarouselFullWidth = 100*alsoPageNumber + "%";
 alsoCarousel.style.width = alsoCarouselFullWidth;
 alsoCarousel.style.gridTemplateColumns = `repeat(${alsoPageNumber}, 1fr)`;
 
-
+/*
 let alsoStep = 100 / alsoPageNumber;
 let alsoCarouselPos = 0;
 
@@ -37,7 +43,7 @@ alsoNextBtn.addEventListener("click",
 handleCarousel.bind(null, subCarousel, "next"));
 alsoPrevBtn.addEventListener("click",
 handleCarousel.bind(null, subCarousel, "prev"));
-
+*/
 
 let dataFile = "../data/productData.json";
 let dataObj = undefined;
@@ -71,3 +77,52 @@ fetch (dataFile)
     alsoCarousel.append(page);
   }
 });
+
+function AlsoSlider() {
+  let _this = this;
+  this.wrap = alsoCarousel;
+  this.slidesNumber = alsoPageNumber;
+  this.sliderWidth = window.innerWidth;
+
+  this.startX = 0;
+  this.sLeft = 0;
+  this.index = 0;
+  this.curLeft = 0;
+  this.disX = 0;
+
+  this.wrap.addEventListener("touchstart", function() {
+    _this.swipeStart();
+  }, false);
+  document.addEventListener("touchmove", 
+  _this.swipeMove.bind(this), false);
+  document.addEventListener("touchend",
+  _this.swipeEnd.bind(this), false);
+
+  this.isSwipe = false;
+  this.isScroll = false;
+  this.posX1 = 0;
+  this.posX2 = 0;
+  this.posY1 = 0;
+  this.posY2 = 0;
+
+  this.nextBtn = alsoNextBtn;
+  this.nextBtn.addEventListener("click", 
+  _this.moveNext.bind(this), false);
+
+  this.prevBtn = alsoPrevBtn;
+  this.prevBtn.addEventListener("click",
+  _this.movePrev.bind(this), false);
+
+  this.pageCounterElem = alsoCurrentPageElem;
+}
+
+AlsoSlider.prototype.swipeStart = swipeStartFunction;
+AlsoSlider.prototype.swipeMove = swipeMoveFunction;
+AlsoSlider.prototype.swipeEnd = swipeEndFunction;
+AlsoSlider.prototype.moveNext = moveNextFunction;
+AlsoSlider.prototype.movePrev = movePrevFunctiion;
+
+window.addEventListener("load", function() {
+  let alsoSlider = new AlsoSlider();
+  console.log(alsoSlider);
+})
