@@ -1,6 +1,6 @@
 "use strict";
 
-let debugMode = false;
+let debugMode = true;
 
 export function swipeStartFunction(e) {
   if (debugMode) {
@@ -86,6 +86,8 @@ export function swipeEndFunction() {
   }
 
   this.wrap.style.transition = "0.5s";
+  
+  console.log(this.index, this.sliderWidth);
   let newPos = -this.index*this.sliderWidth;
 
   this.wrap.style.transform = `translateX(${newPos}px)`;
@@ -95,6 +97,10 @@ export function swipeEndFunction() {
   if (debugMode) {
     console.log("transform after:", newPos);
     console.log("__________");
+  }
+
+  if (this.pageCounterElem !== undefined) {
+    this.pageCounterElem.textContent = (this.index + 1);
   }
 }
 
@@ -130,6 +136,12 @@ export function moveNextFunction() {
     console.log("__________");
   }
 
+  console.log(this.pageCounterElem);
+
+  if (this.pageCounterElem !== undefined) {
+    this.pageCounterElem.textContent = (this.index + 1);
+  }
+
 }
 
 export function movePrevFunctiion() {
@@ -161,5 +173,9 @@ export function movePrevFunctiion() {
   }
   if (debugMode) {
     console.log("__________");
+  }
+
+  if (this.pageCounterElem !== undefined) {
+    this.pageCounterElem.textContent = (this.index + 1);
   }
 }
