@@ -63,7 +63,7 @@ export function swipeMoveFunction(e) {
   }
 }
 
-export function swipeEndFunction(e) {
+export function swipeEndFunction() {
   if (debugMode) {
     console.log("__________");
     console.log("touch ending");
@@ -98,7 +98,7 @@ export function swipeEndFunction(e) {
   }
 }
 
-export function moveNextFunction(e) {
+export function moveNextFunction() {
   if (debugMode) {
     console.log("__________");
     console.log("moving next, called from module");
@@ -132,7 +132,7 @@ export function moveNextFunction(e) {
 
 }
 
-export function movePrevFunctiion(e) {
+export function movePrevFunctiion() {
   if (debugMode) {
     console.log("__________");
     console.log("moving prev, called from module");
