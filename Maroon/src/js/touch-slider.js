@@ -1,13 +1,22 @@
 "use strict";
 
+let debugMode = false;
+
 export function swipeStartFunction(e) {
-  console.log("called from module");
+  if (debugMode) {
+    console.log("__________");
+    console.log("touch start");
+  }
+
   let _this = this;
   e = e || window.event;
   this.disX = 0;
   //e.preventDefault();
   this.startX = e.changedTouches[0].pageX;
-  console.log("touched X:", this.startX);
+  if (debugMode) {
+    console.log("touched X:", this.startX);
+  }
+
   this.sLeft = this.wrap.style.transform ? 
   -parseInt(/\d+/.exec(this.wrap.style.transform)[0]) : 0;
   this.wrap.style.transition = "none";
@@ -32,23 +41,35 @@ export function swipeMoveFunction(e) {
       this.isSwipe = true;
     }
 
-    console.log(this.isScroll, this.isSwipe);
+    if (debugMode) {
+      console.log(this.isScroll, this.isSwipe);
+    }
   }
 
 
   if (this.isSwipe) {
-    console.log("moving");
+    if (debugMode) {
+      console.log("moving");
+    }
+   
     e = e || window.event;
     this.disX = e.changedTouches[0].pageX - this.startX;
     this.curLeft = this.disX + this.sLeft;
     this.wrap.style.transform = `translateX(${this.curLeft}px)`; 
   } else {
-    console.log("scrolling");
+    if (debugMode) {
+      console.log("scrolling");
+    }
   }
 }
 
 export function swipeEndFunction(e) {
-  console.log("ending");
+  if (debugMode) {
+    console.log("__________");
+    console.log("touch ending");
+    console.log("index before:", this.index);
+  }
+
 
   this.isScroll = false;
   this.isSwipe = false;
@@ -59,7 +80,7 @@ export function swipeEndFunction(e) {
     }
   }
   if (this.disX < -50) {
-    if (this.index < (this.cardsNumber - 1)) {
+    if (this.index < (this.slidesNumber - 1)) {
       this.index += 1;
     }
   }
@@ -68,4 +89,77 @@ export function swipeEndFunction(e) {
   let newPos = -this.index*this.sliderWidth;
 
   this.wrap.style.transform = `translateX(${newPos}px)`;
+
+  this.disX = 0;
+
+  if (debugMode) {
+    console.log("transform after:", newPos);
+    console.log("__________");
+  }
+}
+
+export function moveNextFunction(e) {
+  if (debugMode) {
+    console.log("__________");
+    console.log("moving next, called from module");
+    console.log("index before:", this.index);
+  }
+
+  if (this.index < (this.slidesNumber - 1)) {
+    let style = this.wrap.style.transform;
+    let transform = +style.match(this.trfRegExp)[0];
+    if (debugMode) {
+      console.log("transform before:", transform);
+    }
+
+    transform -= this.sliderWidth;
+    if (debugMode) {
+      console.log("transform after:", transform);
+    }
+
+    this.wrap.style.transition = "0.5s";
+    this.wrap.style.transform = `translateX(${transform}px)`;
+    this.index++;
+
+    if (debugMode) {
+      console.log("index after:", this.index);
+    }
+
+  }
+  if (debugMode) {
+    console.log("__________");
+  }
+
+}
+
+export function movePrevFunctiion(e) {
+  if (debugMode) {
+    console.log("__________");
+    console.log("moving prev, called from module");
+    console.log("index before:", this.index);
+  }
+
+  if (this.index > 0) {
+    let style = this.wrap.style.transform;
+    let transform = +style.match(this.trfRegExp)[0];
+    if (debugMode) {
+      console.log("transform before:", transform);
+    }
+
+    transform += this.sliderWidth;
+    if (debugMode) {
+      console.log("transform after:", transform);
+    }
+
+    this.wrap.style.transition = "0.5s";
+    this.wrap.style.transform = `translateX(${transform}px)`;
+    this.index--;
+    if (debugMode) {
+      console.log("index after:", this.index);
+    }
+
+  }
+  if (debugMode) {
+    console.log("__________");
+  }
 }

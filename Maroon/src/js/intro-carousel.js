@@ -5,6 +5,8 @@ import { createBestsellersCard } from "./fillers/bestsellers-filler.js";
 import { swipeStartFunction } from "./touch-slider.js";
 import { swipeMoveFunction } from "./touch-slider.js";
 import { swipeEndFunction } from "./touch-slider.js";
+import { moveNextFunction } from "./touch-slider.js";
+import { movePrevFunctiion } from "./touch-slider.js";
 
 const introPrevBtn = document.querySelector(".js-intro-carousel-prev-btn");
 const introNextBtn = document.querySelector(".js-intro-carousel-next-btn");
@@ -57,7 +59,7 @@ fetch (dataFile)
 function IntroSlider() {
   let _this = this;
   this.wrap = introCarousel;
-  this.cardsNumber = 7;
+  this.slidesNumber = 7;
   this.sliderWidth = window.innerWidth >= 768 ? 260 : 250;
   this.startX = 0;
   this.sLeft = 0;
@@ -90,18 +92,8 @@ function IntroSlider() {
   _this.movePrev.bind(this), false);
 }
 
-IntroSlider.prototype.moveNext = function() {
-  let _this = this;
-  console.log("clicked, current index:", _this.index);
-  if (_this.index < (cardsNumber - 1)) {
-    let style = _this.wrap.style.transform;
-    let transform = +style.match(_this.trfRegExp)[0];
-    transform -= _this.sliderWidth;
-    _this.wrap.style.transform = `translateX(${transform}px)`;
-    _this.index++;
-  }
-}
 
+/*
 IntroSlider.prototype.movePrev = function() {
   let _this = this;
   console.log("clicked, current index:", _this.index); 
@@ -109,21 +101,37 @@ IntroSlider.prototype.movePrev = function() {
     let style = _this.wrap.style.transform;
     let transform = +style.match(_this.trfRegExp)[0];
     transform += _this.sliderWidth;
+    _this.wrap.style.transition = "0.5s";
     _this.wrap.style.transform = `translateX(${transform}px)`;
     _this.index--;
   }
 }
-
+*/
 
 IntroSlider.prototype.swipeStart = swipeStartFunction;
 IntroSlider.prototype.swipeMove = swipeMoveFunction;
 IntroSlider.prototype.swipeEnd = swipeEndFunction;
+IntroSlider.prototype.moveNext = moveNextFunction;
+IntroSlider.prototype.movePrev = movePrevFunctiion;
 
 window.onload = function() {
   let introSlider = new IntroSlider();
   console.log(introSlider);
 }
 
+/*
+IntroSlider.prototype.moveNext = function() {
+  let _this = this;
+  console.log("clicked, current index:", _this.index);
+  if (_this.index < (this.slidesNumber - 1)) {
+    let style = _this.wrap.style.transform;
+    let transform = +style.match(_this.trfRegExp)[0];
+    transform -= _this.sliderWidth;
+    _this.wrap.style.transition = "0.5s";
+    _this.wrap.style.transform = `translateX(${transform}px)`;
+    _this.index++;
+  }
+}*/
 
 /*
 function swipeStartFunction(e) {
