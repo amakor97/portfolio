@@ -75,7 +75,7 @@ function IntroSlider() {
   this.posY1 = 0;
   this.posY2 = 0;
 
-  this.trfRegExp = /([-0-9.]+(?=px))/;
+  //this.trfRegExp = /([-0-9.]+(?=px))/;
   this.nextBtn = introNextBtn;
   this.nextBtn.addEventListener("click", 
   _this.moveNext.bind(this), false);

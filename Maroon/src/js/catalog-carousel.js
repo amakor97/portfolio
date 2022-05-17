@@ -28,23 +28,6 @@ carousel.style.width = carouselFullWidth;
 carousel.style.gridTemplateColumns = `repeat(${pageNumber}, 1fr)`;
 
 
-let step = 100 / pageNumber;
-let carouselPos = 0;
-
-const catalogCarousel = {
-  "carElem": carousel,
-  "carStep": step,
-  "carPos": carouselPos,
-  "carPageCounter": 1,
-  "carPageCounterElem": currentPageElem,
-}
-/*
-nextBtn.addEventListener("click", 
-handleCarousel.bind(null, catalogCarousel, "next"));
-prevBtn.addEventListener("click", 
-handleCarousel.bind(null, catalogCarousel, "prev"));
-*/
-
 
 let fullscreenWidth = screen.width;
 console.log(fullscreenWidth);
@@ -91,11 +74,13 @@ function CatalogSlider() {
   this.wrap = carousel;
   this.slidesNumber = pageNumber;
   this.sliderWidth = window.innerWidth;
+  
   this.startX = 0;
   this.sLeft = 0;
   this.index = 0;
   this.curLeft = 0;
   this.disX = 0;
+
   this.wrap.addEventListener("touchstart", function() {
     _this.swipeStart();
   }, false);
@@ -111,7 +96,7 @@ function CatalogSlider() {
   this.posY1 = 0;
   this.posY2 = 0;
 
-  this.trfRegExp = /([-0-9.]+(?=px))/;
+  //this.trfRegExp = /([-0-9.]+(?=px))/;
   this.nextBtn = nextBtn;
   this.nextBtn.addEventListener("click", 
   _this.moveNext.bind(this), false);
@@ -129,7 +114,7 @@ CatalogSlider.prototype.swipeEnd = swipeEndFunction;
 CatalogSlider.prototype.moveNext = moveNextFunction;
 CatalogSlider.prototype.movePrev = movePrevFunctiion;
 
-window.onload = function() {
+window.addEventListener("load", function() {
   let catalogSlider = new CatalogSlider();
   console.log(catalogSlider);
-}
+});

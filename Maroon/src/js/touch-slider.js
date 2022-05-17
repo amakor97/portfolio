@@ -112,21 +112,12 @@ export function moveNextFunction() {
   }
 
   if (this.index < (this.slidesNumber - 1)) {
-    let style = this.wrap.style.transform;
-    let transform = +style.match(this.trfRegExp)[0];
-    if (debugMode) {
-      console.log("transform before:", transform);
-    }
-
-    transform -= this.sliderWidth;
-    if (debugMode) {
-      console.log("transform after:", transform);
-    }
 
     this.wrap.style.transition = "0.5s";
-    this.wrap.style.transform = `translateX(${transform}px)`;
     this.index++;
 
+    let newPos = -this.index*this.sliderWidth;
+    this.wrap.style.transform = `translateX(${newPos}px)`;
     if (debugMode) {
       console.log("index after:", this.index);
     }
@@ -164,8 +155,11 @@ export function movePrevFunctiion() {
     }
 
     this.wrap.style.transition = "0.5s";
-    this.wrap.style.transform = `translateX(${transform}px)`;
     this.index--;
+    
+    let newPos = -this.index*this.sliderWidth;
+    this.wrap.style.transform = `translateX(${newPos}px)`;
+
     if (debugMode) {
       console.log("index after:", this.index);
     }
