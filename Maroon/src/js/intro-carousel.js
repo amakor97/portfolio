@@ -12,16 +12,17 @@ const introPrevBtn = document.querySelector(".js-intro-carousel-prev-btn");
 const introNextBtn = document.querySelector(".js-intro-carousel-next-btn");
 const introCarousel = document.querySelector(".js-intro-carousel-inner");
 
-let cardsNumber = 7;
+let cardsNumber = 0;
 
 
 const cardInnerWidth = window.innerWidth >= 768 ? 230 : 220;
 const cardMargin = 30;
 
-const introCarouselFullWidth = (cardsNumber > 0) ? cardInnerWidth + 
-(cardInnerWidth + cardMargin)*(cardsNumber - 1) : 0;
+let introCarouselFullWidth = 0;
 
-introCarousel.style.width = introCarouselFullWidth + "px";
+
+
+
 
 const introCarouselStep = cardInnerWidth + cardMargin;
 
@@ -38,6 +39,16 @@ fetch (dataFile)
 .then( function(json) {
   dataObj = json;
   //console.log(dataObj);
+
+  cardsNumber = 7;
+  introCarouselFullWidth = (cardsNumber > 0) ? cardInnerWidth + 
+  (cardInnerWidth + cardMargin)*(cardsNumber - 1) : 0;
+  introCarousel.style.width = introCarouselFullWidth + "px";
+
+  let introSlider = new IntroSlider();
+  console.log(introSlider);
+
+
   const main = document.querySelector(".main");
   for (let i = 0; i < cardsNumber; i++) {
     let card = createBestsellersCard(dataObj[i]);
@@ -53,7 +64,7 @@ fetch (dataFile)
 function IntroSlider() {
   let _this = this;
   this.wrap = introCarousel;
-  this.slidesNumber = 7;
+  this.slidesNumber = cardsNumber;
   this.sliderWidth = window.innerWidth >= 768 ? 260 : 250;
   this.startX = 0;
   this.sLeft = 0;
@@ -93,7 +104,7 @@ IntroSlider.prototype.moveNext = moveNextFunction;
 IntroSlider.prototype.movePrev = movePrevFunctiion;
 
 window.onload = function() {
-  let introSlider = new IntroSlider();
-  console.log(introSlider);
+  //let introSlider = new IntroSlider();
+  //console.log(introSlider);
 }
 

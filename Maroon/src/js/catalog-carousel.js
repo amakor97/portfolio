@@ -42,6 +42,9 @@ fetch (dataFile)
   carousel.style.gridTemplateColumns = `repeat(${pageNumber}, 1fr)`;
   maxPageElem.textContent = pageNumber;
 
+  let catalogSlider = new CatalogSlider();
+  console.log(catalogSlider);
+
   fillCatalog(json);
 });
 
@@ -116,6 +119,6 @@ CatalogSlider.prototype.moveNext = moveNextFunction;
 CatalogSlider.prototype.movePrev = movePrevFunctiion;
 
 window.addEventListener("load", function() {
-  let catalogSlider = new CatalogSlider();
-  console.log(catalogSlider);
+  //let catalogSlider = new CatalogSlider();
+  //console.log(catalogSlider);
 });
