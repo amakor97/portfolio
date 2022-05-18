@@ -1,7 +1,8 @@
 "use strict";
 
-window.addEventListener("DOMContentLoaded", btnsBlockPosHandler)
+//window.addEventListener("DOMContentLoaded", btnsBlockPosHandler)
 window.addEventListener("resize", btnsBlockPosHandler);
+window.addEventListener("load", btnsBlockPosHandler);
 
 function btnsBlockPosHandler() {
   if (this.screen.width >= 1630) {
