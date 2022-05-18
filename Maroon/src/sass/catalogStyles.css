@@ -133,24 +133,28 @@ table {
   font-family: "M PLUS 1p";
   font-weight: 400;
   src: url(../fonts/MPLUS1p-Regular.ttf);
+  display: swap;
 }
 
 @font-face {
   font-family: "M PLUS 1p";
   font-weight: 500;
   src: url(../fonts/MPLUS1p-Medium.ttf);
+  display: swap;
 }
 
 @font-face {
   font-family: "Raleway";
   font-weight: 400;
   src: url(../fonts/Raleway-Regular.ttf);
+  display: swap;
 }
 
 @font-face {
   font-family: "Raleway";
   font-weight: 500;
   src: url(../fonts/Raleway-Medium.ttf);
+  display: swap;
 }
 
 html:root {

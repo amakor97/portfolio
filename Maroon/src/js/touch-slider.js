@@ -143,17 +143,6 @@ export function movePrevFunctiion() {
   }
 
   if (this.index > 0) {
-    let style = this.wrap.style.transform;
-    let transform = +style.match(this.trfRegExp)[0];
-    if (debugMode) {
-      console.log("transform before:", transform);
-    }
-
-    transform += this.sliderWidth;
-    if (debugMode) {
-      console.log("transform after:", transform);
-    }
-
     this.wrap.style.transition = "0.5s";
     this.index--;
 

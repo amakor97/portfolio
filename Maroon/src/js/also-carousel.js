@@ -76,7 +76,7 @@ function AlsoSlider() {
   let _this = this;
   this.wrap = alsoCarousel;
   this.slidesNumber = alsoPageNumber;
-  this.sliderWidth = window.innerWidth;
+  this.sliderWidth = Math.min(1400, window.innerWidth);
 
   this.startX = 0;
   this.sLeft = 0;
