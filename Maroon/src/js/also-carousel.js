@@ -17,13 +17,12 @@ const alsoMaxPageElem = document.querySelector(".js-also-carousel-max-page");
 let fullScreenWidth = window.innerWidth;
 console.log({fullScreenWidth});
 
-let alsoData = 8; //length of array of objects
+let alsoData = 0; //length of array of objects
 let alsoDisplayedCards = (fullScreenWidth >= 768) ? 4 : 1;
-let alsoPageNumber = Math.ceil(alsoData / alsoDisplayedCards);
-alsoMaxPageElem.textContent = alsoPageNumber;
+let alsoPageNumber = 0;
 
-const alsoCarouselFullWidth = 100*alsoPageNumber + "%";
-alsoCarousel.style.width = alsoCarouselFullWidth;
+
+let alsoCarouselFullWidth = 0;
 alsoCarousel.style.gridTemplateColumns = `repeat(${alsoPageNumber}, 1fr)`;
 
 
@@ -34,9 +33,25 @@ fetch (dataFile)
 .then(response => response.json())
 .then(function(json) {
   dataObj = json;
-  console.log(dataObj);
-  const main = document.querySelector(".main");
+  
+  console.log("also json length:", json.length);
+  alsoData = 8;
+  console.log("also cards to render:", alsoData);
 
+  alsoPageNumber = Math.ceil(alsoData / alsoDisplayedCards);
+
+  alsoCarouselFullWidth = 100*alsoPageNumber + "%";
+  alsoCarousel.style.width = alsoCarouselFullWidth;
+  alsoCarousel.style.gridTemplateColumns = `repeat(${alsoPageNumber}, 1fr)`;
+  alsoMaxPageElem.textContent = alsoPageNumber;
+
+  let alsoSlider = new AlsoSlider();
+  console.log(alsoSlider);
+
+  fillAlsoCarousel(json);
+});
+
+function fillAlsoCarousel(obj) {
   let cardCounter = 0;
   
   for (let i = 0; i < alsoPageNumber; i++) {
@@ -55,7 +70,7 @@ fetch (dataFile)
 
     alsoCarousel.append(page);
   }
-});
+}
 
 function AlsoSlider() {
   let _this = this;
@@ -102,6 +117,6 @@ AlsoSlider.prototype.moveNext = moveNextFunction;
 AlsoSlider.prototype.movePrev = movePrevFunctiion;
 
 window.addEventListener("load", function() {
-  let alsoSlider = new AlsoSlider();
-  console.log(alsoSlider);
+//  let alsoSlider = new AlsoSlider();
+//  console.log(alsoSlider);
 })

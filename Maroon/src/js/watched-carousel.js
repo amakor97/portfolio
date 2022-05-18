@@ -20,15 +20,11 @@ console.log({fullScreenWidth});
 
 console.log(fullScreenWidth >= 768);
 
-let watchedData = 8;  //length of array of objects
+let watchedData = 0;  //length of array of objects
 let watchedDisplayedCards = (fullScreenWidth >= 768) ? 4 : 1;
-let watchedPageNumber = Math.ceil(watchedData / watchedDisplayedCards);
-watchedMaxPageElem.textContent = watchedPageNumber;
-console.log({watchedDisplayedCards});
-console.log({watchedPageNumber});
+let watchedPageNumber = 0;
 
-const watchedCarouselFullWidth = 100*watchedPageNumber + "%";
-watchedCarousel.style.width = watchedCarouselFullWidth;
+let watchedCarouselFullWidth = 0;
 watchedCarousel.style.gridTemplateColumns = `repeat(${watchedPageNumber}, 1fr)`;
 
 
@@ -40,8 +36,25 @@ fetch (dataFile)
 .then(function(json) {
   dataObj = json;
   //console.log(dataObj);
-  const main = document.querySelector(".main");
+  console.log("watched json length:", json.length);
+  watchedData = 8; // = json.length;
+  console.log("watched cards to render:", watchedData);
 
+  watchedPageNumber = Math.ceil(watchedData / watchedDisplayedCards);
+
+  watchedCarouselFullWidth = 100*watchedPageNumber + "%";
+  watchedCarousel.style.width = watchedCarouselFullWidth;
+  watchedCarousel.style.gridTemplateColumns = `repeat(${watchedPageNumber}, 1fr)`;
+  watchedMaxPageElem.textContent = watchedPageNumber;
+
+  let watchedSlider = new WatchedSlider();
+  console.log(watchedSlider);
+
+  fillWatchedCarousel(json);
+});
+
+function fillWatchedCarousel(obj) {
+  dataObj = obj;
   let cardCounter = 0;
 
   for (let i = 0; i < watchedPageNumber; i++) {
@@ -50,8 +63,6 @@ fetch (dataFile)
     "js-sub-carousel-page");
 
     for (let j = 0; j < watchedDisplayedCards; j++) {
-      //console.log({cardCounter});
-      //console.log({watchedData});
       if (cardCounter === watchedData) {
         break;
       }
@@ -61,8 +72,8 @@ fetch (dataFile)
     }
 
     watchedCarousel.append(page);
-  }
-});
+  }  
+}
 
 function WatchedSlider() {
   let _this = this;
@@ -109,6 +120,6 @@ WatchedSlider.prototype.moveNext = moveNextFunction;
 WatchedSlider.prototype.movePrev = movePrevFunctiion;
 
 window.addEventListener("load", function() {
-  let watchedSlider = new WatchedSlider();
-  console.log(watchedSlider);
+  //let watchedSlider = new WatchedSlider();
+  //console.log(watchedSlider);
 });
