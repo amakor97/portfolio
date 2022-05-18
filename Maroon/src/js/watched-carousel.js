@@ -79,7 +79,7 @@ function WatchedSlider() {
   let _this = this;
   this.wrap = watchedCarousel;
   this.slidesNumber = watchedPageNumber;
-  this.sliderWidth = window.innerWidth;
+  this.sliderWidth = Math.min(1400, window.innerWidth);
   
   this.startX = 0;
   this.sLeft = 0;

@@ -78,7 +78,7 @@ function CatalogSlider() {
   let _this = this;
   this.wrap = carousel;
   this.slidesNumber = pageNumber;
-  this.sliderWidth = window.innerWidth;
+  this.sliderWidth = Math.min(1400, window.innerWidth);
   
   this.startX = 0;
   this.sLeft = 0;
