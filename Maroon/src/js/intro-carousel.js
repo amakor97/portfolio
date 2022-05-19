@@ -13,71 +13,48 @@ const introNextBtn = document.querySelector(".js-intro-carousel-next-btn");
 const introCarousel = document.querySelector(".js-intro-carousel-inner");
 
 let cardsNumber = 0;
-
-
 const cardInnerWidth = window.innerWidth >= 768 ? 230 : 220;
 const cardMargin = 30;
-
 let introCarouselFullWidth = 0;
-
-
-
-
-
-const introCarouselStep = cardInnerWidth + cardMargin;
-
 introCarousel.style.transform = `translateX(0px)`;
 
+const dataFilePath = "./data/productData.json";
 
-let cards = [];
-
-let dataFile = "./data/productData.json";
-let dataObj = undefined;
-
-fetch (dataFile)
+fetch (dataFilePath)
 .then(response => response.json())
-.then( function(json) {
-  dataObj = json;
-  //console.log(dataObj);
-
+.then(function(json) {
   cardsNumber = 7;
   introCarouselFullWidth = (cardsNumber > 0) ? cardInnerWidth + 
   (cardInnerWidth + cardMargin)*(cardsNumber - 1) : 0;
-  introCarousel.style.width = introCarouselFullWidth + "px";
+  introCarousel.style.width = `${introCarouselFullWidth}px`;
 
   let introSlider = new IntroSlider();
-  console.log(introSlider);
-
-
-  const main = document.querySelector(".main");
-  for (let i = 0; i < cardsNumber; i++) {
-    let card = createBestsellersCard(dataObj[i]);
-    main.appendChild(card);
-    introCarousel.appendChild(card);
-  }
-  cards = document.querySelectorAll(".intro-card");
+  fillIntroCarousel(json);
 });
 
 
+function fillIntroCarousel(obj) {
+  for (let i = 0; i < cardsNumber; i++) {
+    let card = createBestsellersCard(obj[i]);
+    introCarousel.appendChild(card);
+  }
+}
 
-/// touch
+
 function IntroSlider() {
-  let _this = this;
   this.wrap = introCarousel;
   this.slidesNumber = cardsNumber;
-  this.sliderWidth = window.innerWidth >= 768 ? 260 : 250;
+  this.sliderWidth = cardInnerWidth + cardMargin;
+
   this.startX = 0;
   this.sLeft = 0;
   this.index = 0;
   this.curLeft = 0;
   this.disX = 0;
-  this.wrap.addEventListener("touchstart", function() {
-    _this.swipeStart();
-  }, false);
-  document.addEventListener("touchmove", 
-  _this.swipeMove.bind(this), false);
-  document.addEventListener("touchend", 
-  _this.swipeEnd.bind(this), false);
+  
+  this.wrap.addEventListener("touchstart", this.swipeStart.bind(this));
+  document.addEventListener("touchmove", this.swipeMove.bind(this));
+  document.addEventListener("touchend", this.swipeEnd.bind(this));
 
   this.isSwipe = false;
   this.isScroll = false;
@@ -86,25 +63,14 @@ function IntroSlider() {
   this.posY1 = 0;
   this.posY2 = 0;
 
-  //this.trfRegExp = /([-0-9.]+(?=px))/;
   this.nextBtn = introNextBtn;
-  this.nextBtn.addEventListener("click", 
-  _this.moveNext.bind(this), false);
- 
+  this.nextBtn.addEventListener("click", this.moveNext.bind(this));
   this.prevBtn = introPrevBtn;
-  this.prevBtn.addEventListener("click",
-  _this.movePrev.bind(this), false);
+  this.prevBtn.addEventListener("click", this.movePrev.bind(this));
 }
-
 
 IntroSlider.prototype.swipeStart = swipeStartFunction;
 IntroSlider.prototype.swipeMove = swipeMoveFunction;
 IntroSlider.prototype.swipeEnd = swipeEndFunction;
 IntroSlider.prototype.moveNext = moveNextFunction;
 IntroSlider.prototype.movePrev = movePrevFunctiion;
-
-window.onload = function() {
-  //let introSlider = new IntroSlider();
-  //console.log(introSlider);
-}
-
