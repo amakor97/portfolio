@@ -1,4 +1,6 @@
-export function SliderObj(carousel, slidesNumber, sliderWidth, nextBtn, prevBtn, currentPageElem) {
+export function SliderObj(carousel, slidesNumber, sliderWidth, 
+  nextBtn, prevBtn, currentPageElem) {
+  console.log(currentPageElem);
   this.wrap = carousel;
   this.slidesNumber = slidesNumber;
   this.sliderWidth = sliderWidth;
@@ -20,12 +22,19 @@ export function SliderObj(carousel, slidesNumber, sliderWidth, nextBtn, prevBtn,
   this.posY1 = 0;
   this.posY2 = 0;
 
-  this.nextBtn = nextBtn;
-  this.nextBtn.addEventListener("click", this.moveNext.bind(this));
-  this.prevBtn = prevBtn;
-  this.prevBtn.addEventListener("click", this.movePrev.bind(this));
-
-  this.pageCounterElem = currentPageElem; 
+  console.log(nextBtn)
+  if (nextBtn) {
+    this.nextBtn = nextBtn;
+    this.nextBtn.addEventListener("click", this.moveNext.bind(this));
+  }
+  if (prevBtn) {
+    this.prevBtn = prevBtn;
+    this.prevBtn.addEventListener("click", this.movePrev.bind(this));
+  }
+  
+  if (currentPageElem) {
+    this.pageCounterElem = currentPageElem; 
+  }
 }
 
 SliderObj.prototype.swipeStart = swipeStartFunction;
