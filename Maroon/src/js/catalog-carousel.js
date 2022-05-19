@@ -15,7 +15,11 @@ const currentPageElem = document.querySelector(".js-catalog-carousel-current-pag
 const maxPageElem = document.querySelector(".js-catalog-carousel-max-page");
 
 let catalogDataLength = 0;  
-let cardsOnPage = 12;  
+const cardsOnPage = 12;
+const cardsOnRow = (window.innerWidth >= 1366) ? 4 
+  : (window.innerWidth >= 768) ? 2 
+  : 1;
+const rowNumber = Math.ceil(cardsOnPage / cardsOnRow);
 let pageNumber = 0;
 let carouselFullWidth = 0;
 carousel.style.transform = `translateX(0px)`;
@@ -45,7 +49,8 @@ function fillCatalog(obj) {
   for (let i = 0; i < pageNumber; i++) {
     let page = document.createElement("div");
     page.classList.add("catalog-carousel__page", 
-    "js-catalog-carousel-page");
+      "js-catalog-carousel-page");
+    page.style.gridTemplateRows = `repeat(${rowNumber}, 1fr)`
 
     for (let j = 0; j < cardsOnPage; j++) {
       if (cardCounter === catalogDataLength) {
