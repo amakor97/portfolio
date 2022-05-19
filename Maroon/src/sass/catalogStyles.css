@@ -1187,7 +1187,13 @@ html:root {
 
 .catalog__carousel-controls {
   margin-right: calc(4.6875% - 0.25rem);
-  margin-left: calc(4.6875% - 0.25rem);
+  margin-left: calc(4.6875%);
+}
+
+@media (min-width: 768px) {
+  .catalog__carousel-controls {
+    margin-right: calc(4.6875% - 0.25rem);
+  }
 }
 
 @media (min-width: 1366px) {

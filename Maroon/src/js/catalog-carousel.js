@@ -1,4 +1,5 @@
 "use strict";
+
 import { createCatalogCard } from "./fillers/catalogs-filler.js";
 
 import { swipeStartFunction } from "./touch-slider.js";
@@ -12,46 +13,33 @@ const nextBtn = document.querySelector(".js-catalog-carousel-next-btn");
 const carousel = document.querySelector(".js-catalog-carousel-inner");
 const currentPageElem = document.querySelector(".js-catalog-carousel-current-page");
 const maxPageElem = document.querySelector(".js-catalog-carousel-max-page");
-const carouselPages = document.querySelectorAll(".js-catalog-carousel-page");
-console.log(carouselPages);
 
-
-let catalogData = 0;  //length of array of objects
-let displayedCards = 12;  
+let catalogDataLength = 0;  
+let cardsOnPage = 12;  
 let pageNumber = 0;
-
 let carouselFullWidth = 0;
-carousel.style.gridTemplateColumns = `repeat(${pageNumber}, 1fr)`;
+carousel.style.transform = `translateX(0px)`;
 
-let fullscreenWidth = screen.width;
-console.log(fullscreenWidth);
+let dataFilePath = "./data/productData.json";
 
-let dataFile = "./data/productData.json";
-let dataObj = undefined;
 
-fetch (dataFile)
+fetch (dataFilePath)
 .then(response => response.json())
 .then(function(json) {
-  console.log("data length:", json.length);
-  catalogData = json.length;
-  console.log("cards to render:", catalogData);
-
-  pageNumber = Math.ceil(catalogData / displayedCards);
-  carouselFullWidth = 100*pageNumber + "%";
-  carousel.style.width = carouselFullWidth;
-  carousel.style.gridTemplateColumns = `repeat(${pageNumber}, 1fr)`;
+  catalogDataLength = json.length;
+  pageNumber = Math.ceil(catalogDataLength / cardsOnPage);
   maxPageElem.textContent = pageNumber;
 
-  let catalogSlider = new CatalogSlider();
-  console.log(catalogSlider);
+  carouselFullWidth = `${100*pageNumber}%`;
+  carousel.style.width = carouselFullWidth;
+  carousel.style.gridTemplateColumns = `repeat(${pageNumber}, 1fr)`;
 
+  let catalogSlider = new CatalogSlider();
   fillCatalog(json);
 });
 
 
 function fillCatalog(obj) {
-  dataObj = obj;
-
   let cardCounter = 0;
 
   for (let i = 0; i < pageNumber; i++) {
@@ -59,11 +47,11 @@ function fillCatalog(obj) {
     page.classList.add("catalog-carousel__page", 
     "js-catalog-carousel-page");
 
-    for (let j = 0; j < displayedCards; j++) {
-      if (cardCounter === catalogData) {
+    for (let j = 0; j < cardsOnPage; j++) {
+      if (cardCounter === catalogDataLength) {
         break;
       }
-      let card = createCatalogCard(dataObj[cardCounter]);
+      let card = createCatalogCard(obj[cardCounter]);
       cardCounter++;
       page.appendChild(card);
     }
@@ -72,10 +60,8 @@ function fillCatalog(obj) {
   }
 }
 
-carousel.style.transform = `translateX(0px)`;
 
 function CatalogSlider() {
-  let _this = this;
   this.wrap = carousel;
   this.slidesNumber = pageNumber;
   this.sliderWidth = Math.min(1400, window.innerWidth);
@@ -86,13 +72,9 @@ function CatalogSlider() {
   this.curLeft = 0;
   this.disX = 0;
 
-  this.wrap.addEventListener("touchstart", function() {
-    _this.swipeStart();
-  }, false);
-  document.addEventListener("touchmove", 
-  _this.swipeMove.bind(this), false);
-  document.addEventListener("touchend",
-  _this.swipeEnd.bind(this), false);
+  this.wrap.addEventListener("touchstart", this.swipeStart.bind(this));
+  document.addEventListener("touchmove", this.swipeMove.bind(this));
+  document.addEventListener("touchend", this.swipeEnd.bind(this));
 
   this.isSwipe = false;
   this.isScroll = false;
@@ -102,12 +84,9 @@ function CatalogSlider() {
   this.posY2 = 0;
 
   this.nextBtn = nextBtn;
-  this.nextBtn.addEventListener("click", 
-  _this.moveNext.bind(this), false);
-
+  this.nextBtn.addEventListener("click", this.moveNext.bind(this));
   this.prevBtn = prevBtn;
-  this.prevBtn.addEventListener("click",
-  _this.movePrev.bind(this), false);
+  this.prevBtn.addEventListener("click", this.movePrev.bind(this));
 
   this.pageCounterElem = currentPageElem; 
 }
@@ -117,8 +96,3 @@ CatalogSlider.prototype.swipeMove = swipeMoveFunction;
 CatalogSlider.prototype.swipeEnd = swipeEndFunction;
 CatalogSlider.prototype.moveNext = moveNextFunction;
 CatalogSlider.prototype.movePrev = movePrevFunctiion;
-
-window.addEventListener("load", function() {
-  //let catalogSlider = new CatalogSlider();
-  //console.log(catalogSlider);
-});
