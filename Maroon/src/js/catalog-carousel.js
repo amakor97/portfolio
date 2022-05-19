@@ -1,12 +1,7 @@
 "use strict";
 
 import { createCatalogCard } from "./fillers/catalogs-filler.js";
-
-import { swipeStartFunction } from "./touch-slider.js";
-import { swipeMoveFunction } from "./touch-slider.js";
-import { swipeEndFunction } from "./touch-slider.js";
-import { moveNextFunction } from "./touch-slider.js";
-import { movePrevFunctiion } from "./touch-slider.js";
+import { SliderObj } from "./touch-slider.js";
 
 const prevBtn = document.querySelector(".js-catalog-carousel-prev-btn");
 const nextBtn = document.querySelector(".js-catalog-carousel-next-btn");
@@ -38,7 +33,12 @@ fetch (dataFilePath)
   carousel.style.width = carouselFullWidth;
   carousel.style.gridTemplateColumns = `repeat(${pageNumber}, 1fr)`;
 
-  let catalogSlider = new CatalogSlider();
+  let catalogSlider = new SliderObj(
+    carousel, pageNumber,
+    Math.min(1400, window.innerWidth), 
+    nextBtn, prevBtn, currentPageElem
+  );
+
   fillCatalog(json);
 });
 
@@ -64,40 +64,3 @@ function fillCatalog(obj) {
     carousel.append(page);
   }
 }
-
-
-function CatalogSlider() {
-  this.wrap = carousel;
-  this.slidesNumber = pageNumber;
-  this.sliderWidth = Math.min(1400, window.innerWidth);
-  
-  this.startX = 0;
-  this.sLeft = 0;
-  this.index = 0;
-  this.curLeft = 0;
-  this.disX = 0;
-
-  this.wrap.addEventListener("touchstart", this.swipeStart.bind(this));
-  document.addEventListener("touchmove", this.swipeMove.bind(this));
-  document.addEventListener("touchend", this.swipeEnd.bind(this));
-
-  this.isSwipe = false;
-  this.isScroll = false;
-  this.posX1 = 0;
-  this.posX2 = 0;
-  this.posY1 = 0;
-  this.posY2 = 0;
-
-  this.nextBtn = nextBtn;
-  this.nextBtn.addEventListener("click", this.moveNext.bind(this));
-  this.prevBtn = prevBtn;
-  this.prevBtn.addEventListener("click", this.movePrev.bind(this));
-
-  this.pageCounterElem = currentPageElem; 
-}
-
-CatalogSlider.prototype.swipeStart = swipeStartFunction;
-CatalogSlider.prototype.swipeMove = swipeMoveFunction;
-CatalogSlider.prototype.swipeEnd = swipeEndFunction;
-CatalogSlider.prototype.moveNext = moveNextFunction;
-CatalogSlider.prototype.movePrev = movePrevFunctiion;

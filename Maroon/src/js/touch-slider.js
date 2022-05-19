@@ -1,3 +1,40 @@
+export function SliderObj(carousel, slidesNumber, sliderWidth, nextBtn, prevBtn, currentPageElem) {
+  this.wrap = carousel;
+  this.slidesNumber = slidesNumber;
+  this.sliderWidth = sliderWidth;
+  
+  this.startX = 0;
+  this.sLeft = 0;
+  this.index = 0;
+  this.curLeft = 0;
+  this.disX = 0;
+
+  this.wrap.addEventListener("touchstart", this.swipeStart.bind(this));
+  document.addEventListener("touchmove", this.swipeMove.bind(this));
+  document.addEventListener("touchend", this.swipeEnd.bind(this));
+
+  this.isSwipe = false;
+  this.isScroll = false;
+  this.posX1 = 0;
+  this.posX2 = 0;
+  this.posY1 = 0;
+  this.posY2 = 0;
+
+  this.nextBtn = nextBtn;
+  this.nextBtn.addEventListener("click", this.moveNext.bind(this));
+  this.prevBtn = prevBtn;
+  this.prevBtn.addEventListener("click", this.movePrev.bind(this));
+
+  this.pageCounterElem = currentPageElem; 
+}
+
+SliderObj.prototype.swipeStart = swipeStartFunction;
+SliderObj.prototype.swipeMove = swipeMoveFunction;
+SliderObj.prototype.swipeEnd = swipeEndFunction;
+SliderObj.prototype.moveNext = moveNextFunction;
+SliderObj.prototype.movePrev = movePrevFunctiion;
+
+
 export function swipeStartFunction(e) {
   e = e || window.event;
   this.disX = 0;
