@@ -3,7 +3,7 @@
 const menuToggleBtn = document.querySelector(".js-menu-toggle-btn");
 const header = document.querySelector(".header");
 const menu = document.querySelector(".menu");
-const menuLinnks = document.querySelectorAll(".js-menu-link");
+const menuLinks = document.querySelectorAll(".js-menu-link");
 const headerDivider = document.querySelector(".js-header-divider");
 
 menuToggleBtn.addEventListener("click", function() {
@@ -17,7 +17,6 @@ menuToggleBtn.addEventListener("click", function() {
         }, 1000
       )
     }
-    
   } else {
     header.classList.add("header--backgrounded")
     headerDivider.classList.add("header__divider--showed");
@@ -26,24 +25,20 @@ menuToggleBtn.addEventListener("click", function() {
         menu.classList.add("menu--showed");
       }, 500
     )
-    
   }
 })
 
 
 window.addEventListener("scroll", headerBackgrounder)
 
-
-menuLinnks.forEach(function(menuLink) {
-  menuLink.addEventListener("click", function(e) {
-    //e.preventDefault();
+menuLinks.forEach(function(menuLink) {
+  menuLink.addEventListener("click", function() {
     menu.classList.remove("menu--showed");
   })
 })
 
 
 window.addEventListener("load", headerBackgrounder)
-
 
 function headerBackgrounder() {
   if (this.scrollY > 0) {
