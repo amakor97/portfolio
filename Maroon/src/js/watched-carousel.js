@@ -1,12 +1,7 @@
 "use strict";
 
 import { createCatalogCard } from "./fillers/catalogs-filler.js";
-
-import { swipeStartFunction } from "./touch-slider.js";
-import { swipeMoveFunction } from "./touch-slider.js";
-import { swipeEndFunction } from "./touch-slider.js";
-import { moveNextFunction } from "./touch-slider.js";
-import { movePrevFunctiion } from "./touch-slider.js";
+import { SliderObj } from "./touch-slider.js";
 
 const watchedPrevBtn = document.querySelector(".js-watched-carousel-prev-btn");
 const watchedNextBtn = document.querySelector(".js-watched-carousel-next-btn");
@@ -33,7 +28,13 @@ fetch (watchedDataFilePath)
   watchedCarousel.style.gridTemplateColumns = 
     `repeat(${watchedPageNumber}, 1fr)`;
 
-  let watchedSlider = new WatchedSlider();
+  let watchedSlider = new SliderObj(
+    watchedCarousel, watchedPageNumber,
+    Math.min(1400, window.innerWidth),
+    watchedNextBtn, watchedPrevBtn, 
+    watchedCurrentPageElem
+  )
+
   fillWatchedCarousel(json);
 });
 
@@ -58,39 +59,3 @@ function fillWatchedCarousel(obj) {
     watchedCarousel.append(page);
   }  
 }
-
-function WatchedSlider() {
-  this.wrap = watchedCarousel;
-  this.slidesNumber = watchedPageNumber;
-  this.sliderWidth = Math.min(1400, window.innerWidth);
-  
-  this.startX = 0;
-  this.sLeft = 0;
-  this.index = 0;
-  this.curLeft = 0;
-  this.disX = 0;
-
-  this.wrap.addEventListener("touchstart", this.swipeStart.bind(this));
-  document.addEventListener("touchmove", this.swipeMove.bind(this));
-  document.addEventListener("touchend", this.swipeEnd.bind(this));
-
-  this.isSwipe = false;
-  this.isScroll = false;
-  this.posX1 = 0;
-  this.posX2 = 0;
-  this.posY1 = 0;
-  this.posY2 = 0;
-
-  this.nextBtn = watchedNextBtn;
-  this.nextBtn.addEventListener("click", this.moveNext.bind(this));
-  this.prevBtn = watchedPrevBtn;
-  this.prevBtn.addEventListener("click", this.movePrev.bind(this));
-
-  this.pageCounterElem = watchedCurrentPageElem; 
-}
-
-WatchedSlider.prototype.swipeStart = swipeStartFunction;
-WatchedSlider.prototype.swipeMove = swipeMoveFunction;
-WatchedSlider.prototype.swipeEnd = swipeEndFunction;
-WatchedSlider.prototype.moveNext = moveNextFunction;
-WatchedSlider.prototype.movePrev = movePrevFunctiion;
