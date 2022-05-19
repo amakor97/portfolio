@@ -15,12 +15,11 @@ const watchedCurrentPageElem = document.querySelector(".js-watched-carousel-curr
 const watchedMaxPageElem = document.querySelector(".js-watched-carousel-max-page");
 
 let watchedData = 0;  
-let watchedCardsOnPage = (window.innerWidth >= 768) ? 4 : 1;
+const watchedCardsOnPage = (window.innerWidth >= 768) ? 4 : 1;
 let watchedPageNumber = 0;
-
 let watchedCarouselFullWidth = 0;
+const watchedDataFilePath = "./data/productData.json";
 
-let watchedDataFilePath = "./data/productData.json";
 
 fetch (watchedDataFilePath)
 .then(response => response.json())
@@ -35,9 +34,9 @@ fetch (watchedDataFilePath)
     `repeat(${watchedPageNumber}, 1fr)`;
 
   let watchedSlider = new WatchedSlider();
-
   fillWatchedCarousel(json);
 });
+
 
 function fillWatchedCarousel(obj) {
   let cardCounter = 0;

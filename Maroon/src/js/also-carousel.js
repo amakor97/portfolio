@@ -14,40 +14,25 @@ const alsoCarousel = document.querySelector(".js-also-carousel-inner");
 const alsoCurrentPageElem = document.querySelector(".js-also-carousel-current-page");
 const alsoMaxPageElem = document.querySelector(".js-also-carousel-max-page");
 
-let fullScreenWidth = window.innerWidth;
-console.log({fullScreenWidth});
-
-let alsoData = 0; //length of array of objects
-let alsoDisplayedCards = (fullScreenWidth >= 768) ? 4 : 1;
+let alsoData = 0;
+const alsoDisplayedCards = (window.innerWidth >= 768) ? 4 : 1;
 let alsoPageNumber = 0;
-
-
 let alsoCarouselFullWidth = 0;
-alsoCarousel.style.gridTemplateColumns = `repeat(${alsoPageNumber}, 1fr)`;
-
-
 let dataFile = "../data/productData.json";
-let dataObj = undefined;
+
 
 fetch (dataFile)
 .then(response => response.json())
 .then(function(json) {
-  dataObj = json;
-  
-  console.log("also json length:", json.length);
   alsoData = 8;
-  console.log("also cards to render:", alsoData);
-
   alsoPageNumber = Math.ceil(alsoData / alsoDisplayedCards);
+  alsoMaxPageElem.textContent = alsoPageNumber;
 
   alsoCarouselFullWidth = 100*alsoPageNumber + "%";
   alsoCarousel.style.width = alsoCarouselFullWidth;
   alsoCarousel.style.gridTemplateColumns = `repeat(${alsoPageNumber}, 1fr)`;
-  alsoMaxPageElem.textContent = alsoPageNumber;
 
   let alsoSlider = new AlsoSlider();
-  console.log(alsoSlider);
-
   fillAlsoCarousel(json);
 });
 
@@ -57,13 +42,13 @@ function fillAlsoCarousel(obj) {
   for (let i = 0; i < alsoPageNumber; i++) {
     let page = document.createElement("div");
     page.classList.add("sub-carousel__page", 
-    "js-sub-carousel-page");
+      "js-sub-carousel-page");
 
     for (let j = 0; j < alsoDisplayedCards; j++) {
       if (cardCounter === alsoData) {
         break;
       }
-      let card = createCatalogCard(dataObj[cardCounter], true);
+      let card = createCatalogCard(obj[cardCounter], true);
       cardCounter++;
       page.appendChild(card);
     }
@@ -115,8 +100,3 @@ AlsoSlider.prototype.swipeMove = swipeMoveFunction;
 AlsoSlider.prototype.swipeEnd = swipeEndFunction;
 AlsoSlider.prototype.moveNext = moveNextFunction;
 AlsoSlider.prototype.movePrev = movePrevFunctiion;
-
-window.addEventListener("load", function() {
-//  let alsoSlider = new AlsoSlider();
-//  console.log(alsoSlider);
-})

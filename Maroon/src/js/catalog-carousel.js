@@ -24,7 +24,7 @@ let pageNumber = 0;
 let carouselFullWidth = 0;
 carousel.style.transform = `translateX(0px)`;
 
-let dataFilePath = "./data/productData.json";
+const dataFilePath = "./data/productData.json";
 
 
 fetch (dataFilePath)
