@@ -45,7 +45,7 @@ applyBtn.addEventListener("click", function() {
 
 
 const filterFieldsets = document.querySelectorAll(".js-filter-fieldset");
-console.log(filterFieldsets);
+//console.log(filterFieldsets);
 
 window.addEventListener("resize", function() {
   if (this.screen.width >= 768) {

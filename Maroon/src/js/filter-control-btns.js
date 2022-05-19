@@ -1,50 +1,28 @@
 "use strict";
 
-//window.addEventListener("DOMContentLoaded", btnsBlockPosHandler)
 window.addEventListener("resize", btnsBlockPosHandler);
 window.addEventListener("load", btnsBlockPosHandler);
 
+
 function btnsBlockPosHandler() {
-  if (this.screen.width >= 1630) {
-    let fieldsetPos = getThirdFieldsetPos();
-    let formPos = getFilterContentPos();
-    let elemPos = fieldsetPos.left - formPos.left;
-    console.log("fieldPos", fieldsetPos.left);
-    console.log("formPos", formPos.left);
+  const fieldsetPos = getElemPosByClass("js-filter-fieldset-third");
+  const formPos = getElemPosByClass("js-filter-content");
+  let elemPos = fieldsetPos.left - formPos.left;
 
-    let formObj = document.querySelector(".js-filter-content");
-    let formSyleObj = window.getComputedStyle(formObj);
-    console.log("margin left", formSyleObj.marginLeft);
+  const formObj = document.querySelector(".js-filter-content");
+  const formSyleObj = window.getComputedStyle(formObj);
 
-    console.log({elemPos});
-    elemPos += parseInt(formSyleObj.marginLeft);
-    console.log({elemPos});
-    setBtnslBlockPos(elemPos);
-    return;
-  }
-  if (this.screen.width >= 1366) {
-    let fieldsetPos = getThirdFieldsetPos();
-    let formPos = getFilterContentPos();
-    let elemPos = fieldsetPos.left - formPos.left;
-    console.log("fieldPos", fieldsetPos.left);
-    console.log("formPos", formPos.left);
-    console.log(elemPos);
-    setBtnslBlockPos(fieldsetPos.left);
-  }
+  elemPos += parseInt(formSyleObj.marginLeft);
+  setBtnslBlockPos(elemPos);
 }
 
-function getThirdFieldsetPos() {
-  const thirdFieldSet = document.getElementsByClassName("js-filter-fieldset")[2];
-  let pos = thirdFieldSet.getBoundingClientRect();
-  console.log(pos.left);
+
+function getElemPosByClass(className) {
+  const elem = document.querySelector(`.${className}`);
+  let pos = elem.getBoundingClientRect();
   return pos;
 }
 
-function getFilterContentPos() {
-  const filterContent = document.querySelector(".js-filter-content");
-  let pos = filterContent.getBoundingClientRect();
-  return pos;
-}
 
 function setBtnslBlockPos(posLeft) {
   const btnsBlock = document.querySelector(".filter__btn-block");
