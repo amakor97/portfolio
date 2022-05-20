@@ -43,7 +43,3 @@ function createDescription(productData) {
 
   return cont;
 }
-
-//create basic layout
-// fill it with content
-// return card

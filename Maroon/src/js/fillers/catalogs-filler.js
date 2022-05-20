@@ -3,8 +3,6 @@
 export function createCatalogCard(productData, positionFlag) {
   let card = document.createElement("a");
   card.classList.add("catalog-card", "catalog-carousel__card");
-  //console.log(positionFlag);
-  //console.log(productData.href.slice(11));
   card.href = positionFlag ? `.${productData.href.slice(11)}` : productData.href;
 
   let img = createImg(productData, positionFlag);
@@ -18,7 +16,6 @@ export function createCatalogCard(productData, positionFlag) {
 
 function createImg(productData, positionFlag) {
   let img = document.createElement("img");
-  //console.log(positionFlag);
   img.src = positionFlag ? `./.${productData.src}` : productData.src;
   img.classList.add("catalog-card__img");
   img.alt = productData.alt;

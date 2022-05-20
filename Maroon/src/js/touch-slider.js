@@ -1,6 +1,7 @@
-export function SliderObj(carousel, slidesNumber, sliderWidth, 
+export function SliderObj
+  (carousel, slidesNumber, sliderWidth, 
   nextBtn, prevBtn, currentPageElem) {
-  console.log(currentPageElem);
+    
   this.wrap = carousel;
   this.slidesNumber = slidesNumber;
   this.sliderWidth = sliderWidth;
@@ -22,7 +23,6 @@ export function SliderObj(carousel, slidesNumber, sliderWidth,
   this.posY1 = 0;
   this.posY2 = 0;
 
-  console.log(nextBtn)
   if (nextBtn) {
     this.nextBtn = nextBtn;
     this.nextBtn.addEventListener("click", this.moveNext.bind(this));
@@ -44,7 +44,7 @@ SliderObj.prototype.moveNext = moveNextFunction;
 SliderObj.prototype.movePrev = movePrevFunctiion;
 
 
-export function swipeStartFunction(e) {
+function swipeStartFunction(e) {
   e = e || window.event;
   this.disX = 0;
   this.startX = e.changedTouches[0].pageX;
@@ -57,7 +57,7 @@ export function swipeStartFunction(e) {
 }
 
 
-export function swipeMoveFunction(e) {
+function swipeMoveFunction(e) {
   this.posX2 = this.posX1 - e.changedTouches[0].pageX;
   this.posX1 = e.changedTouches[0].pageX;
 
@@ -82,7 +82,7 @@ export function swipeMoveFunction(e) {
 }
 
 
-export function swipeEndFunction() {
+function swipeEndFunction() {
   this.isScroll = false;
   this.isSwipe = false;
 
@@ -108,7 +108,7 @@ export function swipeEndFunction() {
 }
 
 
-export function moveNextFunction() {
+function moveNextFunction() {
   if (this.index < (this.slidesNumber - 1)) {
     this.wrap.style.transition = "0.5s";
     this.index++;
@@ -123,7 +123,7 @@ export function moveNextFunction() {
 }
 
 
-export function movePrevFunctiion() {
+function movePrevFunctiion() {
   if (this.index > 0) {
     this.wrap.style.transition = "0.5s";
     this.index--;
