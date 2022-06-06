@@ -1,8 +1,10 @@
 import "./_card.sass";
 
-function Card() {
+function Card(props) {
   return (
-      <h1 className="Card">Hello</h1>
+      <div className="Card">
+        <p>{props.nameRu}</p>
+      </div>
   )
 }
 
