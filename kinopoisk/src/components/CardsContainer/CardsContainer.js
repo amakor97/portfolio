@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import Card from "../Card/Card";
 
@@ -9,32 +9,52 @@ function CardsContainer(props) {
   
   console.log("page iter: ", props.pageIter);
   console.log("to fetch: ", props.pagesToFetch);
+  console.log("films to render: ", props.filmsToRender);
 
-  let inter = 100;
+  const renderedPages = useRef(0);
+
+
+
+  //let inter = 100;
+  let inter = 0;
   let tmpArray = [];
   
   useEffect(() => {
+    
+
     let pgIter = props.pageIter;
     console.log({pgIter});
     for (let i = pgIter; i < pgIter + props.pagesToFetch; i++) {
-      let tmpTimeout = setTimeout(async function() {
-        const response = await fetch(
-          `https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_250_BEST_FILMS&page=${i}`,
-          {
-            method: "GET",
-            headers: {
-              "X-API-KEY": "109fecb7-71a1-4a6e-a355-a26f2cd3cd52",
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        const json = await response.json();
-        console.log(json);
-        tmpArray = tmpArray.concat(filmsArray, json.films);
+      renderedPages.current = renderedPages.current + 1;
+      console.log("RENDERED TIMES:", renderedPages.current);
+
+      if ((renderedPages.current === 1) && (props.filmsToRender)) {
+        console.log("another way");
+        console.log(props.filmsToRender);
+        tmpArray = tmpArray.concat(filmsArray, props.filmsToRender);
         console.log(tmpArray);
         setFilmsArray(tmpArray);
         console.log({pgIter});
-      }, inter);
+      } else {
+        let tmpTimeout = setTimeout(async function() {
+          const response = await fetch(
+            `https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_250_BEST_FILMS&page=${i}`,
+            {
+              method: "GET",
+              headers: {
+                "X-API-KEY": "109fecb7-71a1-4a6e-a355-a26f2cd3cd52",
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          const json = await response.json();
+          console.log(json);
+          tmpArray = tmpArray.concat(filmsArray, json.films);
+          console.log(tmpArray);
+          setFilmsArray(tmpArray);
+          console.log({pgIter});
+        }, inter);
+      }
       inter += 100;
     }
   }, [props.pageIter])

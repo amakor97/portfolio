@@ -13,6 +13,8 @@ let pagesToFetch = 3;
 let pageTotalCount = 0;
 
 
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
 fetch(
   `https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_250_BEST_FILMS&page=1`,
   {
@@ -27,35 +29,42 @@ fetch(
 .then((actualData) => {
   pageTotalCount = actualData.pagesCount;
   console.log({pageTotalCount});
+
+  let filmsToRender = actualData.films;
+  console.log(filmsToRender);
+
   
   //delete this line; its needed for preventing huge amount of requests
-  pageTotalCount =  3;
+  pageTotalCount =  5;
+
+  root.render(
+    <CardsContainer pageIter={pageIter} pagesToFetch={pagesToFetch}
+    filmsToRender={filmsToRender}/>
+  );
+
+  pageIter = 3;
+  pagesToFetch = 1;
 });
 
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <CardsContainer pageIter={pageIter} pagesToFetch={pagesToFetch}/>
-);
-
-
-pageIter = 3;
-pagesToFetch = 1;
-
-
+let isRendered = false;
 
 window.addEventListener("scroll", function() {
   if (this.window.innerHeight + this.window.scrollY 
-    >= this.document.body.scrollHeight) {
+    >= (this.document.body.scrollHeight - 200)) {
     console.log("bottom!");
-    if (pageIter < pageTotalCount) {
+    if ((pageIter < pageTotalCount) && !isRendered) {
       pageIter++;
+      isRendered = true;
       root.render(
         <>
           <CardsContainer pageIter={pageIter} pagesToFetch={pagesToFetch}/>
         </>
       );
     }
+    this.setTimeout(function() {
+      isRendered = false;
+    }, 100);
   }
 })
 
