@@ -27,6 +27,9 @@ fetch(
 .then((actualData) => {
   pageTotalCount = actualData.pagesCount;
   console.log({pageTotalCount});
+  
+  //delete this line; its needed for preventing huge amount of requests
+  pageTotalCount =  3;
 });
 
 
@@ -38,6 +41,8 @@ root.render(
 
 pageIter = 3;
 pagesToFetch = 1;
+
+
 
 window.addEventListener("scroll", function() {
   if (this.window.innerHeight + this.window.scrollY 
