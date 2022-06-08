@@ -2,8 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
+import Header from './layout/Header/Header';
+import Main from './layout/Main/Main';
+import Footer from './layout/Footer/Footer';
+
 import Card from './components/Card/Card';
-import CardsContainer from "./components/CardsContainer/CardsContainer"
+import CardsContainer from "./components/CardsContainer/CardsContainer";
 
 import reportWebVitals from './reportWebVitals';
 
@@ -12,11 +16,14 @@ let pageIter = 1;
 let pagesToFetch = 3;
 let pageTotalCount = 0;
 
+let mainId = "main-id";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
+
 fetch(
   `https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_250_BEST_FILMS&page=1`,
+  //'./localBase.json',
   {
     method: "GET",
     headers: {
@@ -25,21 +32,27 @@ fetch(
     },
   }
 )
-.then((response) => response.json())
+.then((response) => {
+  console.log(response);
+  return response.json();
+})
 .then((actualData) => {
+  console.log(actualData);
   pageTotalCount = actualData.pagesCount;
   console.log({pageTotalCount});
-
+  console.log(actualData.films);
   let filmsToRender = actualData.films;
-  console.log(filmsToRender);
-
   
-  //delete this line; its needed for preventing huge amount of requests
+  //delete this line; its needed for preventing huge requests amount
   pageTotalCount =  5;
 
   root.render(
-    <CardsContainer pageIter={pageIter} pagesToFetch={pagesToFetch}
-    filmsToRender={filmsToRender}/>
+    <>
+      <Header />
+      <Main pageIter={pageIter} pagesToFetch={pagesToFetch} filmsToRender={filmsToRender}>
+      </Main>
+      <Footer />
+    </>
   );
 
   pageIter = 3;
@@ -58,7 +71,9 @@ window.addEventListener("scroll", function() {
       isRendered = true;
       root.render(
         <>
-          <CardsContainer pageIter={pageIter} pagesToFetch={pagesToFetch}/>
+          <Header />
+          <Main pageIter={pageIter} pagesToFetch={pagesToFetch} />
+          <Footer />
         </>
       );
     }

@@ -6,38 +6,30 @@ import "./_cardsContainer.sass";
 
 function CardsContainer(props) {
   let [filmsArray, setFilmsArray] = useState([]);
-  
-  console.log("page iter: ", props.pageIter);
-  console.log("to fetch: ", props.pagesToFetch);
-  console.log("films to render: ", props.filmsToRender);
+
+  console.log(props);
 
   const renderedPages = useRef(0);
 
-
-
   //let inter = 100;
-  let inter = 0;
-  let tmpArray = [];
+  //let inter = 0;
   
   useEffect(() => {
-    
+    let tmpArray = [];
+    let inter = 0;
 
     let pgIter = props.pageIter;
-    console.log({pgIter});
     for (let i = pgIter; i < pgIter + props.pagesToFetch; i++) {
+      
       renderedPages.current = renderedPages.current + 1;
       console.log("RENDERED TIMES:", renderedPages.current);
 
       if ((renderedPages.current === 1) && (props.filmsToRender)) {
-        console.log("another way");
-        console.log(props.filmsToRender);
         tmpArray = tmpArray.concat(filmsArray, props.filmsToRender);
-        console.log(tmpArray);
         setFilmsArray(tmpArray);
-        console.log({pgIter});
       } else {
-        let tmpTimeout = setTimeout(async function() {
-          const response = await fetch(
+        setTimeout(async function() {
+          fetch(
             `https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_250_BEST_FILMS&page=${i}`,
             {
               method: "GET",
@@ -46,13 +38,12 @@ function CardsContainer(props) {
                 "Content-Type": "application/json",
               },
             }
-          );
-          const json = await response.json();
-          console.log(json);
-          tmpArray = tmpArray.concat(filmsArray, json.films);
-          console.log(tmpArray);
-          setFilmsArray(tmpArray);
-          console.log({pgIter});
+          )
+          .then((response) => response.json())
+          .then((json) => {
+            tmpArray = tmpArray.concat(filmsArray, json.films);
+            setFilmsArray(tmpArray);
+          })
         }, inter);
       }
       inter += 100;
@@ -65,7 +56,8 @@ function CardsContainer(props) {
       {
         filmsArray && filmsArray.map(function(film) {
           return (
-            <Card key={film.nameRu} nameRu={film.nameRu} />
+            <Card key={film.nameRu} nameRu={film.nameRu} 
+            posterUrlPreview={film.posterUrlPreview}/>
           )
         })
       }
