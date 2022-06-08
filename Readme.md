@@ -12,6 +12,10 @@ The app's logic is based on getting timestamps, so it will work if you switch to
 
 This is a simple date reminder app that allows user to add and remove dates and filter them by months and colors. Data is saving in local storage. Also, there are save and load from local file functions.
 
+### Kinopoisk (developing)
+
+This is a React-based app that uses unofficial kinopoisk api and represents top 250\* films from kinopoisk website. Every film poster is clickable and contains additional data about film.
+
 ## Layout exmaples
 
 ### Scandi
