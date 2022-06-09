@@ -4,10 +4,11 @@ import FilmInfo from "../FilmInfo/FilmInfo";
 
 function Modal(props) {
   console.log(props.closeModal);
+  console.log(props.filmId);
 
   return (
     <div className="Modal" onClick={props.closeModal}>
-      <FilmInfo nameRu={props.nameRu}/>
+      <FilmInfo filmId={props.filmId} cardNumber={props.cardNumber}/>
     </div>
   )
 }

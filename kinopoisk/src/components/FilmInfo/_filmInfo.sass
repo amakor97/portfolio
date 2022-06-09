@@ -1,6 +1,96 @@
 .FilmInfo
-  width: 500px
-  height: 300px
+  box-sizing: border-box
+  width: 900px
+  height: 600px
+  padding: 20px
 
   background:
     color: lightgrey
+
+  @media screen and (max-width: 1000px)
+    width: 500px
+    height: 400px
+
+  &__main-container
+    box-sizing: border-box
+    display: flex
+    justify-content: space-between
+    width: 100%
+    height: 100%
+
+    background:
+      color: yellow
+
+  &__poster-container
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    width: 40%
+    height: 100%
+
+    background:
+      color: orange
+
+  &__poster-wrapper
+    width: 344px
+    height: 516px
+
+    background:
+      color: lightgreen
+
+  &__poster-sub
+    display: flex
+    justify-content: space-between
+    width: 100%
+    height: 40px
+
+    background:
+      color: lightgreen
+
+  &__poster-pos
+    font:
+      size: 32px
+
+  &__poster-rating
+    font:
+      size: 32px
+
+  &__poster-year
+    font:
+      size: 32px
+
+  &__poster-img
+    width: 100%
+    height: 100%
+
+  &__description-container
+    width: 50%
+    height: 100%
+
+    background:
+      color: orange
+
+  &__description-slogan
+    margin: 12px 0
+
+    font:
+      family: Arial
+      size: 18px
+      style: italic
+
+    text-align: center
+
+  &__description-title
+    margin-bottom: 12px
+
+    font:
+      family: Arial
+      size: 24px
+
+    text-align: center
+
+  &__description-text
+    font:
+      size: 18px
+
+    line-height: 120%

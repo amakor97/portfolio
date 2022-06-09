@@ -19,7 +19,7 @@ function Card(props) {
   const FilmContext = createContext();
   
 
-  console.log(props.nameRu);
+  console.log(props.cardNumber);
   return (
     <FilmContext.Provider value={props}>
       <div className="Card" onClick={setModalIsOpenToTrue}>
@@ -28,7 +28,7 @@ function Card(props) {
       </div>
 
       {modalIsOpen && 
-        <ModalWindow closeModal={setModalIsOpenToFalse} nameRu={props.nameRu}/>
+        <ModalWindow closeModal={setModalIsOpenToFalse} filmId={props.filmId} cardNumber={props.cardNumber}/>
       }
 
     </FilmContext.Provider>
@@ -37,3 +37,6 @@ function Card(props) {
 
 
 export default Card;
+
+
+//try useMemo if re-render is noticable

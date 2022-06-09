@@ -10,6 +10,9 @@ function CardsContainer(props) {
   console.log(props);
 
   const renderedPages = useRef(0);
+  //const renderedCards = useRef(0);
+
+  let renderedCards = 0;
 
   //let inter = 100;
   //let inter = 0;
@@ -55,9 +58,13 @@ function CardsContainer(props) {
     <div className="CardsContainer">
       {
         filmsArray && filmsArray.map(function(film) {
+          renderedCards = renderedCards + 1;
+          console.log("cards", renderedCards.current);
+
           return (
             <Card key={film.nameRu} nameRu={film.nameRu} 
-            posterUrlPreview={film.posterUrlPreview}/>
+            posterUrlPreview={film.posterUrlPreview} filmId={film.filmId} cardNumber={renderedCards}
+            />
           )
         })
       }
