@@ -1,8 +1,12 @@
 import { useState, useEffect, useContext } from "react";
 
+import "../../Sass/_reset.sass";
 import "./_filmInfo.sass";
 
 
+function captureClick(e) {
+  e.stopPropagation();
+}
 
 function FilmInfo(props) {
   let [filmData, setFilmData] = useState([]);
@@ -29,7 +33,7 @@ function FilmInfo(props) {
 
   return (
     filmData &&
-    <div className="FilmInfo">
+    <div className="FilmInfo" onClick={captureClick}>
       <div className="FilmInfo__main-container">
         <div className="FilmInfo__poster-container">
           <div className="FilmInfo__poster-wrapper">
@@ -37,21 +41,38 @@ function FilmInfo(props) {
           </div>
           <div className="FilmInfo__poster-sub">
             <div className="FilmInfo__poster-pos">
-              #{props.cardNumber}
+              <span className="FilmInfo__poster-number" title="Позиция в рейтинге">
+                #{props.cardNumber}
+              </span>
             </div>
-            <div className="FilmInfo__poster-rating">
-              {filmData.ratingKinopoisk}
+            <div className="FilmInfo__poster-rating" title="Рейтинг">
+              <span className="FilmInfo__poster-number">
+                {filmData.ratingKinopoisk}
+              </span>
+              <img className="FilmInfo__poster-rating-icon" src={require("./star.png")}/>
             </div>
-            <div className="FilmInfo__poster-year">
+            <div className="FilmInfo__poster-year" title="Год выпуска">
+            <span className="FilmInfo__poster-number">
               {filmData.year}
+            </span>
             </div>
           </div>
         </div>
         <div className="FilmInfo__description-container">
-          <p className="FilmInfo__description-slogan">"{filmData.slogan}"</p>
+          {
+            filmData.slogan && 
+            <p className="FilmInfo__description-slogan">"{filmData.slogan}"</p>
+          }
           <p className="FilmInfo__description-title">{filmData.nameRu}</p>
           <p className="FilmInfo__description-text">{filmData.description}</p>
-          <a target="_blank" href={`https://www.kinopoisk.ru/film/${filmData.kinopoiskId}/`}>Подробнее</a>
+          <div className="FilmInfo__description-nav">
+            <a className="FilmInfo__description-link" target="_blank" 
+            href={`https://www.kinopoisk.ru/film/${filmData.kinopoiskId}/`}>
+              Страница на Кинопоиске
+            </a>
+            <button className="FilmInfo__description-btn" onClick={props.closeModal}>Закрыть</button>
+          </div>
+          
         </div>
       </div>
     </div>

@@ -1,3 +1,6 @@
+@import "../../Sass/_variables.sass"
+@import "../../Sass/_root.sass"
+
 .Card
   display: inline-flex
   justify-content: center
@@ -13,6 +16,8 @@
   border-radius: 10px
   cursor: pointer
 
+  transition: box-shadow 0.2s
+
   @media screen and (min-width: 768px )
     width: 250px
     height: 375px
@@ -24,3 +29,6 @@
   &__title
     display: none
     font-size: 10px
+
+  &:hover
+    box-shadow: 0 0 5px 10px $main-blue

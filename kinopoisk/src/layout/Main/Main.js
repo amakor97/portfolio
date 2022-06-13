@@ -1,5 +1,6 @@
 import CardsContainer from "../../components/CardsContainer/CardsContainer";
 import "../../Sass/_reset.sass";
+import "../../Sass/_root.sass";
 import "./_main.sass";
 
 

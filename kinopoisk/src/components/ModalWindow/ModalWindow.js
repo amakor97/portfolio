@@ -8,7 +8,11 @@ function Modal(props) {
 
   return (
     <div className="Modal" onClick={props.closeModal}>
-      <FilmInfo filmId={props.filmId} cardNumber={props.cardNumber}/>
+      <FilmInfo 
+        filmId={props.filmId} 
+        cardNumber={props.cardNumber} 
+        closeModal={props.closeModal}
+      />
     </div>
   )
 }
