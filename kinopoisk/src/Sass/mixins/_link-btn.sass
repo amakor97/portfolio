@@ -5,12 +5,12 @@
   display: inline-flex
   justify-content: center
   align-items: center
-  min-width: 110px
-  height: 50px
+  //min-width: 110px
+  height: 2rem
 
   font:
     family: "Raleway", Arial, sans-serif
-    size: 1rem
+    size: 0.875rem
   color: $main-white
   text:
     align: center
@@ -22,6 +22,12 @@
   cursor: pointer
 
   transition: border 0.5s
+
+  @media screen and (min-width: $screen-xl)
+    height: 2.778rem
+
+    font:
+      size: 1rem
 
   &:hover
     font:

@@ -39,7 +39,11 @@ function FilmInfo(props) {
       <div className="FilmInfo__main-container">
         <div className="FilmInfo__poster-container">
           <div className="FilmInfo__poster-wrapper">
-            <img className="FilmInfo__poster-img" src={filmData.posterUrl}/>
+            <img 
+              className="FilmInfo__poster-img" 
+              src={filmData.posterUrl}
+              alt={`Постер фильма "${filmData.nameRu}"`}
+            />
           </div>
           <div className="FilmInfo__poster-sub">
             <div className="FilmInfo__poster-pos">
@@ -51,7 +55,10 @@ function FilmInfo(props) {
               <span className="FilmInfo__poster-number">
                 {filmData.ratingKinopoisk}
               </span>
-              <img className="FilmInfo__poster-rating-icon" src={require("./star.png")}/>
+              <img 
+                className="FilmInfo__poster-rating-icon" 
+                src={require("./star.png")}
+                alt={`Оценка`}/>
             </div>
             <div className="FilmInfo__poster-year" title="Год выпуска">
             <span className="FilmInfo__poster-number">
@@ -60,7 +67,8 @@ function FilmInfo(props) {
             </div>
           </div>
         </div>
-        <div className="FilmInfo__description-container">
+        {//<div className="FilmInfo__description-container">
+}
           {
             filmData.slogan && 
             <p className="FilmInfo__description-slogan">"{filmData.slogan}"</p>
@@ -68,16 +76,20 @@ function FilmInfo(props) {
           <p className="FilmInfo__description-title">{filmData.nameRu}</p>
           <p className="FilmInfo__description-text">{filmData.description}</p>
           <div className="FilmInfo__description-nav">
-            <a className="FilmInfo__description-link" target="_blank" 
-            href={`https://www.kinopoisk.ru/film/${filmData.kinopoiskId}/`}>
+            <a 
+              className="FilmInfo__description-link" 
+              target="_blank" 
+              href={`https://www.kinopoisk.ru/film/${filmData.kinopoiskId}/`}
+              rel="noreferrer">
               Страница на Кинопоиске
             </a>
             <RegularBtn 
               text="Закрыть"
               action={props.closeModal}/>
           </div>
-          
-        </div>
+          {
+        //</div>
+          }
       </div>
     </div>
   )

@@ -1,12 +1,18 @@
+@import "../../Sass/_reset.sass"
+@import "../../Sass/_root.sass"
+@import "../../Sass/_variables.sass"
+
 .CardsContainer
-  display: flex
-  justify-content: space-between
-  flex-wrap: wrap
+  display: grid
+  grid-template-columns: repeat(3, 10rem)
+  column-gap: 40px
   row-gap: 40px
-  width: 100%
-  max-width: 1200px
+  width: min-content
 
   margin: 0 auto
 
   background:
     //color: rgba(255, 128, 128, 0.1)
+
+  @media screen and (min-width: $screen-xl)
+    grid-template-columns: repeat(4, 13.889rem)
