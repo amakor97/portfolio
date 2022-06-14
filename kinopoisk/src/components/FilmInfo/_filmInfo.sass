@@ -1,8 +1,6 @@
 @import "../../Sass/_variables.sass"
 @import "../../Sass/_root.sass"
 
-@import "../../Sass/mixins/_regular-btn.sass"
-
 .FilmInfo
   box-sizing: border-box
   width: 940px
@@ -26,7 +24,7 @@
     height: 100%
 
     background:
-      color: rgba(255, 255, 0, 0.5)
+      //color: rgba(255, 255, 0, 0.1)
 
   &__poster-container
     display: flex
@@ -36,29 +34,41 @@
     min-height: 100%
 
     background:
-      color: rgba(255, 165, 0, 0.5)
+      //color: rgba(255, 165, 0, 0.1)
 
   &__poster-wrapper
     width: 344px
     height: 516px
 
     background:
-      color: rgba(144, 238, 144, 0.5)
+      //color: rgba(144, 238, 144, 0.1)
 
   &__poster-sub
+    position: relative
+
     display: flex
     justify-content: space-between
     width: 100%
     height: 40px
 
+    font:
+      family: Rubik
+
     background:
-      color: rgba(144, 238, 144, 0.5)
+      //color: rgba(144, 238, 144, 0.1)
 
   &__poster-pos
     font:
       size: 32px
 
   &__poster-rating
+    position: absolute
+    left: 50%
+    transform: translateX(-50%)
+
+    display: flex
+    align-items: center
+
     font:
       size: 32px
 
@@ -71,7 +81,7 @@
     line-height: 40px
 
   &__poster-rating-icon
-    vertical-align: middle
+    //vertical-align: middle
 
   &__poster-year
     font:
@@ -89,7 +99,7 @@
     min-height: 100%
 
     background:
-      color: rgba(255, 165, 0, 0.5)
+      //color: rgba(255, 165, 0, 0.1)
 
   &__description-slogan
     margin-bottom: 12px
@@ -124,6 +134,21 @@
     margin-top: auto
 
   &__description-link
+    display: inline-flex
+    align-items: center
+    height: 36px
+
+    color: $dark-blue
+    font:
+      size: 1.25rem
+
+    border: 3px solid transparent
+
+    transition: border 0.2s
+
+    &:hover
+      //border-top: 3px solid $dark-blue
+      //border-bottom: 3px solid $dark-blue
+      color: $accent-blue
 
   &__description-btn
-    @include regular-btn

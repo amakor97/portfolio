@@ -7,7 +7,7 @@ function Modal(props) {
   console.log(props.filmId);
 
   return (
-    <div className="Modal" onClick={props.closeModal}>
+    <div className="Modal-Window" onClick={props.closeModal}>
       <FilmInfo 
         filmId={props.filmId} 
         cardNumber={props.cardNumber} 

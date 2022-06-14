@@ -3,6 +3,8 @@ import { useState, useEffect, useContext } from "react";
 import "../../Sass/_reset.sass";
 import "./_filmInfo.sass";
 
+import "../RegularBtn/RegularBtn";
+import RegularBtn from "../RegularBtn/RegularBtn";
 
 function captureClick(e) {
   e.stopPropagation();
@@ -70,7 +72,9 @@ function FilmInfo(props) {
             href={`https://www.kinopoisk.ru/film/${filmData.kinopoiskId}/`}>
               Страница на Кинопоиске
             </a>
-            <button className="FilmInfo__description-btn" onClick={props.closeModal}>Закрыть</button>
+            <RegularBtn 
+              text="Закрыть"
+              action={props.closeModal}/>
           </div>
           
         </div>
