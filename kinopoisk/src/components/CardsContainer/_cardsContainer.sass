@@ -4,16 +4,28 @@
 
 .CardsContainer
   display: grid
-  grid-template-columns: repeat(3, 10rem)
-  column-gap: 40px
-  row-gap: 40px
+  grid-template-columns: repeat(2, 8em)
+  column-gap: 24px
+  row-gap: 24px
   width: min-content
-
   margin: 0 auto
+
+  font: 
+    size: 16px
 
   background:
     //color: rgba(255, 128, 128, 0.1)
 
+  @media screen and (min-width: $screen-md) 
+    grid-template-columns: repeat(3, 8em)
+    column-gap: 40px
+    row-gap: 40px
+
+    font: 
+      size: 20px
+
   @media screen and (min-width: $screen-xl)
-    grid-template-columns: repeat(4, 13.889rem)
-    
+    grid-template-columns: repeat(4, 8em)
+
+    font:
+      size: 31.25px

@@ -1,4 +1,4 @@
-import { react, useState, createContext, useContext } from "react";
+import { react, useState, createContext, useContext, useMemo } from "react";
 import Modal from "react-modal";
 
 import "./_card.sass";
@@ -18,12 +18,19 @@ function Card(props) {
 
   const FilmContext = createContext();
   
+  const cardPoster = useMemo(() => props.posterUrlPreview);
 
   console.log(props.cardNumber);
   return (
     <FilmContext.Provider value={props}>
       <div className="Card" onClick={setModalIsOpenToTrue}>
+        {
         <img className="Card__bg-img" src={props.posterUrlPreview}/>
+      }
+      {
+        //<img className="Card__bg-img" src={cardPoster}/>
+      }
+        
         <p className="Card__title">{props.posterUrlPreview}</p>
       </div>
 
