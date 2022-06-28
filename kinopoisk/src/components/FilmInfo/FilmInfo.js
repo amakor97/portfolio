@@ -33,9 +33,16 @@ function FilmInfo(props) {
     })
   }, []);
 
+  useEffect(() => {
+    console.log(props.filmId);
+    let cont = document.querySelector(".FilmInfo");
+    console.log(cont);
+    setTimeout(() => cont.classList.remove("FilmInfo--no-visible"), 150);
+  })
+
   return (
     filmData &&
-    <div className="FilmInfo" onClick={captureClick}>
+    <div className="FilmInfo FilmInfo--no-visible" onClick={captureClick}>
       <div className="FilmInfo__main-container">
         <div className="FilmInfo__poster-container">
           <div className="FilmInfo__poster-wrapper">
