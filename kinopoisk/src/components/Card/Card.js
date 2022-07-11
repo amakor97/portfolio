@@ -46,4 +46,4 @@ function Card(props) {
 export default Card;
 
 
-//try useMemo if re-render is noticable
+//try useMemo if poster preview re-render is noticable

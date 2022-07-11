@@ -15,6 +15,14 @@ function FilmInfo(props) {
   //const props = useContext(FilmContext);
   console.log(props);
 
+  function DescriptionWithoutSlogan() {
+    
+  }
+
+  let styles = {
+    "gridTemplateRows": "auto auto 1fr", 
+  }
+
   useEffect(() => {
     fetch(
       `https://kinopoiskapiunofficial.tech/api/v2.2/films/${props.filmId}`,
@@ -37,13 +45,16 @@ function FilmInfo(props) {
     console.log(props.filmId);
     let cont = document.querySelector(".FilmInfo");
     console.log(cont);
-    setTimeout(() => cont.classList.remove("FilmInfo--no-visible"), 150);
+    setTimeout(() => cont.classList.remove("FilmInfo--no-visible"), 250);
   })
 
   return (
     filmData &&
     <div className="FilmInfo FilmInfo--no-visible" onClick={captureClick}>
-      <div className="FilmInfo__main-container">
+      <div className={"FilmInfo__main-container " + 
+        (filmData.slogan ? "" : "FilmInfo__main-container--no-slogan")}
+        >
+          {console.log(filmData.slogan === null)}
         <div className="FilmInfo__poster-container">
           <div className="FilmInfo__poster-wrapper">
             <img 

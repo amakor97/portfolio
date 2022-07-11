@@ -4,20 +4,29 @@
 .FilmInfo
   box-sizing: border-box
 
-  width: 500px
-  min-height: none
+  width: 90%
+  max-width: 400px
+  //min-height: none
   padding: 20px
+
+  font:
+    size: 12px
 
   border: 20px solid $main-blue
   border-radius: 20px
   background:
     color: $main-white
 
+  @media screen and (min-width: $screen-md)
+    width: 500px
+    max-width: none
+
+    font:
+      size: 16px
+
   @media screen and (min-width: $screen-xl)
     width: 940px
-    min-height: 600px
-
-  
+    //min-height: 600px  
 
   &__main-container
     box-sizing: border-box
@@ -32,11 +41,16 @@
 
     @media screen and (min-width: $screen-xl)
       grid-template-columns: 40% 50%
-      grid-template-rows: auto auto 8fr 1fr
+      grid-template-rows: auto auto auto 1fr
+
+    &--no-slogan
+      @media screen and (min-width: $screen-xl)
+        grid-template-columns: 40% 50%
+        grid-template-rows: auto auto 1fr
 
   &__poster-container
-    grid-row-start: 4
-    grid-row-end: 5
+    //grid-row-start: 3
+    grid-row-end: -2
 
     display: flex
     flex-direction: column
@@ -50,8 +64,8 @@
     @media screen and (min-width: $screen-xl)
       width: 100%
 
-      grid-row-start: 1
-      grid-row-end: 5
+      grid-row-start: -6
+      grid-row-end: -1
 
   &__poster-wrapper
     display: none
@@ -79,8 +93,8 @@
       //color: rgba(144, 238, 144, 0.1)
 
   &__poster-pos
-    font:
-      size: 32px
+    //font:
+      //size: 32px
 
   &__poster-rating
     position: absolute
@@ -90,23 +104,23 @@
     display: flex
     align-items: center
 
-    font:
-      size: 32px
+    //font:
+      //size: 32px
 
   &__poster-number
     display: inline-block
     height: 40px
 
     font:
-      size: 32px
+      size: 2em
     line-height: 40px
 
   &__poster-rating-icon
     //vertical-align: middle
 
   &__poster-year
-    font:
-      size: 32px
+    //font:
+      //size: 32px
 
   &__poster-img
     width: 100%
@@ -126,10 +140,11 @@
       width: 100%
 
   &__description-slogan
+    grid-row-end: -5
     margin-bottom: 12px
 
     font:
-      size: 18px
+      size: 1.125em
       style: italic
 
     text-align: center
@@ -138,20 +153,24 @@
       grid-column-start: 2
 
   &__description-title
+    grid-row-end: -4
     margin-bottom: 12px
 
     font:
-      size: 24px
+      size: 1.5em
       weight: 500
 
     text-align: center
 
     @media screen and (min-width: $screen-xl)
       grid-column-start: 2
+      grid-row-end: -3
 
   &__description-text
+    grid-row-end: -3
+
     font:
-      size: 18px
+      size: 1.125em
     text:
       indent: 32px
 
@@ -160,14 +179,16 @@
 
     @media screen and (min-width: $screen-xl)
       grid-column-start: 2
+      grid-row-end: -2
 
   &__description-nav
     display: flex
     justify-content: space-between
+    grid-row-end: -1
     margin-top: auto
 
     @media screen and (min-width: $screen-xl)
-      grid-column-start: 2
+      //grid-column-start: 2
 
   &__description-link
     display: inline-flex
@@ -176,7 +197,7 @@
 
     color: $dark-blue
     font:
-      size: 1.25rem
+      size: 1.25em
 
     border: 3px solid transparent
 
