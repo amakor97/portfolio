@@ -19,15 +19,25 @@
 
   /*--header-color: #ff9500;*/
   --theme-color: #ff7f50;
-  --theme-color: #00bfff;
+  --theme-color: #236a8a;
+  --text-color: #1a1a47;
+  --subtext-color: #ffffff;
+
+  --settings-bg-color: #e1e1e1;
 
   --nav-link-text: #000000;
   --nav-link-text-hover: #ffffff;
 }
 
+@font-face {
+  font-family: Raleway;
+  src: url(../fonts/Raleway-Regular.ttf);
+  font-weight: 400;
+}
+
 html {
   font-size: 16px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Raleway, Arial, Helvetica, sans-serif;
 }
 
 @media screen and (max-width: 1020px) {
@@ -62,12 +72,12 @@ html {
 
 .header__title {
   font-size: 2rem;
+  color: var(--subtext-color);
 }
 
 .nav__link {
   font-size: 1.5rem;
-  font-style: italic;
-  color: #000000;
+  color: var(--subtext-color);
   text-decoration: none;
 }
 
@@ -165,13 +175,8 @@ html {
 }
 
 .timer__percent {
-  /*align-self: flex-end;*/
-  /*width: 50%;*/
-
   font-size: 8rem;
   font-weight: bold;
-
-  /*background-color: rgba(0, 255, 0, 0.3);*/
 }
 
 @media screen and (max-width: 665px) {
@@ -200,7 +205,7 @@ html {
   height: 100%;
   padding: 1rem;
 
-  background-color: #e1e1e1;
+  background-color: var(--settings-bg-color);
   border-left: 5px solid var(--theme-color);
 
   transition: all 1s;
@@ -297,6 +302,8 @@ html {
 .timer__add-timer-svg {
   width: 4rem;
   height: 4rem;
+
+  fill: var(--text-color);
 }
 
 .timer__add-timer-btn:hover {
@@ -307,8 +314,6 @@ html {
 
 .timer__text {
   font-size: 3rem;
-
-  /*background-color: rgba(0, 255, 0, 0.3);*/
 }
 
 @media screen and (max-width: 768px) {
@@ -339,7 +344,7 @@ html {
   width: 100%;
   height: 100%;
 
-  background-color: #e1e1e1;
+  background-color: var(--settings-bg-color);
 }
 
 @media screen and (max-width: 768px) {
@@ -418,6 +423,7 @@ label {
 
 .timer__text-intro {
   font-size: 5rem;
+  color: var(--text-color);
 }
 
 @media screen and (max-width: 665px) {
