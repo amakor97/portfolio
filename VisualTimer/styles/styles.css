@@ -257,6 +257,7 @@ body {
 
 .timer__percent {
   font-family: Rubik;
+  color: var(--text-color);
   font-size: 8rem;
   font-weight: bold;
 }
@@ -320,6 +321,7 @@ body {
 .btn {
   padding: 1rem;
 
+  color: var(--text-color);
   font-size: 1.5rem;
 
   cursor: pointer;
@@ -409,6 +411,7 @@ body {
 
 .timer__text_remaining {
   font-family: Rubik;
+  color: var(--text-color);
   font-size: 2rem;
 }
 
