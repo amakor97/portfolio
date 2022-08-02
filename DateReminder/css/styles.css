@@ -16,27 +16,45 @@
   --big-text: 2rem;
 
   /*--header-color: #ff9500;*/
+  --main-blue: #236a8a;
+  --dark-blue: #1a1a47;
+  --accent-blue: #005cff;
+  --main-white: #ffffff;
+  --text-color: #1a1a47;
+  --subtext-color: #ffffff;
+
   --grey-color: #a1a1a1;
-  --theme-color: #ff7f50;
-  --theme-color: #00bfff;
+  --theme-color: #1a1a47;
   --orange-color: #ff7f50;
-  --cyan-color: #00c5bb;
   --cyan-color: #00bfff;
   --green-color: #54d100;
   --purple-color: #9700c5;
   --nav-link-text: #000000;
   --nav-link-text-hover: #ffffff;
 
+
   /*overflow-x: hidden;*/
 
   font-size: 16px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Raleway, Arial, Helvetica, sans-serif;
 }
 
 @media screen and (max-width: 768px) {
   :root {
     font-size: 12px;
   }
+}
+
+@font-face {
+  font-family: Raleway;
+  src: url(../fonts/Raleway-Regular.ttf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Rubik;
+  src: url(../fonts/Rubik-Regular.ttf);
+  font-weight: 400;
 }
 
 * {
@@ -51,46 +69,93 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 4rem;
+  height: 5rem;
+  margin-bottom: 3rem;
   padding: 0 5%;
 
-  background-color: var(--theme-color);
-  box-shadow: 10px 0px 10px 0px grey, -10px 0px 10px 0px grey;
+  background-color: var(--main-blue);
+  box-shadow: 10px 0 10px 0 grey, -10px 0 10px 0 grey;
 }
 
 .header__title {
-  margin-right: auto;
-
   font-size: 2rem;
+  color: var(--subtext-color);
 }
 
-.header__info-btn {
-  width: fit-content;
+@media screen and (max-width: 420px) {
+  .header__title {
+    font-size: 1rem;
+  }
+}
 
-  font-size: 1.5rem;
-  font-style: italic;
-  color: #000000;
+.nav__ul {
+  display: flex;
+  align-items: center;
+}
+
+.nav__item {
+  float: left;
+}
+
+.nav__btn {
+  display: inline-block;
+  height: 3rem;
+
+  font-family: Raleway, Arial, Helvetica, sans-serif;
+  font-size: 1.25rem;
+  color: var(--subtext-color);
   text-decoration: none;
+
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+
+  transition: 0.25s border;
+}
+
+@media screen and (max-width: 420px) {
+  .nav__btn {
+    height: 2rem;
+
+    font-size: 1rem;
+  }
+}
+
+.nav__btn:hover {
+  border-top: 1px solid var(--subtext-color);
+  border-bottom: 1px solid var(--subtext-color);
 }
 
 .nav__link {
-  font-size: 1.5rem;
-  font-style: italic;
-  color: #000000;
-  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  height: 3rem;
+  margin-left: 1rem;
+
+  font-size: 1.25rem;
+  color: var(--subtext-color);
+
+  border: 1px solid transparent;
+
+  transition: 0.25s border;
 }
 
-.nav__link_home {
-  margin-left: 4rem;
+@media screen and (max-width: 420px) {
+  .nav__link {
+    height: 2rem;
+    font-size: 1rem;
+  }
 }
 
 .nav__link:hover {
-  text-decoration: underline;
+  border-top: 1px solid var(--subtext-color);
+  border-bottom: 1px solid var(--subtext-color);
 }
 
 .main {
   width: 50%;
   padding-top: 6rem;
+  padding-bottom: 5rem;
   margin: 0 auto;
 }
 
@@ -107,6 +172,7 @@
 .date-container {
   display: grid;
   grid-template-columns: 8rem auto 1fr;
+  column-gap: 5px;
 
   align-items: center;
   width: 100%;
@@ -114,6 +180,8 @@
   min-height: 5rem;
   padding: 1rem;
 
+  font-family: Rubik;
+  color: var(--dark-blue);
   font-size: 2rem;
 
   border: 10px solid var(--grey-color);
@@ -146,11 +214,17 @@
 }
 
 .date-alert__text {
+  font-family: Rubik;
+  color: var(--dark-blue);
   font-size: 2rem;
 }
 
 .date-container__day-month {
   width: 10rem;
+}
+
+.date-container__text {
+  overflow-wrap: anywhere;
 }
 
 .add-form__submit-btn {
@@ -260,16 +334,14 @@
   z-index: 5;
 
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   gap: 0.2rem;
-  width: auto;
+  width: 14rem;
   height: auto;
-  padding: 1rem;
+  padding: 1.5rem;
 
-  background-color: var(--theme-color);
-  border-top: 1px solid white;
-  border-left: 1px solid white;
-  border-radius: 0.5rem 0.5rem 0 0.5rem;
+  background-color: var(--main-blue);
+  border-radius: 1rem 0 0 0;
 }
 
 .buttons-bar__btn {
@@ -325,8 +397,10 @@
   padding: 1.5rem;
   overflow: hidden;
 
-  background-color: var(--theme-color);
-  border-radius: 1rem 1rem 0 1rem;
+  color: var(--main-white);
+
+  background-color: var(--main-blue);
+  border-radius: 1rem 0 0 0;
   box-shadow: 0 0 10px 0 grey;
 
   transition: transform 0.5s;
@@ -339,7 +413,13 @@
 }
 
 .filter-container_hidden {
-  transform: translate(14rem, 20rem);
+  transform: translateY(14.5rem);
+}
+
+@media screen and (max-width: 768px) {
+  .filter-container_hidden {
+    height: 18.5rem;
+  }
 }
 
 .filter-container__main-label {
