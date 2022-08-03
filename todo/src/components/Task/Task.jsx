@@ -4,7 +4,7 @@ function Task(props) {
   console.log("Task");
   console.log(props.task);
   return (
-    <div className="task">
+    <div className="task" onClick={() => {console.log(props.task.id)}}>
       <span>{props.task.id}</span>
       <span>{props.task.text}</span>
     </div>
