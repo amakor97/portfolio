@@ -9,9 +9,8 @@ function EditContainer(props) {
 
   const [currentId, setCurrentId] = useState(props.task.id);
 
-  console.log({currentId});
-  console.log(props.task.id);
-  console.log(props.task.id === currentId);
+  console.log(props.editTask);
+
   if (props.task.id === currentId) {
     console.log("ok");
   } else {
@@ -30,14 +29,23 @@ function EditContainer(props) {
     console.log(event.target.value);
   }
 
+  function handleSubmit(event) {
+    event.preventDefault()
+    console.log(event.target[0].value)
+    console.log(event.target.elements.taskName.value)
+    console.log(event.target.taskName.value)
+
+    //props.editTask(event.target.taskName.value);
+  }
+
   return (
     <div className="editContainer">
-      <form className="editContainer__form">
+      <form className="editContainer__form" onSubmit={handleSubmit}>
         <fieldset className="editContainer__fieldset">
           <span>{props.task.id}</span>
-          <input className="editContainer__input" type="text" value={taskName} onChange={e => setTaskName(e.target.value)}></input>
+          <input className="editContainer__input" type="text" name="taskName" value={taskName} onChange={e => setTaskName(e.target.value)}></input>
           <textarea className="editContainer__textarea">{props.task.description}</textarea>
-          <button>Сохранить</button>
+          <button type="submit">Сохранить</button>
         </fieldset>
       </form>
     </div>
