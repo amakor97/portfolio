@@ -26,16 +26,23 @@ const tasks = [
 
 function TodoContainer() {
   const [currentTaskId, setCurrentTaskId] = useState(1);
+  const [tasksBase, setTask] = useState(tasks);
+
+
 
   function updateCurrentTaskId(num) {
     console.log(`setting current task id: ${num}`);
     setCurrentTaskId(num);
   }
 
+  function editTask(taskData) {
+    console.log(`retrieved data: ${taskData}`);
+  } 
+
   return (
     <div className="todoContainer">
-      <ListContainer tasks={tasks} updateId={updateCurrentTaskId}/>
-      <EditContainer task={tasks[currentTaskId-1]}/>
+      <ListContainer tasks={tasksBase} updateId={updateCurrentTaskId}/>
+      <EditContainer task={tasks[currentTaskId-1]} editTask={editTask}/>
     </div>
   )
 }
