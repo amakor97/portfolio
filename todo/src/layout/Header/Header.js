@@ -6,7 +6,6 @@ import Logo from "../../components/Logo/Logo";
 
 import { useState } from "react";
 
-import AboutWindow from "../../components/AboutWindow/AboutWindow";
 
 function Header() {
   const [aboutIsOpen, setAboutIsOpen] = useState(false);
@@ -40,10 +39,6 @@ function Header() {
           </ul>
         </div>
       </div>
-
-      {aboutIsOpen &&
-        <AboutWindow closeAbout={setAboutIsOpenToFalse}/>
-      }
     </>
   )
 }

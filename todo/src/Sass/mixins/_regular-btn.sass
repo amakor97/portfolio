@@ -1,0 +1,23 @@
+@import "../_variables.sass"
+@import "../_root.sass"
+
+@mixin regular-btn
+  padding: 2px 10px
+
+  font:
+    family: "Raleway", Arial, sans-serif
+    size: 1.25rem
+
+  border: 3px solid $dark-blue
+  border-radius: 20px
+  background:
+    color: transparent
+  cursor: pointer
+
+  transition: color 0.2s, background-color 0.2s
+
+  &:hover
+    color: $main-white
+
+    background:
+      color: $dark-blue
