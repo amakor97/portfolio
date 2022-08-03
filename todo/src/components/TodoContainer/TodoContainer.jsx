@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import "./_todoContainer.sass";
 
 import ListContainer from "../ListContainer/ListContainer";
@@ -23,12 +25,17 @@ const tasks = [
 ]
 
 function TodoContainer() {
-  
+  const [currentTaskId, setCurrentTaskId] = useState(1);
+
+  function updateCurrentTaskId(num) {
+    console.log(`setting current task id: ${num}`);
+    setCurrentTaskId(num);
+  }
 
   return (
     <div className="todoContainer">
-      <ListContainer tasks={tasks}/>
-      <EditContainer />
+      <ListContainer tasks={tasks} updateId={updateCurrentTaskId}/>
+      <EditContainer task={tasks[currentTaskId-1]}/>
     </div>
   )
 }

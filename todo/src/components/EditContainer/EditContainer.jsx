@@ -1,12 +1,13 @@
 import "./_editContainer.sass";
 
-function EditContainer() {
+function EditContainer(props) {
   return (
     <div className="editContainer">
       <form className="editContainer__form">
         <fieldset className="editContainer__fieldset">
-          <input className="editContainer__input" type="text"></input>
-          <textarea className="editContainer__textarea"></textarea>
+          <span>{props.task.id}</span>
+          <input className="editContainer__input" type="text" defaultValue={props.task.text}></input>
+          <textarea className="editContainer__textarea">{props.task.description}</textarea>
           <button>Сохранить</button>
         </fieldset>
       </form>
