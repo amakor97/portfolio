@@ -1,8 +1,9 @@
 import "./_addButton.sass";
 
-function AddButton() {
+function AddButton(props) {
+  console.log(props);
   return (
-    <button>Добавить</button>
+    <button onClick={() => {props.toggleAdding(true); props.toggleEditing(true)}}>Добавить</button>
   )
 }
 

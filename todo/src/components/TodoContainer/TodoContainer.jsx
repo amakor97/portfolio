@@ -26,8 +26,9 @@ const tasks = [
 
 function TodoContainer() {
   const [currentTaskId, setCurrentTaskId] = useState(1);
-  const [tasksBase, setTask] = useState(tasks);
+  const [tasksBase, setTask] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
 
   function updateCurrentTaskId(num) {
     console.log(`setting current task id: ${num}`);
@@ -37,14 +38,24 @@ function TodoContainer() {
   function editTask(taskData) {
     console.log(`retrieved id: ${taskData.id}`);
     console.log(`retrieved text: ${taskData.text}`);
-    let newTasksBase = tasksBase.map(obj => {
-      if (obj.id === taskData.id) {
-        console.log(obj.id);
-        obj = JSON.parse(JSON.stringify(taskData));
+
+    let newTasksBase = [];
+
+    if (isAdding === true) {
+      console.log("need to add task!");
+      setIsAdding(false);
+      newTasksBase = tasksBase;
+      newTasksBase.push(taskData);
+    } else {
+      newTasksBase = tasksBase.map(obj => {
+        if (obj.id === taskData.id) {
+          console.log(obj.id);
+          obj = JSON.parse(JSON.stringify(taskData));
+          return obj;
+        }
         return obj;
-      }
-      return obj;
-    })
+      })
+    }
     console.log(newTasksBase);
     setTask(newTasksBase);
   } 
@@ -54,10 +65,15 @@ function TodoContainer() {
     console.log(`change isEditing to: ${bool}`);
   }
 
+  function toggleAdding(bool) {
+    setIsAdding(bool);
+    console.log(`change isAdding to: ${bool}`);
+  }
+
   return (
     <div className="todoContainer">
-      <ListContainer tasks={tasksBase} updateId={updateCurrentTaskId} toggleEditing={toggleEditing}/>
-      <EditContainer task={tasks[currentTaskId-1]} editTask={editTask} toggleEditing={toggleEditing} isEditing={isEditing}/>
+      <ListContainer tasks={tasksBase} updateId={updateCurrentTaskId} toggleEditing={toggleEditing} toggleAdding={toggleAdding}/>
+      <EditContainer task={tasks[currentTaskId-1]} editTask={editTask} toggleEditing={toggleEditing} isEditing={isEditing} isAdding={isAdding}/>
     </div>
   )
 }

@@ -6,31 +6,35 @@ function EditContainer(props) {
   //console.log(props.task.text);
 
   const [taskName, setTaskName] = useState(props.task.text);
-
   const [currentId, setCurrentId] = useState(-1);
+  const [isReseted, setIsReseted] = useState(false);
 
   //const [isEditing, setIsEditing] = useState(false);
 
   console.log({currentId});
-  console.log(props.isEditing);
+  console.log("editing:", props.isEditing);
+  console.log("adding:", props.isAdding);
 
-  if (props.task.id === currentId) {
-    console.log("ok");
+  if (props.isAdding === false) {
+    if (props.task.id === currentId) {
+      console.log("ok");
+    } else {
+      console.log("warning, needs to reset taskName");
+      console.log("current task name:", props.task.text);
+      setCurrentId(props.task.id);
+      setTaskName(props.task.text);
+    } 
   } else {
-    console.log("warning, needs to reset taskName");
-    console.log("current task name:", props.task.text);
-    setCurrentId(props.task.id);
-    setTaskName(props.task.text);
+    if (isReseted === false) {
+      console.log(Date.now());
+      console.log(props.task.text);
+      setTaskName('');
+      setCurrentId(Date.now());
+      setIsReseted(true);
+    }
 
   }
 
-  let tName = props.task.text;
-  console.log({tName});
-
-  function handleChange(event) {
-    console.log(this);
-    console.log(event.target.value);
-  }
 
   function handleSubmit(event) {
     event.preventDefault()
@@ -48,6 +52,8 @@ function EditContainer(props) {
     props.editTask(taskData);
 
     props.toggleEditing(false);
+
+    setIsReseted(false);
   }
 
   return (
@@ -56,7 +62,7 @@ function EditContainer(props) {
         props.isEditing === true &&
         <form className="editContainer__form" onSubmit={handleSubmit}>
           <fieldset className="editContainer__fieldset">
-            <span>{props.task.id}</span>
+            <span>{currentId}</span>
             <input className="editContainer__input" type="text" name="taskName" value={taskName} onChange={e => setTaskName(e.target.value)}></input>
             <textarea className="editContainer__textarea">{props.task.description}</textarea>
             <button type="submit">Сохранить</button>

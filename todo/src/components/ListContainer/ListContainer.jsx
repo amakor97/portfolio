@@ -9,7 +9,7 @@ function ListContainer(props) {
     <div className="listContainer">
       <ul>
         {props.tasks.map(task => <Task task={task} updateId={props.updateId} toggleEditing={props.toggleEditing}/>)}
-        <AddButton />
+        <AddButton toggleAdding={props.toggleAdding} toggleEditing={props.toggleEditing}/>
       </ul>
     </div>
   )
