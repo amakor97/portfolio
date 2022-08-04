@@ -5,20 +5,19 @@ import "./_editContainer.sass";
 function EditContainer(props) {
   //console.log(props.task.text);
 
-  const [taskName, setTaskName] = useState(props.task.text);
+  console.log("PROPS", props);
+
+  const [taskName, setTaskName] = useState(props.task ? props.task.text: "");
   const [currentId, setCurrentId] = useState(-1);
   const [isReseted, setIsReseted] = useState(false);
 
   //const [isEditing, setIsEditing] = useState(false);
 
-  console.log({currentId});
-  console.log("editing:", props.isEditing);
-  console.log("adding:", props.isAdding);
-
   if (props.isAdding === false) {
     if (props.task.id === currentId) {
       console.log("ok");
     } else {
+      console.log("props task:", props.task);
       console.log("warning, needs to reset taskName");
       console.log("current task name:", props.task.text);
       setCurrentId(props.task.id);
@@ -26,10 +25,9 @@ function EditContainer(props) {
     } 
   } else {
     if (isReseted === false) {
-      console.log(Date.now());
-      console.log(props.task.text);
       setTaskName('');
       setCurrentId(Date.now());
+      console.log(currentId);
       setIsReseted(true);
     }
 
@@ -39,8 +37,6 @@ function EditContainer(props) {
   function handleSubmit(event) {
     event.preventDefault()
     console.log(event.target[1].value)
-    console.log(event.target.elements.taskName.value)
-    console.log(event.target.taskName.value)
 
     let taskData = {
       id: currentId,
