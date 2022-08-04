@@ -29,6 +29,7 @@ function TodoContainer() {
   const [tasksBase, setTask] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
+  const [isWatching, setIsWatching] = useState(false);
 
   console.log("current task base:", tasksBase);
 
@@ -84,6 +85,11 @@ function TodoContainer() {
     console.log(`change isAdding to: ${bool}`);
   }
 
+  function toggleWatching(bool) {
+    setIsWatching(bool);
+    console.log(`change isWatching to: ${bool}`);
+  }
+
   function findTaskById(id, arr) {
     console.log({id});
     console.log({arr});
@@ -107,8 +113,8 @@ function TodoContainer() {
 
   return (
     <div className="todoContainer">
-      <ListContainer tasks={tasksBase} updateId={updateCurrentTaskId} toggleEditing={toggleEditing} toggleAdding={toggleAdding} deleteTask={deleteTask}/>
-      <EditContainer task={tasksBase.length > 0 ? findTaskById(currentTaskId, tasksBase) : -1} editTask={editTask} toggleEditing={toggleEditing} isEditing={isEditing} isAdding={isAdding}/>
+      <ListContainer tasks={tasksBase} updateId={updateCurrentTaskId} toggleEditing={toggleEditing} toggleAdding={toggleAdding} deleteTask={deleteTask} toggleWatching={toggleWatching}/>
+      <EditContainer task={tasksBase.length > 0 ? findTaskById(currentTaskId, tasksBase) : -1} editTask={editTask} toggleEditing={toggleEditing} isEditing={isEditing} isAdding={isAdding} isWatching={isWatching} toggleWatching={toggleWatching}/>
     </div>
   )
 }

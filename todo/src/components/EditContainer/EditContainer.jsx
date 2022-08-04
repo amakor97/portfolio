@@ -2,6 +2,9 @@ import { useState } from "react";
 
 import "./_editContainer.sass";
 
+import "../EditForm/EditForm";
+import EditForm from "../EditForm/EditForm";
+
 function EditContainer(props) {
   //console.log(props.task.text);
 
@@ -49,9 +52,7 @@ function EditContainer(props) {
     }
 
     console.log(taskData);
-
     props.editTask(taskData);
-
     props.toggleEditing(false);
 
     setIsReseted(false);
@@ -66,14 +67,15 @@ function EditContainer(props) {
     <div className="editContainer">
       {
         props.isEditing === true &&
-        <form className="editContainer__form" onSubmit={handleSubmit}>
-          <fieldset className="editContainer__fieldset">
-            <span>{currentId}</span>
-            <input className="editContainer__input" type="text" name="taskName" value={taskName} onChange={e => setTaskName(e.target.value)}></input>
-            <textarea className="editContainer__textarea" value={taskDesc} onChange={(e) => handleMessageChange(e)}></textarea>
-            <button type="submit">Сохранить</button>
-          </fieldset>
-        </form>
+        <EditForm handleSubmit={handleSubmit} currentId={currentId} taskName={taskName} setTaskName={setTaskName} taskDesc={taskDesc} setTaskDesc={setTaskDesc} handleMessageChange={handleMessageChange}/>
+      } 
+      {
+        props.isWatching === true &&
+        <>
+          <p>{taskName}</p>
+          <p>{taskDesc}</p>
+          <button onClick={() => {props.toggleWatching(false)}}>Скрыть</button>
+        </>
       }
     </div>
   )
