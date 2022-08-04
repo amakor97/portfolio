@@ -7,9 +7,12 @@ function EditContainer(props) {
 
   const [taskName, setTaskName] = useState(props.task.text);
 
-  const [currentId, setCurrentId] = useState(props.task.id);
+  const [currentId, setCurrentId] = useState(-1);
 
-  console.log(props.editTask);
+  //const [isEditing, setIsEditing] = useState(false);
+
+  console.log({currentId});
+  console.log(props.isEditing);
 
   if (props.task.id === currentId) {
     console.log("ok");
@@ -31,23 +34,28 @@ function EditContainer(props) {
 
   function handleSubmit(event) {
     event.preventDefault()
-    console.log(event.target[0].value)
+    console.log(event.target[1].value)
     console.log(event.target.elements.taskName.value)
     console.log(event.target.taskName.value)
 
-    //props.editTask(event.target.taskName.value);
+    props.editTask(event.target.taskName.value);
+
+    props.toggleEditing(false);
   }
 
   return (
     <div className="editContainer">
-      <form className="editContainer__form" onSubmit={handleSubmit}>
-        <fieldset className="editContainer__fieldset">
-          <span>{props.task.id}</span>
-          <input className="editContainer__input" type="text" name="taskName" value={taskName} onChange={e => setTaskName(e.target.value)}></input>
-          <textarea className="editContainer__textarea">{props.task.description}</textarea>
-          <button type="submit">Сохранить</button>
-        </fieldset>
-      </form>
+      {
+        props.isEditing === true &&
+        <form className="editContainer__form" onSubmit={handleSubmit}>
+          <fieldset className="editContainer__fieldset">
+            <span>{props.task.id}</span>
+            <input className="editContainer__input" type="text" name="taskName" value={taskName} onChange={e => setTaskName(e.target.value)}></input>
+            <textarea className="editContainer__textarea">{props.task.description}</textarea>
+            <button type="submit">Сохранить</button>
+          </fieldset>
+        </form>
+      }
     </div>
   )
 }

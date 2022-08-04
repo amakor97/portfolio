@@ -27,8 +27,7 @@ const tasks = [
 function TodoContainer() {
   const [currentTaskId, setCurrentTaskId] = useState(1);
   const [tasksBase, setTask] = useState(tasks);
-
-
+  const [isEditing, setIsEditing] = useState(false);
 
   function updateCurrentTaskId(num) {
     console.log(`setting current task id: ${num}`);
@@ -39,10 +38,15 @@ function TodoContainer() {
     console.log(`retrieved data: ${taskData}`);
   } 
 
+  function toggleEditing(bool) {
+    setIsEditing(bool);
+    console.log(`change isEditing to: ${bool}`);
+  }
+
   return (
     <div className="todoContainer">
-      <ListContainer tasks={tasksBase} updateId={updateCurrentTaskId}/>
-      <EditContainer task={tasks[currentTaskId-1]} editTask={editTask}/>
+      <ListContainer tasks={tasksBase} updateId={updateCurrentTaskId} toggleEditing={toggleEditing}/>
+      <EditContainer task={tasks[currentTaskId-1]} editTask={editTask} toggleEditing={toggleEditing} isEditing={isEditing}/>
     </div>
   )
 }
