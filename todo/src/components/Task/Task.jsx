@@ -2,9 +2,10 @@ import "./_task.sass";
 
 function Task(props) {
   return (
-    <div className="task" onClick={() => {props.updateId(props.task.id); props.toggleEditing(true)}}>
-      <span>{props.task.id}</span>
-      <span>{props.task.text}</span>
+    <div className="task">
+      <span className="task__id">{props.task.id}</span>
+      <span className="task__name">{props.task.text}</span>
+      <button  className="task__btn task__btn-edit"onClick={() => {props.updateId(props.task.id); props.toggleEditing(true)}}>Ред</button>
     </div>
   );
 }

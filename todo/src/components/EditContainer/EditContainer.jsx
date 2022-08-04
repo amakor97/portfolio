@@ -7,7 +7,7 @@ function EditContainer(props) {
 
   console.log("PROPS", props);
 
-  const [taskName, setTaskName] = useState(props.task ? props.task.text: "");
+  const [taskName, setTaskName] = useState(props.task.text);
   const [currentId, setCurrentId] = useState(-1);
   const [isReseted, setIsReseted] = useState(false);
 
