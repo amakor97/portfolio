@@ -35,7 +35,18 @@ function TodoContainer() {
   }
 
   function editTask(taskData) {
-    console.log(`retrieved data: ${taskData}`);
+    console.log(`retrieved id: ${taskData.id}`);
+    console.log(`retrieved text: ${taskData.text}`);
+    let newTasksBase = tasksBase.map(obj => {
+      if (obj.id === taskData.id) {
+        console.log(obj.id);
+        obj = JSON.parse(JSON.stringify(taskData));
+        return obj;
+      }
+      return obj;
+    })
+    console.log(newTasksBase);
+    setTask(newTasksBase);
   } 
 
   function toggleEditing(bool) {

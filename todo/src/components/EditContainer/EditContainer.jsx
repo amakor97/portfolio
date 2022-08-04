@@ -38,7 +38,14 @@ function EditContainer(props) {
     console.log(event.target.elements.taskName.value)
     console.log(event.target.taskName.value)
 
-    props.editTask(event.target.taskName.value);
+    let taskData = {
+      id: currentId,
+      text: event.target[1].value
+    }
+
+    console.log(taskData);
+
+    props.editTask(taskData);
 
     props.toggleEditing(false);
   }
