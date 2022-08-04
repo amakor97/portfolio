@@ -30,6 +30,8 @@ function TodoContainer() {
   const [isEditing, setIsEditing] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
 
+  console.log("current task base:", tasksBase);
+
   function updateCurrentTaskId(num) {
     setCurrentTaskId(num);
   }
@@ -43,7 +45,9 @@ function TodoContainer() {
       setIsAdding(false);
       setCurrentTaskId(taskData.id);
       newTasksBase = tasksBase;
+      console.log("NTB before", newTasksBase);
       newTasksBase.push(taskData);
+      console.log("NTB after", newTasksBase);
     } else {
       newTasksBase = tasksBase.map(obj => {
         if (obj.id === taskData.id) {
@@ -56,6 +60,19 @@ function TodoContainer() {
     }
     setTask(newTasksBase);
   } 
+
+  function deleteTask(id) {
+    let task = findTaskById(id, tasksBase);
+    console.log("task to delete:", task);
+    let index = tasksBase.indexOf(task);
+    console.log("TTD index:", index);
+    let newTasksBase = tasksBase;
+    console.log("NTB before", newTasksBase);
+    newTasksBase.splice(index, 1);
+    console.log("NTB after", newTasksBase);
+    setTask([...newTasksBase]);
+    console.log("TB after:", tasksBase);
+  }
 
   function toggleEditing(bool) {
     setIsEditing(bool);
@@ -90,7 +107,7 @@ function TodoContainer() {
 
   return (
     <div className="todoContainer">
-      <ListContainer tasks={tasksBase} updateId={updateCurrentTaskId} toggleEditing={toggleEditing} toggleAdding={toggleAdding}/>
+      <ListContainer tasks={tasksBase} updateId={updateCurrentTaskId} toggleEditing={toggleEditing} toggleAdding={toggleAdding} deleteTask={deleteTask}/>
       <EditContainer task={tasksBase.length > 0 ? findTaskById(currentTaskId, tasksBase) : -1} editTask={editTask} toggleEditing={toggleEditing} isEditing={isEditing} isAdding={isAdding}/>
     </div>
   )
