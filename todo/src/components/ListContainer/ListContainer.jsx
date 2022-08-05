@@ -23,7 +23,7 @@ function ListContainer(props) {
         )}
         )}
       </ul>
-      <AddButton toggleAdding={props.toggleAdding} toggleEditing={props.toggleEditing}/>
+      <AddButton toggleAdding={props.toggleAdding} toggleEditing={props.toggleEditing} toggleWatching={props.toggleWatching}/>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import "./_todoContainer.sass";
 
@@ -37,6 +37,14 @@ function TodoContainer() {
 
   console.log("current task base:", tasksBase);
 
+  useEffect(() => {
+    const tmpBase = readLocalStorage();
+    console.log(tmpBase);
+    if (tmpBase) {
+      setTask([...tmpBase]);
+    }
+  }, [])
+
   function updateCurrentTaskId(num) {
     setCurrentTaskId(num);
   }
@@ -63,6 +71,7 @@ function TodoContainer() {
         return obj;
       })
     }
+    writeLocalStorage(newTasksBase);
     setTask(newTasksBase);
   } 
 
@@ -75,6 +84,7 @@ function TodoContainer() {
     console.log("NTB before", newTasksBase);
     newTasksBase.splice(index, 1);
     console.log("NTB after", newTasksBase);
+    writeLocalStorage(newTasksBase);
     setTask([...newTasksBase]);
     console.log("TB after:", tasksBase);
   }
@@ -105,20 +115,26 @@ function TodoContainer() {
     }
   }
 
-  let test = [
-    {
-      id: 1,
-      text: "abc"
-    }
-  ]
+  function writeLocalStorage(arr) {
+    //const tasksBaseStringed = tasksBase.toString();
+    const tasksBaseStringed = JSON.stringify(arr);
+    console.log(tasksBaseStringed);
+    localStorage.setItem("tasks", tasksBaseStringed);
+  }
 
-  console.log({currentTaskId});
-  findTaskById(1, test);
+
+  function readLocalStorage() {
+    let tmpBase = localStorage.getItem("tasks");
+    console.log({tmpBase});
+    tmpBase = JSON.parse(tmpBase);
+    console.log({tmpBase});
+    return tmpBase;
+  }
 
   return (
     <div className="todoContainer">
       <ListContainer tasks={tasksBase} updateId={updateCurrentTaskId} toggleEditing={toggleEditing} toggleAdding={toggleAdding} deleteTask={deleteTask} toggleWatching={toggleWatching} searchRegEx={searchRegEx} setSearchRegEx={setSearchRegEx}/>
-      <EditContainer task={tasksBase.length > 0 ? findTaskById(currentTaskId, tasksBase) : -1} editTask={editTask} toggleEditing={toggleEditing} isEditing={isEditing} isAdding={isAdding} isWatching={isWatching} toggleWatching={toggleWatching}/>
+      <EditContainer task={tasksBase.length > 0 ? findTaskById(currentTaskId, tasksBase) : -1} editTask={editTask} toggleEditing={toggleEditing} isEditing={isEditing} isAdding={isAdding} isWatching={isWatching} toggleWatching={toggleWatching} toggleAdding={toggleAdding}/>
     </div>
   )
 }
