@@ -36,6 +36,33 @@ function TodoContainer() {
   console.log(searchRegEx);
   //etSearchRegEx("First");
 
+  const [realCurrentTask, setRealCurrentTask] = useState();
+
+  function updateRealCurrentTask(id) {
+    console.log("changing current task to one with id:", id);
+    let tmpTask = undefined;
+
+    switch(id) {
+      case -1: {
+        console.log("no task is going to be worked with");
+        tmpTask = undefined;
+        break;
+      }
+      case 0: {
+        console.log("empty task is going to be added");
+        tmpTask = {};
+        break;
+      }
+      default: {
+        console.log("task is going to be edited");
+        tmpTask = findTaskById(id, tasksBase);
+        console.log(tmpTask);
+      }
+    }
+    setRealCurrentTask(tmpTask);
+  }
+
+
   console.log("current task base:", tasksBase);
 
   useEffect(() => {
@@ -138,10 +165,38 @@ function TodoContainer() {
     return tmpBase;
   }
 
+  console.log("tasks base len:", tasksBase.length);
+
   return (
     <div className="todoContainer">
-      <ListContainer tasks={tasksBase} updateId={updateCurrentTaskId} toggleEditing={toggleEditing} toggleAdding={toggleAdding} deleteTask={deleteTask} toggleWatching={toggleWatching} searchRegEx={searchRegEx} setSearchRegEx={setSearchRegEx} setIsFormRes={setIsFormRes}/>
-      <EditContainer task={tasksBase.length > 0 ? findTaskById(currentTaskId, tasksBase) : -1} editTask={editTask} toggleEditing={toggleEditing} isEditing={isEditing} isAdding={isAdding} isWatching={isWatching} toggleWatching={toggleWatching} toggleAdding={toggleAdding} setIsFormRes={setIsFormRes} isFormRes={isFormRes}/>
+      <ListContainer 
+        tasks={tasksBase} 
+        updateId={updateCurrentTaskId} 
+        toggleEditing={toggleEditing} 
+        toggleAdding={toggleAdding} 
+        deleteTask={deleteTask} 
+        toggleWatching={toggleWatching} 
+        searchRegEx={searchRegEx} 
+        setSearchRegEx={setSearchRegEx} 
+        setIsFormRes={setIsFormRes}
+        updateTask={updateRealCurrentTask}
+        realCurrentTask={realCurrentTask}
+      />
+      <EditContainer 
+        task=
+        {realCurrentTask} 
+        editTask={editTask} 
+        toggleEditing={toggleEditing} 
+        isEditing={isEditing} 
+        isAdding={isAdding} 
+        isWatching={isWatching} 
+        toggleWatching={toggleWatching} 
+        toggleAdding={toggleAdding} 
+        setIsFormRes={setIsFormRes} 
+        isFormRes={isFormRes}
+        updateTask={updateRealCurrentTask}
+        realCurrentTask={realCurrentTask}
+      />
     </div>
   )
 }

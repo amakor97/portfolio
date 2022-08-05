@@ -9,7 +9,7 @@ function EditForm(props) {
         <input className="editContainer__input" type="text" name="taskName" value={props.taskName} onChange={e => props.setTaskName(e.target.value)}></input>
         <textarea className="editContainer__textarea" value={props.taskDesc} onChange={(e) => props.handleMessageChange(e)}></textarea>
         <button type="submit">Сохранить</button>
-        <button onClick={() => {props.toggleEditing(false); props.toggleAdding(false)}}>Отмена</button>
+        <button onClick={() => {props.toggleEditing(false); props.toggleAdding(false); props.updateTask(-1)}}>Отмена</button>
       </fieldset>
     </form>
   )

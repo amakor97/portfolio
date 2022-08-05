@@ -19,11 +19,21 @@ function ListContainer(props) {
         {props.tasks.map(task => {
         return (
           re.test(task.text) &&
-          <Task key={task.id} task={task} updateId={props.updateId} toggleEditing={props.toggleEditing} deleteTask={props.deleteTask} toggleWatching={props.toggleWatching} toggleAdding={props.toggleAdding}/>
+          <Task 
+            key={task.id} 
+            task={task} 
+            updateId={props.updateId} 
+            toggleEditing={props.toggleEditing} 
+            deleteTask={props.deleteTask} 
+            toggleWatching={props.toggleWatching} 
+            toggleAdding={props.toggleAdding}
+            updateTask={props.updateTask}
+            realCurrentTask={props.realCurrentTask}
+            />
         )}
         )}
       </ul>
-      <AddButton toggleAdding={props.toggleAdding} toggleEditing={props.toggleEditing} toggleWatching={props.toggleWatching} setIsFormRes={props.setIsFormRes}/>
+      <AddButton toggleAdding={props.toggleAdding} toggleEditing={props.toggleEditing} toggleWatching={props.toggleWatching} setIsFormRes={props.setIsFormRes} updateTask={props.updateTask}/>
     </div>
   )
 }

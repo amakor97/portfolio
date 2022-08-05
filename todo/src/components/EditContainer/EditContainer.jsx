@@ -67,6 +67,7 @@ function EditContainer(props) {
     console.log(taskData);
     props.editTask(taskData);
     props.toggleEditing(false);
+    props.updateTask(-1);
 
     setIsReseted(false);
   }
@@ -80,14 +81,14 @@ function EditContainer(props) {
     <div className="editContainer">
       {
         props.isEditing === true &&
-        <EditForm handleSubmit={handleSubmit} currentId={currentId} taskName={taskName} setTaskName={setTaskName} taskDesc={taskDesc} setTaskDesc={setTaskDesc} handleMessageChange={handleMessageChange} toggleEditing={props.toggleEditing} toggleAdding={props.toggleAdding}/>
+        <EditForm handleSubmit={handleSubmit} currentId={currentId} taskName={taskName} setTaskName={setTaskName} taskDesc={taskDesc} setTaskDesc={setTaskDesc} handleMessageChange={handleMessageChange} toggleEditing={props.toggleEditing} toggleAdding={props.toggleAdding} updateTask={props.updateTask}/>
       } 
       {
         props.isWatching === true &&
         <>
           <p>{taskName}</p>
           <p>{taskDesc}</p>
-          <button onClick={() => {props.toggleWatching(false)}}>Скрыть</button>
+          <button onClick={() => {props.toggleWatching(false); props.updateTask(-1)}}>Скрыть</button>
         </>
       }
     </div>
