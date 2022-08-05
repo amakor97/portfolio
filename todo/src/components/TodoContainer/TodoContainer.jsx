@@ -25,11 +25,15 @@ const tasks = [
 ]
 
 function TodoContainer() {
+
   const [currentTaskId, setCurrentTaskId] = useState(1);
   const [tasksBase, setTask] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
   const [isWatching, setIsWatching] = useState(false);
+  const [searchRegEx, setSearchRegEx] = useState(".*");
+  console.log(searchRegEx);
+  //etSearchRegEx("First");
 
   console.log("current task base:", tasksBase);
 
@@ -113,7 +117,7 @@ function TodoContainer() {
 
   return (
     <div className="todoContainer">
-      <ListContainer tasks={tasksBase} updateId={updateCurrentTaskId} toggleEditing={toggleEditing} toggleAdding={toggleAdding} deleteTask={deleteTask} toggleWatching={toggleWatching}/>
+      <ListContainer tasks={tasksBase} updateId={updateCurrentTaskId} toggleEditing={toggleEditing} toggleAdding={toggleAdding} deleteTask={deleteTask} toggleWatching={toggleWatching} searchRegEx={searchRegEx} setSearchRegEx={setSearchRegEx}/>
       <EditContainer task={tasksBase.length > 0 ? findTaskById(currentTaskId, tasksBase) : -1} editTask={editTask} toggleEditing={toggleEditing} isEditing={isEditing} isAdding={isAdding} isWatching={isWatching} toggleWatching={toggleWatching}/>
     </div>
   )
