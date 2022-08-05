@@ -84,7 +84,13 @@ function TodoContainer() {
     console.log("NTB before", newTasksBase);
     newTasksBase.splice(index, 1);
     console.log("NTB after", newTasksBase);
-    writeLocalStorage(newTasksBase);
+    if (newTasksBase.length === 0) {
+      console.log("EMPTY");
+      localStorage.clear();
+    } else {
+      writeLocalStorage(newTasksBase);
+    }
+
     setTask([...newTasksBase]);
     console.log("TB after:", tasksBase);
   }
