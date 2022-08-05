@@ -32,6 +32,7 @@ function TodoContainer() {
   const [isAdding, setIsAdding] = useState(false);
   const [isWatching, setIsWatching] = useState(false);
   const [searchRegEx, setSearchRegEx] = useState(".*");
+  const [isFormRes, setIsFormRes] = useState(false);
   console.log(searchRegEx);
   //etSearchRegEx("First");
 
@@ -139,8 +140,8 @@ function TodoContainer() {
 
   return (
     <div className="todoContainer">
-      <ListContainer tasks={tasksBase} updateId={updateCurrentTaskId} toggleEditing={toggleEditing} toggleAdding={toggleAdding} deleteTask={deleteTask} toggleWatching={toggleWatching} searchRegEx={searchRegEx} setSearchRegEx={setSearchRegEx}/>
-      <EditContainer task={tasksBase.length > 0 ? findTaskById(currentTaskId, tasksBase) : -1} editTask={editTask} toggleEditing={toggleEditing} isEditing={isEditing} isAdding={isAdding} isWatching={isWatching} toggleWatching={toggleWatching} toggleAdding={toggleAdding}/>
+      <ListContainer tasks={tasksBase} updateId={updateCurrentTaskId} toggleEditing={toggleEditing} toggleAdding={toggleAdding} deleteTask={deleteTask} toggleWatching={toggleWatching} searchRegEx={searchRegEx} setSearchRegEx={setSearchRegEx} setIsFormRes={setIsFormRes}/>
+      <EditContainer task={tasksBase.length > 0 ? findTaskById(currentTaskId, tasksBase) : -1} editTask={editTask} toggleEditing={toggleEditing} isEditing={isEditing} isAdding={isAdding} isWatching={isWatching} toggleWatching={toggleWatching} toggleAdding={toggleAdding} setIsFormRes={setIsFormRes} isFormRes={isFormRes}/>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import "./_editContainer.sass";
 
@@ -19,32 +19,38 @@ function EditContainer(props) {
   //const [isEditing, setIsEditing] = useState(false);
 
   console.log("props current task", props.task);
+  console.log("is form res", props.isFormRes);
 
-  if ((props.isAdding === false)) {
-    if ((props.task) && (props.task.id === currentId)) {
-      console.log("ok");
+  useEffect(() => {
+    if ((props.isAdding === false)) {
+      if ((props.task) && (props.task.id === currentId)) {
+        console.log("ok");
+      } else {
+        console.log("props task:", props.task);
+        console.log("warning, needs to reset taskName");
+        //console.log("current task name:", props.task.text);
+        if (props.task) {
+          setCurrentId(props.task.id);
+          setTaskName(props.task.text);
+          setTaskDesc(props.task.desc);
+        }
+      } 
     } else {
-      console.log("props task:", props.task);
-      console.log("warning, needs to reset taskName");
-      //console.log("current task name:", props.task.text);
-      if (props.task) {
-        setCurrentId(props.task.id);
-        setTaskName(props.task.text);
-        setTaskDesc(props.task.desc);
+      console.log("adding new task");
+      console.log("props current task", props.task);
+      console.log("isFormRes before:", props.isFormRes);
+      if (props.isFormRes === false) {
+        setTaskName('');
+        setTaskDesc('');
+        setCurrentId(Date.now());
+        console.log(currentId);
+        props.setIsFormRes(true);
+        console.log("isFormRes after:", props.isFormRes);
       }
-
-    } 
-  } else {
-    console.log("adding new task");
-    console.log("props current task", props.task);
-    if (isReseted === false) {
-      setTaskName('');
-      setTaskDesc('');
-      setCurrentId(Date.now());
-      console.log(currentId);
-      setIsReseted(true);
     }
-  }
+  })
+
+
 
 
   function handleSubmit(event) {
