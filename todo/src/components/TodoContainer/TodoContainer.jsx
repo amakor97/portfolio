@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useLayoutEffect } from "react";
 
 import "./_todoContainer.sass";
 
@@ -35,6 +35,18 @@ function TodoContainer() {
   const [isFormRes, setIsFormRes] = useState(false);
   console.log(searchRegEx);
   //etSearchRegEx("First");
+
+  const ref = useRef(null);
+
+  useLayoutEffect(() => {
+    setTdWidth(ref.current.offsetWidth);
+  }, []);
+
+  const [tdWidth, setTdWidth] = useState(0);
+
+  window.addEventListener("resize", function() {
+    setTdWidth(ref.current.offsetWidth);
+  })
 
   const [realCurrentTask, setRealCurrentTask] = useState({});
 
@@ -192,7 +204,7 @@ function TodoContainer() {
   console.log("tasks base len:", tasksBase.length);
 
   return (
-    <div className="todoContainer">
+    <div className="todoContainer" ref={ref}>
       <ListContainer 
         tasks={tasksBase} 
         updateId={updateCurrentTaskId} 
@@ -205,6 +217,7 @@ function TodoContainer() {
         setIsFormRes={setIsFormRes}
         updateTask={updateRealCurrentTask}
         realCurrentTask={realCurrentTask}
+        tdWidth={tdWidth}
       />
       <EditContainer 
         task={realCurrentTask} 
