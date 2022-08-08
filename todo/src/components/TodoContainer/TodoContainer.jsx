@@ -183,8 +183,7 @@ function TodoContainer() {
         realCurrentTask={realCurrentTask}
       />
       <EditContainer 
-        task=
-        {realCurrentTask} 
+        task={realCurrentTask} 
         editTask={editTask} 
         toggleEditing={toggleEditing} 
         isEditing={isEditing} 

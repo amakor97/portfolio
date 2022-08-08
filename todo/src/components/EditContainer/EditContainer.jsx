@@ -14,6 +14,7 @@ function EditContainer(props) {
   const [taskName, setTaskName] = useState(props.task ? props.task.text : "");
   const [currentId, setCurrentId] = useState(-1);
   const [taskDesc, setTaskDesc] = useState(props.task? props.task.desc : "");
+  const [taskStatus, setTaskStatus] = useState(props.task ? props.task.status : "");
   const [isReseted, setIsReseted] = useState(false);
 
   //const [isEditing, setIsEditing] = useState(false);
@@ -33,6 +34,8 @@ function EditContainer(props) {
           setCurrentId(props.task.id);
           setTaskName(props.task.text);
           setTaskDesc(props.task.desc);
+          console.log("status:", props.task.status);
+          setTaskStatus(props.task.status);
         }
       } 
     } else {
@@ -42,6 +45,7 @@ function EditContainer(props) {
       if (props.isFormRes === false) {
         setTaskName('');
         setTaskDesc('');
+        setTaskStatus('');
         setCurrentId(Date.now());
         console.log(currentId);
         props.setIsFormRes(true);
@@ -57,11 +61,13 @@ function EditContainer(props) {
     event.preventDefault();
     console.log(event.target[1].value);
     console.log(event.target[2].value);
+    console.log(event.target["status"].value);
 
     let taskData = {
       id: currentId,
       text: event.target[1].value,
-      desc: event.target[2].value
+      desc: event.target[2].value,
+      status: event.target["status"].value
     }
 
     console.log(taskData);
@@ -77,17 +83,20 @@ function EditContainer(props) {
     console.log(e.target.value);
   };
 
+  console.log({taskStatus});
+
   return (
     <div className="editContainer">
       {
         props.isEditing === true &&
-        <EditForm handleSubmit={handleSubmit} currentId={currentId} taskName={taskName} setTaskName={setTaskName} taskDesc={taskDesc} setTaskDesc={setTaskDesc} handleMessageChange={handleMessageChange} toggleEditing={props.toggleEditing} toggleAdding={props.toggleAdding} updateTask={props.updateTask}/>
+        <EditForm handleSubmit={handleSubmit} currentId={currentId} taskName={taskName} setTaskName={setTaskName} taskDesc={taskDesc} setTaskDesc={setTaskDesc} handleMessageChange={handleMessageChange} toggleEditing={props.toggleEditing} toggleAdding={props.toggleAdding} updateTask={props.updateTask} taskStatus={taskStatus} setTaskStatus={setTaskStatus}/>
       } 
       {
         props.isWatching === true &&
         <>
           <p>{taskName}</p>
           <p>{taskDesc}</p>
+          <p>{taskStatus}</p>
           <button onClick={() => {props.toggleWatching(false); props.updateTask(-1)}}>Скрыть</button>
         </>
       }
