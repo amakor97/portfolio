@@ -36,7 +36,7 @@ function TodoContainer() {
   console.log(searchRegEx);
   //etSearchRegEx("First");
 
-  const [realCurrentTask, setRealCurrentTask] = useState();
+  const [realCurrentTask, setRealCurrentTask] = useState({});
 
   function updateRealCurrentTask(id) {
     console.log("changing current task to one with id:", id);
@@ -106,6 +106,24 @@ function TodoContainer() {
   function deleteTask(id) {
     let task = findTaskById(id, tasksBase);
     console.log("task to delete:", task);
+     
+    console.log({realCurrentTask});
+  
+    if (typeof(realCurrentTask) === "object") {
+      if (id === realCurrentTask.id) {
+        console.log("MATCHED!!");
+        console.log("need to delete edit form");
+        setRealCurrentTask(-1);
+        setIsEditing(false);
+
+        console.log(realCurrentTask);
+      }
+    }
+
+    if (id === realCurrentTask) {
+
+    }
+
     let index = tasksBase.indexOf(task);
     console.log("TTD index:", index);
     let newTasksBase = tasksBase;
@@ -121,6 +139,10 @@ function TodoContainer() {
 
     setTask([...newTasksBase]);
     console.log("TB after:", tasksBase);
+
+    if (isEditing === true) {
+      setRealCurrentTask(findTaskById(currentTaskId));
+    }
   }
 
   function toggleEditing(bool) {
@@ -148,6 +170,8 @@ function TodoContainer() {
       }
     }
   }
+
+  console.log({realCurrentTask});
 
   function writeLocalStorage(arr) {
     //const tasksBaseStringed = tasksBase.toString();

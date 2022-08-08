@@ -8,7 +8,7 @@ function Task(props) {
       <button className="task__btn" 
       onClick={() => {props.updateId(props.task.id); props.toggleWatching(true); props.toggleEditing(false); props.toggleAdding(false); props.updateTask(props.task.id)}}>Смот</button>
       <button className="task__btn task__btn-edit"onClick={() => {props.updateId(props.task.id); props.toggleWatching(false); props.toggleEditing(true); props.toggleAdding(false); props.updateTask(props.task.id)}}>Ред</button>
-      <button className="task__btn" onClick={() => {props.deleteTask(props.task.id); props.updateTask(-1)}}>Удал</button>
+      <button className="task__btn" onClick={() => {console.log("deleting task with id:", props.task.id); props.deleteTask(props.task.id); props.updateTask(-1)}}>Удал</button>
     </div>
   );
 }
