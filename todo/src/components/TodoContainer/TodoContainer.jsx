@@ -43,6 +43,7 @@ function TodoContainer() {
   }, []);
 
   const [tdWidth, setTdWidth] = useState(0);
+  const [editingTaskId, setEditingTaskId] = useState(0);
 
   window.addEventListener("resize", function() {
     setTdWidth(ref.current.offsetWidth);
@@ -218,6 +219,7 @@ function TodoContainer() {
         updateTask={updateRealCurrentTask}
         realCurrentTask={realCurrentTask}
         tdWidth={tdWidth}
+        setEditingTaskId={setEditingTaskId}
       />
       <EditContainer 
         task={realCurrentTask} 
@@ -232,6 +234,8 @@ function TodoContainer() {
         isFormRes={isFormRes}
         updateTask={updateRealCurrentTask}
         realCurrentTask={realCurrentTask}
+        editingTaskId={editingTaskId}
+        setEditingTaskId={setEditingTaskId}
       />
     </div>
   )

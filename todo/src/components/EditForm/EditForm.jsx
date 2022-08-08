@@ -27,7 +27,7 @@ function EditForm(props) {
           <input type="radio" name="status" value="done" onChange={(e) => {props.setTaskStatus(e.target.value); setSelectedStatus(e.target.value)}} checked={selectedStatus === "done"}></input>
         </label>
         <button type="submit">Сохранить</button>
-        <button onClick={() => {props.toggleEditing(false); props.toggleAdding(false); props.updateTask(-1)}}>Отмена</button>
+        <button onClick={() => {props.toggleEditing(false); props.toggleAdding(false); props.updateTask(-1); props.setCurrentId(-1)}}>Отмена</button>
       </fieldset>
     </form>
   )

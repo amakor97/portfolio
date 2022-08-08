@@ -37,7 +37,7 @@ function ListContainer(props) {
     return false;
   }  
   document.onselectstart = disableselect;  
-  document.onmousedown = disableselect;
+  //document.onmousedown = disableselect;
 
   const [sizeX, setSize] = useState(400);
 
@@ -92,6 +92,7 @@ function ListContainer(props) {
             toggleAdding={props.toggleAdding}
             updateTask={props.updateTask}
             realCurrentTask={props.realCurrentTask}
+            setEditingTaskId={props.setEditingTaskId}
             />
         )}
         )}
