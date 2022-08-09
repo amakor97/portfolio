@@ -11,6 +11,7 @@ function EditContainer(props) {
   const [taskDesc, setTaskDesc] = useState(props.task? props.task.desc : "");
   const [taskStatus, setTaskStatus] = useState(props.task ? props.task.status : "");
   const [isReseted, setIsReseted] = useState(false);
+  const [ecWidth, setEcWidth] = useState("100%");
 
   useEffect(() => {
     if ((props.isAdding === false)) {
@@ -32,15 +33,19 @@ function EditContainer(props) {
         }
       } 
     } else {
-      if (props.isFormRes === false) {
+      if (props.isFormReseted === false) {
         setTaskName('');
         setTaskDesc('');
         setTaskStatus('');
         setCurrentId(Date.now());
-        props.setIsFormRes(true);
+        props.setIsFormReseted(true);
       }
     }
   })
+
+  useEffect(() => {
+    setEcWidth(props.tdWidth - props.lcWidth);
+  }, [props.tdWidth, props.lcWidth])
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -64,10 +69,10 @@ function EditContainer(props) {
   };
 
   return (
-    <div className="editContainer">
+    <div className="editContainer" style={{width: ecWidth}}>
       {
         props.isEditing === true &&
-        <EditForm handleSubmit={handleSubmit} currentId={currentId} taskName={taskName} setTaskName={setTaskName} taskDesc={taskDesc} setTaskDesc={setTaskDesc} handleMessageChange={handleMessageChange} toggleEditing={props.toggleEditing} toggleAdding={props.toggleAdding} updateTask={props.updateTask} taskStatus={taskStatus} setTaskStatus={setTaskStatus} setIsFormRes={props.setIsFormRes} setCurrentId={setCurrentId}/>
+        <EditForm handleSubmit={handleSubmit} currentId={currentId} taskName={taskName} setTaskName={setTaskName} taskDesc={taskDesc} setTaskDesc={setTaskDesc} handleMessageChange={handleMessageChange} toggleEditing={props.toggleEditing} toggleAdding={props.toggleAdding} updateTask={props.updateTask} taskStatus={taskStatus} setTaskStatus={setTaskStatus} setCurrentId={setCurrentId}/>
       } 
       {
         props.isWatching === true &&

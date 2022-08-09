@@ -8,16 +8,16 @@ import AddButton from "../AddButton/AddButton";
 
 function ListContainer(props) {
   const ref = useRef(null);
-  const [lcWidth, setLcWidth] = useState("100%");
+  //const [lcWidth, setLcWidth] = useState("100%");
   const [posX, setPosX] = useState(0);
   
   useLayoutEffect(() => {
-    setLcWidth(ref.current.offsetWidth);
+    props.setLcWidth(ref.current.offsetWidth);
     setPosX(ref.current.offsetLeft);
   })
 
   function resize(e) {
-    setLcWidth(e.clientX - posX);
+    props.setLcWidth(e.clientX - posX);
   }
 
 
@@ -36,12 +36,15 @@ function ListContainer(props) {
       
       setSize(() => {
         if (((startSize - startPosition + mouseMoveEvent.pageX) <= 600) &&(startSize - startPosition + mouseMoveEvent.pageX > 50)) {
+          props.setLcWidth(startSize - startPosition + mouseMoveEvent.pageX);
           return startSize - startPosition + mouseMoveEvent.pageX;
         } else {
           if ((startSize - startPosition + mouseMoveEvent.pageX) > 600) {
+            props.setLcWidth(600);
             return 600;
           }
           if ((startSize - startPosition + mouseMoveEvent.pageX) <= 50) {
+            props.setLcWidth(50);
             return 50;
         }}
       });
@@ -79,7 +82,7 @@ function ListContainer(props) {
         )}
         )}
       </ul>
-      <AddButton toggleAdding={props.toggleAdding} toggleEditing={props.toggleEditing} toggleWatching={props.toggleWatching} setIsFormRes={props.setIsFormRes} updateTask={props.updateTask}/>
+      <AddButton toggleAdding={props.toggleAdding} toggleEditing={props.toggleEditing} toggleWatching={props.toggleWatching} setIsFormReseted={props.setIsFormReseted} updateTask={props.updateTask}/>
     </div>
   )
 }

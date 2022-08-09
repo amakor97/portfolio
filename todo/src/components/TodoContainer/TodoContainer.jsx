@@ -5,33 +5,14 @@ import "./_todoContainer.sass";
 import ListContainer from "../ListContainer/ListContainer";
 import EditContainer from "../EditContainer/EditContainer";
 
-const tasks = [
-  {
-    id: 1,
-    text: "something",
-  },
-  {
-    id: 2,
-    text: "another",
-  },
-  {
-    id: 3,
-    text: "lorem",
-  },
-  {
-    id: 4,
-    text: "xexexe",
-  }
-]
-
 function TodoContainer() {
-  const [currentTaskId, setCurrentTaskId] = useState(1);
-  const [tasksBase, setTask] = useState([]);
+  const [currentTaskId, setCurrentTaskId] = useState(-1);
+  const [tasksBase, setTaskBase] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
   const [isWatching, setIsWatching] = useState(false);
   const [searchRegEx, setSearchRegEx] = useState(".*");
-  const [isFormRes, setIsFormRes] = useState(false);
+  const [isFormReseted, setIsFormReseted] = useState(false);
 
   const ref = useRef(null);
 
@@ -40,10 +21,11 @@ function TodoContainer() {
   }, []);
 
   const [tdWidth, setTdWidth] = useState(0);
+  const [lcWidth, setLcWidth] = useState("100%");
   const [editingTaskId, setEditingTaskId] = useState(0);
 
   window.addEventListener("resize", function() {
-    setTdWidth(ref.current.offsetWidth);
+    //setTdWidth(ref.current.offsetWidth);
   })
 
   const [realCurrentTask, setRealCurrentTask] = useState({});
@@ -70,7 +52,7 @@ function TodoContainer() {
   useEffect(() => {
     const tmpBase = readLocalStorage();
     if (tmpBase) {
-      setTask([...tmpBase]);
+      setTaskBase([...tmpBase]);
     }
   }, [])
 
@@ -97,7 +79,7 @@ function TodoContainer() {
       })
     }
     writeLocalStorage(newTasksBase);
-    setTask(newTasksBase);
+    setTaskBase(newTasksBase);
   } 
 
   function deleteTask(id) {
@@ -119,7 +101,7 @@ function TodoContainer() {
       writeLocalStorage(newTasksBase);
     }
 
-    setTask([...newTasksBase]);
+    setTaskBase([...newTasksBase]);
 
     if (isEditing === true) {
       setRealCurrentTask(findTaskById(currentTaskId));
@@ -169,10 +151,12 @@ function TodoContainer() {
         toggleWatching={toggleWatching} 
         searchRegEx={searchRegEx} 
         setSearchRegEx={setSearchRegEx} 
-        setIsFormRes={setIsFormRes}
+        setIsFormReseted={setIsFormReseted}
         updateTask={updateRealCurrentTask}
         realCurrentTask={realCurrentTask}
         tdWidth={tdWidth}
+        lcWidth={lcWidth}
+        setLcWidth={setLcWidth}
         setEditingTaskId={setEditingTaskId}
       />
       <EditContainer 
@@ -184,12 +168,14 @@ function TodoContainer() {
         isWatching={isWatching} 
         toggleWatching={toggleWatching} 
         toggleAdding={toggleAdding} 
-        setIsFormRes={setIsFormRes} 
-        isFormRes={isFormRes}
+        setIsFormReseted={setIsFormReseted} 
+        isFormReseted={isFormReseted}
         updateTask={updateRealCurrentTask}
         realCurrentTask={realCurrentTask}
         editingTaskId={editingTaskId}
         setEditingTaskId={setEditingTaskId}
+        tdWidth={tdWidth}
+        lcWidth={lcWidth}
       />
     </div>
   )
