@@ -33,8 +33,6 @@ function TodoContainer() {
   const [isWatching, setIsWatching] = useState(false);
   const [searchRegEx, setSearchRegEx] = useState(".*");
   const [isFormRes, setIsFormRes] = useState(false);
-  console.log(searchRegEx);
-  //etSearchRegEx("First");
 
   const ref = useRef(null);
 

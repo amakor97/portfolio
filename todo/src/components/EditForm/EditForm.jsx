@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import "./_editForm.sass";
 
 function EditForm(props) {
-
   
   const [selectedStatus, setSelectedStatus] = useState(props.taskStatus);
 
