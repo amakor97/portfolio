@@ -10,14 +10,13 @@ function EditContainer(props) {
   const [currentId, setCurrentId] = useState(-1);
   const [taskDesc, setTaskDesc] = useState(props.task? props.task.desc : "");
   const [taskStatus, setTaskStatus] = useState(props.task ? props.task.status : "");
-  const [isReseted, setIsReseted] = useState(false);
   const [ecWidth, setEcWidth] = useState("100%");
 
   useEffect(() => {
     if ((props.isAdding === false)) {
       if ((props.task) && (props.task.id === currentId)) {
-        
         if ((props.task) && (props.editingTaskId === -1)) {
+
           setCurrentId(props.task.id);
           props.setEditingTaskId(props.task.id);
           setTaskName(props.task.text);
@@ -58,10 +57,8 @@ function EditContainer(props) {
     }
 
     props.editTask(taskData);
-    props.toggleEditing(false);
+    props.setIsEditing(false);
     props.updateTask(-1);
-
-    setIsReseted(false);
   }
 
   function handleMessageChange(e) {
@@ -72,7 +69,21 @@ function EditContainer(props) {
     <div className="editContainer" style={{width: ecWidth}}>
       {
         props.isEditing === true &&
-        <EditForm handleSubmit={handleSubmit} currentId={currentId} taskName={taskName} setTaskName={setTaskName} taskDesc={taskDesc} setTaskDesc={setTaskDesc} handleMessageChange={handleMessageChange} toggleEditing={props.toggleEditing} toggleAdding={props.toggleAdding} updateTask={props.updateTask} taskStatus={taskStatus} setTaskStatus={setTaskStatus} setCurrentId={setCurrentId}/>
+        <EditForm 
+          handleSubmit={handleSubmit} 
+          currentId={currentId} 
+          taskName={taskName} 
+          setTaskName={setTaskName} 
+          taskDesc={taskDesc} 
+          setTaskDesc={setTaskDesc} 
+          handleMessageChange={handleMessageChange} 
+          setIsEditing={props.setIsEditing} 
+          setIsAdding={props.setIsAdding} 
+          updateTask={props.updateTask} 
+          taskStatus={taskStatus} 
+          setTaskStatus={setTaskStatus} 
+          setCurrentId={setCurrentId}
+        />
       } 
       {
         props.isWatching === true &&
@@ -80,7 +91,11 @@ function EditContainer(props) {
           <p>{props.task.text}</p>
           <p>{props.task.desc}</p>
           <p>{props.task.status}</p>
-          <button onClick={() => {props.toggleWatching(false); props.updateTask(-1)}}>Скрыть</button>
+          <button onClick={() => {
+            props.setIsWatching(false); 
+            props.updateTask(-1)}
+            }>Скрыть
+          </button>
         </>
       }
     </div>

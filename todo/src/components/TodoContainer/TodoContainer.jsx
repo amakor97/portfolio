@@ -7,7 +7,7 @@ import EditContainer from "../EditContainer/EditContainer";
 
 function TodoContainer() {
   const [currentTaskId, setCurrentTaskId] = useState(-1);
-  const [tasksBase, setTaskBase] = useState([]);
+  const [tasksBase, setTasksBase] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
   const [isWatching, setIsWatching] = useState(false);
@@ -28,31 +28,25 @@ function TodoContainer() {
   })
 
   function updateRealCurrentTask(id) {
-    let tmpTask = undefined;
-
     switch(id) {
       case -1: {
-        tmpTask = undefined;
-        //setRealCurrentTask(undefined);
+        setRealCurrentTask(undefined);
         break;
       }
       case 0: {
-        tmpTask = {};
-        //setRealCurrentTask({});
+        setRealCurrentTask({});
         break;
       }
       default: {
-        tmpTask = findTaskById(id, tasksBase);
-        //setRealCurrentTask(findTaskById(id, tasksBase));
+        setRealCurrentTask(findTaskById(id, tasksBase));
       }
     }
-    setRealCurrentTask(tmpTask);
   }
 
   useEffect(() => {
     const tmpBase = readLocalStorage();
     if (tmpBase) {
-      setTaskBase([...tmpBase]);
+      setTasksBase([...tmpBase]);
     }
   }, [])
 
@@ -61,7 +55,6 @@ function TodoContainer() {
   }
 
   function editTask(taskData) {
-
     let newTasksBase = [];
 
     if (isAdding === true) {
@@ -79,19 +72,18 @@ function TodoContainer() {
       })
     }
     writeLocalStorage(newTasksBase);
-    setTaskBase(newTasksBase);
+    setTasksBase(newTasksBase);
   } 
 
   function deleteTask(id) {
     let task = findTaskById(id, tasksBase);
-    console.log({tasksBase});
   
     if (typeof(realCurrentTask) === "object") {
       if (id === realCurrentTask.id) {
         setRealCurrentTask(-1);
         setIsEditing(false);
       }
-    }
+    } //???
 
     let index = tasksBase.indexOf(task);
     let newTasksBase = tasksBase;
@@ -102,34 +94,16 @@ function TodoContainer() {
       writeLocalStorage(newTasksBase);
     }
 
-    setTaskBase([...newTasksBase]);
+    setTasksBase([...newTasksBase]);
 
     if (isEditing === true) {
       setRealCurrentTask(findTaskById(currentTaskId, tasksBase));
-    }
+    } //???
   }
 
-  function toggleEditing(bool) {
-    setIsEditing(bool);
-  }
 
-  function toggleAdding(bool) {
-    setIsAdding(bool);
-  }
-
-  function toggleWatching(bool) {
-    setIsWatching(bool);
-  }
-
-  console.log(typeof(tasksBase));
-  console.log(Array.isArray(tasksBase));
 
   function findTaskById(id, arr) {
-    console.log(typeof(arr));
-    console.log(Array.isArray(arr));
-    if (arr.length === 0) {
-      //return null;
-    }
     for (let i = 0; i < arr.length; i++) {
       if (arr[i].id === id) {
         return arr[i];
@@ -154,10 +128,10 @@ function TodoContainer() {
       <ListContainer 
         tasks={tasksBase} 
         updateId={updateCurrentTaskId} 
-        toggleEditing={toggleEditing} 
-        toggleAdding={toggleAdding} 
+        setIsEditing={setIsEditing} 
+        setIsAdding={setIsAdding} 
         deleteTask={deleteTask} 
-        toggleWatching={toggleWatching} 
+        setIsWatching={setIsWatching} 
         searchRegEx={searchRegEx} 
         setSearchRegEx={setSearchRegEx} 
         setIsFormReseted={setIsFormReseted}
@@ -171,12 +145,12 @@ function TodoContainer() {
       <EditContainer 
         task={realCurrentTask} 
         editTask={editTask} 
-        toggleEditing={toggleEditing} 
+        setIsEditing={setIsEditing} 
         isEditing={isEditing} 
         isAdding={isAdding} 
         isWatching={isWatching} 
-        toggleWatching={toggleWatching} 
-        toggleAdding={toggleAdding} 
+        setIsWatching={setIsWatching} 
+        setIsAdding={setIsAdding} 
         setIsFormReseted={setIsFormReseted} 
         isFormReseted={isFormReseted}
         updateTask={updateRealCurrentTask}

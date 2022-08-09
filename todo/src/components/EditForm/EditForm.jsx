@@ -12,19 +12,58 @@ function EditForm(props) {
     <form className="editContainer__form" onSubmit={props.handleSubmit}>
       <fieldset className="editContainer__fieldset">
         <span>{props.currentId}</span>
-        <input className="editContainer__input" type="text" name="taskName" value={props.taskName} onChange={e => props.setTaskName(e.target.value)}></input>
-        <textarea className="editContainer__textarea" value={props.taskDesc} onChange={(e) => props.handleMessageChange(e)}></textarea>
+        <input 
+          className="editContainer__input" 
+          type="text" 
+          name="taskName" 
+          value={props.taskName} 
+          onChange={e => props.setTaskName(e.target.value)}
+        ></input>
+        <textarea 
+          className="editContainer__textarea" 
+          value={props.taskDesc} 
+          onChange={(e) => props.handleMessageChange(e)}
+        ></textarea>
         <label className="editForm__label">Ожидает
-          <input type="radio" name="status" value="waiting" onChange={(e) => {props.setTaskStatus(e.target.value); setSelectedStatus(e.target.value)}} checked={selectedStatus === "waiting"}></input>
+          <input 
+            type="radio" 
+            name="status" 
+            value="waiting" 
+            onChange={(e) => {
+              props.setTaskStatus(e.target.value); setSelectedStatus(e.target.value)
+            }} 
+            checked={selectedStatus === "waiting"}
+          ></input>
         </label>
         <label className="editForm__label">В процессе
-          <input type="radio" name="status" value="processing" onChange={(e) => {props.setTaskStatus(e.target.value); setSelectedStatus(e.target.value)}} checked={selectedStatus === "processing"}></input>
+          <input 
+            type="radio" 
+            name="status" 
+            value="processing" 
+            onChange={(e) => {
+              props.setTaskStatus(e.target.value); setSelectedStatus(e.target.value)
+            }} 
+            checked={selectedStatus === "processing"}
+            ></input>
         </label>
         <label className="editForm__label">Выполнена
-          <input type="radio" name="status" value="done" onChange={(e) => {props.setTaskStatus(e.target.value); setSelectedStatus(e.target.value)}} checked={selectedStatus === "done"}></input>
+          <input 
+          type="radio" 
+          name="status" 
+          value="done" 
+          onChange={(e) => {
+            props.setTaskStatus(e.target.value); setSelectedStatus(e.target.value)
+          }}
+          checked={selectedStatus === "done"}
+        ></input>
         </label>
         <button type="submit">Сохранить</button>
-        <button onClick={() => {props.toggleEditing(false); props.toggleAdding(false); props.updateTask(-1); props.setCurrentId(-1)}}>Отмена</button>
+        <button onClick={() => {
+          props.setIsEditing(false); 
+          props.setIsAdding(false); 
+          props.updateTask(-1); 
+          props.setCurrentId(-1)
+        }}>Отмена</button>
       </fieldset>
     </form>
   )

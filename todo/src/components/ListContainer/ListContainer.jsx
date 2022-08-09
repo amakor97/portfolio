@@ -8,17 +8,10 @@ import AddButton from "../AddButton/AddButton";
 
 function ListContainer(props) {
   const ref = useRef(null);
-  //const [lcWidth, setLcWidth] = useState("100%");
-  const [posX, setPosX] = useState(0);
   
   useLayoutEffect(() => {
     props.setLcWidth(ref.current.offsetWidth);
-    setPosX(ref.current.offsetLeft);
   })
-
-  function resize(e) {
-    props.setLcWidth(e.clientX - posX);
-  }
 
 
   const disableselect = (e) => {  
@@ -71,18 +64,24 @@ function ListContainer(props) {
             key={task.id} 
             task={task} 
             updateId={props.updateId} 
-            toggleEditing={props.toggleEditing} 
+            setIsEditing={props.setIsEditing} 
             deleteTask={props.deleteTask} 
-            toggleWatching={props.toggleWatching} 
-            toggleAdding={props.toggleAdding}
+            setIsWatching={props.setIsWatching} 
+            setIsAdding={props.setIsAdding}
             updateTask={props.updateTask}
             realCurrentTask={props.realCurrentTask}
             setEditingTaskId={props.setEditingTaskId}
-            />
+          />
         )}
         )}
       </ul>
-      <AddButton toggleAdding={props.toggleAdding} toggleEditing={props.toggleEditing} toggleWatching={props.toggleWatching} setIsFormReseted={props.setIsFormReseted} updateTask={props.updateTask}/>
+      <AddButton 
+        setIsAdding={props.setIsAdding} 
+        setIsEditing={props.setIsEditing} 
+        setIsWatching={props.setIsWatching} 
+        setIsFormReseted={props.setIsFormReseted} 
+        updateTask={props.updateTask}
+      />
     </div>
   )
 }

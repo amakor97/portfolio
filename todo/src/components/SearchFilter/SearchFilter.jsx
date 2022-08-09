@@ -8,7 +8,8 @@ function SearchFilter(props) {
   }
 
   return (
-    <input className="searchFilter" onChange={(e) => handleInput(e)}></input>
+    <input className="searchFilter" 
+    onChange={(e) => handleInput(e)}></input>
   )
 }
 
