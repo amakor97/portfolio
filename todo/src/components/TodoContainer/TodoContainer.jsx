@@ -13,22 +13,19 @@ function TodoContainer() {
   const [isWatching, setIsWatching] = useState(false);
   const [searchRegEx, setSearchRegEx] = useState(".*");
   const [isFormReseted, setIsFormReseted] = useState(false);
-
+  const [tdWidth, setTdWidth] = useState(0);
+  const [lcWidth, setLcWidth] = useState("100%");
+  const [editingTaskId, setEditingTaskId] = useState(0);
+  const [realCurrentTask, setRealCurrentTask] = useState({});
   const ref = useRef(null);
 
   useLayoutEffect(() => {
     setTdWidth(ref.current.offsetWidth);
   }, []);
 
-  const [tdWidth, setTdWidth] = useState(0);
-  const [lcWidth, setLcWidth] = useState("100%");
-  const [editingTaskId, setEditingTaskId] = useState(0);
-
   window.addEventListener("resize", function() {
-    //setTdWidth(ref.current.offsetWidth);
+    setTdWidth(ref.current.offsetWidth);
   })
-
-  const [realCurrentTask, setRealCurrentTask] = useState({});
 
   function updateRealCurrentTask(id) {
     let tmpTask = undefined;
@@ -36,14 +33,17 @@ function TodoContainer() {
     switch(id) {
       case -1: {
         tmpTask = undefined;
+        //setRealCurrentTask(undefined);
         break;
       }
       case 0: {
         tmpTask = {};
+        //setRealCurrentTask({});
         break;
       }
       default: {
         tmpTask = findTaskById(id, tasksBase);
+        //setRealCurrentTask(findTaskById(id, tasksBase));
       }
     }
     setRealCurrentTask(tmpTask);
@@ -84,6 +84,7 @@ function TodoContainer() {
 
   function deleteTask(id) {
     let task = findTaskById(id, tasksBase);
+    console.log({tasksBase});
   
     if (typeof(realCurrentTask) === "object") {
       if (id === realCurrentTask.id) {
@@ -104,7 +105,7 @@ function TodoContainer() {
     setTaskBase([...newTasksBase]);
 
     if (isEditing === true) {
-      setRealCurrentTask(findTaskById(currentTaskId));
+      setRealCurrentTask(findTaskById(currentTaskId, tasksBase));
     }
   }
 
@@ -120,7 +121,15 @@ function TodoContainer() {
     setIsWatching(bool);
   }
 
+  console.log(typeof(tasksBase));
+  console.log(Array.isArray(tasksBase));
+
   function findTaskById(id, arr) {
+    console.log(typeof(arr));
+    console.log(Array.isArray(arr));
+    if (arr.length === 0) {
+      //return null;
+    }
     for (let i = 0; i < arr.length; i++) {
       if (arr[i].id === id) {
         return arr[i];
