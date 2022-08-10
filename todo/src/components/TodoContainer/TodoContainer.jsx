@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useLayoutEffect } from "react";
+import { useState, useEffect, useRef, useLayoutEffect} from "react";
 
 import "./_todoContainer.sass";
 
@@ -77,13 +77,6 @@ function TodoContainer() {
 
   function deleteTask(id) {
     let task = findTaskById(id, tasksBase);
-  
-    if (typeof(realCurrentTask) === "object") {
-      if (id === realCurrentTask.id) {
-        setRealCurrentTask(-1);
-        setIsEditing(false);
-      }
-    } //???
 
     let index = tasksBase.indexOf(task);
     let newTasksBase = tasksBase;
@@ -102,7 +95,6 @@ function TodoContainer() {
   }
 
 
-
   function findTaskById(id, arr) {
     for (let i = 0; i < arr.length; i++) {
       if (arr[i].id === id) {
@@ -118,49 +110,48 @@ function TodoContainer() {
 
 
   function readLocalStorage() {
-    let tmpBase = localStorage.getItem("tasks");
-    tmpBase = JSON.parse(tmpBase);
+    let tmpBase = JSON.parse(localStorage.getItem("tasks"));
     return tmpBase;
   }
 
   return (
-    <div className="todoContainer" ref={ref}>
-      <ListContainer 
-        tasks={tasksBase} 
-        updateId={updateCurrentTaskId} 
-        setIsEditing={setIsEditing} 
-        setIsAdding={setIsAdding} 
-        deleteTask={deleteTask} 
-        setIsWatching={setIsWatching} 
-        searchRegEx={searchRegEx} 
-        setSearchRegEx={setSearchRegEx} 
-        setIsFormReseted={setIsFormReseted}
-        updateTask={updateRealCurrentTask}
-        realCurrentTask={realCurrentTask}
-        tdWidth={tdWidth}
-        lcWidth={lcWidth}
-        setLcWidth={setLcWidth}
-        setEditingTaskId={setEditingTaskId}
-      />
-      <EditContainer 
-        task={realCurrentTask} 
-        editTask={editTask} 
-        setIsEditing={setIsEditing} 
-        isEditing={isEditing} 
-        isAdding={isAdding} 
-        isWatching={isWatching} 
-        setIsWatching={setIsWatching} 
-        setIsAdding={setIsAdding} 
-        setIsFormReseted={setIsFormReseted} 
-        isFormReseted={isFormReseted}
-        updateTask={updateRealCurrentTask}
-        realCurrentTask={realCurrentTask}
-        editingTaskId={editingTaskId}
-        setEditingTaskId={setEditingTaskId}
-        tdWidth={tdWidth}
-        lcWidth={lcWidth}
-      />
-    </div>
+      <div className="todoContainer" ref={ref}>
+        <ListContainer 
+          tasks={tasksBase} 
+          updateId={updateCurrentTaskId} 
+          setIsEditing={setIsEditing} 
+          setIsAdding={setIsAdding} 
+          deleteTask={deleteTask} 
+          setIsWatching={setIsWatching} 
+          searchRegEx={searchRegEx} 
+          setSearchRegEx={setSearchRegEx} 
+          setIsFormReseted={setIsFormReseted}
+          updateTask={updateRealCurrentTask}
+          realCurrentTask={realCurrentTask}
+          tdWidth={tdWidth}
+          lcWidth={lcWidth}
+          setLcWidth={setLcWidth}
+          setEditingTaskId={setEditingTaskId}
+        />
+        <EditContainer 
+          task={realCurrentTask} 
+          editTask={editTask} 
+          setIsEditing={setIsEditing} 
+          isEditing={isEditing} 
+          isAdding={isAdding} 
+          isWatching={isWatching} 
+          setIsWatching={setIsWatching} 
+          setIsAdding={setIsAdding} 
+          setIsFormReseted={setIsFormReseted} 
+          isFormReseted={isFormReseted}
+          updateTask={updateRealCurrentTask}
+          realCurrentTask={realCurrentTask}
+          editingTaskId={editingTaskId}
+          setEditingTaskId={setEditingTaskId}
+          tdWidth={tdWidth}
+          lcWidth={lcWidth}
+        />
+      </div>
   )
 }
 

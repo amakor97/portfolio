@@ -1,4 +1,4 @@
-import { useState, useRef, useLayoutEffect } from "react";
+import { useState, useRef, useLayoutEffect} from "react";
 
 import "./_listContainer.sass";
 
@@ -15,7 +15,6 @@ function ListContainer(props) {
     props.setLcWidth(ref.current.offsetWidth);
   })
 
-
   const disableselect = (e) => {  
     return false;
   }  
@@ -31,15 +30,13 @@ function ListContainer(props) {
       
       setSize(() => {
         if (((startSize - startPosition + mouseMoveEvent.pageX) <= maxWidth) &&(startSize - startPosition + mouseMoveEvent.pageX > minWidth)) {
-          //props.setLcWidth(startSize - startPosition + mouseMoveEvent.pageX);
+          console.log(startSize - startPosition + mouseMoveEvent.pageX);
           return startSize - startPosition + mouseMoveEvent.pageX;
         } else {
           if ((startSize - startPosition + mouseMoveEvent.pageX) > maxWidth) {
-            //props.setLcWidth(600);
             return maxWidth;
           }
           if ((startSize - startPosition + mouseMoveEvent.pageX) <= minWidth) {
-            //props.setLcWidth(50);
             return minWidth;
         }}
       });
