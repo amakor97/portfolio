@@ -88,10 +88,6 @@ function TodoContainer() {
     }
 
     setTasksBase([...newTasksBase]);
-
-    if (isEditing === true) {
-      setRealCurrentTask(findTaskById(currentTaskId, tasksBase));
-    } //???
   }
 
 
