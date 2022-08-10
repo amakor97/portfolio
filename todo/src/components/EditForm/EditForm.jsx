@@ -6,7 +6,7 @@ function EditForm(props) {
 
   useEffect(() => {
     setSelectedStatus(props.taskStatus);
-  },)
+  }, [props.taskStatus]);
 
   return (
     <form className="editContainer__form" onSubmit={props.handleSubmit}>

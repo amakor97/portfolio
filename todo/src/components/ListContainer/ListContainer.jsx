@@ -62,6 +62,7 @@ function ListContainer(props) {
         return (
           re.test(task.text) &&
           <Task 
+            className="listContainer__task"
             key={task.id} 
             task={task} 
             setIsEditing={props.setIsEditing} 

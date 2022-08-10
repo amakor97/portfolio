@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 
 import "./_editContainer.sass";
 
-import "../EditForm/EditForm";
 import EditForm from "../EditForm/EditForm";
 
 function EditContainer(props) {
@@ -40,7 +39,7 @@ function EditContainer(props) {
         props.setIsFormReseted(true);
       }
     }
-  })
+  }, [props, currentId])
 
   useEffect(() => {
     setEcWidth(props.tdWidth - props.lcWidth);
