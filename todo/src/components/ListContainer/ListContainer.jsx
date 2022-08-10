@@ -8,6 +8,8 @@ import AddButton from "../AddButton/AddButton";
 
 function ListContainer(props) {
   const ref = useRef(null);
+  const minWidth = 200;
+  const maxWidth = 600;
   
   useLayoutEffect(() => {
     props.setLcWidth(ref.current.offsetWidth);
@@ -28,19 +30,21 @@ function ListContainer(props) {
     function onMouseMove(mouseMoveEvent) {
       
       setSize(() => {
-        if (((startSize - startPosition + mouseMoveEvent.pageX) <= 600) &&(startSize - startPosition + mouseMoveEvent.pageX > 50)) {
-          props.setLcWidth(startSize - startPosition + mouseMoveEvent.pageX);
+        if (((startSize - startPosition + mouseMoveEvent.pageX) <= maxWidth) &&(startSize - startPosition + mouseMoveEvent.pageX > minWidth)) {
+          //props.setLcWidth(startSize - startPosition + mouseMoveEvent.pageX);
           return startSize - startPosition + mouseMoveEvent.pageX;
         } else {
-          if ((startSize - startPosition + mouseMoveEvent.pageX) > 600) {
-            props.setLcWidth(600);
-            return 600;
+          if ((startSize - startPosition + mouseMoveEvent.pageX) > maxWidth) {
+            //props.setLcWidth(600);
+            return maxWidth;
           }
-          if ((startSize - startPosition + mouseMoveEvent.pageX) <= 50) {
-            props.setLcWidth(50);
-            return 50;
+          if ((startSize - startPosition + mouseMoveEvent.pageX) <= minWidth) {
+            //props.setLcWidth(50);
+            return minWidth;
         }}
       });
+
+      props.setLcWidth(sizeX);
     }
     function onMouseUp() {
       document.body.removeEventListener("mousemove", onMouseMove);
