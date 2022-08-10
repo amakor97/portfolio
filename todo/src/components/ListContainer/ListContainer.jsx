@@ -64,7 +64,6 @@ function ListContainer(props) {
           <Task 
             key={task.id} 
             task={task} 
-            updateId={props.updateId} 
             setIsEditing={props.setIsEditing} 
             deleteTask={props.deleteTask} 
             setIsWatching={props.setIsWatching} 

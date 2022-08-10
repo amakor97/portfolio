@@ -6,7 +6,6 @@ import ListContainer from "../ListContainer/ListContainer";
 import EditContainer from "../EditContainer/EditContainer";
 
 function TodoContainer() {
-  const [currentTaskId, setCurrentTaskId] = useState(-1);
   const [tasksBase, setTasksBase] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
@@ -50,16 +49,11 @@ function TodoContainer() {
     }
   }, [])
 
-  function updateCurrentTaskId(num) {
-    setCurrentTaskId(num);
-  }
-
   function editTask(taskData) {
     let newTasksBase = [];
 
     if (isAdding === true) {
       setIsAdding(false);
-      setCurrentTaskId(taskData.id);
       newTasksBase = tasksBase;
       newTasksBase.push(taskData);
     } else {
@@ -114,7 +108,6 @@ function TodoContainer() {
       <div className="todoContainer" ref={ref}>
         <ListContainer 
           tasks={tasksBase} 
-          updateId={updateCurrentTaskId} 
           setIsEditing={setIsEditing} 
           setIsAdding={setIsAdding} 
           deleteTask={deleteTask} 

@@ -6,9 +6,8 @@ function Task(props) {
       <span className="task__id">{props.task.id}</span>
       <span className="task__name">{props.task.text}</span>
       <button className="task__btn" onClick={() => {
-        props.updateId(props.task.id); props.setIsWatching(true); props.setIsEditing(false); props.setIsAdding(false); props.updateTask(props.task.id); props.setEditingTaskId(-1)}}>Смот</button>
+        props.setIsWatching(true); props.setIsEditing(false); props.setIsAdding(false); props.updateTask(props.task.id); props.setEditingTaskId(-1)}}>Смот</button>
       <button className="task__btn task__btn-edit"onClick={() => {
-        props.updateId(props.task.id); 
         props.setIsWatching(false); 
         props.setIsEditing(true); 
         props.setIsAdding(false); 
