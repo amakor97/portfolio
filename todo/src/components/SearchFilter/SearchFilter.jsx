@@ -9,6 +9,9 @@ function SearchFilter(props) {
 
   function resetInput(e) {
     props.setSearchRegEx(".*");
+
+    props.stateHandler("SETREGEX", ".*");
+
     e.target.parentNode["searchReg"].value = "";
   }
 

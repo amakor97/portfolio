@@ -91,6 +91,7 @@ function TodoContainer() {
         return state;
       }
       case "SETREALCURRENTTASK": {
+        console.log("updating real current task");
         for (const key in state) {
           if (key === "realCurrentTask") {
             console.log(`prev realCurrentTask: ${state[key]}`);
@@ -143,7 +144,21 @@ function TodoContainer() {
         break;
       }
       case "SETREALCURRENTTASK": {
-        dispatch({ type: actionType, realCurrentTask: universal});
+
+        switch(universal) {
+          case -1: {
+            dispatch({ type: actionType, realCurrentTask: undefined });
+            break;
+          }
+          case 0: {
+            dispatch({ type: actionType, realCurrentTask: {} });
+            break;
+          }
+          default: {
+            dispatch({ type: actionType, realCurrentTask: findTaskById(universal, todoList.tasksBase) });
+            break;
+          }
+        }
         break;
       }
       default:
@@ -190,14 +205,20 @@ function TodoContainer() {
     switch(id) {
       case -1: {
         setRealCurrentTask(undefined);
+
+        //stateHandler("SETREALCURRENTTASK", undefined);
         break;
       }
       case 0: {
         setRealCurrentTask({});
+
+        //stateHandler("SETREALCURRENTTASK", {});
         break;
       }
       default: {
-        setRealCurrentTask(findTaskById(id, tasksBase));
+        setRealCurrentTask(findTaskById(id, todoList.tasksBase));
+
+        //stateHandler("SETREALCURRENTTASK", findTaskById(id, todoList.tasksBase));
       }
     }
   }
@@ -215,10 +236,13 @@ function TodoContainer() {
 
     if (isAdding === true) {
       setIsAdding(false);
-      newTasksBase = tasksBase;
+
+      stateHandler("SETISADDING", false);
+
+      newTasksBase = todoList.tasksBase;
       newTasksBase.push(taskData);
     } else {
-      newTasksBase = tasksBase.map(obj => {
+      newTasksBase = todoList.tasksBase.map(obj => {
         if (obj.id === taskData.id) {
           obj = JSON.parse(JSON.stringify(taskData));
           return obj;
@@ -232,10 +256,10 @@ function TodoContainer() {
   } 
 
   function deleteTask(id) {
-    let task = findTaskById(id, tasksBase);
+    let task = findTaskById(id, todoList.tasksBase);
 
-    let index = tasksBase.indexOf(task);
-    let newTasksBase = tasksBase;
+    let index = todoList.tasksBase.indexOf(task);
+    let newTasksBase = todoList.tasksBase;
     newTasksBase.splice(index, 1);
     if (newTasksBase.length === 0) {
       localStorage.clear();
@@ -289,6 +313,9 @@ function TodoContainer() {
           setEditingTaskId={setEditingTaskId}
         />
         <EditContainer 
+          todoList={todoList}
+          stateHandler={stateHandler}
+
           task={realCurrentTask} 
           editTask={editTask} 
           setIsEditing={setIsEditing} 

@@ -62,7 +62,9 @@ function ListContainer(props) {
         {props.tasks.map(task => {
         return (
           re.test(task.text) &&
-          <Task 
+          <Task
+            stateHandler={props.stateHandler}
+
             className="listContainer__task"
             key={task.id} 
             task={task} 
@@ -77,7 +79,9 @@ function ListContainer(props) {
         )}
         )}
       </ul>
-      <AddButton 
+      <AddButton
+        stateHandler={props.stateHandler}
+      
         setIsAdding={props.setIsAdding} 
         setIsEditing={props.setIsEditing} 
         setIsWatching={props.setIsWatching} 

@@ -18,6 +18,9 @@ function EditContainer(props) {
 // remove currentId? because editingTaskId looks very similar
           setCurrentId(props.task.id);
           props.setEditingTaskId(props.task.id);
+
+          props.stateHandler("SETEDITINGTASKID", props.task.id);
+
           setTaskName(props.task.text);
           setTaskDesc(props.task.desc);
           setTaskStatus(props.task.status);
@@ -25,6 +28,10 @@ function EditContainer(props) {
       } else {
         if (props.task) {
           setCurrentId(props.task.id);
+          props.setEditingTaskId(props.task.id);
+
+          props.stateHandler("SETEDITINGTASKID", props.task.id);
+
           setTaskName(props.task.text);
           setTaskDesc(props.task.desc);
           setTaskStatus(props.task.status);
@@ -37,6 +44,8 @@ function EditContainer(props) {
         setTaskStatus('');
         setCurrentId(Date.now());
         props.setIsFormReseted(true);
+
+        props.stateHandler("SETISFORMRESETED", true);
       }
     }
   }, [props, currentId])
@@ -57,7 +66,12 @@ function EditContainer(props) {
 
     props.editTask(taskData);
     props.setIsEditing(false);
+
+    props.stateHandler("SETISEDITING", false);
+
     props.updateTask(-1);
+
+    props.stateHandler("SETREALCURRENTTASK", -1);
   }
 
   function handleMessageChange(e) {
@@ -69,6 +83,8 @@ function EditContainer(props) {
       {
         props.isEditing === true &&
         <EditForm 
+          stateHandler={props.stateHandler}
+
           handleSubmit={handleSubmit} 
           currentId={currentId} 
           taskName={taskName} 
@@ -91,8 +107,14 @@ function EditContainer(props) {
           <p>{props.task.desc}</p>
           <p>{props.task.status}</p>
           <button onClick={() => {
-            props.setIsWatching(false); 
-            props.updateTask(-1)}
+            props.setIsWatching(false);
+
+            props.stateHandler("SETISWATCHING", false);
+
+            props.updateTask(-1)
+          
+            props.stateHandler("SETREALCURRENTTASK", -1);
+            }
             }>Скрыть
           </button>
         </>

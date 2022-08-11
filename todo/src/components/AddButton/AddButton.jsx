@@ -4,10 +4,27 @@ function AddButton(props) {
   return (
     <button onClick={() => {
       props.setIsAdding(true); 
+      
+      props.stateHandler("SETISADDING", true);
+
       props.setIsEditing(true); 
-      props.setIsWatching(false); 
+
+      props.stateHandler("SETISEDITING", true);
+
+      props.setIsWatching(false);
+
+      props.stateHandler("SETISWATCHING", true);
+
       props.setIsFormReseted(false); 
-      props.updateTask(0)}
+
+      props.stateHandler("SETISFORMRESETED", false);
+
+      props.updateTask(0);
+    
+      props.stateHandler("SETREALCURRENTTASK", 0);
+    }
+
+      
     }>Добавить
     </button>
   )

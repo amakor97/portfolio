@@ -60,8 +60,16 @@ function EditForm(props) {
         <button type="submit">Сохранить</button>
         <button onClick={() => {
           props.setIsEditing(false); 
-          props.setIsAdding(false); 
+
+          props.stateHandler("SETISEDITING", false);
+
+          props.setIsAdding(false);
+
+          props.stateHandler("SETISADDING", false);
+
           props.updateTask(-1); 
+
+          props.stateHandler("SETREALCURRENTTASK", -1);
           props.setCurrentId(-1)
         }}>Отмена</button>
       </fieldset>
