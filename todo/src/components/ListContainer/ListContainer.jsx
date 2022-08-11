@@ -56,7 +56,7 @@ function ListContainer(props) {
   return (
     <div className="listContainer" ref={ref} style={{width: sizeX}}>
       <div className="listContainer__resizer" onMouseDown={resizer}></div>
-      <SearchFilter setSearchRegEx={props.setSearchRegEx}/>
+      <SearchFilter setSearchRegEx={props.setSearchRegEx} stateHandler={props.stateHandler}/>
       <ul>
         {props.tasks.map(task => {
         return (

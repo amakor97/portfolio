@@ -4,12 +4,14 @@ function SearchFilter(props) {
 
   function handleInput(e) {
     props.setSearchRegEx(e.target.value);
+    props.stateHandler("SETREGEX", e.target.value);
   }
 
   function resetInput(e) {
     props.setSearchRegEx(".*");
     e.target.parentNode["searchReg"].value = "";
   }
+
 
   return (
     <div className="searchFilter">

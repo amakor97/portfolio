@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useLayoutEffect} from "react";
+import { useState, useEffect, useRef, useLayoutEffect, useReducer} from "react";
 
 import "./_todoContainer.sass";
 
@@ -6,6 +6,61 @@ import ListContainer from "../ListContainer/ListContainer";
 import EditContainer from "../EditContainer/EditContainer";
 
 function TodoContainer() {
+
+  const initialTodoList = {
+    tasksBase: [],
+    isEditing: false,
+    isAdding: false,
+    isWatching: false,
+    searchRegEx: ".*",
+    isFormReseted: false,
+    editingTaskId: 0,
+    realCurrentTask: {}
+  };
+
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case "SETTASKBASE": {
+        return state;
+      }
+      case "SETREG": {
+        for (const key in state) {
+          if (key === "searchRegEx") {
+            console.log(`prev regex: ${state[key]}`);
+            state[key] = action.searchRegEx;
+            console.log(`new regex: ${state[key]}`);
+          }
+        }
+        return state;
+      }
+      default:
+        for (const key in state) {
+          console.log(key, state[key]);
+        }
+        return state;
+    }
+  }
+
+
+
+  const [todoList, dispatch] = useReducer(reducer, initialTodoList);
+
+  const stateHandler = (actionType, universal) => {
+    switch(actionType) {
+      case "SETREGEX": {
+        dispatch({ type: actionType, searchRegEx: universal});
+        break;
+      }
+      default:
+        return;
+    }
+  }
+
+  useEffect(() => {
+    //stateHandler("SETREGEX", "abc");
+  }, [])
+
+
   const [tasksBase, setTasksBase] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
@@ -106,7 +161,10 @@ function TodoContainer() {
 
   return (
       <div className="todoContainer" ref={ref}>
-        <ListContainer 
+        <ListContainer
+          todoList={todoList}
+          stateHandler={stateHandler}
+
           tasks={tasksBase} 
           setIsEditing={setIsEditing} 
           setIsAdding={setIsAdding} 
