@@ -15,7 +15,7 @@ function EditContainer(props) {
     if ((props.isAdding === false)) {
       if ((props.task) && (props.task.id === currentId)) {
         if ((props.task) && (props.editingTaskId === -1)) {
-
+// remove currentId? because editingTaskId looks very similar
           setCurrentId(props.task.id);
           props.setEditingTaskId(props.task.id);
           setTaskName(props.task.text);
