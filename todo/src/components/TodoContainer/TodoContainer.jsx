@@ -297,7 +297,7 @@ function TodoContainer() {
           todoList={todoList}
           stateHandler={stateHandler}
 
-          tasks={tasksBase} 
+          //tasks={tasksBase} 
           setIsEditing={setIsEditing} 
           setIsAdding={setIsAdding} 
           deleteTask={deleteTask} 

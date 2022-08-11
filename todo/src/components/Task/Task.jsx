@@ -1,6 +1,7 @@
 import "./_task.sass";
 
 function Task(props) {
+  console.log(props);
   return (
     <div className={"task " + (props.className ? props.className : "")}>
       <span className="task__name">{props.task.text}</span>
@@ -54,8 +55,10 @@ function Task(props) {
         </svg>
       </button>
       <button className="task__btn" onClick={() => {
-        if (props.realCurrentTask) {
-          if (props.realCurrentTask.id) {
+        console.log(props);
+        console.log(props.realCurrentTask);
+        if (props.todoList.realCurrentTask) {
+          if (props.todoList.realCurrentTask.id) {
           }
           if (props.task.id === props.realCurrentTask.id) {
             props.setIsWatching(false);

@@ -59,10 +59,11 @@ function ListContainer(props) {
       <div className="listContainer__resizer" onMouseDown={resizer}></div>
       <SearchFilter setSearchRegEx={props.setSearchRegEx} stateHandler={props.stateHandler}/>
       <ul>
-        {props.tasks.map(task => {
+        {props.todoList.tasksBase.map(task => {
         return (
           re.test(task.text) &&
           <Task
+            todoList={props.todoList}
             stateHandler={props.stateHandler}
 
             className="listContainer__task"
@@ -80,6 +81,7 @@ function ListContainer(props) {
         )}
       </ul>
       <AddButton
+        todoList={props.todoList}
         stateHandler={props.stateHandler}
       
         setIsAdding={props.setIsAdding} 

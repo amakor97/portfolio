@@ -13,7 +13,7 @@ function AddButton(props) {
 
       props.setIsWatching(false);
 
-      props.stateHandler("SETISWATCHING", true);
+      props.stateHandler("SETISWATCHING", false);
 
       props.setIsFormReseted(false); 
 
