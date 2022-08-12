@@ -30,7 +30,7 @@ function EditForm(props) {
             name="status" 
             value="waiting" 
             onChange={(e) => {
-              props.setTaskStatus(e.target.value); setSelectedStatus(e.target.value)
+              props.setTaskStatus(e.target.value);setSelectedStatus(e.target.value)
             }} 
             checked={selectedStatus === "waiting"}
           ></input>
@@ -59,17 +59,18 @@ function EditForm(props) {
         </label>
         <button type="submit">Сохранить</button>
         <button onClick={() => {
-          props.setIsEditing(false); 
+          //props.setIsEditing(false); 
 
           props.stateHandler("SETISEDITING", false);
 
-          props.setIsAdding(false);
+          //props.setIsAdding(false);
 
           props.stateHandler("SETISADDING", false);
 
-          props.updateTask(-1); 
+          //props.updateTask(-1); 
 
           props.stateHandler("SETREALCURRENTTASK", -1);
+          
           props.setCurrentId(-1)
         }}>Отмена</button>
       </fieldset>

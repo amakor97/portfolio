@@ -3,12 +3,12 @@ import "./_searchFilter.sass";
 function SearchFilter(props) {
 
   function handleInput(e) {
-    props.setSearchRegEx(e.target.value);
+    //props.setSearchRegEx(e.target.value);
     props.stateHandler("SETREGEX", e.target.value);
   }
 
   function resetInput(e) {
-    props.setSearchRegEx(".*");
+    //props.setSearchRegEx(".*");
 
     props.stateHandler("SETREGEX", ".*");
 

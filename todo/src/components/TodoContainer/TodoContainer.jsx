@@ -4,7 +4,6 @@ import "./_todoContainer.sass";
 
 import ListContainer from "../ListContainer/ListContainer";
 import EditContainer from "../EditContainer/EditContainer";
-import { act } from "react-dom/test-utils";
 
 function TodoContainer() {
 
@@ -229,19 +228,19 @@ function TodoContainer() {
   function updateRealCurrentTask(id) {
     switch(id) {
       case -1: {
-        setRealCurrentTask(undefined);
+        //setRealCurrentTask(undefined);
 
         //stateHandler("SETREALCURRENTTASK", undefined);
         break;
       }
       case 0: {
-        setRealCurrentTask({});
+        //setRealCurrentTask({});
 
         //stateHandler("SETREALCURRENTTASK", {});
         break;
       }
       default: {
-        setRealCurrentTask(findTaskById(id, todoList.tasksBase));
+        //setRealCurrentTask(findTaskById(id, todoList.tasksBase));
 
         //stateHandler("SETREALCURRENTTASK", findTaskById(id, todoList.tasksBase));
       }
@@ -251,7 +250,7 @@ function TodoContainer() {
   useEffect(() => {
     const tmpBase = readLocalStorage();
     if (tmpBase) {
-      setTasksBase([...tmpBase]);
+      //setTasksBase([...tmpBase]);
       stateHandler("SETTASKSBASE", [...tmpBase]);
     }
   }, [])
@@ -260,7 +259,7 @@ function TodoContainer() {
     let newTasksBase = [];
 
     if (todoList.isAdding === true) {
-      setIsAdding(false);
+      //setIsAdding(false);
 
       stateHandler("SETISADDING", false);
 
@@ -276,14 +275,17 @@ function TodoContainer() {
       })
     }
     writeLocalStorage(newTasksBase);
-    setTasksBase(newTasksBase);
+    //setTasksBase(newTasksBase);
     stateHandler("SETTASKSBASE", newTasksBase);
   } 
 
   function deleteTask(id) {
     let task = findTaskById(id, todoList.tasksBase);
+    console.log({task});
 
     let index = todoList.tasksBase.indexOf(task);
+    console.log({index});
+
     let newTasksBase = todoList.tasksBase;
     newTasksBase.splice(index, 1);
     if (newTasksBase.length === 0) {
@@ -292,7 +294,7 @@ function TodoContainer() {
       writeLocalStorage(newTasksBase);
     }
 
-    setTasksBase([...newTasksBase]);
+    //setTasksBase([...newTasksBase]);
     stateHandler("SETTASKSBASE", [...newTasksBase]);
   }
 

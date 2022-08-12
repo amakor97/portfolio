@@ -6,23 +6,23 @@ function Task(props) {
     <div className={"task " + (props.className ? props.className : "")}>
       <span className="task__name">{props.task.text}</span>
       <button className="task__btn" onClick={() => {
-        props.setIsWatching(true); 
+        //props.setIsWatching(true); 
 
         props.stateHandler("SETISWATCHING", true);
 
-        props.setIsEditing(false); 
+        //props.setIsEditing(false); 
         
         props.stateHandler("SETISEDITING", false);
 
-        props.setIsAdding(false);
+        //props.setIsAdding(false);
 
         props.stateHandler("SETISADDING", false);
 
-        props.updateTask(props.task.id); 
+        //props.updateTask(props.task.id); 
 
         props.stateHandler("SETREALCURRENTTASK", props.task.id);
         
-        props.setEditingTaskId(-1)
+        //props.setEditingTaskId(-1)
       
         props.stateHandler("SETEDITINGTASKID", -1);
         }}>
@@ -32,21 +32,23 @@ function Task(props) {
           </svg>
         </button>
       <button className="task__btn task__btn-edit"onClick={() => {
-        props.setIsWatching(false);
+        //props.setIsWatching(false);
 
         props.stateHandler("SETISWATCHING", false);
 
-        props.setIsEditing(true); 
+        //props.setIsEditing(true); 
 
         props.stateHandler("SETISEDITING", true);
 
-        props.setIsAdding(false); 
+        //props.setIsAdding(false); 
 
         props.stateHandler("SETISADDING", false);
 
-        props.updateTask(props.task.id);
+        //props.updateTask(props.task.id);
 
         props.stateHandler("SETREALCURRENTTASK", props.task.id);
+
+        props.stateHandler("SETEDITINGTASKID", props.task.id);
 
       }}>
         <svg className="task__btn-svg" viewBox="0 0 306.637 306.637">
@@ -60,18 +62,20 @@ function Task(props) {
         if (props.todoList.realCurrentTask) {
           if (props.todoList.realCurrentTask.id) {
           }
-          if (props.task.id === props.realCurrentTask.id) {
-            props.setIsWatching(false);
+          if (props.task.id === props.todoList.realCurrentTask.id) {
+            //props.setIsWatching(false);
 
             props.stateHandler("SETISWATCHING", false);
 
-            props.setIsEditing(false);
+            //props.setIsEditing(false);
 
             props.stateHandler("SETISEDITING", false);
 
-            props.updateTask(-1);
+            //props.updateTask(-1);
 
             props.stateHandler("SETREALCURRENTTASK", -1);
+          
+            props.stateHandler("SETEDITINGTASKID", -1);
           } else {
           }
         }

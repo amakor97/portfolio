@@ -17,7 +17,7 @@ function EditContainer(props) {
         if ((props.todoList.realCurrentTask) && (props.todoList.editingTaskId === -1)) {
 // remove currentId? because editingTaskId looks very similar
           setCurrentId(props.todoList.realCurrentTask.id);
-          props.setEditingTaskId(props.todoList.realCurrentTask.id);
+          //props.setEditingTaskId(props.todoList.realCurrentTask.id);
 
           props.stateHandler("SETEDITINGTASKID", props.todoList.realCurrentTask.id);
 
@@ -28,7 +28,7 @@ function EditContainer(props) {
       } else {
         if (props.todoList.realCurrentTask) {
           setCurrentId(props.todoList.realCurrentTask.id);
-          props.setEditingTaskId(props.todoList.realCurrentTask.id);
+          //props.setEditingTaskId(props.todoList.realCurrentTask.id);
 
           props.stateHandler("SETEDITINGTASKID", props.todoList.realCurrentTask.id);
 
@@ -43,7 +43,7 @@ function EditContainer(props) {
         setTaskDesc('');
         setTaskStatus('');
         setCurrentId(Date.now());
-        props.setIsFormReseted(true);
+        //props.setIsFormReseted(true);
 
         props.stateHandler("SETISFORMRESETED", true);
       }
@@ -65,11 +65,11 @@ function EditContainer(props) {
     }
 
     props.editTask(taskData);
-    props.setIsEditing(false);
+    //props.setIsEditing(false);
 
     props.stateHandler("SETISEDITING", false);
 
-    props.updateTask(-1);
+    //props.updateTask(-1);
 
     props.stateHandler("SETREALCURRENTTASK", -1);
   }
@@ -107,11 +107,11 @@ function EditContainer(props) {
           <p>{props.todoList.realCurrentTask.desc}</p>
           <p>{props.todoList.realCurrentTask.status}</p>
           <button onClick={() => {
-            props.setIsWatching(false);
+            //props.setIsWatching(false);
 
             props.stateHandler("SETISWATCHING", false);
 
-            props.updateTask(-1)
+            //props.updateTask(-1)
           
             props.stateHandler("SETREALCURRENTTASK", -1);
             }
