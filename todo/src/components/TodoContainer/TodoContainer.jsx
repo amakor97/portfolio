@@ -259,7 +259,7 @@ function TodoContainer() {
   function editTask(taskData) {
     let newTasksBase = [];
 
-    if (isAdding === true) {
+    if (todoList.isAdding === true) {
       setIsAdding(false);
 
       stateHandler("SETISADDING", false);
