@@ -2,7 +2,9 @@ import "./_addButton.sass";
 
 function AddButton(props) {
   return (
-    <button onClick={() => {
+    <button 
+      className={"addButton " + (props.className ? props.className : "")} 
+      onClick={() => {
       props.stateHandler("SETISADDING", true);
       props.stateHandler("SETISEDITING", true);
       props.stateHandler("SETISWATCHING", false);

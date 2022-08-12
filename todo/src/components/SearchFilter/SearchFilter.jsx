@@ -1,7 +1,7 @@
 import "./_searchFilter.sass";
 
 function SearchFilter(props) {
-  
+
   function handleInput(e) {
     props.stateHandler("SETREGEX", e.target.value);
   }
@@ -13,7 +13,7 @@ function SearchFilter(props) {
 
   return (
     <div className="searchFilter">
-      <form>
+      <form className="searchFilter__form">
         <input className="searchFilter__input" name="searchReg"
         onChange={(e) => handleInput(e)}></input>
         <button type="button" className="searchFilter__reset-btn" onClick={(e) => {resetInput(e)}}>

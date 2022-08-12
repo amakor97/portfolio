@@ -8,7 +8,7 @@ import AddButton from "../AddButton/AddButton";
 
 function ListContainer(props) {
   const ref = useRef(null);
-  const minWidth = 200;
+  const minWidth = 250;
   const maxWidth = 600;
   
   useLayoutEffect(() => {
@@ -68,6 +68,7 @@ function ListContainer(props) {
         )}
       </ul>
       <AddButton
+        className="listContainer__add-btn"
         todoList={props.todoList}
         stateHandler={props.stateHandler}
       />

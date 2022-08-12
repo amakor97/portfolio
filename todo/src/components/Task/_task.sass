@@ -9,16 +9,23 @@
   width: 100%
   max-width: 100%
   height: 60px
-  padding: 5px
+  padding: 10px
 
   font:
-    size: 32px
+    size: 24px
+  color: $dark-blue
 
-  border: 5px solid black
-    radius: 20px
+  //border: 5px solid $main-blue
+  border-radius: 20px
 
-  background: 
-    color: red
+  &--waiting
+    background: $task-waiting
+
+  &--processing
+    background: $task-processing
+
+  &--done
+    background: $task-done
 
   &__id
     display: inline-block
@@ -29,26 +36,52 @@
 
   &__name
     display: inline-block
-    height: 100%
+    height: 36px
+    padding: 0 4px
     margin-right: auto
     overflow: hidden
+    text-overflow: ellipsis
+
+    line-height: 28px
+
+    border: 4px solid white
+    border-radius: 12px
+    background: $light-grey
+    background: white
+
+  &__btn-wrapper
+    min-width: max-content
+    margin-left: 8px
 
   &__btn
     display: inline-block
     //height: 100%
     padding: 4px
-    width: 32px
-    height: 32px
-    margin-left: 2px
+    width: 36px
+    height: 36px
+    margin-right: 2px
 
     font:
       size: 0
     line-height: 0
 
-    border: none
+    border: 2px solid $dark-blue
+      radius: 12px
+    background: white
+    cursor: pointer
+
+    &:last-of-type
+      margin-right: 0
+
+    &:hover
+      transform: scale(1.1, 1.1)
+
+
 
   &__btn-svg
     width: 24px
     height: 24px
+
+    fill: $dark-blue
 
     pointer-events: none
