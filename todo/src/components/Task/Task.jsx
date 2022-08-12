@@ -1,7 +1,6 @@
 import "./_task.sass";
 
 function Task(props) {
-  console.log(props);
   return (
     <div className={"task " + (props.className ? props.className : "")}>
       <span className="task__name">{props.task.text}</span>
@@ -30,8 +29,6 @@ function Task(props) {
         </svg>
       </button>
       <button className="task__btn" onClick={() => {
-        console.log(props);
-        console.log(props.realCurrentTask);
         if (props.todoList.realCurrentTask) {
           if (props.task.id === props.todoList.realCurrentTask.id) {
             props.stateHandler("SETISWATCHING", false);

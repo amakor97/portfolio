@@ -1,7 +1,7 @@
 import "./_searchFilter.sass";
 
 function SearchFilter(props) {
-
+  
   function handleInput(e) {
     props.stateHandler("SETREGEX", e.target.value);
   }
@@ -10,7 +10,6 @@ function SearchFilter(props) {
     props.stateHandler("SETREGEX", ".*");
     e.target.parentNode["searchReg"].value = "";
   }
-
 
   return (
     <div className="searchFilter">

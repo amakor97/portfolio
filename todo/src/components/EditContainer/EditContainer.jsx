@@ -71,17 +71,14 @@ function EditContainer(props) {
         props.todoList.isEditing === true &&
         <EditForm 
           stateHandler={props.stateHandler}
+          handleSubmit={handleSubmit}
 
-          handleSubmit={handleSubmit} 
           currentId={currentId} 
           taskName={taskName} 
           setTaskName={setTaskName} 
           taskDesc={taskDesc} 
           setTaskDesc={setTaskDesc} 
-          handleMessageChange={handleMessageChange} 
-          setIsEditing={props.setIsEditing} 
-          setIsAdding={props.setIsAdding} 
-          updateTask={props.updateTask} 
+          handleMessageChange={handleMessageChange}
           taskStatus={taskStatus} 
           setTaskStatus={setTaskStatus} 
           setCurrentId={setCurrentId}

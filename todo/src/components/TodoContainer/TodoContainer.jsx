@@ -128,31 +128,9 @@ function TodoContainer() {
     }
   }
 
-  function testReducer() {
-    stateHandler("SETISEDITING", true);
-    stateHandler("SETISADDING", true);
-    stateHandler("SETISWATCHING", true);
-    stateHandler("SETISFORMRESETED", true);
-    stateHandler("SETEDITINGTASKID", 123);
-    stateHandler("SETREALCURRENTTASK", -1);
-    stateHandler("SETREGEX", "abc");
-  }
 
-  useEffect(() => {
-    //testReducer();
-  }, [])
-
-
-  const [tasksBase, setTasksBase] = useState([]);
-  const [isEditing, setIsEditing] = useState(false);
-  const [isAdding, setIsAdding] = useState(false);
-  const [isWatching, setIsWatching] = useState(false);
-  const [searchRegEx, setSearchRegEx] = useState(".*");
-  const [isFormReseted, setIsFormReseted] = useState(false);
   const [tdWidth, setTdWidth] = useState(0);
   const [lcWidth, setLcWidth] = useState("100%");
-  const [editingTaskId, setEditingTaskId] = useState(0);
-  const [realCurrentTask, setRealCurrentTask] = useState({});
   const ref = useRef(null);
 
   useLayoutEffect(() => {
@@ -162,19 +140,6 @@ function TodoContainer() {
   window.addEventListener("resize", function() {
     setTdWidth(ref.current.offsetWidth);
   })
-
-  function updateRealCurrentTask(id) {
-    switch(id) {
-      case -1: {
-        break;
-      }
-      case 0: {
-        break;
-      }
-      default: {
-      }
-    }
-  }
 
   useEffect(() => {
     const tmpBase = readLocalStorage();
@@ -244,40 +209,15 @@ function TodoContainer() {
         <ListContainer
           todoList={todoList}
           stateHandler={stateHandler}
-
-          //tasks={tasksBase} 
-          setIsEditing={setIsEditing} 
-          setIsAdding={setIsAdding} 
-          deleteTask={deleteTask} 
-          setIsWatching={setIsWatching} 
-          searchRegEx={searchRegEx} 
-          setSearchRegEx={setSearchRegEx} 
-          setIsFormReseted={setIsFormReseted}
-          updateTask={updateRealCurrentTask}
-          realCurrentTask={realCurrentTask}
+          deleteTask={deleteTask}
           tdWidth={tdWidth}
           lcWidth={lcWidth}
           setLcWidth={setLcWidth}
-          setEditingTaskId={setEditingTaskId}
         />
         <EditContainer 
           todoList={todoList}
           stateHandler={stateHandler}
-
-          task={realCurrentTask} 
-          editTask={editTask} 
-          setIsEditing={setIsEditing} 
-          isEditing={isEditing} 
-          isAdding={isAdding} 
-          isWatching={isWatching} 
-          setIsWatching={setIsWatching} 
-          setIsAdding={setIsAdding} 
-          setIsFormReseted={setIsFormReseted} 
-          isFormReseted={isFormReseted}
-          updateTask={updateRealCurrentTask}
-          realCurrentTask={realCurrentTask}
-          editingTaskId={editingTaskId}
-          setEditingTaskId={setEditingTaskId}
+          editTask={editTask}
           tdWidth={tdWidth}
           lcWidth={lcWidth}
         />

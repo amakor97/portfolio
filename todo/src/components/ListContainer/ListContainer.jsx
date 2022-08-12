@@ -30,7 +30,6 @@ function ListContainer(props) {
       
       setSize(() => {
         if (((startSize - startPosition + mouseMoveEvent.pageX) <= maxWidth) &&(startSize - startPosition + mouseMoveEvent.pageX > minWidth)) {
-          console.log(startSize - startPosition + mouseMoveEvent.pageX);
           return startSize - startPosition + mouseMoveEvent.pageX;
         } else {
           if ((startSize - startPosition + mouseMoveEvent.pageX) > maxWidth) {
@@ -56,7 +55,7 @@ function ListContainer(props) {
   return (
     <div className="listContainer" ref={ref} style={{width: sizeX}}>
       <div className="listContainer__resizer" onMouseDown={resizer}></div>
-      <SearchFilter setSearchRegEx={props.setSearchRegEx} stateHandler={props.stateHandler}/>
+      <SearchFilter stateHandler={props.stateHandler}/>
       <ul>
         {props.todoList.tasksBase.map(task => {
         return (
@@ -64,17 +63,10 @@ function ListContainer(props) {
           <Task
             todoList={props.todoList}
             stateHandler={props.stateHandler}
-
             className="listContainer__task"
             key={task.id} 
             task={task} 
-            setIsEditing={props.setIsEditing} 
-            deleteTask={props.deleteTask} 
-            setIsWatching={props.setIsWatching} 
-            setIsAdding={props.setIsAdding}
-            updateTask={props.updateTask}
-            realCurrentTask={props.realCurrentTask}
-            setEditingTaskId={props.setEditingTaskId}
+            deleteTask={props.deleteTask}
           />
         )}
         )}
@@ -82,12 +74,6 @@ function ListContainer(props) {
       <AddButton
         todoList={props.todoList}
         stateHandler={props.stateHandler}
-      
-        setIsAdding={props.setIsAdding} 
-        setIsEditing={props.setIsEditing} 
-        setIsWatching={props.setIsWatching} 
-        setIsFormReseted={props.setIsFormReseted} 
-        updateTask={props.updateTask}
       />
     </div>
   )
