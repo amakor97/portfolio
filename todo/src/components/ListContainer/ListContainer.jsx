@@ -52,7 +52,6 @@ function ListContainer(props) {
   };
 
 
-  //let re = new RegExp(props.searchRegEx, 'i');
   let re = new RegExp(props.todoList.searchRegEx, 'i');
   return (
     <div className="listContainer" ref={ref} style={{width: sizeX}}>

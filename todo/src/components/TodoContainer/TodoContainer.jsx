@@ -21,119 +21,57 @@ function TodoContainer() {
   const reducer = (state, action) => {
     switch (action.type) {
       case "SETTASKSBASE": {
-        /*for (const key in state) {
-          if (key === "tasksBase") {
-            console.log(`prev tasksBase: ${state[key]}`);
-            state[key] = action.tasksBase;
-            console.log(`new tasksBase: ${state[key]}`);
-          }
-        }*/
         return {
           ...state,
           tasksBase: action.tasksBase
         };
       }
       case "SETISEDITING": {
-        /*for (const key in state) {
-          if (key === "isEditing") {
-            console.log(`prev isEditing: ${state[key]}`);
-            state[key] = action.isEditing;
-            console.log(`new isEditing: ${state[key]}`);
-          }
-        }*/
         return {
           ...state,
           isEditing: action.isEditing
         };
       }
       case "SETISADDING": {
-        /*for (const key in state) {
-          if (key === "isAdding") {
-            console.log(`prev isAdding: ${state[key]}`);
-            state[key] = action.isAdding;
-            console.log(`new isAdding: ${state[key]}`);
-          }
-        }*/
         return {
           ...state,
           isAdding: action.isAdding
         };
       }
       case "SETISWATCHING": {
-        /*for (const key in state) {
-          if (key === "isWatching") {
-            console.log(`prev isWatching: ${state[key]}`);
-            state[key] = action.isWatching;
-            console.log(`new isWatching: ${state[key]}`);
-          }
-        }*/
         return {
           ...state,
           isWatching: action.isWatching
         };
       }
       case "SETREGEX": {
-        /*for (const key in state) {
-          if (key === "searchRegEx") {
-            console.log(`prev regex: ${state[key]}`);
-            state[key] = action.searchRegEx;
-            console.log(`new regex: ${state[key]}`);
-          }
-        }*/
         return {
           ...state,
           searchRegEx: action.searchRegEx
         };
       }
       case "SETISFORMRESETED": {
-        /*for (const key in state) {
-          if (key === "isFormReseted") {
-            console.log(`prev isFormReseted: ${state[key]}`);
-            state[key] = action.isFormReseted;
-            console.log(`new isFormReseted: ${state[key]}`);
-          }
-        }*/
         return {
           ...state,
           isFormReseted: action.isFormReseted
         };
       }
       case "SETEDITINGTASKID": {
-        /*for (const key in state) {
-          if (key === "editingTaskId") {
-            console.log(`prev editingTaskId: ${state[key]}`);
-            state[key] = action.editingTaskId;
-            console.log(`new editingTaskId: ${state[key]}`);
-          }
-        }*/
         return {
           ...state,
           editingTaskId: action.editingTaskId
         };
       }
       case "SETREALCURRENTTASK": {
-        /*console.log("updating real current task");
-        for (const key in state) {
-          if (key === "realCurrentTask") {
-            console.log(`prev realCurrentTask: ${state[key]}`);
-            state[key] = action.realCurrentTask;
-            console.log(`new realCurrentTask: ${state[key]}`);
-          }
-        }*/
         return {
           ...state,
           realCurrentTask: action.realCurrentTask
         };
       }
       default:
-        for (const key in state) {
-          console.log(key, state[key]);
-        }
         return state;
     }
   }
-
-
 
   const [todoList, dispatch] = useReducer(reducer, initialTodoList);
 
@@ -228,21 +166,12 @@ function TodoContainer() {
   function updateRealCurrentTask(id) {
     switch(id) {
       case -1: {
-        //setRealCurrentTask(undefined);
-
-        //stateHandler("SETREALCURRENTTASK", undefined);
         break;
       }
       case 0: {
-        //setRealCurrentTask({});
-
-        //stateHandler("SETREALCURRENTTASK", {});
         break;
       }
       default: {
-        //setRealCurrentTask(findTaskById(id, todoList.tasksBase));
-
-        //stateHandler("SETREALCURRENTTASK", findTaskById(id, todoList.tasksBase));
       }
     }
   }
@@ -250,7 +179,6 @@ function TodoContainer() {
   useEffect(() => {
     const tmpBase = readLocalStorage();
     if (tmpBase) {
-      //setTasksBase([...tmpBase]);
       stateHandler("SETTASKSBASE", [...tmpBase]);
     }
   }, [])
@@ -259,8 +187,6 @@ function TodoContainer() {
     let newTasksBase = [];
 
     if (todoList.isAdding === true) {
-      //setIsAdding(false);
-
       stateHandler("SETISADDING", false);
 
       newTasksBase = todoList.tasksBase;
@@ -275,16 +201,12 @@ function TodoContainer() {
       })
     }
     writeLocalStorage(newTasksBase);
-    //setTasksBase(newTasksBase);
     stateHandler("SETTASKSBASE", newTasksBase);
   } 
 
   function deleteTask(id) {
     let task = findTaskById(id, todoList.tasksBase);
-    console.log({task});
-
     let index = todoList.tasksBase.indexOf(task);
-    console.log({index});
 
     let newTasksBase = todoList.tasksBase;
     newTasksBase.splice(index, 1);
@@ -294,7 +216,6 @@ function TodoContainer() {
       writeLocalStorage(newTasksBase);
     }
 
-    //setTasksBase([...newTasksBase]);
     stateHandler("SETTASKSBASE", [...newTasksBase]);
   }
 

@@ -6,24 +6,10 @@ function Task(props) {
     <div className={"task " + (props.className ? props.className : "")}>
       <span className="task__name">{props.task.text}</span>
       <button className="task__btn" onClick={() => {
-        //props.setIsWatching(true); 
-
-        props.stateHandler("SETISWATCHING", true);
-
-        //props.setIsEditing(false); 
-        
+        props.stateHandler("SETISWATCHING", true);        
         props.stateHandler("SETISEDITING", false);
-
-        //props.setIsAdding(false);
-
         props.stateHandler("SETISADDING", false);
-
-        //props.updateTask(props.task.id); 
-
         props.stateHandler("SETREALCURRENTTASK", props.task.id);
-        
-        //props.setEditingTaskId(-1)
-      
         props.stateHandler("SETEDITINGTASKID", -1);
         }}>
           <svg className="task__btn-svg" viewBox="0 0 64 64" >
@@ -32,24 +18,11 @@ function Task(props) {
           </svg>
         </button>
       <button className="task__btn task__btn-edit"onClick={() => {
-        //props.setIsWatching(false);
-
         props.stateHandler("SETISWATCHING", false);
-
-        //props.setIsEditing(true); 
-
         props.stateHandler("SETISEDITING", true);
-
-        //props.setIsAdding(false); 
-
         props.stateHandler("SETISADDING", false);
-
-        //props.updateTask(props.task.id);
-
         props.stateHandler("SETREALCURRENTTASK", props.task.id);
-
         props.stateHandler("SETEDITINGTASKID", props.task.id);
-
       }}>
         <svg className="task__btn-svg" viewBox="0 0 306.637 306.637">
           <path d="M12.809,238.52L0,306.637l68.118-12.809l184.277-184.277l-55.309-55.309L12.809,238.52z M60.79,279.943l-41.992,7.896 l7.896-41.992L197.086,75.455l34.096,34.096L60.79,279.943z"/>
@@ -60,21 +33,10 @@ function Task(props) {
         console.log(props);
         console.log(props.realCurrentTask);
         if (props.todoList.realCurrentTask) {
-          if (props.todoList.realCurrentTask.id) {
-          }
           if (props.task.id === props.todoList.realCurrentTask.id) {
-            //props.setIsWatching(false);
-
             props.stateHandler("SETISWATCHING", false);
-
-            //props.setIsEditing(false);
-
             props.stateHandler("SETISEDITING", false);
-
-            //props.updateTask(-1);
-
             props.stateHandler("SETREALCURRENTTASK", -1);
-          
             props.stateHandler("SETEDITINGTASKID", -1);
           } else {
           }
