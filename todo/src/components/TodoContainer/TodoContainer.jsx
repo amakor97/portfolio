@@ -3,7 +3,7 @@ import { useState, useEffect, useRef, useLayoutEffect, useReducer} from "react";
 import "./_todoContainer.sass";
 
 import ListContainer from "../ListContainer/ListContainer";
-import EditContainer from "../EditContainer/EditContainer";
+import EditContainer from "../WorkContainer/WorkContainer";
 
 function TodoContainer() {
 
@@ -226,3 +226,5 @@ function TodoContainer() {
 }
 
 export default TodoContainer;
+
+//https://www.w3schools.com/react/react_memo.asp

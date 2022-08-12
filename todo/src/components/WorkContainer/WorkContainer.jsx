@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 
-import "./_editContainer.sass";
+import "./_workContainer.sass";
 
 import EditForm from "../EditForm/EditForm";
+import WatchContainer from "../WatchContainer/WatchContainer";
 
 function EditContainer(props) {
   const [taskName, setTaskName] = useState(props.todoList.realCurrentTask ? props.todoList.realCurrentTask.text : "");
@@ -66,7 +67,7 @@ function EditContainer(props) {
   };
 
   return (
-    <div className="editContainer" style={{width: ecWidth}}>
+    <div className="workContainer" style={{width: ecWidth}}>
       {
         props.todoList.isEditing === true &&
         <EditForm 
@@ -86,17 +87,10 @@ function EditContainer(props) {
       } 
       {
         props.todoList.isWatching === true &&
-        <>
-          <p>{props.todoList.realCurrentTask.text}</p>
-          <p>{props.todoList.realCurrentTask.desc}</p>
-          <p>{props.todoList.realCurrentTask.status}</p>
-          <button onClick={() => {
-            props.stateHandler("SETISWATCHING", false);
-            props.stateHandler("SETREALCURRENTTASK", -1);
-            }
-            }>Скрыть
-          </button>
-        </>
+        <WatchContainer 
+          todoList={props.todoList}
+          stateHandler={props.stateHandler}
+        />
       }
     </div>
   )

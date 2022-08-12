@@ -9,18 +9,17 @@ function EditForm(props) {
   }, [props.taskStatus]);
 
   return (
-    <form className="editContainer__form" onSubmit={props.handleSubmit}>
-      <fieldset className="editContainer__fieldset">
-        <span>{props.currentId}</span>
+    <form className="editForm__form" onSubmit={props.handleSubmit}>
+      <fieldset className="editForm__fieldset">
         <input 
-          className="editContainer__input" 
+          className="editForm__input" 
           type="text" 
           name="taskName" 
           value={props.taskName} 
           onChange={e => props.setTaskName(e.target.value)}
         ></input>
         <textarea 
-          className="editContainer__textarea" 
+          className="editForm__textarea" 
           value={props.taskDesc} 
           onChange={(e) => props.handleMessageChange(e)}
         ></textarea>
