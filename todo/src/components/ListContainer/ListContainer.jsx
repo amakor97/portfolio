@@ -1,4 +1,4 @@
-import { useState, useRef, useLayoutEffect} from "react";
+import { useRef, useLayoutEffect} from "react";
 
 import "./_listContainer.sass";
 
@@ -20,15 +20,12 @@ function ListContainer(props) {
   }  
   document.onselectstart = disableselect;
 
-  const [sizeX, setSize] = useState(400);
-
   const resizer = (mouseDownEvent) => {
-    const startSize = sizeX;
+    const startSize = props.lcWidth;
     const startPosition = mouseDownEvent.pageX;
     
     function onMouseMove(mouseMoveEvent) {
-      
-      setSize(() => {
+      props.setLcWidth(() => {
         if (((startSize - startPosition + mouseMoveEvent.pageX) <= maxWidth) &&(startSize - startPosition + mouseMoveEvent.pageX > minWidth)) {
           return startSize - startPosition + mouseMoveEvent.pageX;
         } else {
@@ -39,9 +36,8 @@ function ListContainer(props) {
             return minWidth;
         }}
       });
-
-      props.setLcWidth(sizeX);
     }
+
     function onMouseUp() {
       document.body.removeEventListener("mousemove", onMouseMove);
     }
@@ -53,7 +49,7 @@ function ListContainer(props) {
 
   let re = new RegExp(props.todoList.searchRegEx, 'i');
   return (
-    <div className="listContainer" ref={ref} style={{width: sizeX}}>
+    <div className="listContainer" ref={ref} style={{width: props.lcWidth}}>
       <div className="listContainer__resizer" onMouseDown={resizer}></div>
       <SearchFilter stateHandler={props.stateHandler}/>
       <ul>

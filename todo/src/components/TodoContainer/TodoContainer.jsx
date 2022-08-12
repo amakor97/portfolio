@@ -130,7 +130,7 @@ function TodoContainer() {
 
 
   const [tdWidth, setTdWidth] = useState(0);
-  const [lcWidth, setLcWidth] = useState("100%");
+  const [lcWidth, setLcWidth] = useState(400);
   const ref = useRef(null);
 
   useLayoutEffect(() => {
