@@ -4,6 +4,7 @@ import "./_todoContainer.sass";
 
 import ListContainer from "../ListContainer/ListContainer";
 import EditContainer from "../EditContainer/EditContainer";
+import { act } from "react-dom/test-utils";
 
 function TodoContainer() {
 
@@ -21,85 +22,109 @@ function TodoContainer() {
   const reducer = (state, action) => {
     switch (action.type) {
       case "SETTASKSBASE": {
-        for (const key in state) {
+        /*for (const key in state) {
           if (key === "tasksBase") {
             console.log(`prev tasksBase: ${state[key]}`);
             state[key] = action.tasksBase;
             console.log(`new tasksBase: ${state[key]}`);
           }
-        }
-        return state;
+        }*/
+        return {
+          ...state,
+          tasksBase: action.tasksBase
+        };
       }
       case "SETISEDITING": {
-        for (const key in state) {
+        /*for (const key in state) {
           if (key === "isEditing") {
             console.log(`prev isEditing: ${state[key]}`);
             state[key] = action.isEditing;
             console.log(`new isEditing: ${state[key]}`);
           }
-        }
-        return state;
+        }*/
+        return {
+          ...state,
+          isEditing: action.isEditing
+        };
       }
       case "SETISADDING": {
-        for (const key in state) {
+        /*for (const key in state) {
           if (key === "isAdding") {
             console.log(`prev isAdding: ${state[key]}`);
             state[key] = action.isAdding;
             console.log(`new isAdding: ${state[key]}`);
           }
-        }
-        return state;
+        }*/
+        return {
+          ...state,
+          isAdding: action.isAdding
+        };
       }
       case "SETISWATCHING": {
-        for (const key in state) {
+        /*for (const key in state) {
           if (key === "isWatching") {
             console.log(`prev isWatching: ${state[key]}`);
             state[key] = action.isWatching;
             console.log(`new isWatching: ${state[key]}`);
           }
-        }
-        return state;
+        }*/
+        return {
+          ...state,
+          isWatching: action.isWatching
+        };
       }
       case "SETREGEX": {
-        for (const key in state) {
+        /*for (const key in state) {
           if (key === "searchRegEx") {
             console.log(`prev regex: ${state[key]}`);
             state[key] = action.searchRegEx;
             console.log(`new regex: ${state[key]}`);
           }
-        }
-        return state;
+        }*/
+        return {
+          ...state,
+          searchRegEx: action.searchRegEx
+        };
       }
       case "SETISFORMRESETED": {
-        for (const key in state) {
+        /*for (const key in state) {
           if (key === "isFormReseted") {
             console.log(`prev isFormReseted: ${state[key]}`);
             state[key] = action.isFormReseted;
             console.log(`new isFormReseted: ${state[key]}`);
           }
-        }
-        return state;
+        }*/
+        return {
+          ...state,
+          isFormReseted: action.isFormReseted
+        };
       }
       case "SETEDITINGTASKID": {
-        for (const key in state) {
+        /*for (const key in state) {
           if (key === "editingTaskId") {
             console.log(`prev editingTaskId: ${state[key]}`);
             state[key] = action.editingTaskId;
             console.log(`new editingTaskId: ${state[key]}`);
           }
-        }
-        return state;
+        }*/
+        return {
+          ...state,
+          editingTaskId: action.editingTaskId
+        };
       }
       case "SETREALCURRENTTASK": {
-        console.log("updating real current task");
+        /*console.log("updating real current task");
         for (const key in state) {
           if (key === "realCurrentTask") {
             console.log(`prev realCurrentTask: ${state[key]}`);
             state[key] = action.realCurrentTask;
             console.log(`new realCurrentTask: ${state[key]}`);
           }
-        }
-        return state;
+        }*/
+        return {
+          ...state,
+          realCurrentTask: action.realCurrentTask
+        };
       }
       default:
         for (const key in state) {
