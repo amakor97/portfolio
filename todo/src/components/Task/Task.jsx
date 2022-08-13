@@ -1,7 +1,6 @@
 import "./_task.sass";
 
 function Task(props) {
-  console.log(props.task.status);
   return (
     <div className={"task " + (props.className ? props.className : "") + (` task--${props.task.status}`)}>
       <span className="task__name">{props.task.text}</span>

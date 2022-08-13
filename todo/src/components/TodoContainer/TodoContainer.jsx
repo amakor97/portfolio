@@ -20,20 +20,10 @@ function TodoContainer() {
 
   const reducer = (state, action) => {
     let key = action.type.toString().slice(3);
-    key = `${key[0].toLowerCase()}${key.slice(1)}`
-    console.log(key, action.value);
-    switch (action.type) {
-      /*case "SETREALCURRENTTASK": {
-        return {
-          ...state,
-          realCurrentTask: action.realCurrentTask
-        };
-      }*/
-      default:
-        return {
-          ...state,
-          [key]: action.value
-        }
+    key = `${key[0].toLowerCase()}${key.slice(1)}`;
+    return {
+      ...state,
+      [key]: action.value
     }
   }
 
@@ -60,7 +50,6 @@ function TodoContainer() {
         break;
       }
       default: {
-        console.log(actionType, universal);
         dispatch({ type: actionType, value: universal});
         break;
       }
