@@ -58,8 +58,8 @@ function EditForm(props) {
         </label>
         <button type="submit">Сохранить</button>
         <button onClick={() => {
-          props.stateHandler("SETISEDITING", false);
-          props.stateHandler("SETISADDING", false);
+          props.stateHandler("setIsEditing", false);
+          props.stateHandler("setIsAdding", false);
           props.stateHandler("SETREALCURRENTTASK", -1);
           props.setCurrentId(-1)
         }}>Отмена</button>

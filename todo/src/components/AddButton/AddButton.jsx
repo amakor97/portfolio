@@ -5,10 +5,10 @@ function AddButton(props) {
     <button 
       className={"addButton " + (props.className ? props.className : "")} 
       onClick={() => {
-      props.stateHandler("SETISADDING", true);
-      props.stateHandler("SETISEDITING", true);
-      props.stateHandler("SETISWATCHING", false);
-      props.stateHandler("SETISFORMRESETED", false);
+      props.stateHandler("setIsAdding", true);
+      props.stateHandler("setIsEditing", true);
+      props.stateHandler("setIsWatching", false);
+      props.stateHandler("setIsFormReseted", false);
       props.stateHandler("SETREALCURRENTTASK", 0);
     }}>
       Добавить

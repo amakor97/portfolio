@@ -19,49 +19,10 @@ function TodoContainer() {
   };
 
   const reducer = (state, action) => {
+    let key = action.type.toString().slice(3);
+    key = `${key[0].toLowerCase()}${key.slice(1)}`
+    console.log(key);
     switch (action.type) {
-      case "SETTASKSBASE": {
-        return {
-          ...state,
-          tasksBase: action.tasksBase
-        };
-      }
-      case "SETISEDITING": {
-        return {
-          ...state,
-          isEditing: action.isEditing
-        };
-      }
-      case "SETISADDING": {
-        return {
-          ...state,
-          isAdding: action.isAdding
-        };
-      }
-      case "SETISWATCHING": {
-        return {
-          ...state,
-          isWatching: action.isWatching
-        };
-      }
-      case "SETREGEX": {
-        return {
-          ...state,
-          searchRegEx: action.searchRegEx
-        };
-      }
-      case "SETISFORMRESETED": {
-        return {
-          ...state,
-          isFormReseted: action.isFormReseted
-        };
-      }
-      case "SETEDITINGTASKID": {
-        return {
-          ...state,
-          editingTaskId: action.editingTaskId
-        };
-      }
       case "SETREALCURRENTTASK": {
         return {
           ...state,
@@ -69,7 +30,10 @@ function TodoContainer() {
         };
       }
       default:
-        return state;
+        return {
+          ...state,
+          [key]: action.value
+        }
     }
   }
 
@@ -77,36 +41,7 @@ function TodoContainer() {
 
   const stateHandler = (actionType, universal) => {
     switch(actionType) {
-      case "SETTASKSBASE": {
-        dispatch({ type: actionType, tasksBase: universal});
-        break;
-      }
-      case "SETISEDITING": {
-        dispatch({ type: actionType, isEditing: universal});
-        break;
-      }
-      case "SETISADDING": {
-        dispatch({ type: actionType, isAdding: universal});
-        break;
-      }
-      case "SETISWATCHING": {
-        dispatch({ type: actionType, isWatching: universal});
-        break;
-      }
-      case "SETREGEX": {
-        dispatch({ type: actionType, searchRegEx: universal});
-        break;
-      }
-      case "SETISFORMRESETED": {
-        dispatch({ type: actionType, isFormReseted: universal});
-        break;
-      }
-      case "SETEDITINGTASKID": {
-        dispatch({ type: actionType, editingTaskId: universal});
-        break;
-      }
       case "SETREALCURRENTTASK": {
-
         switch(universal) {
           case -1: {
             dispatch({ type: actionType, realCurrentTask: undefined });
@@ -123,8 +58,11 @@ function TodoContainer() {
         }
         break;
       }
-      default:
-        return;
+      default: {
+        console.log(actionType, universal);
+        dispatch({ type: actionType, value: universal});
+        break;
+      }
     }
   }
 
@@ -144,7 +82,7 @@ function TodoContainer() {
   useEffect(() => {
     const tmpBase = readLocalStorage();
     if (tmpBase) {
-      stateHandler("SETTASKSBASE", [...tmpBase]);
+      stateHandler("setTasksBase", [...tmpBase]);
     }
   }, [])
 
@@ -152,7 +90,7 @@ function TodoContainer() {
     let newTasksBase = [];
 
     if (todoList.isAdding === true) {
-      stateHandler("SETISADDING", false);
+      stateHandler("setIsAdding", false);
 
       newTasksBase = todoList.tasksBase;
       newTasksBase.push(taskData);
@@ -166,7 +104,7 @@ function TodoContainer() {
       })
     }
     writeLocalStorage(newTasksBase);
-    stateHandler("SETTASKSBASE", newTasksBase);
+    stateHandler("setTasksBase", newTasksBase);
   } 
 
   function deleteTask(id) {
@@ -181,7 +119,7 @@ function TodoContainer() {
       writeLocalStorage(newTasksBase);
     }
 
-    stateHandler("SETTASKSBASE", [...newTasksBase]);
+    stateHandler("setTasksBase", [...newTasksBase]);
   }
 
 

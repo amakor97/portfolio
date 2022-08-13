@@ -18,7 +18,7 @@ function EditContainer(props) {
         if ((props.todoList.realCurrentTask) && (props.todoList.editingTaskId === -1)) {
 // remove currentId? because editingTaskId looks very similar
           setCurrentId(props.todoList.realCurrentTask.id);
-          props.stateHandler("SETEDITINGTASKID", props.todoList.realCurrentTask.id);
+          props.stateHandler("setEditingTaskId", props.todoList.realCurrentTask.id);
           setTaskName(props.todoList.realCurrentTask.text);
           setTaskDesc(props.todoList.realCurrentTask.desc);
           setTaskStatus(props.todoList.realCurrentTask.status);
@@ -26,7 +26,7 @@ function EditContainer(props) {
       } else {
         if (props.todoList.realCurrentTask) {
           setCurrentId(props.todoList.realCurrentTask.id);
-          props.stateHandler("SETEDITINGTASKID", props.todoList.realCurrentTask.id);
+          props.stateHandler("setEditingTaskId", props.todoList.realCurrentTask.id);
           setTaskName(props.todoList.realCurrentTask.text);
           setTaskDesc(props.todoList.realCurrentTask.desc);
           setTaskStatus(props.todoList.realCurrentTask.status);
@@ -38,7 +38,7 @@ function EditContainer(props) {
         setTaskDesc('');
         setTaskStatus('');
         setCurrentId(Date.now());
-        props.stateHandler("SETISFORMRESETED", true);
+        props.stateHandler("setIsFormReseted", true);
       }
     }
   }, [props, currentId])
@@ -58,7 +58,7 @@ function EditContainer(props) {
     }
 
     props.editTask(taskData);
-    props.stateHandler("SETISEDITING", false);
+    props.stateHandler("setIsEditing", false);
     props.stateHandler("SETREALCURRENTTASK", -1);
   }
 
