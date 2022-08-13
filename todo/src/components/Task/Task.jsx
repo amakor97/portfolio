@@ -3,7 +3,7 @@ import "./_task.sass";
 function Task(props) {
   return (
     <div className={"task " + (props.className ? props.className : "") + (` task--${props.task.status}`)}>
-      <span className="task__name">{props.task.text}</span>
+      <span className="task__name">{props.task.name}</span>
       <div className="task__btn-wrapper">
         <button className="task__btn" onClick={() => {
           props.stateHandler("setIsWatching", true);
@@ -23,6 +23,7 @@ function Task(props) {
           props.stateHandler("setIsAdding", false);
           props.stateHandler("setRealCurrentTask", props.task.id);
           props.stateHandler("setEditingTaskId", props.task.id);
+          props.formStateHandler("resetForm", 0);
         }}>
           <svg className="task__btn-svg" viewBox="0 0 306.637 306.637">
             <path d="M12.809,238.52L0,306.637l68.118-12.809l184.277-184.277l-55.309-55.309L12.809,238.52z M60.79,279.943l-41.992,7.896 l7.896-41.992L197.086,75.455l34.096,34.096L60.79,279.943z"/>

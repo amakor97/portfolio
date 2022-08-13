@@ -63,6 +63,9 @@ function ListContainer(props) {
             key={task.id} 
             task={task} 
             deleteTask={props.deleteTask}
+
+            formData={props.formData}
+            formStateHandler={props.formStateHandler}
           />
         )}
         )}

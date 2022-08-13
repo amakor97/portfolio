@@ -19,8 +19,8 @@ function TodoContainer() {
   };
 
   const initialFormData = {
-    taskName: "a",
-    taskDesc: "b",
+    taskName: "",
+    taskDesc: "",
     taskStatus: ""
   };
 
@@ -35,7 +35,12 @@ function TodoContainer() {
 
   const formReducer = (state, action) => {
     console.log(state, action);
+    console.log(state);
+    console.log(action);
+    let key = action.type.toString().slice(3);
+    key = `${key[0].toLowerCase()}${key.slice(1)}`;
     if (action.type === "resetForm") {
+      console.log("reseting form");
       return {
         ...state,
         taskName: "",
@@ -43,8 +48,11 @@ function TodoContainer() {
         taskStatus: ""
       };
     } else {
+      console.log(action.type);
+      console.log(action.value);
       return {
-        state
+        ...state,
+        [key]: action.value
       }
     }
   }
@@ -82,15 +90,15 @@ function TodoContainer() {
   const formStateHandler = (actionType, universal) => {
     console.log(actionType, universal);
     switch (actionType) {
-      case "setName": {
+      case "setTaskName": {
         formDispatch({ type: actionType, value: universal});
         break;
       }
-      case "setDesc": {
+      case "setTaskDesc": {
         formDispatch({ type: actionType, value: universal});
         break;
       }
-      case "setStatus": {
+      case "setTaskStatus": {
         formDispatch({ type: actionType, value: universal});
         break;
       }
@@ -186,6 +194,7 @@ function TodoContainer() {
           todoList={todoList}
           stateHandler={stateHandler}
 
+          formData={formData}
           formStateHandler={formStateHandler}
 
           deleteTask={deleteTask}
@@ -196,6 +205,10 @@ function TodoContainer() {
         <WorkContainer 
           todoList={todoList}
           stateHandler={stateHandler}
+
+          formData={formData}
+          formStateHandler={formStateHandler}
+
           editTask={editTask}
           tdWidth={tdWidth}
           lcWidth={lcWidth}

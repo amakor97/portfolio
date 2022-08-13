@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./_editForm.sass";
 
 function EditForm(props) {
-  const [selectedStatus, setSelectedStatus] = useState(props.taskStatus);
+  const [selectedStatus, setSelectedStatus] = useState(props.formData.taskStatus);
 
   useEffect(() => {
     setSelectedStatus(props.taskStatus);
@@ -15,12 +15,15 @@ function EditForm(props) {
           className="editForm__input" 
           type="text" 
           name="taskName" 
-          value={props.taskName} 
-          onChange={e => props.setTaskName(e.target.value)}
+          value={props.formData.taskName} 
+          onChange={e => {
+            props.setTaskName(e.target.value);
+            props.formStateHandler("setTaskName", e.target.value);
+          }}
         ></input>
         <textarea 
           className="editForm__textarea" 
-          value={props.taskDesc} 
+          value={props.formData.taskDesc} 
           onChange={(e) => props.handleMessageChange(e)}
         ></textarea>
         <label className="editForm__label">Ожидает
@@ -29,7 +32,9 @@ function EditForm(props) {
             name="status" 
             value="waiting" 
             onChange={(e) => {
-              props.setTaskStatus(e.target.value);setSelectedStatus(e.target.value)
+              props.setTaskStatus(e.target.value);
+              props.formStateHandler("setTaskStatus", e.target.value);
+              setSelectedStatus(e.target.value)
             }} 
             checked={selectedStatus === "waiting"}
           ></input>
@@ -40,7 +45,9 @@ function EditForm(props) {
             name="status" 
             value="processing" 
             onChange={(e) => {
-              props.setTaskStatus(e.target.value); setSelectedStatus(e.target.value)
+              props.setTaskStatus(e.target.value);
+              props.formStateHandler("setTaskStatus", e.target.value);
+              setSelectedStatus(e.target.value)
             }} 
             checked={selectedStatus === "processing"}
             ></input>
@@ -51,7 +58,9 @@ function EditForm(props) {
           name="status" 
           value="done" 
           onChange={(e) => {
-            props.setTaskStatus(e.target.value); setSelectedStatus(e.target.value)
+            props.setTaskStatus(e.target.value);
+            props.formStateHandler("setTaskStatus", e.target.value);
+            setSelectedStatus(e.target.value)
           }}
           checked={selectedStatus === "done"}
         ></input>
@@ -64,7 +73,8 @@ function EditForm(props) {
           props.setCurrentId(-1);
           props.stateHandler("setEditingTaskId", -1);
           props.stateHandler("setIsFormReseted", false);
-          //props.resetForm();
+          props.formStateHandler("resetForm", 0);
+          props.resetForm();
         }}>Отмена</button>
       </fieldset>
     </form>

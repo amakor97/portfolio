@@ -15,9 +15,14 @@ function WorkContainer(props) {
   useEffect(() => {
     if ((props.todoList.isAdding === false)) {
       if ((props.todoList.realCurrentTask) && (props.todoList.realCurrentTask.id !== currentId)) {
-        setTaskName(props.todoList.realCurrentTask.text);
+        setTaskName(props.todoList.realCurrentTask.name);
+        props.formStateHandler("setTaskName", props.todoList.realCurrentTask.name);
+
         setTaskDesc(props.todoList.realCurrentTask.desc);
+        props.formStateHandler("setTaskDesc", props.todoList.realCurrentTask.desc);
+        
         setTaskStatus(props.todoList.realCurrentTask.status);
+        props.formStateHandler("setTaskStatus", props.todoList.realCurrentTask.status);
 
         setCurrentId(props.todoList.realCurrentTask.id);
         props.stateHandler("setEditingTaskId", props.todoList.realCurrentTask.id);
@@ -52,9 +57,12 @@ function WorkContainer(props) {
 
     let taskData = {
       id: currentId,
-      text: taskName,
-      desc: taskDesc,
-      status: taskStatus
+      name: props.formData.taskName,
+      desc: props.formData.taskDesc,
+      status: props.formData.taskStatus,
+      //text: taskName,
+      //desc: taskDesc,
+      //status: taskStatus
     }
 
     props.editTask(taskData);
@@ -64,6 +72,7 @@ function WorkContainer(props) {
 
   function handleMessageChange(e) {
     setTaskDesc(e.target.value);
+    props.formStateHandler("setTaskDesc", e.target.value);
   };
 
   return (
@@ -73,6 +82,10 @@ function WorkContainer(props) {
         <EditForm 
           stateHandler={props.stateHandler}
           handleSubmit={handleSubmit}
+
+          formData={props.formData}
+          formStateHandler={props.formStateHandler}
+
           resetForm={resetForm}
 
           taskName={taskName} 
@@ -90,6 +103,9 @@ function WorkContainer(props) {
         <WatchContainer 
           todoList={props.todoList}
           stateHandler={props.stateHandler}
+
+          formData={props.formData}
+          formStateHandler={props.formStateHandler}
         />
       }
     </div>
