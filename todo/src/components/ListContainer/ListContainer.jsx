@@ -26,7 +26,7 @@ function ListContainer(props) {
     
     function onMouseMove(mouseMoveEvent) {
       props.setLcWidth(() => {
-        if (((startSize - startPosition + mouseMoveEvent.pageX) <= maxWidth) &&(startSize - startPosition + mouseMoveEvent.pageX > minWidth)) {
+        if (((startSize - startPosition + mouseMoveEvent.pageX) <= maxWidth) && (startSize - startPosition + mouseMoveEvent.pageX > minWidth)) {
           return startSize - startPosition + mouseMoveEvent.pageX;
         } else {
           if ((startSize - startPosition + mouseMoveEvent.pageX) > maxWidth) {

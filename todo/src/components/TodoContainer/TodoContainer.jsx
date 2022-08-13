@@ -30,7 +30,6 @@ function TodoContainer() {
   const [todoList, dispatch] = useReducer(reducer, initialTodoList);
 
   const stateHandler = (actionType, universal) => {
-    console.log(actionType, universal);
     switch(actionType) {
       case "setRealCurrentTask": {
         switch(universal) {

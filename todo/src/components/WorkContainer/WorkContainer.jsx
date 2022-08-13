@@ -14,24 +14,13 @@ function WorkContainer(props) {
 
   useEffect(() => {
     if ((props.todoList.isAdding === false)) {
-      if ((props.todoList.realCurrentTask) && (props.todoList.realCurrentTask.id === currentId)) {
-        if ((props.todoList.realCurrentTask) && (props.todoList.editingTaskId === -1)) {
-// remove currentId? because editingTaskId looks very similar
-          setCurrentId(props.todoList.realCurrentTask.id);
-          props.stateHandler("setEditingTaskId", props.todoList.realCurrentTask.id);
-          setTaskName(props.todoList.realCurrentTask.text);
-          setTaskDesc(props.todoList.realCurrentTask.desc);
-          setTaskStatus(props.todoList.realCurrentTask.status);
-        }
-      } else {
-        if (props.todoList.realCurrentTask) {
-          setCurrentId(props.todoList.realCurrentTask.id);
-          props.stateHandler("setEditingTaskId", props.todoList.realCurrentTask.id);
-          setTaskName(props.todoList.realCurrentTask.text);
-          setTaskDesc(props.todoList.realCurrentTask.desc);
-          setTaskStatus(props.todoList.realCurrentTask.status);
-        }
-      } 
+      if ((props.todoList.realCurrentTask) && (props.todoList.realCurrentTask.id !== currentId)) {
+        setCurrentId(props.todoList.realCurrentTask.id);
+        props.stateHandler("setEditingTaskId", props.todoList.realCurrentTask.id);
+        setTaskName(props.todoList.realCurrentTask.text);
+        setTaskDesc(props.todoList.realCurrentTask.desc);
+        setTaskStatus(props.todoList.realCurrentTask.status);
+      }
     } else {
       if (props.todoList.isFormReseted === false) {
         setTaskName('');
