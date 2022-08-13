@@ -16,15 +16,12 @@ function EditForm(props) {
           type="text" 
           name="taskName" 
           value={props.formData.taskName} 
-          onChange={e => {
-            props.setTaskName(e.target.value);
-            props.formStateHandler("setTaskName", e.target.value);
-          }}
+          onChange={e => props.formStateHandler("setTaskName", e.target.value)}
         ></input>
         <textarea 
           className="editForm__textarea" 
           value={props.formData.taskDesc} 
-          onChange={(e) => props.handleMessageChange(e)}
+          onChange={(e) => props.formStateHandler("setTaskDesc", e.target.value)}
         ></textarea>
         <label className="editForm__label">Ожидает
           <input 
@@ -32,7 +29,6 @@ function EditForm(props) {
             name="status" 
             value="waiting" 
             onChange={(e) => {
-              props.setTaskStatus(e.target.value);
               props.formStateHandler("setTaskStatus", e.target.value);
               setSelectedStatus(e.target.value)
             }} 
@@ -45,7 +41,6 @@ function EditForm(props) {
             name="status" 
             value="processing" 
             onChange={(e) => {
-              props.setTaskStatus(e.target.value);
               props.formStateHandler("setTaskStatus", e.target.value);
               setSelectedStatus(e.target.value)
             }} 
@@ -58,7 +53,6 @@ function EditForm(props) {
           name="status" 
           value="done" 
           onChange={(e) => {
-            props.setTaskStatus(e.target.value);
             props.formStateHandler("setTaskStatus", e.target.value);
             setSelectedStatus(e.target.value)
           }}
@@ -70,11 +64,8 @@ function EditForm(props) {
           props.stateHandler("setIsEditing", false);
           props.stateHandler("setIsAdding", false);
           props.stateHandler("setRealCurrentTask", -1);
-          props.setCurrentId(-1);
           props.stateHandler("setEditingTaskId", -1);
-          props.stateHandler("setIsFormReseted", false);
           props.formStateHandler("resetForm", 0);
-          props.resetForm();
         }}>Отмена</button>
       </fieldset>
     </form>

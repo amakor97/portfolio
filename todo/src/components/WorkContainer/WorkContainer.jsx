@@ -6,10 +6,6 @@ import EditForm from "../EditForm/EditForm";
 import WatchContainer from "../WatchContainer/WatchContainer";
 
 function WorkContainer(props) {
-  const [taskName, setTaskName] = useState(props.todoList.realCurrentTask ? props.todoList.realCurrentTask.text : "");
-  const [currentId, setCurrentId] = useState(-1);
-  const [taskDesc, setTaskDesc] = useState(props.todoList.realCurrentTask ? props.todoList.realCurrentTask.desc : "");
-  const [taskStatus, setTaskStatus] = useState(props.todoList.realCurrentTask ? props.todoList.realCurrentTask.status : "");
   const [ecWidth, setEcWidth] = useState("100%");
 
   useEffect(() => {
@@ -21,25 +17,9 @@ function WorkContainer(props) {
         props.stateHandler("setEditingTaskId", props.todoList.realCurrentTask.id);
       }
     } else {
-      if (props.todoList.isFormReseted === false) {
-        setTaskName('');
-        setTaskDesc('');
-        setTaskStatus('');
-        props.stateHandler("setIsFormReseted", true);
-        
-        let time = Date.now();
-        setCurrentId(time);
-        props.stateHandler("setEditingTaskId", time);
-      }
+      props.stateHandler("setEditingTaskId", Date.now());
     }
   }, [props.todoList.realCurrentTask])
-
-  function resetForm() {
-    setTaskName('');
-    setTaskDesc('');
-    setTaskStatus('');
-    props.stateHandler("setIsFormReseted", true);
-  }
 
   useEffect(() => {
     setEcWidth(props.tdWidth - props.lcWidth);
@@ -48,27 +28,18 @@ function WorkContainer(props) {
   function handleSubmit(event) {
     event.preventDefault();
 
-    console.log(props.formData);
-
-    let taskData = {
+    let editedTaskData = {
       id: props.todoList.editingTaskId,
       name: props.formData.taskName,
       desc: props.formData.taskDesc,
       status: props.formData.taskStatus,
-      //text: taskName,
-      //desc: taskDesc,
-      //status: taskStatus
     }
 
-    props.editTask(taskData);
+    props.editTask(editedTaskData);
     props.stateHandler("setIsEditing", false);
     props.stateHandler("setRealCurrentTask", -1);
+    props.formStateHandler("resetForm", 0);
   }
-
-  function handleMessageChange(e) {
-    setTaskDesc(e.target.value);
-    props.formStateHandler("setTaskDesc", e.target.value);
-  };
 
   return (
     <div className="workContainer" style={{width: ecWidth}}>
@@ -80,17 +51,6 @@ function WorkContainer(props) {
 
           formData={props.formData}
           formStateHandler={props.formStateHandler}
-
-          resetForm={resetForm}
-
-          taskName={taskName} 
-          setTaskName={setTaskName} 
-          taskDesc={taskDesc} 
-          setTaskDesc={setTaskDesc} 
-          handleMessageChange={handleMessageChange}
-          taskStatus={taskStatus} 
-          setTaskStatus={setTaskStatus} 
-          setCurrentId={setCurrentId}
         />
       } 
       {
@@ -99,7 +59,6 @@ function WorkContainer(props) {
           todoList={props.todoList}
           stateHandler={props.stateHandler}
 
-          formData={props.formData}
           formStateHandler={props.formStateHandler}
         />
       }

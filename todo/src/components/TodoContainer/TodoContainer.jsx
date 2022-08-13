@@ -13,7 +13,6 @@ function TodoContainer() {
     isAdding: false,
     isWatching: false,
     searchRegEx: ".*",
-    isFormReseted: false,
     editingTaskId: 0,
     realCurrentTask: {}
   };
