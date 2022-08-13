@@ -14,17 +14,10 @@ function WorkContainer(props) {
 
   useEffect(() => {
     if ((props.todoList.isAdding === false)) {
-      if ((props.todoList.realCurrentTask) && (props.todoList.realCurrentTask.id !== currentId)) {
-        setTaskName(props.todoList.realCurrentTask.name);
+      if ((props.todoList.realCurrentTask)) {
         props.formStateHandler("setTaskName", props.todoList.realCurrentTask.name);
-
-        setTaskDesc(props.todoList.realCurrentTask.desc);
         props.formStateHandler("setTaskDesc", props.todoList.realCurrentTask.desc);
-        
-        setTaskStatus(props.todoList.realCurrentTask.status);
         props.formStateHandler("setTaskStatus", props.todoList.realCurrentTask.status);
-
-        setCurrentId(props.todoList.realCurrentTask.id);
         props.stateHandler("setEditingTaskId", props.todoList.realCurrentTask.id);
       }
     } else {
@@ -39,7 +32,7 @@ function WorkContainer(props) {
         props.stateHandler("setEditingTaskId", time);
       }
     }
-  }, [props, currentId])
+  }, [props.todoList.realCurrentTask])
 
   function resetForm() {
     setTaskName('');
@@ -55,8 +48,10 @@ function WorkContainer(props) {
   function handleSubmit(event) {
     event.preventDefault();
 
+    console.log(props.formData);
+
     let taskData = {
-      id: currentId,
+      id: props.todoList.editingTaskId,
       name: props.formData.taskName,
       desc: props.formData.taskDesc,
       status: props.formData.taskStatus,

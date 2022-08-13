@@ -9,6 +9,7 @@ function WatchContainer(props) {
           <button onClick={() => {
             props.stateHandler("setIsWatching", false);
             props.stateHandler("setRealCurrentTask", -1);
+            props.formStateHandler("resetForm", 0);
           }}>
             Скрыть
           </button>

@@ -34,9 +34,6 @@ function TodoContainer() {
   }
 
   const formReducer = (state, action) => {
-    console.log(state, action);
-    console.log(state);
-    console.log(action);
     let key = action.type.toString().slice(3);
     key = `${key[0].toLowerCase()}${key.slice(1)}`;
     if (action.type === "resetForm") {
@@ -48,8 +45,6 @@ function TodoContainer() {
         taskStatus: ""
       };
     } else {
-      console.log(action.type);
-      console.log(action.value);
       return {
         ...state,
         [key]: action.value
@@ -88,7 +83,6 @@ function TodoContainer() {
   }
 
   const formStateHandler = (actionType, universal) => {
-    console.log(actionType, universal);
     switch (actionType) {
       case "setTaskName": {
         formDispatch({ type: actionType, value: universal});
@@ -133,6 +127,7 @@ function TodoContainer() {
   }, [])
 
   function editTask(taskData) {
+    console.log("received:", taskData);
     let newTasksBase = [];
 
     if (todoList.isAdding === true) {
@@ -140,6 +135,7 @@ function TodoContainer() {
 
       newTasksBase = todoList.tasksBase;
       newTasksBase.push(taskData);
+      
     } else {
       newTasksBase = todoList.tasksBase.map(obj => {
         if (obj.id === taskData.id) {

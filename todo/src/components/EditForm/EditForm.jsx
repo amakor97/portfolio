@@ -5,8 +5,8 @@ function EditForm(props) {
   const [selectedStatus, setSelectedStatus] = useState(props.formData.taskStatus);
 
   useEffect(() => {
-    setSelectedStatus(props.taskStatus);
-  }, [props.taskStatus]);
+    setSelectedStatus(props.formData.taskStatus);
+  }, [props.formData.taskStatus]);
 
   return (
     <form className="editForm__form" onSubmit={props.handleSubmit}>
