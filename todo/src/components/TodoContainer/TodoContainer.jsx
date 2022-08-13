@@ -26,15 +26,6 @@ function TodoContainer() {
   const reducer = (state, action) => {
     let key = action.type.toString().slice(3);
     key = `${key[0].toLowerCase()}${key.slice(1)}`;
-    return {
-      ...state,
-      [key]: action.value
-    }
-  }
-
-  const formReducer = (state, action) => {
-    let key = action.type.toString().slice(3);
-    key = `${key[0].toLowerCase()}${key.slice(1)}`;
     if (action.type === "resetForm") {
       console.log("reseting form");
       return {
@@ -53,7 +44,7 @@ function TodoContainer() {
 
   const [todoList, dispatch] = useReducer(reducer, initialTodoList);
 
-  const [formData, formDispatch] = useReducer(formReducer, initialFormData); 
+  const [formData, formDispatch] = useReducer(reducer, initialFormData); 
 
   const stateHandler = (actionType, universal) => {
     switch(actionType) {
@@ -82,29 +73,8 @@ function TodoContainer() {
   }
 
   const formStateHandler = (actionType, universal) => {
-    switch (actionType) {
-      case "setTaskName": {
-        formDispatch({ type: actionType, value: universal});
-        break;
-      }
-      case "setTaskDesc": {
-        formDispatch({ type: actionType, value: universal});
-        break;
-      }
-      case "setTaskStatus": {
-        formDispatch({ type: actionType, value: universal});
-        break;
-      }
-      case "resetForm": {
-        formDispatch({ type: actionType, value: universal});
-        break;
-      }
-      default:
-        break;
-    }
+    formDispatch({ type: actionType, value: universal});
   } 
-
-
 
   const [tdWidth, setTdWidth] = useState(0);
   const [lcWidth, setLcWidth] = useState(400);

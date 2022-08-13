@@ -55,7 +55,7 @@ function ListContainer(props) {
       <ul>
         {props.todoList.tasksBase.map(task => {
         return (
-          re.test(task.text) &&
+          re.test(task.name) &&
           <Task
             todoList={props.todoList}
             stateHandler={props.stateHandler}
