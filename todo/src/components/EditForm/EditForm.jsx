@@ -60,7 +60,7 @@ function EditForm(props) {
         <button onClick={() => {
           props.stateHandler("setIsEditing", false);
           props.stateHandler("setIsAdding", false);
-          props.stateHandler("SETREALCURRENTTASK", -1);
+          props.stateHandler("setRealCurrentTask", -1);
           props.setCurrentId(-1)
         }}>Отмена</button>
       </fieldset>

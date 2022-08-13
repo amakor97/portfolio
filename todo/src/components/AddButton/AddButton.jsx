@@ -9,7 +9,7 @@ function AddButton(props) {
       props.stateHandler("setIsEditing", true);
       props.stateHandler("setIsWatching", false);
       props.stateHandler("setIsFormReseted", false);
-      props.stateHandler("SETREALCURRENTTASK", 0);
+      props.stateHandler("setRealCurrentTask", 0);
     }}>
       Добавить
     </button>

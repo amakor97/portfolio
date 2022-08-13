@@ -10,7 +10,7 @@ function Task(props) {
           props.stateHandler("setIsWatching", true);
           props.stateHandler("setIsEditing", false);
           props.stateHandler("setIsAdding", false);
-          props.stateHandler("SETREALCURRENTTASK", props.task.id);
+          props.stateHandler("setRealCurrentTask", props.task.id);
           props.stateHandler("setEditingTaskId", -1);
           }}>
             <svg className="task__btn-svg" viewBox="0 0 64 64" >
@@ -22,7 +22,7 @@ function Task(props) {
           props.stateHandler("setIsWatching", false);
           props.stateHandler("setIsEditing", true);
           props.stateHandler("setIsAdding", false);
-          props.stateHandler("SETREALCURRENTTASK", props.task.id);
+          props.stateHandler("setRealCurrentTask", props.task.id);
           props.stateHandler("setEditingTaskId", props.task.id);
         }}>
           <svg className="task__btn-svg" viewBox="0 0 306.637 306.637">
@@ -35,7 +35,7 @@ function Task(props) {
             if (props.task.id === props.todoList.realCurrentTask.id) {
               props.stateHandler("setIsWatching", false);
               props.stateHandler("setIsEditing", false);
-              props.stateHandler("SETREALCURRENTTASK", -1);
+              props.stateHandler("setRealCurrentTask", -1);
               props.stateHandler("setEditingTaskId", -1);
             } else {
             }

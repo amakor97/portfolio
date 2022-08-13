@@ -3,7 +3,7 @@ import { useState, useEffect, useRef, useLayoutEffect, useReducer} from "react";
 import "./_todoContainer.sass";
 
 import ListContainer from "../ListContainer/ListContainer";
-import EditContainer from "../WorkContainer/WorkContainer";
+import WorkContainer from "../WorkContainer/WorkContainer";
 
 function TodoContainer() {
 
@@ -21,14 +21,14 @@ function TodoContainer() {
   const reducer = (state, action) => {
     let key = action.type.toString().slice(3);
     key = `${key[0].toLowerCase()}${key.slice(1)}`
-    console.log(key);
+    console.log(key, action.value);
     switch (action.type) {
-      case "SETREALCURRENTTASK": {
+      /*case "SETREALCURRENTTASK": {
         return {
           ...state,
           realCurrentTask: action.realCurrentTask
         };
-      }
+      }*/
       default:
         return {
           ...state,
@@ -40,19 +40,20 @@ function TodoContainer() {
   const [todoList, dispatch] = useReducer(reducer, initialTodoList);
 
   const stateHandler = (actionType, universal) => {
+    console.log(actionType, universal);
     switch(actionType) {
-      case "SETREALCURRENTTASK": {
+      case "setRealCurrentTask": {
         switch(universal) {
           case -1: {
-            dispatch({ type: actionType, realCurrentTask: undefined });
+            dispatch({ type: actionType, value: undefined });
             break;
           }
           case 0: {
-            dispatch({ type: actionType, realCurrentTask: {} });
+            dispatch({ type: actionType, value: {} });
             break;
           }
           default: {
-            dispatch({ type: actionType, realCurrentTask: findTaskById(universal, todoList.tasksBase) });
+            dispatch({ type: actionType, value: findTaskById(universal, todoList.tasksBase) });
             break;
           }
         }
@@ -152,7 +153,7 @@ function TodoContainer() {
           lcWidth={lcWidth}
           setLcWidth={setLcWidth}
         />
-        <EditContainer 
+        <WorkContainer 
           todoList={todoList}
           stateHandler={stateHandler}
           editTask={editTask}

@@ -5,7 +5,7 @@ import "./_workContainer.sass";
 import EditForm from "../EditForm/EditForm";
 import WatchContainer from "../WatchContainer/WatchContainer";
 
-function EditContainer(props) {
+function WorkContainer(props) {
   const [taskName, setTaskName] = useState(props.todoList.realCurrentTask ? props.todoList.realCurrentTask.text : "");
   const [currentId, setCurrentId] = useState(-1);
   const [taskDesc, setTaskDesc] = useState(props.todoList.realCurrentTask ? props.todoList.realCurrentTask.desc : "");
@@ -59,7 +59,7 @@ function EditContainer(props) {
 
     props.editTask(taskData);
     props.stateHandler("setIsEditing", false);
-    props.stateHandler("SETREALCURRENTTASK", -1);
+    props.stateHandler("setRealCurrentTask", -1);
   }
 
   function handleMessageChange(e) {
@@ -96,4 +96,4 @@ function EditContainer(props) {
   )
 }
 
-export default EditContainer;
+export default WorkContainer;

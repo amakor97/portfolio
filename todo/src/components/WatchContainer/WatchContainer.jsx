@@ -8,7 +8,7 @@ function WatchContainer(props) {
           <p>{props.todoList.realCurrentTask.status}</p>
           <button onClick={() => {
             props.stateHandler("setIsWatching", false);
-            props.stateHandler("SETREALCURRENTTASK", -1);
+            props.stateHandler("setRealCurrentTask", -1);
           }}>
             Скрыть
           </button>
