@@ -36,6 +36,13 @@ function WorkContainer(props) {
     }
   }, [props, currentId])
 
+  function resetForm() {
+    setTaskName('');
+    setTaskDesc('');
+    setTaskStatus('');
+    props.stateHandler("setIsFormReseted", true);
+  }
+
   useEffect(() => {
     setEcWidth(props.tdWidth - props.lcWidth);
   }, [props.tdWidth, props.lcWidth])
@@ -45,7 +52,6 @@ function WorkContainer(props) {
 
     let taskData = {
       id: currentId,
-      //id: props.todoList.realCurrentTask.id,
       text: taskName,
       desc: taskDesc,
       status: taskStatus
@@ -67,6 +73,7 @@ function WorkContainer(props) {
         <EditForm 
           stateHandler={props.stateHandler}
           handleSubmit={handleSubmit}
+          resetForm={resetForm}
 
           taskName={taskName} 
           setTaskName={setTaskName} 

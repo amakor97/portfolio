@@ -71,6 +71,7 @@ function ListContainer(props) {
         className="listContainer__add-btn"
         todoList={props.todoList}
         stateHandler={props.stateHandler}
+        formStateHandler={props.formStateHandler}
       />
     </div>
   )

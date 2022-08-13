@@ -18,6 +18,12 @@ function TodoContainer() {
     realCurrentTask: {}
   };
 
+  const initialFormData = {
+    taskName: "a",
+    taskDesc: "b",
+    taskStatus: ""
+  };
+
   const reducer = (state, action) => {
     let key = action.type.toString().slice(3);
     key = `${key[0].toLowerCase()}${key.slice(1)}`;
@@ -27,7 +33,25 @@ function TodoContainer() {
     }
   }
 
+  const formReducer = (state, action) => {
+    console.log(state, action);
+    if (action.type === "resetForm") {
+      return {
+        ...state,
+        taskName: "",
+        taskDesc: "",
+        taskStatus: ""
+      };
+    } else {
+      return {
+        state
+      }
+    }
+  }
+
   const [todoList, dispatch] = useReducer(reducer, initialTodoList);
+
+  const [formData, formDispatch] = useReducer(formReducer, initialFormData); 
 
   const stateHandler = (actionType, universal) => {
     switch(actionType) {
@@ -54,6 +78,31 @@ function TodoContainer() {
       }
     }
   }
+
+  const formStateHandler = (actionType, universal) => {
+    console.log(actionType, universal);
+    switch (actionType) {
+      case "setName": {
+        formDispatch({ type: actionType, value: universal});
+        break;
+      }
+      case "setDesc": {
+        formDispatch({ type: actionType, value: universal});
+        break;
+      }
+      case "setStatus": {
+        formDispatch({ type: actionType, value: universal});
+        break;
+      }
+      case "resetForm": {
+        formDispatch({ type: actionType, value: universal});
+        break;
+      }
+      default:
+        break;
+    }
+  } 
+
 
 
   const [tdWidth, setTdWidth] = useState(0);
@@ -136,6 +185,9 @@ function TodoContainer() {
         <ListContainer
           todoList={todoList}
           stateHandler={stateHandler}
+
+          formStateHandler={formStateHandler}
+
           deleteTask={deleteTask}
           tdWidth={tdWidth}
           lcWidth={lcWidth}
