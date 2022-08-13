@@ -26,18 +26,42 @@ function TodoContainer() {
   const reducer = (state, action) => {
     let key = action.type.toString().slice(3);
     key = `${key[0].toLowerCase()}${key.slice(1)}`;
-    if (action.type === "resetForm") {
-      console.log("reseting form");
-      return {
-        ...state,
-        taskName: "",
-        taskDesc: "",
-        taskStatus: ""
-      };
-    } else {
-      return {
-        ...state,
-        [key]: action.value
+    switch(action.type) {
+      case "setRealCurrentTask": {
+        switch(action.value) {
+          case -1: {
+            return {
+              ...state,
+              [key]: undefined
+            }
+          }
+          case 0: {
+            return {
+              ...state,
+              [key]: {}
+            }
+          }
+          default: {
+            return {
+              ...state,
+              [key]: findTaskById(action.value, state.tasksBase)
+            }
+          }
+        }
+      }
+      case "resetForm": {
+        return {
+          ...state,
+          taskName: "",
+          taskDesc: "",
+          taskStatus: ""
+        };
+      }
+      default: {
+        return {
+          ...state,
+          [key]: action.value
+        }
       }
     }
   }
@@ -47,29 +71,7 @@ function TodoContainer() {
   const [formData, formDispatch] = useReducer(reducer, initialFormData); 
 
   const stateHandler = (actionType, universal) => {
-    switch(actionType) {
-      case "setRealCurrentTask": {
-        switch(universal) {
-          case -1: {
-            dispatch({ type: actionType, value: undefined });
-            break;
-          }
-          case 0: {
-            dispatch({ type: actionType, value: {} });
-            break;
-          }
-          default: {
-            dispatch({ type: actionType, value: findTaskById(universal, todoList.tasksBase) });
-            break;
-          }
-        }
-        break;
-      }
-      default: {
-        dispatch({ type: actionType, value: universal});
-        break;
-      }
-    }
+    dispatch({ type: actionType, value: universal});
   }
 
   const formStateHandler = (actionType, universal) => {
@@ -96,7 +98,6 @@ function TodoContainer() {
   }, [])
 
   function editTask(taskData) {
-    console.log("received:", taskData);
     let newTasksBase = [];
 
     if (todoList.isAdding === true) {
