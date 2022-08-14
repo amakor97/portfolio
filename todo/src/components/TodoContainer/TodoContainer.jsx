@@ -80,7 +80,7 @@ function TodoContainer() {
     formDispatch({ type: actionType, value: universal});
   }, []) 
 
-  const [tdWidth, setTdWidth] = useState(0);
+  const [tdWidth, setTdWidth] = useState("600");
   const [lcWidth, setLcWidth] = useState("100%");
   const ref = useRef(null);
 
@@ -88,9 +88,12 @@ function TodoContainer() {
     setTdWidth(ref.current.offsetWidth - 20);
   }, []);
 
-  window.addEventListener("resize", function() {
-    setTdWidth(ref.current.offsetWidth - 20);
-  })
+  useEffect(() => {
+    window.addEventListener("resize", function() {
+      setTdWidth(ref.current.offsetWidth - 20);
+    })
+  }, [])
+
 
   useEffect(() => {
     const tmpBase = readLocalStorage();

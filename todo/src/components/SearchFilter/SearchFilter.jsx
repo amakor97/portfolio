@@ -3,7 +3,6 @@ import { memo } from "react";
 import "./_searchFilter.sass";
 
 function SearchFilter(props) {
-  console.log("search filter is rendering");
 
   function handleInput(e) {
     props.stateHandler("setSearchRegEx", e.target.value);

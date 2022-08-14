@@ -23,7 +23,7 @@ function EditForm(props) {
           value={props.formData.taskDesc} 
           onChange={(e) => props.formStateHandler("setTaskDesc", e.target.value)}
         ></textarea>
-        <label className="editForm__label">Ожидает
+        <label className="editForm__label">
           <input 
             type="radio" 
             name="status" 
@@ -34,8 +34,9 @@ function EditForm(props) {
             }} 
             checked={selectedStatus === "waiting"}
           ></input>
+          Ожидает
         </label>
-        <label className="editForm__label">В процессе
+        <label className="editForm__label">
           <input 
             type="radio" 
             name="status" 
@@ -45,22 +46,24 @@ function EditForm(props) {
               setSelectedStatus(e.target.value)
             }} 
             checked={selectedStatus === "processing"}
-            ></input>
+          ></input>
+          В процессе
         </label>
-        <label className="editForm__label">Выполнена
+        <label className="editForm__label">
           <input 
-          type="radio" 
-          name="status" 
-          value="done" 
-          onChange={(e) => {
-            props.formStateHandler("setTaskStatus", e.target.value);
-            setSelectedStatus(e.target.value)
-          }}
-          checked={selectedStatus === "done"}
-        ></input>
+            type="radio" 
+            name="status" 
+            value="done" 
+            onChange={(e) => {
+              props.formStateHandler("setTaskStatus", e.target.value);
+              setSelectedStatus(e.target.value)
+            }}
+            checked={selectedStatus === "done"}
+          ></input>
+          Выполнена
         </label>
-        <input type="submit" value="Сохранить"></input>
-        <input type="reset" 
+        <input className="editForm__submit-btn" type="submit" value="Сохранить"></input>
+        <input className="editForm__reset-btn" type="reset" 
           value="Отмена"
           onClick={() => {
           props.stateHandler("setIsEditing", false);

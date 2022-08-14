@@ -3,7 +3,6 @@ import { memo } from "react";
 import "./_addButton.sass";
 
 function AddButton(props) {
-  console.log("ADD BUTTON is rendering");
   return (
     <button 
       className={"addButton " + (props.className ? props.className : "")} 
