@@ -1,0 +1,63 @@
+@import "../../Sass/_reset.sass"
+@import "../../Sass/_root.sass"
+@import "../../Sass/_variables.sass"
+
+.searchFilter
+  position: relative
+
+  width: 100%
+  height: 40px
+  margin-bottom: 10px
+
+  &__form
+    position: relative
+
+  &__input
+    width: 100%
+    height: 36px
+    padding: 4px 8px
+
+    font:
+      family: Raleway
+      size: 24px
+    color: $dark-blue
+
+    border: 2px solid $dark-blue
+      radius: 12px
+
+    &:focus
+      outline: none
+      box-shadow: inset 0 0 4px 0 $dark-blue
+
+  &__reset-btn
+    position: absolute
+    top: 50%
+    right: 0px
+    transform: translateY(-50%)
+    
+    display: inline-block
+    //height: 100%
+    padding: 4px
+    width: 36px
+    height: 36px
+
+    font:
+      size: 0
+    line-height: 0
+    fill: $dark-blue
+
+    border: 2px solid $dark-blue
+      radius: 12px
+    background: $main-white
+    cursor: pointer
+
+    transition: transform 0.1s
+
+    &:hover
+      transform: translateY(-50%) scale(1.1, 1.1)
+
+  &__reset-btn-svg
+    width: 24px
+    height: 24px
+
+    pointer-events: none
