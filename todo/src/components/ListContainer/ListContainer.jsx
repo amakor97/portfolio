@@ -8,8 +8,12 @@ import AddButton from "../AddButton/AddButton";
 
 function ListContainer(props) {
   const ref = useRef(null);
-  const minWidth = 250;
-  const maxWidth = 600;
+  console.log(props.tdWidth);
+  //console.log(props.lcWidth);
+  const minWidth = props.tdWidth*0.35;
+  console.log({minWidth});
+  const maxWidth = props.tdWidth*0.65;
+  console.log({maxWidth});
   
   useLayoutEffect(() => {
     props.setLcWidth(ref.current.offsetWidth);

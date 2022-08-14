@@ -81,15 +81,15 @@ function TodoContainer() {
   }, []) 
 
   const [tdWidth, setTdWidth] = useState(0);
-  const [lcWidth, setLcWidth] = useState(400);
+  const [lcWidth, setLcWidth] = useState("100%");
   const ref = useRef(null);
 
   useLayoutEffect(() => {
-    setTdWidth(ref.current.offsetWidth);
+    setTdWidth(ref.current.offsetWidth - 20);
   }, []);
 
   window.addEventListener("resize", function() {
-    setTdWidth(ref.current.offsetWidth);
+    setTdWidth(ref.current.offsetWidth - 20);
   })
 
   useEffect(() => {
