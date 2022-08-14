@@ -3,13 +3,17 @@
 @import "../../Sass/_variables.sass"
 
 .editForm
+  //height: 100%
 
   &__fieldset
+    display: flex
+    flex-direction: column
+    min-height: 150px
 
   &__input
     width: 100%
     height: 36px
-    padding: 4px
+    padding: 4px 8px
     margin:
       bottom: 10px
 
@@ -17,11 +21,18 @@
       family: Raleway
       size: 24px
 
-    border-radius: 12px
+    border: 2px solid $dark-blue
+      radius: 12px
+
+    &:focus
+      outline: none
+      box-shadow: inset 0 0 4px 0 $dark-blue
 
   &__textarea
+    flex-grow: 1
     width: 100%
-    min-height: 36px
+    min-height: 96px
+    padding: 4px 8px
     margin-bottom: 10px
     resize: vertical
 
@@ -29,9 +40,90 @@
       family: Raleway
       size: 24px
 
-    border-radius: 12px 12px 0 12px
+    border: 2px solid $dark-blue
+      radius: 12px 12px 0 12px
 
-  &__label
-    display: block
+    &:focus
+      outline: none
+      box-shadow: inset 0 0 4px 0 $dark-blue
+
+  &__radio-block
+    margin-bottom: 10px
+
+  &__radio-wrapper
+    margin-bottom: 4px
+
+  &__radio-input
+    display: none
+
+  &__radio-label
+    display: flex
+    align-items: center
+
     font:
       size: 1.25em
+
+    cursor: pointer
+
+    &::before
+      content: ""
+      display: inline-block
+      width: 1em
+      height: 1em
+      margin-right: 0.25em
+
+      border: 2px solid $main-blue
+        radius: 50%
+      background: transparent
+
+  &__radio-input:checked + label::before
+    box-shadow: inset 0 0 0 2px $main-white
+
+  &__radio-input--waiting:checked + label::before
+    background: $task-waiting
+    
+  &__radio-input--processing:checked + label::before
+    background: $task-processing
+
+  &__radio-input--done:checked + label::before
+    background: $task-done
+
+  &__btn-block
+    display: flex
+    justify-content: space-evenly
+
+  &__submit-btn
+    display: block
+
+    font:
+      family: Raleway, Arial, sans-serif
+      size: 24px
+    color: $dark-blue
+
+    border: 2px solid $dark-blue
+      radius: 12px
+    background: $main-white
+    cursor: pointer
+
+    transition: transform 0.1s
+
+    &:hover
+      transform: scale(1.1, 1.1)
+
+  &__reset-btn
+    display: block
+
+    font:
+      family: Raleway, Arial, sans-serif
+      size: 24px
+    color: $dark-blue
+
+    border: 2px solid $dark-blue
+      radius: 12px
+    background: $main-white
+    cursor: pointer
+
+    transition: transform 0.1s
+
+    &:hover
+      transform: scale(1.1, 1.1)

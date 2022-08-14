@@ -1,4 +1,4 @@
-import { useRef, useEffect, useLayoutEffect} from "react";
+import { useRef, useLayoutEffect} from "react";
 
 import "./_listContainer.sass";
 
@@ -9,7 +9,7 @@ import AddButton from "../AddButton/AddButton";
 function ListContainer(props) {
   const ref = useRef(null);
   const minWidth = Math.max(props.tdWidth*0.3, 250);
-  const maxWidth = props.tdWidth*0.7;
+  const maxWidth = props.tdWidth*0.55;
   
   useLayoutEffect(() => {
     props.setLcWidth(ref.current.offsetWidth);
