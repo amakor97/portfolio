@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useLayoutEffect, useReducer} from "react";
+import { useState, useEffect, useRef, useLayoutEffect, useReducer, useCallback} from "react";
 
 import "./_todoContainer.sass";
 
@@ -70,13 +70,15 @@ function TodoContainer() {
 
   const [formData, formDispatch] = useReducer(reducer, initialFormData); 
 
-  const stateHandler = (actionType, universal) => {
-    dispatch({ type: actionType, value: universal});
-  }
+  
 
-  const formStateHandler = (actionType, universal) => {
+  const stateHandler = useCallback((actionType, universal) => { 
+    dispatch({ type: actionType, value: universal});
+  }, [])
+
+  const formStateHandler = useCallback((actionType, universal) => {
     formDispatch({ type: actionType, value: universal});
-  } 
+  }, []) 
 
   const [tdWidth, setTdWidth] = useState(0);
   const [lcWidth, setLcWidth] = useState(400);
@@ -184,5 +186,3 @@ function TodoContainer() {
 }
 
 export default TodoContainer;
-
-//https://www.w3schools.com/react/react_memo.asp

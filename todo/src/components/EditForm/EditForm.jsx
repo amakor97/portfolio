@@ -59,14 +59,16 @@ function EditForm(props) {
           checked={selectedStatus === "done"}
         ></input>
         </label>
-        <button type="submit">Сохранить</button>
-        <button onClick={() => {
+        <input type="submit" value="Сохранить"></input>
+        <input type="reset" 
+          value="Отмена"
+          onClick={() => {
           props.stateHandler("setIsEditing", false);
           props.stateHandler("setIsAdding", false);
           props.stateHandler("setRealCurrentTask", -1);
           props.stateHandler("setEditingTaskId", -1);
           props.formStateHandler("resetForm", 0);
-        }}>Отмена</button>
+        }}></input>
       </fieldset>
     </form>
   )

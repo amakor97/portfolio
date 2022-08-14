@@ -1,6 +1,8 @@
+import React, { memo} from "react";
+
 import "./_watchContainer.sass"
 
-function WatchContainer(props) {
+const WatchContainer = React.memo((props) => {
   return(
     <div className="watchContainer">
       <p className="watchContainer__title">{props.todoList.realCurrentTask.name}</p>
@@ -15,6 +17,6 @@ function WatchContainer(props) {
           </button>
     </div>
   );
-}
+})
 
-export default WatchContainer;
+export default memo(WatchContainer);
