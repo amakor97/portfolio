@@ -1,21 +1,7 @@
 @import "../../Sass/_reset.sass"
 @import "../../Sass/_root.sass"
 @import "../../Sass/_variables.sass"
+@import "../../Sass/mixins/_regular-btn.sass"
 
 .closeButton
-  display: block
-
-  font:
-    family: Raleway, Arial, sans-serif
-    size: 24px
-  color: $dark-blue
-
-  border: 2px solid $dark-blue
-    radius: 12px
-  background: $main-white
-  cursor: pointer
-
-  transition: transform 0.1s
-
-  &:hover
-    transform: scale(1.1, 1.1)
+  @include regular-btn

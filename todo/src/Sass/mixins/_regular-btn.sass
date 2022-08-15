@@ -2,22 +2,19 @@
 @import "../_root.sass"
 
 @mixin regular-btn
-  padding: 2px 10px
+  display: block
 
   font:
-    family: "Raleway", Arial, sans-serif
-    size: 1.25rem
+    family: Raleway, Arial, sans-serif
+    size: 24px
+  color: $dark-blue
 
-  border: 3px solid $dark-blue
-  border-radius: 20px
-  background:
-    color: transparent
+  border: 2px solid $dark-blue
+    radius: 12px
+  background: $main-white
   cursor: pointer
 
-  transition: color 0.2s, background-color 0.2s
+  transition: transform 0.1s
 
   &:hover
-    color: $main-white
-
-    background:
-      color: $dark-blue
+    transform: scale(1.1, 1.1)
