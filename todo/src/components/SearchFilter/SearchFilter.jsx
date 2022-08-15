@@ -4,15 +4,19 @@ import "./_searchFilter.sass";
 
 function SearchFilter(props) {
 
+  // установить регулярное выражение на основе ввода
   function handleInput(e) {
     props.stateHandler("setSearchRegEx", e.target.value);
   }
 
+  // сбросить регулярное выражение и очистить поле
   function resetInput(e) {
     props.stateHandler("setSearchRegEx", ".*");
     e.target.parentNode["searchReg"].value = "";
   }
 
+  // вернуть форму с input для ввода названий 
+  // и кнопку сброса значения 
   return (
     <div className="searchFilter">
       <form 

@@ -6,8 +6,14 @@ import WatchContainer from "../WatchContainer/WatchContainer";
 import "./_workContainer.sass";
 
 function WorkContainer(props) {
+  // ширина рабочего контейнера
   const [ecWidth, setEcWidth] = useState("100%");
 
+  // при изменении currentTask:
+  // если isAdding = false - установить свойства объекта
+  // временного хранения и editingTaskId 
+  // в соответствии с currentTask
+   
   useEffect(() => {
     if ((props.todoList.isAdding === false)) {
       if ((props.todoList.currentTask)) {
@@ -17,17 +23,24 @@ function WorkContainer(props) {
         props.stateHandler("setEditingTaskId", props.todoList.currentTask.id);
       }
     } else {
+      // если isAdding = true, получить временную метку и установить
+      // её в качестве id
       props.stateHandler("setEditingTaskId", Date.now());
     }
   }, [props.todoList.currentTask])
 
+  // при изменении ширины контейнера или списка задач
+  // пересчитывать ширину рабочего контейнера
   useEffect(() => {
     setEcWidth(props.tdWidth - props.lcWidth);
   }, [props.tdWidth, props.lcWidth])
 
+  // функция - обработчик "отправки" формы
   function handleSubmit(event) {
+    // предотврать обновление страницы
     event.preventDefault();
 
+    // подготовить объект на основе id и полей формы
     let editedTaskData = {
       id: props.todoList.editingTaskId,
       name: props.formData.taskName,
@@ -35,12 +48,15 @@ function WorkContainer(props) {
       status: props.formData.taskStatus,
     }
 
+    //передать объект, устновить isEditing в false и currentTask в undefined и очистить форму
     props.editTask(editedTaskData);
     props.stateHandler("setIsEditing", false);
     props.stateHandler("setCurrentTask", -1);
     props.formStateHandler("resetForm", 0);
   }
 
+  // в случае isEditing = true вернуть компонент EditForm
+  // в случае isWatching = true вернуть компонент WatchContainer
   return (
     <div className="workContainer" style={{width: ecWidth}}>
       {

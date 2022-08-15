@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import "./_editForm.sass";
 
 function EditForm(props) {
+  // получить статус задачи
   const [selectedStatus, setSelectedStatus] = 
     useState(props.formData.taskStatus);
 
+  // менять статус при изменении 
   useEffect(() => {
     setSelectedStatus(props.formData.taskStatus);
   }, [props.formData.taskStatus]);

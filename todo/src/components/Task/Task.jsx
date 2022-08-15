@@ -1,10 +1,18 @@
 import "./_task.sass";
 
 function Task(props) {
+  // вернуть div, классы получить на основе пропсов
   return (
     <div className={"task " + (props.className ? props.className : "") + (props.task.status ? ` task--${props.task.status}`: " task--default")}>
+
+      {
+        // span с названием и div с тремя кнопками
+      }
       <span className="task__name">{props.task.name}</span>
       <div className="task__btn-wrapper">
+        {
+          // кнопка просмотра - устанавливает необходимые значения
+        }
         <button className="task__btn" onClick={() => {
           props.stateHandler("setIsWatching", true);
           props.stateHandler("setIsEditing", false);
@@ -17,6 +25,12 @@ function Task(props) {
             <path d="M32.158,23.948c4.425,0 8.018,3.593 8.018,8.017c0,4.425 -3.593,8.017 -8.018,8.017c-4.424,0 -8.017,-3.592 -8.017,-8.017c0,-4.424 3.593,-8.017 8.017,-8.017Zm0,4.009c2.213,0 4.009,1.796 4.009,4.008c0,2.213 -1.796,4.009 -4.009,4.009c-2.212,0 -4.008,-1.796 -4.008,-4.009c0,-2.212 1.796,-4.008 4.008,-4.008Z"/>
           </svg>
         </button>
+        {
+            // кнопка просмотра - 
+            // если пользователь работал с одной задачей и потом нажал
+            // на "изменение" другой - очищает форму, также
+            // устанавливает необходимые значения
+          }
         <button className="task__btn task__btn-edit"onClick={() => {
           if ((props.todoList.currentTask) && (props.todoList.currentTask.id !== props.task.id)) {
             props.formStateHandler("resetForm", 0);
@@ -32,6 +46,11 @@ function Task(props) {
             <path d="M251.329,0l-41.507,41.507l55.308,55.308l41.507-41.507L251.329,0z M231.035,41.507l20.294-20.294l34.095,34.095 L265.13,75.602L231.035,41.507z"/>
           </svg>
         </button>
+        {
+          // кнопка удаления - удаляет задачу и в случае, 
+          // если пользователь работал с задачей перед её
+          // удалением - убирает её из рабочего контейнера
+        }
         <button className="task__btn" onClick={() => {
           if (props.todoList.currentTask) {
             if (props.task.id === props.todoList.currentTask.id) {
@@ -39,7 +58,6 @@ function Task(props) {
               props.stateHandler("setIsEditing", false);
               props.stateHandler("setCurrentTask", -1);
               props.stateHandler("setEditingTaskId", -1);
-            } else {
             }
           }
           props.deleteTask(props.task.id);
