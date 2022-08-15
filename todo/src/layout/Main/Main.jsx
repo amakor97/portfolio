@@ -1,8 +1,8 @@
+import TodoContainer from "../../components/TodoContainer/TodoContainer";
+
 import "../../Sass/_reset.sass";
 import "../../Sass/_root.sass";
 import "./_main.sass";
-
-import TodoContainer from "../../components/TodoContainer/TodoContainer";
 
 function Main() {
   return (
