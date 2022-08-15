@@ -12,9 +12,13 @@ function EditForm(props) {
     setSelectedStatus(props.formData.taskStatus);
   }, [props.formData.taskStatus]);
 
+  // вернуть форму
   return (
     <form className="editForm" onSubmit={props.handleSubmit}>
       <fieldset className="editForm__fieldset">
+        {
+          // поле ввода названия
+        }
         <input 
           className="editForm__input" 
           type="text" 
@@ -23,11 +27,17 @@ function EditForm(props) {
           required
           value={props.formData.taskName} 
           onChange={e => props.formStateHandler("setTaskName", e.target.value)}></input>
+        {
+          // поле ввода описания
+        }
         <textarea 
           className="editForm__textarea" 
           value={props.formData.taskDesc}
           placeholder="Описание задачи" 
           onChange={e => props.formStateHandler("setTaskDesc", e.target.value)}></textarea>
+        {
+          // контейнер с радио-инпутами
+        }
         <div className="editForm__radio-block">
           <div className="editForm__radio-wrapper">
             <input
@@ -78,6 +88,10 @@ function EditForm(props) {
             </label>
           </div>
         </div>
+        {
+          // контейнер с кнопками "отправки" и сброса, последняя
+          // устанавливает значения и сбрасывает форму
+        }
         <div className="editForm__btn-block">
           <input className="editForm__submit-btn" type="submit" value="Сохранить"></input>
           <input className="editForm__reset-btn" type="reset" 

@@ -62,16 +62,16 @@
         radius: 50%
       background: transparent
 
-  &__radio-input:checked + .editForm__label::before
+  &__radio-input:checked + .editForm__radio-label::before
     box-shadow: inset 0 0 0 2px $main-white
 
-  &__radio-input--waiting:checked + .editForm__label::before
+  &__radio-input--waiting:checked + .editForm__radio-label::before
     background: $task-waiting
     
-  &__radio-input--processing:checked + .editForm__label::before
+  &__radio-input--processing:checked + .editForm__radio-label::before
     background: $task-processing
 
-  &__radio-input--done:checked + .editForm__label::before
+  &__radio-input--done:checked + .editForm__radio-label::before
     background: $task-done
 
   &__btn-block

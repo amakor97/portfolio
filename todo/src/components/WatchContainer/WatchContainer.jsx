@@ -5,6 +5,7 @@ import CloseButton from "../CloseButton/CloseButton";
 import "./_watchContainer.sass"
 
 function WatchContainer(props) {
+  // получить статус и класс 
   let stat = undefined;
   let statClass = 
     `watchContainer__status--${props.todoList.currentTask.status}`;
@@ -26,6 +27,7 @@ function WatchContainer(props) {
     }
   }
 
+  // вернуть контейнер с несколькими параграфами и кнопкой
   return(
     <div className="watchContainer">
       <p className="watchContainer__title">{props.todoList.currentTask.name}</p>
