@@ -10,16 +10,16 @@ function WorkContainer(props) {
 
   useEffect(() => {
     if ((props.todoList.isAdding === false)) {
-      if ((props.todoList.realCurrentTask)) {
-        props.formStateHandler("setTaskName", props.todoList.realCurrentTask.name);
-        props.formStateHandler("setTaskDesc", props.todoList.realCurrentTask.desc);
-        props.formStateHandler("setTaskStatus", props.todoList.realCurrentTask.status);
-        props.stateHandler("setEditingTaskId", props.todoList.realCurrentTask.id);
+      if ((props.todoList.currentTask)) {
+        props.formStateHandler("setTaskName", props.todoList.currentTask.name);
+        props.formStateHandler("setTaskDesc", props.todoList.currentTask.desc);
+        props.formStateHandler("setTaskStatus", props.todoList.currentTask.status);
+        props.stateHandler("setEditingTaskId", props.todoList.currentTask.id);
       }
     } else {
       props.stateHandler("setEditingTaskId", Date.now());
     }
-  }, [props.todoList.realCurrentTask])
+  }, [props.todoList.currentTask])
 
   useEffect(() => {
     setEcWidth(props.tdWidth - props.lcWidth);
@@ -37,7 +37,7 @@ function WorkContainer(props) {
 
     props.editTask(editedTaskData);
     props.stateHandler("setIsEditing", false);
-    props.stateHandler("setRealCurrentTask", -1);
+    props.stateHandler("setCurrentTask", -1);
     props.formStateHandler("resetForm", 0);
   }
 

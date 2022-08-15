@@ -7,8 +7,8 @@ import "./_watchContainer.sass"
 function WatchContainer(props) {
   let stat = undefined;
   let statClass = 
-    `watchContainer__status--${props.todoList.realCurrentTask.status}`;
-  switch (props.todoList.realCurrentTask.status) {
+    `watchContainer__status--${props.todoList.currentTask.status}`;
+  switch (props.todoList.currentTask.status) {
     case "waiting": {
       stat = "Ожидает";
       break;
@@ -28,8 +28,8 @@ function WatchContainer(props) {
 
   return(
     <div className="watchContainer">
-      <p className="watchContainer__title">{props.todoList.realCurrentTask.name}</p>
-      <p className="watchContainer__desc">{props.todoList.realCurrentTask.desc}</p>
+      <p className="watchContainer__title">{props.todoList.currentTask.name}</p>
+      <p className="watchContainer__desc">{props.todoList.currentTask.desc}</p>
       <p className={`watchContainer__status ${statClass}`}>{stat}</p>
       <CloseButton 
         stateHandler={props.stateHandler}

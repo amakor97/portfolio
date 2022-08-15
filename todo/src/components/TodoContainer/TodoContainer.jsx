@@ -14,7 +14,7 @@ function TodoContainer() {
     isWatching: false,
     searchRegEx: ".*",
     editingTaskId: 0,
-    realCurrentTask: {}
+    currentTask: {}
   };
 
   const initialFormData = {
@@ -27,7 +27,7 @@ function TodoContainer() {
     let key = action.type.toString().slice(3);
     key = `${key[0].toLowerCase()}${key.slice(1)}`;
     switch(action.type) {
-      case "setRealCurrentTask": {
+      case "setCurrentTask": {
         switch(action.value) {
           case -1: {
             return {

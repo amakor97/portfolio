@@ -77,7 +77,7 @@ function EditForm(props) {
             onClick={() => {
             props.stateHandler("setIsEditing", false);
             props.stateHandler("setIsAdding", false);
-            props.stateHandler("setRealCurrentTask", -1);
+            props.stateHandler("setCurrentTask", -1);
             props.stateHandler("setEditingTaskId", -1);
             props.formStateHandler("resetForm", 0);
           }}></input>
