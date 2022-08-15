@@ -4,11 +4,13 @@ import "./_closeButton.sass";
 
 function closeButton(props) {
   return (
-    <button className="watchContainer__close-btn" onClick={() => {
-      props.stateHandler("setIsWatching", false);
-      props.stateHandler("setCurrentTask", -1);
-      props.formStateHandler("resetForm", 0);
-    }}>
+    <button className={"closeButton " + 
+    (props.className ? props.className : "")} 
+      onClick={() => {
+        props.stateHandler("setIsWatching", false);
+        props.stateHandler("setCurrentTask", -1);
+        props.formStateHandler("resetForm", 0);
+      }}>
       Скрыть
     </button>
   )

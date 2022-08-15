@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+
 import "./_editForm.sass";
 
 function EditForm(props) {
-  const [selectedStatus, setSelectedStatus] = useState(props.formData.taskStatus);
+  const [selectedStatus, setSelectedStatus] = 
+    useState(props.formData.taskStatus);
 
   useEffect(() => {
     setSelectedStatus(props.formData.taskStatus);
@@ -16,13 +18,11 @@ function EditForm(props) {
           type="text" 
           name="taskName" 
           value={props.formData.taskName} 
-          onChange={e => props.formStateHandler("setTaskName", e.target.value)}
-        ></input>
+          onChange={e => props.formStateHandler("setTaskName", e.target.value)}></input>
         <textarea 
           className="editForm__textarea" 
           value={props.formData.taskDesc} 
-          onChange={(e) => props.formStateHandler("setTaskDesc", e.target.value)}
-        ></textarea>
+          onChange={e => props.formStateHandler("setTaskDesc", e.target.value)}></textarea>
         <div className="editForm__radio-block">
           <div className="editForm__radio-wrapper">
             <input
@@ -31,13 +31,14 @@ function EditForm(props) {
               name="status"
               id="radio-input-1"
               value="waiting"
-              onChange={(e) => {
+              onChange={e => {
                 props.formStateHandler("setTaskStatus", e.target.value);
-                setSelectedStatus(e.target.value)
+                setSelectedStatus(e.target.value);
               }}
-              checked={selectedStatus === "waiting"}
-            ></input>
-            <label className="editForm__radio-label" htmlFor="radio-input-1">Ожидает</label>
+              checked={selectedStatus === "waiting"}></input>
+            <label className="editForm__radio-label" htmlFor="radio-input-1">
+              Ожидает
+            </label>
           </div>
           <div className="editForm__radio-wrapper">
             <input
@@ -46,13 +47,14 @@ function EditForm(props) {
               name="status"
               id="radio-input-2"
               value="processing"
-              onChange={(e) => {
+              onChange={e => {
                 props.formStateHandler("setTaskStatus", e.target.value);
                 setSelectedStatus(e.target.value)
               }}
-              checked={selectedStatus === "processing"}
-            ></input>
-            <label className="editForm__radio-label" htmlFor="radio-input-2">В процессе</label>
+              checked={selectedStatus === "processing"}></input>
+            <label className="editForm__radio-label" htmlFor="radio-input-2">
+              В процессе
+            </label>
           </div>
           <div className="editForm__radio-wrapper">
             <input
@@ -61,13 +63,14 @@ function EditForm(props) {
               name="status"
               id="radio-input-3"
               value="done"
-              onChange={(e) => {
+              onChange={e => {
                 props.formStateHandler("setTaskStatus", e.target.value);
                 setSelectedStatus(e.target.value)
               }}
-              checked={selectedStatus === "done"}
-            ></input>
-            <label className="editForm__radio-label" htmlFor="radio-input-3">Выполнена</label>
+              checked={selectedStatus === "done"}></input>
+            <label className="editForm__radio-label" htmlFor="radio-input-3">
+              Выполнена
+            </label>
           </div>
         </div>
         <div className="editForm__btn-block">
@@ -75,12 +78,12 @@ function EditForm(props) {
           <input className="editForm__reset-btn" type="reset" 
             value="Отмена"
             onClick={() => {
-            props.stateHandler("setIsEditing", false);
-            props.stateHandler("setIsAdding", false);
-            props.stateHandler("setCurrentTask", -1);
-            props.stateHandler("setEditingTaskId", -1);
-            props.formStateHandler("resetForm", 0);
-          }}></input>
+              props.stateHandler("setIsEditing", false);
+              props.stateHandler("setIsAdding", false);
+              props.stateHandler("setCurrentTask", -1);
+              props.stateHandler("setEditingTaskId", -1);
+              props.formStateHandler("resetForm", 0);
+            }}></input>
         </div>
       </fieldset>
     </form>

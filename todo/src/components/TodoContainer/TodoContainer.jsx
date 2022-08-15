@@ -1,12 +1,11 @@
 import { useState, useEffect, useRef, useLayoutEffect, useReducer, useCallback} from "react";
 
-import "./_todoContainer.sass";
-
 import ListContainer from "../ListContainer/ListContainer";
 import WorkContainer from "../WorkContainer/WorkContainer";
 
-function TodoContainer() {
+import "./_todoContainer.sass";
 
+function TodoContainer() {
   const initialTodoList = {
     tasksBase: [],
     isEditing: false,
@@ -67,10 +66,7 @@ function TodoContainer() {
   }
 
   const [todoList, dispatch] = useReducer(reducer, initialTodoList);
-
   const [formData, formDispatch] = useReducer(reducer, initialFormData); 
-
-  
 
   const stateHandler = useCallback((actionType, universal) => { 
     dispatch({ type: actionType, value: universal});
@@ -107,15 +103,12 @@ function TodoContainer() {
 
     if (todoList.isAdding === true) {
       stateHandler("setIsAdding", false);
-
       newTasksBase = todoList.tasksBase;
       newTasksBase.push(taskData);
-      
     } else {
       newTasksBase = todoList.tasksBase.map(obj => {
         if (obj.id === taskData.id) {
           obj = JSON.parse(JSON.stringify(taskData));
-          return obj;
         }
         return obj;
       })
@@ -160,31 +153,29 @@ function TodoContainer() {
   }
 
   return (
-      <div className="todoContainer" ref={ref}>
-        <ListContainer
-          todoList={todoList}
-          stateHandler={stateHandler}
+    <div className="todoContainer" ref={ref}>
+      <ListContainer
+        todoList={todoList}
+        stateHandler={stateHandler}
+        formData={formData}
+        formStateHandler={formStateHandler}
 
-          formData={formData}
-          formStateHandler={formStateHandler}
+        deleteTask={deleteTask}
+        tdWidth={tdWidth}
+        lcWidth={lcWidth}
+        setLcWidth={setLcWidth}
+      />
+      <WorkContainer 
+        todoList={todoList}
+        stateHandler={stateHandler}
+        formData={formData}
+        formStateHandler={formStateHandler}
 
-          deleteTask={deleteTask}
-          tdWidth={tdWidth}
-          lcWidth={lcWidth}
-          setLcWidth={setLcWidth}
-        />
-        <WorkContainer 
-          todoList={todoList}
-          stateHandler={stateHandler}
-
-          formData={formData}
-          formStateHandler={formStateHandler}
-
-          editTask={editTask}
-          tdWidth={tdWidth}
-          lcWidth={lcWidth}
-        />
-      </div>
+        editTask={editTask}
+        tdWidth={tdWidth}
+        lcWidth={lcWidth}
+      />
+    </div>
   )
 }
 

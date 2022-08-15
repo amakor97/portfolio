@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 
-import "./_workContainer.sass";
-
 import EditForm from "../EditForm/EditForm";
 import WatchContainer from "../WatchContainer/WatchContainer";
+
+import "./_workContainer.sass";
 
 function WorkContainer(props) {
   const [ecWidth, setEcWidth] = useState("100%");
@@ -48,7 +48,6 @@ function WorkContainer(props) {
         <EditForm 
           stateHandler={props.stateHandler}
           handleSubmit={handleSubmit}
-
           formData={props.formData}
           formStateHandler={props.formStateHandler}
         />
@@ -58,7 +57,6 @@ function WorkContainer(props) {
         <WatchContainer 
           todoList={props.todoList}
           stateHandler={props.stateHandler}
-
           formStateHandler={props.formStateHandler}
         />
       }

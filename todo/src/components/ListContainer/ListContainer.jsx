@@ -1,10 +1,10 @@
 import { useRef, useLayoutEffect} from "react";
 
-import "./_listContainer.sass";
-
 import SearchFilter from "../SearchFilter/SearchFilter";
 import Task from "../Task/Task";
 import AddButton from "../AddButton/AddButton";
+
+import "./_listContainer.sass";
 
 function ListContainer(props) {
   const ref = useRef(null);
@@ -15,7 +15,7 @@ function ListContainer(props) {
     props.setLcWidth(ref.current.offsetWidth);
   })
 
-  const disableselect = (e) => {  
+  const disableselect = e => {  
     return false;
   }  
   document.onselectstart = disableselect;
@@ -47,29 +47,29 @@ function ListContainer(props) {
   };
 
 
-  let re = new RegExp(props.todoList.searchRegEx, 'i');
+  let reg = new RegExp(props.todoList.searchRegEx, 'i');
+
   return (
     <div className="listContainer" ref={ref} style={{width: props.lcWidth}}>
       <div className="listContainer__resizer" onMouseDown={resizer}></div>
       <SearchFilter stateHandler={props.stateHandler}/>
-      <ul>
-        {props.todoList.tasksBase.map(task => {
-        return (
-          re.test(task.name) &&
-          <Task
-            todoList={props.todoList}
-            stateHandler={props.stateHandler}
-            className="listContainer__task"
-            key={task.id} 
-            task={task} 
-            deleteTask={props.deleteTask}
-
-            formData={props.formData}
-            formStateHandler={props.formStateHandler}
-          />
-        )}
-        )}
-      </ul>
+        <ul>
+          {props.todoList.tasksBase.map(task => {
+          return (
+            reg.test(task.name) &&
+            <Task
+              todoList={props.todoList}
+              stateHandler={props.stateHandler}
+              className="listContainer__task"
+              key={task.id} 
+              task={task} 
+              deleteTask={props.deleteTask}
+              formData={props.formData}
+              formStateHandler={props.formStateHandler}
+            />
+          )}
+          )}
+        </ul>
       <AddButton
         className="listContainer__add-btn"
         stateHandler={props.stateHandler}
