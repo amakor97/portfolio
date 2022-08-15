@@ -16,12 +16,15 @@ function EditForm(props) {
         <input 
           className="editForm__input" 
           type="text" 
-          name="taskName" 
+          name="taskName"
+          placeholder="Название задачи"
+          required
           value={props.formData.taskName} 
           onChange={e => props.formStateHandler("setTaskName", e.target.value)}></input>
         <textarea 
           className="editForm__textarea" 
-          value={props.formData.taskDesc} 
+          value={props.formData.taskDesc}
+          placeholder="Описание задачи" 
           onChange={e => props.formStateHandler("setTaskDesc", e.target.value)}></textarea>
         <div className="editForm__radio-block">
           <div className="editForm__radio-wrapper">

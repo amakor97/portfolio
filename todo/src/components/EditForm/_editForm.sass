@@ -1,6 +1,7 @@
 @import "../../Sass/_reset.sass"
 @import "../../Sass/_root.sass"
 @import "../../Sass/_variables.sass"
+@import "../../Sass/mixins/_text-input.sass"
 @import "../../Sass/mixins/_regular-btn.sass"
 
 .editForm
@@ -12,22 +13,7 @@
     min-height: 150px
 
   &__input
-    width: 100%
-    height: 36px
-    padding: 4px 8px
-    margin:
-      bottom: 10px
-
-    font:
-      family: Raleway
-      size: 24px
-
-    border: 2px solid $dark-blue
-      radius: 12px
-
-    &:focus
-      outline: none
-      box-shadow: inset 0 0 4px 0 $dark-blue
+    @include text-input
 
   &__textarea
     flex-grow: 1

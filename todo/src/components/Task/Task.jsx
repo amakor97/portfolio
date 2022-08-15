@@ -2,7 +2,7 @@ import "./_task.sass";
 
 function Task(props) {
   return (
-    <div className={"task " + (props.className ? props.className : "") + (` task--${props.task.status}`)}>
+    <div className={"task " + (props.className ? props.className : "") + (props.task.status ? ` task--${props.task.status}`: " task--default")}>
       <span className="task__name">{props.task.name}</span>
       <div className="task__btn-wrapper">
         <button className="task__btn" onClick={() => {

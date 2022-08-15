@@ -21,6 +21,7 @@ function SearchFilter(props) {
         <input 
           className="searchFilter__input" 
           name="searchReg"
+          placeholder="Название задачи"
           onChange={e => handleInput(e)}></input>
         <button 
           type="button" 

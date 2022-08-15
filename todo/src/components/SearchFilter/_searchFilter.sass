@@ -1,6 +1,7 @@
 @import "../../Sass/_reset.sass"
 @import "../../Sass/_root.sass"
 @import "../../Sass/_variables.sass"
+@import "../../Sass/mixins/_text-input.sass"
 
 .searchFilter
   position: relative
@@ -13,21 +14,7 @@
     position: relative
 
   &__input
-    width: 100%
-    height: 36px
-    padding: 4px 8px
-
-    font:
-      family: Raleway
-      size: 24px
-    color: $dark-blue
-
-    border: 2px solid $dark-blue
-      radius: 12px
-
-    &:focus
-      outline: none
-      box-shadow: inset 0 0 4px 0 $dark-blue
+    @include text-input
 
   &__reset-btn
     position: absolute
