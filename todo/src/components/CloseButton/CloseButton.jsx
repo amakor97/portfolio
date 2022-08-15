@@ -10,7 +10,7 @@ function closeButton(props) {
       onClick={() => {
         //установить значения, вызвать очистку формы
         props.stateHandler("setIsWatching", false);
-        props.stateHandler("setCurrentTask", -1);
+        props.stateHandler("setCurrentTask", undefined);
         props.formStateHandler("resetForm", 0);
       }}>
       Скрыть

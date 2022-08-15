@@ -56,7 +56,7 @@ function Task(props) {
             if (props.task.id === props.todoList.currentTask.id) {
               props.stateHandler("setIsWatching", false);
               props.stateHandler("setIsEditing", false);
-              props.stateHandler("setCurrentTask", -1);
+              props.stateHandler("setCurrentTask", undefined);
               props.stateHandler("setEditingTaskId", -1);
             }
           }

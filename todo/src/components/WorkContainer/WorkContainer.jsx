@@ -51,7 +51,7 @@ function WorkContainer(props) {
     //передать объект, устновить isEditing в false и currentTask в undefined и очистить форму
     props.editTask(editedTaskData);
     props.stateHandler("setIsEditing", false);
-    props.stateHandler("setCurrentTask", -1);
+    props.stateHandler("setCurrentTask", undefined);
     props.formStateHandler("resetForm", 0);
   }
 

@@ -34,29 +34,20 @@ function TodoContainer() {
     key = `${key[0].toLowerCase()}${key.slice(1)}`;
     switch(action.type) {
       case "setCurrentTask": {
-        // устанавливить currentTask = undefined, 
-        // если не производится никаких действий
-        switch(action.value) {
-          case -1: {
-            return {
-              ...state,
-              [key]: undefined
-            }
+        // найти задачу в массиве, если идёт её просмотр
+        // или редактирование
+        if (typeof(action.value) === "number") {
+          return {
+            ...state,
+            [key]: findTaskById(action.value, state.tasksBase)
           }
-          // = пустой объект, если идёт добавление задачи
-          case 0: {
-            return {
-              ...state,
-              [key]: {}
-            }
-          }
-          // или найти задачу в массиве, если идёт её просмотр
-          // или редактирование
-          default: {
-            return {
-              ...state,
-              [key]: findTaskById(action.value, state.tasksBase)
-            }
+        } else {
+        // или установить currentTask в значение undefined ( в
+        // случае, если не производится никаких действий) или {}
+        // в случае, если идёт добавление задачи
+          return {
+            ...state,
+            [key]: action.value
           }
         }
       }
