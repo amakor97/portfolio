@@ -1,0 +1,31 @@
+@import "../_variables.sass"
+@import "../_root.sass"
+
+@mixin icon-btn
+  display: inline-block
+  padding: 4px
+  width: 36px
+  height: 36px
+
+  font:
+    size: 0
+  line-height: 0
+
+
+  border: 2px solid $dark-blue
+    radius: 12px
+  background: $main-white
+  cursor: pointer
+
+  transition: transform 0.1s
+
+  &:hover
+    transform: scale(1.1, 1.1)
+
+@mixin icon-btn-svg
+  width: 24px
+  height: 24px
+
+  fill: $dark-blue
+
+  pointer-events: none

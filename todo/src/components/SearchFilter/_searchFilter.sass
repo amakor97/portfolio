@@ -2,6 +2,7 @@
 @import "../../Sass/_root.sass"
 @import "../../Sass/_variables.sass"
 @import "../../Sass/mixins/_text-input.sass"
+@import "../../Sass/mixins/_icon-btn.sass"
 
 .searchFilter
   position: relative
@@ -17,33 +18,10 @@
     @include text-input
 
   &__reset-btn
+    @include icon-btn
     position: absolute
     top: 0
     right: 0
-    
-    display: inline-block
-    //height: 100%
-    padding: 4px
-    width: 36px
-    height: 36px
-
-    font:
-      size: 0
-    line-height: 0
-    fill: $dark-blue
-
-    border: 2px solid $dark-blue
-      radius: 12px
-    background: $main-white
-    cursor: pointer
-
-    transition: transform 0.1s
-
-    &:hover
-      transform: scale(1.1, 1.1)
 
   &__reset-btn-svg
-    width: 24px
-    height: 24px
-
-    pointer-events: none
+    @include icon-btn-svg

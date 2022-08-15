@@ -1,6 +1,7 @@
 @import "../../Sass/_reset.sass"
 @import "../../Sass/_root.sass"
 @import "../../Sass/_variables.sass"
+@import "../../Sass/mixins/_icon-btn.sass"
 
 .task
   display: flex
@@ -15,8 +16,8 @@
     size: 24px
   color: $dark-blue
 
-  //border: 5px solid $main-blue
-  border-radius: 20px
+  border: 2px solid transparent
+    radius: 20px
 
   &--waiting
     background: $task-waiting
@@ -30,13 +31,6 @@
   &--default
     border: 2px solid $main-blue
 
-  &__id
-    display: inline-block
-    width: 30%
-    height: 100%
-
-    overflow: hidden
-
   &__name
     display: inline-block
     height: 36px
@@ -48,46 +42,22 @@
 
     line-height: 28px
 
-    border: 4px solid white
+    border: 4px solid $main-white
     border-radius: 12px
-    background: $light-grey
-    background: white
+    background: $main-white
 
   &__btn-wrapper
     min-width: max-content
     margin-left: 8px
 
   &__btn
-    display: inline-block
-    //height: 100%
-    padding: 4px
-    width: 36px
-    height: 36px
+    @include icon-btn
+
     margin-right: 2px
-
-    font:
-      size: 0
-    line-height: 0
-
-    border: 2px solid $dark-blue
-      radius: 12px
-    background: white
-    cursor: pointer
-
-    transition: transform 0.1s
 
     &:last-of-type
       margin-right: 0
 
-    &:hover
-      transform: scale(1.1, 1.1)
-
-
-
   &__btn-svg
-    width: 24px
-    height: 24px
-
-    fill: $dark-blue
-
-    pointer-events: none
+    @include icon-btn-svg
+    
