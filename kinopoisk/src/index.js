@@ -6,11 +6,6 @@ import Header from './layout/Header/Header';
 import Main from './layout/Main/Main';
 import Footer from './layout/Footer/Footer';
 
-import Card from './components/Card/Card';
-import CardsContainer from "./components/CardsContainer/CardsContainer";
-
-import reportWebVitals from './reportWebVitals';
-
 
 let pageIter = 1;
 let pagesToFetch = 3;
@@ -33,18 +28,14 @@ fetch(
   }
 )
 .then((response) => {
-  console.log(response);
   return response.json();
 })
 .then((actualData) => {
-  console.log(actualData);
   pageTotalCount = actualData.pagesCount;
-  console.log({pageTotalCount});
-  console.log(actualData.films);
   let filmsToRender = actualData.films;
   
   //delete this line; its needed for preventing huge requests amount
-  pageTotalCount =  5;
+  //pageTotalCount =  5;
 
   root.render(
     <>
@@ -82,6 +73,3 @@ window.addEventListener("scroll", function() {
     }, 100);
   }
 })
-
-
-reportWebVitals();

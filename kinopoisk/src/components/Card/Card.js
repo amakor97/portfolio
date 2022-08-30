@@ -19,8 +19,7 @@ function Card(props) {
   const FilmContext = createContext();
   
   const cardPoster = useMemo(() => props.posterUrlPreview);
-
-  console.log(props.cardNumber);
+  
   return (
     <FilmContext.Provider value={props}>
       <div className="Card" onClick={setModalIsOpenToTrue}>

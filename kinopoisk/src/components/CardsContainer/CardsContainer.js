@@ -7,8 +7,6 @@ import "./_cardsContainer.sass";
 function CardsContainer(props) {
   let [filmsArray, setFilmsArray] = useState([]);
 
-  console.log(props);
-
   const renderedPages = useRef(0);
   //const renderedCards = useRef(0);
 
@@ -25,7 +23,6 @@ function CardsContainer(props) {
     for (let i = pgIter; i < pgIter + props.pagesToFetch; i++) {
       
       renderedPages.current = renderedPages.current + 1;
-      console.log("RENDERED TIMES:", renderedPages.current);
 
       if ((renderedPages.current === 1) && (props.filmsToRender)) {
         tmpArray = tmpArray.concat(filmsArray, props.filmsToRender);
@@ -59,7 +56,6 @@ function CardsContainer(props) {
       {
         filmsArray && filmsArray.map(function(film) {
           renderedCards = renderedCards + 1;
-          console.log("cards", renderedCards.current);
 
           return (
             <Card key={film.nameRu} nameRu={film.nameRu} 
