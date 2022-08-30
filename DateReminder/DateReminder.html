@@ -38,19 +38,17 @@
     </main>
     <aside class="aside">
       <div class="filter-wrapper">
-        <div
-          class="filter-container filter-container_hidden js-filter-container"
-        >
-          <label class="filter-container__main-label"
-            >Filter dates
+        <div class="filter-container filter-container_hidden js-filter-container">
+          <div class="filter-container__label-container">
             <input
               class="filter-container__checkbox js-filter-switch"
               type="checkbox"
               name=""
-              id=""
+              id="toggle-filtering"
               checked
             />
-          </label>
+            <label class="filter-container__label" for="toggle-filtering">Filter dates</label>
+      </div>
           <form action="" class="filter">
             <label for="select-start"
               >Start
@@ -96,46 +94,46 @@
                 <option value="Dec" selected>Dec</option>
               </select>
             </label>
-            <label class="filter__label"
-              >Orange
+            <div class="filter-container__label-container">
               <input
-                class="filter__checkbox js-filter-orange js-filter-input"
+                class="filter-container__checkbox js-filter-orange js-filter-input"
                 type="checkbox"
                 name=""
-                id=""
+                id="toggle-orange"
                 checked
               />
-            </label>
-            <label class="filter__label"
-              >Cyan
+              <label class="filter-container__label" for="toggle-orange">Orange</label>
+            </div>
+            <div class="filter-container__label-container">
               <input
-                class="filter__checkbox js-filter-cyan js-filter-input"
+                class="filter-container__checkbox js-filter-cyan js-filter-input"
                 type="checkbox"
                 name=""
-                id=""
+                id="toggle-cyan"
                 checked
               />
-            </label>
-            <label class="filter__label"
-              >Green
+              <label class="filter-container__label" for="toggle-cyan">Cyan</label>
+            </div>
+            <div class="filter-container__label-container">
               <input
-                class="filter__checkbox js-filter-green js-filter-input"
+                class="filter-container__checkbox js-filter-green js-filter-input"
                 type="checkbox"
                 name=""
-                id=""
+                id="toggle-green"
                 checked
               />
-            </label>
-            <label class="filter__label"
-              >Purple
+              <label class="filter-container__label" for="toggle-green">Green</label>
+            </div>
+            <div class="filter-container__label-container">
               <input
-                class="filter__checkbox js-filter-purple js-filter-input"
+                class="filter-container__checkbox js-filter-purple js-filter-input"
                 type="checkbox"
                 name=""
-                id=""
+                id="toggle-purple"
                 checked
               />
-            </label>
+              <label class="filter-container__label" for="toggle-purple">Purple</label>
+            </div>
           </form>
         </div>
       </div>
@@ -145,19 +143,7 @@
             <polygon points="14,30 22,25 22,17 35.999,0 17.988,0 0,0 14,17 " />
           </svg>
         </button>
-        <!--<button class="buttons-bar__btn btn">Loa</button>-->
         <label class="buttons-bar__label-input" for="load-file-id">
-          <!--<svg
-            class="btn__svg btn__svg-load"
-            x="0px"
-            y="0px"
-            viewBox="0 0 512 512"
-          >
-            <path class="btn__svg-load-inner" d="M56,56h400v400H56V56z" />
-            <path
-              d="M185.4,361.9h141.2V220.7h94.1L256,56L91.3,220.7h94.1V361.9z M91.3,408.9h329.4V456H91.3V408.9z"
-            />
-          </svg>-->
           <svg class="btn__svg btn__svg-load" viewBox="0 -256 1950 1950">
             <g transform="matrix(1,0,0,-1,60.745763,1405.4576)" id="g3015">
               <path
@@ -166,9 +152,7 @@
               />
             </g>
           </svg>
-
-          Loa</label
-        >
+          </label>
         <input
           class="buttons-bar__input-file js-load-file"
           type="file"
@@ -181,8 +165,6 @@
               d="M439.965,0H1.108v512h509.784V72.407L439.965,0z M74.251,73.143H293.68v110.823H74.251V73.143z M437.749,441.074H72.035 V257.108h365.714V441.074z M437.749,183.965h-70.926V73.143h42.625l28.302,29.339V183.965z"
             />
           </svg>
-
-          Sav
         </button>
       </div>
     </aside>
