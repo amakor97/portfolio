@@ -31,3 +31,7 @@ This is an example of three-paged (landing, catalog & one product page) fake e-s
 ### FunBox
 
 This is a React-based card-select layout example. You can toggle cards, active cards will change their color and text.
+
+### Todo
+
+This is a React-based todo list app. You can create, edit and delete tasks and their status and description. Task list and interaction area separator can be moved.
