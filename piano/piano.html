@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Piano</title>
+  <link rel="stylesheet" href="pianoStyles.css">
+</head>
+<body>
+  <div class="keyboard keyboard--full">
+    <div class="keyboard__black">
+      <div class="keyboard__black--key key key--black">2</div>
+      <div class="keyboard__black--key key key--black">3</div>
+      <div class="keyboard__black--key key key--empty"></div>
+      <div class="keyboard__black--key key key--black">5</div>
+      <div class="keyboard__black--key key key--black">6</div>
+      <div class="keyboard__black--key key key--black">7</div>
+    </div>
+    <div class="keyboard__white">
+      <div class="keyboard__white--key key key--white">q</div>
+      <div class="keyboard__white--key key key--white">w</div>
+      <div class="keyboard__white--key key key--white">e</div>
+      <div class="keyboard__white--key key key--white">r</div>
+      <div class="keyboard__white--key key key--white">t</div>
+      <div class="keyboard__white--key key key--white">y</div>
+      <div class="keyboard__white--key key key--white">u</div>
+    </div>
+  </div>
+  <div class="keyboard keyboard--small">
+    <div class="keyboard__black">
+      <div class="keyboard__black--key key key--black">9</div>
+      <div class="keyboard__black--key key key--black">0</div>
+      <div class="keyboard__black--key key key--black">-</div>
+    </div>
+    <div class="keyboard__white">
+      <div class="keyboard__white--key key key--white">i</div>
+      <div class="keyboard__white--key key key--white">o</div>
+      <div class="keyboard__white--key key key--white">p</div>
+      <div class="keyboard__white--key key key--white">[</div>
+    </div>
+  </div>
+  <div class="keyboard keyboard--tiny">
+    <div class="keyboard__black">
+    </div>
+    <div class="keyboard__white">
+      <div class="keyboard__white--key key key--white">]</div>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="keyboard keyboard--full">
+    <div class="keyboard__black">
+      <div class="keyboard__black--key key key--black" data-key="115">s</div>
+      <div class="keyboard__black--key key key--black" data-key="100">d</div>
+      <div class="keyboard__black--key key key--empty"></div>
+      <div class="keyboard__black--key key key--black" data-key="103">g</div>
+      <div class="keyboard__black--key key key--black" data-key="104">h</div>
+      <div class="keyboard__black--key key key--black" data-key="106">j</div>
+    </div>
+    <div class="keyboard__white">
+      <div class="keyboard__white--key key key--white" data-key="122" data-playing="false">z</div>
+      <div class="keyboard__white--key key key--white"  data-key="120">x</div>
+      <div class="keyboard__white--key key key--white" data-key="99">c</div>
+      <div class="keyboard__white--key key key--white" data-key="118">v</div>
+      <div class="keyboard__white--key key key--white" data-key="98">b</div>
+      <div class="keyboard__white--key key key--white" data-key="110">n</div>
+      <div class="keyboard__white--key key key--white" data-key="109">m</div>
+    </div>
+  </div>
+  <div class="keyboard keyboard--small">
+    <div class="keyboard__black">
+      <div class="keyboard__black--key key key--black">l</div>
+      <div class="keyboard__black--key key key--black">;</div>
+    </div>
+    <div class="keyboard__white">
+      <div class="keyboard__white--key key key--white">,</div>
+      <div class="keyboard__white--key key key--white">.</div>
+      <div class="keyboard__white--key key key--white">/</div>
+    </div>
+  </div>
+  <!--
+  <div class="keyboard keyboard--big">
+    <div class="keyboard__black">
+      <div class="keyboard__black--key key key--black"></div>
+      <div class="keyboard__black--key key key--black"></div>
+      <div class="keyboard__black--key key key--black"></div>
+    </div>
+    <div class="keyboard__white">
+      <div class="keyboard__white--key key key--white"></div>
+      <div class="keyboard__white--key key key--white"></div>
+      <div class="keyboard__white--key key key--white"></div>
+      <div class="keyboard__white--key key key--white"></div>
+    </div>
+  </div>
+  -->
+  <block-audio>
+    <block-octave data-name="first">
+      <audio src="./src/samples/C4.mp3" data-key="122"></audio>
+      <audio src="./src/samples/Db4.mp3" data-key="115"></audio>
+      <audio src="./src/samples/D4.mp3" data-key="120"></audio>
+      <audio src="./src/samples/Eb4.mp3" data-key="100"></audio>
+      <audio src="./src/samples/E4.mp3" data-key="99"></audio>
+      <audio src="./src/samples/F4.mp3" data-key="118"></audio>
+      <audio src="./src/samples/Gb4.mp3" data-key="103"></audio>
+      <audio src="./src/samples/G4.mp3" data-key="98"></audio>
+      <audio src="./src/samples/Ab4.mp3" data-key="104"></audio>
+      <audio src="./src/samples/A4.mp3" data-key="110"></audio>
+      <audio src="./src/samples/Bb4.mp3" data-key="106"></audio>
+      <audio src="./src/samples/B4.mp3" data-key="109"></audio>
+    </block-octave>
+  </block-audio>
+  <script src="./src/js/kbdHandler.js"></script>
+</body>
+</html>

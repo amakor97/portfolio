@@ -1,0 +1,34 @@
+.keyboard {
+  display: inline-block;
+  width: -moz-fit-content;
+  width: fit-content;
+  vertical-align: bottom;
+}
+.keyboard__black {
+  display: flex;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto;
+}
+.keyboard__white {
+  display: flex;
+}
+
+.key {
+  display: block;
+  padding: 50px;
+  border: 1px solid black;
+}
+.key--black {
+  height: 30px;
+  background: lightgrey;
+}
+.key--white {
+  height: 120px;
+}
+.key--empty {
+  opacity: 0;
+}
+.key--pressing {
+  background: grey;
+}
