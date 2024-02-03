@@ -3,9 +3,7 @@
 const audio = document.querySelector("audio");
 const keyboard = document.querySelector(".keyboard");
 
-
 let lowerMode = false;
-
 
 window.addEventListener("keypress", playSound);
 
@@ -31,13 +29,27 @@ function modeHandler(e) {
 }
 
 
+let newAudio = document.querySelectorAll("audio");
+let newAudioList = {};
+newAudio.forEach(audioElem => {
+  console.log(audioElem.dataset.sound);
+
+})
+
+
 function playSound(e) {
   console.log(e.keyCode);
 
   let isPlaying = false;
 
-  const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+  //const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
   const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+  const audio = document.querySelector(`audio[data-sound="${key.dataset.sound}"]`);
+
+  console.log(key.dataset.sound);
+
+
+  
   if (!audio) {
     return;
   }
@@ -48,11 +60,6 @@ function playSound(e) {
     audio.load();
     audio.play();
   }
-
-  //if (audio.paused) {
-
-  //}
-  //audio.currentTime = 0;
 
   console.log(audio);
   audio.id = 5;
