@@ -12,6 +12,24 @@ const octaveCodes = [
   ["C1", "Db1", "D4"]
 ]
 
+const modeSelectors = document.querySelectorAll("input[name='select-switch-mode']");
+
+function checkMode() {
+  return document.querySelector("input[name='select-switch-mode']:checked");
+}
+
+console.log(modeSelectors);
+
+let switchModeType = "basic";
+
+modeSelectors.forEach(input => {
+  input.addEventListener("change", function() {
+    if (input.checked) {
+      switchModeType = input.value;
+      console.log({switchModeType}); 
+    }
+  })
+})
 
 function switchBasicMode(e) {
   console.log(e.keyCode);
@@ -29,11 +47,11 @@ function switchBasicMode(e) {
       console.log(e.code.charAt(5));
       const targetOctave = e.code.charAt(5) - 1;
       const targetNum = e.code.charAt(5);
-      console.log(octaveCodes[targetOctave]);
+      //console.log(octaveCodes[targetOctave]);
 
       const mainOctaveElems = document.querySelectorAll(".key");
       mainOctaveElems.forEach(key => {
-        console.log(key.classList);
+        //console.log(key.classList);
         if (key.classList.contains("js-key-main")) {
           key.dataset.sound = `${key.dataset.sound.slice(0, -1)}${targetNum}`;
         }
@@ -43,12 +61,40 @@ function switchBasicMode(e) {
         if (key.dataset.sound) {
 
         }
-        console.log(key.dataset.sound);
-      })
-      console.log(firstOctaveElems);  
+        //console.log(key.dataset.sound);
+      }) 
       break;
     }
   }
+}
+
+
+function prepareForSwitchAdvancedMode() {
+
+}
+
+
+function switchAdvancedMode(e) {
+  console.log("SWWWWW", e.keyCode);
+  switch(e.keyCode) {
+    case 33:
+    case 64:
+    case 35:
+    case 36:
+    case 37:
+    case 94:
+    case 38:
+    case 42:
+    case 40: {
+      console.log("SWITCHING ADV");
+    }
+  console.log("s");
+  }
+}
+
+
+function switchProMode(e) {
+  console.log("p");
 }
 
 //33, 64, 35, 36, 37, 94, 38, 42, 40 
@@ -70,7 +116,7 @@ function kbdHandler(e) {
 
 function modeHandler(e) {
   switchMode = true;
-  console.log({switchMode});
+  //console.log({switchMode});
   window.addEventListener("keyup", function(e) {
     console.log("up", e.keyCode);
     //const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
@@ -84,14 +130,33 @@ function modeHandler(e) {
 let newAudio = document.querySelectorAll("audio");
 let newAudioList = {};
 newAudio.forEach(audioElem => {
-  console.log(audioElem.dataset.sound);
+  //console.log(audioElem.dataset.sound);
 
 })
 
 
 function playSound(e) {
   if (switchMode === true) {
-    switchBasicMode(e);
+    
+    switch(switchModeType) {
+      case "basic": {
+        switchBasicMode(e);
+        break;
+      }
+      case "advanced": {
+        window.addEventListener("keydown", function(e) {
+          console.log(e.keyCode);
+        })
+        switchAdvancedMode(e);
+        break;
+      }
+      case "pro": {
+        switchProMode(e);
+        break;
+      }
+
+    }
+
     return;
   }
   console.log(e.keyCode);
@@ -102,22 +167,22 @@ function playSound(e) {
   const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
   const audio = document.querySelector(`audio[data-sound="${key.dataset.sound}"]`);
 
-  console.log(key.dataset.sound);
+  //console.log(key.dataset.sound);
 
 
   
   if (!audio) {
     return;
   }
-  console.log(key.getAttribute("data-playing"));
+  //console.log(key.getAttribute("data-playing"));
 
   if (key.getAttribute("data-playing") !== "true") {
-    console.log("y");
+    //console.log("y");
     audio.load();
     audio.play();
   }
 
-  console.log(audio);
+  //console.log(audio);
   audio.id = 5;
   key.setAttribute("data-playing", true);
 
