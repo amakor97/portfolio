@@ -31,11 +31,17 @@ function switchBasicMode(e) {
       const targetNum = e.code.charAt(5);
       console.log(octaveCodes[targetOctave]);
 
-      const firstOctaveElems = document.querySelectorAll(".keyboard--main .key");
-      firstOctaveElems.forEach(key => {
-        console.log(key.dataset.sound);
-        if (key.dataset.sound) {
+      const mainOctaveElems = document.querySelectorAll(".key");
+      mainOctaveElems.forEach(key => {
+        console.log(key.classList);
+        if (key.classList.contains("js-key-main")) {
           key.dataset.sound = `${key.dataset.sound.slice(0, -1)}${targetNum}`;
+        }
+        if (key.classList.contains("js-key-sub")) {
+          key.dataset.sound = `${key.dataset.sound.slice(0, -1)}${targetNum - 1}`;
+        }
+        if (key.dataset.sound) {
+
         }
         console.log(key.dataset.sound);
       })
