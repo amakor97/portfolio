@@ -6,7 +6,7 @@ const keyboard = document.querySelector(".keyboard");
 let lowerMode = false;
 let switchMode = false;
 
-window.addEventListener("keydown", kbdHandler);
+
 
 const octaveCodes = [
   ["C1", "Db1", "D4"]
@@ -14,11 +14,7 @@ const octaveCodes = [
 
 const modeSelectors = document.querySelectorAll("input[name='select-switch-mode']");
 
-function checkMode() {
-  return document.querySelector("input[name='select-switch-mode']:checked");
-}
 
-console.log(modeSelectors);
 
 let switchModeType = "basic";
 
@@ -43,8 +39,8 @@ function switchBasicMode(e) {
     case 38:
     case 42:
     case 40: {
-      console.log("SWITCHING");
-      console.log(e.code.charAt(5));
+      //console.log("SWITCHING");
+      //console.log(e.code.charAt(5));
       const targetOctave = e.code.charAt(5) - 1;
       const targetNum = e.code.charAt(5);
       //console.log(octaveCodes[targetOctave]);
@@ -88,13 +84,12 @@ function switchAdvancedMode(e) {
     case 40: {
       console.log("SWITCHING ADV");
     }
-  console.log("s");
   }
 }
 
 
 function switchProMode(e) {
-  console.log("p");
+  //console.log("p");
 }
 
 //33, 64, 35, 36, 37, 94, 38, 42, 40 
@@ -102,6 +97,7 @@ function switchProMode(e) {
 //49-57
 
 window.addEventListener("keypress", playSound);
+window.addEventListener("keydown", kbdHandler);
 
 function kbdHandler(e) {
   //console.log(e.keyCode);
@@ -114,16 +110,38 @@ function kbdHandler(e) {
   }
 }
 
+
+function waiterForKbdInputAdvSwitch(e) {
+  console.log(this);
+  switchAdvancedMode(e);
+  window.removeEventListener("keydown", waiterForKbdInputAdvSwitch);
+}
+
+function waiterForKbdInput(e) {
+  console.log(this);
+
+  window.addEventListener("keyup", waiterForShiftRelease);
+  window.removeEventListener("keydown", waiterForKbdInput);
+
+  window.addEventListener("keydown", waiterForKbdInputAdvSwitch);
+}
+
+function waiterForShiftRelease(e) {
+  if (e.keyCode === 16) {
+    switchMode = false;
+    console.warn({switchMode});
+    window.removeEventListener("keyup", waiterForShiftRelease);
+  }
+}
+
 function modeHandler(e) {
   switchMode = true;
-  //console.log({switchMode});
-  window.addEventListener("keyup", function(e) {
-    console.log("up", e.keyCode);
-    //const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
-    //key.classList.remove("key--pressing");
-    switchMode = false;
-    console.log({switchMode});
-  })
+  console.warn({switchMode});
+  window.addEventListener("keydown", waiterForKbdInput);
+  //waiterForKbdInput(e);
+
+  
+  //window.removeEventListener("keydown", waiterForKbdInput);
 }
 
 
@@ -144,10 +162,10 @@ function playSound(e) {
         break;
       }
       case "advanced": {
-        window.addEventListener("keydown", function(e) {
-          console.log(e.keyCode);
-        })
-        switchAdvancedMode(e);
+        //window.addEventListener("keydown", function(e) {
+          //console.log(e.keyCode);
+        //})
+        //switchAdvancedMode(e);
         break;
       }
       case "pro": {
@@ -192,6 +210,9 @@ function playSound(e) {
 
 window.addEventListener("keyup", function(e) {
   //console.log("up", e.keyCode);
+  if (e.keyCode === 16) {
+    return;
+  }
   //console.log("up", e.code);
   const keyText = e.code.charAt(3).toLowerCase();
   console.log({keyText});
@@ -202,20 +223,15 @@ window.addEventListener("keyup", function(e) {
       key = keyElem;
     }
   })
-  console.log(key);
+  //console.log(key);
   //const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
   if (key) {
     key.classList.remove("key--pressing");
     const dataKey = key.dataset.key;
-    console.log(dataKey);
+    //console.log(dataKey);
     const audio = document.querySelector(`audio[data-key="${dataKey}"]`);
-    console.log(audio);
+    //console.log(audio);
 
     key.setAttribute("data-playing", false);
-    //audio.load();
-
-    //audio.pause();
-    //audio.currentTime = 0;
-    //audio.load();
   }
 })
