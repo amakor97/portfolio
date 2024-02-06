@@ -6,15 +6,17 @@ const keyboard = document.querySelector(".keyboard");
 let lowerMode = false;
 let switchMode = false;
 
-
+let pressedKeys = [];
 
 const octaveCodes = [
   ["C1", "Db1", "D4"]
 ]
 
 const modeSelectors = document.querySelectorAll("input[name='select-switch-mode']");
+const editModeToggler = document.querySelector("input[name='toggle-edit-mode']");
 
 
+const mainOctaveSymbols = ["z", "s", "x"];
 
 let switchModeType = "basic";
 
@@ -26,6 +28,11 @@ modeSelectors.forEach(input => {
     }
   })
 })
+
+
+let isEditModeActive = false;
+editModeToggler.addEventListener("change", () => isEditModeActive = editModeToggler.checked);
+
 
 function switchBasicMode(e) {
   console.log(e.keyCode);
@@ -65,11 +72,87 @@ function switchBasicMode(e) {
 }
 
 
-function prepareForSwitchAdvancedMode() {
+function switchAdvancedMode() {
+  console.log(pressedKeys);
+  let pressedSymbols = pressedKeys.filter(key => key !== "shift");
+  console.log(pressedSymbols);
+  console.log(pressedSymbols[0]);
+
+  let pressedOctave = undefined;
+
+  if (mainOctaveSymbols.includes(pressedSymbols[0])) {
+    pressedOctave = "main";
+  }
+  console.warn({pressedOctave});
+}
+
+
+function keyHandler() {
+  if (pressedKeys.includes("shift")) {
+    console.warn("SWITCHING MODE ON");
+    switch(switchModeType) {
+      case "basic": {
+        console.error("BASIC SWITCHING MODE IS ACTIVE");
+        break;
+      }
+      case "advanced": {
+        console.error("ADVANCED SWITCHING MODE IS ACTIVE");
+        if (isEditModeActive === true) {
+          console.log("EDITING IS ON");
+          switchAdvancedMode();
+        } else {
+          console.log("EDITING IS OFF");
+        }
+        break;
+      }
+      case "pro": {
+        console.error("PRO SWITCHING MODE IS ACTIVE");
+        if (isEditModeActive === true) {
+          console.log("EDITING IS ON");
+        } else {
+          console.log("EDITING IS OFF");
+        }
+        break;
+      }
+    }
+
+  } else {
+    switch(switchModeType) {
+      case "basic": {
+        console.error("BASIC SWITCHING MODE IS INACTIVE");
+        break;
+      }
+      case "advanced": {
+        console.error("ADVANCED SWITCHING MODE IS INACTIVE");
+        if (isEditModeActive === true) {
+          console.log("EDITING IS ON");
+
+        } else {
+          console.log("EDITING IS OFF");
+        }
+        break;
+      }
+      case "pro": {
+        console.error("PRO SWITCHING MODE IS INACTIVE");
+        if (isEditModeActive === true) {
+          console.log("EDITING IS ON");
+        } else {
+          console.log("EDITING IS OFF");
+        }
+        break;
+      }
+    }
+    console.warn("SWITCHING MODE OFF");
+  }
 
 }
 
 
+function prepareForSwitchAdvancedMode() {
+
+}
+
+/*
 function switchAdvancedMode(e) {
   console.log("SWWWWW", e.keyCode);
   switch(e.keyCode) {
@@ -86,6 +169,7 @@ function switchAdvancedMode(e) {
     }
   }
 }
+*/
 
 
 function switchProMode(e) {
@@ -96,17 +180,39 @@ function switchProMode(e) {
 //keycodes of 1-9 with shift
 //49-57
 
-window.addEventListener("keypress", playSound);
 window.addEventListener("keydown", kbdHandler);
+//window.addEventListener("keydown", kbdHandler);
 
 function kbdHandler(e) {
   //console.log(e.keyCode);
   switch(e.keyCode) {
     case 16: {
-      modeHandler(e);
+      if (!pressedKeys.includes("shift")) {
+        console.log(`adding "shift" to`);
+        pressedKeys.push("shift");
+        keyHandler();
+      }
+      console.log(pressedKeys);
+      //modeHandler(e);
       break;
     }
-    default: break; playSound(e);
+    default: {
+      if ((switchModeType === "advanced") && (isEditModeActive)) {
+        console.log("adv");
+        const keyText = e.code.charAt(3).toLowerCase();
+        console.log({keyText});
+        if (!pressedKeys.includes(keyText)) {
+          pressedKeys.push(keyText);
+        }
+        console.log(pressedKeys);
+        if (pressedKeys.includes("shift")) {
+          switchAdvancedMode();
+        }
+      } else {
+        playSound(e);
+      }
+
+    }
   }
 }
 
@@ -154,29 +260,7 @@ newAudio.forEach(audioElem => {
 
 
 function playSound(e) {
-  if (switchMode === true) {
-    
-    switch(switchModeType) {
-      case "basic": {
-        switchBasicMode(e);
-        break;
-      }
-      case "advanced": {
-        //window.addEventListener("keydown", function(e) {
-          //console.log(e.keyCode);
-        //})
-        //switchAdvancedMode(e);
-        break;
-      }
-      case "pro": {
-        switchProMode(e);
-        break;
-      }
 
-    }
-
-    return;
-  }
   console.log(e.keyCode);
 
   let isPlaying = false;
@@ -185,8 +269,14 @@ function playSound(e) {
   const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
   const audio = document.querySelector(`audio[data-sound="${key.dataset.sound}"]`);
 
-  //console.log(key.dataset.sound);
 
+  const keyText = e.code.charAt(3).toLowerCase();
+  console.log({keyText});
+  if (!pressedKeys.includes(keyText)) {
+    pressedKeys.push(keyText);
+  }
+  console.log(`adding ${keyText} to`);
+  console.log(pressedKeys);
 
   
   if (!audio) {
@@ -195,27 +285,30 @@ function playSound(e) {
   //console.log(key.getAttribute("data-playing"));
 
   if (key.getAttribute("data-playing") !== "true") {
-    //console.log("y");
     audio.load();
     audio.play();
   }
 
-  //console.log(audio);
   audio.id = 5;
   key.setAttribute("data-playing", true);
-
   key.classList.add("key--pressing");
 }
 
 
 window.addEventListener("keyup", function(e) {
-  //console.log("up", e.keyCode);
   if (e.keyCode === 16) {
+    pressedKeys.splice(pressedKeys.indexOf("shift"), 1);
+    console.log(pressedKeys);
+    keyHandler();
     return;
   }
-  //console.log("up", e.code);
   const keyText = e.code.charAt(3).toLowerCase();
-  console.log({keyText});
+
+  if (pressedKeys.includes(keyText)) {
+    pressedKeys.splice(pressedKeys.indexOf(keyText), 1);
+  }
+   console.log(pressedKeys);
+
   let key = undefined;
   const keys = this.document.querySelectorAll(".key");
   keys.forEach(keyElem => {
