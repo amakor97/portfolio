@@ -34,8 +34,30 @@ let isEditModeActive = false;
 editModeToggler.addEventListener("change", () => isEditModeActive = editModeToggler.checked);
 
 
-function switchBasicMode(e) {
-  console.log(e.keyCode);
+function switchBasicMode() {
+  console.log(pressedKeys);
+  //console.log(e.keyCode);
+  let pressedSymbols = pressedKeys.filter(key => key !== "shift");
+  console.log(pressedSymbols);
+  console.log(pressedSymbols[0]);
+  let targetNum = undefined;
+  if (typeof(+pressedSymbols[0]) === "number") {
+    targetNum = pressedSymbols[0];
+  }
+  console.error({targetNum});
+
+  if ((+targetNum > 0) && (+targetNum < 10)) {
+    console.log("VALID");
+
+    const keyElems = document.querySelectorAll(".key");
+    keyElems.forEach(keyElem => {
+      if (keyElem.classList.contains("js-key-main")) {
+        keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${targetNum}`;
+      }
+    })
+  }
+
+  /*
   switch(e.keyCode) {
     case 33:
     case 64:
@@ -69,6 +91,7 @@ function switchBasicMode(e) {
       break;
     }
   }
+  */
 }
 
 
@@ -93,13 +116,14 @@ function keyHandler() {
     switch(switchModeType) {
       case "basic": {
         console.error("BASIC SWITCHING MODE IS ACTIVE");
+        //switchBasicMode();
         break;
       }
       case "advanced": {
         console.error("ADVANCED SWITCHING MODE IS ACTIVE");
         if (isEditModeActive === true) {
           console.log("EDITING IS ON");
-          switchAdvancedMode();
+          //switchAdvancedMode();
         } else {
           console.log("EDITING IS OFF");
         }
@@ -197,6 +221,17 @@ function kbdHandler(e) {
       break;
     }
     default: {
+      if (switchModeType === "basic") {
+        console.log(e.code.charAt(5), e.keyCode);
+        if (typeof(+(e.code.charAt(5))) === "number") {
+          console.log("num");
+        };
+        pressedKeys.push(e.code.charAt(5));
+        console.log(pressedKeys);
+        if (pressedKeys.includes("shift")) {
+          switchBasicMode();
+        }
+      }
       if ((switchModeType === "advanced") && (isEditModeActive)) {
         console.log("adv");
         const keyText = e.code.charAt(3).toLowerCase();
