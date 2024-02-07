@@ -6,7 +6,9 @@ const keyboard = document.querySelector(".keyboard");
 let lowerMode = false;
 let switchMode = false;
 
-let pressedKeys = [];
+const digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
+//let pressedKeys = [];
 
 const octaveCodes = [
   ["C1", "Db1", "D4"]
@@ -31,7 +33,10 @@ modeSelectors.forEach(input => {
 
 
 let isEditModeActive = false;
-editModeToggler.addEventListener("change", () => isEditModeActive = editModeToggler.checked);
+editModeToggler.addEventListener("change", () => {
+  isEditModeActive = editModeToggler.checked;
+  console.log({isEditModeActive});
+});
 
 
 function switchBasicMode() {
@@ -204,7 +209,7 @@ function switchProMode(e) {
 //keycodes of 1-9 with shift
 //49-57
 
-window.addEventListener("keydown", kbdHandler);
+//window.addEventListener("keydown", kbdHandler);
 //window.addEventListener("keydown", kbdHandler);
 
 function kbdHandler(e) {
@@ -252,38 +257,7 @@ function kbdHandler(e) {
 }
 
 
-function waiterForKbdInputAdvSwitch(e) {
-  console.log(this);
-  switchAdvancedMode(e);
-  window.removeEventListener("keydown", waiterForKbdInputAdvSwitch);
-}
 
-function waiterForKbdInput(e) {
-  console.log(this);
-
-  window.addEventListener("keyup", waiterForShiftRelease);
-  window.removeEventListener("keydown", waiterForKbdInput);
-
-  window.addEventListener("keydown", waiterForKbdInputAdvSwitch);
-}
-
-function waiterForShiftRelease(e) {
-  if (e.keyCode === 16) {
-    switchMode = false;
-    console.warn({switchMode});
-    window.removeEventListener("keyup", waiterForShiftRelease);
-  }
-}
-
-function modeHandler(e) {
-  switchMode = true;
-  console.warn({switchMode});
-  window.addEventListener("keydown", waiterForKbdInput);
-  //waiterForKbdInput(e);
-
-  
-  //window.removeEventListener("keydown", waiterForKbdInput);
-}
 
 
 let newAudio = document.querySelectorAll("audio");
@@ -307,9 +281,9 @@ function playSound(e) {
 
   const keyText = e.code.charAt(3).toLowerCase();
   console.log({keyText});
-  if (!pressedKeys.includes(keyText)) {
-    pressedKeys.push(keyText);
-  }
+  //if (!pressedKeys.includes(keyText)) {
+    //pressedKeys.push(keyText);
+  //}
   console.log(`adding ${keyText} to`);
   console.log(pressedKeys);
 
@@ -330,6 +304,27 @@ function playSound(e) {
 }
 
 
+function stopPlaying(e) {
+  const keyText = e.code.charAt(3).toLowerCase();
+
+  let key = undefined;
+  const keys = document.querySelectorAll(".key");
+  keys.forEach(keyElem => {
+    if (keyElem.textContent === keyText) {
+      key = keyElem;
+    }
+  })
+  if (key) {
+    key.classList.remove("key--pressing");
+    const dataKey = key.dataset.key;
+    const audio = document.querySelector(`audio[data-key="${dataKey}"]`);
+
+    key.setAttribute("data-playing", false);
+  }
+}
+
+
+/*
 window.addEventListener("keyup", function(e) {
   if (e.keyCode === 16) {
     pressedKeys.splice(pressedKeys.indexOf("shift"), 1);
@@ -363,3 +358,115 @@ window.addEventListener("keyup", function(e) {
     key.setAttribute("data-playing", false);
   }
 })
+*/
+
+let pressedKeys = new Set();
+console.log(pressedKeys);
+
+function addKeyToArray(e) {
+  console.log("press:", e.keyCode);
+  switch(e.keyCode) {
+    case 16: {
+      console.log("aKTA: adding 'shift' to pK");
+      pressedKeys.add("shift");
+      break;
+    }
+    case 48:
+    case 49:
+    case 50:
+    case 51:
+    case 52:
+    case 53:
+    case 54:
+    case 55:
+    case 56:
+    case 57: {
+      const digit = e.code.charAt(5);
+      console.log(`aKTA: adding '${digit}' to pK`);
+      pressedKeys.add(digit);
+      break;
+    }
+    default: {
+      const keyText = e.code.charAt(3).toLowerCase();
+      console.log(`aKTA: adding '${keyText}' to pK`);
+      pressedKeys.add(keyText);
+      break;
+    }
+  }
+}
+
+function removeKeyFromArray(e) {
+  console.log("release:", e.keyCode);
+  switch(e.keyCode) {
+    case 16: {
+      console.log("rKTA: removing 'shift' from pK");
+      pressedKeys.delete("shift");
+      break;
+    }
+    case 48:
+    case 49:
+    case 50:
+    case 51:
+    case 52:
+    case 53:
+    case 54:
+    case 55:
+    case 56:
+    case 57: {
+      const digit = e.code.charAt(5);
+      console.log(`rKTA: removing '${digit}' to pK`);
+      pressedKeys.delete(digit);
+      break;
+    }
+    default: {
+      const keyText = e.code.charAt(3).toLowerCase();
+      console.log(`rKTA: removing '${keyText}' to pK`);
+      pressedKeys.delete(keyText);
+      break;
+    }
+  }
+}
+
+window.addEventListener("keydown", kbdInputHandler);
+window.addEventListener("keyup", kbdReleaseHandler);
+
+function kbdInputHandler(e) {
+  addKeyToArray(e);
+  pressedKeysHandler(e);
+}
+
+function kbdReleaseHandler(e) {
+  removeKeyFromArray(e);
+  stopPlaying(e);
+}
+
+function pressedKeysHandler(e) {
+  console.log(pressedKeys);
+  if (pressedKeys.has("shift")) {
+    console.log("SWITCHING MODE");
+    switch(switchModeType) {
+      case "basic": {
+        tmpSwitchBasicMode();
+        break;
+      }
+    }
+  } else {
+    playSound(e);
+  }
+}
+
+function tmpSwitchBasicMode() {
+  console.warn("BASIC SWITCH MODE");
+
+  const targetDigit = digits.find(key => pressedKeys.has(key));
+  console.log({targetDigit});
+  if (targetDigit) {
+    console.error(`SWITCHING PIANO TO ${targetDigit} OCTAVE`);
+    const keyElems = document.querySelectorAll(".key");
+    keyElems.forEach(keyElem => {
+      if (keyElem.classList.contains("js-key-main")) {
+        keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${targetDigit}`;
+      }
+    })
+  }
+}
