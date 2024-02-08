@@ -16,7 +16,7 @@
 
 .key {
   display: block;
-  padding: 50px;
+  padding: 50px 40px;
   border: 1px solid black;
 }
 .key--black {

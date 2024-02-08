@@ -305,15 +305,17 @@ function playSound(e) {
 
 
 function stopPlaying(e) {
-  const keyText = e.code.charAt(3).toLowerCase();
+  const keyText = e.code.startsWith("D") ? e.code.charAt(5) : e.code.charAt(3).toLowerCase();
 
   let key = undefined;
   const keys = document.querySelectorAll(".key");
   keys.forEach(keyElem => {
     if (keyElem.textContent === keyText) {
+      console.log(keyElem);
       key = keyElem;
     }
   })
+  console.log({key});
   if (key) {
     key.classList.remove("key--pressing");
     const dataKey = key.dataset.key;
@@ -414,13 +416,13 @@ function removeKeyFromArray(e) {
     case 56:
     case 57: {
       const digit = e.code.charAt(5);
-      console.log(`rKTA: removing '${digit}' to pK`);
+      console.log(`rKTA: removing '${digit}' from pK`);
       pressedKeys.delete(digit);
       break;
     }
     default: {
       const keyText = e.code.charAt(3).toLowerCase();
-      console.log(`rKTA: removing '${keyText}' to pK`);
+      console.log(`rKTA: removing '${keyText}' from pK`);
       pressedKeys.delete(keyText);
       break;
     }
@@ -474,6 +476,9 @@ function tmpSwitchBasicMode() {
     keyElems.forEach(keyElem => {
       if (keyElem.classList.contains("js-key-main")) {
         keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${targetDigit}`;
+      }
+      if (keyElem.classList.contains("js-key-sub")) {
+        keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${targetDigit - 1}`;
       }
     })
   }
