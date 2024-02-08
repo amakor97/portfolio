@@ -484,6 +484,8 @@ function tmpSwitchBasicMode() {
   }
 }
 
+let pressedOctave = undefined;
+
 function tmpSwitchAdvancedMode() {
   console.warn("ADVANCED SWITCH MODE");
   console.warn({isEditModeActive});
@@ -493,31 +495,57 @@ function tmpSwitchAdvancedMode() {
   } else {
     console.error("HARD MODE");
     console.error("PRESS ONE OF DISPLAYED KEY");
-    console.log(pressedKeys);
-    const pressedSymbolKeys = new Set(([...pressedKeys]).filter(value => value !== "shift"));
-    console.log({pressedSymbolKeys});
-    let targetKey = undefined;
-    if (pressedSymbolKeys.size === 1) {
-      targetKey = Array.from(pressedSymbolKeys)[0];
-    }
-    if (targetKey) {
-      const allKeyElems = document.querySelectorAll(".key");
-      let pressedOctave = undefined;
-      allKeyElems.forEach(keyElem => {
-        if (keyElem.textContent === targetKey) {
-          console.log(keyElem);
-          console.log(keyElem.classList);
-          keyElem.classList.forEach(className => {
-            console.log(className);
-            if (className.startsWith("js-key-")) {
-              pressedOctave = className;
-            }
-          })
-        }
-      })
-      console.log({pressedOctave});
+    if (pressedOctave) {
+      console.error("OCTAVE IS FOUND");
+      console.warn("new p", pressedKeys);
+
       const pressedOctaveKeys = document.querySelectorAll(`.${pressedOctave}`);
-      console.log({pressedOctaveKeys});
+      console.log(pressedOctaveKeys);
+
+
+      const pressedSymbolKeys = new Set(([...pressedKeys]).filter(value => value !== "shift"));
+      console.log({pressedSymbolKeys});
+      let targetKey = undefined;
+      if (pressedSymbolKeys.size === 1) {
+        targetKey = Array.from(pressedSymbolKeys)[0];
+      }
+      console.error({targetKey});
+      pressedOctaveKeys.forEach(keyElem => {
+        keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${targetKey}`;
+      })
+
+      pressedOctave = undefined;
+    } else {
+      console.log(pressedKeys);
+      const pressedSymbolKeys = new Set(([...pressedKeys]).filter(value => value !== "shift"));
+      console.log({pressedSymbolKeys});
+      let targetKey = undefined;
+      if (pressedSymbolKeys.size === 1) {
+        targetKey = Array.from(pressedSymbolKeys)[0];
+      }
+      pressedKeys.delete(targetKey); //optional?
+      if (targetKey) {
+        const allKeyElems = document.querySelectorAll(".key");
+  
+        allKeyElems.forEach(keyElem => {
+          if (keyElem.textContent === targetKey) {
+            //console.log(keyElem);
+            //console.log(keyElem.classList);
+            keyElem.classList.forEach(className => {
+              console.log(className);
+              if (className.startsWith("js-key-")) {
+                pressedOctave = className;
+              }
+            })
+          }
+        })
+        console.log({pressedOctave});
+  
+        const pressedOctaveKeys = document.querySelectorAll(`.${pressedOctave}`);
+        console.log({pressedOctaveKeys});
+  
+      }
     }
+    
   }
 }
