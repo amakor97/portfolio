@@ -18,6 +18,29 @@ const modeSelectors = document.querySelectorAll("input[name='select-switch-mode'
 const editModeToggler = document.querySelector("input[name='toggle-edit-mode']");
 
 
+let advancedModeLayouts = [
+  {
+    sub: 3,
+    main: 4,
+    sup: 5,
+    super: 6
+  },
+  {
+    sub: 3,
+    main: 4,
+    sup: 5,
+    super: 6
+  },
+  {
+    sub: 3,
+    main: 4,
+    sup: 5,
+    super: 6
+  }
+]
+
+let activeAdvanceLayout = 0;
+
 const mainOctaveSymbols = ["z", "s", "x"];
 
 let switchModeType = "basic";
@@ -492,6 +515,28 @@ function tmpSwitchAdvancedMode() {
   if (!isEditModeActive) {
     console.error("LIGHT MODE ISN'T COMPLETED YET");
     console.log(pressedKeys);
+    console.log(activeAdvanceLayout);
+
+    const pressedSymbolKeys = new Set(([...pressedKeys]).filter(value => value !== "shift"));
+    console.log({pressedSymbolKeys});
+    let targetKey = undefined;
+    if (pressedSymbolKeys.size === 1) {
+      targetKey = Array.from(pressedSymbolKeys)[0];
+    }
+    console.error({targetKey});
+
+    activeAdvanceLayout = targetKey;
+    console.log({activeAdvanceLayout});
+
+    //inp for setting activeAdvLYOUT
+
+    console.log(advancedModeLayouts[activeAdvanceLayout]);
+    const keyElems = document.querySelectorAll(".key");
+    keyElems.forEach(keyElem => {
+      if (keyElem.classList.contains("js-key-main")) {
+        keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${advancedModeLayouts[activeAdvanceLayout].main}`;
+      }
+    })  
   } else {
     console.error("HARD MODE");
     console.error("PRESS ONE OF DISPLAYED KEY");
@@ -510,9 +555,24 @@ function tmpSwitchAdvancedMode() {
         targetKey = Array.from(pressedSymbolKeys)[0];
       }
       console.error({targetKey});
-      pressedOctaveKeys.forEach(keyElem => {
-        keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${targetKey}`;
-      })
+      if (targetKey) {
+        pressedOctaveKeys.forEach(keyElem => {
+          keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${targetKey}`;
+        })
+
+        let octaveName = undefined;
+        switch(pressedOctave) {
+          case "js-key-main": {
+            octaveName = "main";
+            console.log(octaveName);
+            break;
+          }
+        }
+
+        advancedModeLayouts[activeAdvanceLayout][octaveName] = +targetKey;
+        console.log(advancedModeLayouts);
+      }
+
 
       pressedOctave = undefined;
     } else {
