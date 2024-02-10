@@ -29,6 +29,7 @@ let noteForProMode = undefined;
 
 noteValidateBtn.addEventListener("click", function() {
   //console.log(noteInput.value);
+  noteInput.value = noteInput.value.toUpperCase();
   noteForProMode = noteInput.value;
   console.log({noteForProMode});
 })
