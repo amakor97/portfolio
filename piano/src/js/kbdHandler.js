@@ -6,6 +6,12 @@ const keyboard = document.querySelector(".keyboard");
 let lowerMode = false;
 let switchMode = false;
 
+
+
+let advInfo = document.querySelector(".adv-info");
+let proInfo = document.querySelector(".pro-info");
+
+
 const digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 //let pressedKeys = [];
@@ -16,7 +22,16 @@ const octaveCodes = [
 
 const modeSelectors = document.querySelectorAll("input[name='select-switch-mode']");
 const editModeToggler = document.querySelector("input[name='toggle-edit-mode']");
+const noteInput = document.querySelector("input[name='enter-note']");
+const noteValidateBtn = document.querySelector(".js-note-validate-btn");
 
+let noteForProMode = undefined;
+
+noteValidateBtn.addEventListener("click", function() {
+  //console.log(noteInput.value);
+  noteForProMode = noteInput.value;
+  console.log({noteForProMode});
+})
 
 let advancedModeLayouts = [
   {
@@ -39,7 +54,16 @@ let advancedModeLayouts = [
   }
 ]
 
-let activeAdvanceLayout = 0;
+let proModeLayouts = [
+  {
+    z: "C4",
+    x: "D4",
+    c: "E4"
+  }
+]
+
+let activeAdvancedLayout = 0;
+let activeProLayout = 0;
 
 const mainOctaveSymbols = ["z", "s", "x"];
 
@@ -515,7 +539,7 @@ function tmpSwitchAdvancedMode() {
   if (!isEditModeActive) {
     console.error("LIGHT MODE ISN'T COMPLETED YET");
     console.log(pressedKeys);
-    console.log(activeAdvanceLayout);
+    console.log(activeAdvancedLayout);
 
     const pressedSymbolKeys = new Set(([...pressedKeys]).filter(value => value !== "shift"));
     console.log({pressedSymbolKeys});
@@ -525,16 +549,16 @@ function tmpSwitchAdvancedMode() {
     }
     console.error({targetKey});
 
-    activeAdvanceLayout = targetKey;
-    console.log({activeAdvanceLayout});
+    activeAdvancedLayout = targetKey;
+    console.log({activeAdvancedLayout});
 
     //inp for setting activeAdvLYOUT
 
-    console.log(advancedModeLayouts[activeAdvanceLayout]);
+    console.log(advancedModeLayouts[activeAdvancedLayout]);
     const keyElems = document.querySelectorAll(".key");
     keyElems.forEach(keyElem => {
       if (keyElem.classList.contains("js-key-main")) {
-        keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${advancedModeLayouts[activeAdvanceLayout].main}`;
+        keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${advancedModeLayouts[activeAdvancedLayout].main}`;
       }
     })  
   } else {
@@ -569,7 +593,8 @@ function tmpSwitchAdvancedMode() {
           }
         }
 
-        advancedModeLayouts[activeAdvanceLayout][octaveName] = +targetKey;
+        advancedModeLayouts[activeAdvancedLayout][octaveName] = +targetKey;
+        advInfo.textContent = JSON.stringify(advancedModeLayouts);
         console.log(advancedModeLayouts);
       }
 
@@ -609,3 +634,55 @@ function tmpSwitchAdvancedMode() {
     
   }
 }
+
+
+let pressedProKeyElem = undefined;
+
+
+function tmpSwitchProMode() {
+  console.warn("PRO SWITCH MODE");
+  console.warn({isEditModeActive});
+  if (!isEditModeActive) {
+    console.error("LIGHT MODE ISN'T COMPLETED YET");
+    console.log(pressedKeys);
+    console.log(activeAdvancedLayout);
+  } else {
+    console.error("HARD MODE");
+    console.error("PRESS ONE OF DISPLAYED KEY");
+    //if (pressedProKeyElem) {
+      //console.error("KEY IS FOUND");
+      //console.warn("new p", pressedKeys);
+
+ //     const pressedKey = pressedProKeyElem.textContent;
+
+    //} else {
+      console.log(pressedKeys);
+      const pressedSymbolKeys = new Set(([...pressedKeys]).filter(value => value !== "shift"));
+      console.log({pressedSymbolKeys});
+
+      let targetKey = undefined;
+      if (pressedSymbolKeys.size === 1) {
+        targetKey = Array.from(pressedSymbolKeys)[0];
+      }
+      pressedKeys.delete(targetKey); //optional?
+      if (targetKey) {
+        console.log({targetKey});
+
+        const allKeyElems = document.querySelectorAll(".key");
+  
+        allKeyElems.forEach(keyElem => {
+          if (keyElem.textContent === targetKey) {
+            pressedProKeyElem = keyElem;
+          }
+        })
+        console.log(pressedProKeyElem);
+        console.log(pressedProKeyElem.textContent);
+        pressedProKeyElem.dataset.sound = noteForProMode;
+
+        proModeLayouts[activeProLayout][targetKey] = noteForProMode;
+        proInfo.textContent = JSON.stringify(proModeLayouts);
+      }
+    //}
+  }
+}
+
