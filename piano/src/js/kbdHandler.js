@@ -59,6 +59,11 @@ let proModeLayouts = [
     z: "C4",
     x: "D4",
     c: "E4"
+  },
+  {
+    z: "C4",
+    x: "D4",
+    c: "E4"
   }
 ]
 
@@ -645,7 +650,44 @@ function tmpSwitchProMode() {
   if (!isEditModeActive) {
     console.error("LIGHT MODE ISN'T COMPLETED YET");
     console.log(pressedKeys);
-    console.log(activeAdvancedLayout);
+    console.log(activeProLayout);
+
+    const pressedSymbolKeys = new Set(([...pressedKeys]).filter(value => value !== "shift"));
+    console.log({pressedSymbolKeys});
+    let targetKey = undefined;
+    if (pressedSymbolKeys.size === 1) {
+      targetKey = Array.from(pressedSymbolKeys)[0];
+    }
+    console.error({targetKey});
+
+    if (Number.isInteger(+targetKey)) {
+      activeProLayout = targetKey;
+    }
+
+
+    console.log({activeProLayout});
+
+    console.log(proModeLayouts[activeProLayout]);
+
+    const keyElems = document.querySelectorAll(".key");
+    //keyElemsArray = [...keyElems];
+    
+    //let keyElemsArray.find(elem => (elem.textContent === pressedProKeyElem.textContent));
+    
+    //console.log(pressedProKeyElem);
+
+    
+    keyElems.forEach(keyElem => {
+      if (keyElem.textContent in proModeLayouts[activeProLayout]) {
+        console.log(keyElem.textContent);
+        console.log(proModeLayouts[activeProLayout][keyElem.textContent]);
+        keyElem.dataset.sound = proModeLayouts[activeProLayout][keyElem.textContent];
+      }
+    })
+    
+
+    //pressedProKeyElem = undefined;
+
   } else {
     console.error("HARD MODE");
     console.error("PRESS ONE OF DISPLAYED KEY");
