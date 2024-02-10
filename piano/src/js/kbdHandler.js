@@ -636,7 +636,6 @@ function tmpSwitchAdvancedMode() {
   
       }
     }
-    
   }
 }
 
@@ -666,15 +665,8 @@ function tmpSwitchProMode() {
 
 
     console.log({activeProLayout});
-
     console.log(proModeLayouts[activeProLayout]);
-
     const keyElems = document.querySelectorAll(".key");
-    //keyElemsArray = [...keyElems];
-    
-    //let keyElemsArray.find(elem => (elem.textContent === pressedProKeyElem.textContent));
-    
-    //console.log(pressedProKeyElem);
 
     
     keyElems.forEach(keyElem => {
@@ -684,47 +676,37 @@ function tmpSwitchProMode() {
         keyElem.dataset.sound = proModeLayouts[activeProLayout][keyElem.textContent];
       }
     })
-    
-
-    //pressedProKeyElem = undefined;
 
   } else {
     console.error("HARD MODE");
     console.error("PRESS ONE OF DISPLAYED KEY");
-    //if (pressedProKeyElem) {
-      //console.error("KEY IS FOUND");
-      //console.warn("new p", pressedKeys);
 
- //     const pressedKey = pressedProKeyElem.textContent;
+    console.log(pressedKeys);
+    const pressedSymbolKeys = new Set(([...pressedKeys]).filter(value => value !== "shift"));
+    console.log({pressedSymbolKeys});
 
-    //} else {
-      console.log(pressedKeys);
-      const pressedSymbolKeys = new Set(([...pressedKeys]).filter(value => value !== "shift"));
-      console.log({pressedSymbolKeys});
+    let targetKey = undefined;
+    if (pressedSymbolKeys.size === 1) {
+      targetKey = Array.from(pressedSymbolKeys)[0];
+    }
+    pressedKeys.delete(targetKey); //optional?
+    if (targetKey) {
+      console.log({targetKey});
 
-      let targetKey = undefined;
-      if (pressedSymbolKeys.size === 1) {
-        targetKey = Array.from(pressedSymbolKeys)[0];
-      }
-      pressedKeys.delete(targetKey); //optional?
-      if (targetKey) {
-        console.log({targetKey});
+      const allKeyElems = document.querySelectorAll(".key");
 
-        const allKeyElems = document.querySelectorAll(".key");
-  
-        allKeyElems.forEach(keyElem => {
-          if (keyElem.textContent === targetKey) {
-            pressedProKeyElem = keyElem;
-          }
-        })
-        console.log(pressedProKeyElem);
-        console.log(pressedProKeyElem.textContent);
-        pressedProKeyElem.dataset.sound = noteForProMode;
+      allKeyElems.forEach(keyElem => {
+        if (keyElem.textContent === targetKey) {
+          pressedProKeyElem = keyElem;
+        }
+      })
+      console.log(pressedProKeyElem);
+      console.log(pressedProKeyElem.textContent);
+      pressedProKeyElem.dataset.sound = noteForProMode;
 
-        proModeLayouts[activeProLayout][targetKey] = noteForProMode;
-        proInfo.textContent = JSON.stringify(proModeLayouts);
-      }
-    //}
+      proModeLayouts[activeProLayout][targetKey] = noteForProMode;
+      proInfo.textContent = JSON.stringify(proModeLayouts);
+    }
   }
 }
 
