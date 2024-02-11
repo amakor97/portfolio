@@ -500,6 +500,14 @@ function tmpSwitchBasicMode() {
       if (keyElem.classList.contains("js-key-sub")) {
         keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${targetDigit - 1}`;
       }
+      if (keyElem.classList.contains("js-key-sup")) {
+        console.log(keyElem.dataset.sound);
+        console.log(keyElem.dataset.sound.slice(0, -1));
+        keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${+targetDigit + 1}`;
+      }
+      if (keyElem.classList.contains("js-key-super-sup")) {
+        keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${+targetDigit + 2}`;
+      }
     })
   }
 }
