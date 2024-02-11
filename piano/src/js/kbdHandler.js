@@ -363,7 +363,7 @@ function stopPlaying(e) {
   let key = undefined;
   const keys = document.querySelectorAll(".key");
   keys.forEach(keyElem => {
-    if (keyElem.textContent === keyText) {
+    if (keyElem.dataset.symbol === keyText) {
       console.log(keyElem);
       key = keyElem;
     }
@@ -619,7 +619,7 @@ function tmpSwitchAdvancedMode() {
         const allKeyElems = document.querySelectorAll(".key");
   
         allKeyElems.forEach(keyElem => {
-          if (keyElem.textContent === targetKey) {
+          if (keyElem.dataset.symbol === targetKey) {
             //console.log(keyElem);
             //console.log(keyElem.classList);
             keyElem.classList.forEach(className => {
@@ -671,10 +671,10 @@ function tmpSwitchProMode() {
 
     
     keyElems.forEach(keyElem => {
-      if (keyElem.textContent in proModeLayouts[activeProLayout]) {
-        console.log(keyElem.textContent);
-        console.log(proModeLayouts[activeProLayout][keyElem.textContent]);
-        keyElem.dataset.sound = proModeLayouts[activeProLayout][keyElem.textContent];
+      if (keyElem.dataset.symbol in proModeLayouts[activeProLayout]) {
+        console.log(keyElem.dataset.symbol);
+        console.log(proModeLayouts[activeProLayout][keyElem.dataset.symbol]);
+        keyElem.dataset.sound = proModeLayouts[activeProLayout][keyElem.dataset.symbol];
       }
     })
 
@@ -697,12 +697,12 @@ function tmpSwitchProMode() {
       const allKeyElems = document.querySelectorAll(".key");
 
       allKeyElems.forEach(keyElem => {
-        if (keyElem.textContent === targetKey) {
+        if (keyElem.dataset.symbol === targetKey) {
           pressedProKeyElem = keyElem;
         }
       })
       console.log(pressedProKeyElem);
-      console.log(pressedProKeyElem.textContent);
+      console.log(pressedProKeyElem.dataset.symbol);
       pressedProKeyElem.dataset.sound = noteForProMode;
 
       proModeLayouts[activeProLayout][targetKey] = noteForProMode;
