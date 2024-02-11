@@ -333,12 +333,12 @@ function playSound(e) {
 
 
   const keyText = e.code.charAt(3).toLowerCase();
-  console.log({keyText});
+  //console.log({keyText});
   //if (!pressedKeys.includes(keyText)) {
     //pressedKeys.push(keyText);
   //}
-  console.log(`adding ${keyText} to`);
-  console.log(pressedKeys);
+  //console.log(`adding ${keyText} to`);
+  //console.log(pressedKeys);
 
   
   if (!audio) {
@@ -358,8 +358,42 @@ function playSound(e) {
 
 
 function stopPlaying(e) {
-  const keyText = e.code.startsWith("D") ? e.code.charAt(5) : e.code.charAt(3).toLowerCase();
-
+  console.log(e.code);
+  let keyText = undefined;
+  switch (e.code) {
+    case "Comma": {
+      keyText = ",";
+      break;
+    }
+    case "Period": {
+      keyText = ".";
+      break;
+    }
+    case "Slash": {
+      keyText = "/";
+      break;
+    }
+    case "Semicolon": {
+      keyText = ";";
+      break;
+    }
+    case "Minus": {
+      keyText = "-";
+      break;
+    }
+    case "BracketLeft": {
+      keyText = "[";
+      break;
+    }
+    case "BracketRight": {
+      keyText = "]";
+      break;
+    }
+    default: {
+      keyText = e.code.startsWith("D") ? e.code.charAt(5) : e.code.charAt(3).toLowerCase();
+      break;
+    }
+  }
   let key = undefined;
   const keys = document.querySelectorAll(".key");
   keys.forEach(keyElem => {
@@ -441,6 +475,34 @@ function addKeyToArray(e) {
       pressedKeys.add(digit);
       break;
     }
+    case 186: {
+      pressedKeys.add(";");
+      break;
+    }
+    case 188: {
+      pressedKeys.add(",");
+      break;
+    }
+    case 189: {
+      pressedKeys.add("-");
+      break;
+    }
+    case 190: {
+      pressedKeys.add(".");
+      break;
+    }
+    case 191: {
+      pressedKeys.add("/");
+      break;
+    }
+    case 219: {
+      pressedKeys.add("[");
+      break;
+    }
+    case 221: {
+      pressedKeys.add("]");
+      break;
+    }
     default: {
       const keyText = e.code.charAt(3).toLowerCase();
       console.log(`aKTA: adding '${keyText}' to pK`);
@@ -471,6 +533,34 @@ function removeKeyFromArray(e) {
       const digit = e.code.charAt(5);
       console.log(`rKTA: removing '${digit}' from pK`);
       pressedKeys.delete(digit);
+      break;
+    }
+    case 186: {
+      pressedKeys.delete(";");
+      break;
+    }
+    case 188: {
+      pressedKeys.delete(",");
+      break;
+    }
+    case 189: {
+      pressedKeys.delete("-");
+      break;
+    }
+    case 190: {
+      pressedKeys.delete(".");
+      break;
+    }
+    case 191: {
+      pressedKeys.delete("/");
+      break;
+    }
+    case 219: {
+      pressedKeys.delete("[");
+      break;
+    }
+    case 221: {
+      pressedKeys.delete("]");
       break;
     }
     default: {
