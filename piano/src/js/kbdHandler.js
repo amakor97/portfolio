@@ -6,15 +6,10 @@ const keyboard = document.querySelector(".keyboard");
 let lowerMode = false;
 let switchMode = false;
 
-
-
 let advInfo = document.querySelector(".adv-info");
 let proInfo = document.querySelector(".pro-info");
 
-
 const digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-
-//let pressedKeys = [];
 
 const octaveCodes = [
   ["C1", "Db1", "D4"]
@@ -115,41 +110,6 @@ function switchBasicMode() {
     })
   }
 
-  /*
-  switch(e.keyCode) {
-    case 33:
-    case 64:
-    case 35:
-    case 36:
-    case 37:
-    case 94:
-    case 38:
-    case 42:
-    case 40: {
-      //console.log("SWITCHING");
-      //console.log(e.code.charAt(5));
-      const targetOctave = e.code.charAt(5) - 1;
-      const targetNum = e.code.charAt(5);
-      //console.log(octaveCodes[targetOctave]);
-
-      const mainOctaveElems = document.querySelectorAll(".key");
-      mainOctaveElems.forEach(key => {
-        //console.log(key.classList);
-        if (key.classList.contains("js-key-main")) {
-          key.dataset.sound = `${key.dataset.sound.slice(0, -1)}${targetNum}`;
-        }
-        if (key.classList.contains("js-key-sub")) {
-          key.dataset.sound = `${key.dataset.sound.slice(0, -1)}${targetNum - 1}`;
-        }
-        if (key.dataset.sound) {
-
-        }
-        //console.log(key.dataset.sound);
-      }) 
-      break;
-    }
-  }
-  */
 }
 
 
@@ -230,41 +190,6 @@ function keyHandler() {
 }
 
 
-function prepareForSwitchAdvancedMode() {
-
-}
-
-/*
-function switchAdvancedMode(e) {
-  console.log("SWWWWW", e.keyCode);
-  switch(e.keyCode) {
-    case 33:
-    case 64:
-    case 35:
-    case 36:
-    case 37:
-    case 94:
-    case 38:
-    case 42:
-    case 40: {
-      console.log("SWITCHING ADV");
-    }
-  }
-}
-*/
-
-
-function switchProMode(e) {
-  //console.log("p");
-}
-
-//33, 64, 35, 36, 37, 94, 38, 42, 40 
-//keycodes of 1-9 with shift
-//49-57
-
-//window.addEventListener("keydown", kbdHandler);
-//window.addEventListener("keydown", kbdHandler);
-
 function kbdHandler(e) {
   //console.log(e.keyCode);
   switch(e.keyCode) {
@@ -310,35 +235,22 @@ function kbdHandler(e) {
 }
 
 
-
-
-
 let newAudio = document.querySelectorAll("audio");
 let newAudioList = {};
 newAudio.forEach(audioElem => {
-  //console.log(audioElem.dataset.sound);
-
 })
 
 
 function playSound(e) {
-
   console.log(e.keyCode);
-
   let isPlaying = false;
 
-  //const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
   const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
   const audio = document.querySelector(`audio[data-sound="${key.dataset.sound}"]`);
 
 
   const keyText = e.code.charAt(3).toLowerCase();
-  //console.log({keyText});
-  //if (!pressedKeys.includes(keyText)) {
-    //pressedKeys.push(keyText);
-  //}
-  //console.log(`adding ${keyText} to`);
-  //console.log(pressedKeys);
+
 
   
   if (!audio) {
@@ -413,41 +325,6 @@ function stopPlaying(e) {
 }
 
 
-/*
-window.addEventListener("keyup", function(e) {
-  if (e.keyCode === 16) {
-    pressedKeys.splice(pressedKeys.indexOf("shift"), 1);
-    console.log(pressedKeys);
-    keyHandler();
-    return;
-  }
-  const keyText = e.code.charAt(3).toLowerCase();
-
-  if (pressedKeys.includes(keyText)) {
-    pressedKeys.splice(pressedKeys.indexOf(keyText), 1);
-  }
-   console.log(pressedKeys);
-
-  let key = undefined;
-  const keys = this.document.querySelectorAll(".key");
-  keys.forEach(keyElem => {
-    if (keyElem.textContent === keyText) {
-      key = keyElem;
-    }
-  })
-  //console.log(key);
-  //const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
-  if (key) {
-    key.classList.remove("key--pressing");
-    const dataKey = key.dataset.key;
-    //console.log(dataKey);
-    const audio = document.querySelector(`audio[data-key="${dataKey}"]`);
-    //console.log(audio);
-
-    key.setAttribute("data-playing", false);
-  }
-})
-*/
 
 let pressedKeys = new Set();
 console.log(pressedKeys);
