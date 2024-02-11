@@ -541,7 +541,16 @@ function tmpSwitchAdvancedMode() {
       if (keyElem.classList.contains("js-key-main")) {
         keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${advancedModeLayouts[activeAdvancedLayout].main}`;
       }
-    })  
+      if (keyElem.classList.contains("js-key-sub")) {
+        keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${advancedModeLayouts[activeAdvancedLayout].sub}`;
+      }
+      if (keyElem.classList.contains("js-key-sup")) {
+        keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${advancedModeLayouts[activeAdvancedLayout].sup}`;
+      }
+      if (keyElem.classList.contains("js-key-super-sup")) {
+        keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${advancedModeLayouts[activeAdvancedLayout].super}`;
+      }
+    })
   } else {
     console.error("HARD MODE");
     console.error("PRESS ONE OF DISPLAYED KEY");
@@ -570,6 +579,18 @@ function tmpSwitchAdvancedMode() {
           case "js-key-main": {
             octaveName = "main";
             console.log(octaveName);
+            break;
+          }
+          case "js-key-sub": {
+            octaveName = "sub";
+            break;
+          }
+          case "js-key-sup": {
+            octaveName = "sup";
+            break;
+          }
+          case "js-key-super-sup": {
+            octaveName = "super";
             break;
           }
         }
