@@ -23,9 +23,9 @@ const noteValidateBtn = document.querySelector(".js-note-validate-btn");
 let noteForProMode = undefined;
 
 noteValidateBtn.addEventListener("click", function() {
-  //console.log(noteInput.value);
+  console.log(noteInput.value);
   if (noteInput.value.length === 3) {
-    noteInput.value = noteInput.value.slice(0, 1).toUpperCase() + noteInput.value.slice(1);
+    noteInput.value = noteInput.value.slice(0, 1).toUpperCase() + noteInput.value.slice(1).toLowerCase();
   } else {
     noteInput.value = noteInput.value.toUpperCase();
   }
