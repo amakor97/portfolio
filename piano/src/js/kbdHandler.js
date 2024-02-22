@@ -274,34 +274,34 @@ function playSound(e) {
 
 
 function stopPlaying(e) {
-  console.log(e.code);
+  console.log(e.code, e.keyCode);
   let keyText = undefined;
-  switch (e.code) {
-    case "Comma": {
+  switch (e.keyCode) {
+    case 188: {
       keyText = ",";
       break;
     }
-    case "Period": {
+    case 190: {
       keyText = ".";
       break;
     }
-    case "Slash": {
+    case 191: {
       keyText = "/";
       break;
     }
-    case "Semicolon": {
+    case 186: {
       keyText = ";";
       break;
     }
-    case "Minus": {
+    case 189: {
       keyText = "-";
       break;
     }
-    case "BracketLeft": {
+    case 219: {
       keyText = "[";
       break;
     }
-    case "BracketRight": {
+    case 221: {
       keyText = "]";
       break;
     }
