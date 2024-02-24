@@ -275,7 +275,9 @@ function playSound(e) {
 
 function stopPlaying(e) {
   console.log(e.code, e.keyCode);
+  /*
   let keyText = undefined;
+
   switch (e.keyCode) {
     case 188: {
       keyText = ",";
@@ -310,6 +312,10 @@ function stopPlaying(e) {
       break;
     }
   }
+  */
+
+  let keyText = getKeyFromEvent(e);
+
   let key = undefined;
   const keys = document.querySelectorAll(".key");
   keys.forEach(keyElem => {
@@ -333,124 +339,19 @@ function stopPlaying(e) {
 let pressedKeys = new Set();
 console.log(pressedKeys);
 
+
+
 function addKeyToArray(e) {
   console.log("press:", e.keyCode);
-  switch(e.keyCode) {
-    case 16: {
-      console.log("aKTA: adding 'shift' to pK");
-      pressedKeys.add("shift");
-      break;
-    }
-    case 48:
-    case 49:
-    case 50:
-    case 51:
-    case 52:
-    case 53:
-    case 54:
-    case 55:
-    case 56:
-    case 57: {
-      const digit = e.code.charAt(5);
-      console.log(`aKTA: adding '${digit}' to pK`);
-      pressedKeys.add(digit);
-      break;
-    }
-    case 186: {
-      pressedKeys.add(";");
-      break;
-    }
-    case 188: {
-      pressedKeys.add(",");
-      break;
-    }
-    case 189: {
-      pressedKeys.add("-");
-      break;
-    }
-    case 190: {
-      pressedKeys.add(".");
-      break;
-    }
-    case 191: {
-      pressedKeys.add("/");
-      break;
-    }
-    case 219: {
-      pressedKeys.add("[");
-      break;
-    }
-    case 221: {
-      pressedKeys.add("]");
-      break;
-    }
-    default: {
-      const keyText = e.code.charAt(3).toLowerCase();
-      console.log(`aKTA: adding '${keyText}' to pK`);
-      pressedKeys.add(keyText);
-      break;
-    }
-  }
+  let key = getKeyFromEvent(e);
+  pressedKeys.add(key);
+
 }
 
 function removeKeyFromArray(e) {
   console.log("release:", e.keyCode);
-  switch(e.keyCode) {
-    case 16: {
-      console.log("rKTA: removing 'shift' from pK");
-      pressedKeys.delete("shift");
-      break;
-    }
-    case 48:
-    case 49:
-    case 50:
-    case 51:
-    case 52:
-    case 53:
-    case 54:
-    case 55:
-    case 56:
-    case 57: {
-      const digit = e.code.charAt(5);
-      console.log(`rKTA: removing '${digit}' from pK`);
-      pressedKeys.delete(digit);
-      break;
-    }
-    case 186: {
-      pressedKeys.delete(";");
-      break;
-    }
-    case 188: {
-      pressedKeys.delete(",");
-      break;
-    }
-    case 189: {
-      pressedKeys.delete("-");
-      break;
-    }
-    case 190: {
-      pressedKeys.delete(".");
-      break;
-    }
-    case 191: {
-      pressedKeys.delete("/");
-      break;
-    }
-    case 219: {
-      pressedKeys.delete("[");
-      break;
-    }
-    case 221: {
-      pressedKeys.delete("]");
-      break;
-    }
-    default: {
-      const keyText = e.code.charAt(3).toLowerCase();
-      console.log(`rKTA: removing '${keyText}' from pK`);
-      pressedKeys.delete(keyText);
-      break;
-    }
-  }
+  let key = getKeyFromEvent(e);
+  pressedKeys.delete(key);
 }
 
 window.addEventListener("keydown", kbdInputHandler);
@@ -711,3 +612,50 @@ function tmpSwitchProMode() {
   }
 }
 
+
+
+function getKeyFromEvent(e) {
+  let key = undefined;
+
+  switch (e.keyCode) {
+    case 16: {
+      key = "shift";
+      break;
+    }
+    case 188: {
+      key = ",";
+      break;
+    }
+    case 190: {
+      key = ".";
+      break;
+    }
+    case 191: {
+      key = "/";
+      break;
+    }
+    case 186: {
+      key = ";";
+      break;
+    }
+    case 189: {
+      key = "-";
+      break;
+    }
+    case 219: {
+      key = "[";
+      break;
+    }
+    case 221: {
+      key = "]";
+      break;
+    }
+    default: {
+      key = e.code.startsWith("D") ? e.code.charAt(5) : e.code.charAt(3).toLowerCase();
+      break;
+    }
+  }
+
+  console.log({key});
+  return key;
+}
