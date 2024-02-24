@@ -1,13 +1,15 @@
 .keyboard {
+  position: relative;
   display: inline-block;
   width: -moz-fit-content;
   width: fit-content;
   vertical-align: bottom;
 }
 .keyboard__black {
+  position: absolute;
   display: flex;
-  width: -moz-fit-content;
-  width: fit-content;
+  justify-content: space-evenly;
+  width: 100%;
   margin: auto;
 }
 .keyboard__white {
@@ -15,18 +17,22 @@
 }
 
 .key {
-  display: block;
+  display: flex;
+  align-items: flex-end;
   padding: 50px 40px;
   border: 1px solid black;
 }
 .key--black {
-  height: 30px;
+  height: 90px;
+  padding: 50px 20px;
   background: lightgrey;
 }
 .key--white {
-  height: 120px;
+  height: 210px;
 }
 .key--empty {
+  height: 60px;
+  padding: 0px;
   opacity: 0;
 }
 .key--pressing {
