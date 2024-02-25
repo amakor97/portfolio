@@ -7,75 +7,81 @@
   <link rel="stylesheet" href="pianoStyles.css">
 </head>
 <body>
-  <div class="keyboard keyboard--full keyboard--sub">
-    <div class="keyboard__black">
-      <div class="keyboard__black--key key key--black js-key-sub" data-key="50" data-sound="Db3" data-symbol="2">2</div>
-      <div class="keyboard__black--key key key--black js-key-sub" data-key="51" data-sound="Eb3" data-symbol="3">3</div>
-      <div class="keyboard__black--key key key--empty"></div>
-      <div class="keyboard__black--key key key--black js-key-sub" data-key="53" data-sound="Gb3" data-symbol="5">5</div>
-      <div class="keyboard__black--key key key--black js-key-sub" data-key="54" data-sound="Ab3" data-symbol="6">6</div>
-      <div class="keyboard__black--key key key--black js-key-sub" data-key="55" data-sound="Bb3" data-symbol="7">7</div>
+  <div class="keyboard-grid js-keyboard-cont">
+    <div class="keyboard-grid__item--left js-keyboard-left">
+      <div class="keyboard keyboard--full keyboard--sub">
+        <div class="keyboard__black">
+          <div class="keyboard__black--key key key--black js-key-sub" data-key="50" data-sound="Db3" data-symbol="2">2</div>
+          <div class="keyboard__black--key key key--black js-key-sub" data-key="51" data-sound="Eb3" data-symbol="3">3</div>
+          <div class="keyboard__black--key key key--empty"></div>
+          <div class="keyboard__black--key key key--black js-key-sub" data-key="53" data-sound="Gb3" data-symbol="5">5</div>
+          <div class="keyboard__black--key key key--black js-key-sub" data-key="54" data-sound="Ab3" data-symbol="6">6</div>
+          <div class="keyboard__black--key key key--black js-key-sub" data-key="55" data-sound="Bb3" data-symbol="7">7</div>
+        </div>
+        <div class="keyboard__white">
+          <div class="keyboard__white--key key key--white js-key-sub" data-key="81" data-sound="C3" data-symbol="q">q</div>
+          <div class="keyboard__white--key key key--white js-key-sub" data-key="87" data-sound="D3" data-symbol="w">w</div>
+          <div class="keyboard__white--key key key--white js-key-sub" data-key="69" data-sound="E3" data-symbol="e">e</div>
+          <div class="keyboard__white--key key key--white js-key-sub" data-key="82" data-sound="F3" data-symbol="r">r</div>
+          <div class="keyboard__white--key key key--white js-key-sub" data-key="84" data-sound="G3" data-symbol="t">t</div>
+          <div class="keyboard__white--key key key--white js-key-sub" data-key="89" data-sound="A3" data-symbol="y">y</div>
+          <div class="keyboard__white--key key key--white js-key-sub" data-key="85" data-sound="B3" data-symbol="u">u</div>
+        </div>
+      </div>
     </div>
-    <div class="keyboard__white">
-      <div class="keyboard__white--key key key--white js-key-sub" data-key="81" data-sound="C3" data-symbol="q">q</div>
-      <div class="keyboard__white--key key key--white js-key-sub" data-key="87" data-sound="D3" data-symbol="w">w</div>
-      <div class="keyboard__white--key key key--white js-key-sub" data-key="69" data-sound="E3" data-symbol="e">e</div>
-      <div class="keyboard__white--key key key--white js-key-sub" data-key="82" data-sound="F3" data-symbol="r">r</div>
-      <div class="keyboard__white--key key key--white js-key-sub" data-key="84" data-sound="G3" data-symbol="t">t</div>
-      <div class="keyboard__white--key key key--white js-key-sub" data-key="89" data-sound="A3" data-symbol="y">y</div>
-      <div class="keyboard__white--key key key--white js-key-sub" data-key="85" data-sound="B3" data-symbol="u">u</div>
+    <div class="keyboard-grid__item--right js-keyboard-right">
+      <div class="keyboard keyboard--small">
+        <div class="keyboard__black">
+          <div class="keyboard__black--key key key--black js-key-sup" data-key="57" data-sound="Gb5" data-symbol="9">9</div>
+          <div class="keyboard__black--key key key--black js-key-sup" data-key="48" data-sound="Ab5" data-symbol="0">0</div>
+          <div class="keyboard__black--key key key--black js-key-sup" data-key="189" data-sound="Bb5" data-symbol="-">-</div>
+        </div>
+        <div class="keyboard__white">
+          <div class="keyboard__white--key key key--white js-key-sup" data-key="73" data-sound="F5" data-symbol="i">i</div>
+          <div class="keyboard__white--key key key--white js-key-sup" data-key="79" data-sound="G5" data-symbol="o">o</div>
+          <div class="keyboard__white--key key key--white js-key-sup" data-key="80" data-sound="A5" data-symbol="p">p</div>
+          <div class="keyboard__white--key key key--white js-key-sup" data-key="219" data-sound="B5" data-symbol="[">[</div>
+        </div>
+      </div>
+      <div class="keyboard keyboard--tiny">
+        <div class="keyboard__black">
+        </div>
+        <div class="keyboard__white">
+          <div class="keyboard__white--key key key--white js-key-super-sup" data-key="221" data-sound="C6" data-symbol="]">]</div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="keyboard keyboard--small">
-    <div class="keyboard__black">
-      <div class="keyboard__black--key key key--black js-key-sup" data-key="57" data-sound="Gb5" data-symbol="9">9</div>
-      <div class="keyboard__black--key key key--black js-key-sup" data-key="48" data-sound="Ab5" data-symbol="0">0</div>
-      <div class="keyboard__black--key key key--black js-key-sup" data-key="189" data-sound="Bb5" data-symbol="-">-</div>
-    </div>
-    <div class="keyboard__white">
-      <div class="keyboard__white--key key key--white js-key-sup" data-key="73" data-sound="F5" data-symbol="i">i</div>
-      <div class="keyboard__white--key key key--white js-key-sup" data-key="79" data-sound="G5" data-symbol="o">o</div>
-      <div class="keyboard__white--key key key--white js-key-sup" data-key="80" data-sound="A5" data-symbol="p">p</div>
-      <div class="keyboard__white--key key key--white js-key-sup" data-key="219" data-sound="B5" data-symbol="[">[</div>
-    </div>
-  </div>
-  <div class="keyboard keyboard--tiny">
-    <div class="keyboard__black">
-    </div>
-    <div class="keyboard__white">
-      <div class="keyboard__white--key key key--white js-key-super-sup" data-key="221" data-sound="C6" data-symbol="]">]</div>
-    </div>
-  </div>
-  <br>
-  <br>
-  <div class="keyboard keyboard--full keyboard--main">
-    <div class="keyboard__black">
-      <div class="keyboard__black--key key key--black js-key-main" data-key="83" data-sound="Db4" data-symbol="s">s</div>
-      <div class="keyboard__black--key key key--black js-key-main" data-key="68" data-sound="Eb4" data-symbol="d">d</div>
-      <div class="keyboard__black--key key key--empty"></div>
-      <div class="keyboard__black--key key key--black js-key-main" data-key="71" data-sound="Gb4" data-symbol="g">g</div>
-      <div class="keyboard__black--key key key--black js-key-main" data-key="72" data-sound="Ab4" data-symbol="h">h</div>
-      <div class="keyboard__black--key key key--black js-key-main" data-key="74" data-sound="Bb4" data-symbol="j">j</div>
-    </div>
-    <div class="keyboard__white">
-      <div class="keyboard__white--key key key--white js-key-main" data-key="90" data-sound="C4" data-symbol="z">z</div>
-      <div class="keyboard__white--key key key--white js-key-main" data-key="88" data-sound="D4" data-symbol="x">x</div>
-      <div class="keyboard__white--key key key--white js-key-main" data-key="67" data-sound="E4" data-symbol="c">c</div>
-      <div class="keyboard__white--key key key--white js-key-main" data-key="86" data-sound="F4" data-symbol="v">v</div>
-      <div class="keyboard__white--key key key--white js-key-main" data-key="66" data-sound="G4" data-symbol="b">b</div>
-      <div class="keyboard__white--key key key--white js-key-main" data-key="78" data-sound="A4" data-symbol="n">n</div>
-      <div class="keyboard__white--key key key--white js-key-main" data-key="77" data-sound="B4" data-symbol="m">m</div>
-    </div>
-  </div>
-  <div class="keyboard keyboard--small">
-    <div class="keyboard__black">
-      <div class="keyboard__black--key key key--black js-key-sup" data-key="76" data-sound="Db5" data-symbol="l">l</div>
-      <div class="keyboard__black--key key key--black js-key-sup" data-key="186" data-sound="Eb5" data-symbol=";">;</div>
-    </div>
-    <div class="keyboard__white">
-      <div class="keyboard__white--key key key--white js-key-sup" data-key="188" data-sound="C5" data-symbol=",">,</div>
-      <div class="keyboard__white--key key key--white js-key-sup" data-key="190" data-sound="D5" data-symbol=".">.</div>
-      <div class="keyboard__white--key key key--white js-key-sup" data-key="191" data-sound="E5" data-symbol="/">/</div>
+    <div class="keyboard-grid__item keyboard-grid__item--full js-keyboard-center">
+      <div class="keyboard keyboard--full keyboard--main">
+        <div class="keyboard__black">
+          <div class="keyboard__black--key key key--black js-key-main" data-key="83" data-sound="Db4" data-symbol="s">s</div>
+          <div class="keyboard__black--key key key--black js-key-main" data-key="68" data-sound="Eb4" data-symbol="d">d</div>
+          <div class="keyboard__black--key key key--empty"></div>
+          <div class="keyboard__black--key key key--black js-key-main" data-key="71" data-sound="Gb4" data-symbol="g">g</div>
+          <div class="keyboard__black--key key key--black js-key-main" data-key="72" data-sound="Ab4" data-symbol="h">h</div>
+          <div class="keyboard__black--key key key--black js-key-main" data-key="74" data-sound="Bb4" data-symbol="j">j</div>
+        </div>
+        <div class="keyboard__white">
+          <div class="keyboard__white--key key key--white js-key-main" data-key="90" data-sound="C4" data-symbol="z">z</div>
+          <div class="keyboard__white--key key key--white js-key-main" data-key="88" data-sound="D4" data-symbol="x">x</div>
+          <div class="keyboard__white--key key key--white js-key-main" data-key="67" data-sound="E4" data-symbol="c">c</div>
+          <div class="keyboard__white--key key key--white js-key-main" data-key="86" data-sound="F4" data-symbol="v">v</div>
+          <div class="keyboard__white--key key key--white js-key-main" data-key="66" data-sound="G4" data-symbol="b">b</div>
+          <div class="keyboard__white--key key key--white js-key-main" data-key="78" data-sound="A4" data-symbol="n">n</div>
+          <div class="keyboard__white--key key key--white js-key-main" data-key="77" data-sound="B4" data-symbol="m">m</div>
+        </div>
+      </div>
+      <div class="keyboard keyboard--small">
+        <div class="keyboard__black">
+          <div class="keyboard__black--key key key--black js-key-sup" data-key="76" data-sound="Db5" data-symbol="l">l</div>
+          <div class="keyboard__black--key key key--black js-key-sup" data-key="186" data-sound="Eb5" data-symbol=";">;</div>
+        </div>
+        <div class="keyboard__white">
+          <div class="keyboard__white--key key key--white js-key-sup" data-key="188" data-sound="C5" data-symbol=",">,</div>
+          <div class="keyboard__white--key key key--white js-key-sup" data-key="190" data-sound="D5" data-symbol=".">.</div>
+          <div class="keyboard__white--key key key--white js-key-sup" data-key="191" data-sound="E5" data-symbol="/">/</div>
+        </div>
+      </div>
     </div>
   </div>
   <!--
@@ -219,6 +225,7 @@
       <audio src="./src/samples/B7.mp3" data-sound="B7"></audio>
     </block-octave>
   </block-audio>
+  <script src="./src/js/kbdChanger.js"></script>
   <script src="./src/js/kbdHandler.js"></script>
 </body>
 </html>
