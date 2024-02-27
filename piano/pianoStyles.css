@@ -1,17 +1,35 @@
 .keyboard-grid {
-  width: 70%;
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
-.keyboard-grid__item--left {
+.keyboard-grid--double-rows {
+  grid-template-columns: 1fr 1fr;
+}
+.keyboard-grid--single-row {
+  grid-template-columns: 7fr 10fr 5fr;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.keyboard-grid__item--left-double {
   margin-right: auto;
 }
-.keyboard-grid__item--right {
+.keyboard-grid__item--left-single {
+  margin-right: 0;
+}
+.keyboard-grid__item--right-double {
   margin-left: auto;
 }
-.keyboard-grid__item--full {
+.keyboard-grid__item--right-single {
+  margin-left: 0;
+}
+.keyboard-grid__item--full-double {
   grid-column: 1/3;
   margin: 0 auto;
+}
+.keyboard-grid__item--full-single {
+  grid-column: 2/3;
+  grid-row: 1/2;
+  margin: 0;
 }
 
 .keyboard {

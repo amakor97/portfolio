@@ -1,18 +1,37 @@
 .keyboard-grid
-  width: 70%
   display: grid
   grid-template-columns: 1fr 1fr
 
+  &--double-rows
+    grid-template-columns: 1fr 1fr
+
+  &--single-row
+    grid-template-columns: 7fr 10fr 5fr
+    width: fit-content
+
   &__item
     
-    &--left
+    &--left-double
       margin:
         right: auto
 
-    &--right
+    &--left-single
+      margin:
+        right: 0
+
+    &--right-double
       margin:
         left: auto
 
-    &--full
+    &--right-single
+      margin:
+        left: 0
+
+    &--full-double
       grid-column: 1/3
       margin: 0 auto
+
+    &--full-single
+      grid-column: 2/3
+      grid-row: 1/2
+      margin: 0
