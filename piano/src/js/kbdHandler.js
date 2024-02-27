@@ -11,19 +11,16 @@ let proInfo = document.querySelector(".pro-info");
 
 const digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
-const octaveCodes = [
-  ["C1", "Db1", "D4"]
-]
-
 const modeSelectors = document.querySelectorAll("input[name='select-switch-mode']");
 const editModeToggler = document.querySelector("input[name='toggle-edit-mode']");
 const noteInput = document.querySelector("input[name='enter-note']");
 const noteValidateBtn = document.querySelector(".js-note-validate-btn");
 
+let pressedKeys = new Set();
+
 let noteForProMode = undefined;
 
 noteValidateBtn.addEventListener("click", function() {
-  console.log(noteInput.value);
   if (noteInput.value.length === 3) {
     noteInput.value = noteInput.value.slice(0, 1).toUpperCase() + noteInput.value.slice(1).toLowerCase();
   } else {
@@ -56,7 +53,7 @@ let advancedModeLayouts = [
 
 let proModeLayouts = [
   {
-    z: "C4",
+    z: "C4",  //is it really needed?
     x: "D4",
     c: "E4"
   },
@@ -78,7 +75,6 @@ modeSelectors.forEach(input => {
   input.addEventListener("change", function() {
     if (input.checked) {
       switchModeType = input.value;
-      console.log({switchModeType}); 
     }
   })
 })
@@ -86,302 +82,89 @@ modeSelectors.forEach(input => {
 
 let isEditModeActive = false;
 editModeToggler.addEventListener("change", () => {
-  isEditModeActive = editModeToggler.checked;
-  console.log({isEditModeActive});
+  isEditModeActive = editModeToggler.checked
 });
 
 
-function switchBasicMode() {
-  console.log(pressedKeys);
-  //console.log(e.keyCode);
-  let pressedSymbols = pressedKeys.filter(key => key !== "shift");
-  console.log(pressedSymbols);
-  console.log(pressedSymbols[0]);
-  let targetNum = undefined;
-  if (typeof(+pressedSymbols[0]) === "number") {
-    targetNum = pressedSymbols[0];
-  }
-  console.error({targetNum});
-
-  if ((+targetNum > 0) && (+targetNum < 10)) {
-    console.log("VALID");
-
-    const keyElems = document.querySelectorAll(".key");
-    keyElems.forEach(keyElem => {
-      if (keyElem.classList.contains("js-key-main")) {
-        keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${targetNum}`;
-      }
-    })
-  }
-
-}
-
-
-function switchAdvancedMode() {
-  console.log(pressedKeys);
-  let pressedSymbols = pressedKeys.filter(key => key !== "shift");
-  console.log(pressedSymbols);
-  console.log(pressedSymbols[0]);
-
-  let pressedOctave = undefined;
-
-  if (mainOctaveSymbols.includes(pressedSymbols[0])) {
-    pressedOctave = "main";
-  }
-  console.warn({pressedOctave});
-}
-
-
-function keyHandler() {
-  if (pressedKeys.includes("shift")) {
-    console.warn("SWITCHING MODE ON");
-    switch(switchModeType) {
-      case "basic": {
-        console.error("BASIC SWITCHING MODE IS ACTIVE");
-        //switchBasicMode();
-        break;
-      }
-      case "advanced": {
-        console.error("ADVANCED SWITCHING MODE IS ACTIVE");
-        if (isEditModeActive === true) {
-          console.log("EDITING IS ON");
-          //switchAdvancedMode();
-        } else {
-          console.log("EDITING IS OFF");
-        }
-        break;
-      }
-      case "pro": {
-        console.error("PRO SWITCHING MODE IS ACTIVE");
-        if (isEditModeActive === true) {
-          console.log("EDITING IS ON");
-        } else {
-          console.log("EDITING IS OFF");
-        }
-        break;
-      }
-    }
-
-  } else {
-    switch(switchModeType) {
-      case "basic": {
-        console.error("BASIC SWITCHING MODE IS INACTIVE");
-        break;
-      }
-      case "advanced": {
-        console.error("ADVANCED SWITCHING MODE IS INACTIVE");
-        if (isEditModeActive === true) {
-          console.log("EDITING IS ON");
-
-        } else {
-          console.log("EDITING IS OFF");
-        }
-        break;
-      }
-      case "pro": {
-        console.error("PRO SWITCHING MODE IS INACTIVE");
-        if (isEditModeActive === true) {
-          console.log("EDITING IS ON");
-        } else {
-          console.log("EDITING IS OFF");
-        }
-        break;
-      }
-    }
-    console.warn("SWITCHING MODE OFF");
-  }
-
-}
-
-
-function kbdHandler(e) {
-  //console.log(e.keyCode);
-  switch(e.keyCode) {
-    case 16: {
-      if (!pressedKeys.includes("shift")) {
-        console.log(`adding "shift" to`);
-        pressedKeys.push("shift");
-        keyHandler();
-      }
-      console.log(pressedKeys);
-      //modeHandler(e);
-      break;
-    }
-    default: {
-      if (switchModeType === "basic") {
-        console.log(e.code.charAt(5), e.keyCode);
-        if (typeof(+(e.code.charAt(5))) === "number") {
-          console.log("num");
-        };
-        pressedKeys.push(e.code.charAt(5));
-        console.log(pressedKeys);
-        if (pressedKeys.includes("shift")) {
-          switchBasicMode();
-        }
-      }
-      if ((switchModeType === "advanced") && (isEditModeActive)) {
-        console.log("adv");
-        const keyText = e.code.charAt(3).toLowerCase();
-        console.log({keyText});
-        if (!pressedKeys.includes(keyText)) {
-          pressedKeys.push(keyText);
-        }
-        console.log(pressedKeys);
-        if (pressedKeys.includes("shift")) {
-          switchAdvancedMode();
-        }
-      } else {
-        playSound(e);
-      }
-
-    }
-  }
-}
-
-
-let newAudio = document.querySelectorAll("audio");
-let newAudioList = {};
-newAudio.forEach(audioElem => {
-})
-
 
 function playSound(e) {
-  console.log(e.keyCode);
-  let isPlaying = false;
-
   const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
   const audio = document.querySelector(`audio[data-sound="${key.dataset.sound}"]`);
 
-
-  const keyText = e.code.charAt(3).toLowerCase();
-
-
-  
   if (!audio) {
     return;
   }
-  //console.log(key.getAttribute("data-playing"));
 
   if (key.getAttribute("data-playing") !== "true") {
     audio.load();
     audio.play();
   }
 
-  audio.id = 5;
+  audio.id = 5; //wtf???
   key.setAttribute("data-playing", true);
   key.classList.add("key--pressing");
 }
 
 
 function stopPlaying(e) {
-  console.log(e.code, e.keyCode);
-  /*
-  let keyText = undefined;
-
-  switch (e.keyCode) {
-    case 188: {
-      keyText = ",";
-      break;
-    }
-    case 190: {
-      keyText = ".";
-      break;
-    }
-    case 191: {
-      keyText = "/";
-      break;
-    }
-    case 186: {
-      keyText = ";";
-      break;
-    }
-    case 189: {
-      keyText = "-";
-      break;
-    }
-    case 219: {
-      keyText = "[";
-      break;
-    }
-    case 221: {
-      keyText = "]";
-      break;
-    }
-    default: {
-      keyText = e.code.startsWith("D") ? e.code.charAt(5) : e.code.charAt(3).toLowerCase();
-      break;
-    }
-  }
-  */
-
   let keyText = getKeyFromEvent(e);
-
   let key = undefined;
   const keys = document.querySelectorAll(".key");
+  
   keys.forEach(keyElem => {
     if (keyElem.dataset.symbol === keyText) {
-      console.log(keyElem);
       key = keyElem;
     }
   })
-  console.log({key});
   if (key) {
     key.classList.remove("key--pressing");
-    const dataKey = key.dataset.key;
-    const audio = document.querySelector(`audio[data-key="${dataKey}"]`);
-
     key.setAttribute("data-playing", false);
   }
 }
 
 
 
-let pressedKeys = new Set();
-console.log(pressedKeys);
-
-
-
 function addKeyToArray(e) {
-  console.log("press:", e.keyCode);
   let key = getKeyFromEvent(e);
   pressedKeys.add(key);
-
 }
 
+
 function removeKeyFromArray(e) {
-  console.log("release:", e.keyCode);
   let key = getKeyFromEvent(e);
   pressedKeys.delete(key);
 }
 
+
 window.addEventListener("keydown", kbdInputHandler);
 window.addEventListener("keyup", kbdReleaseHandler);
+
 
 function kbdInputHandler(e) {
   addKeyToArray(e);
   pressedKeysHandler(e);
 }
 
+
 function kbdReleaseHandler(e) {
   removeKeyFromArray(e);
   stopPlaying(e);
 }
 
+
 function pressedKeysHandler(e) {
-  console.log(pressedKeys);
   if (pressedKeys.has("shift")) {
-    console.log("SWITCHING MODE");
     switch(switchModeType) {
       case "basic": {
-        tmpSwitchBasicMode();
+        switchBasicMode();
         break;
       }
       case "advanced": {
-        tmpSwitchAdvancedMode();
+        switchAdvancedMode();
         break;
       }
       case "pro": {
-        tmpSwitchProMode();
+        switchProMode();
         break;
       }
     }
@@ -390,13 +173,11 @@ function pressedKeysHandler(e) {
   }
 }
 
-function tmpSwitchBasicMode() {
-  console.warn("BASIC SWITCH MODE");
 
+function switchBasicMode() {
   const targetDigit = digits.find(key => pressedKeys.has(key));
-  console.log({targetDigit});
+
   if (targetDigit) {
-    console.error(`SWITCHING PIANO TO ${targetDigit} OCTAVE`);
     const keyElems = document.querySelectorAll(".key");
     keyElems.forEach(keyElem => {
       if (keyElem.classList.contains("js-key-main")) {
@@ -406,8 +187,6 @@ function tmpSwitchBasicMode() {
         keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${targetDigit - 1}`;
       }
       if (keyElem.classList.contains("js-key-sup")) {
-        console.log(keyElem.dataset.sound);
-        console.log(keyElem.dataset.sound.slice(0, -1));
         keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${+targetDigit + 1}`;
       }
       if (keyElem.classList.contains("js-key-super-sup")) {
@@ -417,30 +196,21 @@ function tmpSwitchBasicMode() {
   }
 }
 
+
 let pressedOctave = undefined;
 
-function tmpSwitchAdvancedMode() {
-  console.warn("ADVANCED SWITCH MODE");
-  console.warn({isEditModeActive});
+function switchAdvancedMode() {
   if (!isEditModeActive) {
-    console.error("LIGHT MODE ISN'T COMPLETED YET");
-    console.log(pressedKeys);
-    console.log(activeAdvancedLayout);
-
     const pressedSymbolKeys = new Set(([...pressedKeys]).filter(value => value !== "shift"));
-    console.log({pressedSymbolKeys});
     let targetKey = undefined;
     if (pressedSymbolKeys.size === 1) {
       targetKey = Array.from(pressedSymbolKeys)[0];
     }
-    console.error({targetKey});
 
     activeAdvancedLayout = targetKey;
-    console.log({activeAdvancedLayout});
 
-    //inp for setting activeAdvLYOUT
+    //inp for setting activeAdvLYOUT ???
 
-    console.log(advancedModeLayouts[activeAdvancedLayout]);
     const keyElems = document.querySelectorAll(".key");
     keyElems.forEach(keyElem => {
       if (keyElem.classList.contains("js-key-main")) {
@@ -457,23 +227,13 @@ function tmpSwitchAdvancedMode() {
       }
     })
   } else {
-    console.error("HARD MODE");
-    console.error("PRESS ONE OF DISPLAYED KEY");
     if (pressedOctave) {
-      console.error("OCTAVE IS FOUND");
-      console.warn("new p", pressedKeys);
-
       const pressedOctaveKeys = document.querySelectorAll(`.${pressedOctave}`);
-      console.log(pressedOctaveKeys);
-
-
       const pressedSymbolKeys = new Set(([...pressedKeys]).filter(value => value !== "shift"));
-      console.log({pressedSymbolKeys});
       let targetKey = undefined;
       if (pressedSymbolKeys.size === 1) {
         targetKey = Array.from(pressedSymbolKeys)[0];
       }
-      console.error({targetKey});
       if (targetKey) {
         pressedOctaveKeys.forEach(keyElem => {
           keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${targetKey}`;
@@ -483,7 +243,6 @@ function tmpSwitchAdvancedMode() {
         switch(pressedOctave) {
           case "js-key-main": {
             octaveName = "main";
-            console.log(octaveName);
             break;
           }
           case "js-key-sub": {
@@ -502,15 +261,11 @@ function tmpSwitchAdvancedMode() {
 
         advancedModeLayouts[activeAdvancedLayout][octaveName] = +targetKey;
         advInfo.textContent = JSON.stringify(advancedModeLayouts);
-        console.log(advancedModeLayouts);
       }
-
 
       pressedOctave = undefined;
     } else {
-      console.log(pressedKeys);
       const pressedSymbolKeys = new Set(([...pressedKeys]).filter(value => value !== "shift"));
-      console.log({pressedSymbolKeys});
       let targetKey = undefined;
       if (pressedSymbolKeys.size === 1) {
         targetKey = Array.from(pressedSymbolKeys)[0];
@@ -518,24 +273,17 @@ function tmpSwitchAdvancedMode() {
       pressedKeys.delete(targetKey); //optional?
       if (targetKey) {
         const allKeyElems = document.querySelectorAll(".key");
-  
         allKeyElems.forEach(keyElem => {
           if (keyElem.dataset.symbol === targetKey) {
-            //console.log(keyElem);
-            //console.log(keyElem.classList);
             keyElem.classList.forEach(className => {
-              console.log(className);
               if (className.startsWith("js-key-")) {
                 pressedOctave = className;
               }
             })
           }
         })
-        console.log({pressedOctave});
   
         const pressedOctaveKeys = document.querySelectorAll(`.${pressedOctave}`);
-        console.log({pressedOctaveKeys});
-  
       }
     }
   }
@@ -544,48 +292,28 @@ function tmpSwitchAdvancedMode() {
 
 let pressedProKeyElem = undefined;
 
-
-function tmpSwitchProMode() {
-  console.warn("PRO SWITCH MODE");
-  console.warn({isEditModeActive});
+function switchProMode() {
   if (!isEditModeActive) {
-    console.error("LIGHT MODE ISN'T COMPLETED YET");
-    console.log(pressedKeys);
-    console.log(activeProLayout);
-
     const pressedSymbolKeys = new Set(([...pressedKeys]).filter(value => value !== "shift"));
-    console.log({pressedSymbolKeys});
     let targetKey = undefined;
     if (pressedSymbolKeys.size === 1) {
       targetKey = Array.from(pressedSymbolKeys)[0];
     }
-    console.error({targetKey});
 
     if (Number.isInteger(+targetKey)) {
       activeProLayout = targetKey;
     }
 
-
-    console.log({activeProLayout});
-    console.log(proModeLayouts[activeProLayout]);
     const keyElems = document.querySelectorAll(".key");
 
-    
     keyElems.forEach(keyElem => {
       if (keyElem.dataset.symbol in proModeLayouts[activeProLayout]) {
-        console.log(keyElem.dataset.symbol);
-        console.log(proModeLayouts[activeProLayout][keyElem.dataset.symbol]);
         keyElem.dataset.sound = proModeLayouts[activeProLayout][keyElem.dataset.symbol];
       }
     })
 
   } else {
-    console.error("HARD MODE");
-    console.error("PRESS ONE OF DISPLAYED KEY");
-
-    console.log(pressedKeys);
     const pressedSymbolKeys = new Set(([...pressedKeys]).filter(value => value !== "shift"));
-    console.log({pressedSymbolKeys});
 
     let targetKey = undefined;
     if (pressedSymbolKeys.size === 1) {
@@ -593,8 +321,6 @@ function tmpSwitchProMode() {
     }
     pressedKeys.delete(targetKey); //optional?
     if (targetKey) {
-      console.log({targetKey});
-
       const allKeyElems = document.querySelectorAll(".key");
 
       allKeyElems.forEach(keyElem => {
@@ -602,10 +328,7 @@ function tmpSwitchProMode() {
           pressedProKeyElem = keyElem;
         }
       })
-      console.log(pressedProKeyElem);
-      console.log(pressedProKeyElem.dataset.symbol);
       pressedProKeyElem.dataset.sound = noteForProMode;
-
       proModeLayouts[activeProLayout][targetKey] = noteForProMode;
       proInfo.textContent = JSON.stringify(proModeLayouts);
     }
@@ -656,6 +379,5 @@ function getKeyFromEvent(e) {
     }
   }
 
-  console.log({key});
   return key;
 }
