@@ -5,10 +5,14 @@ const leftPart = document.querySelector(".js-keyboard-left");
 const rightPart = document.querySelector(".js-keyboard-right");
 const centerPart = document.querySelector(".js-keyboard-center");
 const toggleModeBtn = document.querySelector(".js-toggle-visual-mode-btn");
+const toggleFullKbdBtn = document.querySelector(".js-toggle-full-keyboard-btn");
 
 let doubleRowsMode = true;
+let fullKbdMode = false;
 
 toggleModeBtn.addEventListener("click", toggleVisualMode);
+toggleFullKbdBtn.addEventListener("click", toggleFullKbd);
+
 
 function toggleVisualMode() {
   doubleRowsMode = !doubleRowsMode;
@@ -18,6 +22,56 @@ function toggleVisualMode() {
   } else {
     changeStylesForOneRow();
   }
+
+  updateFullKbd();
+}
+
+function toggleFullKbd() {
+  if ((doubleRowsMode === false)) {
+    fullKbdMode = !fullKbdMode;
+    console.log("chg fkm", {fullKbdMode});
+  }
+  updateFullKbd();
+}
+
+
+function updateFullKbd() {
+  console.log("updating fkb");
+  console.log("current", {fullKbdMode});
+  if ((fullKbdMode) && (!doubleRowsMode)){
+    showFullKbd();
+  } else {
+    hideFullKbd();
+  }
+}
+
+function hideFullKbd() {
+  kbdCont.classList.remove("keyboard-cont--full-kbd");
+
+  const hidedKeys = document.querySelectorAll(".js-key-hideable");
+  hidedKeys.forEach(key => key.classList.add("key--hided"));
+
+  const whiteKeys = document.querySelectorAll(".key--white");
+  whiteKeys.forEach(key => key.classList.remove("key--white-narrow"));
+
+  const blackKeys = document.querySelectorAll(".key--black");
+  blackKeys.forEach(key => key.classList.remove("key--black-narrow"));
+}
+
+
+function showFullKbd() {
+  console.log("showing");
+
+  kbdCont.classList.add("keyboard-cont--full-kbd");
+
+  const hidedKeys = document.querySelectorAll(".js-key-hideable");
+  hidedKeys.forEach(key => key.classList.remove("key--hided"));
+
+  const whiteKeys = document.querySelectorAll(".key--white");
+  whiteKeys.forEach(key => key.classList.add("key--white-narrow"));
+
+  const blackKeys = document.querySelectorAll(".key--black");
+  blackKeys.forEach(key => key.classList.add("key--black-narrow"));
 }
 
 function changeStylesForOneRow() {

@@ -10,10 +10,31 @@
   width: -moz-fit-content;
   width: fit-content;
 }
+.keyboard-cont--full-kbd {
+  display: flex;
+}
 .keyboard-cont__item {
   display: inline-block;
   width: -moz-fit-content;
   width: fit-content;
+}
+.keyboard-cont__item--0 {
+  order: 0;
+}
+.keyboard-cont__item--1 {
+  order: 1;
+}
+.keyboard-cont__item--2 {
+  order: 2;
+}
+.keyboard-cont__item--3 {
+  order: 3;
+}
+.keyboard-cont__item--4 {
+  order: 4;
+}
+.keyboard-cont__item--5 {
+  order: 5;
 }
 .keyboard-cont__item--left-double {
   float: left;
@@ -79,4 +100,15 @@
 }
 .key--pressing {
   background: grey;
+}
+.key--hided {
+  display: none;
+}
+.key--white-narrow {
+  width: 1.5vw;
+  padding: 0;
+}
+.key--black-narrow {
+  width: 0.75vw;
+  padding: 0;
 }
