@@ -7,6 +7,7 @@
   height: 624px;
 }
 .keyboard-cont--single-row {
+  display: flex;
   width: -moz-fit-content;
   width: fit-content;
 }
@@ -105,10 +106,10 @@
   display: none;
 }
 .key--white-narrow {
-  width: 1.5vw;
+  width: 1.78vw;
   padding: 0;
 }
 .key--black-narrow {
-  width: 0.75vw;
+  width: 0.89vw;
   padding: 0;
 }
