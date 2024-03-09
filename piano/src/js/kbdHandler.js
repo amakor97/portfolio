@@ -95,6 +95,9 @@ function playSound(e) {
   const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
   const audio = document.querySelector(`audio[data-sound="${key.dataset.sound}"]`);
 
+  const displayedKey = document.querySelector(`div[data-display="${key.dataset.sound}"]`);
+  console.log(displayedKey);
+
   console.log(key.dataset.sound);
 
   if (!audio) {
@@ -106,10 +109,12 @@ function playSound(e) {
     audio.play();
   }
 
-  audio.id = 5; //wtf???
+  //audio.id = 5; //wtf???
   key.setAttribute("data-playing", true);
   if (!fullKbdMode) {
     key.classList.add("key--pressing");
+  } else {
+    displayedKey.classList.add("key--pressing");
   }
 
 }
@@ -117,7 +122,9 @@ function playSound(e) {
 
 function stopPlaying(e) {
   let keyText = getKeyFromEvent(e);
+
   let key = undefined;
+  let displayedKey = undefined;
   const keys = document.querySelectorAll(".key");
   
   keys.forEach(keyElem => {
@@ -125,9 +132,24 @@ function stopPlaying(e) {
       key = keyElem;
     }
   })
+
   if (key) {
-    key.classList.remove("key--pressing");
-    key.setAttribute("data-playing", false);
+    if (!fullKbdMode) {
+      key.classList.remove("key--pressing");
+      key.setAttribute("data-playing", false);
+    } else {
+      let playedSound = key.dataset.sound;
+      console.log({playedSound});
+      
+      
+      keys.forEach(keyElem => {
+        if (keyElem.dataset.display === playedSound) {
+          displayedKey = keyElem;
+        }
+      })
+      displayedKey.classList.remove("key--pressing");
+      key.setAttribute("data-playing", false);
+    }
   }
 }
 
