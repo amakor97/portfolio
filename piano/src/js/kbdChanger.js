@@ -8,7 +8,7 @@ const toggleModeBtn = document.querySelector(".js-toggle-visual-mode-btn");
 const toggleFullKbdBtn = document.querySelector(".js-toggle-full-keyboard-btn");
 
 let doubleRowsMode = true;
-let fullKbdMode = false;
+export let fullKbdMode = false;
 
 toggleModeBtn.addEventListener("click", toggleVisualMode);
 toggleFullKbdBtn.addEventListener("click", toggleFullKbd);

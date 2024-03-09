@@ -1,5 +1,9 @@
 "use strict";
 
+import { fullKbdMode } from "./kbdChanger.js";
+
+console.log({fullKbdMode});
+
 const audio = document.querySelector("audio");
 const keyboard = document.querySelector(".keyboard");
 
@@ -91,6 +95,8 @@ function playSound(e) {
   const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
   const audio = document.querySelector(`audio[data-sound="${key.dataset.sound}"]`);
 
+  console.log(key.dataset.sound);
+
   if (!audio) {
     return;
   }
@@ -102,7 +108,10 @@ function playSound(e) {
 
   audio.id = 5; //wtf???
   key.setAttribute("data-playing", true);
-  key.classList.add("key--pressing");
+  if (!fullKbdMode) {
+    key.classList.add("key--pressing");
+  }
+
 }
 
 
