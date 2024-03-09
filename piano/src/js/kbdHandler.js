@@ -10,6 +10,7 @@ const keyboard = document.querySelector(".keyboard");
 let lowerMode = false;
 let switchMode = false;
 
+let basInfo = document.querySelector(".bas-info");
 let advInfo = document.querySelector(".adv-info");
 let proInfo = document.querySelector(".pro-info");
 
@@ -141,7 +142,6 @@ function stopPlaying(e) {
       let playedSound = key.dataset.sound;
       console.log({playedSound});
       
-      
       keys.forEach(keyElem => {
         if (keyElem.dataset.display === playedSound) {
           displayedKey = keyElem;
@@ -225,6 +225,9 @@ function switchBasicMode() {
       }
     })
   }
+
+  let displayedHint = `${targetDigit - 1} - ${targetDigit} - ${+targetDigit + 1}`;
+  basInfo.textContent = displayedHint;
 }
 
 
