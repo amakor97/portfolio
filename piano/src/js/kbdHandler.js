@@ -14,7 +14,7 @@ let basInfo = document.querySelector(".bas-info");
 let advInfo = document.querySelector(".adv-info");
 let proInfo = document.querySelector(".pro-info");
 
-const digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+const digits = ["0", "1", "2", "3", "4", "5", "6"];
 
 const modeSelectors = document.querySelectorAll("input[name='select-switch-mode']");
 const editModeToggler = document.querySelector("input[name='toggle-edit-mode']");
@@ -212,10 +212,10 @@ function switchBasicMode() {
     const keyElems = document.querySelectorAll(".key");
     keyElems.forEach(keyElem => {
       if (keyElem.classList.contains("js-key-main")) {
-        keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${targetDigit}`;
+        keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${+targetDigit}`;
       }
       if (keyElem.classList.contains("js-key-sub")) {
-        keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${targetDigit - 1}`;
+        keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${+targetDigit - 1}`;
       }
       if (keyElem.classList.contains("js-key-sup")) {
         keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${+targetDigit + 1}`;
@@ -228,6 +228,8 @@ function switchBasicMode() {
 
   let displayedHint = `${targetDigit - 1} - ${targetDigit} - ${+targetDigit + 1}`;
   basInfo.textContent = displayedHint;
+
+  updateDisabledKeys();
 }
 
 
@@ -321,6 +323,8 @@ function switchAdvancedMode() {
       }
     }
   }
+
+  updateDisabledKeys();
 }
 
 
@@ -367,6 +371,8 @@ function switchProMode() {
       proInfo.textContent = JSON.stringify(proModeLayouts);
     }
   }
+
+  updateDisabledKeys();
 }
 
 
@@ -415,3 +421,20 @@ function getKeyFromEvent(e) {
 
   return key;
 }
+
+
+function updateDisabledKeys() {
+  let playableKbdKeys = document.querySelectorAll("div[data-sound]");
+  let playableSounds = [];
+  playableKbdKeys.forEach(kbdKey => playableSounds.push(kbdKey.dataset.sound));
+
+  let allKeyElems = document.querySelectorAll(".key");
+  allKeyElems.forEach(keyElem => {
+    keyElem.classList.remove("key--disabled");
+    if ((!playableSounds.includes(keyElem.dataset.display))) { // && fullKbdMode
+      keyElem.classList.add("key--disabled");
+    }
+  })
+}
+
+updateDisabledKeys();
