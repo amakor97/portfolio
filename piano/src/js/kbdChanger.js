@@ -1,4 +1,8 @@
 "use strict";
+export let fullKbdMode = false;
+export let doubleRowsMode = true;
+
+import { updateDisabledKeys } from "./kbdHandler.js";
 
 const kbdCont = document.querySelector(".js-keyboard-cont");
 const leftPart = document.querySelector(".js-keyboard-left");
@@ -7,8 +11,8 @@ const centerPart = document.querySelector(".js-keyboard-center");
 const toggleModeBtn = document.querySelector(".js-toggle-visual-mode-btn");
 const toggleFullKbdBtn = document.querySelector(".js-toggle-full-keyboard-btn");
 
-let doubleRowsMode = true;
-export let fullKbdMode = false;
+
+
 
 toggleModeBtn.addEventListener("click", toggleVisualMode);
 toggleFullKbdBtn.addEventListener("click", toggleFullKbd);
@@ -56,6 +60,8 @@ function hideFullKbd() {
 
   const blackKeys = document.querySelectorAll(".key--black");
   blackKeys.forEach(key => key.classList.remove("key--black-narrow"));
+
+  updateDisabledKeys();
 }
 
 
@@ -72,6 +78,8 @@ function showFullKbd() {
 
   const blackKeys = document.querySelectorAll(".key--black");
   blackKeys.forEach(key => key.classList.add("key--black-narrow"));
+
+  updateDisabledKeys();
 }
 
 function changeStylesForOneRow() {
@@ -81,8 +89,8 @@ function changeStylesForOneRow() {
   leftPart.classList.remove("keyboard-cont__item--left-double");
   leftPart.classList.add("keyboard-cont__item--left-single");
 
-  rightPart.classList.remove("keyboard-cont__item--right-double");
-  rightPart.classList.add("keyboard-cont__item--right-single");
+  //rightPart.classList.remove("keyboard-cont__item--right-double");
+  //rightPart.classList.add("keyboard-cont__item--right-single");
 
   centerPart.classList.remove("keyboard-cont__item--full-double");
   centerPart.classList.add("keyboard-cont__item--full-single");
@@ -95,8 +103,8 @@ function changeStylesForTwoRows() {
   leftPart.classList.remove("keyboard-cont__item--left-single");
   leftPart.classList.add("keyboard-cont__item--left-double");
 
-  rightPart.classList.remove("keyboard-cont__item--right-single");
-  rightPart.classList.add("keyboard-cont__item--right-double");
+  //rightPart.classList.remove("keyboard-cont__item--right-single");
+  //rightPart.classList.add("keyboard-cont__item--right-double");
 
   centerPart.classList.remove("keyboard-cont__item--full-single");
   centerPart.classList.add("keyboard-cont__item--full-double");

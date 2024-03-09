@@ -1,8 +1,7 @@
 "use strict";
 
-import { fullKbdMode } from "./kbdChanger.js";
+import { doubleRowsMode, fullKbdMode } from "./kbdChanger.js";
 
-console.log({fullKbdMode});
 
 const audio = document.querySelector("audio");
 const keyboard = document.querySelector(".keyboard");
@@ -96,7 +95,12 @@ function playSound(e) {
   const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
   const audio = document.querySelector(`audio[data-sound="${key.dataset.sound}"]`);
 
-  const displayedKey = document.querySelector(`div[data-display="${key.dataset.sound}"]`);
+  //const displayedKey = document.querySelector(`div[data-display="${key.dataset.sound}"]`);
+  //const displayedKey = document.querySelector(`div[data-display="${key.dataset.display}"]`);
+  
+  const displayedKey = fullKbdMode ? document.querySelector(`div[data-display="${key.dataset.sound}"]`) :
+    document.querySelector(`div[data-display="${key.dataset.display}"]`);
+
   console.log(displayedKey);
 
   console.log(key.dataset.sound);
@@ -140,6 +144,7 @@ function stopPlaying(e) {
       key.setAttribute("data-playing", false);
     } else {
       let playedSound = key.dataset.sound;
+      //let playedSound = key.dataset.display;
       console.log({playedSound});
       
       keys.forEach(keyElem => {
@@ -423,11 +428,40 @@ function getKeyFromEvent(e) {
 }
 
 
-function updateDisabledKeys() {
+export function updateDisabledKeys() {
   let playableKbdKeys = document.querySelectorAll("div[data-sound]");
   let playableSounds = [];
+
+  let allPianoKeys = document.querySelectorAll(".key");
+  let allSounds = [];
+  allPianoKeys.forEach(pianoKey => {
+    if (pianoKey.dataset.display) {
+      allSounds.push(pianoKey.dataset.display);
+    }
+  });
+  console.log({allSounds});
+
   playableKbdKeys.forEach(kbdKey => playableSounds.push(kbdKey.dataset.sound));
 
+  let unplayableSounds = allSounds.filter(sound => !playableSounds.includes(sound));
+  console.log({unplayableSounds});
+
+  let unplayablePianoKeys = [];
+  unplayableSounds.forEach(sound => {
+    let unplayableKey = Array.from(allPianoKeys).find(key => key.dataset.display === sound);
+    unplayablePianoKeys.push(unplayableKey);
+  })
+  console.log({unplayablePianoKeys});
+
+  allPianoKeys.forEach(key => key.classList.remove("key--disabled"));
+  console.log({fullKbdMode});
+  unplayablePianoKeys.forEach(unplayableKey => {
+    if (fullKbdMode && !doubleRowsMode) {
+      unplayableKey.classList.add("key--disabled");
+    }
+  });
+
+  /*
   let allKeyElems = document.querySelectorAll(".key");
   allKeyElems.forEach(keyElem => {
     keyElem.classList.remove("key--disabled");
@@ -435,6 +469,7 @@ function updateDisabledKeys() {
       keyElem.classList.add("key--disabled");
     }
   })
+  */
 }
 
 updateDisabledKeys();
