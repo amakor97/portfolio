@@ -116,7 +116,7 @@ function playSound(e) {
 
   //audio.id = 5; //wtf???
   key.setAttribute("data-playing", true);
-  if (!fullKbdMode) {
+  if ((!fullKbdMode) || (doubleRowsMode)) {
     key.classList.add("key--pressing");
   } else {
     displayedKey.classList.add("key--pressing");
@@ -139,7 +139,7 @@ function stopPlaying(e) {
   })
 
   if (key) {
-    if (!fullKbdMode) {
+    if ((!fullKbdMode) || (doubleRowsMode)) {
       key.classList.remove("key--pressing");
       key.setAttribute("data-playing", false);
     } else {
@@ -235,6 +235,8 @@ function switchBasicMode() {
   basInfo.textContent = displayedHint;
 
   updateDisabledKeys();
+  updateSoundHints();
+  updateKbdHints();
 }
 
 
@@ -330,6 +332,8 @@ function switchAdvancedMode() {
   }
 
   updateDisabledKeys();
+  updateSoundHints();
+  updateKbdHints();
 }
 
 
@@ -378,6 +382,8 @@ function switchProMode() {
   }
 
   updateDisabledKeys();
+  updateSoundHints();
+  updateKbdHints();
 }
 
 
@@ -473,3 +479,86 @@ export function updateDisabledKeys() {
 }
 
 updateDisabledKeys();
+
+
+export function updateKbdHints() {
+  if (doubleRowsMode) {
+    let playableKbdKeys = document.querySelectorAll("div[data-sound]");
+    playableKbdKeys.forEach(kbdKey => {
+      const hintSpan = kbdKey.querySelector(".js-kbd-key-hint");
+      //hintSpan.textContent = kbdKey.dataset.symbol;
+    })
+  } else {
+    const hintSpans = document.querySelectorAll(".js-kbd-key-hint");
+    console.log({hintSpans});
+  
+    hintSpans.forEach(hintSpan => hintSpan.textContent = "");
+
+    const allPianoKeys = document.querySelectorAll(".key");
+    let playableKbdKeys = document.querySelectorAll("div[data-sound]");
+    let playableSounds = [];
+  
+    let allSounds = [];
+    allPianoKeys.forEach(pianoKey => {
+      if (pianoKey.dataset.display) {
+        allSounds.push(pianoKey.dataset.display);
+      }
+    });
+    console.log({allSounds});
+  
+  
+  
+    allPianoKeys.forEach(pianoKey => {
+  
+      const hintSpan = pianoKey.querySelector(".js-kbd-key-hint");
+      console.log({hintSpan});
+  
+      playableKbdKeys.forEach(kbdKey => {
+        //console.log(kbdKey.dataset.sound);
+        if (pianoKey.dataset.display === kbdKey.dataset.sound) {
+          console.log("mmm", pianoKey.dataset.display, kbdKey.dataset.symbol);
+          console.log(hintSpan, kbdKey.dataset.symbol);
+          if (hintSpan) {
+  
+            hintSpan.textContent = kbdKey.dataset.symbol;
+          }
+        }
+      })
+    });
+  }
+}
+
+updateKbdHints();
+
+
+function updateSoundHints() {
+  const allPianoKeys = document.querySelectorAll(".key");
+  allPianoKeys.forEach(pianoKey => {
+    const soundHint = pianoKey.querySelector(".js-piano-key-hint");
+    if (soundHint) {
+
+      if (doubleRowsMode) {
+        soundHint.textContent = pianoKey.dataset.sound;
+      } else {
+        soundHint.textContent = pianoKey.dataset.display;
+      }
+    }
+
+  })
+}
+
+
+export function restoreKbdHints() {
+  const playableKbdKeys = document.querySelectorAll(".key[data-symbol]");
+
+  playableKbdKeys.forEach(kbdKey => {
+    const hintSpan = kbdKey.querySelector(".js-kbd-key-hint");
+    if (hintSpan) {
+      hintSpan.textContent = kbdKey.dataset.symbol;
+    }
+  })
+
+  console.log(playableKbdKeys);
+}
+
+restoreKbdHints();  

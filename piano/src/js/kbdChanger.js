@@ -3,6 +3,8 @@ export let fullKbdMode = false;
 export let doubleRowsMode = true;
 
 import { updateDisabledKeys } from "./kbdHandler.js";
+import { updateKbdHints } from "./kbdHandler.js";
+import { restoreKbdHints } from "./kbdHandler.js";
 
 const kbdCont = document.querySelector(".js-keyboard-cont");
 const leftPart = document.querySelector(".js-keyboard-left");
@@ -62,6 +64,8 @@ function hideFullKbd() {
   blackKeys.forEach(key => key.classList.remove("key--black-narrow"));
 
   updateDisabledKeys();
+  //updateKbdHints();
+  restoreKbdHints();
 }
 
 
@@ -80,6 +84,7 @@ function showFullKbd() {
   blackKeys.forEach(key => key.classList.add("key--black-narrow"));
 
   updateDisabledKeys();
+  updateKbdHints();
 }
 
 function changeStylesForOneRow() {

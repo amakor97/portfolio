@@ -82,12 +82,10 @@
 
 .key {
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  justify-content: end;
   padding: 50px 40px;
   border: 1px solid black;
-}
-.key--disabled {
-  background: red;
 }
 .key--black {
   height: 90px;
@@ -96,6 +94,9 @@
 }
 .key--white {
   height: 210px;
+}
+.key--disabled {
+  background: rgb(255, 0, 0);
 }
 .key--empty {
   height: 60px;

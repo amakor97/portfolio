@@ -1,12 +1,10 @@
 .key
   display: flex
-  align-items: flex-end
+  flex-direction: column
+  justify-content: end
   padding: 50px 40px
 
   border: 1px solid black
-
-  &--disabled
-    background: red
 
   &--black
     height: 90px
@@ -16,6 +14,9 @@
 
   &--white
     height: 210px
+
+  &--disabled
+    background: rgba(255, 0, 0, 1)
 
   &--empty
     height: 60px
