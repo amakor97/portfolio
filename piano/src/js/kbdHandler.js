@@ -9,6 +9,8 @@ const keyboard = document.querySelector(".keyboard");
 let lowerMode = false;
 let switchMode = false;
 
+let isleftPaddleActive = false;
+
 let basInfo = document.querySelector(".bas-info");
 let advInfo = document.querySelector(".adv-info");
 let proInfo = document.querySelector(".pro-info");
@@ -101,15 +103,15 @@ function playSound(e) {
   const displayedKey = fullKbdMode ? document.querySelector(`div[data-display="${key.dataset.sound}"]`) :
     document.querySelector(`div[data-display="${key.dataset.display}"]`);
 
-  console.log(displayedKey);
+  //console.log(displayedKey);
 
-  console.log(key.dataset.sound);
+  //console.log(key.dataset.sound);
 
   if (!audio) {
     return;
   }
 
-  if (key.getAttribute("data-playing") !== "true") {
+  if ((key.getAttribute("data-playing") !== "true") || ((key.getAttribute("data-playing") === "true") && isleftPaddleActive === true)){
     audio.load();
     audio.play();
   }
@@ -141,7 +143,12 @@ function stopPlaying(e) {
   if (key) {
     if ((!fullKbdMode) || (doubleRowsMode)) {
       key.classList.remove("key--pressing");
-      key.setAttribute("data-playing", false);
+      if (!isleftPaddleActive) {
+        key.setAttribute("data-playing", false);
+
+        const audio = document.querySelector(`audio[data-sound="${key.dataset.sound}"]`);
+        audio.load();
+      }
     } else {
       let playedSound = key.dataset.sound;
       //let playedSound = key.dataset.display;
@@ -153,7 +160,12 @@ function stopPlaying(e) {
         }
       })
       displayedKey.classList.remove("key--pressing");
-      key.setAttribute("data-playing", false);
+      if (!isleftPaddleActive) {
+        key.setAttribute("data-playing", false);
+
+        const audio = document.querySelector(`audio[data-sound="${key.dataset.sound}"]`);
+        audio.load();
+      }
     }
   }
 }
@@ -183,6 +195,10 @@ function kbdInputHandler(e) {
 
 
 function kbdReleaseHandler(e) {
+  if (e.keyCode === 17) {
+    isleftPaddleActive = false;
+    leftPaddleRelease();
+  }
   removeKeyFromArray(e);
   stopPlaying(e);
 }
@@ -205,7 +221,11 @@ function pressedKeysHandler(e) {
       }
     }
   } else {
-    playSound(e);
+    if (e.keyCode === 17) {
+      isleftPaddleActive = true;
+    } else {
+      playSound(e);
+    }
   }
 }
 
@@ -244,7 +264,10 @@ let pressedOctave = undefined;
 
 function switchAdvancedMode() {
   if (!isEditModeActive) {
-    const pressedSymbolKeys = new Set(([...pressedKeys]).filter(value => value !== "shift"));
+    const pressedSymbolKeys = new Set(([...pressedKeys]).filter(value => ((value !== "shift") && (value !== "ctrl"))));
+
+    console.log(pressedSymbolKeys);
+
     let targetKey = undefined;
     if (pressedSymbolKeys.size === 1) {
       targetKey = Array.from(pressedSymbolKeys)[0];
@@ -272,7 +295,7 @@ function switchAdvancedMode() {
   } else {
     if (pressedOctave) {
       const pressedOctaveKeys = document.querySelectorAll(`.${pressedOctave}`);
-      const pressedSymbolKeys = new Set(([...pressedKeys]).filter(value => value !== "shift"));
+      const pressedSymbolKeys = new Set(([...pressedKeys]).filter(value => ((value !== "shift") && (value !== "ctrl"))));
       let targetKey = undefined;
       if (pressedSymbolKeys.size === 1) {
         targetKey = Array.from(pressedSymbolKeys)[0];
@@ -308,7 +331,7 @@ function switchAdvancedMode() {
 
       pressedOctave = undefined;
     } else {
-      const pressedSymbolKeys = new Set(([...pressedKeys]).filter(value => value !== "shift"));
+      const pressedSymbolKeys = new Set(([...pressedKeys]).filter(value => ((value !== "shift") && (value !== "ctrl"))));
       let targetKey = undefined;
       if (pressedSymbolKeys.size === 1) {
         targetKey = Array.from(pressedSymbolKeys)[0];
@@ -341,7 +364,8 @@ let pressedProKeyElem = undefined;
 
 function switchProMode() {
   if (!isEditModeActive) {
-    const pressedSymbolKeys = new Set(([...pressedKeys]).filter(value => value !== "shift"));
+    const pressedSymbolKeys = new Set(([...pressedKeys]).filter(value => ((value !== "shift") && (value !== "ctrl"))));
+    console.log(pressedSymbolKeys);
     let targetKey = undefined;
     if (pressedSymbolKeys.size === 1) {
       targetKey = Array.from(pressedSymbolKeys)[0];
@@ -360,7 +384,7 @@ function switchProMode() {
     })
 
   } else {
-    const pressedSymbolKeys = new Set(([...pressedKeys]).filter(value => value !== "shift"));
+    const pressedSymbolKeys = new Set(([...pressedKeys]).filter(value => ((value !== "shift") && (value !== "ctrl"))));
 
     let targetKey = undefined;
     if (pressedSymbolKeys.size === 1) {
@@ -391,9 +415,15 @@ function switchProMode() {
 function getKeyFromEvent(e) {
   let key = undefined;
 
+  console.log("code", e.keyCode);
+
   switch (e.keyCode) {
     case 16: {
       key = "shift";
+      break;
+    }
+    case 17: {
+      key = "ctrl";
       break;
     }
     case 188: {
@@ -511,13 +541,13 @@ export function updateKbdHints() {
     allPianoKeys.forEach(pianoKey => {
   
       const hintSpan = pianoKey.querySelector(".js-kbd-key-hint");
-      console.log({hintSpan});
+      //console.log({hintSpan});
   
       playableKbdKeys.forEach(kbdKey => {
         //console.log(kbdKey.dataset.sound);
         if (pianoKey.dataset.display === kbdKey.dataset.sound) {
-          console.log("mmm", pianoKey.dataset.display, kbdKey.dataset.symbol);
-          console.log(hintSpan, kbdKey.dataset.symbol);
+          //console.log("mmm", pianoKey.dataset.display, kbdKey.dataset.symbol);
+          //console.log(hintSpan, kbdKey.dataset.symbol);
           if (hintSpan) {
   
             hintSpan.textContent = kbdKey.dataset.symbol;
@@ -558,7 +588,32 @@ export function restoreKbdHints() {
     }
   })
 
-  console.log(playableKbdKeys);
+  //console.log(playableKbdKeys);
 }
 
-restoreKbdHints();  
+restoreKbdHints();
+
+
+function leftPaddleRelease() {
+  console.log("paddle is released");
+
+  const allPianoKeys = document.querySelectorAll(".key");
+  const allPlayedKeys = document.querySelectorAll(".key[data-playing=true]");
+  console.log({allPlayedKeys});
+  console.log(pressedKeys);
+
+  const pressedSymbolKeys = new Set(([...pressedKeys]).filter(value => ((value !== "shift") && (value !== "ctrl"))));
+
+  console.log(pressedSymbolKeys);
+
+
+
+  allPlayedKeys.forEach(playedKey => {
+    console.log(playedKey.dataset.symbol);
+    if (!pressedKeys.has(playedKey.dataset.symbol)) {
+      console.log(playedKey.dataset.playing);
+      playedKey.dataset.playing = false;
+    }
+
+  })
+}
