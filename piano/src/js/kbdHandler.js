@@ -624,3 +624,16 @@ function leftPaddleRelease() {
 
   })
 }
+
+
+const hideKbdHintsBtn = document.querySelector(".js-hide-kbd-hints");
+hideKbdHintsBtn.addEventListener("click", () => {
+  const allKbdHints = document.querySelectorAll(".js-kbd-key-hint");
+  allKbdHints.forEach(kbdHint => kbdHint.classList.toggle("key__hint--transparent"));
+})
+
+const hideSoundHintsBtn = document.querySelector(".js-hide-piano-hints");
+hideSoundHintsBtn.addEventListener("click", () => {
+  const allSoundHints = document.querySelectorAll(".js-piano-key-hint");
+  allSoundHints.forEach(soundHint => soundHint.classList.toggle("key__hint--transparent"));
+})

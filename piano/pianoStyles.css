@@ -117,3 +117,6 @@
   width: 0.89vw;
   padding: 0;
 }
+.key__hint--transparent {
+  opacity: 0;
+}
