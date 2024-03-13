@@ -5,6 +5,7 @@ export let doubleRowsMode = true;
 import { updateDisabledKeys } from "./kbdHandler.js";
 import { updateKbdHints } from "./kbdHandler.js";
 import { restoreKbdHints } from "./kbdHandler.js";
+import { updateSoundHints } from "./kbdHandler.js";
 
 const kbdCont = document.querySelector(".js-keyboard-cont");
 const leftPart = document.querySelector(".js-keyboard-left");
@@ -27,6 +28,7 @@ function toggleVisualMode() {
     changeStylesForTwoRows();
   } else {
     changeStylesForOneRow();
+
   }
 
   updateFullKbd();
@@ -66,6 +68,7 @@ function hideFullKbd() {
   updateDisabledKeys();
   //updateKbdHints();
   restoreKbdHints();
+  updateSoundHints();
 }
 
 
@@ -85,6 +88,7 @@ function showFullKbd() {
 
   updateDisabledKeys();
   updateKbdHints();
+  updateSoundHints();
 }
 
 function changeStylesForOneRow() {

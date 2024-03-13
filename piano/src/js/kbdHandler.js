@@ -520,7 +520,8 @@ updateDisabledKeys();
 
 
 export function updateKbdHints() {
-  if (doubleRowsMode) {
+  //if (doubleRowsMode) {
+  if (doubleRowsMode || !fullKbdMode) {
     let playableKbdKeys = document.querySelectorAll("div[data-sound]");
     playableKbdKeys.forEach(kbdKey => {
       const hintSpan = kbdKey.querySelector(".js-kbd-key-hint");
@@ -544,20 +545,12 @@ export function updateKbdHints() {
     });
     console.log({allSounds});
   
-  
-  
     allPianoKeys.forEach(pianoKey => {
-  
       const hintSpan = pianoKey.querySelector(".js-kbd-key-hint");
-      //console.log({hintSpan});
   
       playableKbdKeys.forEach(kbdKey => {
-        //console.log(kbdKey.dataset.sound);
         if (pianoKey.dataset.display === kbdKey.dataset.sound) {
-          //console.log("mmm", pianoKey.dataset.display, kbdKey.dataset.symbol);
-          //console.log(hintSpan, kbdKey.dataset.symbol);
           if (hintSpan) {
-  
             hintSpan.textContent = kbdKey.dataset.symbol;
           }
         }
@@ -569,13 +562,15 @@ export function updateKbdHints() {
 updateKbdHints();
 
 
-function updateSoundHints() {
+export function updateSoundHints() {
+  console.log("upd sound hints");
   const allPianoKeys = document.querySelectorAll(".key");
   allPianoKeys.forEach(pianoKey => {
     const soundHint = pianoKey.querySelector(".js-piano-key-hint");
     if (soundHint) {
 
-      if (doubleRowsMode) {
+      //if (doubleRowsMode) {
+      if (doubleRowsMode || !fullKbdMode) {
         soundHint.textContent = pianoKey.dataset.sound;
       } else {
         soundHint.textContent = pianoKey.dataset.display;
