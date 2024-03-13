@@ -111,7 +111,12 @@ function playSound(e) {
     return;
   }
 
-  if ((key.getAttribute("data-playing") !== "true") || ((key.getAttribute("data-playing") === "true") && isleftPaddleActive === true)){
+
+  // bug
+  // when condition is complex there is multiplaying nanosek sound when holding key
+  // when condition is simple there is bug when repeated pressing causes no sound
+  //if ((key.getAttribute("data-playing") !== "true") || ((key.getAttribute("data-playing") === "true") && isleftPaddleActive === true)){
+  if ((key.getAttribute("data-playing") !== "true")) {
     audio.load();
     audio.play();
   }
@@ -143,8 +148,9 @@ function stopPlaying(e) {
   if (key) {
     if ((!fullKbdMode) || (doubleRowsMode)) {
       key.classList.remove("key--pressing");
+      key.setAttribute("data-playing", false);
       if (!isleftPaddleActive) {
-        key.setAttribute("data-playing", false);
+
 
         const audio = document.querySelector(`audio[data-sound="${key.dataset.sound}"]`);
         audio.load();
@@ -205,6 +211,7 @@ function kbdReleaseHandler(e) {
 
 
 function pressedKeysHandler(e) {
+  console.log("fff");
   if (pressedKeys.has("shift")) {
     switch(switchModeType) {
       case "basic": {
@@ -223,6 +230,7 @@ function pressedKeysHandler(e) {
   } else {
     if (e.keyCode === 17) {
       isleftPaddleActive = true;
+      console.log({isleftPaddleActive});
     } else {
       playSound(e);
     }
@@ -415,7 +423,7 @@ function switchProMode() {
 function getKeyFromEvent(e) {
   let key = undefined;
 
-  console.log("code", e.keyCode);
+  //console.log("code", e.keyCode);
 
   switch (e.keyCode) {
     case 16: {
@@ -598,7 +606,7 @@ function leftPaddleRelease() {
   console.log("paddle is released");
 
   const allPianoKeys = document.querySelectorAll(".key");
-  const allPlayedKeys = document.querySelectorAll(".key[data-playing=true]");
+  const allPlayedKeys = document.querySelectorAll(".key[data-playing]");
   console.log({allPlayedKeys});
   console.log(pressedKeys);
 
@@ -613,6 +621,10 @@ function leftPaddleRelease() {
     if (!pressedKeys.has(playedKey.dataset.symbol)) {
       console.log(playedKey.dataset.playing);
       playedKey.dataset.playing = false;
+      console.log(playedKey.dataset.sound);
+      const targetSound = document.querySelector(`audio[data-sound=${playedKey.dataset.sound}]`);
+      console.log(targetSound);
+      targetSound.load();
     }
 
   })
