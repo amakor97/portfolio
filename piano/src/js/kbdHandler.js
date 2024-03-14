@@ -162,39 +162,25 @@ editModeToggler.addEventListener("change", () => {
 function playSound(e) {
   const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
   const audio = document.querySelector(`audio[data-sound="${key.dataset.sound}"]`);
-
-  //const displayedKey = document.querySelector(`div[data-display="${key.dataset.sound}"]`);
-  //const displayedKey = document.querySelector(`div[data-display="${key.dataset.display}"]`);
   
   const displayedKey = fullKbdMode ? document.querySelector(`div[data-display="${key.dataset.sound}"]`) :
     document.querySelector(`div[data-display="${key.dataset.display}"]`);
-
-  //console.log(displayedKey);
-
-  //console.log(key.dataset.sound);
 
   if (!audio) {
     return;
   }
 
-
-  // bug
-  // when condition is complex there is multiplaying nanosek sound when holding key
-  // when condition is simple there is bug when repeated pressing causes no sound
-  //if ((key.getAttribute("data-playing") !== "true") || ((key.getAttribute("data-playing") === "true") && isleftPaddleActive === true)){
   if ((key.getAttribute("data-playing") !== "true")) {
     audio.load();
     audio.play();
   }
 
-  //audio.id = 5; //wtf???
   key.setAttribute("data-playing", true);
   if ((!fullKbdMode) || (doubleRowsMode)) {
     key.classList.add("key--pressing");
   } else {
     displayedKey.classList.add("key--pressing");
   }
-
 }
 
 
@@ -217,13 +203,11 @@ function stopPlaying(e) {
       key.setAttribute("data-playing", false);
       if (!isleftPaddleActive) {
 
-
         const audio = document.querySelector(`audio[data-sound="${key.dataset.sound}"]`);
         audio.load();
       }
     } else {
       let playedSound = key.dataset.sound;
-      //let playedSound = key.dataset.display;
       console.log({playedSound});
       
       keys.forEach(keyElem => {
@@ -348,8 +332,6 @@ function switchAdvancedMode() {
     }
 
     activeAdvancedLayout = targetKey;
-
-    //inp for setting activeAdvLYOUT ???
 
     const keyElems = document.querySelectorAll(".key");
     keyElems.forEach(keyElem => {
@@ -489,8 +471,6 @@ function switchProMode() {
 function getKeyFromEvent(e) {
   let key = undefined;
 
-  //console.log("code", e.keyCode);
-
   switch (e.keyCode) {
     case 16: {
       key = "shift";
@@ -586,12 +566,10 @@ updateDisabledKeys();
 
 
 export function updateKbdHints() {
-  //if (doubleRowsMode) {
   if (doubleRowsMode || !fullKbdMode) {
     let playableKbdKeys = document.querySelectorAll("div[data-sound]");
     playableKbdKeys.forEach(kbdKey => {
       const hintSpan = kbdKey.querySelector(".js-kbd-key-hint");
-      //hintSpan.textContent = kbdKey.dataset.symbol;
     })
   } else {
     const hintSpans = document.querySelectorAll(".js-kbd-key-hint");
@@ -635,7 +613,6 @@ export function updateSoundHints() {
     const soundHint = pianoKey.querySelector(".js-piano-key-hint");
     if (soundHint) {
 
-      //if (doubleRowsMode) {
       if (doubleRowsMode || !fullKbdMode) {
         soundHint.textContent = pianoKey.dataset.sound;
       } else {
@@ -656,8 +633,6 @@ export function restoreKbdHints() {
       hintSpan.textContent = kbdKey.dataset.symbol;
     }
   })
-
-  //console.log(playableKbdKeys);
 }
 
 restoreKbdHints();

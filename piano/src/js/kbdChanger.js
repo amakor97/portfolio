@@ -66,7 +66,6 @@ function hideFullKbd() {
   blackKeys.forEach(key => key.classList.remove("key--black-narrow"));
 
   updateDisabledKeys();
-  //updateKbdHints();
   restoreKbdHints();
   updateSoundHints();
 }
@@ -98,9 +97,6 @@ function changeStylesForOneRow() {
   leftPart.classList.remove("keyboard-cont__item--left-double");
   leftPart.classList.add("keyboard-cont__item--left-single");
 
-  //rightPart.classList.remove("keyboard-cont__item--right-double");
-  //rightPart.classList.add("keyboard-cont__item--right-single");
-
   centerPart.classList.remove("keyboard-cont__item--full-double");
   centerPart.classList.add("keyboard-cont__item--full-single");
 }
@@ -111,9 +107,6 @@ function changeStylesForTwoRows() {
 
   leftPart.classList.remove("keyboard-cont__item--left-single");
   leftPart.classList.add("keyboard-cont__item--left-double");
-
-  //rightPart.classList.remove("keyboard-cont__item--right-single");
-  //rightPart.classList.add("keyboard-cont__item--right-double");
 
   centerPart.classList.remove("keyboard-cont__item--full-single");
   centerPart.classList.add("keyboard-cont__item--full-double");
