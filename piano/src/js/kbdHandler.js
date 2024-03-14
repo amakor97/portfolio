@@ -3,12 +3,6 @@
 import { doubleRowsMode, fullKbdMode } from "./kbdChanger.js";
 
 
-const audio = document.querySelector("audio");
-const keyboard = document.querySelector(".keyboard");
-
-let lowerMode = false;
-let switchMode = false;
-
 let isleftPaddleActive = false;
 
 let basInfo = document.querySelector(".bas-info");
@@ -59,7 +53,6 @@ let advancedModeLayouts = createAdvancedModeLayouts(5);
 
 function createProModeSingleLayout() {
   const playableKbdKeys = document.querySelectorAll(".key[data-symbol]");
-  const symbols = [];
   
   let layout = {};
 
@@ -89,7 +82,6 @@ let proModeLayouts = createProModeLayouts(2);
 let activeAdvancedLayout = 0;
 let activeProLayout = 0;
 
-const mainOctaveSymbols = ["z", "s", "x"];
 
 let switchModeType = "basic";
 
@@ -350,8 +342,7 @@ function switchAdvancedMode() {
             })
           }
         })
-  
-        const pressedOctaveKeys = document.querySelectorAll(`.${pressedOctave}`);
+
       }
     }
   }
@@ -498,10 +489,6 @@ updateDisabledKeys();
 
 export function updateKbdHints() {
   if (doubleRowsMode || !fullKbdMode) {
-    let playableKbdKeys = document.querySelectorAll("div[data-sound]");
-    playableKbdKeys.forEach(kbdKey => {
-      const hintSpan = kbdKey.querySelector(".js-kbd-key-hint");
-    })
   } else {
     const hintSpans = document.querySelectorAll(".js-kbd-key-hint");
   
@@ -509,7 +496,6 @@ export function updateKbdHints() {
 
     const allPianoKeys = document.querySelectorAll(".key");
     let playableKbdKeys = document.querySelectorAll("div[data-sound]");
-    let playableSounds = [];
   
     let allSounds = [];
     allPianoKeys.forEach(pianoKey => {
@@ -567,10 +553,9 @@ restoreKbdHints();
 
 
 function leftPaddleRelease() {
-  const allPianoKeys = document.querySelectorAll(".key");
   const allPlayedKeys = document.querySelectorAll(".key[data-playing]");
 
-  const pressedSymbolKeys = new Set(([...pressedKeys]).filter(value => ((value !== "shift") && (value !== "ctrl"))));
+
 
 
 

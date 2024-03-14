@@ -9,7 +9,6 @@ import { updateSoundHints } from "./kbdHandler.js";
 
 const kbdCont = document.querySelector(".js-keyboard-cont");
 const leftPart = document.querySelector(".js-keyboard-left");
-const rightPart = document.querySelector(".js-keyboard-right");
 const centerPart = document.querySelector(".js-keyboard-center");
 const toggleModeBtn = document.querySelector(".js-toggle-visual-mode-btn");
 const toggleFullKbdBtn = document.querySelector(".js-toggle-full-keyboard-btn");
