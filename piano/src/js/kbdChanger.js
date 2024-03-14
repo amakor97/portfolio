@@ -37,15 +37,12 @@ function toggleVisualMode() {
 function toggleFullKbd() {
   if ((doubleRowsMode === false)) {
     fullKbdMode = !fullKbdMode;
-    console.log("chg fkm", {fullKbdMode});
   }
   updateFullKbd();
 }
 
 
 function updateFullKbd() {
-  console.log("updating fkb");
-  console.log("current", {fullKbdMode});
   if ((fullKbdMode) && (!doubleRowsMode)){
     showFullKbd();
   } else {
@@ -72,8 +69,6 @@ function hideFullKbd() {
 
 
 function showFullKbd() {
-  console.log("showing");
-
   kbdCont.classList.add("keyboard-cont--full-kbd");
 
   const hidedKeys = document.querySelectorAll(".js-key-hideable");
