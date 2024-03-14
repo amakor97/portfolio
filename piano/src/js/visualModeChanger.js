@@ -4,10 +4,8 @@
 export let fullKbdMode = false;
 export let doubleRowsMode = true;
 
-import { updateDisabledKeys } from "./inputHandler.js";
-import { updateKbdHints } from "./inputHandler.js";
-import { restoreKbdHints } from "./inputHandler.js";
-import { updateSoundHints } from "./inputHandler.js";
+import { updateSoundHints, updateKbdHints, 
+  restoreKbdHints, updateDisabledKeys } from "./hintsUpdater.js";
 
 const kbdCont = document.querySelector(".js-keyboard-cont");
 const leftPart = document.querySelector(".js-keyboard-left");
