@@ -1,7 +1,7 @@
 "use strict";
 
 
-import { doubleRowsMode, fullKbdMode } from "./kbdChanger.js";
+import { doubleRowsMode, fullKbdMode } from "./visualModeChanger.js";
 
 let isleftPaddleActive = false;
 let noteForProMode = undefined;
