@@ -1,4 +1,6 @@
 "use strict";
+
+
 export let fullKbdMode = false;
 export let doubleRowsMode = true;
 
@@ -13,9 +15,6 @@ const centerPart = document.querySelector(".js-keyboard-center");
 const toggleModeBtn = document.querySelector(".js-toggle-visual-mode-btn");
 const toggleFullKbdBtn = document.querySelector(".js-toggle-full-keyboard-btn");
 
-
-
-
 toggleModeBtn.addEventListener("click", toggleVisualMode);
 toggleFullKbdBtn.addEventListener("click", toggleFullKbd);
 
@@ -27,11 +26,10 @@ function toggleVisualMode() {
     changeStylesForTwoRows();
   } else {
     changeStylesForOneRow();
-
   }
-
   updateFullKbd();
 }
+
 
 function toggleFullKbd() {
   if ((doubleRowsMode === false)) {
@@ -49,15 +47,14 @@ function updateFullKbd() {
   }
 }
 
+
 function hideFullKbd() {
   kbdCont.classList.remove("keyboard-cont--full-kbd");
 
   const hidedKeys = document.querySelectorAll(".js-key-hideable");
   hidedKeys.forEach(key => key.classList.add("key--hided"));
-
   const whiteKeys = document.querySelectorAll(".key--white");
   whiteKeys.forEach(key => key.classList.remove("key--white-narrow"));
-
   const blackKeys = document.querySelectorAll(".key--black");
   blackKeys.forEach(key => key.classList.remove("key--black-narrow"));
 
@@ -72,10 +69,8 @@ function showFullKbd() {
 
   const hidedKeys = document.querySelectorAll(".js-key-hideable");
   hidedKeys.forEach(key => key.classList.remove("key--hided"));
-
   const whiteKeys = document.querySelectorAll(".key--white");
   whiteKeys.forEach(key => key.classList.add("key--white-narrow"));
-
   const blackKeys = document.querySelectorAll(".key--black");
   blackKeys.forEach(key => key.classList.add("key--black-narrow"));
 
@@ -83,6 +78,7 @@ function showFullKbd() {
   updateKbdHints();
   updateSoundHints();
 }
+
 
 function changeStylesForOneRow() {
   kbdCont.classList.remove("keyboard-cont--double-rows");
@@ -94,6 +90,7 @@ function changeStylesForOneRow() {
   centerPart.classList.remove("keyboard-cont__item--full-double");
   centerPart.classList.add("keyboard-cont__item--full-single");
 }
+
 
 function changeStylesForTwoRows() {
   kbdCont.classList.remove("keyboard-cont--single-row");
