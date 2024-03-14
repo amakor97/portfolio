@@ -36,6 +36,34 @@ noteValidateBtn.addEventListener("click", function() {
   console.log({noteForProMode});
 })
 
+function createAdvancedModeSingleLayout() {
+  let layout = {
+    sub: 3,
+    main: 4,
+    sup: 5,
+    super: 6
+  };
+  return layout;
+}
+
+function createAdvancedModeLayouts(num) {
+  let layouts = [];
+  console.log({layouts});
+  for (let i = 0; i < num; i++) {
+    let layout = createAdvancedModeSingleLayout();
+    layouts.push(layout);
+  }
+  
+  console.log({layouts});
+  return layouts;
+}
+
+//createAdvancedModeLayouts(5);
+
+let advancedModeLayouts = createAdvancedModeLayouts(5);
+console.log(advancedModeLayouts);
+
+/*
 let advancedModeLayouts = [
   {
     sub: 3,
@@ -56,7 +84,41 @@ let advancedModeLayouts = [
     super: 6
   }
 ]
+*/
 
+function createProModeSingleLayout() {
+  const playableKbdKeys = document.querySelectorAll(".key[data-symbol]");
+  const symbols = [];
+  
+  let layout = {};
+
+  playableKbdKeys.forEach(kbdKey => {
+    let symbol = kbdKey.dataset.symbol;
+    let sound = kbdKey.dataset.sound;
+    layout[symbol] = sound;
+  })
+
+  console.log(layout);
+  return layout;
+}
+
+function createProModeLayouts(num) {
+  let layouts = [];
+  for (let i = 0; i < num; i++) {
+    let layout = createProModeSingleLayout();
+    layouts.push(layout);
+  }
+  console.log(layouts);
+  return layouts;
+}
+
+
+//let proModeLayouts = createProModeLayouts(2);
+//console.log({proModeLayouts});
+
+let proModeLayouts = createProModeLayouts(2);
+
+/*
 let proModeLayouts = [
   {
     z: "C4",  //is it really needed?
@@ -69,6 +131,9 @@ let proModeLayouts = [
     c: "E4"
   }
 ]
+*/
+
+console.log(proModeLayouts);
 
 let activeAdvancedLayout = 0;
 let activeProLayout = 0;
