@@ -8,12 +8,7 @@ import { switchBasicMode, switchAdvancedMode,
   switchProMode, switchModeType,  } from "./functionalModeSwitcher.js";
 
 let isleftPaddleActive = false;
-
-
 export let pressedKeys = new Set();
-
-
-
 
 
 function playSound(e) {
@@ -139,12 +134,6 @@ function pressedKeysHandler(e) {
 }
 
 
-
-
-
-
-
-
 function getKeyFromEvent(e) {
   let key = undefined;
 
@@ -193,11 +182,6 @@ function getKeyFromEvent(e) {
 
   return key;
 }
-
-
-updateDisabledKeys();
-updateKbdHints();
-restoreKbdHints();
 
 
 function leftPaddleRelease() {
