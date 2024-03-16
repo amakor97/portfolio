@@ -67,7 +67,6 @@ function createAdvancedModeLayouts(num) {
 
 
 let advancedModeLayouts = createAdvancedModeLayouts(5);
-console.log({advancedModeLayouts});
 
 let noteForProMode = undefined;
 

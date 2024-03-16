@@ -7,7 +7,7 @@ import { updateSoundHints, updateKbdHints,
 import { switchBasicMode, switchAdvancedMode, 
   switchProMode, switchModeType,  } from "./functionalModeSwitcher.js";
 
-let isleftPaddleActive = false;
+let isRightPaddleActive = false;
 export let pressedKeys = new Set();
 
 
@@ -52,7 +52,7 @@ function stopPlaying(e) {
     if ((!fullKbdMode) || (doubleRowsMode)) {
       key.classList.remove("key--pressing");
       key.setAttribute("data-playing", false);
-      if (!isleftPaddleActive) {
+      if (!isRightPaddleActive) {
         const audio = document.querySelector(
           `audio[data-sound="${key.dataset.sound}"]`);
         audio.load();
@@ -65,7 +65,7 @@ function stopPlaying(e) {
         }
       })
       displayedKey.classList.remove("key--pressing");
-      if (!isleftPaddleActive) {
+      if (!isRightPaddleActive) {
         key.setAttribute("data-playing", false);
         const audio = document.querySelector(
           `audio[data-sound="${key.dataset.sound}"]`);
@@ -100,8 +100,8 @@ function kbdInputHandler(e) {
 
 function kbdReleaseHandler(e) {
   if (e.keyCode === 17) {
-    isleftPaddleActive = false;
-    leftPaddleRelease();
+    isRightPaddleActive = false;
+    rightPaddleRelease();
   }
   removeKeyFromArray(e);
   stopPlaying(e);
@@ -126,7 +126,7 @@ function pressedKeysHandler(e) {
     }
   } else {
     if (e.keyCode === 17) {
-      isleftPaddleActive = true;
+      isRightPaddleActive = true;
     } else {
       playSound(e);
     }
@@ -184,7 +184,7 @@ function getKeyFromEvent(e) {
 }
 
 
-function leftPaddleRelease() {
+function rightPaddleRelease() {
   const allPlayedKeys = document.querySelectorAll(".key[data-playing]");
 
   allPlayedKeys.forEach(playedKey => {
