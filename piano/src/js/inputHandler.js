@@ -99,7 +99,7 @@ function kbdInputHandler(e) {
 
 
 function kbdReleaseHandler(e) {
-  if (e.keyCode === 17) {
+  if (e.keyCode === 32) {
     isRightPaddleActive = false;
     rightPaddleRelease();
   }
@@ -125,7 +125,7 @@ function pressedKeysHandler(e) {
       }
     }
   } else {
-    if (e.keyCode === 17) {
+    if (e.keyCode === 32) {
       isRightPaddleActive = true;
     } else {
       playSound(e);
@@ -142,8 +142,8 @@ function getKeyFromEvent(e) {
       key = "shift";
       break;
     }
-    case 17: {
-      key = "ctrl";
+    case 32: {
+      key = "space";
       break;
     }
     case 188: {
