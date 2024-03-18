@@ -14,7 +14,6 @@ export function updateSoundHints() {
         soundHint.textContent = pianoKey.dataset.display;
       }
     }
-
   })
 }
 
@@ -87,3 +86,19 @@ export function restoreKbdHints() {
     }
   })
 }
+
+
+const hideKbdHintsBtn = document.querySelector(".js-hide-kbd-hints");
+const hideSoundHintsBtn = document.querySelector(".js-hide-piano-hints");
+
+
+hideKbdHintsBtn.addEventListener("click", () => {
+  const allKbdHints = document.querySelectorAll(".js-kbd-key-hint");
+  allKbdHints.forEach(kbdHint => kbdHint.classList.toggle("key__hint--transparent"));
+})
+
+
+hideSoundHintsBtn.addEventListener("click", () => {
+  const allSoundHints = document.querySelectorAll(".js-piano-key-hint");
+  allSoundHints.forEach(soundHint => soundHint.classList.toggle("key__hint--transparent"));
+})

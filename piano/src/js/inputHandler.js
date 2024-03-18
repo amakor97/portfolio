@@ -2,14 +2,11 @@
 
 
 import { doubleRowsMode, fullKbdMode } from "./visualModeChanger.js";
-import { updateSoundHints, updateKbdHints, 
-  restoreKbdHints, updateDisabledKeys } from "./hintsUpdater.js";
 import { switchBasicMode, switchAdvancedMode, 
   switchProMode, switchModeType,  } from "./functionalModeSwitcher.js";
 
 let isRightPaddleActive = false;
 export let pressedKeys = new Set();
-
 
 function playSound(e) {
   const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
@@ -195,19 +192,3 @@ function rightPaddleRelease() {
     }
   })
 }
-
-
-const hideKbdHintsBtn = document.querySelector(".js-hide-kbd-hints");
-const hideSoundHintsBtn = document.querySelector(".js-hide-piano-hints");
-
-
-hideKbdHintsBtn.addEventListener("click", () => {
-  const allKbdHints = document.querySelectorAll(".js-kbd-key-hint");
-  allKbdHints.forEach(kbdHint => kbdHint.classList.toggle("key__hint--transparent"));
-})
-
-
-hideSoundHintsBtn.addEventListener("click", () => {
-  const allSoundHints = document.querySelectorAll(".js-piano-key-hint");
-  allSoundHints.forEach(soundHint => soundHint.classList.toggle("key__hint--transparent"));
-})
