@@ -10,6 +10,11 @@ export let pressedKeys = new Set();
 
 function playSound(e) {
   const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+  
+  if (!key) {
+    return;
+  }
+
   const audio = document.querySelector(`audio[data-sound="${key.dataset.sound}"]`);
   const displayedKey = fullKbdMode ? 
     document.querySelector(`div[data-display="${key.dataset.sound}"]`) :
@@ -52,6 +57,9 @@ function stopPlaying(e) {
       if (!isRightPaddleActive) {
         const audio = document.querySelector(
           `audio[data-sound="${key.dataset.sound}"]`);
+        if (!audio) {
+          return;
+        }
         audio.load();
       }
     } else {
