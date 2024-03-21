@@ -1,10 +1,12 @@
 .keyboard-cont {
   position: relative;
+  margin: 0 auto;
+  font-size: 0;
 }
 .keyboard-cont--double-rows {
   width: -moz-fit-content;
   width: fit-content;
-  height: 624px;
+  height: 700px;
 }
 .keyboard-cont--single-row {
   display: flex;
@@ -84,19 +86,23 @@
   display: flex;
   flex-direction: column;
   justify-content: end;
-  padding: 50px 40px;
+  box-sizing: border-box;
+  font-size: 1rem;
   border: 1px solid black;
 }
 .key--black {
-  height: 90px;
-  padding: 50px 20px;
-  background: lightgrey;
+  height: 220px;
+  width: 35px;
+  color: white;
+  background: rgb(16, 16, 16);
 }
 .key--white {
-  height: 210px;
+  height: 350px;
+  width: 50px;
+  color: black;
 }
 .key--disabled {
-  background: rgb(255, 0, 0);
+  background: lightgrey;
 }
 .key--empty {
   height: 60px;
@@ -110,12 +116,12 @@
   display: none;
 }
 .key--white-narrow {
-  width: 1.78vw;
-  padding: 0;
+  width: 1.89vw;
+  height: 13vw;
 }
 .key--black-narrow {
-  width: 0.89vw;
-  padding: 0;
+  width: 1.3vw;
+  height: 8vw;
 }
 .key__hint--transparent {
   opacity: 0;
