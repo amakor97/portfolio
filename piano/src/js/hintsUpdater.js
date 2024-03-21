@@ -45,24 +45,14 @@ export function updateKbdHints() {
 
 
 export function updateDisabledKeys() {
-  let playableKbdKeys = document.querySelectorAll("div[data-sound]");
-  let playableSounds = [];
   let allPianoKeys = document.querySelectorAll(".key");
-  let allSounds = [];
-  allPianoKeys.forEach(pianoKey => {
-    if (pianoKey.dataset.display) {
-      allSounds.push(pianoKey.dataset.display);
-    }
-  });
-
-  playableKbdKeys.forEach(kbdKey => playableSounds.push(kbdKey.dataset.sound));
-  let unplayableSounds = allSounds.filter(
-    sound => !playableSounds.includes(sound));
   let unplayablePianoKeys = [];
-  unplayableSounds.forEach(sound => {
-    let unplayableKey = Array.from(allPianoKeys).find(
-      key => key.dataset.display === sound);
-    unplayablePianoKeys.push(unplayableKey);
+
+  allPianoKeys.forEach(key => {
+    let kbdHint = key.querySelector(".js-kbd-key-hint");
+    if (kbdHint && kbdHint.textContent === "") {
+      unplayablePianoKeys.push(key);
+    }
   })
 
   allPianoKeys.forEach(key => key.classList.remove("key--disabled"));

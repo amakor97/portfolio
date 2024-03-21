@@ -39,9 +39,9 @@ export function switchBasicMode() {
   let displayedHint = `${targetDigit - 1} - ${targetDigit} - ${+targetDigit + 1}`;
   basInfo.textContent = displayedHint;
 
-  updateDisabledKeys();
   updateSoundHints();
   updateKbdHints();
+  updateDisabledKeys();
 }
 
 
@@ -230,9 +230,9 @@ export function switchAdvancedMode() {
     }
   }
 
-  updateDisabledKeys();
   updateSoundHints();
   updateKbdHints();
+  updateDisabledKeys();
 }
 
 
@@ -280,7 +280,7 @@ export function switchProMode() {
     }
   }
 
-  updateDisabledKeys();
   updateSoundHints();
   updateKbdHints();
+  updateDisabledKeys();
 }

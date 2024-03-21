@@ -56,9 +56,9 @@ function hideFullKbd() {
   const blackKeys = document.querySelectorAll(".key--black");
   blackKeys.forEach(key => key.classList.remove("key--black-narrow"));
 
-  updateDisabledKeys();
   restoreKbdHints();
   updateSoundHints();
+  updateDisabledKeys();
 }
 
 
@@ -72,9 +72,9 @@ function showFullKbd() {
   const blackKeys = document.querySelectorAll(".key--black");
   blackKeys.forEach(key => key.classList.add("key--black-narrow"));
 
-  updateDisabledKeys();
   updateKbdHints();
   updateSoundHints();
+  updateDisabledKeys();
 }
 
 
