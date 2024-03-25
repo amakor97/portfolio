@@ -9,8 +9,8 @@ let isRightPaddleActive = false;
 export let pressedKeys = new Set();
 
 function playSound(e) {
-  const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
-  
+  const key = document.querySelector(`.key[data-key="${e.code}"]`);
+  console.log(key);
   if (!key) {
     return;
   }
@@ -40,15 +40,17 @@ function playSound(e) {
 
 function stopPlaying(e) {
   let keyText = getKeyFromEvent(e);
-  let key = undefined;
+  //let key = undefined;
   let displayedKey = undefined;
   const keys = document.querySelectorAll(".key");
   
   keys.forEach(keyElem => {
     if (keyElem.dataset.symbol === keyText) {
-      key = keyElem;
+      //key = keyElem;
     }
   })
+
+  const key = document.querySelector(`.key[data-key="${e.code}"]`);
 
   if (key) {
     if ((!fullKbdMode) || (doubleRowsMode)) {
@@ -98,8 +100,10 @@ window.addEventListener("keyup", kbdReleaseHandler);
 
 
 function kbdInputHandler(e) {
+  console.log(e);
   addKeyToArray(e);
   pressedKeysHandler(e);
+  console.log(pressedKeys);
 }
 
 
@@ -185,6 +189,7 @@ function getKeyFromEvent(e) {
     }
   }
 
+  key = e.code;
   return key;
 }
 
