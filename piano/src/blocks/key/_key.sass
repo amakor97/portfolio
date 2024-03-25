@@ -5,23 +5,35 @@
   box-sizing: border-box
 
   font:
-    size: 1rem
+    size: 0.75rem
 
   border: 1px solid black
 
+  transition: transform 0.05s
+
   &--black
-    height: 220px
-    width: 35px
+    z-index: 1
+
+    height: 291px
+    width: 39px
 
     color: white
 
     background: rgb(16, 16, 16)
+    border:
+      radius: 0 0 4px 4px
 
   &--white
-    height: 350px
-    width: 50px
+    z-index: 0
+
+    height: 408px
+    width: 69px
 
     color: black
+
+    background: white
+    border:
+      radius: 0 0 4px 4px
 
   &--disabled
     background: lightgrey
@@ -33,6 +45,7 @@
     opacity: 0
 
   &--pressing
+    transform: scaleY(1.02) translateY(1%)
     background: grey
 
   &--hided
@@ -47,6 +60,8 @@
     height: 8vw
 
   &__hint
+    text:
+      align: center
 
     &--transparent
       opacity: 0

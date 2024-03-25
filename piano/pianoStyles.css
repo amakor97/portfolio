@@ -1,3 +1,16 @@
+:root {
+  font-family: Arial, sans-serif;
+}
+
+.body {
+  min-height: 100vh;
+  margin: 0;
+  color: white;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), transparent, rgba(0, 0, 0, 0.5)), url(/portfolio/piano/src/pics/background.jpg);
+  background-size: cover, 579px 344.67px;
+  background-repeat: no-repeat, repeat;
+}
+
 .keyboard-cont {
   position: relative;
   margin: 0 auto;
@@ -6,7 +19,7 @@
 .keyboard-cont--double-rows {
   width: -moz-fit-content;
   width: fit-content;
-  height: 700px;
+  height: 840px;
 }
 .keyboard-cont--single-row {
   display: flex;
@@ -87,19 +100,25 @@
   flex-direction: column;
   justify-content: end;
   box-sizing: border-box;
-  font-size: 1rem;
+  font-size: 0.75rem;
   border: 1px solid black;
+  transition: transform 0.05s;
 }
 .key--black {
-  height: 220px;
-  width: 35px;
+  z-index: 1;
+  height: 291px;
+  width: 39px;
   color: white;
   background: rgb(16, 16, 16);
+  border-radius: 0 0 4px 4px;
 }
 .key--white {
-  height: 350px;
-  width: 50px;
+  z-index: 0;
+  height: 408px;
+  width: 69px;
   color: black;
+  background: white;
+  border-radius: 0 0 4px 4px;
 }
 .key--disabled {
   background: lightgrey;
@@ -110,6 +129,7 @@
   opacity: 0;
 }
 .key--pressing {
+  transform: scaleY(1.02) translateY(1%);
   background: grey;
 }
 .key--hided {
@@ -122,6 +142,9 @@
 .key--black-narrow {
   width: 1.3vw;
   height: 8vw;
+}
+.key__hint {
+  text-align: center;
 }
 .key__hint--transparent {
   opacity: 0;
