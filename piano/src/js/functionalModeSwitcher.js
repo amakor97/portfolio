@@ -10,11 +10,15 @@ let advInfo = document.querySelector(".adv-info");
 let proInfo = document.querySelector(".pro-info");
 
 let digits = ["0", "1", "2", "3", "4", "5", "6"];
+let tDigits = ["Digit0", "Digit1", "Digit2", "Digit3", "Digit4", "Digit5", "Digit6"];
 
 export function switchBasicMode() {
-  const targetDigit = digits.find(key => pressedKeys.has(key));
+  console.log("bas mod");
+  let targetDigit = tDigits.find(key => pressedKeys.has(key));
+  console.log({targetDigit});
 
   if (targetDigit) {
+    targetDigit = targetDigit.slice(5, 6);
     const keyElems = document.querySelectorAll(".key");
     keyElems.forEach(keyElem => {
       if (keyElem.classList.contains("js-key-main")) {
@@ -34,10 +38,12 @@ export function switchBasicMode() {
           `${keyElem.dataset.sound.slice(0, -1)}${+targetDigit + 2}`;
       }
     })
+
+    let displayedHint = `${targetDigit - 1} - ${targetDigit} - ${+targetDigit + 1}`;
+    basInfo.textContent = displayedHint;
   }
 
-  let displayedHint = `${targetDigit - 1} - ${targetDigit} - ${+targetDigit + 1}`;
-  basInfo.textContent = displayedHint;
+
 
   updateSoundHints();
   updateKbdHints();
@@ -72,7 +78,7 @@ let noteForProMode = undefined;
 
 const modeSelectors = document.querySelectorAll("input[name='select-switch-mode']");
 const editModeToggler = document.querySelector("input[name='toggle-edit-mode']");
-const noteInput = document.querySelector("input[name='enter-note']");
+export const noteInput = document.querySelector("input[name='enter-note']");
 const noteValidateBtn = document.querySelector(".js-note-validate-btn");
 
 
@@ -139,40 +145,49 @@ let pressedOctave = undefined;
 export function switchAdvancedMode() {
   if (!isEditModeActive) {
     const pressedSymbolKeys = new Set(([...pressedKeys]).filter(
-      value => ((value !== "shift") && (value !== "ctrl"))));
+      value => ((value !== "ShiftLeft") && (value !== "ShiftRight") && (value !== "Space"))));
     let targetKey = undefined;
     if (pressedSymbolKeys.size === 1) {
       targetKey = Array.from(pressedSymbolKeys)[0];
+      console.log({targetKey});
+      targetKey = targetKey.slice(-1);
     }
-    activeAdvancedLayout = targetKey;
 
-    const keyElems = document.querySelectorAll(".key");
-    keyElems.forEach(keyElem => {
-      if (keyElem.classList.contains("js-key-main")) {
-        keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
-          advancedModeLayouts[activeAdvancedLayout].main}`;
-      }
-      if (keyElem.classList.contains("js-key-sub")) {
-        keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
-          advancedModeLayouts[activeAdvancedLayout].sub}`;
-      }
-      if (keyElem.classList.contains("js-key-sup")) {
-        keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
-          advancedModeLayouts[activeAdvancedLayout].sup}`;
-      }
-      if (keyElem.classList.contains("js-key-super-sup")) {
-        keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
-          advancedModeLayouts[activeAdvancedLayout].super}`;
-      }
-    })
+    if ((targetKey) && digits.includes(targetKey)) {
+      activeAdvancedLayout = targetKey;
+
+      const keyElems = document.querySelectorAll(".key");
+      keyElems.forEach(keyElem => {
+        if (keyElem.classList.contains("js-key-main")) {
+          keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
+            advancedModeLayouts[activeAdvancedLayout].main}`;
+        }
+        if (keyElem.classList.contains("js-key-sub")) {
+          keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
+            advancedModeLayouts[activeAdvancedLayout].sub}`;
+        }
+        if (keyElem.classList.contains("js-key-sup")) {
+          keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
+            advancedModeLayouts[activeAdvancedLayout].sup}`;
+        }
+        if (keyElem.classList.contains("js-key-super-sup")) {
+          keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
+            advancedModeLayouts[activeAdvancedLayout].super}`;
+        }
+      })
+    }
+
   } else {
     if (pressedOctave) {
       const pressedOctaveKeys = document.querySelectorAll(`.${pressedOctave}`);
       const pressedSymbolKeys = new Set(([...pressedKeys]).filter(
-        value => ((value !== "shift") && (value !== "ctrl"))));
+        value => ((value !== "ShiftLeft") && (value !== "ShiftRight") && (value !== "Space"))));
       let targetKey = undefined;
       if (pressedSymbolKeys.size === 1) {
+        console.log(pressedSymbolKeys);
         targetKey = Array.from(pressedSymbolKeys)[0];
+        console.log({targetKey});
+        targetKey = targetKey.slice(-1);
       }
 
       if (targetKey) {
@@ -208,20 +223,23 @@ export function switchAdvancedMode() {
       pressedOctave = undefined;
     } else {
       const pressedSymbolKeys = new Set(([...pressedKeys]).filter(
-        value => ((value !== "shift") && (value !== "ctrl"))));
+        value => ((value !== "ShiftLeft") && (value !== "ShiftRight") && (value !== "Space"))));
       let targetKey = undefined;
       if (pressedSymbolKeys.size === 1) {
+        console.log(pressedSymbolKeys);
         targetKey = Array.from(pressedSymbolKeys)[0];
       }
+      console.log({targetKey});
       pressedKeys.delete(targetKey); //optional?
 
       if (targetKey) {
         const allKeyElems = document.querySelectorAll(".key");
         allKeyElems.forEach(keyElem => {
-          if (keyElem.dataset.symbol === targetKey) {
+          if (keyElem.dataset.key === targetKey) {
             keyElem.classList.forEach(className => {
               if (className.startsWith("js-key-")) {
                 pressedOctave = className;
+                console.log({pressedOctave});
               }
             })
           }
@@ -242,10 +260,11 @@ let pressedProKeyElem = undefined;
 export function switchProMode() {
   if (!isEditModeActive) {
     const pressedSymbolKeys = new Set(([...pressedKeys]).filter(
-      value => ((value !== "shift") && (value !== "ctrl"))));
+      value => ((value !== "ShiftLeft") && (value !== "ShiftRight") && (value !== "Space"))));
     let targetKey = undefined;
     if (pressedSymbolKeys.size === 1) {
       targetKey = Array.from(pressedSymbolKeys)[0];
+      targetKey = targetKey.slice(-1);
     }
     if (Number.isInteger(+targetKey)) {
       activeProLayout = targetKey;
@@ -260,22 +279,23 @@ export function switchProMode() {
 
   } else {
     const pressedSymbolKeys = new Set(([...pressedKeys]).filter(
-      value => ((value !== "shift") && (value !== "ctrl"))));
+      value => ((value !== "ShiftLeft") && (value !== "ShiftRight") && (value !== "Space"))));
     let targetKey = undefined;
     if (pressedSymbolKeys.size === 1) {
       targetKey = Array.from(pressedSymbolKeys)[0];
+      console.log({targetKey});
     }
     pressedKeys.delete(targetKey); //optional?
 
-    if (targetKey) {
+    if ((targetKey) && (noteInput !== document.activeElement) && noteForProMode) {
       const allKeyElems = document.querySelectorAll(".key");
       allKeyElems.forEach(keyElem => {
-        if (keyElem.dataset.symbol === targetKey) {
+        if (keyElem.dataset.key === targetKey) {
           pressedProKeyElem = keyElem;
         }
       })
       pressedProKeyElem.dataset.sound = noteForProMode;
-      proModeLayouts[activeProLayout][targetKey] = noteForProMode;
+      proModeLayouts[activeProLayout][targetKey.slice(-1).toLowerCase()] = noteForProMode;
       proInfo.textContent = JSON.stringify(proModeLayouts);
     }
   }

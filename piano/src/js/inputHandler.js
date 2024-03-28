@@ -3,12 +3,16 @@
 
 import { doubleRowsMode, fullKbdMode } from "./visualModeChanger.js";
 import { switchBasicMode, switchAdvancedMode, 
-  switchProMode, switchModeType,  } from "./functionalModeSwitcher.js";
+  switchProMode, switchModeType, noteInput } from "./functionalModeSwitcher.js";
 
 let isRightPaddleActive = false;
 export let pressedKeys = new Set();
 
 function playSound(e) {
+  if (noteInput === document.activeElement) {
+    return;
+  }
+
   const key = document.querySelector(`.key[data-key="${e.code}"]`);
   console.log(key);
   if (!key) {
@@ -100,6 +104,7 @@ window.addEventListener("keyup", kbdReleaseHandler);
 
 
 function kbdInputHandler(e) {
+  //e.preventDefault();
   console.log(e);
   addKeyToArray(e);
   pressedKeysHandler(e);
@@ -118,7 +123,7 @@ function kbdReleaseHandler(e) {
 
 
 function pressedKeysHandler(e) {
-  if (pressedKeys.has("shift")) {
+  if (pressedKeys.has("ShiftLeft") || (pressedKeys.has("ShiftRight"))) {
     switch(switchModeType) {
       case "basic": {
         switchBasicMode();
@@ -146,6 +151,7 @@ function pressedKeysHandler(e) {
 function getKeyFromEvent(e) {
   let key = undefined;
 
+  /*
   switch (e.keyCode) {
     case 16: {
       key = "shift";
@@ -188,6 +194,7 @@ function getKeyFromEvent(e) {
       break;
     }
   }
+*/
 
   key = e.code;
   return key;
