@@ -88,7 +88,13 @@ noteValidateBtn.addEventListener("click", function() {
   } else {
     noteInput.value = noteInput.value.toUpperCase();
   }
-  noteForProMode = noteInput.value;
+
+  const regex = /^[a-gA-G]b?[0-8]$/;
+  console.log(regex.test(noteInput.value));
+  if (noteInput.value.match(/([a-h]|[A-H])[b|B]?[0-8]/)) {
+    noteForProMode = noteInput.value;
+  }
+
 })
 
 
@@ -159,21 +165,11 @@ function updateMode() {
     }
     case "advanced": {
       keyElems.forEach(keyElem => {
-        if (keyElem.classList.contains("js-key-main")) {
+        let targetClass = Array.from(keyElem.classList).find(keyClass => ["js-key-main", "js-key-sub", "js-key-sup", "js-key-super"].includes(keyClass));
+        if (targetClass) {
+          targetClass = targetClass.slice(7);
           keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
-            advancedModeLayouts[activeAdvancedLayout].main}`;
-        }
-        if (keyElem.classList.contains("js-key-sub")) {
-          keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
-            advancedModeLayouts[activeAdvancedLayout].sub}`;
-        }
-        if (keyElem.classList.contains("js-key-sup")) {
-          keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
-            advancedModeLayouts[activeAdvancedLayout].sup}`;
-        }
-        if (keyElem.classList.contains("js-key-super")) {
-          keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
-            advancedModeLayouts[activeAdvancedLayout].super}`;
+            advancedModeLayouts[activeAdvancedLayout][targetClass]}`;
         }
       })
       break;
@@ -217,21 +213,12 @@ export function switchAdvancedMode() {
 
       const keyElems = document.querySelectorAll(".key");
       keyElems.forEach(keyElem => {
-        if (keyElem.classList.contains("js-key-main")) {
+        let targetClass = Array.from(keyElem.classList).find(keyClass => ["js-key-main", "js-key-sub", "js-key-sup", "js-key-super"].includes(keyClass));
+        console.log({targetClass});
+        if (targetClass) {
+          targetClass = targetClass.slice(7);
           keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
-            advancedModeLayouts[activeAdvancedLayout].main}`;
-        }
-        if (keyElem.classList.contains("js-key-sub")) {
-          keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
-            advancedModeLayouts[activeAdvancedLayout].sub}`;
-        }
-        if (keyElem.classList.contains("js-key-sup")) {
-          keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
-            advancedModeLayouts[activeAdvancedLayout].sup}`;
-        }
-        if (keyElem.classList.contains("js-key-super")) {
-          keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
-            advancedModeLayouts[activeAdvancedLayout].super}`;
+            advancedModeLayouts[activeAdvancedLayout][targetClass]}`;
         }
       })
     }
