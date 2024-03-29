@@ -19,6 +19,7 @@ export function switchBasicMode() {
 
   if (targetDigit) {
     targetDigit = targetDigit.slice(5, 6);
+    activeBasicOffset = +targetDigit;
     const keyElems = document.querySelectorAll(".key");
     keyElems.forEach(keyElem => {
       if (keyElem.classList.contains("js-key-main")) {
@@ -118,7 +119,7 @@ function createProModeLayouts(num) {
 
 let proModeLayouts = createProModeLayouts(2);
 
-
+let activeBasicOffset = 4;
 export let activeAdvancedLayout = 0;
 let activeProLayout = 0;
 export let switchModeType = "basic";
@@ -129,9 +130,70 @@ modeSelectors.forEach(input => {
   input.addEventListener("change", function() {
     if (input.checked) {
       switchModeType = input.value;
+      updateMode();
     }
   })
 })
+
+function updateMode() {
+  const keyElems = document.querySelectorAll(".key");
+  switch(switchModeType) {
+    case "basic": {
+      keyElems.forEach(keyElem => {
+        if (keyElem.classList.contains("js-key-main")) {
+          keyElem.dataset.sound = 
+            `${keyElem.dataset.sound.slice(0, -1)}${activeBasicOffset}`;
+        }
+        if (keyElem.classList.contains("js-key-sub")) {
+          keyElem.dataset.sound = 
+            `${keyElem.dataset.sound.slice(0, -1)}${activeBasicOffset - 1}`;
+        }
+        if (keyElem.classList.contains("js-key-sup")) {
+          keyElem.dataset.sound = 
+            `${keyElem.dataset.sound.slice(0, -1)}${activeBasicOffset + 1}`;
+        }
+        if (keyElem.classList.contains("js-key-super-sup")) {
+          keyElem.dataset.sound = 
+            `${keyElem.dataset.sound.slice(0, -1)}${activeBasicOffset + 2}`;
+        }
+      })
+      break;
+    }
+    case "advanced": {
+      keyElems.forEach(keyElem => {
+        if (keyElem.classList.contains("js-key-main")) {
+          keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
+            advancedModeLayouts[activeAdvancedLayout].main}`;
+        }
+        if (keyElem.classList.contains("js-key-sub")) {
+          keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
+            advancedModeLayouts[activeAdvancedLayout].sub}`;
+        }
+        if (keyElem.classList.contains("js-key-sup")) {
+          keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
+            advancedModeLayouts[activeAdvancedLayout].sup}`;
+        }
+        if (keyElem.classList.contains("js-key-super-sup")) {
+          keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
+            advancedModeLayouts[activeAdvancedLayout].super}`;
+        }
+      })
+      break;
+    }
+    case "pro": {
+      keyElems.forEach(keyElem => {
+        if (keyElem.dataset.symbol in proModeLayouts[activeProLayout]) {
+          keyElem.dataset.sound = proModeLayouts[activeProLayout][keyElem.dataset.symbol];
+        }
+      })
+    }
+  }
+
+  updateSoundHints();
+  updateKbdHints();
+  updateDisabledKeys();
+}
+
 
 
 editModeToggler.addEventListener("change", () => {
