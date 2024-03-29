@@ -13,9 +13,7 @@ let digits = ["0", "1", "2", "3", "4", "5", "6"];
 let tDigits = ["Digit0", "Digit1", "Digit2", "Digit3", "Digit4", "Digit5", "Digit6"];
 
 export function switchBasicMode() {
-  console.log("bas mod");
   let targetDigit = tDigits.find(key => pressedKeys.has(key));
-  console.log({targetDigit});
 
   if (targetDigit) {
     targetDigit = targetDigit.slice(5, 6);
@@ -183,7 +181,6 @@ function updateMode() {
     case "pro": {
       keyElems.forEach(keyElem => {
         if (keyElem.dataset.key in proModeLayouts[activeProLayout]) {
-          console.log(keyElem.dataset.key, proModeLayouts[activeProLayout][keyElem.dataset.key]);
           keyElem.dataset.sound = proModeLayouts[activeProLayout][keyElem.dataset.key];
         }
       })
@@ -212,7 +209,6 @@ export function switchAdvancedMode() {
     let targetKey = undefined;
     if (pressedSymbolKeys.size === 1) {
       targetKey = Array.from(pressedSymbolKeys)[0];
-      console.log({targetKey});
       targetKey = targetKey.slice(-1);
     }
 
@@ -247,9 +243,7 @@ export function switchAdvancedMode() {
         value => ((value !== "ShiftLeft") && (value !== "ShiftRight") && (value !== "Space"))));
       let targetKey = undefined;
       if (pressedSymbolKeys.size === 1) {
-        console.log(pressedSymbolKeys);
         targetKey = Array.from(pressedSymbolKeys)[0];
-        console.log({targetKey});
         targetKey = targetKey.slice(-1);
       }
 
@@ -259,25 +253,7 @@ export function switchAdvancedMode() {
             targetKey}`;
         })
 
-        let octaveName = undefined;
-        switch(pressedOctave) {
-          case "js-key-main": {
-            octaveName = "main";
-            break;
-          }
-          case "js-key-sub": {
-            octaveName = "sub";
-            break;
-          }
-          case "js-key-sup": {
-            octaveName = "sup";
-            break;
-          }
-          case "js-key-super": {
-            octaveName = "super";
-            break;
-          }
-        }
+        let octaveName = pressedOctave.slice(7);
 
         advancedModeLayouts[activeAdvancedLayout][octaveName] = +targetKey;
         advInfo.textContent = JSON.stringify(advancedModeLayouts);
@@ -289,10 +265,8 @@ export function switchAdvancedMode() {
         value => ((value !== "ShiftLeft") && (value !== "ShiftRight") && (value !== "Space"))));
       let targetKey = undefined;
       if (pressedSymbolKeys.size === 1) {
-        console.log(pressedSymbolKeys);
         targetKey = Array.from(pressedSymbolKeys)[0];
       }
-      console.log({targetKey});
       pressedKeys.delete(targetKey); //optional?
 
       if (targetKey) {
@@ -302,7 +276,6 @@ export function switchAdvancedMode() {
             keyElem.classList.forEach(className => {
               if (className.startsWith("js-key-")) {
                 pressedOctave = className;
-                console.log({pressedOctave});
               }
             })
           }
@@ -346,7 +319,6 @@ export function switchProMode() {
     let targetKey = undefined;
     if (pressedSymbolKeys.size === 1) {
       targetKey = Array.from(pressedSymbolKeys)[0];
-      console.log({targetKey});
     }
     pressedKeys.delete(targetKey); //optional?
 
@@ -357,9 +329,7 @@ export function switchProMode() {
           pressedProKeyElem = keyElem;
         }
       })
-      console.log(pressedProKeyElem);
       pressedProKeyElem.dataset.sound = noteForProMode;
-      console.log(proModeLayouts[activeProLayout][targetKey.slice(-1).toLowerCase()]);
       proModeLayouts[activeProLayout][targetKey] = noteForProMode;
       proInfo.textContent = JSON.stringify(proModeLayouts);
     }
