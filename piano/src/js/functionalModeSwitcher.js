@@ -34,7 +34,7 @@ export function switchBasicMode() {
         keyElem.dataset.sound = 
           `${keyElem.dataset.sound.slice(0, -1)}${+targetDigit + 1}`;
       }
-      if (keyElem.classList.contains("js-key-super-sup")) {
+      if (keyElem.classList.contains("js-key-super")) {
         keyElem.dataset.sound = 
           `${keyElem.dataset.sound.slice(0, -1)}${+targetDigit + 2}`;
       }
@@ -95,13 +95,13 @@ noteValidateBtn.addEventListener("click", function() {
 
 
 function createProModeSingleLayout() {
-  const playableKbdKeys = document.querySelectorAll(".key[data-symbol]");  
+  const playableKbdKeys = document.querySelectorAll(".key[data-key]");  
   let layout = {};
 
   playableKbdKeys.forEach(kbdKey => {
-    let symbol = kbdKey.dataset.symbol;
+    let key = kbdKey.dataset.key;
     let sound = kbdKey.dataset.sound;
-    layout[symbol] = sound;
+    layout[key] = sound;
   })
   return layout;
 }
@@ -152,7 +152,7 @@ function updateMode() {
           keyElem.dataset.sound = 
             `${keyElem.dataset.sound.slice(0, -1)}${activeBasicOffset + 1}`;
         }
-        if (keyElem.classList.contains("js-key-super-sup")) {
+        if (keyElem.classList.contains("js-key-super")) {
           keyElem.dataset.sound = 
             `${keyElem.dataset.sound.slice(0, -1)}${activeBasicOffset + 2}`;
         }
@@ -173,7 +173,7 @@ function updateMode() {
           keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
             advancedModeLayouts[activeAdvancedLayout].sup}`;
         }
-        if (keyElem.classList.contains("js-key-super-sup")) {
+        if (keyElem.classList.contains("js-key-super")) {
           keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
             advancedModeLayouts[activeAdvancedLayout].super}`;
         }
@@ -182,8 +182,9 @@ function updateMode() {
     }
     case "pro": {
       keyElems.forEach(keyElem => {
-        if (keyElem.dataset.symbol in proModeLayouts[activeProLayout]) {
-          keyElem.dataset.sound = proModeLayouts[activeProLayout][keyElem.dataset.symbol];
+        if (keyElem.dataset.key in proModeLayouts[activeProLayout]) {
+          console.log(keyElem.dataset.key, proModeLayouts[activeProLayout][keyElem.dataset.key]);
+          keyElem.dataset.sound = proModeLayouts[activeProLayout][keyElem.dataset.key];
         }
       })
     }
@@ -232,7 +233,7 @@ export function switchAdvancedMode() {
           keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
             advancedModeLayouts[activeAdvancedLayout].sup}`;
         }
-        if (keyElem.classList.contains("js-key-super-sup")) {
+        if (keyElem.classList.contains("js-key-super")) {
           keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
             advancedModeLayouts[activeAdvancedLayout].super}`;
         }
@@ -272,7 +273,7 @@ export function switchAdvancedMode() {
             octaveName = "sup";
             break;
           }
-          case "js-key-super-sup": {
+          case "js-key-super": {
             octaveName = "super";
             break;
           }
@@ -334,8 +335,8 @@ export function switchProMode() {
 
     const keyElems = document.querySelectorAll(".key");
     keyElems.forEach(keyElem => {
-      if (keyElem.dataset.symbol in proModeLayouts[activeProLayout]) {
-        keyElem.dataset.sound = proModeLayouts[activeProLayout][keyElem.dataset.symbol];
+      if (keyElem.dataset.key in proModeLayouts[activeProLayout]) {
+        keyElem.dataset.sound = proModeLayouts[activeProLayout][keyElem.dataset.key];
       }
     })
 
@@ -356,8 +357,10 @@ export function switchProMode() {
           pressedProKeyElem = keyElem;
         }
       })
+      console.log(pressedProKeyElem);
       pressedProKeyElem.dataset.sound = noteForProMode;
-      proModeLayouts[activeProLayout][targetKey.slice(-1).toLowerCase()] = noteForProMode;
+      console.log(proModeLayouts[activeProLayout][targetKey.slice(-1).toLowerCase()]);
+      proModeLayouts[activeProLayout][targetKey] = noteForProMode;
       proInfo.textContent = JSON.stringify(proModeLayouts);
     }
   }
