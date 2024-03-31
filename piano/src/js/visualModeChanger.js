@@ -12,6 +12,10 @@ const leftPart = document.querySelector(".js-keyboard-left");
 const centerPart = document.querySelector(".js-keyboard-center");
 const toggleModeBtn = document.querySelector(".js-toggle-visual-mode-btn");
 const toggleFullKbdBtn = document.querySelector(".js-toggle-full-keyboard-btn");
+const controlPanel = document.querySelector(".js-control-panel");
+
+export const assignModeCont = document.querySelector(".js-control-assign-mode-cont");
+export const noteInputCont = document.querySelector(".js-control-note-input-cont");
 
 toggleModeBtn.addEventListener("click", toggleVisualMode);
 toggleFullKbdBtn.addEventListener("click", toggleFullKbd);
@@ -87,6 +91,8 @@ function changeStylesForOneRow() {
 
   centerPart.classList.remove("keyboard-cont__item--full-double");
   centerPart.classList.add("keyboard-cont__item--full-single");
+  
+  controlPanel.classList.add("control-panel--single-row");
 }
 
 
@@ -99,4 +105,28 @@ function changeStylesForTwoRows() {
 
   centerPart.classList.remove("keyboard-cont__item--full-single");
   centerPart.classList.add("keyboard-cont__item--full-double");
+  
+  controlPanel.classList.remove("control-panel--single-row");
 }
+
+
+const controlToggleBtn = document.querySelector(".js-control-toggle-btn");
+controlToggleBtn.addEventListener("click", function() {
+  controlToggleBtn.classList.toggle("control-toggle-btn--rotated");
+
+  if (doubleRowsMode) {
+    controlPanel.classList.remove("control-panel--hided-bottom")
+    if (controlPanel.classList.contains("control-panel--hided-right")) {
+      controlPanel.classList.remove("control-panel--hided-right");
+    } else {
+      controlPanel.classList.add("control-panel--hided-right");
+    }
+  } else {
+    controlPanel.classList.remove("control-panel--hided-right");
+    if (controlPanel.classList.contains("control-panel--hided-bottom")) {
+      controlPanel.classList.remove("control-panel--hided-bottom");
+    } else {
+      controlPanel.classList.add("control-panel--hided-bottom");
+    }
+  }
+})

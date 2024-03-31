@@ -2,13 +2,96 @@
   font-family: Arial, sans-serif;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   min-height: 100vh;
   margin: 0;
+  overflow: hidden;
   color: white;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), transparent, rgba(0, 0, 0, 0.5)), url(/portfolio/piano/src/pics/background.jpg);
   background-size: cover, 579px 344.67px;
   background-repeat: no-repeat, repeat;
+}
+
+.control-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  width: 18vw;
+  height: 100vh;
+  padding: 0 1vw;
+  transition: right 0.5s, bottom 0.5s;
+}
+.control-panel--single-row {
+  top: auto;
+  right: auto;
+  left: 5vw;
+  bottom: 0;
+  flex-direction: row;
+  width: 90vw;
+  height: 15vh;
+  padding: 0 5vw;
+}
+.control-panel--hided-right {
+  right: -20vw;
+}
+.control-panel--hided-bottom {
+  bottom: -15vh;
+}
+.control-panel__switch-mode-cont {
+  display: flex;
+  flex-direction: column;
+  min-width: 13vw;
+  gap: 10px;
+  justify-content: space-evenly;
+}
+.control-panel__switch-mode-cont--note {
+  flex-direction: row;
+  justify-content: space-between;
+}
+.control-panel__switch-mode-cont--hided {
+  opacity: 0;
+}
+.control-panel__switch-mode-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 4px;
+  font-size: 1.5em;
+  border-radius: 8px;
+}
+.control-panel__note-input {
+  width: 40px;
+}
+.control-panel__note-btn {
+  width: 80px;
+  height: 56px;
+}
+
+.control-toggle-btn {
+  position: absolute;
+  z-index: 3;
+  top: 4vw;
+  right: 4vw;
+  display: inline-block;
+  width: 4vw;
+  height: 4vw;
+  transition: transform 0.5s;
+}
+.control-toggle-btn--rotated {
+  transform: rotate(180deg);
 }
 
 .keyboard-cont {

@@ -5,6 +5,8 @@ import { pressedKeys } from "./inputHandler.js";
 import { updateSoundHints, updateKbdHints, 
   restoreKbdHints, updateDisabledKeys } from "./hintsUpdater.js";
 
+import { assignModeCont, noteInputCont } from "./visualModeChanger.js";
+
 let basInfo = document.querySelector(".bas-info");
 let advInfo = document.querySelector(".adv-info");
 let proInfo = document.querySelector(".pro-info");
@@ -143,6 +145,10 @@ function updateMode() {
   const keyElems = document.querySelectorAll(".key");
   switch(switchModeType) {
     case "basic": {
+      //switchModeCont.classList.remove("control-panel__switch-mode-cont--hided");
+      assignModeCont.classList.add("control-panel__switch-mode-cont--hided");
+      noteInputCont.classList.add("control-panel__switch-mode-cont--hided");
+
       keyElems.forEach(keyElem => {
         if (keyElem.classList.contains("js-key-main")) {
           keyElem.dataset.sound = 
@@ -164,6 +170,9 @@ function updateMode() {
       break;
     }
     case "advanced": {
+      assignModeCont.classList.remove("control-panel__switch-mode-cont--hided");
+      noteInputCont.classList.add("control-panel__switch-mode-cont--hided");
+
       keyElems.forEach(keyElem => {
         let targetClass = Array.from(keyElem.classList).find(keyClass => ["js-key-main", "js-key-sub", "js-key-sup", "js-key-super"].includes(keyClass));
         if (targetClass) {
@@ -175,6 +184,9 @@ function updateMode() {
       break;
     }
     case "pro": {
+      assignModeCont.classList.remove("control-panel__switch-mode-cont--hided");
+      noteInputCont.classList.remove("control-panel__switch-mode-cont--hided");
+
       keyElems.forEach(keyElem => {
         if (keyElem.dataset.key in proModeLayouts[activeProLayout]) {
           keyElem.dataset.sound = proModeLayouts[activeProLayout][keyElem.dataset.key];

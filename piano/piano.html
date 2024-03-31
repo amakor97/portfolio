@@ -435,39 +435,57 @@
       </div>
     </div>
   </div>
-  </div>
-  <div>
-    <label for="id-select-switch-mode-basic">Basic</label>
-    <input type="radio" name="select-switch-mode" id="id-select-switch-mode-basic" value="basic" checked>
-    <label for="id-select-switch-mode-advanced">Advanced</label>
-    <input type="radio" name="select-switch-mode" id="id-select-switch-mode-advanced" value="advanced">
-    <label for="id-select-switch-mode-pro">Pro</label>
-    <input type="radio" name="select-switch-mode" id="id-select-switch-mode-pro" value="pro">
-  </div>
-  <div>
-    <label for="id-toggle-edit-mode">Edit</label>
-    <input type="checkbox" name="toggle-edit-mode" id="id-toggle-edit-mode">
-  </div>
-  <div>
-    <label for="id-enter-note">Note</label>
-    <input type="text" name="enter-note" id="id-enter-note">
-    <button class="js-note-validate-btn">Validate</button>
-  </div>
-  <button class="js-toggle-visual-mode-btn">toggle visual mode</button>
-  <button class="js-toggle-full-keyboard-btn">toggle full keyboard</button>
-  <div class="debug">
-    <div class="bas-info"></div>
-    <div class="adv-info"></div>
-    <div class="pro-info"></div>
-  </div>
-  <div class="control">
-    <button class="js-hide-kbd-hints">hide kdb</button>
-    <button class="js-hide-piano-hints">hide sounds</button>
-  </div>
-  <div class="hint">
-    <p>Basic mode: press and hold "Shift" and press num button for make offset</p>
-    <p>Advanced mode: press and hold "Shift". Pressing num button will change active layout. Setting "Edit" checkbox to true will toggle editing mode. While "Edit" is true pressing and releasing one of displaying keys will select octave and pressing num button then will set selected octave to corresponding offset.</p>
-    <p>Pro mode: press and hold "Shift". Pressing num button will change active layout. For assigning: enter node code to input field and press button. Then set "Edit" checkbox to true and press and hold "Shift". Pressing one of displaying keys will select key for note code.</p>
+  <button class="control-toggle-btn js-control-toggle-btn"></button>
+  <div class="control-panel control-panel--hided-right js-control-panel">
+    <div class="control-panel__switch-mode-cont">
+      <div class="control-panel__switch-mode-item">
+        <label class="control-panel__switch-mode-label" for="id-select-switch-mode-basic">
+          Basic
+          <input type="radio" name="select-switch-mode" id="id-select-switch-mode-basic" value="basic" checked>
+        </label>
+      </div>
+      <div class="control-panel__switch-mode-item">
+        <label class="control-panel__switch-mode-label"  for="id-select-switch-mode-advanced">
+          Advanced
+          <input type="radio" name="select-switch-mode" id="id-select-switch-mode-advanced" value="advanced">
+        </label>
+      </div>
+      <div class="control-panel__switch-mode-item">
+        <label class="control-panel__switch-mode-label" for="id-select-switch-mode-pro">
+          Pro
+          <input type="radio" name="select-switch-mode" id="id-select-switch-mode-pro" value="pro">
+        </label>
+      </div>
+    </div>
+    <div class="control-panel__switch-mode-cont control-panel__switch-mode-cont--hided js-control-assign-mode-cont">
+      <label class="control-panel__switch-mode-label" for="id-toggle-edit-mode">Re-assign
+        <input type="checkbox" name="toggle-edit-mode" id="id-toggle-edit-mode">
+      </label>
+    </div>
+    <div class="control-panel__switch-mode-cont control-panel__switch-mode-cont--hided control-panel__switch-mode-cont--note js-control-note-input-cont">
+      <label class="control-panel__note-label" for="id-enter-note">Note
+        <input class="control-panel__note-input" type="text" name="enter-note" id="id-enter-note">
+      </label>
+      <button class="control-panel__note-btn js-note-validate-btn">Validate</button>
+    </div>
+    <div class="control-panel__switch-mode-cont--note">
+      <button class="control-panel__note-btn js-toggle-visual-mode-btn">toggle visual mode</button>
+      <button class="control-panel__note-btn js-toggle-full-keyboard-btn">toggle full keyboard</button>
+    </div>
+    <div class="debug" style="display: none;">
+      <div class="bas-info"></div>
+      <div class="adv-info"></div>
+      <div class="pro-info"></div>
+    </div>
+    <div class="control">
+      <button class="js-hide-kbd-hints">hide kdb</button>
+      <button class="js-hide-piano-hints">hide sounds</button>
+    </div>
+    <div class="hint" style="display: none;">
+      <p>Basic mode: press and hold "Shift" and press num button for make offset</p>
+      <p>Advanced mode: press and hold "Shift". Pressing num button will change active layout. Setting "Edit" checkbox to true will toggle editing mode. While "Edit" is true pressing and releasing one of displaying keys will select octave and pressing num button then will set selected octave to corresponding offset.</p>
+      <p>Pro mode: press and hold "Shift". Pressing num button will change active layout. For assigning: enter node code to input field and press button. Then set "Edit" checkbox to true and press and hold "Shift". Pressing one of displaying keys will select key for note code.</p>
+    </div>
   </div>
   <block-audio>
     <block-octave data-name="subcontr">

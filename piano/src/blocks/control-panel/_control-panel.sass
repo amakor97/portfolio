@@ -1,0 +1,75 @@
+.control-panel
+  position: absolute
+  top: 0
+  right: 0
+  z-index: 2
+
+  display: flex
+  flex-direction: column
+  justify-content: center
+  gap: 20px
+  width: 18vw
+  height: 100vh
+  padding: 0 1vw
+
+  //background: grey
+
+  transition: right 0.5s, bottom 0.5s
+
+  &--single-row
+    top: auto
+    right: auto
+    left: 5vw
+    bottom: 0
+
+    flex-direction: row
+    width: 90vw
+    height: 15vh
+    padding: 0 5vw
+
+  &--hided-right
+    right: -20vw
+
+  &--hided-bottom
+    bottom: -15vh
+
+  &__switch-mode-cont
+    display: flex
+    flex-direction: column
+    min-width: 13vw
+    //min-height: 7.5vh
+    gap: 10px
+    justify-content: space-evenly
+    //background: red
+
+    &--note
+      flex-direction: row
+      justify-content: space-between
+
+    &--hided
+      opacity: 0
+
+  &__switch-mode-item
+    //background: pink
+
+  &__switch-mode-label
+    display: flex
+    justify-content: space-between
+    align-items: center
+    width: 100%
+    padding: 4px
+
+    font:
+      size: 1.5em
+
+    border:
+      radius: 8px
+    //background: blue
+
+  &__note-input
+    width: 40px
+
+  &__note-btn
+    width: 80px
+    height: 56px
+    
