@@ -5,7 +5,7 @@ import { pressedKeys } from "./inputHandler.js";
 import { updateSoundHints, updateKbdHints, 
   restoreKbdHints, updateDisabledKeys } from "./hintsUpdater.js";
 
-import { assignModeCont, noteInputCont } from "./visualModeChanger.js";
+import { assignModeCont, noteInputCont, toggleVisualMode, toggleFullKbd, showFullKbd, hideFullKbd, changeStylesForOneRow, changeStylesForTwoRows } from "./visualModeChanger.js";
 
 let basInfo = document.querySelector(".bas-info");
 let advInfo = document.querySelector(".adv-info");
@@ -78,7 +78,7 @@ let advancedModeLayouts = createAdvancedModeLayouts(5);
 let noteForProMode = undefined;
 
 const modeSelectors = document.querySelectorAll("input[name='select-switch-mode']");
-const editModeToggler = document.querySelector("input[name='toggle-edit-mode']");
+export const editModeToggler = document.querySelector("input[name='toggle-edit-mode']");
 export const noteInput = document.querySelector("input[name='enter-note']");
 const noteValidateBtn = document.querySelector(".js-note-validate-btn");
 
@@ -200,10 +200,105 @@ function updateMode() {
   updateDisabledKeys();
 }
 
-
+let prevOctave = undefined;
+let prevOctaveNum = undefined;
+let targetOctave = undefined;
+let targetOctaveNum = undefined;
 
 editModeToggler.addEventListener("change", () => {
-  isEditModeActive = editModeToggler.checked
+  isEditModeActive = editModeToggler.checked;
+  if (isEditModeActive) {
+    changeStylesForOneRow();
+    showFullKbd();
+
+    updateKbdHints();
+    updateSoundHints();
+    updateDisabledKeys();
+
+    console.log(advancedModeLayouts);
+    
+
+
+    const allKeyElems = document.querySelectorAll(".key");
+    const playableKbdKeys = document.querySelectorAll(".key[data-key]"); 
+    playableKbdKeys.forEach(key => {
+
+    })
+    allKeyElems.forEach(key => {
+      key.addEventListener("click", function(e) {
+        console.log(e.target.parentNode.parentNode);
+        if ((prevOctave === undefined)) {
+          if (key.dataset && key.dataset.key) {
+            prevOctave = e.target.parentNode.parentNode;
+            prevOctaveNum = Array.from(prevOctave.classList);
+            prevOctaveNum = prevOctaveNum.find(
+              className => className.startsWith("keyboard--count")).slice(-1);
+          }
+
+          console.log({prevOctave, prevOctaveNum});
+          console.log(advancedModeLayouts);
+          //prevOctave = undefined; 
+        } else {
+          targetOctave = Array.from(e.target.parentNode.parentNode.classList);
+          targetOctave = targetOctave.find(
+            className => className.startsWith("keyboard--count")).slice(-1);
+          console.log({targetOctave});
+          console.log(advancedModeLayouts);
+
+
+          const octaveKeys = prevOctave.querySelectorAll(".key");
+          console.log(octaveKeys);
+
+          let octaveName = undefined;
+
+          octaveKeys.forEach(key => {
+            //console.log(key.classList);
+            let classes = Array.from(key.classList);
+            console.log(classes);
+            classes = classes.filter(className => (className.startsWith("js-key-") && (className !== "js-key-hideable")));
+            if (classes.length === 1) {
+              octaveName = classes[0];
+            }
+            console.log(classes);
+          });
+
+          //const octaveName = Array.from(octaveKeys[0].classList).find(className => className.startsWith("js-key-"));
+          console.log({octaveName});
+
+          const name = octaveName.slice(7);
+          console.log({name});
+
+          console.log(advancedModeLayouts);
+          advancedModeLayouts[activeAdvancedLayout][name] = +targetOctave;
+          console.log(advancedModeLayouts);
+
+          const keyElems = document.querySelectorAll(".key");
+          keyElems.forEach(keyElem => {
+            let targetClass = Array.from(keyElem.classList).find(keyClass => ["js-key-main", "js-key-sub", "js-key-sup", "js-key-super"].includes(keyClass));
+            //console.log({targetClass});
+            if ((targetClass)) {
+              
+              targetClass = targetClass.slice(7);
+              keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
+                advancedModeLayouts[activeAdvancedLayout][targetClass]}`;
+            }
+          })
+          updateKbdHints();
+          updateSoundHints();
+
+          updateDisabledKeys();
+
+          prevOctave = undefined;
+          prevOctaveNum = undefined;
+          targetOctave = undefined;
+        }
+      });
+    })
+
+  } else {
+    changeStylesForTwoRows();
+    hideFullKbd();
+  }
 });
 
 

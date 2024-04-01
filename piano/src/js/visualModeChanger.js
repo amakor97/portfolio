@@ -21,7 +21,7 @@ toggleModeBtn.addEventListener("click", toggleVisualMode);
 toggleFullKbdBtn.addEventListener("click", toggleFullKbd);
 
 
-function toggleVisualMode() {
+export function toggleVisualMode() {
   doubleRowsMode = !doubleRowsMode;
 
   if (doubleRowsMode) {
@@ -33,7 +33,7 @@ function toggleVisualMode() {
 }
 
 
-function toggleFullKbd() {
+export function toggleFullKbd() {
   if ((doubleRowsMode === false)) {
     fullKbdMode = !fullKbdMode;
   }
@@ -50,7 +50,7 @@ function updateFullKbd() {
 }
 
 
-function hideFullKbd() {
+export function hideFullKbd() {
   kbdCont.classList.remove("keyboard-cont--full-kbd");
 
   const hidedKeys = document.querySelectorAll(".js-key-hideable");
@@ -66,7 +66,7 @@ function hideFullKbd() {
 }
 
 
-function showFullKbd() {
+export function showFullKbd() {
   kbdCont.classList.add("keyboard-cont--full-kbd");
 
   const hidedKeys = document.querySelectorAll(".js-key-hideable");
@@ -82,7 +82,7 @@ function showFullKbd() {
 }
 
 
-function changeStylesForOneRow() {
+export function changeStylesForOneRow() {
   kbdCont.classList.remove("keyboard-cont--double-rows");
   kbdCont.classList.add("keyboard-cont--single-row");
 
@@ -96,7 +96,7 @@ function changeStylesForOneRow() {
 }
 
 
-function changeStylesForTwoRows() {
+export function changeStylesForTwoRows() {
   kbdCont.classList.remove("keyboard-cont--single-row");
   kbdCont.classList.add("keyboard-cont--double-rows");
 

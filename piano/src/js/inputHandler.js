@@ -3,7 +3,7 @@
 
 import { doubleRowsMode, fullKbdMode } from "./visualModeChanger.js";
 import { switchBasicMode, switchAdvancedMode, 
-  switchProMode, switchModeType, noteInput } from "./functionalModeSwitcher.js";
+  switchProMode, switchModeType, noteInput, editModeToggler } from "./functionalModeSwitcher.js";
 
 let isRightPaddleActive = false;
 export let pressedKeys = new Set();
@@ -20,7 +20,7 @@ function playSound(e) {
   }
 
   const audio = document.querySelector(`audio[data-sound="${key.dataset.sound}"]`);
-  const displayedKey = fullKbdMode ? 
+  const displayedKey = (fullKbdMode || editModeToggler.checked)? 
     document.querySelector(`div[data-display="${key.dataset.sound}"]`) :
     document.querySelector(`div[data-display="${key.dataset.display}"]`);
 
@@ -34,7 +34,7 @@ function playSound(e) {
   }
 
   key.setAttribute("data-playing", true);
-  if ((!fullKbdMode) || (doubleRowsMode)) {
+  if (((!fullKbdMode) || (doubleRowsMode)) && !editModeToggler.checked) {
     key.classList.add("key--pressing");
   } else {
     displayedKey.classList.add("key--pressing");
@@ -57,7 +57,7 @@ function stopPlaying(e) {
   const key = document.querySelector(`.key[data-key="${e.code}"]`);
 
   if (key) {
-    if ((!fullKbdMode) || (doubleRowsMode)) {
+    if (((!fullKbdMode) || (doubleRowsMode))  && !editModeToggler.checked) {
       key.classList.remove("key--pressing");
       key.setAttribute("data-playing", false);
       if (!isRightPaddleActive) {
