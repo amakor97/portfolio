@@ -225,81 +225,111 @@ editModeToggler.addEventListener("change", () => {
 
     })
     allKeyElems.forEach(key => {
-      key.addEventListener("click", function(e) {
-        console.log(e.target.parentNode.parentNode);
-        if ((prevOctave === undefined)) {
-          if (key.dataset && key.dataset.key) {
-            prevOctave = e.target.parentNode.parentNode;
-            prevOctaveNum = Array.from(prevOctave.classList);
-            prevOctaveNum = prevOctaveNum.find(
-              className => className.startsWith("keyboard--count")).slice(-1);
-          }
-
-          console.log({prevOctave, prevOctaveNum});
-          console.log(advancedModeLayouts);
-          //prevOctave = undefined; 
-        } else {
-          targetOctave = Array.from(e.target.parentNode.parentNode.classList);
-          targetOctave = targetOctave.find(
-            className => className.startsWith("keyboard--count")).slice(-1);
-          console.log({targetOctave});
-          console.log(advancedModeLayouts);
-
-
-          const octaveKeys = prevOctave.querySelectorAll(".key");
-          console.log(octaveKeys);
-
-          let octaveName = undefined;
-
-          octaveKeys.forEach(key => {
-            //console.log(key.classList);
-            let classes = Array.from(key.classList);
-            console.log(classes);
-            classes = classes.filter(className => (className.startsWith("js-key-") && (className !== "js-key-hideable")));
-            if (classes.length === 1) {
-              octaveName = classes[0];
-            }
-            console.log(classes);
-          });
-
-          //const octaveName = Array.from(octaveKeys[0].classList).find(className => className.startsWith("js-key-"));
-          console.log({octaveName});
-
-          const name = octaveName.slice(7);
-          console.log({name});
-
-          console.log(advancedModeLayouts);
-          advancedModeLayouts[activeAdvancedLayout][name] = +targetOctave;
-          console.log(advancedModeLayouts);
-
-          const keyElems = document.querySelectorAll(".key");
-          keyElems.forEach(keyElem => {
-            let targetClass = Array.from(keyElem.classList).find(keyClass => ["js-key-main", "js-key-sub", "js-key-sup", "js-key-super"].includes(keyClass));
-            //console.log({targetClass});
-            if ((targetClass)) {
-              
-              targetClass = targetClass.slice(7);
-              keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
-                advancedModeLayouts[activeAdvancedLayout][targetClass]}`;
-            }
-          })
-          updateKbdHints();
-          updateSoundHints();
-
-          updateDisabledKeys();
-
-          prevOctave = undefined;
-          prevOctaveNum = undefined;
-          targetOctave = undefined;
-        }
+      key.addEventListener("click", function test(e) {
+        switchAdvancedModeClick(e, key);
       });
     })
 
   } else {
     changeStylesForTwoRows();
     hideFullKbd();
+
+    const allKeyElems = document.querySelectorAll(".key");
+    const playableKbdKeys = document.querySelectorAll(".key[data-key]"); 
+    playableKbdKeys.forEach(key => {
+
+    })
+    allKeyElems.forEach(key => {
+      key.removeEventListener("click", test);
+    })
   }
 });
+
+
+function switchAdvancedModeClick(e, key) {
+  console.log(e.target.parentNode.parentNode);
+  if ((prevOctave === undefined)) {
+    let kdbHint = key.querySelector(".js-kbd-key-hint");
+    if (key.dataset && (kdbHint.textContent !== "")) {
+      prevOctave = e.target.parentNode.parentNode;
+      console.log(prevOctave);
+      prevOctaveNum = Array.from(prevOctave.classList);
+      prevOctaveNum = prevOctaveNum.find(
+        className => className.startsWith("keyboard--count")).slice(-1);
+    }
+
+    console.log({prevOctave, prevOctaveNum});
+    console.log(advancedModeLayouts);
+    //prevOctave = undefined; 
+  } else {
+    targetOctave = Array.from(e.target.parentNode.parentNode.classList);
+    targetOctave = targetOctave.find(
+      className => className.startsWith("keyboard--count")).slice(-1);
+    console.log({targetOctave});
+    console.log(advancedModeLayouts);
+
+
+    const octaveKeys = prevOctave.querySelectorAll(".key");
+    console.log(octaveKeys);
+
+    let octaveName = undefined;
+    const keyElems = document.querySelectorAll(".key");
+    octaveKeys.forEach(key => {
+      //console.log(key.classList);
+      let kbdHint = key.querySelector(".js-kbd-key-hint");
+      if (kbdHint) {
+        console.log(kbdHint.textContent);
+
+        keyElems.forEach(allKey => {
+          if (allKey.dataset.symbol === kbdHint.textContent) {
+            
+            let classes = Array.from(allKey.classList);
+            console.log(classes);
+            classes = classes.filter(className => (className.startsWith("js-key-") && (className !== "js-key-hideable")));
+            if (classes.length === 1) {
+              octaveName = classes[0];
+            }
+            console.log(classes);
+          
+          }
+        })
+
+
+      };
+
+
+    });
+
+    //const octaveName = Array.from(octaveKeys[0].classList).find(className => className.startsWith("js-key-"));
+    console.log({octaveName});
+
+    const name = octaveName.slice(7);
+    console.log({name});
+
+    console.log(advancedModeLayouts);
+    advancedModeLayouts[activeAdvancedLayout][name] = +targetOctave;
+    console.log(advancedModeLayouts);
+
+    keyElems.forEach(keyElem => {
+      let targetClass = Array.from(keyElem.classList).find(keyClass => ["js-key-main", "js-key-sub", "js-key-sup", "js-key-super"].includes(keyClass));
+      //console.log({targetClass});
+      if ((targetClass)) {
+        
+        targetClass = targetClass.slice(7);
+        keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
+          advancedModeLayouts[activeAdvancedLayout][targetClass]}`;
+      }
+    })
+    updateKbdHints();
+    updateSoundHints();
+
+    updateDisabledKeys();
+
+    prevOctave = undefined;
+    prevOctaveNum = undefined;
+    targetOctave = undefined;
+  }
+}
 
 
 let pressedOctave = undefined;
