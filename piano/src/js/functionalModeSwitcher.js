@@ -5,7 +5,7 @@ import { pressedKeys } from "./inputHandler.js";
 import { updateSoundHints, updateKbdHints, 
   restoreKbdHints, updateDisabledKeys } from "./hintsUpdater.js";
 
-import { assignModeCont, noteInputCont, toggleVisualMode, toggleFullKbd, showFullKbd, hideFullKbd, changeStylesForOneRow, changeStylesForTwoRows } from "./visualModeChanger.js";
+import { assignModeCont, noteInputCont, toggleVisualMode, toggleFullKbd, showFullKbd, hideFullKbd, changeStylesForOneRow, changeStylesForTwoRows, visualMode } from "./visualModeChanger.js";
 
 let basInfo = document.querySelector(".bas-info");
 let advInfo = document.querySelector(".adv-info");
@@ -220,6 +220,7 @@ editModeToggler.addEventListener("change", () => {
 
         const allKeyElems = document.querySelectorAll(".key");
         allKeyElems.forEach(key => {
+          key.removeEventListener("click", test);
           key.addEventListener("click", function test(e) {
             switchBasicModeClick(e, key);
           });
@@ -244,6 +245,7 @@ editModeToggler.addEventListener("change", () => {
 
         })
         allKeyElems.forEach(key => {
+          key.removeEventListener("click", test);
           key.addEventListener("click", function test(e) {
             switchAdvancedModeClick(e, key);
           });
@@ -265,6 +267,7 @@ editModeToggler.addEventListener("change", () => {
 
         })
         allKeyElems.forEach(key => {
+          key.removeEventListener("click", test);
           key.addEventListener("click", function test(e) {
             switchProModeClick(e, key);
           });
@@ -276,8 +279,21 @@ editModeToggler.addEventListener("change", () => {
     
 
   } else {
-    changeStylesForTwoRows();
-    hideFullKbd();
+    switch(visualMode) {
+      case "double": {
+        changeStylesForTwoRows();
+        hideFullKbd();
+        break;
+      }
+      case "single": {
+        hideFullKbd();
+        break;
+      }
+      case "full": {
+
+      }
+    }
+
 
     const allKeyElems = document.querySelectorAll(".key");
     const playableKbdKeys = document.querySelectorAll(".key[data-key]"); 

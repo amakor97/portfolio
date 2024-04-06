@@ -4,6 +4,8 @@
 export let fullKbdMode = false;
 export let doubleRowsMode = true;
 
+export let visualMode = "double";
+
 import { updateSoundHints, updateKbdHints, 
   restoreKbdHints, updateDisabledKeys } from "./hintsUpdater.js";
 
@@ -14,6 +16,8 @@ const toggleModeBtn = document.querySelector(".js-toggle-visual-mode-btn");
 const toggleFullKbdBtn = document.querySelector(".js-toggle-full-keyboard-btn");
 const controlPanel = document.querySelector(".js-control-panel");
 
+const visualModeSelectors = document.querySelectorAll("input[name='select-visual-mode']");
+
 export const assignModeCont = document.querySelector(".js-control-assign-mode-cont");
 export const noteInputCont = document.querySelector(".js-control-note-input-cont");
 
@@ -21,10 +25,19 @@ toggleModeBtn.addEventListener("click", toggleVisualMode);
 toggleFullKbdBtn.addEventListener("click", toggleFullKbd);
 
 
-export function toggleVisualMode() {
-  doubleRowsMode = !doubleRowsMode;
+visualModeSelectors.forEach(input => {
+  input.addEventListener("change", () => {
+    if (input.checked) {
+      visualMode = input.value;
+      console.log({visualMode});
+    }
+    toggleVisualMode();
+  })
+})
 
-  if (doubleRowsMode) {
+
+export function toggleVisualMode() {
+  if (visualMode === "double") {
     changeStylesForTwoRows();
   } else {
     changeStylesForOneRow();
@@ -34,15 +47,12 @@ export function toggleVisualMode() {
 
 
 export function toggleFullKbd() {
-  if ((doubleRowsMode === false)) {
-    fullKbdMode = !fullKbdMode;
-  }
   updateFullKbd();
 }
 
 
 function updateFullKbd() {
-  if ((fullKbdMode) && (!doubleRowsMode)){
+  if (visualMode === "full") {
     showFullKbd();
   } else {
     hideFullKbd();
@@ -114,7 +124,7 @@ const controlToggleBtn = document.querySelector(".js-control-toggle-btn");
 controlToggleBtn.addEventListener("click", function() {
   controlToggleBtn.classList.toggle("control-toggle-btn--rotated");
 
-  if (doubleRowsMode) {
+  if (visualMode === "double") {
     controlPanel.classList.remove("control-panel--hided-bottom")
     if (controlPanel.classList.contains("control-panel--hided-right")) {
       controlPanel.classList.remove("control-panel--hided-right");

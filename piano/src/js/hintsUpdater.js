@@ -1,7 +1,7 @@
 "use strict";
 
 import { editModeToggler, isEditModeActive } from "./functionalModeSwitcher.js";
-import { doubleRowsMode, fullKbdMode } from "./visualModeChanger.js";
+import { doubleRowsMode, fullKbdMode, visualMode } from "./visualModeChanger.js";
 
 export function updateSoundHints() {
   const allPianoKeys = document.querySelectorAll(".key");
@@ -10,7 +10,7 @@ export function updateSoundHints() {
     
     if (soundHint) {
       //console.log((doubleRowsMode || !fullKbdMode) && !editModeToggler.checked);
-      if ((doubleRowsMode || !fullKbdMode) && !editModeToggler.checked) {
+      if ((visualMode === "double") && !editModeToggler.checked) {
         soundHint.textContent = pianoKey.dataset.sound;
       } else {
         soundHint.textContent = pianoKey.dataset.display;
@@ -21,7 +21,7 @@ export function updateSoundHints() {
 
 
 export function updateKbdHints() {
-  if ((fullKbdMode && !doubleRowsMode) || (editModeToggler.checked === true)) {
+  if ((visualMode === "full") || (editModeToggler.checked === true)) {
     const hintSpans = document.querySelectorAll(".js-kbd-key-hint");
     hintSpans.forEach(hintSpan => hintSpan.textContent = "");
     const allPianoKeys = document.querySelectorAll(".key");
@@ -59,7 +59,7 @@ export function updateDisabledKeys() {
 
   allPianoKeys.forEach(key => key.classList.remove("key--disabled"));
   unplayablePianoKeys.forEach(unplayableKey => {
-    if ((fullKbdMode && !doubleRowsMode) || (editModeToggler.checked === true)) {
+    if ((visualMode === "full") || (editModeToggler.checked === true)) {
       unplayableKey.classList.add("key--disabled");
     }
   });
