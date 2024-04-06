@@ -1,12 +1,13 @@
 "use strict";
 
 
-import { doubleRowsMode, fullKbdMode, visualMode } from "./visualModeChanger.js";
+import { visualMode } from "./visualModeChanger.js";
 import { switchBasicMode, switchAdvancedMode, 
   switchProMode, switchModeType, noteInput, editModeToggler } from "./functionalModeSwitcher.js";
 
 let isRightPaddleActive = false;
 export let pressedKeys = new Set();
+
 
 function playSound(e) {
   if (noteInput === document.activeElement) {
@@ -14,7 +15,6 @@ function playSound(e) {
   }
 
   const key = document.querySelector(`.key[data-key="${e.code}"]`);
-  console.log(key);
   if (!key) {
     return;
   }
@@ -43,20 +43,9 @@ function playSound(e) {
 
 
 function stopPlaying(e) {
-  let keyText = getKeyFromEvent(e);
-  //let key = undefined;
   let displayedKey = undefined;
   const keys = document.querySelectorAll(".key");
-  
-  keys.forEach(keyElem => {
-    if (keyElem.dataset.symbol === keyText) {
-      //key = keyElem;
-    }
-  })
-
   const key = document.querySelector(`.key[data-key="${e.code}"]`);
-
-  console.log(key);
 
   if (key) {
     if ((visualMode !== "full")  && !editModeToggler.checked) {
@@ -72,7 +61,6 @@ function stopPlaying(e) {
       }
     } else {
       let playedSound = key.dataset.sound;
-      console.log({playedSound});
       keys.forEach(keyElem => {
         if (keyElem.dataset.display === playedSound) {
           displayedKey = keyElem;
@@ -107,10 +95,9 @@ window.addEventListener("keyup", kbdReleaseHandler);
 
 
 function kbdInputHandler(e) {
-  //e.preventDefault();
+  // e.preventDefault(); devtools lol
   addKeyToArray(e);
   pressedKeysHandler(e);
-  console.log(pressedKeys);
 }
 
 
@@ -150,12 +137,7 @@ function pressedKeysHandler(e) {
 }
 
 
-function getKeyFromEvent(e) {
-  let key = undefined;
-
-  key = e.code;
-  return key;
-}
+let getKeyFromEvent = (e) => e.code;
 
 
 function rightPaddleRelease() {

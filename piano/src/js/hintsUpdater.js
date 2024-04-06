@@ -3,13 +3,13 @@
 import { editModeToggler, isEditModeActive } from "./functionalModeSwitcher.js";
 import { doubleRowsMode, fullKbdMode, visualMode } from "./visualModeChanger.js";
 
+
 export function updateSoundHints() {
   const allPianoKeys = document.querySelectorAll(".key");
   allPianoKeys.forEach(pianoKey => {
     const soundHint = pianoKey.querySelector(".js-piano-key-hint");
     
     if (soundHint) {
-      //console.log((doubleRowsMode || !fullKbdMode) && !editModeToggler.checked);
       if ((visualMode === "full") || editModeToggler.checked) {
         soundHint.textContent = pianoKey.dataset.display;
       } else {
@@ -67,7 +67,6 @@ export function updateDisabledKeys() {
 
 
 export function restoreKbdHints() {
-  console.log("res");
   const playableKbdKeys = document.querySelectorAll(".key[data-symbol]");
   playableKbdKeys.forEach(kbdKey => {
     const hintSpan = kbdKey.querySelector(".js-kbd-key-hint");

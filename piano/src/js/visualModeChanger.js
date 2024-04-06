@@ -73,7 +73,6 @@ export function hideFullKbd() {
   blackKeys.forEach(key => key.classList.remove("key--black-narrow"));
 
   restoreKbdHints();
-  //updateKbdHints();
   updateSoundHints();
   updateDisabledKeys();
 }
