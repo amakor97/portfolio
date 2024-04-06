@@ -67,8 +67,8 @@ function stopPlaying(e) {
         }
       })
       displayedKey.classList.remove("key--pressing");
+      key.setAttribute("data-playing", false);
       if (!isRightPaddleActive) {
-        key.setAttribute("data-playing", false);
         const audio = document.querySelector(
           `audio[data-sound="${key.dataset.sound}"]`);
         audio.load();
@@ -143,8 +143,10 @@ let getKeyFromEvent = (e) => e.code;
 function rightPaddleRelease() {
   const allPlayedKeys = document.querySelectorAll(".key[data-playing]");
 
+  console.log(pressedKeys);
+
   allPlayedKeys.forEach(playedKey => {
-    if (!pressedKeys.has(playedKey.dataset.symbol)) {
+    if (!pressedKeys.has(playedKey.dataset.key)) {
       playedKey.dataset.playing = false;
       const targetSound = document.querySelector(`audio[data-sound=${playedKey.dataset.sound}]`);
       targetSound.load();
