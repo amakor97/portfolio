@@ -10,10 +10,10 @@ export function updateSoundHints() {
     
     if (soundHint) {
       //console.log((doubleRowsMode || !fullKbdMode) && !editModeToggler.checked);
-      if ((visualMode === "double") && !editModeToggler.checked) {
-        soundHint.textContent = pianoKey.dataset.sound;
-      } else {
+      if ((visualMode === "full") || editModeToggler.checked) {
         soundHint.textContent = pianoKey.dataset.display;
+      } else {
+        soundHint.textContent = pianoKey.dataset.sound;
       }
     }
   })
@@ -67,6 +67,7 @@ export function updateDisabledKeys() {
 
 
 export function restoreKbdHints() {
+  console.log("res");
   const playableKbdKeys = document.querySelectorAll(".key[data-symbol]");
   playableKbdKeys.forEach(kbdKey => {
     const hintSpan = kbdKey.querySelector(".js-kbd-key-hint");

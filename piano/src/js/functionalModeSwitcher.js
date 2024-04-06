@@ -176,9 +176,17 @@ function updateMode() {
       keyElems.forEach(keyElem => {
         let targetClass = Array.from(keyElem.classList).find(keyClass => ["js-key-main", "js-key-sub", "js-key-sup", "js-key-super"].includes(keyClass));
         if (targetClass) {
+          console.log({targetClass}, advancedModeLayouts[activeAdvancedLayout][targetClass.slice(7)]);
           targetClass = targetClass.slice(7);
-          keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
-            advancedModeLayouts[activeAdvancedLayout][targetClass]}`;
+          if ((visualMode === "double") && (!isEditModeActive)) {
+            keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
+              advancedModeLayouts[activeAdvancedLayout][targetClass]}`;
+          } else {
+            keyElem.dataset.sound = `${keyElem.dataset.display.slice(0, -1)}${
+              advancedModeLayouts[activeAdvancedLayout][targetClass]}`;
+          }
+
+          console.log(keyElem, keyElem.dataset.sound);
         }
       })
       break;
@@ -420,6 +428,9 @@ function switchProModeClick(e, key) {
     if (key) {
       console.log("target: ", key);
       pressedProKeyElemClick.dataset.sound = key.dataset.display;
+
+
+      proModeLayouts[activeProLayout][pressedProKeyElemClick.dataset.key] = key.dataset.display;
 
       pressedProKeyElemClick = undefined;
     }

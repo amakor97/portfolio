@@ -56,6 +56,8 @@ function stopPlaying(e) {
 
   const key = document.querySelector(`.key[data-key="${e.code}"]`);
 
+  console.log(key);
+
   if (key) {
     if ((visualMode !== "full")  && !editModeToggler.checked) {
       key.classList.remove("key--pressing");
