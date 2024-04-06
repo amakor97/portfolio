@@ -205,78 +205,25 @@ let prevOctaveNum = undefined;
 let targetOctave = undefined;
 let targetOctaveNum = undefined;
 
+const allKeyElems = document.querySelectorAll(".key");
+allKeyElems.forEach(key => {
+  key.addEventListener("click", function test(e) {
+    switchByClick(e, key);
+  });
+})
+
 editModeToggler.addEventListener("change", () => {
   isEditModeActive = editModeToggler.checked;
   if (isEditModeActive) {
 
-    switch(switchModeType) {
-      case "basic": {
-        changeStylesForOneRow();
-        showFullKbd();
 
-        updateKbdHints();
-        updateSoundHints();
-        updateDisabledKeys();
 
-        const allKeyElems = document.querySelectorAll(".key");
-        allKeyElems.forEach(key => {
-          key.removeEventListener("click", test);
-          key.addEventListener("click", function test(e) {
-            switchBasicModeClick(e, key);
-          });
-        })
+    changeStylesForOneRow();
+    showFullKbd();
 
-        break;
-      }
-      case "advanced": {
-        
-        changeStylesForOneRow();
-        showFullKbd();
-
-        updateKbdHints();
-        updateSoundHints();
-        updateDisabledKeys();
-
-        console.log(advancedModeLayouts);
-
-        const allKeyElems = document.querySelectorAll(".key");
-        const playableKbdKeys = document.querySelectorAll(".key[data-key]"); 
-        playableKbdKeys.forEach(key => {
-
-        })
-        allKeyElems.forEach(key => {
-          key.removeEventListener("click", test);
-          key.addEventListener("click", function test(e) {
-            switchAdvancedModeClick(e, key);
-          });
-        })
-        
-        break;
-      }
-      case "pro": {
-        changeStylesForOneRow();
-        showFullKbd();
-
-        updateKbdHints();
-        updateSoundHints();
-        updateDisabledKeys();
-
-        const allKeyElems = document.querySelectorAll(".key");
-        const playableKbdKeys = document.querySelectorAll(".key[data-key]"); 
-        playableKbdKeys.forEach(key => {
-
-        })
-        allKeyElems.forEach(key => {
-          key.removeEventListener("click", test);
-          key.addEventListener("click", function test(e) {
-            switchProModeClick(e, key);
-          });
-        })
-
-        break;
-      }
-    }
-    
+    updateKbdHints();
+    updateSoundHints();
+    updateDisabledKeys();
 
   } else {
     switch(visualMode) {
@@ -301,21 +248,40 @@ editModeToggler.addEventListener("change", () => {
 
     })
     allKeyElems.forEach(key => {
-      key.removeEventListener("click", test);
+      //key.removeEventListener("click", test);
     })
   }
 });
 
 
+function switchByClick(e, key) {
+  if (!isEditModeActive) {
+    return;
+  }
+
+  switch(switchModeType) {
+    case("basic"): {
+      switchBasicModeClick(e, key);
+      break;
+    }
+    case("advanced"): {
+      switchAdvancedModeClick(e, key);
+      break;
+    }
+    case("pro"): {
+      switchProModeClick(e, key);
+      break;
+    }
+  }
+}
+
 
 function switchBasicModeClick(e, key) {
-  console.log(e.target.parentNode.parentNode, key);
 
   let targetOctave = e.target.parentNode.parentNode;
   let targetBasicNum = Array.from(targetOctave.classList);
   targetBasicNum = targetBasicNum.find(
     className => className.startsWith("keyboard--count")).slice(-1);
-  console.log({targetBasicNum});
 
   let targetDigit = +targetBasicNum;
   const keyElems = document.querySelectorAll(".key");
@@ -347,7 +313,6 @@ function switchBasicModeClick(e, key) {
 
 
 function switchAdvancedModeClick(e, key) {
-  console.log(e.target.parentNode.parentNode);
   if ((prevOctave === undefined)) {
     let kdbHint = key.querySelector(".js-kbd-key-hint");
     if (key.dataset && (kdbHint.textContent !== "")) {
@@ -393,11 +358,7 @@ function switchAdvancedModeClick(e, key) {
           
           }
         })
-
-
       };
-
-
     });
 
     //const octaveName = Array.from(octaveKeys[0].classList).find(className => className.startsWith("js-key-"));

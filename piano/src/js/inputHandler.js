@@ -70,6 +70,7 @@ function stopPlaying(e) {
       }
     } else {
       let playedSound = key.dataset.sound;
+      console.log({playedSound});
       keys.forEach(keyElem => {
         if (keyElem.dataset.display === playedSound) {
           displayedKey = keyElem;
@@ -105,7 +106,6 @@ window.addEventListener("keyup", kbdReleaseHandler);
 
 function kbdInputHandler(e) {
   //e.preventDefault();
-  console.log(e);
   addKeyToArray(e);
   pressedKeysHandler(e);
   console.log(pressedKeys);
@@ -150,51 +150,6 @@ function pressedKeysHandler(e) {
 
 function getKeyFromEvent(e) {
   let key = undefined;
-
-  /*
-  switch (e.keyCode) {
-    case 16: {
-      key = "shift";
-      break;
-    }
-    case 32: {
-      key = "space";
-      break;
-    }
-    case 188: {
-      key = ",";
-      break;
-    }
-    case 190: {
-      key = ".";
-      break;
-    }
-    case 191: {
-      key = "/";
-      break;
-    }
-    case 186: {
-      key = ";";
-      break;
-    }
-    case 189: {
-      key = "-";
-      break;
-    }
-    case 219: {
-      key = "[";
-      break;
-    }
-    case 221: {
-      key = "]";
-      break;
-    }
-    default: {
-      key = e.code.startsWith("D") ? e.code.charAt(5) : e.code.charAt(3).toLowerCase();
-      break;
-    }
-  }
-*/
 
   key = e.code;
   return key;

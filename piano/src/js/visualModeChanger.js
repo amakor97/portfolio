@@ -8,6 +8,7 @@ export let visualMode = "double";
 
 import { updateSoundHints, updateKbdHints, 
   restoreKbdHints, updateDisabledKeys } from "./hintsUpdater.js";
+import { isEditModeActive } from "./functionalModeSwitcher.js";
 
 const kbdCont = document.querySelector(".js-keyboard-cont");
 const leftPart = document.querySelector(".js-keyboard-left");
@@ -29,7 +30,6 @@ visualModeSelectors.forEach(input => {
   input.addEventListener("change", () => {
     if (input.checked) {
       visualMode = input.value;
-      console.log({visualMode});
     }
     toggleVisualMode();
   })
@@ -37,7 +37,7 @@ visualModeSelectors.forEach(input => {
 
 
 export function toggleVisualMode() {
-  if (visualMode === "double") {
+  if ((visualMode === "double") && (!isEditModeActive)) {
     changeStylesForTwoRows();
   } else {
     changeStylesForOneRow();
@@ -55,7 +55,9 @@ function updateFullKbd() {
   if (visualMode === "full") {
     showFullKbd();
   } else {
-    hideFullKbd();
+    if (!isEditModeActive) {
+      hideFullKbd();
+    }
   }
 }
 
