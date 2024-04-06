@@ -461,6 +461,7 @@ export function switchAdvancedMode() {
 
   } else {
     if (pressedOctave) {
+      console.log({pressedOctave});
       const pressedOctaveKeys = document.querySelectorAll(`.${pressedOctave}`);
       const pressedSymbolKeys = new Set(([...pressedKeys]).filter(
         value => ((value !== "ShiftLeft") && (value !== "ShiftRight") && (value !== "Space"))));
@@ -469,6 +470,15 @@ export function switchAdvancedMode() {
         targetKey = Array.from(pressedSymbolKeys)[0];
         targetKey = targetKey.slice(-1);
       }
+      console.log({targetKey});
+
+      console.log((new RegExp(/[0-8]/)).test(targetKey));
+
+      if (!(new RegExp(/[0-8]/)).test(targetKey.slice(-1))) {
+        targetKey = undefined;
+      }
+
+      console.log({targetKey});
 
       if (targetKey) {
         pressedOctaveKeys.forEach(keyElem => {
@@ -491,6 +501,8 @@ export function switchAdvancedMode() {
         targetKey = Array.from(pressedSymbolKeys)[0];
       }
       pressedKeys.delete(targetKey); //optional?
+
+      console.log({targetKey});
 
       if (targetKey) {
         const allKeyElems = document.querySelectorAll(".key");
