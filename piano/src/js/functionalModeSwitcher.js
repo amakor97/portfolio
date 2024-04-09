@@ -3,16 +3,43 @@
 import { pressedKeys } from "./inputHandler.js";
 
 import { updateSoundHints, updateKbdHints, 
-  restoreKbdHints, updateDisabledKeys } from "./hintsUpdater.js";
+  updateDisabledKeys } from "./hintsUpdater.js";
 
-import { assignModeCont, noteInputCont, toggleVisualMode, toggleFullKbd, showFullKbd, hideFullKbd, changeStylesForOneRow, changeStylesForTwoRows, visualMode } from "./visualModeChanger.js";
+import { noteInputCont, showFullKbd, hideFullKbd, 
+  changeStylesForOneRow, changeStylesForTwoRows, 
+  visualMode } from "./visualModeChanger.js";
 
 let basInfo = document.querySelector(".bas-info");
 let advInfo = document.querySelector(".adv-info");
 let proInfo = document.querySelector(".pro-info");
 
 let digits = ["0", "1", "2", "3", "4", "5", "6"];
-let tDigits = ["Digit0", "Digit1", "Digit2", "Digit3", "Digit4", "Digit5", "Digit6"];
+let tDigits = ["Digit0", "Digit1", "Digit2", 
+  "Digit3", "Digit4", "Digit5", "Digit6"];
+
+
+function updateBasicSounds(base) {
+  const keyElems = document.querySelectorAll(".key");
+  keyElems.forEach(keyElem => {
+    if (keyElem.classList.contains("js-key-main")) {
+      keyElem.dataset.sound = 
+        `${keyElem.dataset.sound.slice(0, -1)}${base}`;
+    }
+    if (keyElem.classList.contains("js-key-sub")) {
+      keyElem.dataset.sound = 
+        `${keyElem.dataset.sound.slice(0, -1)}${base - 1}`;
+    }
+    if (keyElem.classList.contains("js-key-sup")) {
+      keyElem.dataset.sound = 
+        `${keyElem.dataset.sound.slice(0, -1)}${base + 1}`;
+    }
+    if (keyElem.classList.contains("js-key-super")) {
+      keyElem.dataset.sound = 
+        `${keyElem.dataset.sound.slice(0, -1)}${base + 2}`;
+    }
+  })
+}
+
 
 export function switchBasicMode() {
   let targetDigit = tDigits.find(key => pressedKeys.has(key));
@@ -20,31 +47,8 @@ export function switchBasicMode() {
   if (targetDigit) {
     targetDigit = targetDigit.slice(5, 6);
     activeBasicOffset = +targetDigit;
-    const keyElems = document.querySelectorAll(".key");
-    keyElems.forEach(keyElem => {
-      if (keyElem.classList.contains("js-key-main")) {
-        keyElem.dataset.sound = 
-          `${keyElem.dataset.sound.slice(0, -1)}${+targetDigit}`;
-      }
-      if (keyElem.classList.contains("js-key-sub")) {
-        keyElem.dataset.sound = 
-          `${keyElem.dataset.sound.slice(0, -1)}${+targetDigit - 1}`;
-      }
-      if (keyElem.classList.contains("js-key-sup")) {
-        keyElem.dataset.sound = 
-          `${keyElem.dataset.sound.slice(0, -1)}${+targetDigit + 1}`;
-      }
-      if (keyElem.classList.contains("js-key-super")) {
-        keyElem.dataset.sound = 
-          `${keyElem.dataset.sound.slice(0, -1)}${+targetDigit + 2}`;
-      }
-    })
-
-    let displayedHint = `${targetDigit - 1} - ${targetDigit} - ${+targetDigit + 1}`;
-    basInfo.textContent = displayedHint;
+    updateBasicSounds(activeBasicOffset);
   }
-
-
 
   updateSoundHints();
   updateKbdHints();
@@ -76,26 +80,20 @@ function createAdvancedModeLayouts(num) {
 let advancedModeLayouts = createAdvancedModeLayouts(5);
 
 let noteForProMode = undefined;
-
-const modeSelectors = document.querySelectorAll("input[name='select-switch-mode']");
-export const editModeToggler = document.querySelector("input[name='toggle-edit-mode']");
-export const noteInput = document.querySelector("input[name='enter-note']");
-const noteValidateBtn = document.querySelector(".js-note-validate-btn");
+const modeSelectors = document.querySelectorAll(
+  "input[name='select-switch-mode']");
+export const editModeToggler = document.querySelector(
+  "input[name='toggle-edit-mode']");
+export const noteInput = document.querySelector(
+  "input[name='enter-note']");
+const noteValidateBtn = document.querySelector(
+  ".js-note-validate-btn");
 
 
 noteValidateBtn.addEventListener("click", function() {
-  if (noteInput.value.length === 3) {
-    noteInput.value = noteInput.value.slice(0, 1).toUpperCase() + 
-      noteInput.value.slice(1).toLowerCase();
-  } else {
-    noteInput.value = noteInput.value.toUpperCase();
-  }
-
-  const regex = /^[a-gA-G]b?[0-8]$/;
-  if (noteInput.value.match(/([a-h]|[A-H])[b|B]?[0-8]/)) {
+  if ((/^([a-g]|[A-G])[b|B]?[0-8]$/).test(noteInput.value)) {
     noteForProMode = noteInput.value;
   }
-
 })
 
 
@@ -140,37 +138,25 @@ modeSelectors.forEach(input => {
   })
 })
 
+
 function updateMode() {
   const keyElems = document.querySelectorAll(".key");
   switch(switchModeType) {
     case "basic": {
-      noteInputCont.classList.add("control-panel__switch-mode-cont--hided");
-
-      keyElems.forEach(keyElem => {
-        if (keyElem.classList.contains("js-key-main")) {
-          keyElem.dataset.sound = 
-            `${keyElem.dataset.sound.slice(0, -1)}${activeBasicOffset}`;
-        }
-        if (keyElem.classList.contains("js-key-sub")) {
-          keyElem.dataset.sound = 
-            `${keyElem.dataset.sound.slice(0, -1)}${activeBasicOffset - 1}`;
-        }
-        if (keyElem.classList.contains("js-key-sup")) {
-          keyElem.dataset.sound = 
-            `${keyElem.dataset.sound.slice(0, -1)}${activeBasicOffset + 1}`;
-        }
-        if (keyElem.classList.contains("js-key-super")) {
-          keyElem.dataset.sound = 
-            `${keyElem.dataset.sound.slice(0, -1)}${activeBasicOffset + 2}`;
-        }
-      })
+      noteInputCont.classList.add(
+        "control-panel__switch-mode-cont--hided");
+      updateBasicSounds(activeBasicOffset);
       break;
     }
     case "advanced": {
-      noteInputCont.classList.add("control-panel__switch-mode-cont--hided");
+      noteInputCont.classList.add(
+        "control-panel__switch-mode-cont--hided");
 
       keyElems.forEach(keyElem => {
-        let targetClass = Array.from(keyElem.classList).find(keyClass => ["js-key-main", "js-key-sub", "js-key-sup", "js-key-super"].includes(keyClass));
+        let targetClass = Array.from(keyElem.classList).find(
+          keyClass => ["js-key-main", "js-key-sub", 
+          "js-key-sup", "js-key-super"].includes(keyClass));
+
         if (targetClass) {
           targetClass = targetClass.slice(7);
           if ((visualMode === "double") && (!isEditModeActive)) {
@@ -189,7 +175,8 @@ function updateMode() {
 
       keyElems.forEach(keyElem => {
         if (keyElem.dataset.key in proModeLayouts[activeProLayout]) {
-          keyElem.dataset.sound = proModeLayouts[activeProLayout][keyElem.dataset.key];
+          keyElem.dataset.sound = 
+            proModeLayouts[activeProLayout][keyElem.dataset.key];
         }
       })
     }
@@ -200,10 +187,11 @@ function updateMode() {
   updateDisabledKeys();
 }
 
+
 let prevOctave = undefined;
 let prevOctaveNum = undefined;
 let targetOctave = undefined;
-let targetOctaveNum = undefined;
+
 
 const allKeyElems = document.querySelectorAll(".key");
 allKeyElems.forEach(key => {
@@ -212,19 +200,16 @@ allKeyElems.forEach(key => {
   });
 })
 
+
 editModeToggler.addEventListener("change", () => {
   isEditModeActive = editModeToggler.checked;
   if (isEditModeActive) {
-
-
-
     changeStylesForOneRow();
     showFullKbd();
 
     updateKbdHints();
     updateSoundHints();
     updateDisabledKeys();
-
   } else {
     switch(visualMode) {
       case "double": {
@@ -237,7 +222,7 @@ editModeToggler.addEventListener("change", () => {
         break;
       }
       case "full": {
-
+        break;
       }
     }
   }
@@ -267,38 +252,17 @@ function switchByClick(e, key) {
 
 
 function switchBasicModeClick(e, key) {
-
   let targetOctave = e.target.parentNode.parentNode;
   let targetBasicNum = Array.from(targetOctave.classList);
   targetBasicNum = targetBasicNum.find(
     className => className.startsWith("keyboard--count")).slice(-1);
 
   let targetDigit = +targetBasicNum;
-  const keyElems = document.querySelectorAll(".key");
-  keyElems.forEach(keyElem => {
-    if (keyElem.classList.contains("js-key-main")) {
-      keyElem.dataset.sound = 
-        `${keyElem.dataset.sound.slice(0, -1)}${+targetDigit}`;
-    }
-    if (keyElem.classList.contains("js-key-sub")) {
-      keyElem.dataset.sound = 
-        `${keyElem.dataset.sound.slice(0, -1)}${+targetDigit - 1}`;
-    }
-    if (keyElem.classList.contains("js-key-sup")) {
-      keyElem.dataset.sound = 
-        `${keyElem.dataset.sound.slice(0, -1)}${+targetDigit + 1}`;
-    }
-    if (keyElem.classList.contains("js-key-super")) {
-      keyElem.dataset.sound = 
-        `${keyElem.dataset.sound.slice(0, -1)}${+targetDigit + 2}`;
-    }
-  })
+  updateBasicSounds(targetDigit);
 
   updateKbdHints();
   updateSoundHints();
-
   updateDisabledKeys();
-
 }
 
 

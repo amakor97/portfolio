@@ -13,17 +13,12 @@ import { isEditModeActive } from "./functionalModeSwitcher.js";
 const kbdCont = document.querySelector(".js-keyboard-cont");
 const leftPart = document.querySelector(".js-keyboard-left");
 const centerPart = document.querySelector(".js-keyboard-center");
-const toggleModeBtn = document.querySelector(".js-toggle-visual-mode-btn");
-const toggleFullKbdBtn = document.querySelector(".js-toggle-full-keyboard-btn");
 const controlPanel = document.querySelector(".js-control-panel");
 
 const visualModeSelectors = document.querySelectorAll("input[name='select-visual-mode']");
 
 export const assignModeCont = document.querySelector(".js-control-assign-mode-cont");
 export const noteInputCont = document.querySelector(".js-control-note-input-cont");
-
-toggleModeBtn.addEventListener("click", toggleVisualMode);
-toggleFullKbdBtn.addEventListener("click", toggleFullKbd);
 
 
 visualModeSelectors.forEach(input => {
@@ -42,11 +37,6 @@ export function toggleVisualMode() {
   } else {
     changeStylesForOneRow();
   }
-  updateFullKbd();
-}
-
-
-export function toggleFullKbd() {
   updateFullKbd();
 }
 
