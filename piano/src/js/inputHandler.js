@@ -66,12 +66,16 @@ function stopPlaying(e) {
           displayedKey = keyElem;
         }
       })
-      displayedKey.classList.remove("key--pressing");
+      if (displayedKey) {
+        displayedKey.classList.remove("key--pressing");
+      }
       key.setAttribute("data-playing", false);
       if (!isRightPaddleActive) {
         const audio = document.querySelector(
           `audio[data-sound="${key.dataset.sound}"]`);
-        audio.load();
+        if (audio) {
+          audio.load();
+        }
       }
     }
   }
@@ -149,7 +153,9 @@ function rightPaddleRelease() {
     if (!pressedKeys.has(playedKey.dataset.key)) {
       playedKey.dataset.playing = false;
       const targetSound = document.querySelector(`audio[data-sound=${playedKey.dataset.sound}]`);
-      targetSound.load();
+      if (targetSound) {
+        targetSound.load();
+      }
     }
   })
 }
