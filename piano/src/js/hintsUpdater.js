@@ -1,7 +1,7 @@
 "use strict";
 
-import { editModeToggler, isEditModeActive } from "./functionalModeSwitcher.js";
-import { doubleRowsMode, fullKbdMode, visualMode } from "./visualModeChanger.js";
+import { isEditModeActive } from "./functionalModeSwitcher.js";
+import { visualMode } from "./visualModeChanger.js";
 
 
 export function updateSoundHints() {
@@ -10,7 +10,7 @@ export function updateSoundHints() {
     const soundHint = pianoKey.querySelector(".js-piano-key-hint");
     
     if (soundHint) {
-      if ((visualMode === "full") || editModeToggler.checked) {
+      if ((visualMode === "full") || isEditModeActive) {
         soundHint.textContent = pianoKey.dataset.display;
       } else {
         soundHint.textContent = pianoKey.dataset.sound;
@@ -20,19 +20,20 @@ export function updateSoundHints() {
 }
 
 
+
 export function updateKbdHints() {
-  if ((visualMode === "full") || (editModeToggler.checked === true)) {
-    const hintSpans = document.querySelectorAll(".js-kbd-key-hint");
-    hintSpans.forEach(hintSpan => hintSpan.textContent = "");
+  if ((visualMode === "full") || isEditModeActive) {
+    const kbdHintSpans = document.querySelectorAll(".js-kbd-key-hint");
+    kbdHintSpans.forEach(kbdHintSpan => kbdHintSpan.textContent = "");
     const allPianoKeys = document.querySelectorAll(".key");
-    let playableKbdKeys = document.querySelectorAll("div[data-sound]");
+    const playableKbdKeys = document.querySelectorAll("div[data-sound]");
   
-    let allSounds = [];
-    allPianoKeys.forEach(pianoKey => {
-      if (pianoKey.dataset.display) {
-        allSounds.push(pianoKey.dataset.display);
-      }
-    });
+
+
+    //const allSounds = Array.from(document.querySelectorAll("audio"))
+      //.map(elem => elem.dataset.sound);
+
+
   
     allPianoKeys.forEach(pianoKey => {
       const hintSpan = pianoKey.querySelector(".js-kbd-key-hint");
@@ -44,6 +45,8 @@ export function updateKbdHints() {
     });
   }
 }
+
+
 
 
 export function updateDisabledKeys() {
@@ -59,7 +62,7 @@ export function updateDisabledKeys() {
 
   allPianoKeys.forEach(key => key.classList.remove("key--disabled"));
   unplayablePianoKeys.forEach(unplayableKey => {
-    if ((visualMode === "full") || (editModeToggler.checked === true)) {
+    if ((visualMode === "full") || isEditModeActive) {
       unplayableKey.classList.add("key--disabled");
     }
   });
