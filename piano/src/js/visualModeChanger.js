@@ -1,10 +1,10 @@
 "use strict";
 
-
-export let fullKbdMode = false;
-export let doubleRowsMode = true;
-
 export let visualMode = "double";
+export const assignModeCont = document
+  .querySelector(".js-control-assign-mode-cont");
+export const noteInputCont = document
+  .querySelector(".js-control-note-input-cont");
 
 import { updateSoundHints, updateKbdHints, 
   restoreKbdHints, updateDisabledKeys } from "./hintsUpdater.js";
@@ -14,11 +14,8 @@ const kbdCont = document.querySelector(".js-keyboard-cont");
 const leftPart = document.querySelector(".js-keyboard-left");
 const centerPart = document.querySelector(".js-keyboard-center");
 const controlPanel = document.querySelector(".js-control-panel");
-
-const visualModeSelectors = document.querySelectorAll("input[name='select-visual-mode']");
-
-export const assignModeCont = document.querySelector(".js-control-assign-mode-cont");
-export const noteInputCont = document.querySelector(".js-control-note-input-cont");
+const visualModeSelectors = document
+  .querySelectorAll("input[name='select-visual-mode']");
 
 
 visualModeSelectors.forEach(input => {
@@ -32,22 +29,25 @@ visualModeSelectors.forEach(input => {
 
 
 export function toggleVisualMode() {
-  if ((visualMode === "double") && (!isEditModeActive)) {
-    changeStylesForTwoRows();
-  } else {
-    changeStylesForOneRow();
-  }
+  updateKbdRows();
   updateFullKbd();
 }
 
 
+function updateKbdRows() {
+  if ((visualMode === "double") && !isEditModeActive) {
+    changeStylesForTwoRows();
+  } else {
+    changeStylesForOneRow();
+  }
+}
+
+
 function updateFullKbd() {
-  if (visualMode === "full") {
+  if ((visualMode === "full") || isEditModeActive) {
     showFullKbd();
   } else {
-    if (!isEditModeActive) {
-      hideFullKbd();
-    }
+    hideFullKbd();
   }
 }
 
@@ -118,17 +118,9 @@ controlToggleBtn.addEventListener("click", function() {
 
   if (visualMode === "double") {
     controlPanel.classList.remove("control-panel--hided-bottom")
-    if (controlPanel.classList.contains("control-panel--hided-right")) {
-      controlPanel.classList.remove("control-panel--hided-right");
-    } else {
-      controlPanel.classList.add("control-panel--hided-right");
-    }
+    controlPanel.classList.toggle("control-panel--hided-right");
   } else {
     controlPanel.classList.remove("control-panel--hided-right");
-    if (controlPanel.classList.contains("control-panel--hided-bottom")) {
-      controlPanel.classList.remove("control-panel--hided-bottom");
-    } else {
-      controlPanel.classList.add("control-panel--hided-bottom");
-    }
+    controlPanel.classList.toggle("control-panel--hided-bottom");
   }
 })
