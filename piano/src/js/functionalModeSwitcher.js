@@ -1,10 +1,8 @@
 "use strict";
 
 import { pressedKeys } from "./inputHandler.js";
-
 import { updateSoundHints, updateKbdHints, 
   updateDisabledKeys } from "./hintsUpdater.js";
-
 import { noteInputCont, showFullKbd, hideFullKbd, 
   changeStylesForOneRow, changeStylesForTwoRows, 
   visualMode } from "./visualModeChanger.js";
@@ -18,42 +16,11 @@ let tDigits = ["Digit0", "Digit1", "Digit2",
   "Digit3", "Digit4", "Digit5", "Digit6"];
 
 
-function updateBasicSounds(base) {
-  const keyElems = document.querySelectorAll(".key");
-  keyElems.forEach(keyElem => {
-    if (keyElem.classList.contains("js-key-main")) {
-      keyElem.dataset.sound = 
-        `${keyElem.dataset.sound.slice(0, -1)}${base}`;
-    }
-    if (keyElem.classList.contains("js-key-sub")) {
-      keyElem.dataset.sound = 
-        `${keyElem.dataset.sound.slice(0, -1)}${base - 1}`;
-    }
-    if (keyElem.classList.contains("js-key-sup")) {
-      keyElem.dataset.sound = 
-        `${keyElem.dataset.sound.slice(0, -1)}${base + 1}`;
-    }
-    if (keyElem.classList.contains("js-key-super")) {
-      keyElem.dataset.sound = 
-        `${keyElem.dataset.sound.slice(0, -1)}${base + 2}`;
-    }
-  })
-}
-
-
-export function switchBasicMode() {
-  let targetDigit = tDigits.find(key => pressedKeys.has(key));
-
-  if (targetDigit) {
-    targetDigit = targetDigit.slice(5, 6);
-    activeBasicOffset = +targetDigit;
-    updateBasicSounds(activeBasicOffset);
-  }
-
-  updateSoundHints();
-  updateKbdHints();
-  updateDisabledKeys();
-}
+export let filterSpecialKeys = () => new Set(([...pressedKeys]).filter(value => 
+  ((value !== "ShiftLeft") && 
+  (value !== "ShiftRight") && 
+  (value !== "Space")
+)));
 
 
 function createAdvancedModeSingleLayout() {
@@ -77,24 +44,7 @@ function createAdvancedModeLayouts(num) {
 }
 
 
-let advancedModeLayouts = createAdvancedModeLayouts(5);
-
-let noteForProMode = undefined;
-const modeSelectors = document.querySelectorAll(
-  "input[name='select-switch-mode']");
-export const editModeToggler = document.querySelector(
-  "input[name='toggle-edit-mode']");
-export const noteInput = document.querySelector(
-  "input[name='enter-note']");
-const noteValidateBtn = document.querySelector(
-  ".js-note-validate-btn");
-
-
-noteValidateBtn.addEventListener("click", function() {
-  if ((/^([a-g]|[A-G])[b|B]?[0-8]$/).test(noteInput.value)) {
-    noteForProMode = noteInput.value;
-  }
-})
+export let advancedModeLayouts = createAdvancedModeLayouts(5);
 
 
 function createProModeSingleLayout() {
@@ -120,11 +70,55 @@ function createProModeLayouts(num) {
 }
 
 
-let proModeLayouts = createProModeLayouts(5);
+export let proModeLayouts = createProModeLayouts(5);
 
-let activeBasicOffset = 4;
+let noteForProMode = undefined;
+const modeSelectors = document
+  .querySelectorAll("input[name='select-switch-mode']");
+export const editModeToggler = document
+  .querySelector("input[name='toggle-edit-mode']");
+export const noteInput = document
+  .querySelector("input[name='enter-note']");
+const noteValidateBtn = document
+  .querySelector(".js-note-validate-btn");
+
+
+noteValidateBtn.addEventListener("click", function() {
+  if ((/^([a-g]|[A-G])[b|B]?[0-8]$/).test(noteInput.value)) {
+    noteForProMode = noteInput.value;
+  }
+})
+
+
+export function updateBasicSounds(base) {
+  const keyElems = document.querySelectorAll(".key");
+  keyElems.forEach(keyElem => {
+    if (keyElem.classList.contains("js-key-main")) {
+      keyElem.dataset.sound = 
+        `${keyElem.dataset.sound.slice(0, -1)}${base}`;
+    }
+    if (keyElem.classList.contains("js-key-sub")) {
+      keyElem.dataset.sound = 
+        `${keyElem.dataset.sound.slice(0, -1)}${base - 1}`;
+    }
+    if (keyElem.classList.contains("js-key-sup")) {
+      keyElem.dataset.sound = 
+        `${keyElem.dataset.sound.slice(0, -1)}${base + 1}`;
+    }
+    if (keyElem.classList.contains("js-key-super")) {
+      keyElem.dataset.sound = 
+        `${keyElem.dataset.sound.slice(0, -1)}${base + 2}`;
+    }
+  })
+}
+
+
+
+export let setBasicOffset = (n) => activeBasicOffset = n; 
+
+export let activeBasicOffset = 4;
 export let activeAdvancedLayout = 0;
-let activeProLayout = 0;
+export let activeProLayout = 0;
 export let switchModeType = "basic";
 export let isEditModeActive = false;
 
@@ -188,17 +182,7 @@ function updateMode() {
 }
 
 
-let prevOctave = undefined;
-let prevOctaveNum = undefined;
-let targetOctave = undefined;
 
-
-const allKeyElems = document.querySelectorAll(".key");
-allKeyElems.forEach(key => {
-  key.addEventListener("click", function test(e) {
-    switchByClick(e, key);
-  });
-})
 
 
 editModeToggler.addEventListener("change", () => {
@@ -229,138 +213,30 @@ editModeToggler.addEventListener("change", () => {
 });
 
 
-function switchByClick(e, key) {
-  if (!isEditModeActive) {
-    return;
-  }
 
-  switch(switchModeType) {
-    case("basic"): {
-      switchBasicModeClick(e, key);
-      break;
-    }
-    case("advanced"): {
-      switchAdvancedModeClick(e, key);
-      break;
-    }
-    case("pro"): {
-      switchProModeClick(e, key);
-      break;
-    }
-  }
-}
-
-
-function switchBasicModeClick(e, key) {
-  let targetOctave = e.target.parentNode.parentNode;
-  let targetBasicNum = Array.from(targetOctave.classList);
-  targetBasicNum = targetBasicNum.find(
-    className => className.startsWith("keyboard--count")).slice(-1);
-
-  let targetDigit = +targetBasicNum;
-  updateBasicSounds(targetDigit);
-
-  updateKbdHints();
-  updateSoundHints();
-  updateDisabledKeys();
-}
-
-
-function switchAdvancedModeClick(e, key) {
-  if ((prevOctave === undefined)) {
-    let kdbHint = key.querySelector(".js-kbd-key-hint");
-    if (key.dataset && (kdbHint.textContent !== "")) {
-      prevOctave = e.target.parentNode.parentNode;
-      prevOctaveNum = Array.from(prevOctave.classList);
-      prevOctaveNum = prevOctaveNum.find(
-        className => className.startsWith("keyboard--count")).slice(-1);
-    } 
-  } else {
-    targetOctave = Array.from(e.target.parentNode.parentNode.classList);
-    targetOctave = targetOctave.find(
-      className => className.startsWith("keyboard--count")).slice(-1);
-    const octaveKeys = prevOctave.querySelectorAll(".key");
-
-    let octaveName = undefined;
-    const keyElems = document.querySelectorAll(".key");
-    octaveKeys.forEach(key => {
-      let kbdHint = key.querySelector(".js-kbd-key-hint");
-      if (kbdHint) {
-        keyElems.forEach(allKey => {
-          if (allKey.dataset.symbol === kbdHint.textContent) {
-            
-            let classes = Array.from(allKey.classList);
-            classes = classes.filter(className => (className.startsWith("js-key-") && (className !== "js-key-hideable")));
-            if (classes.length === 1) {
-              octaveName = classes[0];
-            }
-          }
-        })
-      };
-    });
-
-    const name = octaveName.slice(7);
-    advancedModeLayouts[activeAdvancedLayout][name] = +targetOctave;
-
-    keyElems.forEach(keyElem => {
-      let targetClass = Array.from(keyElem.classList).find(keyClass => ["js-key-main", "js-key-sub", "js-key-sup", "js-key-super"].includes(keyClass));
-      if ((targetClass)) {
-        targetClass = targetClass.slice(7);
-        keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
-          advancedModeLayouts[activeAdvancedLayout][targetClass]}`;
-      }
-    })
-    updateKbdHints();
-    updateSoundHints();
-
-    updateDisabledKeys();
-
-    prevOctave = undefined;
-    prevOctaveNum = undefined;
-    targetOctave = undefined;
-  }
-}
-
-
-let pressedProKeyElemClick = undefined;
-
-
-function switchProModeClick(e, key) {
-  if (!pressedProKeyElemClick) {
-    let kdbHint = key.querySelector(".js-kbd-key-hint");
-    if (key.dataset && (kdbHint.textContent !== "")) {
-
-      const keyElems = document.querySelectorAll(".key");
-      keyElems.forEach(key => {
-        if (kdbHint.textContent === key.dataset.symbol) {
-          pressedProKeyElemClick = key;
-        }
-      })
-    } else {
-      console.log("fail");
-    }
-  } else {
-    if (key) {
-      pressedProKeyElemClick.dataset.sound = key.dataset.display;
-      proModeLayouts[activeProLayout][pressedProKeyElemClick.dataset.key] = key.dataset.display;
-
-      pressedProKeyElemClick = undefined;
-    }
-  }
-
-  updateSoundHints();
-  updateKbdHints();
-  updateDisabledKeys();
-}
 
 
 let pressedOctave = undefined;
 
 
+export function switchBasicMode() {
+  let targetDigit = tDigits.find(key => pressedKeys.has(key));
+
+  if (targetDigit) {
+    targetDigit = targetDigit.slice(5, 6);
+    activeBasicOffset = +targetDigit;
+    updateBasicSounds(activeBasicOffset);
+  }
+
+  updateSoundHints();
+  updateKbdHints();
+  updateDisabledKeys();
+}
+
+
 export function switchAdvancedMode() {
   if (!isEditModeActive) {
-    const pressedSymbolKeys = new Set(([...pressedKeys]).filter(
-      value => ((value !== "ShiftLeft") && (value !== "ShiftRight") && (value !== "Space"))));
+    const pressedSymbolKeys = filterSpecialKeys();
     let targetKey = undefined;
     if (pressedSymbolKeys.size === 1) {
       targetKey = Array.from(pressedSymbolKeys)[0];
@@ -384,8 +260,7 @@ export function switchAdvancedMode() {
   } else {
     if (pressedOctave) {
       const pressedOctaveKeys = document.querySelectorAll(`.${pressedOctave}`);
-      const pressedSymbolKeys = new Set(([...pressedKeys]).filter(
-        value => ((value !== "ShiftLeft") && (value !== "ShiftRight") && (value !== "Space"))));
+      const pressedSymbolKeys = filterSpecialKeys();
       let targetKey = undefined;
       if (pressedSymbolKeys.size === 1) {
         targetKey = Array.from(pressedSymbolKeys)[0];
@@ -410,8 +285,7 @@ export function switchAdvancedMode() {
 
       pressedOctave = undefined;
     } else {
-      const pressedSymbolKeys = new Set(([...pressedKeys]).filter(
-        value => ((value !== "ShiftLeft") && (value !== "ShiftRight") && (value !== "Space"))));
+      const pressedSymbolKeys = filterSpecialKeys();
       let targetKey = undefined;
       if (pressedSymbolKeys.size === 1) {
         targetKey = Array.from(pressedSymbolKeys)[0];
@@ -442,10 +316,12 @@ export function switchAdvancedMode() {
 let pressedProKeyElem = undefined;
 
 
+
+
+
 export function switchProMode() {
   if (!isEditModeActive) {
-    const pressedSymbolKeys = new Set(([...pressedKeys]).filter(
-      value => ((value !== "ShiftLeft") && (value !== "ShiftRight") && (value !== "Space"))));
+    const pressedSymbolKeys = filterSpecialKeys();
     let targetKey = undefined;
     if (pressedSymbolKeys.size === 1) {
       targetKey = Array.from(pressedSymbolKeys)[0];
@@ -463,8 +339,7 @@ export function switchProMode() {
     })
 
   } else {
-    const pressedSymbolKeys = new Set(([...pressedKeys]).filter(
-      value => ((value !== "ShiftLeft") && (value !== "ShiftRight") && (value !== "Space"))));
+    const pressedSymbolKeys = filterSpecialKeys();
     let targetKey = undefined;
     if (pressedSymbolKeys.size === 1) {
       targetKey = Array.from(pressedSymbolKeys)[0];
