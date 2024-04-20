@@ -366,14 +366,14 @@ export function switchProMode() {
 }
 
 
+export let getOctaveClass = (keyElem) => {
+  return Array.from(keyElem.classList).find(keyClass => ["js-key-main", 
+    "js-key-sub", "js-key-sup", "js-key-super"].includes(keyClass));
+}
+
 
 export function assignSoundForAdvancedMode(keyElem) {
-  let targetClass = Array.from(keyElem.classList).find(keyClass => [
-    "js-key-main", "js-key-sub", "js-key-sup", "js-key-super"].includes(
-    keyClass));
-
-      console.log({targetClass});
-
+  let targetClass = getOctaveClass(keyElem);
   if (targetClass) {
     targetClass = targetClass.slice(7);
     keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
