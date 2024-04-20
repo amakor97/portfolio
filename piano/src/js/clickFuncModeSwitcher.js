@@ -71,6 +71,45 @@ function switchAdvancedModeClick(e, key) {
         className => className.startsWith("keyboard--count")).slice(-1);
     } 
   } else {
+
+    targetOctave = Array.from(e.target.parentNode.parentNode.classList).find(
+      className => className.startsWith("keyboard--count")).slice(-1);
+    let octaveName = undefined;
+    const keyElems = document.querySelectorAll(".key");
+    const octaveKeys = prevOctave.querySelectorAll(".key:not(.key--empty)");
+    octaveKeys.forEach(key => {
+      let kbdHint = key.querySelector(".js-kbd-key-hint");
+
+      keyElems.forEach(keyElem => {
+        if (keyElem.dataset.symbol === kbdHint.textContent) {
+          
+          let targetClass = Array.from(keyElem.classList).find(
+            keyClass => ["js-key-main", "js-key-sub", "js-key-sup", "js-key-super"].includes(keyClass));
+
+          if (targetClass) {
+            octaveName = targetClass;
+          }
+        }
+      })
+    });
+
+    const name = octaveName.slice(7);
+    advancedModeLayouts[activeAdvancedLayout][name] = +targetOctave;
+
+    keyElems.forEach(keyElem => {
+      let targetClass = Array.from(keyElem.classList).find(
+        keyClass => ["js-key-main", "js-key-sub", "js-key-sup", 
+        "js-key-super"].includes(keyClass));
+
+      if (targetClass) {
+        targetClass = targetClass.slice(7);
+        keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
+          advancedModeLayouts[activeAdvancedLayout][targetClass]}`;
+      }
+    })
+
+
+/*
     targetOctave = Array.from(e.target.parentNode.parentNode.classList).find(
       className => className.startsWith("keyboard--count")).slice(-1);
     const octaveKeys = prevOctave.querySelectorAll(".key:not(.key--empty)");
@@ -93,6 +132,7 @@ function switchAdvancedModeClick(e, key) {
         }
       })
     });
+*/
 
     allKeyElems.forEach(key => key.classList.remove("key--pressing"));
 
