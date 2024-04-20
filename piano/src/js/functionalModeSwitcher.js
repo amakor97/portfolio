@@ -247,6 +247,7 @@ export function switchAdvancedMode() {
       activeAdvancedLayout = targetKey;
 
       const keyElems = document.querySelectorAll(".key");
+      
       keyElems.forEach(keyElem => {
         let targetClass = Array.from(keyElem.classList).find(keyClass => ["js-key-main", "js-key-sub", "js-key-sup", "js-key-super"].includes(keyClass));
         if (targetClass) {
@@ -362,4 +363,20 @@ export function switchProMode() {
   updateSoundHints();
   updateKbdHints();
   updateDisabledKeys();
+}
+
+
+
+export function assignSoundForAdvancedMode(keyElem) {
+  let targetClass = Array.from(keyElem.classList).find(keyClass => [
+    "js-key-main", "js-key-sub", "js-key-sup", "js-key-super"].includes(
+    keyClass));
+
+      console.log({targetClass});
+
+  if (targetClass) {
+    targetClass = targetClass.slice(7);
+    keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
+      advancedModeLayouts[activeAdvancedLayout][targetClass]}`;
+  }
 }

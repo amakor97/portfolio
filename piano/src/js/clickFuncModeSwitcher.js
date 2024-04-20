@@ -6,7 +6,8 @@ import { isEditModeActive, switchModeType,
 import { updateKbdHints, updateSoundHints, 
   updateDisabledKeys } from "./hintsUpdater.js";
 import { setBasicOffset, advancedModeLayouts, activeAdvancedLayout, 
-  proModeLayouts, activeProLayout } from "./functionalModeSwitcher.js";
+  proModeLayouts, activeProLayout, assignSoundForAdvancedMode 
+} from "./functionalModeSwitcher.js";
 
 
 const allKeyElems = document.querySelectorAll(".key");
@@ -72,49 +73,26 @@ function switchAdvancedModeClick(e, key) {
   } else {
     targetOctave = Array.from(e.target.parentNode.parentNode.classList).find(
       className => className.startsWith("keyboard--count")).slice(-1);
-    const octaveKeys = prevOctave.querySelectorAll(".key");
-
+    const octaveKeys = prevOctave.querySelectorAll(".key:not(.key--empty)");
     let octaveName = undefined;
     const keyElems = document.querySelectorAll(".key");
+  
     octaveKeys.forEach(key => {
       let kbdHint = key.querySelector(".js-kbd-key-hint");
-      if (kbdHint) {
-        keyElems.forEach(allKey => {
-          if (allKey.dataset.symbol === kbdHint.textContent) {
-            
-            
-            let classes = Array.from(allKey.classList).filter(className => (
-                (className.startsWith("js-key-")) && 
-                (className !== "js-key-hideable")
-            ));
+      keyElems.forEach(keyElem => {
+        if (keyElem.dataset.symbol === kbdHint.textContent) {
+          let targetClass = Array.from(keyElem.classList).find(keyClass => [
+            "js-key-main", "js-key-sub", "js-key-sup", "js-key-super"].includes(
+            keyClass));
 
-
-            if (classes.length === 1) {
-              octaveName = classes[0];
-            }
-          }
-        })
-      };
+          octaveName = targetClass;
+          const name = octaveName.slice(7);
+          advancedModeLayouts[activeAdvancedLayout][name] = +targetOctave;
+          keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
+            advancedModeLayouts[activeAdvancedLayout][octaveName.slice(7)]}`;
+        }
+      })
     });
-
-    const name = octaveName.slice(7);
-    advancedModeLayouts[activeAdvancedLayout][name] = +targetOctave;
-
-    keyElems.forEach(keyElem => {
-      
-      
-      
-      let targetClass = Array.from(keyElem.classList).find(keyClass => ["js-key-main", 
-        "js-key-sub", "js-key-sup", "js-key-super"].includes(keyClass));
-
-
-
-      if (targetClass) {
-        targetClass = targetClass.slice(7);
-        keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
-          advancedModeLayouts[activeAdvancedLayout][targetClass]}`;
-      }
-    })
 
     allKeyElems.forEach(key => key.classList.remove("key--pressing"));
 
