@@ -81,3 +81,10 @@ hideSoundHintsBtn.addEventListener("click", () => {
   allSoundHints.forEach(soundHint => soundHint.classList
     .toggle("key__hint--transparent"));
 })
+
+
+export function updateVisualHints() {
+  updateSoundHints();
+  updateKbdHints();
+  updateDisabledKeys();
+}
