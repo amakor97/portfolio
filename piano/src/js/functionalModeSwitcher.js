@@ -1,11 +1,10 @@
 "use strict";
 
 import { pressedKeys } from "./inputHandler.js";
-import { updateSoundHints, updateKbdHints, 
-  updateDisabledKeys } from "./hintsUpdater.js";
+import { updateVisualHints } from "./hintsUpdater.js";
 import { noteInputCont, showFullKbd, hideFullKbd, 
   changeStylesForOneRow, changeStylesForTwoRows, 
-  visualMode } from "./visualModeChanger.js";
+  visualMode, updateVisualMode } from "./visualModeChanger.js";
 
 let basInfo = document.querySelector(".bas-info");
 let advInfo = document.querySelector(".adv-info");
@@ -72,15 +71,16 @@ function createProModeLayouts(num) {
 
 export let proModeLayouts = createProModeLayouts(5);
 
+
 let noteForProMode = undefined;
-const modeSelectors = document
-  .querySelectorAll("input[name='select-switch-mode']");
-export const editModeToggler = document
-  .querySelector("input[name='toggle-edit-mode']");
-export const noteInput = document
-  .querySelector("input[name='enter-note']");
-const noteValidateBtn = document
-  .querySelector(".js-note-validate-btn");
+const modeSelectors = document.querySelectorAll(
+  "input[name='select-switch-mode']");
+export const editModeToggler = document.querySelector(
+  "input[name='toggle-edit-mode']");
+export const noteInput = document.querySelector(
+  "input[name='enter-note']");
+const noteValidateBtn = document.querySelector(
+  ".js-note-validate-btn");
 
 
 noteValidateBtn.addEventListener("click", function() {
@@ -91,37 +91,32 @@ noteValidateBtn.addEventListener("click", function() {
 
 
 export function updateBasicSounds(base) {
-  const keyElems = document.querySelectorAll(".key");
-  keyElems.forEach(keyElem => {
-    if (keyElem.classList.contains("js-key-main")) {
-      keyElem.dataset.sound = 
-        `${keyElem.dataset.sound.slice(0, -1)}${base}`;
-    }
+  const playableKbdKeys = document.querySelectorAll(".key[data-key]"); 
+  playableKbdKeys.forEach(keyElem => {
+    let additionalOffset = 0;
     if (keyElem.classList.contains("js-key-sub")) {
-      keyElem.dataset.sound = 
-        `${keyElem.dataset.sound.slice(0, -1)}${base - 1}`;
+      additionalOffset = -1;
     }
     if (keyElem.classList.contains("js-key-sup")) {
-      keyElem.dataset.sound = 
-        `${keyElem.dataset.sound.slice(0, -1)}${base + 1}`;
+      additionalOffset = 1;
     }
     if (keyElem.classList.contains("js-key-super")) {
-      keyElem.dataset.sound = 
-        `${keyElem.dataset.sound.slice(0, -1)}${base + 2}`;
+      additionalOffset = 2;
     }
+
+    keyElem.dataset.sound = 
+      `${keyElem.dataset.sound.slice(0, -1)}${base + additionalOffset}`;
   })
 }
 
 
-
-export let setBasicOffset = (n) => activeBasicOffset = n; 
-
-export let activeBasicOffset = 4;
+let activeBasicOffset = 4;
 export let activeAdvancedLayout = 0;
 export let activeProLayout = 0;
 export let switchModeType = "basic";
 export let isEditModeActive = false;
 
+export let setBasicOffset = (n) => activeBasicOffset = n; 
 
 modeSelectors.forEach(input => {
   input.addEventListener("change", function() {
@@ -153,13 +148,10 @@ function updateMode() {
 
         if (targetClass) {
           targetClass = targetClass.slice(7);
-          if ((visualMode === "double") && (!isEditModeActive)) {
-            keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
-              advancedModeLayouts[activeAdvancedLayout][targetClass]}`;
-          } else {
-            keyElem.dataset.sound = `${keyElem.dataset.display.slice(0, -1)}${
-              advancedModeLayouts[activeAdvancedLayout][targetClass]}`;
-          }
+          let attr = ((visualMode === "double") && (!isEditModeActive)) ? 
+            "sound" : "display";
+          keyElem.dataset.sound = `${keyElem.dataset[attr].slice(0, -1)}${
+            advancedModeLayouts[activeAdvancedLayout][targetClass]}`;
         }
       })
       break;
@@ -176,61 +168,25 @@ function updateMode() {
     }
   }
 
-  updateSoundHints();
-  updateKbdHints();
-  updateDisabledKeys();
+  updateVisualHints();
 }
-
-
-
 
 
 editModeToggler.addEventListener("change", () => {
   isEditModeActive = editModeToggler.checked;
-  if (isEditModeActive) {
-    changeStylesForOneRow();
-    showFullKbd();
-
-    updateKbdHints();
-    updateSoundHints();
-    updateDisabledKeys();
-  } else {
-    switch(visualMode) {
-      case "double": {
-        changeStylesForTwoRows();
-        hideFullKbd();
-        break;
-      }
-      case "single": {
-        hideFullKbd();
-        break;
-      }
-      case "full": {
-        break;
-      }
-    }
-  }
+  updateVisualMode(isEditModeActive);
 });
-
-
-
 
 
 let pressedOctave = undefined;
 
-
 export function switchBasicMode() {
   let targetDigit = tDigits.find(key => pressedKeys.has(key));
-
   if (targetDigit) {
-    targetDigit = targetDigit.slice(5, 6);
-    activeBasicOffset = +targetDigit;
+    activeBasicOffset = +(targetDigit.slice(5, 6));
     updateBasicSounds(activeBasicOffset);
   }
-
-  updateSoundHints();
-  updateKbdHints();
-  updateDisabledKeys();
+  updateVisualHints();
 }
 
 
@@ -308,17 +264,11 @@ export function switchAdvancedMode() {
     }
   }
 
-  updateSoundHints();
-  updateKbdHints();
-  updateDisabledKeys();
+  updateVisualHints();
 }
 
 
 let pressedProKeyElem = undefined;
-
-
-
-
 
 export function switchProMode() {
   if (!isEditModeActive) {
@@ -360,9 +310,7 @@ export function switchProMode() {
     }
   }
 
-  updateSoundHints();
-  updateKbdHints();
-  updateDisabledKeys();
+  updateVisualHints();
 }
 
 

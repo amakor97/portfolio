@@ -6,7 +6,7 @@ export const assignModeCont = document
 export const noteInputCont = document
   .querySelector(".js-control-note-input-cont");
 
-import { updateSoundHints, updateKbdHints, 
+import { updateSoundHints, updateKbdHints, updateVisualHints, 
   restoreKbdHints, updateDisabledKeys } from "./hintsUpdater.js";
 import { isEditModeActive } from "./functionalModeSwitcher.js";
 
@@ -124,3 +124,27 @@ controlToggleBtn.addEventListener("click", function() {
     controlPanel.classList.toggle("control-panel--hided-bottom");
   }
 })
+
+
+export function updateVisualMode(isActive) {
+  if (isActive) {
+    changeStylesForOneRow();
+    showFullKbd();
+    updateVisualHints();
+  } else {
+    switch(visualMode) {
+      case "double": {
+        changeStylesForTwoRows();
+        hideFullKbd();
+        break;
+      }
+      case "single": {
+        hideFullKbd();
+        break;
+      }
+      case "full": {
+        break;
+      }
+    }
+  }
+}
