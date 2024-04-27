@@ -275,43 +275,50 @@ export function switchAdvancedMode() {
 
 let pressedProKeyElem = undefined;
 
+
+function updateProSounds() {
+  const pressedSymbolKeys = filterSpecialKeys();
+  let targetKey = (pressedSymbolKeys.size === 1) ? 
+    Array.from(pressedSymbolKeys)[0].slice(-1) : undefined;
+  if (Number.isInteger(+targetKey)) {
+    activeProLayout = targetKey;
+  }
+
+  const keyElems = document.querySelectorAll(".key");
+  keyElems.forEach(keyElem => {
+    if (keyElem.dataset.key in proModeLayouts[activeProLayout]) {
+      keyElem.dataset.sound = 
+        proModeLayouts[activeProLayout][keyElem.dataset.key];
+    }
+  })
+}
+
+
+function updateProLayoutAndKey(targetKey) {
+  const allKeyElems = document.querySelectorAll(".key");
+  allKeyElems.forEach(keyElem => {
+    if (keyElem.dataset.key === targetKey) {
+      pressedProKeyElem = keyElem;
+    }
+  })
+
+  pressedProKeyElem.dataset.sound = noteForProMode;
+  proModeLayouts[activeProLayout][targetKey] = noteForProMode;
+  proInfo.textContent = JSON.stringify(proModeLayouts);
+}
+
+
 export function switchProMode() {
   if (!isEditModeActive) {
-    const pressedSymbolKeys = filterSpecialKeys();
-    let targetKey = undefined;
-    if (pressedSymbolKeys.size === 1) {
-      targetKey = Array.from(pressedSymbolKeys)[0];
-      targetKey = targetKey.slice(-1);
-    }
-    if (Number.isInteger(+targetKey)) {
-      activeProLayout = targetKey;
-    }
-
-    const keyElems = document.querySelectorAll(".key");
-    keyElems.forEach(keyElem => {
-      if (keyElem.dataset.key in proModeLayouts[activeProLayout]) {
-        keyElem.dataset.sound = proModeLayouts[activeProLayout][keyElem.dataset.key];
-      }
-    })
-
+    updateProSounds();
   } else {
     const pressedSymbolKeys = filterSpecialKeys();
-    let targetKey = undefined;
-    if (pressedSymbolKeys.size === 1) {
-      targetKey = Array.from(pressedSymbolKeys)[0];
-    }
-    pressedKeys.delete(targetKey); //optional?
+    let targetKey = (pressedSymbolKeys.size === 1) ? 
+      Array.from(pressedSymbolKeys)[0] : undefined;
 
-    if ((targetKey) && (noteInput !== document.activeElement) && noteForProMode) {
-      const allKeyElems = document.querySelectorAll(".key");
-      allKeyElems.forEach(keyElem => {
-        if (keyElem.dataset.key === targetKey) {
-          pressedProKeyElem = keyElem;
-        }
-      })
-      pressedProKeyElem.dataset.sound = noteForProMode;
-      proModeLayouts[activeProLayout][targetKey] = noteForProMode;
-      proInfo.textContent = JSON.stringify(proModeLayouts);
+    if (targetKey && (noteInput !== document.activeElement) && 
+      noteForProMode) {
+      updateProLayoutAndKey(targetKey);
     }
   }
 
@@ -322,16 +329,6 @@ export function switchProMode() {
 export let getOctaveClass = (keyElem) => {
   return Array.from(keyElem.classList).find(keyClass => ["js-key-main", 
     "js-key-sub", "js-key-sup", "js-key-super"].includes(keyClass));
-}
-
-
-export function assignSoundForAdvancedMode(keyElem) {
-  let targetClass = getOctaveClass(keyElem);
-  if (targetClass) {
-    targetClass = targetClass.slice(7);
-    keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${
-      advancedModeLayouts[activeAdvancedLayout][targetClass]}`;
-  }
 }
 
 
