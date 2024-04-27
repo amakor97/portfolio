@@ -5,7 +5,8 @@ import { isEditModeActive, switchModeType,
   updateBasicSounds } from "./functionalModeSwitcher.js";
 import { updateVisualHints } from "./hintsUpdater.js";
 import { setBasicOffset, advancedModeLayouts, activeAdvancedLayout, 
-  proModeLayouts, activeProLayout, getOctaveClass } from "./functionalModeSwitcher.js";
+  proModeLayouts, activeProLayout, getOctaveClassByElem, 
+  updateAdvancedOctaveSounds } from "./functionalModeSwitcher.js";
 
 
 const allKeyElems = document.querySelectorAll(".key");
@@ -55,42 +56,55 @@ function switchBasicModeClick(e) {
 }
 
 
+function getPrevOctaveNum(key) {
+  let kdbHint = key.querySelector(".js-kbd-key-hint");
+  if (key.dataset && (kdbHint.textContent !== "")) {
+    prevOctaveNum = Array.from(key.parentNode.parentNode.classList).find(
+      className => className.startsWith("keyboard--count")).slice(-1);
+  }
+  return prevOctaveNum; 
+}
+
+
+function getKbdHint(prevOctaveNum) {
+  let prevOctaveKeys = document.querySelectorAll(
+    `.keyboard--count-${prevOctaveNum} .key:not(.key--empty)`);
+  let kbdHint = "";
+  prevOctaveKeys.forEach(prevOctaveKey => {
+    let tmpKbdHint = prevOctaveKey.querySelector(".js-kbd-key-hint");
+    if (tmpKbdHint.textContent) {
+      kbdHint = tmpKbdHint;
+    }
+  })
+
+  return kbdHint;
+}
+
+
+function getOctaveClassByHint(kbdHint) {
+  for (let keyElem of allKeyElems) {
+    if (keyElem.dataset.symbol === kbdHint.textContent) {
+      return getOctaveClassByElem(keyElem);
+    }
+  }
+}
+
+
 function switchAdvancedModeClick(e, key) {
   let clickedKeyElem = e.target;
   if (!prevOctaveNum) {
-    let kdbHint = key.querySelector(".js-kbd-key-hint");
-    if (key.dataset && (kdbHint.textContent !== "")) {
-      prevOctaveNum = Array.from(clickedKeyElem.parentNode.parentNode.classList).find(
-        className => className.startsWith("keyboard--count")).slice(-1);
-    } 
+   prevOctaveNum = getPrevOctaveNum(key);
   } else {
-    let nextOctaveNum = Array.from(clickedKeyElem.parentNode.parentNode.classList).find(
-      className => className.startsWith("keyboard--count")).slice(-1);
-    let prevOctaveKeys = document.querySelectorAll(
-      `.keyboard--count-${prevOctaveNum} .key:not(.key--empty)`);
-    let octaveName = undefined;
-
-    let kbdHint = "";
-    prevOctaveKeys.forEach(prevOctaveKey => {
-      let tmpKbdHint = prevOctaveKey.querySelector(".js-kbd-key-hint");
-      if (tmpKbdHint.textContent) {
-        kbdHint = tmpKbdHint;
-      }
-    })
-
-    allKeyElems.forEach(keyElem => {
-      if (keyElem.dataset.symbol === kbdHint.textContent) {
-        octaveName = getOctaveClass(keyElem);
-      }
-    })
+    let kbdHint = getKbdHint(prevOctaveNum);
+    let octaveName = getOctaveClassByHint(kbdHint);
     const name = octaveName.slice(7);
+
+    let nextOctaveNum = Array.from(
+      clickedKeyElem.parentNode.parentNode.classList).find(
+      className => className.startsWith("keyboard--count")).slice(-1);
     advancedModeLayouts[activeAdvancedLayout][name] = +nextOctaveNum;
 
-    let playableOctaveKeys =  document.querySelectorAll(`.${octaveName}`);
-    playableOctaveKeys.forEach(playableOctaveKey => {
-      playableOctaveKey.dataset.sound = 
-        `${playableOctaveKey.dataset.sound.slice(0, -1)}${nextOctaveNum}`;
-    })
+    updateAdvancedOctaveSounds(octaveName, nextOctaveNum);
 
     allKeyElems.forEach(key => key.classList.remove("key--pressing"));
     updateVisualHints();
@@ -99,21 +113,26 @@ function switchAdvancedModeClick(e, key) {
 }
 
 
+function getClickedProKeyElem(key) {
+  let kbdHint = key.querySelector(".js-kbd-key-hint");
+  if (key.dataset && (kbdHint.textContent !== "")) {
+    for (let keyElem of allKeyElems) {
+      if (keyElem.dataset.symbol === kbdHint.textContent) {
+        return keyElem;
+      }
+    }
+  }
+}
+
+
 function switchProModeClick(key) {
   if (!clickedProKeyElem) {
-    let kbdHint = key.querySelector(".js-kbd-key-hint");
-    if (key.dataset && (kbdHint.textContent !== "")) {
-      allKeyElems.forEach(keyElem => {
-        if (keyElem.dataset.symbol === kbdHint.textContent) {
-          clickedProKeyElem = keyElem;
-        }
-      })
-    }
-
+    clickedProKeyElem = getClickedProKeyElem(key);
   } else {
     clickedProKeyElem.dataset.sound = key.dataset.display;
     proModeLayouts[activeProLayout][clickedProKeyElem.dataset.key] = 
       key.dataset.display;
+      
     allKeyElems.forEach(key => key.classList.remove("key--pressing"));
     updateVisualHints();
     clickedProKeyElem = undefined;

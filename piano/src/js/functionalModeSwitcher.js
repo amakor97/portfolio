@@ -216,18 +216,13 @@ function updateAdvancedSounds() {
 
 
 function updateAdvancedLayoutAndOctave(pressedOctave) {
-  const pressedOctaveKeys = document.querySelectorAll(`.${pressedOctave}`);
   const pressedSymbolKeys = filterSpecialKeys();
   let targetKey = (pressedSymbolKeys.size === 1) ? 
     Array.from(pressedSymbolKeys)[0] : undefined;
 
   if ((targetKey) && (textDigits.includes(targetKey))) {
     targetKey = targetKey.slice(-1);
-    
-    pressedOctaveKeys.forEach(keyElem => {
-      keyElem.dataset.sound = 
-        `${keyElem.dataset.sound.slice(0, -1)}${targetKey}`;
-    })
+    updateAdvancedOctaveSounds(pressedOctave, targetKey);
 
     let octaveName = pressedOctave.slice(7);
     advancedModeLayouts[activeAdvancedLayout][octaveName] = +targetKey;
@@ -326,9 +321,15 @@ export function switchProMode() {
 }
 
 
-export let getOctaveClass = (keyElem) => {
+export let getOctaveClassByElem = (keyElem) => {
   return Array.from(keyElem.classList).find(keyClass => ["js-key-main", 
     "js-key-sub", "js-key-sup", "js-key-super"].includes(keyClass));
 }
 
 
+export function updateAdvancedOctaveSounds(octaveClass, num) {
+  const octaveKeys = document.querySelectorAll(`.${octaveClass}`);
+  octaveKeys.forEach(keyElem => {
+    keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${num}`;
+  })
+}
