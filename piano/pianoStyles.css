@@ -177,6 +177,17 @@
 .keyboard__white {
   display: flex;
 }
+.keyboard--3 {
+  width: 42.8571428571%;
+}
+.keyboard--4 {
+  width: 57.1428571429%;
+  right: 0;
+}
+.keyboard--most-left {
+  width: 85%;
+  right: 0;
+}
 
 .key {
   display: flex;
