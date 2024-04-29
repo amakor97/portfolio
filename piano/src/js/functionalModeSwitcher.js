@@ -31,7 +31,7 @@ function createAdvancedModeSingleLayout() {
 }
 
 
-function createAdvancedModeLayouts(num) {
+export function createAdvancedModeLayouts(num) {
   let layouts = [];
   for (let i = 0; i < num; i++) {
     let layout = createAdvancedModeSingleLayout();
@@ -50,14 +50,14 @@ function createProModeSingleLayout() {
 
   playableKbdKeys.forEach(kbdKey => {
     let key = kbdKey.dataset.key;
-    let sound = kbdKey.dataset.sound;
+    let sound = kbdKey.dataset.display;
     layout[key] = sound;
   })
   return layout;
 }
 
 
-function createProModeLayouts(num) {
+export function createProModeLayouts(num) {
   let layouts = [];
   for (let i = 0; i < num; i++) {
     let layout = createProModeSingleLayout();
@@ -68,6 +68,17 @@ function createProModeLayouts(num) {
 
 
 export let proModeLayouts = createProModeLayouts(5);
+
+
+const resetLayoutsBtn = document.querySelector(".js-reset-layouts");
+resetLayoutsBtn.addEventListener("click", resetLayouts);
+function resetLayouts() {
+  activeBasicOffset = 4;
+  advancedModeLayouts = createAdvancedModeLayouts(5);
+  proModeLayouts = createProModeLayouts(5);
+  updateMode();
+}
+
 
 
 let noteForProMode = undefined;
@@ -89,6 +100,7 @@ noteValidateBtn.addEventListener("click", function() {
 
 
 export function updateBasicSounds(base) {
+  console.log(base);
   const playableKbdKeys = document.querySelectorAll(".key[data-key]"); 
   playableKbdKeys.forEach(keyElem => {
     let additionalOffset = 0;
@@ -103,18 +115,20 @@ export function updateBasicSounds(base) {
     }
 
     keyElem.dataset.sound = 
-      `${keyElem.dataset.sound.slice(0, -1)}${base + additionalOffset}`;
+      `${keyElem.dataset.sound.slice(0, -1)}${+base + additionalOffset}`;
   })
 }
 
 
-let activeBasicOffset = 4;
+export let activeBasicOffset = 4;
 export let activeAdvancedLayout = 0;
 export let activeProLayout = 0;
 export let switchModeType = "basic";
 export let isEditModeActive = false;
 
 export let setBasicOffset = (n) => activeBasicOffset = n; 
+export let setAdvancedModeLayouts = (obj) => advancedModeLayouts = obj;
+export let setProModeLayouts = (obj) => proModeLayouts = obj;
 
 modeSelectors.forEach(input => {
   input.addEventListener("change", function() {
@@ -126,7 +140,7 @@ modeSelectors.forEach(input => {
 })
 
 
-function updateMode() {
+export function updateMode() {
   const keyElems = document.querySelectorAll(".key");
   switch(switchModeType) {
     case "basic": {
