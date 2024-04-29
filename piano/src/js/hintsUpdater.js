@@ -51,9 +51,9 @@ export function updateDisabledKeys() {
     }
   })
 
-  if ((visualMode === "full") || isEditModeActive) {
-    unplayablePianoKeys.forEach(unplayableKey => unplayableKey.classList
-      .add("key--disabled"));
+  if (((visualMode === "full") || isEditModeActive) && areDisabledKeysActive) {
+    unplayablePianoKeys.forEach(unplayableKey => unplayableKey.classList.add(
+      "key--disabled"));
   }
 }
 
@@ -80,6 +80,14 @@ hideSoundHintsBtn.addEventListener("click", () => {
   const allSoundHints = document.querySelectorAll(".js-piano-key-hint");
   allSoundHints.forEach(soundHint => soundHint.classList
     .toggle("key__hint--transparent"));
+})
+
+
+let areDisabledKeysActive = true;
+const hideDisabledKeysBtn = document.querySelector(".js-hide-disabled-keys");
+hideDisabledKeysBtn.addEventListener("click", () => {
+  areDisabledKeysActive = !areDisabledKeysActive;
+  updateDisabledKeys();
 })
 
 
