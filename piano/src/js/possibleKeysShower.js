@@ -110,7 +110,7 @@ function highlightPrevProKey(e) {
 
   if (targetKey.children[0].textContent !== "") {
     targetKey.classList.add("key--prev");
-    clickedProKey = targetKey;
+    //clickedProKey = targetKey;
   }
 }
 
@@ -139,6 +139,20 @@ function mouseClickHandler(e) {
         applyNextAdvancedKeys();
       }
       break;
+    }
+    case "pro": {
+      if (!clickedProKey) {
+        if (e.target.classList.contains("key")) {
+          clickedProKey = e.target;
+        }
+
+
+        console.log(clickedProKey);
+      } else {
+        if (e.target.classList.contains("key")) {
+          clickedProKey = undefined;
+        }
+      }
     }
   }
 }
@@ -194,6 +208,7 @@ function updateHightlights(e) {
       break;
     }
     case "pro": {
+      console.log(clickedProKey);
       highlightPrevProKey(e);
 
 

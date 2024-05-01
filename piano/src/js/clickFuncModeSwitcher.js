@@ -137,10 +137,10 @@ function switchProModeClick(key) {
     allKeyElems.forEach(key => key.classList.remove("key--pressing"));
     updateVisualHints();
     clickedProKeyElem = undefined;
-    unsetClickedProKey();
+    //unsetClickedProKey();
     console.log(clickedProKeyElem);
 
-    allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
-    allKeyElems.forEach(keyElem => keyElem.classList.remove("key--next"));
+    //allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
+    //allKeyElems.forEach(keyElem => keyElem.classList.remove("key--next"));
   }
 }
