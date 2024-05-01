@@ -237,6 +237,12 @@
   width: 1.3vw;
   height: 8vw;
 }
+.key--prev {
+  background: red;
+}
+.key--next {
+  background: green;
+}
 .key__hint {
   text-align: center;
 }

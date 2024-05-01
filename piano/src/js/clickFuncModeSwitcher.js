@@ -39,7 +39,7 @@ function switchByClick(e, key) {
 }
 
 
-let prevOctaveNum = undefined;
+export let prevOctaveNum = undefined;
 let clickedProKeyElem = undefined;
 
 
