@@ -1,7 +1,7 @@
 "use strict";
 
 import { isEditModeActive, switchModeType } from "./functionalModeSwitcher.js";
-import { prevOctaveNum } from "./clickFuncModeSwitcher.js";
+import { prevOctaveNum, clickedProKeyElem } from "./clickFuncModeSwitcher.js";
 
 const allKeyElems = document.querySelectorAll(".key");
 allKeyElems.forEach(keyElem => {
@@ -92,16 +92,34 @@ function highlightPrevAdvancedKeys(e) {
   targetKeys.forEach(keyElem => keyElem.classList.add("key--prev"));
 }
 
-function highlightNextAdvancedKeys() {
+function highlightNextAdvancedKeys(e) {
+  let targetOctave = e.target.parentNode.parentNode;
+  let targetBasicNum = +(Array.from(targetOctave.classList).find(
+    className => className.startsWith("keyboard--count")).slice(-1));
 
+  let targetKeys = [];
+  fillArrayWithOctaveKeys(targetKeys, targetBasicNum);
+  targetKeys.forEach(keyElem => keyElem.classList.add("key--next"));
 }
 
-function highlightPrevProKey() {
+function highlightPrevProKey(e) {
+  let targetKey = e.target;
+  if (!targetKey.classList.contains("key")) {
+    return;
+  }
 
+  if (targetKey.children[0].textContent !== "") {
+    targetKey.classList.add("key--prev");
+    clickedProKey = targetKey;
+  }
 }
 
-function highlightNextProKey() {
-
+function highlightNextProKey(e) {
+  let targetKey = e.target;
+  if (!targetKey.classList.contains("key")) {
+    return;
+  }
+  targetKey.classList.add("key--next");
 }
 
 function mouseClickHandler(e) {
@@ -146,10 +164,16 @@ function applyNextAdvancedKeys(e) {
 }
 
 
+let clickedProKey = undefined;
+export let unsetClickedProKey = () => clickedProKey = undefined;
+
 function updateHightlights(e) {
-  console.log("x");
   allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
   allKeyElems.forEach(keyElem => keyElem.classList.remove("key--next"));
+
+  if (!isEditModeActive) {
+    return;
+  }
 
   switch(switchModeType) {
     case "basic": {
@@ -163,9 +187,24 @@ function updateHightlights(e) {
         let prevOctaveKeys = [];
         prevOctaveKeys = getOctaveKeys(prevOctaveNum);
         prevOctaveKeys.forEach(keyElem => keyElem.classList.add("key--prev"));
+        
+        highlightNextAdvancedKeys(e);
       }
 
       break;
+    }
+    case "pro": {
+      highlightPrevProKey(e);
+
+
+
+      if (clickedProKey) {
+        console.log(clickedProKey.dataset.display);
+        clickedProKey.classList.add("key--prev");
+
+        highlightNextProKey(e);
+        //clickedProKey = undefined;
+      }
     }
   }
 }

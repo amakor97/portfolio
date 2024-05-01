@@ -7,7 +7,7 @@ import { updateVisualHints } from "./hintsUpdater.js";
 import { setBasicOffset, advancedModeLayouts, activeAdvancedLayout, 
   proModeLayouts, activeProLayout, getOctaveClassByElem, 
   updateAdvancedOctaveSounds } from "./functionalModeSwitcher.js";
-
+import { unsetClickedProKey } from "./possibleKeysShower.js";
 
 const allKeyElems = document.querySelectorAll(".key");
 allKeyElems.forEach(key => {
@@ -40,7 +40,7 @@ function switchByClick(e, key) {
 
 
 export let prevOctaveNum = undefined;
-let clickedProKeyElem = undefined;
+export let clickedProKeyElem = undefined;
 
 
 function switchBasicModeClick(e) {
@@ -114,6 +114,7 @@ function switchAdvancedModeClick(e, key) {
 
 
 function getClickedProKeyElem(key) {
+  console.log("x");
   let kbdHint = key.querySelector(".js-kbd-key-hint");
   if (key.dataset && (kbdHint.textContent !== "")) {
     for (let keyElem of allKeyElems) {
@@ -136,5 +137,10 @@ function switchProModeClick(key) {
     allKeyElems.forEach(key => key.classList.remove("key--pressing"));
     updateVisualHints();
     clickedProKeyElem = undefined;
+    unsetClickedProKey();
+    console.log(clickedProKeyElem);
+
+    allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
+    allKeyElems.forEach(keyElem => keyElem.classList.remove("key--next"));
   }
 }
