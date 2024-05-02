@@ -6,7 +6,7 @@ import { prevOctaveNum, clickedProKeyElem } from "./clickFuncModeSwitcher.js";
 const allKeyElems = document.querySelectorAll(".key");
 allKeyElems.forEach(keyElem => {
   keyElem.addEventListener("mouseover", function(e) {
-    mouseOverHandler(e);
+    //mouseOverHandler(e);
     updateHightlights(e);
   })
 
@@ -18,7 +18,6 @@ allKeyElems.forEach(keyElem => {
   })
 
   keyElem.addEventListener("click", function(e) {
-    console.log(e);
     mouseClickHandler(e);
     updateHightlights(e);
   })
@@ -38,7 +37,7 @@ function mouseOverHandler(e) {
       if (!prevOctaveNum) {
         highlightPrevAdvancedKeys(e);
       } else {
-        highlightNextAdvancedKeys();
+        highlightNextAdvancedKeys(e);
       }
       break;
     }
@@ -93,6 +92,8 @@ function highlightPrevAdvancedKeys(e) {
 }
 
 function highlightNextAdvancedKeys(e) {
+  console.log(e);
+  console.log(e.target);
   let targetOctave = e.target.parentNode.parentNode;
   let targetBasicNum = +(Array.from(targetOctave.classList).find(
     className => className.startsWith("keyboard--count")).slice(-1));
@@ -145,9 +146,6 @@ function mouseClickHandler(e) {
         if (e.target.classList.contains("key")) {
           clickedProKey = e.target;
         }
-
-
-        console.log(clickedProKey);
       } else {
         if (e.target.classList.contains("key")) {
           clickedProKey = undefined;
