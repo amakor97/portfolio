@@ -76,6 +76,8 @@ function highlightPrevAdvancedKeys(e) {
   let targetBasicNum = +(Array.from(targetOctave.classList).find(
     className => className.startsWith("keyboard--count")).slice(-1));
 
+  console.log({targetBasicNum});
+
   let targetKeys = [];
   fillArrayWithOctaveKeys(targetKeys, targetBasicNum);
   let isOctaveCorrect = false;
@@ -84,6 +86,22 @@ function highlightPrevAdvancedKeys(e) {
       isOctaveCorrect = true;
     }
   }
+
+  if (targetBasicNum === 0) {
+    console.log("check");
+    let isZeroOctave = true;
+    for (let keyElem of allKeyElems) {
+      let kbdHint = keyElem.querySelector(".js-kbd-key-hint");
+      if (kbdHint.textContent === "]") {
+        isZeroOctave = false;
+      }
+    }
+
+    if (isZeroOctave) {
+      isOctaveCorrect = true;
+    }
+  }
+
   if (!isOctaveCorrect) {
     return;
   }

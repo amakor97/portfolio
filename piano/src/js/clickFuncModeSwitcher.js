@@ -79,7 +79,7 @@ function getPrevOctaveNum(key) {
 
   const allKeyElems = document.querySelectorAll(".key");
   allKeyElems.forEach(keyElem => {
-    let kbdHint = keyElem.querySelector(".js-piano-key-hint");
+    let kbdHint = keyElem.querySelector(".js-kbd-key-hint"); ///??
     if (kbdHint.textContent === "]") {
       isZeroOctave = false;
     }
@@ -116,10 +116,6 @@ function getKbdHint(prevOctaveNum) {
       kbdHint = tmpKbdHint;
     }
   })
-
-  if (kbdHint === "") {
-    //kbdHint = "]";
-  }
 
   return kbdHint;
 }
