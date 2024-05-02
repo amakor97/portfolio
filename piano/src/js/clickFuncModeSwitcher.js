@@ -56,6 +56,47 @@ function switchBasicModeClick(e) {
 
 
 function getPrevOctaveNum(key) {
+  console.log(key.parentNode.parentNode);
+
+  let prevOctave = key.parentNode.parentNode;
+  console.log(prevOctave);
+
+  let prevOctaveKeys = prevOctave.querySelectorAll(".key");
+  console.log(prevOctaveKeys);
+
+  for (let keyElem of prevOctaveKeys) {
+    let kdbHint = keyElem.querySelector(".js-kbd-key-hint");
+    if (keyElem.dataset && (kdbHint.textContent !== "")) {
+      prevOctaveNum = Array.from(prevOctave.classList).find(
+        className => className.startsWith("keyboard--count")).slice(-1);
+        return prevOctaveNum;
+      }
+  }
+
+  console.log("marl");
+
+  let isZeroOctave = true;
+
+  const allKeyElems = document.querySelectorAll(".key");
+  allKeyElems.forEach(keyElem => {
+    let kbdHint = keyElem.querySelector(".js-piano-key-hint");
+    if (kbdHint.textContent === "]") {
+      isZeroOctave = false;
+    }
+  })
+
+  console.log({isZeroOctave});
+
+  if (isZeroOctave) {
+    prevOctaveNum = 0;
+    return "0";
+  }
+
+  let rbKey = document.querySelector(".key[data-symbol=']']");
+  console.log(rbKey);
+  let rbHint = rbKey.querySelector(".js-piano-key-hint");
+  console.log(rbHint.textContent);
+
   let kdbHint = key.querySelector(".js-kbd-key-hint");
   if (key.dataset && (kdbHint.textContent !== "")) {
     prevOctaveNum = Array.from(key.parentNode.parentNode.classList).find(
@@ -76,6 +117,10 @@ function getKbdHint(prevOctaveNum) {
     }
   })
 
+  if (kbdHint === "") {
+    //kbdHint = "]";
+  }
+
   return kbdHint;
 }
 
@@ -93,10 +138,15 @@ function switchAdvancedModeClick(e, key) {
   let clickedKeyElem = e.target;
   if (!prevOctaveNum) {
    prevOctaveNum = getPrevOctaveNum(key);
+   console.log({prevOctaveNum});
   } else {
+    console.log("hh");
     let kbdHint = getKbdHint(prevOctaveNum);
-    let octaveName = getOctaveClassByHint(kbdHint);
+    console.log({kbdHint});
+    let octaveName = (kbdHint === "") ? "js-key-super" : getOctaveClassByHint(kbdHint);
+    console.log({octaveName});
     const name = octaveName.slice(7);
+    console.log({name});
 
     let nextOctaveNum = Array.from(
       clickedKeyElem.parentNode.parentNode.classList).find(

@@ -87,13 +87,13 @@ function highlightPrevAdvancedKeys(e) {
   if (!isOctaveCorrect) {
     return;
   }
-  console.log({isOctaveCorrect});
+  //console.log({isOctaveCorrect});
   targetKeys.forEach(keyElem => keyElem.classList.add("key--prev"));
 }
 
 function highlightNextAdvancedKeys(e) {
-  console.log(e);
-  console.log(e.target);
+  //console.log(e);
+  //console.log(e.target);
   let targetOctave = e.target.parentNode.parentNode;
   let targetBasicNum = +(Array.from(targetOctave.classList).find(
     className => className.startsWith("keyboard--count")).slice(-1));
@@ -193,7 +193,7 @@ function updateHightlights(e) {
     case "advanced": {
       highlightPrevAdvancedKeys(e);
       if (prevOctaveNum) {
-        console.log({prevOctaveNum});
+        //console.log({prevOctaveNum});
         let prevOctaveKeys = [];
         prevOctaveKeys = getOctaveKeys(prevOctaveNum);
         prevOctaveKeys.forEach(keyElem => keyElem.classList.add("key--prev"));
