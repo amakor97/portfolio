@@ -169,8 +169,6 @@ function applyPrevAdvancedKeys(e) {
 
 
   updateHightlights();
-  //console.log({prevOctaveNum});
-  //console.log({targetBasicNum});
 }
 
 function applyNextAdvancedKeys(e) {
@@ -208,17 +206,10 @@ function updateHightlights(e) {
       break;
     }
     case "pro": {
-      console.log(clickedProKey);
       highlightPrevProKey(e);
-
-
-
       if (clickedProKey) {
-        console.log(clickedProKey.dataset.display);
         clickedProKey.classList.add("key--prev");
-
         highlightNextProKey(e);
-        //clickedProKey = undefined;
       }
     }
   }

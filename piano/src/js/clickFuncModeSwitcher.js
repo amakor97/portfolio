@@ -7,7 +7,6 @@ import { updateVisualHints } from "./hintsUpdater.js";
 import { setBasicOffset, advancedModeLayouts, activeAdvancedLayout, 
   proModeLayouts, activeProLayout, getOctaveClassByElem, 
   updateAdvancedOctaveSounds } from "./functionalModeSwitcher.js";
-import { unsetClickedProKey } from "./possibleKeysShower.js";
 
 const allKeyElems = document.querySelectorAll(".key");
 allKeyElems.forEach(key => {
@@ -137,10 +136,6 @@ function switchProModeClick(key) {
     allKeyElems.forEach(key => key.classList.remove("key--pressing"));
     updateVisualHints();
     clickedProKeyElem = undefined;
-    //unsetClickedProKey();
     console.log(clickedProKeyElem);
-
-    //allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
-    //allKeyElems.forEach(keyElem => keyElem.classList.remove("key--next"));
   }
 }
