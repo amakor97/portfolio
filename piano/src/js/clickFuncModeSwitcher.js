@@ -6,7 +6,8 @@ import { isEditModeActive, switchModeType,
 import { updateVisualHints } from "./hintsUpdater.js";
 import { setBasicOffset, advancedModeLayouts, activeAdvancedLayout, 
   proModeLayouts, activeProLayout, getOctaveClassByElem, 
-  updateAdvancedOctaveSounds } from "./functionalModeSwitcher.js";
+  updateAdvancedOctaveSounds,
+  switchBasicMode } from "./functionalModeSwitcher.js";
 
 const allKeyElems = document.querySelectorAll(".key");
 allKeyElems.forEach(key => {
@@ -23,7 +24,7 @@ function switchByClick(e, key) {
 
   switch(switchModeType) {
     case("basic"): {
-      switchBasicModeClick(e);
+      switchBasicModeClickHandler(e);
       break;
     }
     case("advanced"): {
@@ -42,16 +43,11 @@ export let prevOctaveNum = undefined;
 export let clickedProKeyElem = undefined;
 
 
-function switchBasicModeClick(e) {
+function switchBasicModeClickHandler(e) {
   let targetOctave = e.target.parentNode.parentNode;
-  let targetBasicNum = Array.from(targetOctave.classList).find(
+  let num = Array.from(targetOctave.classList).find(
     className => className.startsWith("keyboard--count")).slice(-1);
-
-  setBasicOffset(+targetBasicNum);
-  updateBasicSounds(+targetBasicNum);
-
-  allKeyElems.forEach(key => key.classList.remove("key--pressing"));
-  updateVisualHints();
+  switchBasicMode(num);
 }
 
 

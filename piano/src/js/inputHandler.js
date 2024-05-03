@@ -4,7 +4,7 @@
 export let pressedKeys = new Set();
 
 import { visualMode } from "./visualModeChanger.js";
-import { switchBasicMode, switchAdvancedMode, 
+import { switchBasicModeKeyHandler, switchAdvancedMode, 
   switchProMode, switchModeType, noteInput, isEditModeActive } from "./functionalModeSwitcher.js";
 
 let isRightPaddleActive = false;
@@ -95,7 +95,7 @@ function pressedKeysHandler(e) {
   if (pressedKeys.has("ShiftLeft") || (pressedKeys.has("ShiftRight"))) {
     switch(switchModeType) {
       case "basic": {
-        switchBasicMode();
+        switchBasicModeKeyHandler();
         break;
       }
       case "advanced": {

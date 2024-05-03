@@ -7,7 +7,7 @@ import { setBasicOffset, setAdvancedModeLayouts, setProModeLayouts,
 const saveToLsBtn = document.querySelector(".js-save-local-storage");
 const readFromLsBtn = document.querySelector(".js-read-local-storage");
 
-window.onbeforeunload = saveToLs;
+//window.onbeforeunload = saveToLs;
 function saveToLs() {
   localStorage.setItem("basic", activeBasicOffset);
   localStorage.setItem("adv", JSON.stringify(advancedModeLayouts));
@@ -16,9 +16,15 @@ function saveToLs() {
 
 window.onload = readFromLs;
 function readFromLs() {
-  setBasicOffset(localStorage.getItem("basic"));
-  setAdvancedModeLayouts(JSON.parse(localStorage.getItem("adv")));
-  setProModeLayouts(JSON.parse(localStorage.getItem("pro")));
+  if (localStorage.getItem("basic")) {
+    setBasicOffset(localStorage.getItem("basic"));
+  }
+  if (localStorage.getItem("adv")) {
+    setAdvancedModeLayouts(JSON.parse(localStorage.getItem("adv")));
+  }
+  if (localStorage.getItem("pro")) {
+    setProModeLayouts(JSON.parse(localStorage.getItem("pro")));
+  }
   updateMode();
 }
 

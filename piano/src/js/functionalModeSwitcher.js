@@ -13,6 +13,8 @@ let textDigits = ["Digit0", "Digit1", "Digit2",
   "Digit3", "Digit4", "Digit5", "Digit6", "Digit7", "Digit8"];
 
 
+
+
 export let filterSpecialKeys = () => new Set(([...pressedKeys]).filter(value => 
   ((value !== "ShiftLeft") && 
   (value !== "ShiftRight") && 
@@ -192,15 +194,22 @@ editModeToggler.addEventListener("change", () => {
 
 let pressedOctave = undefined;
 
-export function switchBasicMode() {
+export function switchBasicModeKeyHandler() {
   let tmpDigits = [...textDigits];
   tmpDigits.splice(0, 1);
   tmpDigits.splice(-2, 2);
-  let targetDigit = tmpDigits.find(key => pressedKeys.has(key));
-  if (targetDigit) {
-    activeBasicOffset = +(targetDigit.slice(5, 6));
-    updateBasicSounds(activeBasicOffset);
+  let num = +(tmpDigits.find(key => pressedKeys.has(key)).slice(5, 6));
+  if (num) {
+    switchBasicMode(num);
   }
+}
+
+
+export function switchBasicMode(num) {
+  setBasicOffset(num);
+  updateBasicSounds(num);
+  const allKeyElems = document.querySelectorAll(".key");
+  allKeyElems.forEach(key => key.classList.remove("key--pressing"));
   updateVisualHints();
 }
 
