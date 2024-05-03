@@ -275,6 +275,18 @@ export function switchAdvancedMode() {
       pressedOctave = undefined;
     } else {
       pressedOctave = getPressedOctave();
+
+
+      console.log({pressedOctave});
+      let t = document.querySelector(`.${pressedOctave}`);
+      console.log(t);
+      console.log(t.dataset.sound.slice(-1));
+
+      let num = t.dataset.sound.slice(-1);
+      let octaveKeys = document.querySelectorAll(`.keyboard--count-${num} .key`);
+      console.log(octaveKeys);
+
+      octaveKeys.forEach(keyElem => keyElem.classList.add("key--prev"));
     }
   }
 
