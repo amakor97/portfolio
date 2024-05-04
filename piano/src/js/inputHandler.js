@@ -4,7 +4,7 @@
 export let pressedKeys = new Set();
 
 import { visualMode } from "./visualModeChanger.js";
-import { switchBasicModeKeyHandler, switchAdvancedMode, 
+import { switchBasicModeKeyHandler, switchAdvancedModeKeyHandler, 
   switchProMode, switchModeType, noteInput, isEditModeActive } from "./functionalModeSwitcher.js";
 
 let isRightPaddleActive = false;
@@ -99,7 +99,7 @@ function pressedKeysHandler(e) {
         break;
       }
       case "advanced": {
-        switchAdvancedMode();
+        switchAdvancedModeKeyHandler();
         break;
       }
       case "pro": {

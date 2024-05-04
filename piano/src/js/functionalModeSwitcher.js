@@ -239,34 +239,17 @@ function updateAdvancedSounds() {
 
 
 export function updateAdvancedLayoutAndOctave2(octaveName, nextOctaveNum) {
-  if (nextOctaveNum) {
-    updateAdvancedOctaveSounds(octaveName, nextOctaveNum);
-    const name = octaveName.slice(7);
-    advancedModeLayouts[activeAdvancedLayout][name] = +nextOctaveNum;
-  }
+  updateAdvancedOctaveSounds(octaveName, nextOctaveNum);
+  const name = octaveName.slice(7);
+  advancedModeLayouts[activeAdvancedLayout][name] = +nextOctaveNum;
   allKeyElems.forEach(key => key.classList.remove("key--pressing"));
   updateVisualHints();
 }
 
 
-function updateAdvancedLayoutAndOctave(octaveName) {
-  const pressedSymbolKeys = filterSpecialKeys();
-  let nextOctaveNum = (pressedSymbolKeys.size === 1) ? 
-    Array.from(pressedSymbolKeys)[0] : undefined;
-
-  console.log({nextOctaveNum});
-
-  if (textDigits.includes(nextOctaveNum)) {
-    nextOctaveNum = nextOctaveNum.slice(-1);
-    updateAdvancedLayoutAndOctave2(octaveName, nextOctaveNum);
-  }
-}
-
 
 function getPressedOctave() {
-  const pressedSymbolKeys = filterSpecialKeys();
-  let targetKey = (pressedSymbolKeys.size === 1) ? 
-    Array.from(pressedSymbolKeys)[0] : undefined;
+  let targetKey = getPressedSymbolKey();
 
   if (targetKey) {
     const allKeyElems = document.querySelectorAll(".key");
@@ -279,35 +262,132 @@ function getPressedOctave() {
 }
 
 
-export function switchAdvancedMode() {
+export function switchAdvancedModeKeyHandler() {
   if (!isEditModeActive) {
     updateAdvancedSounds();
   } else {
-
-    if (!pressedOctave) {
-      pressedOctave = getPressedOctave();
-
-
-      console.log({pressedOctave});
-      {
-        let t = document.querySelector(`.${pressedOctave}`);
-        console.log(t);
-        console.log(t.dataset.sound.slice(-1));
-  
-        let num = t.dataset.sound.slice(-1);
-        let octaveKeys = document.querySelectorAll(`.keyboard--count-${num} .key`);
-        console.log(octaveKeys);
-  
-        octaveKeys.forEach(keyElem => keyElem.classList.add("key--prev"));
-      }
-
-    } else {
-      updateAdvancedLayoutAndOctave(pressedOctave);
-      pressedOctave = undefined;
-    }
+    let targetKey = getPressedSymbolKey();
+    console.log({targetKey});
+    switchAdvancedMode();
   }
 
   updateVisualHints();
+}
+
+
+function getPressedSymbolKey() {
+  const pressedSymbolKeys = filterSpecialKeys();
+  let targetKey = (pressedSymbolKeys.size === 1) ? 
+    Array.from(pressedSymbolKeys)[0] : undefined;
+  return targetKey;
+}
+
+
+let prevOctaveNum = undefined;
+
+
+function getPrevOctaveNumFromKey(key) {
+  if (!key) {
+    return;
+  }
+
+  let num = undefined;
+
+  console.log(key);
+  allKeyElems.forEach(keyElem => {
+    if (keyElem.dataset.key === key) {
+      console.log(keyElem.dataset.sound.slice(-1));
+      num = keyElem.dataset.sound.slice(-1);
+    }
+  })
+  return num;
+}
+
+
+function getPressedKeyElemByKey(key) {
+  let tmpKey = undefined;
+  allKeyElems.forEach(keyElem => {
+    if (keyElem.dataset.key === key) {
+      tmpKey = key;
+    }
+  })
+  return tmpKey;
+}
+
+
+
+function getKbdHint(prevOctaveNum) {
+  let prevOctaveKeys = document.querySelectorAll(
+    `.keyboard--count-${prevOctaveNum} .key:not(.key--empty)`);
+  let kbdHint = "";
+  prevOctaveKeys.forEach(prevOctaveKey => {
+    let tmpKbdHint = prevOctaveKey.querySelector(".js-kbd-key-hint");
+    if (tmpKbdHint.textContent) {
+      kbdHint = tmpKbdHint;
+    }
+  })
+
+  return kbdHint;
+}
+
+function getOctaveClassByHint(kbdHint) {
+  for (let keyElem of allKeyElems) {
+    if (keyElem.dataset.symbol === kbdHint.textContent) {
+      return getOctaveClassByElem(keyElem);
+    }
+  }
+}
+
+
+
+
+
+export function switchAdvancedMode() {
+  let pressedKey = getPressedSymbolKey();
+  
+  console.log({pressedKey});
+
+
+
+  if (!prevOctaveNum) {
+    prevOctaveNum = getPrevOctaveNumFromKey(pressedKey);
+    console.log({prevOctaveNum});
+
+
+    //pressedOctave = getPressedOctave();
+
+    /*
+    console.log({pressedOctave});
+    {
+      let t = document.querySelector(`.${pressedOctave}`);
+      console.log(t);
+      console.log(t.dataset.sound.slice(-1));
+
+      let num = t.dataset.sound.slice(-1);
+      let octaveKeys = document.querySelectorAll(`.keyboard--count-${num} .key`);
+      console.log(octaveKeys);
+
+      octaveKeys.forEach(keyElem => keyElem.classList.add("key--prev"));
+    }
+    */
+
+  } else {
+
+    let kbdHint = getKbdHint(prevOctaveNum);
+    let octaveName = (kbdHint === "") ? "js-key-super" : 
+      getOctaveClassByHint(kbdHint);
+
+      //let nextOctaveNum = Array.from(
+        //clickedKeyElem.parentNode.parentNode.classList).find(
+        //className => className.startsWith("keyboard--count")).slice(-1);
+
+    let nextOctaveNum = getPressedSymbolKey();
+    if (textDigits.includes(nextOctaveNum)) {
+      nextOctaveNum = nextOctaveNum.slice(-1);
+      updateAdvancedLayoutAndOctave2(octaveName, nextOctaveNum);
+    }
+    prevOctaveNum = undefined;
+  }
 }
 
 
