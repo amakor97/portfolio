@@ -7,7 +7,7 @@ import { updateVisualHints } from "./hintsUpdater.js";
 import { setBasicOffset, advancedModeLayouts, activeAdvancedLayout, 
   proModeLayouts, activeProLayout, getOctaveClassByElem, 
   updateAdvancedOctaveSounds,
-  switchBasicMode } from "./functionalModeSwitcher.js";
+  switchBasicMode, updateAdvancedLayoutAndOctave2 } from "./functionalModeSwitcher.js";
 
 const allKeyElems = document.querySelectorAll(".key");
 allKeyElems.forEach(key => {
@@ -65,6 +65,7 @@ function getPrevOctaveNum(key) {
     if (keyElem.dataset && (kdbHint.textContent !== "")) {
       prevOctaveNum = Array.from(prevOctave.classList).find(
         className => className.startsWith("keyboard--count")).slice(-1);
+        console.log("exit");
         return prevOctaveNum;
       }
   }
@@ -135,20 +136,14 @@ function switchAdvancedModeClick(e, key) {
     console.log("hh");
     let kbdHint = getKbdHint(prevOctaveNum);
     console.log({kbdHint});
-    let octaveName = (kbdHint === "") ? "js-key-super" : getOctaveClassByHint(kbdHint);
-    console.log({octaveName});
-    const name = octaveName.slice(7);
-    console.log({name});
+    let octaveName = (kbdHint === "") ? "js-key-super" : 
+      getOctaveClassByHint(kbdHint);
 
     let nextOctaveNum = Array.from(
       clickedKeyElem.parentNode.parentNode.classList).find(
       className => className.startsWith("keyboard--count")).slice(-1);
-    advancedModeLayouts[activeAdvancedLayout][name] = +nextOctaveNum;
-
-    updateAdvancedOctaveSounds(octaveName, nextOctaveNum);
-
-    allKeyElems.forEach(key => key.classList.remove("key--pressing"));
-    updateVisualHints();
+    updateAdvancedLayoutAndOctave2(octaveName, nextOctaveNum);
+    
     prevOctaveNum = undefined;
   }
 }
