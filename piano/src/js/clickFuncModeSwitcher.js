@@ -7,7 +7,8 @@ import { updateVisualHints } from "./hintsUpdater.js";
 import { setBasicOffset, advancedModeLayouts, activeAdvancedLayout, 
   proModeLayouts, activeProLayout, getOctaveClassByElem, 
   updateAdvancedOctaveSounds,
-  switchBasicMode, updateAdvancedLayoutAndOctave2 } from "./functionalModeSwitcher.js";
+  switchBasicMode, updateAdvancedLayoutAndOctave2,
+  prevOctaveNum, setPrevOctaveNum } from "./functionalModeSwitcher.js";
 
 const allKeyElems = document.querySelectorAll(".key");
 allKeyElems.forEach(key => {
@@ -39,7 +40,7 @@ function switchByClick(e, key) {
 }
 
 
-export let prevOctaveNum = undefined;
+//export let prevOctaveNum = undefined;
 export let clickedProKeyElem = undefined;
 
 
@@ -63,8 +64,8 @@ function getPrevOctaveNum(key) {
   for (let keyElem of prevOctaveKeys) {
     let kdbHint = keyElem.querySelector(".js-kbd-key-hint");
     if (keyElem.dataset && (kdbHint.textContent !== "")) {
-      prevOctaveNum = Array.from(prevOctave.classList).find(
-        className => className.startsWith("keyboard--count")).slice(-1);
+      setPrevOctaveNum(Array.from(prevOctave.classList).find(
+        className => className.startsWith("keyboard--count")).slice(-1));
         console.log("exit");
         return prevOctaveNum;
       }
@@ -85,7 +86,7 @@ function getPrevOctaveNum(key) {
   console.log({isZeroOctave});
 
   if (isZeroOctave) {
-    prevOctaveNum = 0;
+    setPrevOctaveNum(0);
     return "0";
   }
 
@@ -96,8 +97,8 @@ function getPrevOctaveNum(key) {
 
   let kdbHint = key.querySelector(".js-kbd-key-hint");
   if (key.dataset && (kdbHint.textContent !== "")) {
-    prevOctaveNum = Array.from(key.parentNode.parentNode.classList).find(
-      className => className.startsWith("keyboard--count")).slice(-1);
+    setPrevOctaveNum(Array.from(key.parentNode.parentNode.classList).find(
+      className => className.startsWith("keyboard--count")).slice(-1));
   }
   return prevOctaveNum; 
 }
@@ -130,7 +131,7 @@ function getOctaveClassByHint(kbdHint) {
 function switchAdvancedModeClick(e, key) {
   let clickedKeyElem = e.target;
   if (!prevOctaveNum) {
-   prevOctaveNum = getPrevOctaveNum(key);
+   setPrevOctaveNum(getPrevOctaveNum(key));
    console.log({prevOctaveNum});
   } else {
     console.log("hh");
@@ -144,7 +145,7 @@ function switchAdvancedModeClick(e, key) {
       className => className.startsWith("keyboard--count")).slice(-1);
     updateAdvancedLayoutAndOctave2(octaveName, nextOctaveNum);
     
-    prevOctaveNum = undefined;
+    setPrevOctaveNum(undefined);
   }
 }
 

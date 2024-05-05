@@ -283,8 +283,8 @@ function getPressedSymbolKey() {
 }
 
 
-let prevOctaveNum = undefined;
-
+export let prevOctaveNum = undefined;
+export let setPrevOctaveNum = (n) => prevOctaveNum = n;
 
 function getPrevOctaveNumFromKey(key) {
   if (!key) {
@@ -316,10 +316,16 @@ function getPressedKeyElemByKey(key) {
 
 
 
+//bug here
+//prevOctaveNum => prevOctaveName
+
 function getKbdHint(prevOctaveNum) {
   let prevOctaveKeys = document.querySelectorAll(
     `.keyboard--count-${prevOctaveNum} .key:not(.key--empty)`);
   let kbdHint = "";
+
+  console.log(prevOctaveKeys);
+
   prevOctaveKeys.forEach(prevOctaveKey => {
     let tmpKbdHint = prevOctaveKey.querySelector(".js-kbd-key-hint");
     if (tmpKbdHint.textContent) {
@@ -327,12 +333,22 @@ function getKbdHint(prevOctaveNum) {
     }
   })
 
+  let lolHint = kbdHint.cloneNode(true);
+  console.log("KH while retrieving: ");
+  console.log(lolHint);
+
   return kbdHint;
 }
 
 function getOctaveClassByHint(kbdHint) {
+  console.log(kbdHint);
+  console.log(kbdHint.textContent);
+  console.log(kbdHint.innerHTML);
   for (let keyElem of allKeyElems) {
     if (keyElem.dataset.symbol === kbdHint.textContent) {
+      console.log(keyElem);
+      console.log(keyElem.dataset.symbol);
+      console.log(kbdHint.textContent);
       return getOctaveClassByElem(keyElem);
     }
   }
@@ -345,13 +361,13 @@ function getOctaveClassByHint(kbdHint) {
 export function switchAdvancedMode() {
   let pressedKey = getPressedSymbolKey();
   
-  console.log({pressedKey});
+  console.log("PK at SWA enter:", pressedKey);
 
 
 
   if (!prevOctaveNum) {
     prevOctaveNum = getPrevOctaveNumFromKey(pressedKey);
-    console.log({prevOctaveNum});
+    console.log("PON when no PON: ", prevOctaveNum);
 
 
     //pressedOctave = getPressedOctave();
@@ -372,10 +388,12 @@ export function switchAdvancedMode() {
     */
 
   } else {
-
+    console.log("PON when is PON: ", prevOctaveNum);
     let kbdHint = getKbdHint(prevOctaveNum);
+    console.log("KH when is PON: ", kbdHint);
     let octaveName = (kbdHint === "") ? "js-key-super" : 
       getOctaveClassByHint(kbdHint);
+    console.log("ON when is PON: ", octaveName);
 
       //let nextOctaveNum = Array.from(
         //clickedKeyElem.parentNode.parentNode.classList).find(
