@@ -1,7 +1,7 @@
 "use strict";
 
-import { isEditModeActive, switchModeType } from "./functionalModeSwitcher.js";
-import { prevOctaveNum, clickedProKeyElem } from "./clickFuncModeSwitcher.js";
+import { isEditModeActive, switchModeType, prevOctaveNum } from "./functionalModeSwitcher.js";
+import { clickedProKeyElem } from "./clickFuncModeSwitcher.js";
 
 const allKeyElems = document.querySelectorAll(".key");
 allKeyElems.forEach(keyElem => {
@@ -76,7 +76,7 @@ function highlightPrevAdvancedKeys(e) {
   let targetBasicNum = +(Array.from(targetOctave.classList).find(
     className => className.startsWith("keyboard--count")).slice(-1));
 
-  console.log({targetBasicNum});
+  //console.log({targetBasicNum});
 
   let targetKeys = [];
   fillArrayWithOctaveKeys(targetKeys, targetBasicNum);

@@ -1,14 +1,14 @@
 "use strict";
 
 
-import { isEditModeActive, switchModeType, 
+import { isEditModeActive, pressedOctave, switchModeType, 
   updateBasicSounds } from "./functionalModeSwitcher.js";
 import { updateVisualHints } from "./hintsUpdater.js";
 import { setBasicOffset, advancedModeLayouts, activeAdvancedLayout, 
   proModeLayouts, activeProLayout, getOctaveClassByElem, 
   updateAdvancedOctaveSounds,
   switchBasicMode, updateAdvancedLayoutAndOctave2,
-  prevOctaveNum, setPrevOctaveNum } from "./functionalModeSwitcher.js";
+  prevOctaveNum, setPrevOctaveNum, setPressedOctaveName, switchProMode3 } from "./functionalModeSwitcher.js";
 
 const allKeyElems = document.querySelectorAll(".key");
 allKeyElems.forEach(key => {
@@ -29,7 +29,7 @@ function switchByClick(e, key) {
       break;
     }
     case("advanced"): {
-      switchAdvancedModeClick(e, key);
+      switchAdvancedModeClickHandler(e, key);
       break;
     }
     case("pro"): {
@@ -59,7 +59,7 @@ function getPrevOctaveNum(key) {
   console.log(prevOctave);
 
   let prevOctaveKeys = prevOctave.querySelectorAll(".key");
-  console.log(prevOctaveKeys);
+  //console.log(prevOctaveKeys);
 
   for (let keyElem of prevOctaveKeys) {
     let kdbHint = keyElem.querySelector(".js-kbd-key-hint");
@@ -91,9 +91,7 @@ function getPrevOctaveNum(key) {
   }
 
   let rbKey = document.querySelector(".key[data-symbol=']']");
-  console.log(rbKey);
   let rbHint = rbKey.querySelector(".js-piano-key-hint");
-  console.log(rbHint.textContent);
 
   let kdbHint = key.querySelector(".js-kbd-key-hint");
   if (key.dataset && (kdbHint.textContent !== "")) {
@@ -120,38 +118,119 @@ function getKbdHint(prevOctaveNum) {
 
 
 function getOctaveClassByHint(kbdHint) {
+
+  console.log("+++++++++++++++++++++++++++++++++++++++++++++++");
+  console.log(kbdHint.parentNode);
+
+  let clickedOctave = kbdHint.parentNode.parentNode.parentNode;
+
+  console.log(clickedOctave.classList);
+
+  let clickedOctaveNum = Array.from(clickedOctave.classList).find(
+    className => className.startsWith("keyboard--count"));
+  console.log(clickedOctaveNum);
+
+  clickedOctave = document.querySelector(`.${clickedOctaveNum}`);
+
+  let clickedOctaveKeys = clickedOctave.querySelectorAll(".key");
+
+  let targetKeyElem = undefined;
+
+  for (let keyElem of clickedOctaveKeys) {
+    let tmpKbdHint = keyElem.querySelector(".js-kbd-key-hint");
+    if (tmpKbdHint.textContent) {
+      console.log("found");
+
+      for (let keyElem2 of allKeyElems) {
+        if (tmpKbdHint.textContent === keyElem2.dataset.symbol) {
+          targetKeyElem = keyElem2; ////////////////////////
+        }
+      }
+
+      //targetKeyElem = tmpKbdHint.parentNode;
+    }
+  }
+
+
+  if (targetKeyElem) {
+    console.log("ttg");
+    return getOctaveClassByElem(targetKeyElem);
+  }
+
+
   for (let keyElem of allKeyElems) {
     if (keyElem.dataset.symbol === kbdHint.textContent) {
       return getOctaveClassByElem(keyElem);
     }
   }
+
+  for (let keyElem of allKeyElems) {
+    let tmpKbdHint = keyElem.querySelector(".js-kbd-key-hint");
+    if (tmpKbdHint.textContent === "]") {
+      console.log("rb is found");
+      return;
+    }
+  }
+
+  
+  return "js-key-super";
 }
+
+
+function switchAdvancedModeClickHandler(e, key) {
+  switchAdvancedModeClick(e, key);
+}
+
 
 
 function switchAdvancedModeClick(e, key) {
   let clickedKeyElem = e.target;
-  if (!prevOctaveNum) {
-   setPrevOctaveNum(getPrevOctaveNum(key));
-   console.log({prevOctaveNum});
+  console.log(clickedKeyElem);
+  console.log(key);
+  if (!pressedOctave) {
+
+    console.log("======");
+    console.log(key);
+    console.log(key.dataset);
+
+    let tmpKbdHint = key.querySelector(".js-kbd-key-hint");
+
+
+    allKeyElems.forEach(keyElem => {
+      if (keyElem.dataset.key) {
+        let keyCo = keyElem.dataset.key;
+        if (tmpKbdHint.textContent === keyCo.slice(-1).toLowerCase()) {
+          console.log(keyElem.classList); //////
+        }
+      }
+    })
+
+    console.log(getOctaveClassByHint(tmpKbdHint));
+    setPressedOctaveName(getOctaveClassByHint(tmpKbdHint));
+    console.log({pressedOctave});
+
+    setPrevOctaveNum(getPrevOctaveNum(key));
+    console.log("CAMS, setting PON: ", prevOctaveNum);
   } else {
-    console.log("hh");
     let kbdHint = getKbdHint(prevOctaveNum);
     console.log({kbdHint});
     let octaveName = (kbdHint === "") ? "js-key-super" : 
       getOctaveClassByHint(kbdHint);
 
+    console.log("CAMS, setting ON: ", octaveName);
+
     let nextOctaveNum = Array.from(
       clickedKeyElem.parentNode.parentNode.classList).find(
       className => className.startsWith("keyboard--count")).slice(-1);
-    updateAdvancedLayoutAndOctave2(octaveName, nextOctaveNum);
+    updateAdvancedLayoutAndOctave2(pressedOctave, nextOctaveNum);
     
     setPrevOctaveNum(undefined);
+    setPressedOctaveName(undefined);
   }
 }
 
 
 function getClickedProKeyElem(key) {
-  console.log("x");
   let kbdHint = key.querySelector(".js-kbd-key-hint");
   if (key.dataset && (kbdHint.textContent !== "")) {
     for (let keyElem of allKeyElems) {
@@ -164,16 +243,18 @@ function getClickedProKeyElem(key) {
 
 
 function switchProModeClick(key) {
+  let noteForProMode = key.dataset.display;
+
   if (!clickedProKeyElem) {
     clickedProKeyElem = getClickedProKeyElem(key);
   } else {
-    clickedProKeyElem.dataset.sound = key.dataset.display;
-    proModeLayouts[activeProLayout][clickedProKeyElem.dataset.key] = 
-      key.dataset.display;
-      
-    allKeyElems.forEach(key => key.classList.remove("key--pressing"));
-    updateVisualHints();
+    let targetKey = clickedProKeyElem.dataset.key;
+    switchProMode3(clickedProKeyElem, targetKey, noteForProMode);
     clickedProKeyElem = undefined;
-    console.log(clickedProKeyElem);
   }
+}
+
+
+function switchProModeClickHandler(key) {
+  
 }
