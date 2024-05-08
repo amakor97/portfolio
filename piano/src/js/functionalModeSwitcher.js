@@ -268,9 +268,18 @@ export function switchAdvancedModeKeyHandler() {
   if (!isEditModeActive) {
     updateAdvancedSounds();
   } else {
-    let targetKey = getPressedSymbolKey();
-    console.log({targetKey});
-    switchAdvancedMode();
+    if (filterSpecialKeys().size === 0) {
+      return;
+    }
+  
+    if (!pressedOctave) {
+      pressedOctave = getPressedOctave();
+    } else {
+      let nextOctaveNum = getPressedSymbolKey();
+      if (textDigits.includes(nextOctaveNum)) {
+        switchAdvancedMode2(pressedOctave, nextOctaveNum);
+      }
+    }
   }
 
   updateVisualHints();
@@ -363,61 +372,26 @@ function getOctaveClassByHint(kbdHint) {
 
 
 
+export function switchAdvancedMode2(name, num) {
+  num = num.slice(-1);
+  updateAdvancedLayoutAndOctave2(name, num);
+  setPressedOctaveName(undefined);
+}
+
+
 
 export function switchAdvancedMode() {
-  console.log("PO at SWAK enter: ", {pressedOctave});
-
-  console.log(pressedKeys);
   if (filterSpecialKeys().size === 0) {
     return;
   }
 
-  let pressedKey = getPressedSymbolKey();
-
-
-
   if (!pressedOctave) {
-    prevOctaveNum = getPrevOctaveNumFromKey(pressedKey);
-    console.log("PON when no PON: ", prevOctaveNum);
-
     pressedOctave = getPressedOctave();
-    console.log(pressedOctave);
-
-    //pressedOctave = getPressedOctave();
-
-    /*
-    console.log({pressedOctave});
-    {
-      let t = document.querySelector(`.${pressedOctave}`);
-      console.log(t);
-      console.log(t.dataset.sound.slice(-1));
-
-      let num = t.dataset.sound.slice(-1);
-      let octaveKeys = document.querySelectorAll(`.keyboard--count-${num} .key`);
-      console.log(octaveKeys);
-
-      octaveKeys.forEach(keyElem => keyElem.classList.add("key--prev"));
-    }
-    */
-
   } else {
-    let kbdHint = getKbdHint(prevOctaveNum);
-    console.log("KH when is PON: ", kbdHint);
-    let octaveName = (kbdHint === "") ? "js-key-super" : 
-      getOctaveClassByHint(kbdHint);
-    console.log("ON when is PON: ", octaveName);
-
-      //let nextOctaveNum = Array.from(
-        //clickedKeyElem.parentNode.parentNode.classList).find(
-        //className => className.startsWith("keyboard--count")).slice(-1);
-
     let nextOctaveNum = getPressedSymbolKey();
     if (textDigits.includes(nextOctaveNum)) {
-      nextOctaveNum = nextOctaveNum.slice(-1);
-      console.log(octaveName);
-      updateAdvancedLayoutAndOctave2(pressedOctave, nextOctaveNum);
+      switchAdvancedMode2(pressedOctave, nextOctaveNum);
     }
-    pressedOctave = undefined;
   }
 }
 

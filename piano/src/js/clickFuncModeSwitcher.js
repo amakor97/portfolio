@@ -8,7 +8,8 @@ import { setBasicOffset, advancedModeLayouts, activeAdvancedLayout,
   proModeLayouts, activeProLayout, getOctaveClassByElem, 
   updateAdvancedOctaveSounds,
   switchBasicMode, updateAdvancedLayoutAndOctave2,
-  prevOctaveNum, setPrevOctaveNum, setPressedOctaveName, switchProMode3 } from "./functionalModeSwitcher.js";
+  prevOctaveNum, setPrevOctaveNum, setPressedOctaveName, switchProMode3,
+switchAdvancedMode2 } from "./functionalModeSwitcher.js";
 
 const allKeyElems = document.querySelectorAll(".key");
 allKeyElems.forEach(key => {
@@ -178,23 +179,25 @@ function getOctaveClassByHint(kbdHint) {
 
 
 function switchAdvancedModeClickHandler(e, key) {
-  switchAdvancedModeClick(e, key);
+  if (!pressedOctave) {
+    let tmpKbdHint = key.querySelector(".js-kbd-key-hint");
+    setPressedOctaveName(getOctaveClassByHint(tmpKbdHint));
+  } else {
+    let clickedKeyElem = e.target;
+    let nextOctaveNum = Array.from(
+      clickedKeyElem.parentNode.parentNode.classList).find(
+      className => className.startsWith("keyboard--count"));
+    switchAdvancedMode2(pressedOctave, nextOctaveNum);
+  }
 }
 
 
 
 function switchAdvancedModeClick(e, key) {
   let clickedKeyElem = e.target;
-  console.log(clickedKeyElem);
-  console.log(key);
+
   if (!pressedOctave) {
-
-    console.log("======");
-    console.log(key);
-    console.log(key.dataset);
-
     let tmpKbdHint = key.querySelector(".js-kbd-key-hint");
-
 
     allKeyElems.forEach(keyElem => {
       if (keyElem.dataset.key) {
@@ -205,26 +208,16 @@ function switchAdvancedModeClick(e, key) {
       }
     })
 
-    console.log(getOctaveClassByHint(tmpKbdHint));
     setPressedOctaveName(getOctaveClassByHint(tmpKbdHint));
-    console.log({pressedOctave});
-
-    setPrevOctaveNum(getPrevOctaveNum(key));
-    console.log("CAMS, setting PON: ", prevOctaveNum);
   } else {
-    let kbdHint = getKbdHint(prevOctaveNum);
-    console.log({kbdHint});
-    let octaveName = (kbdHint === "") ? "js-key-super" : 
-      getOctaveClassByHint(kbdHint);
-
-    console.log("CAMS, setting ON: ", octaveName);
 
     let nextOctaveNum = Array.from(
       clickedKeyElem.parentNode.parentNode.classList).find(
-      className => className.startsWith("keyboard--count")).slice(-1);
+      className => className.startsWith("keyboard--count"));
+
+    nextOctaveNum = nextOctaveNum.slice(-1);
     updateAdvancedLayoutAndOctave2(pressedOctave, nextOctaveNum);
-    
-    setPrevOctaveNum(undefined);
+
     setPressedOctaveName(undefined);
   }
 }
