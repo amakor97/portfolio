@@ -200,9 +200,10 @@ export function switchBasicModeKeyHandler() {
   let tmpDigits = [...textDigits];
   tmpDigits.splice(0, 1);
   tmpDigits.splice(-2, 2);
+  console.log(tmpDigits);
   let num = +(tmpDigits.find(key => pressedKeys.has(key)).slice(5, 6));
   if (num) {
-    switchBasicMode(num);
+    updateBasicMode(num);
   }
 }
 
@@ -210,6 +211,11 @@ export function switchBasicModeKeyHandler() {
 export function switchBasicMode(num) {
   setBasicOffset(num);
   updateBasicSounds(num);
+}
+
+
+export function updateBasicMode(num) {
+  switchBasicMode(num);
   const allKeyElems = document.querySelectorAll(".key");
   allKeyElems.forEach(key => key.classList.remove("key--pressing"));
   updateVisualHints();
@@ -245,7 +251,6 @@ export function updateAdvancedLayoutAndOctave2(octaveName, nextOctaveNum) {
   const name = octaveName.slice(7);
   advancedModeLayouts[activeAdvancedLayout][name] = +nextOctaveNum;
   allKeyElems.forEach(key => key.classList.remove("key--pressing"));
-  updateVisualHints();
 }
 
 
@@ -277,12 +282,12 @@ export function switchAdvancedModeKeyHandler() {
     } else {
       let nextOctaveNum = getPressedSymbolKey();
       if (textDigits.includes(nextOctaveNum)) {
-        switchAdvancedMode2(pressedOctave, nextOctaveNum);
+        updateAdvancedMode(pressedOctave, nextOctaveNum);
       }
     }
   }
 
-  updateVisualHints();
+  updateVisualHints();  /// todo
 }
 
 
@@ -371,11 +376,16 @@ function getOctaveClassByHint(kbdHint) {
 }
 
 
+export function updateAdvancedMode(name, num) {
+  switchAdvancedMode2(name, num);
+  updateVisualHints();
+  setPressedOctaveName(undefined);
+}
+
 
 export function switchAdvancedMode2(name, num) {
   num = num.slice(-1);
   updateAdvancedLayoutAndOctave2(name, num);
-  setPressedOctaveName(undefined);
 }
 
 
@@ -407,6 +417,9 @@ function updateProSounds() {
     activeProLayout = targetKey;
   }
 
+  console.log({activeProLayout});
+  console.log(proModeLayouts[activeProLayout]);
+
   const keyElems = document.querySelectorAll(".key");
   keyElems.forEach(keyElem => {
     if (keyElem.dataset.key in proModeLayouts[activeProLayout]) {
@@ -430,8 +443,12 @@ function updateProLayoutAndKey(targetKey) {
 }
 
 export function switchProModeKeyHandler() {
+  console.log({activeProLayout});
+  console.log([proModeLayouts][0][0]);
+  console.log([proModeLayouts][0].KeyZ);
   if (!isEditModeActive) {
     updateProSounds();
+    updateVisualHints();
   } else {
     if (!noteForProMode) {
       return;
@@ -446,11 +463,9 @@ export function switchProModeKeyHandler() {
           pressedProKeyElem = keyElem;
         }
       })
-      switchProMode3(pressedProKeyElem, targetKey, noteForProMode);
+      updateProMode(pressedProKeyElem, targetKey, noteForProMode);
     }
   }
-
-  updateVisualHints();
 }
 
 
@@ -491,9 +506,18 @@ export function switchProMode2() {
 }
 
 
+export function updateProMode(keyElem, targetKey, note) {
+  switchProMode3(keyElem, targetKey, note);
+  console.log("hh");
+  updateVisualHints();
+}
+
+
 export function switchProMode3(keyElem, targetKey, note) {
   keyElem.dataset.sound = note;
+  console.log(proModeLayouts[activeProLayout][targetKey]);
   proModeLayouts[activeProLayout][targetKey] = note;
+  console.log(proModeLayouts[activeProLayout][targetKey]);
   allKeyElems.forEach(keyElem => keyElem.classList.remove("key--pressing"));
   updateVisualHints();
 }

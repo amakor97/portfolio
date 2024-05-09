@@ -2,14 +2,15 @@
 
 
 import { isEditModeActive, pressedOctave, switchModeType, 
-  updateBasicSounds } from "./functionalModeSwitcher.js";
+  updateBasicSounds} from "./functionalModeSwitcher.js";
 import { updateVisualHints } from "./hintsUpdater.js";
 import { setBasicOffset, advancedModeLayouts, activeAdvancedLayout, 
   proModeLayouts, activeProLayout, getOctaveClassByElem, 
   updateAdvancedOctaveSounds,
   switchBasicMode, updateAdvancedLayoutAndOctave2,
   prevOctaveNum, setPrevOctaveNum, setPressedOctaveName, switchProMode3,
-switchAdvancedMode2 } from "./functionalModeSwitcher.js";
+  switchAdvancedMode2, updateBasicMode, updateAdvancedMode, 
+  updateProMode } from "./functionalModeSwitcher.js";
 
 const allKeyElems = document.querySelectorAll(".key");
 allKeyElems.forEach(key => {
@@ -49,7 +50,7 @@ function switchBasicModeClickHandler(e) {
   let targetOctave = e.target.parentNode.parentNode;
   let num = Array.from(targetOctave.classList).find(
     className => className.startsWith("keyboard--count")).slice(-1);
-  switchBasicMode(num);
+  updateBasicMode(num);
 }
 
 
@@ -180,14 +181,14 @@ function getOctaveClassByHint(kbdHint) {
 
 function switchAdvancedModeClickHandler(e, key) {
   if (!pressedOctave) {
-    let tmpKbdHint = key.querySelector(".js-kbd-key-hint");
-    setPressedOctaveName(getOctaveClassByHint(tmpKbdHint));
+    let kbdHint = key.querySelector(".js-kbd-key-hint");
+    setPressedOctaveName(getOctaveClassByHint(kbdHint));
   } else {
     let clickedKeyElem = e.target;
     let nextOctaveNum = Array.from(
       clickedKeyElem.parentNode.parentNode.classList).find(
       className => className.startsWith("keyboard--count"));
-    switchAdvancedMode2(pressedOctave, nextOctaveNum);
+    updateAdvancedMode(pressedOctave, nextOctaveNum);
   }
 }
 
@@ -249,5 +250,13 @@ function switchProModeClick(key) {
 
 
 function switchProModeClickHandler(key) {
-  
+  let noteForProMode = key.dataset.display;
+
+  if (!clickedProKeyElem) {
+    clickedProKeyElem = getClickedProKeyElem(key);
+  } else {
+    let targetKey = clickedProKeyElem.dataset.key;
+    updateProMode(clickedProKeyElem, targetKey, noteForProMode);
+    clickedProKeyElem = undefined;
+  }
 }

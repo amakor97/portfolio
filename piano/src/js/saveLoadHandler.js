@@ -14,7 +14,7 @@ function saveToLs() {
   localStorage.setItem("pro", JSON.stringify(proModeLayouts));
 }
 
-window.onload = readFromLs;
+//window.onload = readFromLs;
 function readFromLs() {
   if (localStorage.getItem("basic")) {
     setBasicOffset(localStorage.getItem("basic"));
