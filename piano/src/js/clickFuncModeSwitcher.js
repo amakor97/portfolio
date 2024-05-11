@@ -1,10 +1,11 @@
 "use strict";
 
 
-import { isEditModeActive, pressedOctave, switchModeType, 
-  updateBasicSounds} from "./functionalModeSwitcher.js";
+import { isEditModeActive, pressedOctave, 
+  switchModeType } from "./functionalModeSwitcher.js";
 import { getOctaveClassByElem, setPressedOctaveName, updateBasicMode, 
   updateAdvancedMode, updateProMode } from "./functionalModeSwitcher.js";
+
 
 const allKeyElems = document.querySelectorAll(".key");
 allKeyElems.forEach(key => {
@@ -82,8 +83,6 @@ function switchAdvancedModeClickHandler(e, key) {
 }
 
 
-
-
 function getClickedProKeyElem(key) {
   let kbdHint = key.querySelector(".js-kbd-key-hint");
   if (key.dataset && (kbdHint.textContent !== "")) {
@@ -94,8 +93,6 @@ function getClickedProKeyElem(key) {
     }
   }
 }
-
-
 
 
 function switchProModeClickHandler(key) {
