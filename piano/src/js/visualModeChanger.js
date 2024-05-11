@@ -1,21 +1,19 @@
 "use strict";
 
-export let visualMode = "double";
-export const assignModeCont = document
-  .querySelector(".js-control-assign-mode-cont");
-export const noteInputCont = document
-  .querySelector(".js-control-note-input-cont");
 
 import { updateSoundHints, updateKbdHints, updateVisualHints, 
   restoreKbdHints, updateDisabledKeys } from "./hintsUpdater.js";
 import { isEditModeActive } from "./functionalModeSwitcher.js";
 
-const kbdCont = document.querySelector(".js-keyboard-cont");
-const leftPart = document.querySelector(".js-keyboard-left");
-const centerPart = document.querySelector(".js-keyboard-center");
-const controlPanel = document.querySelector(".js-control-panel");
-const visualModeSelectors = document
-  .querySelectorAll("input[name='select-visual-mode']");
+
+export let visualMode = "double";
+export const noteInputCont = document.querySelector(
+  ".js-control-note-input-cont");
+
+const visualModeSelectors = document.querySelectorAll(
+  "input[name='select-visual-mode']");
+const controlToggleBtn = document.querySelector(
+  ".js-control-toggle-btn");
 
 
 visualModeSelectors.forEach(input => {
@@ -28,7 +26,7 @@ visualModeSelectors.forEach(input => {
 })
 
 
-export function toggleVisualMode() {
+function toggleVisualMode() {
   updateKbdRows();
   updateFullKbd();
 }
@@ -43,48 +41,12 @@ function updateKbdRows() {
 }
 
 
-function updateFullKbd() {
-  if ((visualMode === "full") || isEditModeActive) {
-    showFullKbd();
-  } else {
-    hideFullKbd();
-  }
-}
+function changeStylesForOneRow() {
+  const kbdCont = document.querySelector(".js-keyboard-cont");
+  const leftPart = document.querySelector(".js-keyboard-left");
+  const centerPart = document.querySelector(".js-keyboard-center");
+  const controlPanel = document.querySelector(".js-control-panel");
 
-
-export function hideFullKbd() {
-  kbdCont.classList.remove("keyboard-cont--full-kbd");
-
-  const hidedKeys = document.querySelectorAll(".js-key-hideable");
-  hidedKeys.forEach(key => key.classList.add("key--hided"));
-  const whiteKeys = document.querySelectorAll(".key--white");
-  whiteKeys.forEach(key => key.classList.remove("key--white-narrow"));
-  const blackKeys = document.querySelectorAll(".key--black");
-  blackKeys.forEach(key => key.classList.remove("key--black-narrow"));
-
-  restoreKbdHints();
-  updateSoundHints();
-  updateDisabledKeys();
-}
-
-
-export function showFullKbd() {
-  kbdCont.classList.add("keyboard-cont--full-kbd");
-
-  const hidedKeys = document.querySelectorAll(".js-key-hideable");
-  hidedKeys.forEach(key => key.classList.remove("key--hided"));
-  const whiteKeys = document.querySelectorAll(".key--white");
-  whiteKeys.forEach(key => key.classList.add("key--white-narrow"));
-  const blackKeys = document.querySelectorAll(".key--black");
-  blackKeys.forEach(key => key.classList.add("key--black-narrow"));
-
-  updateKbdHints();
-  updateSoundHints();
-  updateDisabledKeys();
-}
-
-
-export function changeStylesForOneRow() {
   kbdCont.classList.remove("keyboard-cont--double-rows");
   kbdCont.classList.add("keyboard-cont--single-row");
 
@@ -98,7 +60,12 @@ export function changeStylesForOneRow() {
 }
 
 
-export function changeStylesForTwoRows() {
+function changeStylesForTwoRows() {
+  const kbdCont = document.querySelector(".js-keyboard-cont");
+  const leftPart = document.querySelector(".js-keyboard-left");
+  const centerPart = document.querySelector(".js-keyboard-center");
+  const controlPanel = document.querySelector(".js-control-panel");
+
   kbdCont.classList.remove("keyboard-cont--single-row");
   kbdCont.classList.add("keyboard-cont--double-rows");
 
@@ -112,8 +79,51 @@ export function changeStylesForTwoRows() {
 }
 
 
-const controlToggleBtn = document.querySelector(".js-control-toggle-btn");
+function updateFullKbd() {
+  if ((visualMode === "full") || isEditModeActive) {
+    showFullKbd();
+  } else {
+    hideFullKbd();
+  }
+}
+
+
+function showFullKbd() {
+  const kbdCont = document.querySelector(".js-keyboard-cont");
+  const hidedKeys = document.querySelectorAll(".js-key-hideable");
+  const whiteKeys = document.querySelectorAll(".key--white");
+  const blackKeys = document.querySelectorAll(".key--black");
+
+  kbdCont.classList.add("keyboard-cont--full-kbd");
+  hidedKeys.forEach(key => key.classList.remove("key--hided"));
+  whiteKeys.forEach(key => key.classList.add("key--white-narrow"));
+  blackKeys.forEach(key => key.classList.add("key--black-narrow"));
+
+  updateKbdHints();
+  updateSoundHints();
+  updateDisabledKeys();
+}
+
+
+function hideFullKbd() {
+  const kbdCont = document.querySelector(".js-keyboard-cont");
+  const hidedKeys = document.querySelectorAll(".js-key-hideable");
+  const whiteKeys = document.querySelectorAll(".key--white");
+  const blackKeys = document.querySelectorAll(".key--black");
+
+  kbdCont.classList.remove("keyboard-cont--full-kbd");
+  hidedKeys.forEach(key => key.classList.add("key--hided"));
+  whiteKeys.forEach(key => key.classList.remove("key--white-narrow"));
+  blackKeys.forEach(key => key.classList.remove("key--black-narrow"));
+
+  restoreKbdHints();
+  updateSoundHints();
+  updateDisabledKeys();
+}
+
+
 controlToggleBtn.addEventListener("click", function() {
+  const controlPanel = document.querySelector(".js-control-panel");
   controlToggleBtn.classList.toggle("control-toggle-btn--rotated");
 
   if (visualMode === "double") {
@@ -126,8 +136,8 @@ controlToggleBtn.addEventListener("click", function() {
 })
 
 
-export function updateVisualMode(isActive) {
-  if (isActive) {
+export function updateVisualMode(isEditModeActive) {
+  if (isEditModeActive) {
     changeStylesForOneRow();
     showFullKbd();
     updateVisualHints();
