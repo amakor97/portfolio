@@ -7,9 +7,8 @@ import { noteInputCont, visualMode,
   updateVisualMode } from "./visualModeChanger.js";
 
 
-const textDigits = ["Digit0", "Digit1", "Digit2", "Digit3", "Digit4", 
-  "Digit5", "Digit6", "Digit7", "Digit8"];
-const allKeyElems = document.querySelectorAll(".key");
+const textDigits = ["Digit0", "Digit1", "Digit2", "Digit3", 
+  "Digit4", "Digit5", "Digit6", "Digit7", "Digit8"];
 
 export let activeBasicOffset = 4;
 export let advancedModeLayouts = createAdvancedModeLayouts(5);
@@ -27,9 +26,9 @@ export let setProModeLayouts = (obj) => proModeLayouts = obj;
 export let pressedOctave = undefined;
 export let setPressedOctaveName = (str) => pressedOctave = str;
 
-let pressedProKeyElem = undefined; ///closure
-
+let pressedProKeyElem = undefined;
 let noteForProMode = undefined;
+
 const modeSelectors = document.querySelectorAll(
   "input[name='select-switch-mode']");
 export const editModeToggler = document.querySelector(
@@ -251,10 +250,10 @@ export let filterSpecialKeys = () => new Set(([...pressedKeys]).filter(value =>
 
 
 function getPressedOctave() {
+  const allKeyElems = document.querySelectorAll(".key");
   let targetKey = getPressedSymbolKey();
 
   if (targetKey) {
-    const allKeyElems = document.querySelectorAll(".key");
     for (let keyElem of allKeyElems) {
       if (keyElem.dataset.key === targetKey) {
         return getOctaveClassByElem(keyElem);
@@ -286,6 +285,8 @@ export function updateAdvancedMode(name, num) {
 
 
 function switchAdvancedMode(name, num) {
+  const allKeyElems = document.querySelectorAll(".key");
+
   num = num.slice(-1);
   updateAdvancedOctaveSounds(name, num);
   updateAdvancedLayout(name, num);
@@ -298,9 +299,10 @@ function updateAdvancedLayout(octaveName, num) {
   advancedModeLayouts[activeAdvancedLayout][name] = +num;
 }
 
-//closure
+
 export function switchProModeKeyHandler() {
   const allKeyElems = document.querySelectorAll(".key");
+
   if (!isEditModeActive) {
     updateProSounds();
     updateVisualHints();
@@ -359,6 +361,8 @@ function updateProLayout(targetKey, note) {
 
 
 export function switchProMode(keyElem, targetKey, note) {
+  const allKeyElems = document.querySelectorAll(".key");
+
   updateProKeySound(keyElem, note);
   updateProLayout(targetKey, note);
   allKeyElems.forEach(keyElem => keyElem.classList.remove("key--pressing"));
