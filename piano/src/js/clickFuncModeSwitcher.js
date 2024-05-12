@@ -1,13 +1,15 @@
 "use strict";
 
 
-import { isEditModeActive, pressedOctave, 
-  switchModeType } from "./keyFuncModeSwitcher.js";
-import { getOctaveClassByElem, setPressedOctaveName, updateBasicMode, 
+import { isEditModeActive, pressedOctave, switchModeType, 
+  getOctaveClassByElem, setPressedOctaveName, updateBasicMode, 
   updateAdvancedMode, updateProMode } from "./keyFuncModeSwitcher.js";
 
 
 const allKeyElems = document.querySelectorAll(".key");
+export let clickedProKeyElem = undefined;
+
+
 allKeyElems.forEach(key => {
   key.addEventListener("click", function tmp(e) {
     switchByClick(e, key);
@@ -37,35 +39,11 @@ function switchByClick(e, key) {
 }
 
 
-export let clickedProKeyElem = undefined;
-
-
 function switchBasicModeClickHandler(e) {
   let targetOctave = e.target.parentNode.parentNode;
   let num = Array.from(targetOctave.classList).find(
     className => className.startsWith("keyboard--count")).slice(-1);
   updateBasicMode(num);
-}
-
-
-function getOctaveClassByHint(kbdHint) {
-  let clickedOctave = kbdHint.parentNode.parentNode.parentNode;
-  let clickedOctaveKeys = clickedOctave.querySelectorAll(".key");
-  let targetKeyElem = undefined;
-
-  for (let keyElem of clickedOctaveKeys) {
-    let tmpKbdHint = keyElem.querySelector(".js-kbd-key-hint");
-    if (tmpKbdHint.textContent) {
-
-      for (let keyElem2 of allKeyElems) {
-        if (tmpKbdHint.textContent === keyElem2.dataset.symbol) {
-          targetKeyElem = keyElem2; ///
-        }
-      }
-    }
-  }
-  
-  return getOctaveClassByElem(targetKeyElem);
 }
 
 
@@ -83,15 +61,25 @@ function switchAdvancedModeClickHandler(e, key) {
 }
 
 
-function getClickedProKeyElem(key) {
-  let kbdHint = key.querySelector(".js-kbd-key-hint");
-  if (key.dataset && (kbdHint.textContent !== "")) {
-    for (let keyElem of allKeyElems) {
-      if (keyElem.dataset.symbol === kbdHint.textContent) {
-        return keyElem;
+function getOctaveClassByHint(kbdHint) {
+  const allKeyElems = document.querySelectorAll(".key");
+  let clickedOctave = kbdHint.parentNode.parentNode.parentNode;
+  let clickedOctaveKeys = clickedOctave.querySelectorAll(".key");
+  let targetKeyElem = undefined;
+
+  for (let octaveKeyElem of clickedOctaveKeys) {
+    let kbdHint = octaveKeyElem.querySelector(".js-kbd-key-hint");
+    if (kbdHint.textContent) {
+
+      for (let keyElem of allKeyElems) {
+        if (kbdHint.textContent === keyElem.dataset.symbol) {
+          targetKeyElem = keyElem;
+        }
       }
     }
   }
+  
+  return getOctaveClassByElem(targetKeyElem);
 }
 
 
@@ -104,5 +92,19 @@ function switchProModeClickHandler(key) {
     let targetKey = clickedProKeyElem.dataset.key;
     updateProMode(clickedProKeyElem, targetKey, noteForProMode);
     clickedProKeyElem = undefined;
+  }
+}
+
+
+function getClickedProKeyElem(key) {
+  const allKeyElems = document.querySelectorAll(".key");
+  let kbdHint = key.querySelector(".js-kbd-key-hint");
+
+  if (key.dataset && (kbdHint.textContent !== "")) {
+    for (let keyElem of allKeyElems) {
+      if (keyElem.dataset.symbol === kbdHint.textContent) {
+        return keyElem;
+      }
+    }
   }
 }
