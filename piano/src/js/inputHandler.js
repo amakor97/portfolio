@@ -1,10 +1,10 @@
 "use strict";
 
 
-import { visualMode } from "./visualModeChanger.js";
+import { visualMode } from "./visualModeSwitcher.js";
 import { switchBasicModeKeyHandler, switchAdvancedModeKeyHandler, 
   switchProModeKeyHandler, switchModeType, noteInput, 
-  isEditModeActive } from "./functionalModeSwitcher.js";
+  isEditModeActive } from "./keyFuncModeSwitcher.js";
 
 
 export let pressedKeys = new Set();

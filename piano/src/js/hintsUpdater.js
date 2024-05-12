@@ -1,7 +1,7 @@
 "use strict";
 
-import { isEditModeActive } from "./functionalModeSwitcher.js";
-import { visualMode } from "./visualModeChanger.js";
+import { isEditModeActive } from "./keyFuncModeSwitcher.js";
+import { visualMode } from "./visualModeSwitcher.js";
 
 
 const toggleKbdHintsBtn = document.querySelector(".js-hide-kbd-hints");

@@ -2,7 +2,7 @@
 
 import { setBasicOffset, setAdvancedModeLayouts, setProModeLayouts, 
   activeBasicOffset, advancedModeLayouts, proModeLayouts, 
-  updateMode } from "./functionalModeSwitcher.js";
+  updateMode } from "./keyFuncModeSwitcher.js";
 
 const saveToLsBtn = document.querySelector(".js-save-local-storage");
 const readFromLsBtn = document.querySelector(".js-read-local-storage");

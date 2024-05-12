@@ -2,9 +2,9 @@
 
 
 import { isEditModeActive, pressedOctave, 
-  switchModeType } from "./functionalModeSwitcher.js";
+  switchModeType } from "./keyFuncModeSwitcher.js";
 import { getOctaveClassByElem, setPressedOctaveName, updateBasicMode, 
-  updateAdvancedMode, updateProMode } from "./functionalModeSwitcher.js";
+  updateAdvancedMode, updateProMode } from "./keyFuncModeSwitcher.js";
 
 
 const allKeyElems = document.querySelectorAll(".key");

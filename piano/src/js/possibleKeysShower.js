@@ -1,6 +1,7 @@
 "use strict";
 
-import { isEditModeActive, switchModeType, prevOctaveNum } from "./functionalModeSwitcher.js";
+import { isEditModeActive, switchModeType, 
+  prevOctaveNum } from "./keyFuncModeSwitcher.js";
 import { clickedProKeyElem } from "./clickFuncModeSwitcher.js";
 
 const allKeyElems = document.querySelectorAll(".key");

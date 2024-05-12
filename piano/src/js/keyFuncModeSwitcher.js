@@ -3,8 +3,7 @@
 
 import { pressedKeys } from "./inputHandler.js";
 import { updateVisualHints, isFullKbdShown } from "./hintsUpdater.js";
-import { noteInputCont, visualMode, 
-  updateVisualMode } from "./visualModeChanger.js";
+import { noteInputCont, updateVisualMode } from "./visualModeSwitcher.js";
 
 
 const textDigits = ["Digit0", "Digit1", "Digit2", "Digit3", 

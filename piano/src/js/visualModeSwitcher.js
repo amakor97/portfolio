@@ -3,7 +3,7 @@
 
 import { updateVisualHints, updateSoundHints, restoreKbdHints, 
   updateDisabledKeys  } from "./hintsUpdater.js";
-import { isEditModeActive } from "./functionalModeSwitcher.js";
+import { isEditModeActive } from "./keyFuncModeSwitcher.js";
 
 
 export let visualMode = "double";
