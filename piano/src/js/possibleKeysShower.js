@@ -49,6 +49,9 @@ function mouseOverHandler(e) {
 let getOctaveKeys = (className) => document.querySelectorAll(
   `.keyboard--count-${className} .key`);
 
+let getOctaveKeysByName = (className) => document.querySelectorAll(
+  `.${className}`);
+
 let fillArrayWithOctaveKeys = (arr, num) => {
   let keys = getOctaveKeys(num);
   keys.forEach(keyElem => arr.push(keyElem));
@@ -125,7 +128,6 @@ function highlightPrevAdvancedKeys(e) {
 }
 
 function highlightNextAdvancedKeys(e) {
-  return;
 
   
   let targetOctave = e.target.parentNode.parentNode;
@@ -228,10 +230,7 @@ function updateHightlights(e) {
     case "advanced": {
       highlightPrevAdvancedKeys(e);
       if (pressedOctave) {
-        let prevOctaveKeys = [];
-        prevOctaveKeys = getOctaveKeys(pressedOctave);
-        prevOctaveKeys.forEach(keyElem => keyElem.classList.add("key--prev"));
-        
+        highlightPrevOctaveKeys(pressedOctave);
         highlightNextAdvancedKeys(e);
       }
 
@@ -246,3 +245,14 @@ function updateHightlights(e) {
     }
   }
 }
+
+
+export function highlightPrevOctaveKeys(pressedOctave) {
+  console.log({pressedOctave});
+  let prevOctaveKeys = [];
+  prevOctaveKeys = getOctaveKeysByName(pressedOctave);
+  console.log(prevOctaveKeys);
+  prevOctaveKeys.forEach(keyElem => keyElem.classList.add("key--prev"));
+}
+
+

@@ -49,7 +49,29 @@ function switchBasicModeClickHandler(e) {
 
 function switchAdvancedModeClickHandler(e, key) {
   if (!pressedOctave) {
-    let kbdHint = key.querySelector(".js-kbd-key-hint");
+
+    console.log(key.parentNode.parentNode);
+
+    let clickedOctave = key.parentNode.parentNode;
+
+    let clickedOctaveClasses = Array.from(clickedOctave.classList);
+    console.log(clickedOctaveClasses);
+
+    let clickedOctaveKeys = clickedOctave.querySelectorAll(".key");
+    console.log(clickedOctaveKeys);
+
+    let kbdHint = getKbdHint(clickedOctaveKeys);
+
+    console.log(kbdHint);
+    //let kbdHint = key.querySelector(".js-kbd-key-hint");
+
+    if (kbdHint === "") {
+      setPressedOctaveName("js-key-super")
+    } else {
+      kbdHint = key.querySelector(".js-kbd-key-hint");
+      setPressedOctaveName(getOctaveClassByHint(kbdHint));
+    }
+
     setPressedOctaveName(getOctaveClassByHint(kbdHint));
 
     console.log(pressedOctave);
@@ -114,5 +136,48 @@ function getClickedProKeyElem(key) {
         return keyElem;
       }
     }
+  }
+}
+
+
+function getKbdHint(prevOctaveKeys) {
+  let kbdHint = "";
+  prevOctaveKeys.forEach(prevOctaveKey => {
+    let tmpKbdHint = prevOctaveKey.querySelector(".js-kbd-key-hint");
+    if (tmpKbdHint.textContent) {
+      kbdHint = tmpKbdHint;
+    }
+  })
+
+  return kbdHint;
+}
+
+
+
+
+function switchAdvancedModeClick(e, key) {
+  let clickedKeyElem = e.target;
+  if (!prevOctaveNum) {
+   prevOctaveNum = getPrevOctaveNum(key);
+   console.log({prevOctaveNum});
+  } else {
+    console.log("hh");
+    let kbdHint = getKbdHint(prevOctaveNum);
+    console.log({kbdHint});
+    let octaveName = (kbdHint === "") ? "js-key-super" : getOctaveClassByHint(kbdHint);
+    console.log({octaveName});
+    const name = octaveName.slice(7);
+    console.log({name});
+
+    let nextOctaveNum = Array.from(
+      clickedKeyElem.parentNode.parentNode.classList).find(
+      className => className.startsWith("keyboard--count")).slice(-1);
+    advancedModeLayouts[activeAdvancedLayout][name] = +nextOctaveNum;
+
+    updateAdvancedOctaveSounds(octaveName, nextOctaveNum);
+
+    allKeyElems.forEach(key => key.classList.remove("key--pressing"));
+    updateVisualHints();
+    prevOctaveNum = undefined;
   }
 }

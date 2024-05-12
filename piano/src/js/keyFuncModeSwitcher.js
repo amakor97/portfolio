@@ -4,7 +4,7 @@
 import { pressedKeys } from "./inputHandler.js";
 import { updateVisualHints, isFullKbdShown } from "./hintsUpdater.js";
 import { noteInputCont, updateVisualMode } from "./visualModeSwitcher.js";
-
+import { highlightPrevOctaveKeys } from "./possibleKeysShower.js";
 
 const textDigits = ["Digit0", "Digit1", "Digit2", "Digit3", 
   "Digit4", "Digit5", "Digit6", "Digit7", "Digit8"];
@@ -238,6 +238,8 @@ function updateBasicSounds(base) {
 
 
 export function switchAdvancedModeKeyHandler() {
+  const allKeyElems = document.querySelectorAll(".key");
+
   if (!isEditModeActive) {
     updateAdvancedSoundsHandler();
     updateVisualHints();
@@ -248,10 +250,12 @@ export function switchAdvancedModeKeyHandler() {
   
     if (!pressedOctave) {
       pressedOctave = getPressedOctave();
+      highlightPrevOctaveKeys(pressedOctave);
     } else {
       let nextOctaveNum = getPressedSymbolKey();
       if (textDigits.includes(nextOctaveNum)) {
         updateAdvancedMode(pressedOctave, nextOctaveNum);
+        allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
       }
     }
   }
