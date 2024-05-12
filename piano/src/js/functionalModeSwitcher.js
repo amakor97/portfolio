@@ -2,7 +2,7 @@
 
 
 import { pressedKeys } from "./inputHandler.js";
-import { updateVisualHints } from "./hintsUpdater.js";
+import { updateVisualHints, isFullKbdShown } from "./hintsUpdater.js";
 import { noteInputCont, visualMode, 
   updateVisualMode } from "./visualModeChanger.js";
 
@@ -141,10 +141,10 @@ function updateMode() {
     }
 
     case "advanced": {
+      console.log("a");
       noteInputCont.classList.add(
         "control-panel__switch-mode-cont--hided");
-      let attr = ((visualMode === "double") && (!isEditModeActive)) ? 
-        "sound" : "display";
+      let attr = isFullKbdShown() ? "display" : "sound";
       updateAdvancedSounds(attr);
       break;
     }
@@ -328,14 +328,15 @@ export function switchProModeKeyHandler() {
 
 function updateProSounds() {
   const pressedSymbolKeys = filterSpecialKeys();
+
   let targetKey = (pressedSymbolKeys.size === 1) ? 
     Array.from(pressedSymbolKeys)[0].slice(-1) : undefined;
   if (Number.isInteger(+targetKey)) {
     activeProLayout = targetKey;
   }
 
-  const keyElems = document.querySelectorAll(".key");
-  keyElems.forEach(keyElem => {
+  const allKeyElems = document.querySelectorAll(".key");
+  allKeyElems.forEach(keyElem => {
     if (keyElem.dataset.key in proModeLayouts[activeProLayout]) {
       keyElem.dataset.sound = 
         proModeLayouts[activeProLayout][keyElem.dataset.key];

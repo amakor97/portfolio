@@ -4,34 +4,49 @@ import { isEditModeActive } from "./functionalModeSwitcher.js";
 import { visualMode } from "./visualModeChanger.js";
 
 
+const toggleKbdHintsBtn = document.querySelector(".js-hide-kbd-hints");
+const toggleSoundHintsBtn = document.querySelector(".js-hide-piano-hints");
+const toggleDisabledKeysBtn = document.querySelector(".js-hide-disabled-keys");
+
+let areDisabledKeysActive = true;
+
+
+export function updateVisualHints() {
+  updateSoundHints();
+  updateKbdHints();
+  updateDisabledKeys();
+}
+
+
 export function updateSoundHints() {
   const allPianoKeys = document.querySelectorAll(".key");
+  
   allPianoKeys.forEach(pianoKey => {
     const soundHint = pianoKey.querySelector(".js-piano-key-hint");
-    
     if (soundHint) {
-      if ((visualMode === "full") || isEditModeActive) {
-        soundHint.textContent = pianoKey.dataset.display;
-      } else {
-        soundHint.textContent = pianoKey.dataset.sound;
-      }
+      soundHint.textContent = isFullKbdShown() ? 
+        pianoKey.dataset.display : pianoKey.dataset.sound;
     }
   })
 }
 
 
+export let isFullKbdShown = () => 
+  ((visualMode === "full") || isEditModeActive);
+
+
 export function updateKbdHints() {
-  if ((visualMode === "full") || isEditModeActive) {
+  if (isFullKbdShown()) {
+    const allKeyElems = document.querySelectorAll(".key");
+    const playableKbdKeys = document.querySelectorAll(".key[data-sound]");
     const kbdHintSpans = document.querySelectorAll(".js-kbd-key-hint");
     kbdHintSpans.forEach(kbdHintSpan => kbdHintSpan.textContent = "");
-    const allPianoKeys = document.querySelectorAll(".key");
-    const playableKbdKeys = document.querySelectorAll(".key[data-sound]");
   
-    allPianoKeys.forEach(pianoKey => {
-      const kbdHintSpan = pianoKey.querySelector(".js-kbd-key-hint");
+    allKeyElems.forEach(keyElem => {
+      const kbdHint = keyElem.querySelector(".js-kbd-key-hint");
       playableKbdKeys.forEach(kbdKey => {
-        if (pianoKey.dataset.display === kbdKey.dataset.sound) {
-          kbdHintSpan.textContent = kbdKey.dataset.symbol;
+        if (keyElem.dataset.display === kbdKey.dataset.sound) {
+          kbdHint.textContent = kbdKey.dataset.symbol;
         }
       })
     });
@@ -40,59 +55,48 @@ export function updateKbdHints() {
 
 
 export function updateDisabledKeys() {
-  let allPianoKeys = document.querySelectorAll(".key");
-  let unplayablePianoKeys = [];
+  const allKeyElems = document.querySelectorAll(".key");
+  const unplayablePianoKeys = [];
 
-  allPianoKeys.forEach(key => {
-    key.classList.remove("key--disabled");
-    let kbdHint = key.querySelector(".js-kbd-key-hint");
+  allKeyElems.forEach(keyElem => {
+    keyElem.classList.remove("key--disabled");
+    let kbdHint = keyElem.querySelector(".js-kbd-key-hint");
     if (kbdHint && kbdHint.textContent === "") {
-      unplayablePianoKeys.push(key);
+      unplayablePianoKeys.push(keyElem);
     }
   })
 
-  if (((visualMode === "full") || isEditModeActive) && areDisabledKeysActive) {
-    unplayablePianoKeys.forEach(unplayableKey => unplayableKey.classList.add(
-      "key--disabled"));
+  if (isFullKbdShown() && areDisabledKeysActive) {
+    unplayablePianoKeys.forEach(unplayableKey => 
+      unplayableKey.classList.add("key--disabled"));
   }
 }
 
 
 export function restoreKbdHints() {
   const playableKbdKeys = document.querySelectorAll(".key[data-key]");
-  playableKbdKeys.forEach(kbdKey => {
-    const kbdHintSpan = kbdKey.querySelector(".js-kbd-key-hint");
-    kbdHintSpan.textContent = kbdKey.dataset.symbol;
+  playableKbdKeys.forEach(playableKey => {
+    const kbdHint = playableKey.querySelector(".js-kbd-key-hint");
+    kbdHint.textContent = playableKey.dataset.symbol;
   })
 }
 
 
-const hideKbdHintsBtn = document.querySelector(".js-hide-kbd-hints");
-hideKbdHintsBtn.addEventListener("click", () => {
+toggleKbdHintsBtn.addEventListener("click", () => {
   const allKbdHints = document.querySelectorAll(".js-kbd-key-hint");
-  allKbdHints.forEach(kbdHint => kbdHint.classList
-    .toggle("key__hint--transparent"));
+  allKbdHints.forEach(kbdHint => 
+    kbdHint.classList.toggle("key__hint--transparent"));
 })
 
 
-const hideSoundHintsBtn = document.querySelector(".js-hide-piano-hints");
-hideSoundHintsBtn.addEventListener("click", () => {
+toggleSoundHintsBtn.addEventListener("click", () => {
   const allSoundHints = document.querySelectorAll(".js-piano-key-hint");
-  allSoundHints.forEach(soundHint => soundHint.classList
-    .toggle("key__hint--transparent"));
+  allSoundHints.forEach(soundHint => 
+    soundHint.classList.toggle("key__hint--transparent"));
 })
 
 
-let areDisabledKeysActive = true;
-const hideDisabledKeysBtn = document.querySelector(".js-hide-disabled-keys");
-hideDisabledKeysBtn.addEventListener("click", () => {
+toggleDisabledKeysBtn.addEventListener("click", () => {
   areDisabledKeysActive = !areDisabledKeysActive;
   updateDisabledKeys();
 })
-
-
-export function updateVisualHints() {
-  updateSoundHints();
-  updateKbdHints();
-  updateDisabledKeys();
-}

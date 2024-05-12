@@ -1,8 +1,8 @@
 "use strict";
 
 
-import { updateSoundHints, updateKbdHints, updateVisualHints, 
-  restoreKbdHints, updateDisabledKeys } from "./hintsUpdater.js";
+import { updateVisualHints, updateSoundHints, restoreKbdHints, 
+  updateDisabledKeys  } from "./hintsUpdater.js";
 import { isEditModeActive } from "./functionalModeSwitcher.js";
 
 
@@ -99,9 +99,7 @@ function showFullKbd() {
   whiteKeys.forEach(key => key.classList.add("key--white-narrow"));
   blackKeys.forEach(key => key.classList.add("key--black-narrow"));
 
-  updateKbdHints();
-  updateSoundHints();
-  updateDisabledKeys();
+  updateVisualHints();
 }
 
 
@@ -116,8 +114,8 @@ function hideFullKbd() {
   whiteKeys.forEach(key => key.classList.remove("key--white-narrow"));
   blackKeys.forEach(key => key.classList.remove("key--black-narrow"));
 
-  restoreKbdHints();
   updateSoundHints();
+  restoreKbdHints();
   updateDisabledKeys();
 }
 
