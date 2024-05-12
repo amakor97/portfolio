@@ -1,7 +1,7 @@
 "use strict";
 
 import { isEditModeActive, switchModeType, 
-  prevOctaveNum } from "./keyFuncModeSwitcher.js";
+  pressedOctave, getOctaveClassByElem } from "./keyFuncModeSwitcher.js";
 import { clickedProKeyElem } from "./clickFuncModeSwitcher.js";
 
 const allKeyElems = document.querySelectorAll(".key");
@@ -35,7 +35,7 @@ function mouseOverHandler(e) {
       break;
     }
     case "advanced": {
-      if (!prevOctaveNum) {
+      if (!pressedOctave) {
         highlightPrevAdvancedKeys(e);
       } else {
         highlightNextAdvancedKeys(e);
@@ -46,8 +46,8 @@ function mouseOverHandler(e) {
 }
 
 
-let getOctaveKeys = (num) => document.querySelectorAll(
-  `.keyboard--count-${num} .key`);
+let getOctaveKeys = (className) => document.querySelectorAll(
+  `.keyboard--count-${className} .key`);
 
 let fillArrayWithOctaveKeys = (arr, num) => {
   let keys = getOctaveKeys(num);
@@ -74,13 +74,26 @@ function highlightNextBasicKeys(e) {
 
 function highlightPrevAdvancedKeys(e) {
   let targetOctave = e.target.parentNode.parentNode;
+  let targetOctaveClasses = Array.from(targetOctave.classList);
+
+  //console.log({targetOctaveClasses});
+
+  let isOctaveValid = (targetOctaveClasses.find(
+    className => className.startsWith("keyboard--count"))) ? true : false;
+
+  //console.log(isOctaveValid);
+
+  if (!isOctaveValid) {
+    return;
+  }
+
   let targetBasicNum = +(Array.from(targetOctave.classList).find(
     className => className.startsWith("keyboard--count")).slice(-1));
 
-  //console.log({targetBasicNum});
-
   let targetKeys = [];
   fillArrayWithOctaveKeys(targetKeys, targetBasicNum);
+  
+
   let isOctaveCorrect = false;
   for (let keyElem of targetKeys) {
     if (keyElem.children[0].textContent !== "") {
@@ -89,7 +102,6 @@ function highlightPrevAdvancedKeys(e) {
   }
 
   if (targetBasicNum === 0) {
-    console.log("check");
     let isZeroOctave = true;
     for (let keyElem of allKeyElems) {
       let kbdHint = keyElem.querySelector(".js-kbd-key-hint");
@@ -103,19 +115,24 @@ function highlightPrevAdvancedKeys(e) {
     }
   }
 
+
   if (!isOctaveCorrect) {
     return;
   }
-  //console.log({isOctaveCorrect});
   targetKeys.forEach(keyElem => keyElem.classList.add("key--prev"));
+  //console.log("keys with prev classes:");
+  //console.log(targetKeys);
 }
 
 function highlightNextAdvancedKeys(e) {
-  //console.log(e);
-  //console.log(e.target);
+  return;
+
+  
   let targetOctave = e.target.parentNode.parentNode;
   let targetBasicNum = +(Array.from(targetOctave.classList).find(
     className => className.startsWith("keyboard--count")).slice(-1));
+
+
 
   let targetKeys = [];
   fillArrayWithOctaveKeys(targetKeys, targetBasicNum);
@@ -151,9 +168,8 @@ function mouseClickHandler(e) {
       break;
     }
     case "advanced": {
-      //console.log(e);
 
-      if (!prevOctaveNum) {
+      if (!pressedOctave) {
         applyPrevAdvancedKeys(e);
       } else {
         applyNextAdvancedKeys();
@@ -211,10 +227,9 @@ function updateHightlights(e) {
     }
     case "advanced": {
       highlightPrevAdvancedKeys(e);
-      if (prevOctaveNum) {
-        //console.log({prevOctaveNum});
+      if (pressedOctave) {
         let prevOctaveKeys = [];
-        prevOctaveKeys = getOctaveKeys(prevOctaveNum);
+        prevOctaveKeys = getOctaveKeys(pressedOctave);
         prevOctaveKeys.forEach(keyElem => keyElem.classList.add("key--prev"));
         
         highlightNextAdvancedKeys(e);
