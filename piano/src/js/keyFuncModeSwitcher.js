@@ -90,6 +90,10 @@ export let filterSpecialKeys = () => new Set(([...pressedKeys]).filter(value =>
 
 
 resetLayoutsBtn.addEventListener("click", function() {
+  localStorage.removeItem("basic");
+  localStorage.removeItem("advanced");
+  localStorage.removeItem("pro");
+  
   activeBasicOffset = 4;
   advancedModeLayouts = createAdvancedModeLayouts(5);
   proModeLayouts = createProModeLayouts(5);
