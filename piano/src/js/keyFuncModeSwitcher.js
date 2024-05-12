@@ -27,6 +27,7 @@ export let setPressedOctaveName = (str) => pressedOctave = str;
 
 let pressedProKeyElem = undefined;
 let noteForProMode = undefined;
+let noteValidatorRegEx = /^([a-g]|[A-G])[b|B]?[0-8]$/;
 
 const modeSelectors = document.querySelectorAll(
   "input[name='select-switch-mode']");
@@ -36,6 +37,7 @@ export const noteInput = document.querySelector(
   "input[name='enter-note']");
 const noteValidateBtn = document.querySelector(
   ".js-note-validate-btn");
+const resetLayoutsBtn = document.querySelector(".js-reset-layouts");
 
 
 function createAdvancedModeSingleLayout() {
@@ -82,41 +84,24 @@ export function createProModeLayouts(num) {
 }
 
 
-const resetLayoutsBtn = document.querySelector(".js-reset-layouts");
-resetLayoutsBtn.addEventListener("click", resetLayouts);
-function resetLayouts() {
+export let filterSpecialKeys = () => new Set(([...pressedKeys]).filter(value => 
+  ((value !== "ShiftLeft") && (value !== "ShiftRight") && (value !== "Space"))
+));
+
+
+resetLayoutsBtn.addEventListener("click", function() {
   activeBasicOffset = 4;
   advancedModeLayouts = createAdvancedModeLayouts(5);
   proModeLayouts = createProModeLayouts(5);
   updateMode();
-}
-
-
-noteValidateBtn.addEventListener("click", function() {
-  if ((/^([a-g]|[A-G])[b|B]?[0-8]$/).test(noteInput.value)) {
-    noteForProMode = noteInput.value;
-  }
 })
 
 
-export function updateBasicSounds(base) {
-  const playableKbdKeys = document.querySelectorAll(".key[data-key]"); 
-  playableKbdKeys.forEach(keyElem => {
-    let additionalOffset = 0;
-    if (keyElem.classList.contains("js-key-sub")) {
-      additionalOffset = -1;
-    }
-    if (keyElem.classList.contains("js-key-sup")) {
-      additionalOffset = 1;
-    }
-    if (keyElem.classList.contains("js-key-super")) {
-      additionalOffset = 2;
-    }
-
-    keyElem.dataset.sound = 
-      `${keyElem.dataset.sound.slice(0, -1)}${+base + additionalOffset}`;
-  })
-}
+noteValidateBtn.addEventListener("click", function() {
+  if (noteValidatorRegEx.test(noteInput.value)) {
+    noteForProMode = noteInput.value;
+  }
+})
 
 
 modeSelectors.forEach(input => {
@@ -129,7 +114,13 @@ modeSelectors.forEach(input => {
 })
 
 
-function updateMode() {
+editModeToggler.addEventListener("change", () => {
+  isEditModeActive = editModeToggler.checked;
+  updateVisualMode(isEditModeActive);
+});
+
+
+export function updateMode() {
   const allKeyElems = document.querySelectorAll(".key");
   switch(switchModeType) {
     case "basic": {
@@ -178,11 +169,23 @@ function updateAdvancedSounds(attr = "sound") {
 }
 
 
-editModeToggler.addEventListener("change", () => {
-  isEditModeActive = editModeToggler.checked;
-  updateVisualMode(isEditModeActive);
-});
+function updateProSounds() {
+  const pressedSymbolKeys = filterSpecialKeys();
 
+  let targetKey = (pressedSymbolKeys.size === 1) ? 
+    Array.from(pressedSymbolKeys)[0].slice(-1) : undefined;
+  if (Number.isInteger(+targetKey)) {
+    activeProLayout = targetKey;
+  }
+
+  const allKeyElems = document.querySelectorAll(".key");
+  allKeyElems.forEach(keyElem => {
+    if (keyElem.dataset.key in proModeLayouts[activeProLayout]) {
+      keyElem.dataset.sound = 
+        proModeLayouts[activeProLayout][keyElem.dataset.key];
+    }
+  })
+}
 
 
 export function switchBasicModeKeyHandler() {
@@ -197,8 +200,8 @@ export function switchBasicModeKeyHandler() {
 
 
 export function updateBasicMode(num) {
-  switchBasicMode(num);
   const allKeyElems = document.querySelectorAll(".key");
+  switchBasicMode(num);
   allKeyElems.forEach(key => key.classList.remove("key--pressing"));
   updateVisualHints();
 }
@@ -207,6 +210,26 @@ export function updateBasicMode(num) {
 function switchBasicMode(num) {
   setBasicOffset(num);
   updateBasicSounds(num);
+}
+
+
+function updateBasicSounds(base) {
+  const playableKbdKeys = document.querySelectorAll(".key[data-key]"); 
+  playableKbdKeys.forEach(keyElem => {
+    let additionalOffset = 0;
+    if (keyElem.classList.contains("js-key-sub")) {
+      additionalOffset = -1;
+    }
+    if (keyElem.classList.contains("js-key-sup")) {
+      additionalOffset = 1;
+    }
+    if (keyElem.classList.contains("js-key-super")) {
+      additionalOffset = 2;
+    }
+
+    keyElem.dataset.sound = 
+      `${keyElem.dataset.sound.slice(0, -1)}${+base + additionalOffset}`;
+  })
 }
 
 
@@ -243,11 +266,6 @@ function updateAdvancedSoundsHandler() {
 }
 
 
-export let filterSpecialKeys = () => new Set(([...pressedKeys]).filter(value => 
-  ((value !== "ShiftLeft") && (value !== "ShiftRight") && (value !== "Space"))
-));
-
-
 function getPressedOctave() {
   const allKeyElems = document.querySelectorAll(".key");
   let targetKey = getPressedSymbolKey();
@@ -277,19 +295,27 @@ function getPressedSymbolKey() {
 
 
 export function updateAdvancedMode(name, num) {
+  const allKeyElems = document.querySelectorAll(".key");
   switchAdvancedMode(name, num);
+
+  allKeyElems.forEach(key => key.classList.remove("key--pressing"));
   updateVisualHints();
   setPressedOctaveName(undefined);
 }
 
 
 function switchAdvancedMode(name, num) {
-  const allKeyElems = document.querySelectorAll(".key");
-
   num = num.slice(-1);
   updateAdvancedOctaveSounds(name, num);
   updateAdvancedLayout(name, num);
-  allKeyElems.forEach(key => key.classList.remove("key--pressing"));
+}
+
+
+function updateAdvancedOctaveSounds(octaveClass, num) {
+  const octaveKeys = document.querySelectorAll(`.${octaveClass}`);
+  octaveKeys.forEach(keyElem => {
+    keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${num}`;
+  })
 }
 
 
@@ -320,33 +346,23 @@ export function switchProModeKeyHandler() {
         }
       })
       updateProMode(pressedProKeyElem, targetKey, noteForProMode);
+      noteForProMode = undefined;
     }
   }
-}
-
-
-function updateProSounds() {
-  const pressedSymbolKeys = filterSpecialKeys();
-
-  let targetKey = (pressedSymbolKeys.size === 1) ? 
-    Array.from(pressedSymbolKeys)[0].slice(-1) : undefined;
-  if (Number.isInteger(+targetKey)) {
-    activeProLayout = targetKey;
-  }
-
-  const allKeyElems = document.querySelectorAll(".key");
-  allKeyElems.forEach(keyElem => {
-    if (keyElem.dataset.key in proModeLayouts[activeProLayout]) {
-      keyElem.dataset.sound = 
-        proModeLayouts[activeProLayout][keyElem.dataset.key];
-    }
-  })
 }
 
 
 export function updateProMode(keyElem, targetKey, note) {
+  const allKeyElems = document.querySelectorAll(".key");
   switchProMode(keyElem, targetKey, note);
+  allKeyElems.forEach(keyElem => keyElem.classList.remove("key--pressing"));
   updateVisualHints();
+}
+
+
+function switchProMode(keyElem, targetKey, note) {
+  updateProKeySound(keyElem, note);
+  updateProLayout(targetKey, note);
 }
 
 
@@ -357,22 +373,4 @@ function updateProKeySound(keyElem, note) {
 
 function updateProLayout(targetKey, note) {
   proModeLayouts[activeProLayout][targetKey] = note;
-}
-
-
-export function switchProMode(keyElem, targetKey, note) {
-  const allKeyElems = document.querySelectorAll(".key");
-
-  updateProKeySound(keyElem, note);
-  updateProLayout(targetKey, note);
-  allKeyElems.forEach(keyElem => keyElem.classList.remove("key--pressing"));
-  updateVisualHints();
-}
-
-
-export function updateAdvancedOctaveSounds(octaveClass, num) {
-  const octaveKeys = document.querySelectorAll(`.${octaveClass}`);
-  octaveKeys.forEach(keyElem => {
-    keyElem.dataset.sound = `${keyElem.dataset.sound.slice(0, -1)}${num}`;
-  })
 }
