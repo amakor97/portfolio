@@ -247,12 +247,51 @@ function updateHightlights(e) {
 }
 
 
-export function highlightPrevOctaveKeys(pressedOctave) {
-  console.log({pressedOctave});
+export function highlightPrevOctaveKeys(num) {
+  console.log({num});
   let prevOctaveKeys = [];
-  prevOctaveKeys = getOctaveKeysByName(pressedOctave);
-  console.log(prevOctaveKeys);
+  prevOctaveKeys = getOctaveKeys(num);
+  //console.log(prevOctaveKeys);
   prevOctaveKeys.forEach(keyElem => keyElem.classList.add("key--prev"));
 }
 
 
+export function getPrevOctaveNumByName(pressedOctave) {
+  console.log(pressedOctave);
+  const allKeyElems = document.querySelectorAll(".key");
+
+  let prevOctaveNum = undefined;
+
+  let tmpKey = undefined;
+
+  allKeyElems.forEach(keyElem => {
+    if (keyElem.classList.contains(pressedOctave)) {
+      tmpKey = keyElem;
+    }
+  })
+
+  console.log(tmpKey);
+  let tmpSymbol = tmpKey.dataset.symbol;
+  console.log({tmpSymbol});
+  console.log("==");
+
+  allKeyElems.forEach(keyElem => {
+    let kbdHint = keyElem.querySelector(".js-kbd-key-hint");
+    if (kbdHint.textContent === tmpSymbol) {
+      console.log(keyElem);
+      console.log("=====");
+      let tmpOctave = keyElem.parentNode.parentNode;
+      console.log(tmpOctave);
+      prevOctaveNum = Array.from(tmpOctave.classList);
+      prevOctaveNum = prevOctaveNum.find(className => 
+        className.startsWith("keyboard--count-")).slice(-1);
+      console.log({prevOctaveNum});
+    }
+  })
+
+  if (!prevOctaveNum) {
+    prevOctaveNum = 0;
+  }
+
+  return +prevOctaveNum;
+}
