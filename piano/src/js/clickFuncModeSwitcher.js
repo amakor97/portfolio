@@ -55,18 +55,34 @@ function switchAdvancedModeClickHandler(e, key) {
     let clickedOctave = key.parentNode.parentNode;
 
     let clickedOctaveClasses = Array.from(clickedOctave.classList);
-    console.log(clickedOctaveClasses);
+    //console.log(clickedOctaveClasses);
 
     let clickedOctaveKeys = clickedOctave.querySelectorAll(".key");
-    console.log(clickedOctaveKeys);
+    //console.log(clickedOctaveKeys);
 
     let kbdHint = getKbdHint(clickedOctaveKeys);
 
-    console.log(kbdHint);
+    //console.log(kbdHint);
     //let kbdHint = key.querySelector(".js-kbd-key-hint");
 
     if (kbdHint === "") {
-      setPressedOctaveName("js-key-super")
+      console.log("HERE");
+
+      /// check if there is no ']' in kbdhint. if yes set pon
+      let isOctaveValid = true;
+      allKeyElems.forEach(keyElem => {
+        let kbdHint = keyElem.querySelector(".js-kbd-key-hint");
+        if (kbdHint.textContent === "]") {
+          isOctaveValid = false;
+        }
+      })
+      if (isOctaveValid) {
+        setPressedOctaveName("js-key-super"); //////?????
+      } else {
+        return;
+      }
+         
+
     } else {
       kbdHint = key.querySelector(".js-kbd-key-hint");
       setPressedOctaveName(getOctaveClassByHint(kbdHint));
@@ -74,7 +90,7 @@ function switchAdvancedModeClickHandler(e, key) {
 
     setPressedOctaveName(getOctaveClassByHint(kbdHint));
 
-    console.log(pressedOctave);
+    //console.log(pressedOctave);
   } else {
     let clickedKeyElem = e.target;
     let nextOctaveNum = Array.from(
@@ -86,8 +102,6 @@ function switchAdvancedModeClickHandler(e, key) {
 
 
 function getOctaveClassByHint(kbdHint) {
-  console.log("start");
-  console.log(kbdHint);
 
   const allKeyElems = document.querySelectorAll(".key");
   let clickedOctave = kbdHint.parentNode.parentNode.parentNode;
@@ -106,8 +120,6 @@ function getOctaveClassByHint(kbdHint) {
     }
   }
   
-  console.log(targetKeyElem);
-  console.log("finish");
 
   return getOctaveClassByElem(targetKeyElem);
 }

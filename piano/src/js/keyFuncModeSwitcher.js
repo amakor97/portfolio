@@ -310,6 +310,7 @@ export function updateAdvancedMode(name, num) {
   allKeyElems.forEach(key => key.classList.remove("key--pressing"));
   updateVisualHints();
   setPressedOctaveName(undefined);
+  console.log({pressedOctave});
 }
 
 

@@ -72,7 +72,6 @@ function highlightNextBasicKeys(e, keyElem) {
     `.keyboard--count-${targetBasicNum+2} .key[data-display^="C"]`);
   targetKeys.push(superOctaveKey);
 
-  console.log(targetKeys);
 
   targetKeys.forEach(keyElem => keyElem.classList.add("key--next"));
 }
@@ -82,12 +81,10 @@ function highlightPrevAdvancedKeys(e, keyElem) {
   let targetOctave = keyElem.parentNode.parentNode;
   let targetOctaveClasses = Array.from(targetOctave.classList);
 
-  //console.log({targetOctaveClasses});
 
   let isOctaveValid = (targetOctaveClasses.find(
     className => className.startsWith("keyboard--count"))) ? true : false;
 
-  //console.log(isOctaveValid);
 
   if (!isOctaveValid) {
     return;
@@ -106,6 +103,8 @@ function highlightPrevAdvancedKeys(e, keyElem) {
       isOctaveCorrect = true;
     }
   }
+
+  console.log({isOctaveCorrect});
 
   if (targetBasicNum === 0) {
     let isZeroOctave = true;
@@ -128,11 +127,7 @@ function highlightPrevAdvancedKeys(e, keyElem) {
   //prevOctaveKeys.map(targetKeys);
 
   targetKeys.forEach(keyElem => prevOctaveKeys.push(keyElem));
-
-  console.log({prevOctaveKeys});
   targetKeys.forEach(keyElem => keyElem.classList.add("key--prev"));
-  //console.log("keys with prev classes:");
-  //console.log(targetKeys);
 }
 
 function highlightNextAdvancedKeys(e) {
@@ -178,10 +173,11 @@ function mouseClickHandler(e) {
       break;
     }
     case "advanced": {
-
+      console.log({pressedOctave});
       if (!pressedOctave) {
         prevOctaveKeys.length = 0;
-        applyPrevAdvancedKeys(e);
+        updateHightlights();
+        //applyPrevAdvancedKeys(e);
       } else {
         applyNextAdvancedKeys();
       }
@@ -243,11 +239,10 @@ function updateHightlights(e, keyElem) {
       break;
     }
     case "advanced": {
-      console.log("ssds");
       allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
       allKeyElems.forEach(keyElem => keyElem.classList.remove("key--next"));
 
-      console.log(prevOctaveKeys);
+
       prevOctaveKeys.forEach(keyElem => keyElem.classList.add("key--prev"));
       if (!pressedOctave) {
         allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
