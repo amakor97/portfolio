@@ -179,14 +179,16 @@ function mouseClickHandler(e) {
         updateHightlights();
         //applyPrevAdvancedKeys(e);
       } else {
-        applyNextAdvancedKeys();
       }
       break;
     }
     case "pro": {
       if (!clickedProKey) {
         if (e.target.classList.contains("key")) {
-          clickedProKey = e.target;
+          let kbdHint = e.target.querySelector(".js-kbd-key-hint");
+          if (kbdHint.textContent !== "") {
+            clickedProKey = e.target;
+          }
         }
       } else {
         if (e.target.classList.contains("key")) {
@@ -195,24 +197,6 @@ function mouseClickHandler(e) {
       }
     }
   }
-}
-
-function applyPrevAdvancedKeys(e) {
-  let targetOctave = e.target.parentNode.parentNode;
-  let targetBasicNum = +(Array.from(targetOctave.classList).find(
-    className => className.startsWith("keyboard--count")).slice(-1));
-
-  let targetKeys = [];
-  fillArrayWithOctaveKeys(targetKeys, targetBasicNum);
-
-  targetKeys.forEach(keyElem => keyElem.classList.add("key--prev"));
-
-
-  updateHightlights();
-}
-
-function applyNextAdvancedKeys(e) {
-
 }
 
 
@@ -257,6 +241,9 @@ function updateHightlights(e, keyElem) {
       break;
     }
     case "pro": {
+      allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
+      allKeyElems.forEach(keyElem => keyElem.classList.remove("key--next"));
+
       highlightPrevProKey(e);
       if (clickedProKey) {
         clickedProKey.classList.add("key--prev");
