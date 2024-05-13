@@ -8,7 +8,7 @@ const allKeyElems = document.querySelectorAll(".key");
 allKeyElems.forEach(keyElem => {
   keyElem.addEventListener("mouseover", function(e) {
     //mouseOverHandler(e);
-    updateHightlights(e);
+    updateHightlights(e, keyElem);
   })
 
   keyElem.addEventListener("mouseout", function(e) {
@@ -59,8 +59,8 @@ let fillArrayWithOctaveKeys = (arr, num) => {
 
 
 // hoverNext...?
-function highlightNextBasicKeys(e) {
-  let targetOctave = e.target.parentNode.parentNode;
+function highlightNextBasicKeys(e, keyElem) {
+  let targetOctave = keyElem.parentNode.parentNode;
   let targetBasicNum = +(Array.from(targetOctave.classList).find(
     className => className.startsWith("keyboard--count")).slice(-1));
 
@@ -72,11 +72,14 @@ function highlightNextBasicKeys(e) {
     `.keyboard--count-${targetBasicNum+2} .key[data-display^="C"]`);
   targetKeys.push(superOctaveKey);
 
+  console.log(targetKeys);
+
   targetKeys.forEach(keyElem => keyElem.classList.add("key--next"));
 }
 
-function highlightPrevAdvancedKeys(e) {
-  let targetOctave = e.target.parentNode.parentNode;
+function highlightPrevAdvancedKeys(e, keyElem) {
+  prevOctaveKeys.length = 0;
+  let targetOctave = keyElem.parentNode.parentNode;
   let targetOctaveClasses = Array.from(targetOctave.classList);
 
   //console.log({targetOctaveClasses});
@@ -122,6 +125,11 @@ function highlightPrevAdvancedKeys(e) {
   if (!isOctaveCorrect) {
     return;
   }
+  //prevOctaveKeys.map(targetKeys);
+
+  targetKeys.forEach(keyElem => prevOctaveKeys.push(keyElem));
+
+  console.log({prevOctaveKeys});
   targetKeys.forEach(keyElem => keyElem.classList.add("key--prev"));
   //console.log("keys with prev classes:");
   //console.log(targetKeys);
@@ -172,6 +180,7 @@ function mouseClickHandler(e) {
     case "advanced": {
 
       if (!pressedOctave) {
+        prevOctaveKeys.length = 0;
         applyPrevAdvancedKeys(e);
       } else {
         applyNextAdvancedKeys();
@@ -214,9 +223,13 @@ function applyNextAdvancedKeys(e) {
 let clickedProKey = undefined;
 export let unsetClickedProKey = () => clickedProKey = undefined;
 
-function updateHightlights(e) {
-  allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
-  allKeyElems.forEach(keyElem => keyElem.classList.remove("key--next"));
+
+const prevOctaveKeys = [];
+const nextOctaveKeys = [];
+
+function updateHightlights(e, keyElem) {
+  //allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
+  //allKeyElems.forEach(keyElem => keyElem.classList.remove("key--next"));
 
   if (!isEditModeActive) {
     return;
@@ -224,12 +237,24 @@ function updateHightlights(e) {
 
   switch(switchModeType) {
     case "basic": {
-      highlightNextBasicKeys(e);
+      allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
+      allKeyElems.forEach(keyElem => keyElem.classList.remove("key--next"));
+      highlightNextBasicKeys(e, keyElem);
       break;
     }
     case "advanced": {
-      highlightPrevAdvancedKeys(e);
-      if (pressedOctave) {
+      console.log("ssds");
+      allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
+      allKeyElems.forEach(keyElem => keyElem.classList.remove("key--next"));
+
+      console.log(prevOctaveKeys);
+      prevOctaveKeys.forEach(keyElem => keyElem.classList.add("key--prev"));
+      if (!pressedOctave) {
+        allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
+        prevOctaveKeys.forEach(keyElem => keyElem.classList.add("key--prev"));
+        highlightPrevAdvancedKeys(e, keyElem);
+      } else {
+        allKeyElems.forEach(keyElem => keyElem.classList.remove("key--next"));
         highlightPrevOctaveKeys(pressedOctave);
         highlightNextAdvancedKeys(e);
       }
