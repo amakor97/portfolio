@@ -287,6 +287,11 @@ function updateHightlights(e, keyElem) {
       break;
     }
     case "advanced": {
+      console.log(e.type);
+      if (e.type === "mouseout") {
+        console.log(prevOctaveKeys);
+        prevOctaveKeys.length = 0;
+      }
       allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
       allKeyElems.forEach(keyElem => keyElem.classList.remove("key--next"));
 
