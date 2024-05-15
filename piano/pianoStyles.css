@@ -248,6 +248,7 @@
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
+  pointer-events: none;
 }
 .key__hint--transparent {
   opacity: 0;
