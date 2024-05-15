@@ -238,11 +238,13 @@ function mouseClickHandler(e, keyElem) {
           let kbdHint = e.target.querySelector(".js-kbd-key-hint");
           if (kbdHint.textContent !== "") {
             clickedProKey = e.target;
+            updateHightlights(e);
           }
         }
       } else {
         if (e.target.classList.contains("key")) {
           clickedProKey = undefined;
+          updateHightlights(e);
         }
       }
     }
