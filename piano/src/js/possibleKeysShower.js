@@ -131,9 +131,10 @@ function highlightPrevAdvancedKeys(e, keyElem) {
 }
 
 function highlightNextAdvancedKeys(e) {
-
-  
+  console.log("high");
+  console.log(e);
   let targetOctave = e.target.parentNode.parentNode;
+  console.log({targetOctave});
   let targetBasicNum = +(Array.from(targetOctave.classList).find(
     className => className.startsWith("keyboard--count")).slice(-1));
 
@@ -175,10 +176,71 @@ function mouseClickHandler(e) {
     case "advanced": {
       console.log({pressedOctave});
       if (!pressedOctave) {
+        console.log("gegege");
+        let tmpE = e;
+        console.log(tmpE);
         prevOctaveKeys.length = 0;
-        updateHightlights();
+        console.log(e.target);
+        e.target.classList.add("key--next");
+        highlightPrevAdvancedKeys(e, e.target);
+/*
+        {
+          let targetOctave = keyElem.parentNode.parentNode;
+          let targetOctaveClasses = Array.from(targetOctave.classList);
+        
+        
+          let isOctaveValid = (targetOctaveClasses.find(
+            className => className.startsWith("keyboard--count"))) ? true : false;
+        
+        
+          if (!isOctaveValid) {
+            return;
+          }
+        
+          let targetBasicNum = +(Array.from(targetOctave.classList).find(
+            className => className.startsWith("keyboard--count")).slice(-1));
+        
+          let targetKeys = [];
+          fillArrayWithOctaveKeys(targetKeys, targetBasicNum);
+          
+        
+          let isOctaveCorrect = false;
+          for (let keyElem of targetKeys) {
+            if (keyElem.children[0].textContent !== "") {
+              isOctaveCorrect = true;
+            }
+          }
+        
+          console.log({isOctaveCorrect});
+        
+          if (targetBasicNum === 0) {
+            let isZeroOctave = true;
+            for (let keyElem of allKeyElems) {
+              let kbdHint = keyElem.querySelector(".js-kbd-key-hint");
+              if (kbdHint.textContent === "]") {
+                isZeroOctave = false;
+              }
+            }
+        
+            if (isZeroOctave) {
+              isOctaveCorrect = true;
+            }
+          }
+        
+        
+          if (!isOctaveCorrect) {
+            return;
+          }
+
+          targetKeys.forEach(keyElem => keyElem.classList.add("key--next"));
+        }
+*/
+        highlightNextAdvancedKeys(e);
+        //updateHightlights();
         //applyPrevAdvancedKeys(e);
       } else {
+        console.log(e.target);
+        updateHightlights(e);
       }
       break;
     }
@@ -211,6 +273,8 @@ function updateHightlights(e, keyElem) {
   //allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
   //allKeyElems.forEach(keyElem => keyElem.classList.remove("key--next"));
 
+  console.log(e);
+
   if (!isEditModeActive) {
     return;
   }
@@ -234,7 +298,9 @@ function updateHightlights(e, keyElem) {
         highlightPrevAdvancedKeys(e, keyElem);
       } else {
         allKeyElems.forEach(keyElem => keyElem.classList.remove("key--next"));
-        highlightPrevOctaveKeys(pressedOctave);
+        prevOctaveKeys.forEach(keyElem => keyElem.classList.add("key--prev"));
+        //highlightPrevOctaveKeys(pressedOctave);
+        console.log("upd");
         highlightNextAdvancedKeys(e);
       }
 
@@ -258,7 +324,6 @@ export function highlightPrevOctaveKeys(num) {
   console.log({num});
   let prevOctaveKeys = [];
   prevOctaveKeys = getOctaveKeys(num);
-  //console.log(prevOctaveKeys);
   prevOctaveKeys.forEach(keyElem => keyElem.classList.add("key--prev"));
 }
 
