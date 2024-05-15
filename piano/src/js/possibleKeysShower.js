@@ -239,7 +239,7 @@ function mouseClickHandler(e) {
         //updateHightlights();
         //applyPrevAdvancedKeys(e);
       } else {
-        console.log(e.target);
+        //console.log(e.target);
         updateHightlights(e);
       }
       break;
@@ -273,7 +273,7 @@ function updateHightlights(e, keyElem) {
   //allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
   //allKeyElems.forEach(keyElem => keyElem.classList.remove("key--next"));
 
-  console.log(e);
+  //console.log(e);
 
   if (!isEditModeActive) {
     return;

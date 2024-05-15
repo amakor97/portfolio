@@ -55,10 +55,25 @@ function switchAdvancedModeClickHandler(e, key) {
     let clickedOctave = key.parentNode.parentNode;
 
     let clickedOctaveClasses = Array.from(clickedOctave.classList);
-    //console.log(clickedOctaveClasses);
+    console.log(clickedOctaveClasses);
 
-    let clickedOctaveKeys = clickedOctave.querySelectorAll(".key");
-    //console.log(clickedOctaveKeys);
+    let octaveCountClass = clickedOctaveClasses.find(
+      className => className.startsWith("keyboard--count"));
+    console.log(octaveCountClass);
+
+    let clickedOctaves = document.querySelectorAll(`.${octaveCountClass}`);
+    //console.log(clickedOctaves);
+
+    clickedOctaves = Array.from(clickedOctaves);
+    console.log(clickedOctaves);
+
+    let clickedOctaveKeys = [];
+    clickedOctaves.forEach(clickedOctave => {
+      let tmpKeys = clickedOctave.querySelectorAll(".key");
+      tmpKeys.forEach(keyElem => clickedOctaveKeys.push(keyElem));
+    })
+    //clickedOctaveKeys = clickedOctave.querySelectorAll(".key");
+    console.log(clickedOctaveKeys);
 
     let kbdHint = getKbdHint(clickedOctaveKeys);
 
@@ -76,6 +91,7 @@ function switchAdvancedModeClickHandler(e, key) {
           isOctaveValid = false;
         }
       })
+
       if (isOctaveValid) {
         setPressedOctaveName("js-key-super"); //////?????
       } else {
@@ -85,6 +101,7 @@ function switchAdvancedModeClickHandler(e, key) {
 
     } else {
       kbdHint = key.querySelector(".js-kbd-key-hint");
+      console.log(kbdHint);
       setPressedOctaveName(getOctaveClassByHint(kbdHint));
     }
 
@@ -105,7 +122,20 @@ function getOctaveClassByHint(kbdHint) {
 
   const allKeyElems = document.querySelectorAll(".key");
   let clickedOctave = kbdHint.parentNode.parentNode.parentNode;
-  let clickedOctaveKeys = clickedOctave.querySelectorAll(".key");
+  
+  let clickedOctaveClasses = Array.from(clickedOctave.classList);
+  let octaveCountClass = clickedOctaveClasses.find(
+    className => className.startsWith("keyboard--count"));
+  let clickedOctaves = document.querySelectorAll(`.${octaveCountClass}`);
+
+  let clickedOctaveKeys = [];
+  clickedOctaves.forEach(clickedOctave => {
+    let tmpKeys = clickedOctave.querySelectorAll(".key");
+    tmpKeys.forEach(keyElem => clickedOctaveKeys.push(keyElem));
+  })
+  
+
+  //let clickedOctaveKeys = clickedOctave.querySelectorAll(".key");
   let targetKeyElem = undefined;
 
   for (let octaveKeyElem of clickedOctaveKeys) {
@@ -161,6 +191,7 @@ function getKbdHint(prevOctaveKeys) {
     }
   })
 
+  console.log(kbdHint);
   return kbdHint;
 }
 
