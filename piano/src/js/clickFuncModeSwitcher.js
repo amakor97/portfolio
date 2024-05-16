@@ -4,6 +4,7 @@
 import { isEditModeActive, pressedOctave, switchModeType, 
   getOctaveClassByElem, setPressedOctaveName, updateBasicMode, 
   updateAdvancedMode, updateProMode } from "./keyFuncModeSwitcher.js";
+import { mouseClickHandler } from "./possibleKeysShower.js";
 
 
 const allKeyElems = document.querySelectorAll(".key");
@@ -13,6 +14,7 @@ export let clickedProKeyElem = undefined;
 allKeyElems.forEach(key => {
   key.addEventListener("click", function tmp(e) {
     switchByClick(e, key);
+    //mouseClickHandler(e, key);
   });
 })
 
@@ -73,7 +75,6 @@ function switchAdvancedModeClickHandler(e, key) {
       tmpKeys.forEach(keyElem => clickedOctaveKeys.push(keyElem));
     })
     //clickedOctaveKeys = clickedOctave.querySelectorAll(".key");
-    console.log(clickedOctaveKeys);
 
     let kbdHint = getKbdHint(clickedOctaveKeys);
 
