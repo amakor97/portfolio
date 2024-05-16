@@ -4,7 +4,7 @@
 import { pressedKeys } from "./inputHandler.js";
 import { updateVisualHints, isFullKbdShown } from "./hintsUpdater.js";
 import { noteInputCont, updateVisualMode } from "./visualModeSwitcher.js";
-import { highlightPrevOctaveKeys, getPrevOctaveNumByName } from "./possibleKeysShower.js";
+import { highlightPrevOctaveKeys } from "./possibleKeysShower.js";
 
 const textDigits = ["Digit0", "Digit1", "Digit2", "Digit3", 
   "Digit4", "Digit5", "Digit6", "Digit7", "Digit8"];
@@ -286,6 +286,36 @@ function getPressedOctave() {
       }
     }
   }
+}
+
+
+function getPrevOctaveNumByName(pressedOctave) {
+  const allKeyElems = document.querySelectorAll(".key");
+  let prevOctaveNum = undefined;
+  let tmpKey = undefined;
+
+  allKeyElems.forEach(keyElem => {
+    if (keyElem.classList.contains(pressedOctave)) {
+      tmpKey = keyElem;
+    }
+  })
+  let tmpSymbol = tmpKey.dataset.symbol;
+
+  allKeyElems.forEach(keyElem => {
+    let kbdHint = keyElem.querySelector(".js-kbd-key-hint");
+    if (kbdHint.textContent === tmpSymbol) {
+      let tmpOctave = keyElem.parentNode.parentNode;
+      prevOctaveNum = Array.from(tmpOctave.classList);
+      prevOctaveNum = prevOctaveNum.find(className => 
+        className.startsWith("keyboard--count-")).slice(-1);
+    }
+  })
+
+  if (!prevOctaveNum) {
+    prevOctaveNum = 0;
+  }
+
+  return +prevOctaveNum;
 }
 
 
