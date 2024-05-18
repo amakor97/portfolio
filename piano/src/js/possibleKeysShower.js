@@ -218,7 +218,7 @@ function updateHightlights(e, keyElem) {
     }
     case "advanced": {
       
-      if (e.relatedTarget && e.relatedTarget.tagName === "BODY") {
+      if (e.relatedTarget && e.relatedTarget.tagName === "BODY" && !pressedOctave) {
         prevOctaveKeys.length = 0;
       }
 
