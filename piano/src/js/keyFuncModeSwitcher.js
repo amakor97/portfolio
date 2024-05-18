@@ -307,7 +307,6 @@ function getPrevOctaveNumByName(pressedOctave) {
   let prevOctaveNum = undefined;
   let tmpSymbol = undefined;
 
-  //2 cycles to 1?
   allKeyElems.forEach(keyElem => {
     if (keyElem.classList.contains(pressedOctave)) {
       tmpSymbol = keyElem.dataset.symbol;
