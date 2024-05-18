@@ -135,7 +135,6 @@ export function updateMode() {
     }
 
     case "advanced": {
-      console.log("a");
       noteInputCont.classList.add(
         "control-panel__switch-mode-cont--hided");
       let attr = isFullKbdShown() ? "display" : "sound";
@@ -289,17 +288,31 @@ function getPressedOctave() {
 }
 
 
+function getPressedSymbolKey() {
+  const pressedSymbolKeys = filterSpecialKeys();
+  let targetKey = (pressedSymbolKeys.size === 1) ? 
+    Array.from(pressedSymbolKeys)[0] : undefined;
+  return targetKey;
+}
+
+
+export let getOctaveClassByElem = (keyElem) => {
+  return Array.from(keyElem.classList).find(keyClass => ["js-key-main", 
+    "js-key-sub", "js-key-sup", "js-key-super"].includes(keyClass));
+}
+
+
 function getPrevOctaveNumByName(pressedOctave) {
   const allKeyElems = document.querySelectorAll(".key");
   let prevOctaveNum = undefined;
-  let tmpKey = undefined;
+  let tmpSymbol = undefined;
 
+  //2 cycles to 1?
   allKeyElems.forEach(keyElem => {
     if (keyElem.classList.contains(pressedOctave)) {
-      tmpKey = keyElem;
+      tmpSymbol = keyElem.dataset.symbol;
     }
   })
-  let tmpSymbol = tmpKey.dataset.symbol;
 
   allKeyElems.forEach(keyElem => {
     let kbdHint = keyElem.querySelector(".js-kbd-key-hint");
@@ -311,25 +324,8 @@ function getPrevOctaveNumByName(pressedOctave) {
     }
   })
 
-  if (!prevOctaveNum) {
-    prevOctaveNum = 0;
-  }
-
-  return +prevOctaveNum;
-}
-
-
-export let getOctaveClassByElem = (keyElem) => {
-  return Array.from(keyElem.classList).find(keyClass => ["js-key-main", 
-    "js-key-sub", "js-key-sup", "js-key-super"].includes(keyClass));
-}
-
-
-function getPressedSymbolKey() {
-  const pressedSymbolKeys = filterSpecialKeys();
-  let targetKey = (pressedSymbolKeys.size === 1) ? 
-    Array.from(pressedSymbolKeys)[0] : undefined;
-  return targetKey;
+  prevOctaveNum = +prevOctaveNum || 0;
+  return prevOctaveNum;
 }
 
 
@@ -340,7 +336,6 @@ export function updateAdvancedMode(name, num) {
   allKeyElems.forEach(key => key.classList.remove("key--pressing"));
   updateVisualHints();
   setPressedOctaveName(undefined);
-  console.log({pressedOctave});
 }
 
 
