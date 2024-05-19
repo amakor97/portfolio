@@ -52,7 +52,11 @@ function highlightPrevAdvancedKeys(e, keyElem) {
   if (!keyElem) {
     return;
   }
-  
+
+  console.log("RED ADV");
+
+  //prevOctaveKeys.forEach();
+  allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
   prevOctaveKeys.length = 0;
 
   console.log(keyElem);
