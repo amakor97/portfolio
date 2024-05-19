@@ -4,20 +4,23 @@
 import { isEditModeActive, pressedOctave, switchModeType, 
   getOctaveClassByElem, setPressedOctaveName, updateBasicMode, 
   updateAdvancedMode, updateProMode } from "./keyFuncModeSwitcher.js";
+import { mouseClickHandler } from "./possibleKeysShower.js";
 
 
 const allKeyElems = document.querySelectorAll(".key");
 export let clickedProKeyElem = undefined;
 
 
-allKeyElems.forEach(key => {
-  key.addEventListener("click", function tmp(e) {
-    switchByClick(e, key);
+allKeyElems.forEach(keyElem => {
+  keyElem.addEventListener("click", function(e) {
+    switchByClick(e, keyElem);
+    mouseClickHandler(e, keyElem);
   });
 })
 
 
 function switchByClick(e, key) {
+  console.log("sw");
   if (!isEditModeActive) {
     return;
   }
@@ -146,7 +149,7 @@ function getClickedProKeyElem(key) {
 }
 
 
-function getKbdHint(prevOctaveKeys) {
+export function getKbdHint(prevOctaveKeys) {
   let kbdHint = "";
   prevOctaveKeys.forEach(prevOctaveKey => {
     let tmpKbdHint = prevOctaveKey.querySelector(".js-kbd-key-hint");
