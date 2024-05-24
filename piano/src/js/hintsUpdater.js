@@ -28,6 +28,8 @@ export function updateSoundHints() {
         pianoKey.dataset.display : pianoKey.dataset.sound;
     }
   })
+
+  //allPianoKeys.forEach(key => console.log(key.dataset));
 }
 
 

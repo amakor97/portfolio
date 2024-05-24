@@ -8,8 +8,8 @@ import { setBasicOffset, setAdvancedModeLayouts, setProModeLayouts,
 const saveToFileBtn = document.querySelector(".js-save-local-file");
 const readFromFileBtn = document.querySelector(".js-read-local-file");
 
-window.onbeforeunload = saveToLs;
-window.onload = readFromLs;
+//window.onbeforeunload = saveToLs;
+//window.onload = readFromLs;
 saveToFileBtn.addEventListener("click", saveToFile);
 readFromFileBtn.addEventListener("change", readFromFile);
 
