@@ -20,7 +20,6 @@ allKeyElems.forEach(keyElem => {
 
 
 function switchByClick(e, key) {
-  console.log("sw");
   if (!isEditModeActive) {
     return;
   }
@@ -88,7 +87,7 @@ function getOctaveKeysByKey(keyElem) {
   const clickedOctave = keyElem.parentNode.parentNode;
   let octaveCountClass = Array.from(clickedOctave.classList).find(
     className => className.startsWith("keyboard--count"));
-  const clickedOctaves = (document.querySelectorAll(`.${octaveCountClass}`));
+  const clickedOctaves = document.querySelectorAll(`.${octaveCountClass}`);
   const clickedOctaveKeys = [];
 
   clickedOctaves.forEach(clickedOctave => {
