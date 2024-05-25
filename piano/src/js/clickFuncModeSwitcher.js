@@ -45,6 +45,7 @@ function switchBasicModeClickHandler(e) {
   let targetOctave = e.target.parentNode.parentNode;
   let num = Array.from(targetOctave.classList).find(
     className => className.startsWith("keyboard--count")).slice(-1);
+  console.log({num});
   updateBasicMode(num);
 }
 

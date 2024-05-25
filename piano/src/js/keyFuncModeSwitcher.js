@@ -243,6 +243,7 @@ export function switchBasicModeKeyHandler() {
 
 
 export function updateBasicMode(num) {
+  console.log({num});
   const allKeyElems = document.querySelectorAll(".key");
   switchBasicMode(num);
   allKeyElems.forEach(key => key.classList.remove("key--pressing"));
@@ -263,20 +264,20 @@ function updateBasicSounds2(base) {
 
 
 
-    console.log(keyElem.dataset.key.slice(-1).toLowerCase());
+    //console.log(keyElem.dataset.key.slice(-1).toLowerCase());
     //let pressedKey = keyElem.dataset.key.slice(-1).toLowerCase();
     let pressedKey = keyElem.dataset.symbol;
     for (let key in basicMap) {
-      console.log(key, basicMap[key].slice(0, -2), 
-      basicMap[key].slice(-2));
+      //console.log(key, basicMap[key].slice(0, -2), 
+      //basicMap[key].slice(-2));
       if (pressedKey === key) {
-        console.log("match");
+        //console.log("match");
         let letter = basicMap[key].slice(0, -2);
         let additionalOffset = parseInt(basicMap[key].slice(-2));
-        console.log(additionalOffset);
-        let resultOffset = base + additionalOffset;
+        //console.log(additionalOffset);
+        let resultOffset = +base + additionalOffset;
         console.log(resultOffset);
-        console.log(`${letter}${resultOffset}`);
+        //console.log(`${letter}${resultOffset}`);
 
         keyElem.dataset.sound = `${letter}${resultOffset}`;
       }
