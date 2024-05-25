@@ -5,49 +5,13 @@ import { pressedKeys } from "./inputHandler.js";
 import { updateVisualHints, isFullKbdShown } from "./hintsUpdater.js";
 import { noteInputCont, updateVisualMode } from "./visualModeSwitcher.js";
 import { highlightPrevOctaveKeys } from "./possibleKeysShower.js";
+import { basicLayout, createAdvancedModeLayouts, 
+  createProModeLayouts } from "./layouts.js";
 
 const textDigits = ["Digit0", "Digit1", "Digit2", "Digit3", 
   "Digit4", "Digit5", "Digit6", "Digit7", "Digit8"];
 
-const basicMap = {
-  "q": "C-1",
-  "2": "Db-1",
-  "w": "D-1",
-  "3": "Eb-1",
-  "e": "E-1",
-  "r": "F-1",
-  "5": "Gb-1",
-  "t": "G-1",
-  "6": "Ab-1",
-  "y": "A-1",
-  "7": "Bb-1",
-  "u": "B-1",
-  "z": "C+0",
-  "s": "Db+0",
-  "x": "D+0",
-  "d": "Eb+0",
-  "c": "E+0",
-  "v": "F+0",
-  "g": "Gb+0",
-  "b": "G+0",
-  "h": "Ab+0",
-  "n": "A+0",
-  "j": "Bb+0",
-  "m": "B+0",
-  ",": "C+1",
-  "l": "Db+1",
-  ".": "D+1",
-  ";": "Eb+1",
-  "/": "E+1",
-  "i": "F+1",
-  "9": "Gb+1",
-  "o": "G+1",
-  "0": "Ab+1",
-  "p": "A+1",
-  "-": "Bb+1",
-  "[": "B+1",
-  "]": "C+2"
-}
+
 
 export let activeBasicOffset = 4;
 export let advancedModeLayouts = createAdvancedModeLayouts(5);
@@ -78,50 +42,6 @@ export const noteInput = document.querySelector(
 const noteValidateBtn = document.querySelector(
   ".js-note-validate-btn");
 const resetLayoutsBtn = document.querySelector(".js-reset-layouts");
-
-
-function createAdvancedModeSingleLayout() {
-  let layout = {
-    sub: 3,
-    main: 4,
-    sup: 5,
-    super: 6
-  };
-  return layout;
-}
-
-
-export function createAdvancedModeLayouts(num) {
-  let layouts = [];
-  for (let i = 0; i < num; i++) {
-    let layout = createAdvancedModeSingleLayout();
-    layouts.push(layout);
-  }
-  return layouts;
-}
-
-
-function createProModeSingleLayout() {
-  const playableKbdKeys = document.querySelectorAll(".key[data-key]");  
-  let layout = {};
-
-  playableKbdKeys.forEach(kbdKey => {
-    let key = kbdKey.dataset.key;
-    let sound = kbdKey.dataset.display;
-    layout[key] = sound;
-  })
-  return layout;
-}
-
-
-export function createProModeLayouts(num) {
-  let layouts = [];
-  for (let i = 0; i < num; i++) {
-    let layout = createProModeSingleLayout();
-    layouts.push(layout);
-  }
-  return layouts;
-}
 
 
 export let filterSpecialKeys = () => new Set(([...pressedKeys]).filter(value => 
@@ -267,13 +187,13 @@ function updateBasicSounds2(base) {
     //console.log(keyElem.dataset.key.slice(-1).toLowerCase());
     //let pressedKey = keyElem.dataset.key.slice(-1).toLowerCase();
     let pressedKey = keyElem.dataset.symbol;
-    for (let key in basicMap) {
-      //console.log(key, basicMap[key].slice(0, -2), 
-      //basicMap[key].slice(-2));
+    for (let key in basicLayout) {
+      //console.log(key, basicLayout[key].slice(0, -2), 
+      //basicLayout[key].slice(-2));
       if (pressedKey === key) {
         //console.log("match");
-        let letter = basicMap[key].slice(0, -2);
-        let additionalOffset = parseInt(basicMap[key].slice(-2));
+        let letter = basicLayout[key].slice(0, -2);
+        let additionalOffset = parseInt(basicLayout[key].slice(-2));
         //console.log(additionalOffset);
         let resultOffset = +base + additionalOffset;
         console.log(resultOffset);
