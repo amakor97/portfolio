@@ -12,7 +12,6 @@ const textDigits = ["Digit0", "Digit1", "Digit2", "Digit3",
   "Digit4", "Digit5", "Digit6", "Digit7", "Digit8"];
 
 
-
 export let activeBasicOffset = 4;
 export let advancedModeLayouts = createAdvancedModeLayouts(5);
 export let proModeLayouts = createProModeLayouts(5);
@@ -90,7 +89,7 @@ export function updateMode() {
     case "basic": {
       noteInputCont.classList.add(
         "control-panel__switch-mode-cont--hided");
-      updateBasicSounds2(activeBasicOffset);
+      updateBasicSounds(activeBasicOffset);
       break;
     }
 
@@ -163,7 +162,6 @@ export function switchBasicModeKeyHandler() {
 
 
 export function updateBasicMode(num) {
-  console.log({num});
   const allKeyElems = document.querySelectorAll(".key");
   switchBasicMode(num);
   allKeyElems.forEach(key => key.classList.remove("key--pressing"));
@@ -173,56 +171,23 @@ export function updateBasicMode(num) {
 
 function switchBasicMode(num) {
   setBasicOffset(num);
-  updateBasicSounds2(num);
-}
-
-
-function updateBasicSounds2(base) {
-  const allPianoKeys = document.querySelectorAll(".key");
-  const playableKbdKeys = document.querySelectorAll(".key[data-key]"); 
-  playableKbdKeys.forEach(keyElem => {
-
-
-
-    //console.log(keyElem.dataset.key.slice(-1).toLowerCase());
-    //let pressedKey = keyElem.dataset.key.slice(-1).toLowerCase();
-    let pressedKey = keyElem.dataset.symbol;
-    for (let key in basicLayout) {
-      //console.log(key, basicLayout[key].slice(0, -2), 
-      //basicLayout[key].slice(-2));
-      if (pressedKey === key) {
-        //console.log("match");
-        let letter = basicLayout[key].slice(0, -2);
-        let additionalOffset = parseInt(basicLayout[key].slice(-2));
-        //console.log(additionalOffset);
-        let resultOffset = +base + additionalOffset;
-        console.log(resultOffset);
-        //console.log(`${letter}${resultOffset}`);
-
-        keyElem.dataset.sound = `${letter}${resultOffset}`;
-      }
-    }
-  })
+  updateBasicSounds(num);
 }
 
 
 function updateBasicSounds(base) {
   const playableKbdKeys = document.querySelectorAll(".key[data-key]"); 
   playableKbdKeys.forEach(keyElem => {
-    let additionalOffset = 0;
-    if (keyElem.classList.contains("js-key-sub")) {
-      additionalOffset = -1;
+    let pressedKey = keyElem.dataset.symbol;
+    
+    for (let key in basicLayout) {
+      if (pressedKey === key) {
+        let letter = basicLayout[key].slice(0, -2);
+        let additionalOffset = parseInt(basicLayout[key].slice(-2));
+        let resultOffset = +base + additionalOffset;
+        keyElem.dataset.sound = `${letter}${resultOffset}`;
+      }
     }
-    if (keyElem.classList.contains("js-key-sup")) {
-      additionalOffset = 1;
-    }
-    if (keyElem.classList.contains("js-key-super")) {
-      additionalOffset = 2;
-    }
-
-    keyElem.dataset.sound = 
-      `${keyElem.dataset.sound.slice(0, -1)}${+base + additionalOffset}`;
-    console.log(keyElem.dataset.sound);
   })
 }
 
@@ -398,6 +363,4 @@ function updateProKeySound(keyElem, note) {
 
 function updateProLayout(targetKey, note) {
   proModeLayouts[activeProLayout][targetKey] = note;
-
-  console.log(proModeLayouts[activeProLayout]);
 }
