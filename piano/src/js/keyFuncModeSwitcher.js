@@ -3,10 +3,13 @@
 
 import { pressedKeys } from "./inputHandler.js";
 import { updateVisualHints, isFullKbdShown } from "./hintsUpdater.js";
-import { noteInputCont, updateVisualMode } from "./visualModeSwitcher.js";
-import { highlightPrevOctaveKeys } from "./possibleKeysShower.js";
+import { noteInputCont, updateVisualMode, 
+  controlPanel } from "./visualModeSwitcher.js";
+import { highlightPrevOctaveKeys, 
+  resetClickedVisualProKeyElem } from "./possibleKeysShower.js";
 import { basicLayout, createAdvancedModeLayouts, 
   createProModeLayouts } from "./layouts.js";
+import { resetClickedProKeyElem} from "./clickFuncModeSwitcher.js";
 
 const textDigits = ["Digit0", "Digit1", "Digit2", "Digit3", 
   "Digit4", "Digit5", "Digit6", "Digit7", "Digit8"];
@@ -80,6 +83,19 @@ modeSelectors.forEach(input => {
 
 editModeToggler.addEventListener("change", () => {
   isEditModeActive = editModeToggler.checked;
+
+  if (!isEditModeActive) {
+    const allKeyElems = document.querySelectorAll(".key");
+    pressedOctave = undefined;
+
+    resetClickedProKeyElem();
+    resetClickedVisualProKeyElem();
+    controlPanel.classList.remove("control-panel--single-row");
+  
+    allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
+    allKeyElems.forEach(keyElem => keyElem.classList.remove("key--next"));
+  }
+
   updateVisualMode(isEditModeActive);
 });
 

@@ -109,6 +109,10 @@ function highlightPrevAdvancedKeys(keyElem) {
 
 
 function highlightNextAdvancedKeys(e) {
+  if (e.type === "mouseout") {
+    return;
+  }
+  
   const targetKeys = [];
   const targetOctave = e.target.parentNode.parentNode;
   let targetBasicNum = +(Array.from(targetOctave.classList).find(

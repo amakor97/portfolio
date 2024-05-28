@@ -11,6 +11,7 @@ import { resetClickedVisualProKeyElem } from "./possibleKeysShower.js";
 export let visualMode = "double";
 export const noteInputCont = document.querySelector(
   ".js-control-note-input-cont");
+export const controlPanel = document.querySelector(".js-control-panel");
 
 const visualModeSelectors = document.querySelectorAll(
   "input[name='select-visual-mode']");
@@ -123,7 +124,6 @@ function hideFullKbd() {
 
 
 controlToggleBtn.addEventListener("click", function() {
-  const controlPanel = document.querySelector(".js-control-panel");
   controlToggleBtn.classList.toggle("menu__btn--toggled");
 
   if (isEditModeActive && visualMode === "double") {
