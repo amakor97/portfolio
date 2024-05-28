@@ -116,7 +116,6 @@ function getOctaveClassByHint(kbdHint) {
     }
   }
   
-
   return getOctaveClassByElem(targetKeyElem);
 }
 

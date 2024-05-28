@@ -6,6 +6,8 @@ import { isEditModeActive, switchModeType,
 
 
 const allKeyElems = document.querySelectorAll(".key");
+const prevOctaveKeys = [];
+let clickedProKey = undefined;
 
 
 allKeyElems.forEach(keyElem => {
@@ -130,108 +132,85 @@ function highlightNextProKey(e, keyElem) {
   if (e.type === "mouseout") {
     return;
   }
-  
+
   keyElem.classList.add("key--next");
 }
 
 
 export function mouseClickHandler(e, keyElem) {
-  console.log("mh");
   if(!isEditModeActive) {
     return;
   }
+
   switch(switchModeType) {
     case "basic": {
       updateHightlights(e, keyElem);
       break;
     }
+
     case "advanced": {
-      console.log("PON at click adv:", {pressedOctave});
       if (!pressedOctave) {
         prevOctaveKeys.length = 0;
-        updateHightlights(e, keyElem);
-        
+      }
+      updateHightlights(e, keyElem);
+      break;
+    }
+
+    case "pro": {
+      if (!clickedProKey) {
+        let kbdHint = keyElem.querySelector(".js-kbd-key-hint");
+        if (kbdHint.textContent !== "") {
+          clickedProKey = keyElem;
+          updateHightlights(e, keyElem);
+        }
       } else {
+        clickedProKey = undefined;
         updateHightlights(e, keyElem);
       }
       break;
-    }
-    case "pro": {
-      if (!clickedProKey) {
-        if (e.target.classList.contains("key")) {
-          let kbdHint = e.target.querySelector(".js-kbd-key-hint");
-          if (kbdHint.textContent !== "") {
-            clickedProKey = e.target;
-            updateHightlights(e, keyElem);
-          }
-        }
-      } else {
-        if (e.target.classList.contains("key")) {
-          clickedProKey = undefined;
-          updateHightlights(e, keyElem);
-        }
-      }
     }
   }
 }
 
 
-let clickedProKey = undefined;
-export let unsetClickedProKey = () => clickedProKey = undefined;
-
-
-const prevOctaveKeys = [];
-const nextOctaveKeys = [];
-
 function updateHightlights(e, keyElem = undefined) {
-
-
   if (!isEditModeActive) {
     return;
   }
 
+  allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
+  allKeyElems.forEach(keyElem => keyElem.classList.remove("key--next"));
+
   switch(switchModeType) {
     case "basic": {
-      allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
-      allKeyElems.forEach(keyElem => keyElem.classList.remove("key--next"));
       highlightNextBasicKeys(e, keyElem);
       break;
     }
-    case "advanced": {
-      console.log("PON at UH adv enter:", {pressedOctave});
 
+    case "advanced": {
       if (e.relatedTarget && e.relatedTarget.tagName === "BODY" && !pressedOctave) {
         prevOctaveKeys.length = 0;
       }
-
-      allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
-      allKeyElems.forEach(keyElem => keyElem.classList.remove("key--next"));
       prevOctaveKeys.forEach(keyElem => keyElem.classList.add("key--prev"));
 
-      console.log(prevOctaveKeys.length);
-
       if (!pressedOctave) {
-        allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
-        prevOctaveKeys.forEach(keyElem => keyElem.classList.add("key--prev"));
         highlightPrevAdvancedKeys(e, keyElem);
-        //highlightNextAdvancedKeys(e);
       } else {
-        allKeyElems.forEach(keyElem => keyElem.classList.remove("key--next"));
-        prevOctaveKeys.forEach(keyElem => keyElem.classList.add("key--prev"));
         highlightNextAdvancedKeys(e);
       }
 
       break;
     }
-    case "pro": {
-      allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
-      allKeyElems.forEach(keyElem => keyElem.classList.remove("key--next"));
 
-      highlightPrevProKey(e, keyElem);
-      if (clickedProKey) {
+    case "pro": {
+      if (!clickedProKey) {
+        highlightPrevProKey(e, keyElem);
+      } else {
         clickedProKey.classList.add("key--prev");
         highlightNextProKey(e, keyElem);
       }
+
+      break;
     }
   }
 }
