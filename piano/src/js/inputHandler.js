@@ -54,7 +54,6 @@ function pressedKeysHandler(e) {
 }
 
 function playSound(e) {
-  console.log(e.code);
   if (noteInput === document.activeElement) {
     return;
   }
@@ -64,15 +63,11 @@ function playSound(e) {
     return;
   }
 
-  console.log(key);
-
   const audio = document.querySelector(
     `audio[data-sound="${key.dataset.sound}"]`);
   if (!audio) {
     return;
   }
-  
-  console.log(audio);
 
   if (key.dataset.playing !== "true") {
     key.dataset.playing = "true";
