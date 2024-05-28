@@ -7,8 +7,8 @@ import { isEditModeActive, switchModeType,
 
 const allKeyElems = document.querySelectorAll(".key");
 const prevOctaveKeys = [];
-export let clickedProKey = undefined;
-export let resetClickedProKey = () => clickedProKey = undefined;
+export let clickedVisualProKeyElem = undefined;
+export let resetClickedVisualProKeyElem = () => clickedVisualProKeyElem = undefined;
 
 
 allKeyElems.forEach(keyElem => {
@@ -159,14 +159,14 @@ export function mouseClickHandler(e, keyElem) {
     }
 
     case "pro": {
-      if (!clickedProKey) {
+      if (!clickedVisualProKeyElem) {
         let kbdHint = keyElem.querySelector(".js-kbd-key-hint");
         if (kbdHint.textContent !== "") {
-          clickedProKey = keyElem;
+          clickedVisualProKeyElem = keyElem;
           updateHightlights(e, keyElem);
         }
       } else {
-        clickedProKey = undefined;
+        clickedVisualProKeyElem = undefined;
         updateHightlights(e, keyElem);
       }
       break;
@@ -201,10 +201,10 @@ function updateHightlights(e, keyElem = undefined) {
     }
 
     case "pro": {
-      if (!clickedProKey) {
+      if (!clickedVisualProKeyElem) {
         highlightPrevProKey(e, keyElem);
       } else {
-        clickedProKey.classList.add("key--prev");
+        clickedVisualProKeyElem.classList.add("key--prev");
         highlightNextProKey(e, keyElem);
       }
 

@@ -5,8 +5,8 @@ import { updateVisualHints, updateSoundHints, restoreKbdHints,
   updateDisabledKeys  } from "./hintsUpdater.js";
 import { isEditModeActive, setEditMode, 
   editModeToggler, setPressedOctaveName } from "./keyFuncModeSwitcher.js";
-import { resetClickedProKeyElem, clickedProKeyElem } from "./clickFuncModeSwitcher.js";
-import { resetClickedProKey, clickedProKey } from "./possibleKeysShower.js";
+import { resetClickedProKeyElem} from "./clickFuncModeSwitcher.js";
+import { resetClickedVisualProKeyElem } from "./possibleKeysShower.js";
 
 export let visualMode = "double";
 export const noteInputCont = document.querySelector(
@@ -127,22 +127,19 @@ controlToggleBtn.addEventListener("click", function() {
   controlToggleBtn.classList.toggle("control-toggle-btn--rotated");
 
   if (isEditModeActive) {
+    const allKeyElems = document.querySelectorAll(".key");
+
     setEditMode(false);
-    editModeToggler.checked = false;
-    controlPanel.classList.remove("control-panel--single-row");
     setPressedOctaveName(undefined);
     resetClickedProKeyElem();
-    resetClickedProKey();
-    console.log(clickedProKeyElem);
+    resetClickedVisualProKeyElem();
+    editModeToggler.checked = false;
+    controlPanel.classList.remove("control-panel--single-row");
 
-    const allKeyElems = document.querySelectorAll(".key");
-    console.log(allKeyElems);
     allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
     allKeyElems.forEach(keyElem => keyElem.classList.remove("key--next"));
-
     updateVisualMode(isEditModeActive);
   }
-  console.log(isEditModeActive);
 
   if (visualMode === "double") {
     controlPanel.classList.remove("control-panel--hided-bottom")
