@@ -83,6 +83,7 @@ export function restoreKbdHints() {
 
 
 toggleKbdHintsBtn.addEventListener("click", () => {
+  toggleKbdHintsBtn.classList.toggle("control-panel__btn--toggled");
   const allKbdHints = document.querySelectorAll(".js-kbd-key-hint");
   allKbdHints.forEach(kbdHint => 
     kbdHint.classList.toggle("key__hint--transparent"));
@@ -90,6 +91,7 @@ toggleKbdHintsBtn.addEventListener("click", () => {
 
 
 toggleSoundHintsBtn.addEventListener("click", () => {
+  toggleSoundHintsBtn.classList.toggle("control-panel__btn--toggled");
   const allSoundHints = document.querySelectorAll(".js-piano-key-hint");
   allSoundHints.forEach(soundHint => 
     soundHint.classList.toggle("key__hint--transparent"));
@@ -97,6 +99,7 @@ toggleSoundHintsBtn.addEventListener("click", () => {
 
 
 toggleDisabledKeysBtn.addEventListener("click", () => {
+  toggleDisabledKeysBtn.classList.toggle("control-panel__btn--toggled");
   areDisabledKeysActive = !areDisabledKeysActive;
   updateDisabledKeys();
 })

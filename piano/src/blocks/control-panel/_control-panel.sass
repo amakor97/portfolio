@@ -1,16 +1,18 @@
 .control-panel
   position: absolute
-  top: 0
+  //top: 0
   right: 0
   z-index: 2
 
   display: flex
   flex-direction: column
-  justify-content: center
+  justify-content: space-between
   gap: 20px
   width: 18vw
   height: 100vh
-  padding: 0 1vw
+  max-height: 965px
+  padding: 6vh 1vw
+  margin: auto 0
 
   //background: grey
 
@@ -19,13 +21,15 @@
   &--single-row
     top: auto
     right: auto
-    left: 5vw
-    bottom: 0
+    //left: 5vw
+    bottom: 2vw
+    margin: 0 auto
 
     flex-direction: row
     width: 90vw
+    max-width: 1300px
     height: 15vh
-    padding: 0 5vw
+    padding: 0 0vw
 
   &--hided-right
     right: -20vw
@@ -43,15 +47,16 @@
   &__switch-mode-cont
     display: flex
     flex-direction: column
-    min-width: 13vw
+    width: min-content
     //min-height: 7.5vh
     gap: 10px
     justify-content: space-evenly
     //background: red
 
     &--note
-      flex-direction: row
-      justify-content: space-between
+      flex-direction: column
+      justify-content: center
+      align-items: center
 
     &--hided
       opacity: 0
@@ -60,23 +65,75 @@
     //background: pink
 
   &__switch-mode-label
-    display: flex
-    justify-content: space-between
+    display: block
     align-items: center
-    width: 100%
+    width: 150px
     padding: 4px
 
+    font:
+      size: 1.5em
+    text:
+      align: center
+
+    border: 2px solid white
+      radius: 8px
+    //background: blue
+
+    &:hover
+      background: grey
+      border: 2px solid grey
+
+  &__note-label
+    font:
+      size: 1.5em
+
+  &__note-input
+    width: 150px
+    height: 40px
+    
     font:
       size: 1.5em
 
     border:
       radius: 8px
-    //background: blue
 
-  &__note-input
-    width: 40px
+  &__radio-input
+    display: none
 
-  &__note-btn
-    width: 80px
-    height: 56px
-    
+  &__checkbox-input
+    display: none
+
+  &__file-input
+    display: none
+
+  &__btn
+    width: 150px
+    height: 40px
+    padding: 4px
+
+    font:
+      size: 1.5em
+    color: white
+    text:
+      align: center
+
+    border: 2px solid white
+      radius: 8px
+    background: transparent
+
+    &:hover
+      border: 2px solid grey
+      background: grey
+
+    &--toggled
+      background: white
+      color: black
+
+input[type=radio]:checked + .control-panel__switch-mode-label
+  background: white
+  color: black
+  border: 2px solid white
+
+input[type=checkbox]:checked + .control-panel__switch-mode-label
+  background: white
+  color: black

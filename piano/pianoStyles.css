@@ -21,27 +21,29 @@
 
 .control-panel {
   position: absolute;
-  top: 0;
   right: 0;
   z-index: 2;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   gap: 20px;
   width: 18vw;
   height: 100vh;
-  padding: 0 1vw;
+  max-height: 965px;
+  padding: 6vh 1vw;
+  margin: auto 0;
   transition: right 0.5s, bottom 0.5s;
 }
 .control-panel--single-row {
   top: auto;
   right: auto;
-  left: 5vw;
-  bottom: 0;
+  bottom: 2vw;
+  margin: 0 auto;
   flex-direction: row;
   width: 90vw;
+  max-width: 1300px;
   height: 15vh;
-  padding: 0 5vw;
+  padding: 0 0vw;
 }
 .control-panel--hided-right {
   right: -20vw;
@@ -58,32 +60,80 @@
 .control-panel__switch-mode-cont {
   display: flex;
   flex-direction: column;
-  min-width: 13vw;
+  width: -moz-min-content;
+  width: min-content;
   gap: 10px;
   justify-content: space-evenly;
 }
 .control-panel__switch-mode-cont--note {
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .control-panel__switch-mode-cont--hided {
   opacity: 0;
 }
 .control-panel__switch-mode-label {
-  display: flex;
-  justify-content: space-between;
+  display: block;
   align-items: center;
-  width: 100%;
+  width: 150px;
   padding: 4px;
+  font-size: 1.5em;
+  text-align: center;
+  border: 2px solid white;
+  border-radius: 8px;
+}
+.control-panel__switch-mode-label:hover {
+  background: grey;
+  border: 2px solid grey;
+}
+.control-panel__note-label {
+  font-size: 1.5em;
+}
+.control-panel__note-input {
+  width: 150px;
+  height: 40px;
   font-size: 1.5em;
   border-radius: 8px;
 }
-.control-panel__note-input {
-  width: 40px;
+.control-panel__radio-input {
+  display: none;
 }
-.control-panel__note-btn {
-  width: 80px;
-  height: 56px;
+.control-panel__checkbox-input {
+  display: none;
+}
+.control-panel__file-input {
+  display: none;
+}
+.control-panel__btn {
+  width: 150px;
+  height: 40px;
+  padding: 4px;
+  font-size: 1.5em;
+  color: white;
+  text-align: center;
+  border: 2px solid white;
+  border-radius: 8px;
+  background: transparent;
+}
+.control-panel__btn:hover {
+  border: 2px solid grey;
+  background: grey;
+}
+.control-panel__btn--toggled {
+  background: white;
+  color: black;
+}
+
+input[type=radio]:checked + .control-panel__switch-mode-label {
+  background: white;
+  color: black;
+  border: 2px solid white;
+}
+
+input[type=checkbox]:checked + .control-panel__switch-mode-label {
+  background: white;
+  color: black;
 }
 
 .control-toggle-btn {
