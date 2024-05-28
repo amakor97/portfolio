@@ -3,8 +3,10 @@
 
 import { updateVisualHints, updateSoundHints, restoreKbdHints, 
   updateDisabledKeys  } from "./hintsUpdater.js";
-import { isEditModeActive } from "./keyFuncModeSwitcher.js";
-
+import { isEditModeActive, setEditMode, 
+  editModeToggler, setPressedOctaveName } from "./keyFuncModeSwitcher.js";
+import { resetClickedProKeyElem, clickedProKeyElem } from "./clickFuncModeSwitcher.js";
+import { resetClickedProKey, clickedProKey } from "./possibleKeysShower.js";
 
 export let visualMode = "double";
 export const noteInputCont = document.querySelector(
@@ -123,6 +125,24 @@ function hideFullKbd() {
 controlToggleBtn.addEventListener("click", function() {
   const controlPanel = document.querySelector(".js-control-panel");
   controlToggleBtn.classList.toggle("control-toggle-btn--rotated");
+
+  if (isEditModeActive) {
+    setEditMode(false);
+    editModeToggler.checked = false;
+    controlPanel.classList.remove("control-panel--single-row");
+    setPressedOctaveName(undefined);
+    resetClickedProKeyElem();
+    resetClickedProKey();
+    console.log(clickedProKeyElem);
+
+    const allKeyElems = document.querySelectorAll(".key");
+    console.log(allKeyElems);
+    allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
+    allKeyElems.forEach(keyElem => keyElem.classList.remove("key--next"));
+
+    updateVisualMode(isEditModeActive);
+  }
+  console.log(isEditModeActive);
 
   if (visualMode === "double") {
     controlPanel.classList.remove("control-panel--hided-bottom")

@@ -9,6 +9,7 @@ import { mouseClickHandler } from "./possibleKeysShower.js";
 
 const allKeyElems = document.querySelectorAll(".key");
 export let clickedProKeyElem = undefined;
+export let resetClickedProKeyElem = () => clickedProKeyElem = undefined;
 
 
 allKeyElems.forEach(keyElem => {

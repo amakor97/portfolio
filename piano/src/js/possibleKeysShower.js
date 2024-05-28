@@ -7,7 +7,8 @@ import { isEditModeActive, switchModeType,
 
 const allKeyElems = document.querySelectorAll(".key");
 const prevOctaveKeys = [];
-let clickedProKey = undefined;
+export let clickedProKey = undefined;
+export let resetClickedProKey = () => clickedProKey = undefined;
 
 
 allKeyElems.forEach(keyElem => {

@@ -20,6 +20,7 @@ let activeAdvancedLayout = 0;
 let activeProLayout = 0;
 export let switchModeType = "basic";
 export let isEditModeActive = false;
+export let setEditMode = (bool) => isEditModeActive = bool;
 
 export let setBasicOffset = (n) => activeBasicOffset = n; 
 export let setAdvancedModeLayouts = (obj) => advancedModeLayouts = obj;
