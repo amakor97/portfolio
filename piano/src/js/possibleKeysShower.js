@@ -1,9 +1,13 @@
 "use strict";
 
+
 import { isEditModeActive, switchModeType, 
   pressedOctave } from "./keyFuncModeSwitcher.js";
 
+
 const allKeyElems = document.querySelectorAll(".key");
+
+
 allKeyElems.forEach(keyElem => {
   keyElem.addEventListener("mouseover", function(e) {
     updateHightlights(e, keyElem);
@@ -30,45 +34,36 @@ function highlightNextBasicKeys(e, keyElem) {
     return;
   }
 
-  let targetOctave = keyElem.parentNode.parentNode;
+  const targetOctave = keyElem.parentNode.parentNode;
   let targetBasicNum = +(Array.from(targetOctave.classList).find(
     className => className.startsWith("keyboard--count")).slice(-1));
 
-  let targetKeys = [];
+  const targetKeys = [];
   fillArrayWithOctaveKeys(targetKeys, targetBasicNum-1);
   fillArrayWithOctaveKeys(targetKeys, targetBasicNum);
   fillArrayWithOctaveKeys(targetKeys, targetBasicNum+1);
   let superOctaveKey = document.querySelector(
     `.keyboard--count-${targetBasicNum+2} .key[data-display^="C"]`);
-  targetKeys.push(superOctaveKey);
-
+  
+  if (superOctaveKey) {
+    targetKeys.push(superOctaveKey);
+  }
   targetKeys.forEach(keyElem => keyElem.classList.add("key--next"));
 }
 
 
 function highlightPrevAdvancedKeys(e, keyElem) {
-
-
   if (!keyElem) {
     return;
   }
 
-  console.log("RED ADV");
-
-  //prevOctaveKeys.forEach();
   allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
   prevOctaveKeys.length = 0;
 
-  console.log(keyElem);
-
-  let targetOctave = keyElem.parentNode.parentNode;
-  let targetOctaveClasses = Array.from(targetOctave.classList);
-
-
-
+  const targetOctave = keyElem.parentNode.parentNode;
+  const targetOctaveClasses = Array.from(targetOctave.classList);
   let isOctaveValid = (targetOctaveClasses.find(
     className => className.startsWith("keyboard--count"))) ? true : false;
-
 
   if (!isOctaveValid) {
     return;
@@ -76,32 +71,29 @@ function highlightPrevAdvancedKeys(e, keyElem) {
 
   let targetBasicNum = +(Array.from(targetOctave.classList).find(
     className => className.startsWith("keyboard--count")).slice(-1));
-
-  let targetKeys = [];
+  const targetKeys = [];
   fillArrayWithOctaveKeys(targetKeys, targetBasicNum);
-  
 
   let isOctaveCorrect = false;
-  for (let keyElem of targetKeys) {
+  targetKeys.forEach(keyElem => {
     if (keyElem.children[0].textContent !== "") {
       isOctaveCorrect = true;
     }
-  }
+  })
 
   if (targetBasicNum === 0) {
     let isZeroOctave = true;
-    for (let keyElem of allKeyElems) {
+    allKeyElems.forEach(keyElem => {
       let kbdHint = keyElem.querySelector(".js-kbd-key-hint");
       if (kbdHint.textContent === "]") {
         isZeroOctave = false;
       }
-    }
+    })
 
     if (isZeroOctave) {
       isOctaveCorrect = true;
     }
   }
-
 
   if (!isOctaveCorrect) {
     return;
@@ -111,39 +103,37 @@ function highlightPrevAdvancedKeys(e, keyElem) {
   targetKeys.forEach(keyElem => keyElem.classList.add("key--prev"));
 }
 
+
 function highlightNextAdvancedKeys(e) {
-  console.log("GREEN ADV");
-  let targetOctave = e.target.parentNode.parentNode;
+  const targetOctave = e.target.parentNode.parentNode;
   let targetBasicNum = +(Array.from(targetOctave.classList).find(
     className => className.startsWith("keyboard--count")).slice(-1));
 
-  let targetKeys = [];
+  const targetKeys = [];
   fillArrayWithOctaveKeys(targetKeys, targetBasicNum);
   targetKeys.forEach(keyElem => keyElem.classList.add("key--next"));
 }
 
-function highlightPrevProKey(e) {
+
+function highlightPrevProKey(e, keyElem) {
   if (e.type === "mouseout") {
     return;
   }
-  let targetKey = e.target;
-  if (!targetKey.classList.contains("key")) {
-    return;
-  }
 
-  if (targetKey.children[0].textContent !== "") {
-    targetKey.classList.add("key--prev");
-    //clickedProKey = targetKey;
+  if (keyElem.children[0].textContent !== "") {
+    keyElem.classList.add("key--prev");
   }
 }
 
-function highlightNextProKey(e) {
-  let targetKey = e.target;
-  if (!targetKey.classList.contains("key")) {
+
+function highlightNextProKey(e, keyElem) {
+  if (e.type === "mouseout") {
     return;
   }
-  targetKey.classList.add("key--next");
+  
+  keyElem.classList.add("key--next");
 }
+
 
 export function mouseClickHandler(e, keyElem) {
   console.log("mh");
@@ -172,13 +162,13 @@ export function mouseClickHandler(e, keyElem) {
           let kbdHint = e.target.querySelector(".js-kbd-key-hint");
           if (kbdHint.textContent !== "") {
             clickedProKey = e.target;
-            updateHightlights(e);
+            updateHightlights(e, keyElem);
           }
         }
       } else {
         if (e.target.classList.contains("key")) {
           clickedProKey = undefined;
-          updateHightlights(e);
+          updateHightlights(e, keyElem);
         }
       }
     }
@@ -193,7 +183,7 @@ export let unsetClickedProKey = () => clickedProKey = undefined;
 const prevOctaveKeys = [];
 const nextOctaveKeys = [];
 
-function updateHightlights(e, keyElem) {
+function updateHightlights(e, keyElem = undefined) {
 
 
   if (!isEditModeActive) {
@@ -237,10 +227,10 @@ function updateHightlights(e, keyElem) {
       allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
       allKeyElems.forEach(keyElem => keyElem.classList.remove("key--next"));
 
-      highlightPrevProKey(e);
+      highlightPrevProKey(e, keyElem);
       if (clickedProKey) {
         clickedProKey.classList.add("key--prev");
-        highlightNextProKey(e);
+        highlightNextProKey(e, keyElem);
       }
     }
   }
