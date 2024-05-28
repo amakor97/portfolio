@@ -124,9 +124,9 @@ function hideFullKbd() {
 
 controlToggleBtn.addEventListener("click", function() {
   const controlPanel = document.querySelector(".js-control-panel");
-  controlToggleBtn.classList.toggle("control-toggle-btn--rotated");
+  controlToggleBtn.classList.toggle("menu__btn--toggled");
 
-  if (isEditModeActive) {
+  if (isEditModeActive && visualMode === "double") {
     const allKeyElems = document.querySelectorAll(".key");
 
     setEditMode(false);
@@ -135,6 +135,20 @@ controlToggleBtn.addEventListener("click", function() {
     resetClickedVisualProKeyElem();
     editModeToggler.checked = false;
     controlPanel.classList.remove("control-panel--single-row");
+
+    allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
+    allKeyElems.forEach(keyElem => keyElem.classList.remove("key--next"));
+    updateVisualMode(isEditModeActive);
+  }
+
+  if (isEditModeActive && visualMode !== "double") {
+    const allKeyElems = document.querySelectorAll(".key");
+
+    setEditMode(false);
+    setPressedOctaveName(undefined);
+    resetClickedProKeyElem();
+    resetClickedVisualProKeyElem();
+    editModeToggler.checked = false;
 
     allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
     allKeyElems.forEach(keyElem => keyElem.classList.remove("key--next"));

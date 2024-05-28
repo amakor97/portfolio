@@ -309,3 +309,28 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 .key__hint--transparent {
   opacity: 0;
 }
+
+.menu {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+.menu__btn {
+  width: 150px;
+  height: 40px;
+  padding: 4px;
+  font-size: 1.5em;
+  color: white;
+  text-align: center;
+  border: 2px solid white;
+  border-radius: 8px;
+  background: transparent;
+}
+.menu__btn:hover {
+  border: 2px solid grey;
+  background: grey;
+}
+.menu__btn--toggled {
+  background: white;
+  color: black;
+}
