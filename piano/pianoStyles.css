@@ -49,6 +49,12 @@
 .control-panel--hided-bottom {
   bottom: -15vh;
 }
+.control-panel__flex-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: start;
+}
 .control-panel__switch-mode-cont {
   display: flex;
   flex-direction: column;
