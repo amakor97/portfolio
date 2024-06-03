@@ -7,11 +7,13 @@
   <link rel="stylesheet" href="pianoStyles.css">
 </head>
 <body class="body">
-  <nav class="menu">
-    <button class="menu__btn">help</button>
-    <button class="menu__btn">app</button>
-    <button class="menu__btn js-control-toggle-btn">piano</button>
-  </nav>
+  <header class="header">
+    <div class="menu">
+      <button class="menu__btn js-dialog-help-toggle-btn">help</button>
+      <button class="menu__btn js-dialog-app-toggle-btn">app</button>
+      <button class="menu__btn js-control-toggle-btn">piano</button>
+    </div>
+  </header>
   <div class="keyboard-cont keyboard-cont--double-rows js-keyboard-cont">
     <div class="keyboard-cont__item keyboard-cont__item--0">
       <div class="keyboard keyboard--count-0">
@@ -501,11 +503,6 @@
       <input id="id-read-local-file" type="file" class="control-panel__file-input js-read-local-file">
       <label class="control-panel__btn" for="id-read-local-file">Upload</label>
     </div>
-    <div class="hint" style="display: none;">
-      <p>Basic mode: press and hold "Shift" and press num button for make offset</p>
-      <p>Advanced mode: press and hold "Shift". Pressing num button will change active layout. Setting "Edit" checkbox to true will toggle editing mode. While "Edit" is true pressing and releasing one of displaying keys will select octave and pressing num button then will set selected octave to corresponding offset.</p>
-      <p>Pro mode: press and hold "Shift". Pressing num button will change active layout. For assigning: enter node code to input field and press button. Then set "Edit" checkbox to true and press and hold "Shift". Pressing one of displaying keys will select key for note code.</p>
-    </div>
   </div>
   <block-audio>
     <block-octave data-name="subcontr">
@@ -616,6 +613,23 @@
     </block-octave>
   </block-audio>
   
+  <dialog class="modal js-dialog-help">
+    <p>Basic mode: press and hold "Shift" and press num button for make offset</p>
+    <p>Advanced mode: press and hold "Shift". Pressing num button will change active layout. Setting "Edit" checkbox to true will toggle editing mode. While "Edit" is true pressing and releasing one of displaying keys will select octave and pressing num button then will set selected octave to corresponding offset.</p>
+    <p>Pro mode: press and hold "Shift". Pressing num button will change active layout. For assigning: enter node code to input field and press button. Then set "Edit" checkbox to true and press and hold "Shift". Pressing one of displaying keys will select key for note code.</p>
+    <button class="js-dialog-help-close-btn">close</button>
+  </dialog>
+
+  <dialog class="modal js-dialog-app">
+    app settings
+    <br>
+    lang
+    <br>
+    style
+    <br>
+    <button class="js-dialog-app-close-btn">close</button>
+  </dialog>
+
   <script src="./src/js/inputHandler.js" type="module"></script>
   <script src="./src/js/layouts.js" type="module"></script>
   <script src="./src/js/keyFuncModeSwitcher.js" type="module"></script>
@@ -624,5 +638,6 @@
   <script src="./src/js/hintsUpdater.js" type="module"></script>
   <script src="./src/js/possibleKeysShower.js" type="module"></script>
   <script src="./src/js/saveLoadHandler.js" type="module"></script>
+  <script src="./src/js/dialogHandlers.js"></script>
 </body>
 </html>

@@ -90,7 +90,6 @@ editModeToggler.addEventListener("change", () => {
 
     resetClickedProKeyElem();
     resetClickedVisualProKeyElem();
-    controlPanel.classList.remove("control-panel--single-row");
   
     allKeyElems.forEach(keyElem => keyElem.classList.remove("key--prev"));
     allKeyElems.forEach(keyElem => keyElem.classList.remove("key--next"));

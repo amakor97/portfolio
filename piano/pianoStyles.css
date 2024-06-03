@@ -82,6 +82,8 @@
   text-align: center;
   border: 2px solid white;
   border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 .control-panel__switch-mode-label:hover {
   background: grey;
@@ -115,6 +117,8 @@
   border: 2px solid white;
   border-radius: 8px;
   background: transparent;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 .control-panel__btn:hover {
   border: 2px solid grey;
@@ -256,16 +260,20 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 }
 .key--black {
   z-index: 1;
-  height: 291px;
-  width: 39px;
+  max-height: 291px;
+  height: 16.87vw;
+  max-width: 39px;
+  width: 2.26vw;
   color: white;
   background: rgb(16, 16, 16);
   border-radius: 0 0 4px 4px;
 }
 .key--white {
   z-index: 0;
-  height: 408px;
-  width: 69px;
+  max-height: 408px;
+  height: 23.65vw;
+  max-width: 69px;
+  width: 4vw;
   color: black;
   background: white;
   border-radius: 0 0 4px 4px;
@@ -310,11 +318,6 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   opacity: 0;
 }
 
-.menu {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-}
 .menu__btn {
   width: 150px;
   height: 40px;
@@ -333,4 +336,17 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 .menu__btn--toggled {
   background: white;
   color: black;
+}
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 64px;
+  padding: 12px;
+}
+
+.modal {
+  width: 50vw;
 }
