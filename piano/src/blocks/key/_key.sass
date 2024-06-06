@@ -11,33 +11,53 @@
 
   transition: transform 0.05s
 
-  &--black
-    z-index: 1
-
-    max-height: 291px
-    height: 16.87vw
-    max-width: 39px
-    width: 2.26vw
-
-    color: white
-
-    background: rgb(16, 16, 16)
-    border:
-      radius: 0 0 4px 4px
-
   &--white
     z-index: 0
 
-    max-height: 408px
-    height: 23.65vw
-    max-width: 69px
-    width: 4vw
+    width: 34.5px
+    height: 204px
 
     color: black
 
     background: white
     border:
       radius: 0 0 4px 4px
+
+    @media (min-width: $screen-lg)
+      width: 46px
+      height: 272px
+
+    @media (min-width: $screen-xl)
+      width: 57.5px
+      height: 340px
+
+    @media (min-width: $screen-xxl)
+      width: 69px
+      height: 408px
+
+  &--black
+    z-index: 1
+
+    width: 19.5px
+    height: 155.5px
+
+    color: white
+
+    background: rgb(32, 32, 32)
+    border:
+      radius: 0 0 4px 4px
+
+    @media (min-width: $screen-lg)
+      width: 26px
+      height: 194px
+
+    @media (min-width: $screen-xl)
+      width: 32.5px
+      height: 242.5px
+
+    @media (min-width: $screen-xxl)
+      width: 39px
+      height: 291px
 
   &--disabled
     background: lightgrey
@@ -59,7 +79,23 @@
     width: 1.89vw
     height: 13vw
 
+  &--white-single
+    width: 4vw
+    height: 23.65vw
+
+  &--white-full
+    width: 1.89vw
+    height: 13vw
+
   &--black-narrow
+    width: 1.3vw
+    height: 8vw
+
+  &--black-single
+    width: 2.26vw
+    height: 16.87vw
+
+  &--black-full
     width: 1.3vw
     height: 8vw
 

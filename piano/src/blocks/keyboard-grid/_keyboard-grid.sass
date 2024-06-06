@@ -7,7 +7,16 @@
 
   &--double-rows
     width: fit-content
-    height: 840px
+    height: 420px
+
+    @media (min-width: $screen-lg)
+      height: 560px
+
+    @media (min-width: $screen-xl)
+      height: 700px
+
+    @media (min-width: $screen-xxl)
+      height: 840px
 
   &--single-row
     display: flex

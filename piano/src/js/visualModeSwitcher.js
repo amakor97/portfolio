@@ -94,14 +94,11 @@ function updateFullKbd() {
 function showFullKbd() {
   const kbdCont = document.querySelector(".js-keyboard-cont");
   const hidedKeys = document.querySelectorAll(".js-key-hideable");
-  const whiteKeys = document.querySelectorAll(".key--white");
-  const blackKeys = document.querySelectorAll(".key--black");
 
   kbdCont.classList.add("keyboard-cont--full-kbd");
   hidedKeys.forEach(key => key.classList.remove("key--hided"));
-  whiteKeys.forEach(key => key.classList.add("key--white-narrow"));
-  blackKeys.forEach(key => key.classList.add("key--black-narrow"));
 
+  updateKeysSize();
   updateVisualHints();
 }
 
@@ -109,17 +106,39 @@ function showFullKbd() {
 function hideFullKbd() {
   const kbdCont = document.querySelector(".js-keyboard-cont");
   const hidedKeys = document.querySelectorAll(".js-key-hideable");
-  const whiteKeys = document.querySelectorAll(".key--white");
-  const blackKeys = document.querySelectorAll(".key--black");
 
   kbdCont.classList.remove("keyboard-cont--full-kbd");
   hidedKeys.forEach(key => key.classList.add("key--hided"));
-  whiteKeys.forEach(key => key.classList.remove("key--white-narrow"));
-  blackKeys.forEach(key => key.classList.remove("key--black-narrow"));
 
+  updateKeysSize();
   updateSoundHints();
   restoreKbdHints();
   updateDisabledKeys();
+}
+
+
+function updateKeysSize() {
+  const whiteKeys = document.querySelectorAll(".key--white");
+  const blackKeys = document.querySelectorAll(".key--black");
+
+  if (isEditModeActive || (visualMode === "full")) {
+    whiteKeys.forEach(key => key.classList.remove("key--white-single"));
+    blackKeys.forEach(key => key.classList.remove("key--black-single"));
+    whiteKeys.forEach(key => key.classList.add("key--white-full"));
+    blackKeys.forEach(key => key.classList.add("key--black-full"));
+
+  } else if (visualMode === "single") {
+    whiteKeys.forEach(key => key.classList.remove("key--white-full"));
+    blackKeys.forEach(key => key.classList.remove("key--black-full"));
+    whiteKeys.forEach(key => key.classList.add("key--white-single"));
+    blackKeys.forEach(key => key.classList.add("key--black-single"));
+
+  } else if (visualMode === "double") {
+    whiteKeys.forEach(key => key.classList.remove("key--white-single"));
+    blackKeys.forEach(key => key.classList.remove("key--black-single"));
+    whiteKeys.forEach(key => key.classList.remove("key--white-full"));
+    blackKeys.forEach(key => key.classList.remove("key--black-full"));
+  }
 }
 
 
