@@ -22,7 +22,11 @@ let isHelpModalShowed = false;
 let isAppModalShowed = false;
 let isAboutModalShowed = false;
 
+
+helpDialog.addEventListener("click", () => closeDialog("help"));
+
 helpDialogToggleBtn.addEventListener("click", function() {
+
   if (isHelpModalShowed) {
     helpDialogToggleBtn.classList.remove("menu__btn--toggled");
     helpDialog.open = false;
@@ -34,12 +38,18 @@ helpDialogToggleBtn.addEventListener("click", function() {
   isHelpModalShowed = !isHelpModalShowed;
 })
 
-helpDialogCloseBtn.addEventListener("click", function() {
-  helpDialogToggleBtn.classList.remove("menu__btn--toggled");
-  helpDialog.open = false;
-  isHelpModalShowed = false;
-})
+function closeDialog(dialogName) {
+  switch(dialogName) {
+    case "help": {
+      helpDialogToggleBtn.classList.remove("menu__btn--toggled");
+      helpDialog.open = false;
+      isHelpModalShowed = false;
+      break;
+    }
+  }
+}
 
+helpDialogCloseBtn.addEventListener("click", () => closeDialog("help"));
 
 appDialogToggleBtn.addEventListener("click", () => {
   if (isAppModalShowed) {

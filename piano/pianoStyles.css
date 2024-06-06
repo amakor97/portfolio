@@ -411,5 +411,22 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 }
 
 .modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(64, 64, 64, 0.5);
+  border: 0px solid transparent;
+}
+.modal__content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
   width: 50vw;
+  padding: 24px;
+  transform: translate(-50%, -50%);
+  border-radius: 24px;
+  background: white;
 }
