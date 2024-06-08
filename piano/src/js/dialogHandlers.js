@@ -1,6 +1,7 @@
 "use strict";
 
 const helpDialog = document.querySelector(".js-dialog-help");
+const helpDialogContent = document.querySelector(".js-dialog-help-content");
 const helpDialogToggleBtn = document.querySelector(
   ".js-dialog-help-toggle-btn");
 const helpDialogCloseBtn = document.querySelector(
@@ -24,6 +25,7 @@ let isAboutModalShowed = false;
 
 
 helpDialog.addEventListener("click", () => closeDialog("help"));
+helpDialogContent.addEventListener("click", e => e.stopPropagation());
 
 helpDialogToggleBtn.addEventListener("click", function() {
 
