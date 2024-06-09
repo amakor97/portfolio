@@ -1,7 +1,7 @@
 .modal
   position: absolute
   top: 0
-  left: 0
+  right: 0
   z-index: 2
   
   width: 100vw
@@ -15,7 +15,7 @@
     top: 50%
     left: 50%
 
-    width: 50vw
+    width: 65vw
     padding: 24px
     transform: translate(-50%, -50%)
 
@@ -30,7 +30,12 @@
     margin: 0 auto 8px
 
   &__text-block
-    margin: 0 auto 8px
+    margin: 0 auto 16px
+
+  &__list
+    margin: 0
+
+    list-style: inside square
 
   &__text
     margin: 0 auto 4px
@@ -40,11 +45,18 @@
       
 
   &__close-btn
+    padding: 4px 16px
+
     font:
       size: 1.5em
     color: black
 
+    border: 2px solid black
+      radius: 8px
     background: transparent
+    cursor: pointer
+
+    transition: color 0.2s, background-color 0.2s
 
     &:hover
       color: white
