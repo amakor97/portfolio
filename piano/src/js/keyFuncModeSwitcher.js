@@ -3,8 +3,7 @@
 
 import { pressedKeys } from "./inputHandler.js";
 import { updateVisualHints, isFullKbdShown } from "./hintsUpdater.js";
-import { noteInputCont, updateVisualMode, 
-  controlPanel } from "./visualModeSwitcher.js";
+import { noteInputCont, updateVisualMode } from "./visualModeSwitcher.js";
 import { highlightPrevOctaveKeys, 
   resetClickedVisualProKeyElem } from "./possibleKeysShower.js";
 import { basicLayout, createAdvancedModeLayouts, 
@@ -47,6 +46,17 @@ const noteValidateBtn = document.querySelector(
 const resetLayoutsBtn = document.querySelector(".js-reset-layouts");
 
 
+updateModeLabelNum("advanced");
+updateModeLabelNum("pro");
+
+
+function updateModeLabelNum(type, num = 1) {
+  const label = document.querySelector(`.js-${type}-mode-label`);
+  label.textContent = 
+    `${type.charAt(0).toUpperCase() + type.slice(1)} (${num})`;
+}
+
+
 export let filterSpecialKeys = () => new Set(([...pressedKeys]).filter(value => 
   ((value !== "ShiftLeft") && (value !== "ShiftRight") && (value !== "Space"))
 ));
@@ -60,6 +70,9 @@ resetLayoutsBtn.addEventListener("click", function() {
   activeBasicOffset = 4;
   advancedModeLayouts = createAdvancedModeLayouts(5);
   proModeLayouts = createProModeLayouts(5);
+
+  updateModeLabelNum("advanced", 1);
+  updateModeLabelNum("pro", 1);
   updateMode();
 })
 
@@ -152,8 +165,9 @@ function updateProSounds() {
 
   let targetKey = (pressedSymbolKeys.size === 1) ? 
     Array.from(pressedSymbolKeys)[0].slice(-1) : undefined;
-  if (Number.isInteger(+targetKey)) {
-    activeProLayout = targetKey;
+  if (Number.isInteger(+targetKey) && proModeLayouts[+targetKey - 1]) {
+    activeProLayout = targetKey - 1;
+    updateModeLabelNum("pro", activeProLayout + 1);
   }
 
   const allKeyElems = document.querySelectorAll(".key");
@@ -236,11 +250,13 @@ export function switchAdvancedModeKeyHandler() {
 
 function updateAdvancedSoundsHandler() {
   const pressedSymbolKeys = filterSpecialKeys();
+
   let targetKey = (pressedSymbolKeys.size === 1) ? 
     Array.from(pressedSymbolKeys)[0] : undefined;
 
-  if ((targetKey) && textDigits.includes(targetKey)) {
-    activeAdvancedLayout = targetKey.slice(-1);
+  if ((targetKey) && (advancedModeLayouts[targetKey.slice(-1) - 1])) {
+    activeAdvancedLayout = targetKey.slice(-1) - 1;
+    updateModeLabelNum("advanced", activeAdvancedLayout + 1);
     updateAdvancedSounds();
   }
 }

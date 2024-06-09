@@ -76,7 +76,7 @@
 .control-panel__switch-mode-label {
   display: block;
   align-items: center;
-  width: 150px;
+  width: 160px;
   padding: 4px;
   font-size: 1.5em;
   text-align: center;
@@ -93,7 +93,7 @@
   font-size: 1.5em;
 }
 .control-panel__note-input {
-  width: 150px;
+  width: 160px;
   height: 40px;
   font-size: 1.5em;
   border-radius: 8px;
@@ -108,7 +108,7 @@
   display: none;
 }
 .control-panel__btn {
-  width: 150px;
+  width: 160px;
   height: 40px;
   padding: 4px;
   font-size: 1.5em;
