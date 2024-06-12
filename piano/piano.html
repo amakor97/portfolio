@@ -616,42 +616,69 @@
   
   <dialog class="modal js-dialog-help">
     <div class="modal__content js-dialog-help-content">
-      <h2 class="modal__title">Help</h2>
-      <div class="modal__text-block">
-        <h3 class="modal__subtitle">Visual modes</h3>
-        <p class="modal__text">You can switch the modes by clicking corresponding buttons on the piano settings.</p>
-        <ul class="modal__list">
-          <li class="modal__text">Double mode: represents 37 piano keys similar to way keyboard keys are placed on computer's keyboard;</li>
-          <li class="modal__text">Single mode: represents 37 piano keys placed in one row;</li>
-          <li class="modal__text">Full mode: represents full piano keyboard.</li>
-        </ul>
+      <header class="modal__header">
+        <h2 class="modal__title">Help</h2>
+        <button class="modal__btn js-dialog-help-close-btn">Close</button>
+      </header>
+      <div class="modal__carousel-cont">
+        <div class="modal__carousel-inner js-dialog-carousel-inner">
+          <div class="modal__carousel-page">
+            <div class="modal__text-block">
+              <h3 class="modal__subtitle">Visual modes</h3>
+              <p class="modal__text">You can switch the modes by clicking corresponding buttons on the piano settings.</p>
+              <ul class="modal__list">
+                <li class="modal__text">Double mode: represents 37 piano keys similar to way keyboard keys are placed on computer's keyboard;</li>
+                <li class="modal__text">Single mode: represents 37 piano keys placed in one row;</li>
+                <li class="modal__text">Full mode: represents full piano keyboard.</li>
+              </ul>
+            </div>
+            <div class="modal__text-block">
+              <h3 class="modal__subtitle">Functional modes</h3>
+              <p class="modal__text">You can switch the modes by clicking corresponding buttons on the piano settings.</p>
+              <ul class="modal__list">
+                <li class="modal__text">Basic mode: represents three full adjacent octaves and allows to move them to the left or to the right;</li>
+                <li class="modal__text">Advanced mode: represents three full adjacent octaves and allows you to reassign each of them separately;</li>
+                <li class="modal__text">Pro mode: represents three full adjacent octaves and allows you to reassign each computer's key to any of piano keys.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="modal__carousel-page">
+            <div class="modal__text-block">
+              <h3 class="modal__subtitle">Editing</h3>
+              <p class="modal__text">There are two ways for editing for each of modes: by clicking or pressing hotkey combinations. For editing by clicks you need to activate the "Reassign" button on the piano settings first.</p>
+              <ul class="modal__list">
+                <li class="modal__text">Basic mode (clicking): move cursor over the octave you want to be central and click;</li>
+                <li class="modal__text">Basic mode (hotkeys): press and hold "Shift" and press num button with octave number you want to be central;</li>
+                <li class="modal__text">Advanced mode (clicking): move cursor over the octave you want to refuse and click it. Move cursor over the octave you want to assign and click it;</li>
+                <li class="modal__text">Advanced mode (hotkeys): activate "Reassign" button first. Then press and hold "Shift" key. Then press any of assigned to octaves keyboard keys for selecting an octave you want to refuse. Finally, press num button with octave number you want to assign for;</li>
+                <li class="modal__text">Pro mode (clicking): move cursor over the piano key you want to refuse and click it. Move cursor over the piano key you want to assign and click it;</li>
+                <li class="modal__text">Pro mode (hotkeys): activate "Reassign" button first. Then enter note code to input field and validate it. Then press and hold "Shift" key. Finally, press one of any already assigned keyboard keys  to piano keys for reassign it to the note.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="modal__carousel-page">
+            <div class="modal__text-block">
+              <h3 class="modal__subtitle">Changing layouts</h3>
+              <p class="modal__text">For Advanced and Pro modes there are several layouts. You can edit one layout and then switch to one of other layouts of selected mode. Press and hold "Shift" key. Then press num button for changing active layout. Current active layout numbers are displayed on mode buttons on piano settings.</p>
+            </div>
+            <div class="modal__text-block">
+              <h3 class="modal__subtitle">Other features</h3>
+              <p class="modal__text">dududu</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="modal__text-block">
-        <h3 class="modal__subtitle">Functional modes</h3>
-        <p class="modal__text">You can switch the modes by clicking corresponding buttons on the piano settings.</p>
-        <ul class="modal__list">
-          <li class="modal__text">Basic mode: represents three full adjacent octaves and allows to move them to the left or to the right;</li>
-          <li class="modal__text">Advanced mode: represents three full adjacent octaves and allows you to reassign each of them separately;</li>
-          <li class="modal__text">Pro mode: represents three full adjacent octaves and allows you to reassign each computer's key to any of piano keys.</li>
-        </ul>
+      
+      <div class="modal__footer">
+        <div class="modal__control">
+          <button class="modal__btn js-modal-ctrl-left">l</button>
+          <button class="modal__btn js-modal-ctrl-right">r</button>
+        </div>
+        <div class="modal__counter-cont">
+          <p class="modal__text">
+            <span class="js-modal-page-num">1</span> of 3</p>
+        </div>
       </div>
-      <div class="modal__text-block">
-        <h3 class="modal__subtitle">Editing</h3>
-        <p class="modal__text">There are two ways for editing for each of modes: by clicking or pressing hotkey combinations. For editing by clicks you need to activate the "Reassign" button on the piano settings first.</p>
-        <ul class="modal__list">
-          <li class="modal__text">Basic mode (clicking): move cursor over the octave you want to be central and click;</li>
-          <li class="modal__text">Basic mode (hotkeys): press and hold "Shift" and press num button with octave number you want to be central;</li>
-          <li class="modal__text">Advanced mode (clicking): move cursor over the octave you want to refuse and click it. Move cursor over the octave you want to assign and click it;</li>
-          <li class="modal__text">Advanced mode (hotkeys): activate "Reassign" button first. Then press and hold "Shift" key. Then press any of assigned to octaves keyboard keys for selecting an octave you want to refuse. Finally, press num button with octave number you want to assign for;</li>
-          <li class="modal__text">Pro mode (clicking): move cursor over the piano key you want to refuse and click it. Move cursor over the piano key you want to assign and click it;</li>
-          <li class="modal__text">Pro mode (hotkeys): activate "Reassign" button first. Then enter note code to input field and validate it. Then press and hold "Shift" key. Finally, press one of any already assigned keyboard keys  to piano keys for reassign it to the note.</li>
-        </ul>
-      </div>
-      <div class="modal__text-block">
-        <h3 class="modal__subtitle">Changing layouts</h3>
-        <p class="modal__text">For Advanced and Pro modes there are several layouts. You can edit one layout and then switch to one of other layouts of selected mode. Press and hold "Shift" key. Then press num button for changing active layout. Current active layout numbers are displayed on mode buttons on piano settings.</p>
-      </div>
-      <button class="modal__btn js-dialog-help-close-btn">Close</button>
     </div>
   </dialog>
 

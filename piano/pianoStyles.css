@@ -426,8 +426,8 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 65vw;
-  padding: 24px;
+  width: 50vw;
+  padding: 20px;
   transform: translate(-50%, -50%);
   border: 4px solid black;
   border-radius: 16px;
@@ -437,8 +437,39 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   width: -moz-fit-content;
   width: fit-content;
 }
-.modal__title {
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 4px 0;
   margin: 0 auto 16px;
+}
+.modal__title {
+  display: inline-block;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0;
+  font-size: 1.75em;
+}
+.modal__carousel-cont {
+  width: 100%;
+  margin: 0 0 16px;
+  overflow: hidden;
+}
+.modal__carousel-inner {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 300%;
+  height: 100%;
+  transform: translateX(0);
+  transition: transform 0.4s;
+}
+.modal__carousel-page {
+  padding: 0 4px;
+}
+.modal__footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4px 4px;
 }
 .modal__subtitle {
   margin: 0 auto 8px;
@@ -493,6 +524,10 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 .modal__input-label:hover {
   background: grey;
   border: 2px solid grey;
+}
+
+.modal__text-block:last-child {
+  margin: 0;
 }
 
 input[type=radio]:checked + .modal__input-label {

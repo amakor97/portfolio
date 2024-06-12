@@ -90,3 +90,32 @@ function toggleDialog(dialogName) {
   toggleBtn.classList.toggle("menu__btn--toggled");
   dialog.open = !dialog.open;
 }
+
+
+const btnCtrlLeft = document.querySelector(".js-modal-ctrl-left");
+const btnCtrlRight = document.querySelector(".js-modal-ctrl-right");
+const helpDialogCarouselInner = document.querySelector(".js-dialog-carousel-inner");
+
+let helpDialogCarouselInnerPos = 0;
+
+btnCtrlLeft.addEventListener("click", updateDialogContentPos.bind(null, "l"));
+btnCtrlRight.addEventListener("click", updateDialogContentPos.bind(null, "r"));
+
+function updateDialogContentPos(dir) {
+  const pageNum = document.querySelector(".js-modal-page-num");
+  moveDialogContent(dir);
+  pageNum.textContent = `${helpDialogCarouselInnerPos + 1}`;
+}
+
+function moveDialogContent(dir) {
+  console.log(dir);
+  console.log(helpDialogCarouselInner);
+  if ((dir === "r") && (helpDialogCarouselInnerPos < 2)) {
+    helpDialogCarouselInnerPos += 1;
+  }
+  if ((dir === "l") && (helpDialogCarouselInnerPos > 0)) {
+    helpDialogCarouselInnerPos -= 1;
+  }
+  helpDialogCarouselInner.style.transform = 
+    `translateX(${-helpDialogCarouselInnerPos * 33.333}%)`;
+}
