@@ -618,7 +618,7 @@
     <div class="modal__content js-dialog-help-content">
       <header class="modal__header">
         <h2 class="modal__title">Help</h2>
-        <button class="modal__btn js-dialog-help-close-btn">Close</button>
+        <button class="modal__btn modal__btn--icon js-dialog-help-close-btn">Cl</button>
       </header>
       <div class="modal__carousel-cont">
         <div class="modal__carousel-inner js-dialog-carousel-inner">
@@ -662,22 +662,32 @@
               <p class="modal__text">For Advanced and Pro modes there are several layouts. You can edit one layout and then switch to one of other layouts of selected mode. Press and hold "Shift" key. Then press num button for changing active layout. Current active layout numbers are displayed on mode buttons on piano settings.</p>
             </div>
             <div class="modal__text-block">
+              <h3 class="modal__subtitle">Visual hints</h3>
+              <p class="modal__text">You can toggle visibility of different hints (assigned keys and sound) and disabled keys displaying as well by clicking corresponding buttons.</p>
+            </div>
+            <div class="modal__text-block">
               <h3 class="modal__subtitle">Other features</h3>
-              <p class="modal__text">dududu</p>
+              <ul class="modal__list">
+                <li class="modal__text">"Reset" button: resets all layouts to default; you can also use it if encounter strange behaviour;</li>
+                <li class="modal__text">"Save" button: saves all layouts to file which you can use later;</li>
+                <li class="modal__text">"Upload" button: uploads saved layouts from file to the piano.</li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
       
       <div class="modal__footer">
-        <div class="modal__control">
-          <button class="modal__btn js-modal-ctrl-left">l</button>
-          <button class="modal__btn js-modal-ctrl-right">r</button>
-        </div>
         <div class="modal__counter-cont">
           <p class="modal__text">
-            <span class="js-modal-page-num">1</span> of 3</p>
+            <span class="js-modal-page-num">1</span> of 3
+          </p>
         </div>
+        <div class="modal__control">
+          <button class="modal__btn modal__btn--icon js-modal-ctrl-left">l</button>
+          <button class="modal__btn modal__btn--icon js-modal-ctrl-right">r</button>
+        </div>
+
       </div>
     </div>
   </dialog>
@@ -685,7 +695,10 @@
 
   <dialog class="modal js-dialog-app">
     <div class="modal__content modal__content--app js-dialog-app-content">
-      <h2 class="modal__title">App settings</h2>
+      <header class="modal__header">
+        <h2 class="modal__title">App settings</h2>
+        <button class="modal__btn modal__btn--icon js-dialog-app-close-btn">Cl</button>
+      </header>
       <div class="modal__text-block">
         <h3 class="modal__subtitle">Language settings</h3>
         <input class="modal__input-radio" type="radio" name="lang" id="id-input-lang-en" value="en" checked>
@@ -710,13 +723,24 @@
         </label>
         <button class="modal__btn">Reset all app settings</button>
       </div>
-      <button class="modal__btn js-dialog-app-close-btn">Close</button>
     </div>
   </dialog>
 
   <dialog class="modal js-dialog-about">
-    piano app
-    <button class="js-dialog-about-close-btn">close</button>
+    <div class="modal__content js-dialog-about-content">
+      <header class="modal__header">
+        <h2 class="modal__title">Piano app</h2>
+        <button class="modal__btn modal__btn--icon js-dialog-about-close-btn">Cl</button>
+      </header>
+      <div class="modal__text-block">
+        <h3 class="modal__subtitle">Used:</h3>
+        <p class="modal__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam consequatur fugit magni temporibus voluptas at voluptatem numquam, molestias perspiciatis sint dolorum vitae optio cumque. Modi porro unde nesciunt molestias delectus!</p>
+      </div>
+      <div class="modal__text-block">
+        <h3 class="modal__subtitle">Contacts:</h3>
+        <p class="modal__text">For any suggestions and questions please contact me </p>
+      </div>
+    </div>
   </dialog>
 
   <script src="./src/js/inputHandler.js" type="module"></script>

@@ -487,6 +487,9 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 .modal__text:last-child {
   margin: 0;
 }
+.modal__counter-cont {
+  font-size: 1.5em;
+}
 .modal__btn {
   vertical-align: top;
   width: 160px;
@@ -502,6 +505,9 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 .modal__btn:hover {
   color: white;
   background: black;
+}
+.modal__btn--icon {
+  width: 40px;
 }
 .modal__input-radio {
   display: none;

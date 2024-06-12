@@ -15,6 +15,7 @@ const appDialogCloseBtn = document.querySelector(
   ".js-dialog-app-close-btn");
 
 const aboutDialog = document.querySelector(".js-dialog-about");
+const aboutDialogContent = document.querySelector(".js-dialog-about-content");
 const aboutDialogToggleBtn = document.querySelector(
   ".js-dialog-about-toggle-btn");
 const aboutDialogCloseBtn = document.querySelector(
@@ -33,39 +34,13 @@ helpDialogCloseBtn.addEventListener("click", () => toggleDialog("help"));
 
 appDialog.addEventListener("click", () => toggleDialog("app"));
 appDialogContent.addEventListener("click", e => e.stopPropagation());
-
-appDialogToggleBtn.addEventListener("click", () => {
-  if (isAppModalShowed) {
-    appDialogToggleBtn.classList.remove("menu__btn--toggled");
-    appDialog.open = false;
-  } else {
-    appDialogToggleBtn.classList.add("menu__btn--toggled");
-    appDialog.open = true;
-  }
-
-  isAppModalShowed = !isAppModalShowed;
-})
-
+appDialogToggleBtn.addEventListener("click", () => toggleDialog("app"));
 appDialogCloseBtn.addEventListener("click", () => toggleDialog("app"));
 
-
-aboutDialogToggleBtn.addEventListener("click", function() {
-  if (isAboutModalShowed) {
-    aboutDialogToggleBtn.classList.remove("menu__btn--toggled");
-    aboutDialog.open = false;
-  } else {
-    aboutDialogToggleBtn.classList.add("menu__btn--toggled");
-    aboutDialog.open = true;
-  }
-  
-  isAboutModalShowed = !isAboutModalShowed;
-})
-
-aboutDialogCloseBtn.addEventListener("click", function() {
-  aboutDialogToggleBtn.classList.remove("menu__btn--toggled");
-  aboutDialog.open = false;
-  isAboutModalShowed = false;
-})
+aboutDialog.addEventListener("click", () => toggleDialog("about"));
+aboutDialogContent.addEventListener("click", e => e.stopPropagation());
+aboutDialogToggleBtn.addEventListener("click", () => toggleDialog("about"));
+aboutDialogCloseBtn.addEventListener("click", () => toggleDialog("about"));
 
 
 function toggleDialog(dialogName) {
@@ -83,6 +58,12 @@ function toggleDialog(dialogName) {
       toggleBtn = appDialogToggleBtn;
       dialog = appDialog;
       isAppModalShowed = !isAppModalShowed;
+      break;
+    }
+    case "about": {
+      toggleBtn = aboutDialogToggleBtn;
+      dialog = aboutDialog;
+      isAboutModalShowed = !isAboutModalShowed;
       break;
     }
   }
