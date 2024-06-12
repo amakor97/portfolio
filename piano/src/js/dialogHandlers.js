@@ -8,6 +8,7 @@ const helpDialogCloseBtn = document.querySelector(
   ".js-dialog-help-close-btn");
 
 const appDialog = document.querySelector(".js-dialog-app");
+const appDialogContent = document.querySelector(".js-dialog-app-content");
 const appDialogToggleBtn = document.querySelector(
   ".js-dialog-app-toggle-btn");
 const appDialogCloseBtn = document.querySelector(
@@ -24,34 +25,14 @@ let isAppModalShowed = false;
 let isAboutModalShowed = false;
 
 
-helpDialog.addEventListener("click", () => closeDialog("help"));
+helpDialog.addEventListener("click", () => toggleDialog("help"));
 helpDialogContent.addEventListener("click", e => e.stopPropagation());
+helpDialogToggleBtn.addEventListener("click", () => toggleDialog("help"));
+helpDialogCloseBtn.addEventListener("click", () => toggleDialog("help"));
 
-helpDialogToggleBtn.addEventListener("click", function() {
 
-  if (isHelpModalShowed) {
-    helpDialogToggleBtn.classList.remove("menu__btn--toggled");
-    helpDialog.open = false;
-  } else {
-    helpDialogToggleBtn.classList.add("menu__btn--toggled");
-    helpDialog.open = true;
-  }
-  
-  isHelpModalShowed = !isHelpModalShowed;
-})
-
-function closeDialog(dialogName) {
-  switch(dialogName) {
-    case "help": {
-      helpDialogToggleBtn.classList.remove("menu__btn--toggled");
-      helpDialog.open = false;
-      isHelpModalShowed = false;
-      break;
-    }
-  }
-}
-
-helpDialogCloseBtn.addEventListener("click", () => closeDialog("help"));
+appDialog.addEventListener("click", () => toggleDialog("app"));
+appDialogContent.addEventListener("click", e => e.stopPropagation());
 
 appDialogToggleBtn.addEventListener("click", () => {
   if (isAppModalShowed) {
@@ -65,11 +46,7 @@ appDialogToggleBtn.addEventListener("click", () => {
   isAppModalShowed = !isAppModalShowed;
 })
 
-appDialogCloseBtn.addEventListener("click", () => {
-  appDialogToggleBtn.classList.remove("menu__btn--toggled");
-  appDialog.open = false;
-  isAppModalShowed = false;
-})
+appDialogCloseBtn.addEventListener("click", () => toggleDialog("app"));
 
 
 aboutDialogToggleBtn.addEventListener("click", function() {
@@ -89,3 +66,27 @@ aboutDialogCloseBtn.addEventListener("click", function() {
   aboutDialog.open = false;
   isAboutModalShowed = false;
 })
+
+
+function toggleDialog(dialogName) {
+  let toggleBtn = undefined;
+  let dialog = undefined;
+  
+  switch(dialogName) {
+    case "help": {
+      toggleBtn = helpDialogToggleBtn;
+      dialog = helpDialog;
+      isHelpModalShowed = !isHelpModalShowed;
+      break;
+    }
+    case "app": {
+      toggleBtn = appDialogToggleBtn;
+      dialog = appDialog;
+      isAppModalShowed = !isAppModalShowed;
+      break;
+    }
+  }
+
+  toggleBtn.classList.toggle("menu__btn--toggled");
+  dialog.open = !dialog.open;
+}
