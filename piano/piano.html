@@ -701,24 +701,24 @@
       </header>
       <div class="modal__text-block">
         <h3 class="modal__subtitle">Language settings</h3>
-        <input class="modal__input-radio" type="radio" name="lang" id="id-input-lang-en" value="en" checked>
+        <input class="modal__input-radio js-settings-lang-input" type="radio" name="lang" id="id-input-lang-en" value="en">
         <label class="modal__input-label" for="id-input-lang-en">En</label>
-        <input class="modal__input-radio" type="radio" name="lang" id="id-input-lang-ru" value="ru">
+        <input class="modal__input-radio js-settings-lang-input" type="radio" name="lang" id="id-input-lang-ru" value="ru">
         <label class="modal__input-label" for="id-input-lang-ru">Ru</label>
       </div>
       <div class="modal__text-block">
         <h3 class="modal__subtitle">Style settings</h3>
-        <input class="modal__input-radio" type="radio" name="style" id="id-input-style-classic" value="classic" checked>
+        <input class="modal__input-radio js-settings-style-input" type="radio" name="style" id="id-input-style-classic" value="classic">
         <label class="modal__input-label" for="id-input-style-classic">Classic</label>
-        <input class="modal__input-radio" type="radio" name="style" id="id-input-style-original" value="original">
+        <input class="modal__input-radio js-settings-style-input" type="radio" name="style" id="id-input-style-original" value="original">
         <label class="modal__input-label" for="id-input-style-original">Original</label>
       </div>
       <div class="modal__text-block">
         <h3 class="modal__subtitle">Other settings</h3>
-        <input class="modal__input-checkbox" type="checkbox" name="toggle-edit-mode" id="id-input-show-intro">
+        <input class="modal__input-checkbox js-settings-intro-input" type="checkbox" name="intro" id="id-input-show-intro">
         <label class="modal__input-label" for="id-input-show-intro">Show intro after reload
         </label>
-        <input class="modal__input-checkbox" type="checkbox" name="toggle-edit-mode" id="id-input-show-hint">
+        <input class="modal__input-checkbox js-settings-hint-input" type="checkbox" name="hint" id="id-input-show-hint">
         <label class="modal__input-label" for="id-input-show-hint">Show hint after reload
         </label>
         <button class="modal__btn">Reset all app settings</button>
@@ -752,5 +752,6 @@
   <script src="./src/js/possibleKeysShower.js" type="module"></script>
   <script src="./src/js/saveLoadHandler.js" type="module"></script>
   <script src="./src/js/dialogHandlers.js"></script>
+  <script src="./src/js/settingsHandler.js"></script>
 </body>
 </html>

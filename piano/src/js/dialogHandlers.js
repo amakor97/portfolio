@@ -89,8 +89,6 @@ function updateDialogContentPos(dir) {
 }
 
 function moveDialogContent(dir) {
-  console.log(dir);
-  console.log(helpDialogCarouselInner);
   if ((dir === "r") && (helpDialogCarouselInnerPos < 2)) {
     helpDialogCarouselInnerPos += 1;
   }
