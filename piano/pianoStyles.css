@@ -531,6 +531,12 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   background: grey;
   border: 2px solid grey;
 }
+.modal__link {
+  color: black;
+}
+.modal__link:hover {
+  color: grey;
+}
 
 .modal__text-block:last-child {
   margin: 0;

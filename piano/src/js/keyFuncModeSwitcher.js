@@ -52,8 +52,8 @@ updateModeLabelNum("pro");
 
 function updateModeLabelNum(type, num = 1) {
   const label = document.querySelector(`.js-${type}-mode-label`);
-  label.textContent = 
-    `${type.charAt(0).toUpperCase() + type.slice(1)} (${num})`;
+  const span = label.querySelector("span.js-mode-label-num");
+  span.textContent = `(${num})`;
 }
 
 

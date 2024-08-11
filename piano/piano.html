@@ -9,10 +9,10 @@
 <body class="body">
   <header class="header">
     <div class="menu">
-      <button class="menu__btn js-dialog-help-toggle-btn">Help</button>
-      <button class="menu__btn js-dialog-app-toggle-btn">App</button>
-      <button class="menu__btn js-control-toggle-btn">Piano</button>
-      <button class="menu__btn js-dialog-about-toggle-btn">About</button>
+      <button class="menu__btn js-dialog-help-toggle-btn" data-text="help">Help</button>
+      <button class="menu__btn js-dialog-app-toggle-btn" data-text="app">App</button>
+      <button class="menu__btn js-control-toggle-btn" data-text="piano">Piano</button>
+      <button class="menu__btn js-dialog-about-toggle-btn" data-text="about">About</button>
     </div>
   </header>
   <div class="keyboard-cont keyboard-cont--double-rows js-keyboard-cont">
@@ -454,55 +454,58 @@
       <div class="control-panel__switch-mode-item">
         <input class="control-panel__radio-input" type="radio" name="select-switch-mode" id="id-select-switch-mode-basic" value="basic" checked>
         <label class="control-panel__switch-mode-label" for="id-select-switch-mode-basic">
-          Basic
+          <span data-text="basicMode">Basic</span>
         </label>
       </div>
       <div class="control-panel__switch-mode-item">
         <input class="control-panel__radio-input" type="radio" name="select-switch-mode" id="id-select-switch-mode-advanced" value="advanced">
-        <label class="control-panel__switch-mode-label js-advanced-mode-label"  for="id-select-switch-mode-advanced">
-          Advanced
+        <label class="control-panel__switch-mode-label js-advanced-mode-label" for="id-select-switch-mode-advanced">
+          <span data-text="advancedMode">Advanced</span>
+          <span class="js-mode-label-num"></span>
         </label>
       </div>
       <div class="control-panel__switch-mode-item">
         <input class="control-panel__radio-input" type="radio" name="select-switch-mode" id="id-select-switch-mode-pro" value="pro">
         <label class="control-panel__switch-mode-label js-pro-mode-label" for="id-select-switch-mode-pro">
-          Pro
+          <span data-text="proMode">Pro</span>
+          <span class="js-mode-label-num"></span>
         </label>
       </div>
     </div>
     <div class="control-panel__switch-mode-cont js-control-assign-mode-cont">
       <input class="control-panel__checkbox-input" type="checkbox" name="toggle-edit-mode" id="id-toggle-edit-mode">
-      <label class="control-panel__switch-mode-label" for="id-toggle-edit-mode">Reassign
+      <label class="control-panel__switch-mode-label" for="id-toggle-edit-mode" data-text="reassign">
+        Reassign
       </label>
     </div>
     <div class="control-panel__switch-mode-cont control-panel__switch-mode-cont--hided control-panel__switch-mode-cont--note js-control-note-input-cont">
       <input class="control-panel__note-input" type="text" name="enter-note" id="id-enter-note" placeholder="Note">
-      <button class="control-panel__btn js-note-validate-btn">Validate</button>
+      <button class="control-panel__btn js-note-validate-btn" data-text="validate">Validate</button>
     </div>
     <div class="control-panel__switch-mode-cont">
       <input class="control-panel__radio-input" type="radio" name="select-visual-mode" id="id-select-visual-mode-double" value="double" checked>
-      <label class="control-panel__switch-mode-label" for="id-select-visual-mode-double">
+      <label class="control-panel__switch-mode-label" for="id-select-visual-mode-double" data-text="double">
         Double
       </label>
       <input class="control-panel__radio-input" type="radio" name="select-visual-mode" id="id-select-visual-mode-single" value="single">
-      <label class="control-panel__switch-mode-label"  for="id-select-visual-mode-single">
+      <label class="control-panel__switch-mode-label" for="id-select-visual-mode-single" data-text="single">
         Single
       </label>
       <input class="control-panel__radio-input" type="radio" name="select-visual-mode" id="id-select-visual-mode-full" value="full">
-      <label class="control-panel__switch-mode-label" for="id-select-visual-mode-full">
+      <label class="control-panel__switch-mode-label" for="id-select-visual-mode-full" data-text="full">
         Full
       </label>
     </div>
     <div class="control-panel__flex-column">
-      <button class="control-panel__btn js-hide-kbd-hints">Keys</button>
-      <button class="control-panel__btn js-hide-piano-hints">Sounds</button>
-      <button class="control-panel__btn js-hide-disabled-keys">Disabled</button>
+      <button class="control-panel__btn js-hide-kbd-hints" data-text="keys">Keys</button>
+      <button class="control-panel__btn js-hide-piano-hints" data-text="sounds">Sounds</button>
+      <button class="control-panel__btn js-hide-disabled-keys" data-text="disabled">Disabled</button>
     </div>
     <div class="control-panel__flex-column">
-      <button class="control-panel__btn js-reset-layouts">Reset</button>
-      <button class="control-panel__btn js-save-local-file">Save</button>
+      <button class="control-panel__btn js-reset-layouts" data-text="reset">Reset</button>
+      <button class="control-panel__btn js-save-local-file" data-text="save">Save</button>
       <input id="id-read-local-file" type="file" class="control-panel__file-input js-read-local-file">
-      <label class="control-panel__btn" for="id-read-local-file">Upload</label>
+      <label class="control-panel__btn" for="id-read-local-file" data-text="upload">Upload</label>
     </div>
   </div>
   <block-audio>
@@ -617,60 +620,60 @@
   <dialog class="modal js-dialog-help">
     <div class="modal__content js-dialog-help-content">
       <header class="modal__header">
-        <h2 class="modal__title">Help</h2>
+        <h2 class="modal__title" data-text="help">Help</h2>
         <button class="modal__btn modal__btn--icon js-dialog-help-close-btn">Cl</button>
       </header>
       <div class="modal__carousel-cont">
         <div class="modal__carousel-inner js-dialog-carousel-inner">
           <div class="modal__carousel-page">
             <div class="modal__text-block">
-              <h3 class="modal__subtitle">Visual modes</h3>
-              <p class="modal__text">You can switch the modes by clicking corresponding buttons on the piano settings.</p>
+              <h3 class="modal__subtitle" data-text="helpVisualModes">Visual modes</h3>
+              <p class="modal__text" data-text="helpVisualModesText">You can switch the modes by clicking corresponding buttons on the piano settings.</p>
               <ul class="modal__list">
-                <li class="modal__text">Double mode: represents 37 piano keys similar to way keyboard keys are placed on computer's keyboard;</li>
-                <li class="modal__text">Single mode: represents 37 piano keys placed in one row;</li>
-                <li class="modal__text">Full mode: represents full piano keyboard.</li>
+                <li class="modal__text" data-text="helpVisualModesDouble">Double mode: represents 37 piano keys similar to way keyboard keys are placed on computer's keyboard;</li>
+                <li class="modal__text" data-text="helpVisualModesSingle">Single mode: represents 37 piano keys placed in one row;</li>
+                <li class="modal__text" data-text="helpVisualModesFull">Full mode: represents full piano keyboard.</li>
               </ul>
             </div>
             <div class="modal__text-block">
-              <h3 class="modal__subtitle">Functional modes</h3>
-              <p class="modal__text">You can switch the modes by clicking corresponding buttons on the piano settings.</p>
+              <h3 class="modal__subtitle" data-text="helpFunctionalModes">Functional modes</h3>
+              <p class="modal__text" data-text="helpFunctionalModesText">You can switch the modes by clicking corresponding buttons on the piano settings.</p>
               <ul class="modal__list">
-                <li class="modal__text">Basic mode: represents three full adjacent octaves and allows to move them to the left or to the right;</li>
-                <li class="modal__text">Advanced mode: represents three full adjacent octaves and allows you to reassign each of them separately;</li>
-                <li class="modal__text">Pro mode: represents three full adjacent octaves and allows you to reassign each computer's key to any of piano keys.</li>
-              </ul>
-            </div>
-          </div>
-          <div class="modal__carousel-page">
-            <div class="modal__text-block">
-              <h3 class="modal__subtitle">Editing</h3>
-              <p class="modal__text">There are two ways for editing for each of modes: by clicking or pressing hotkey combinations. For editing by clicks you need to activate the "Reassign" button on the piano settings first.</p>
-              <ul class="modal__list">
-                <li class="modal__text">Basic mode (clicking): move cursor over the octave you want to be central and click;</li>
-                <li class="modal__text">Basic mode (hotkeys): press and hold "Shift" and press num button with octave number you want to be central;</li>
-                <li class="modal__text">Advanced mode (clicking): move cursor over the octave you want to refuse and click it. Move cursor over the octave you want to assign and click it;</li>
-                <li class="modal__text">Advanced mode (hotkeys): activate "Reassign" button first. Then press and hold "Shift" key. Then press any of assigned to octaves keyboard keys for selecting an octave you want to refuse. Finally, press num button with octave number you want to assign for;</li>
-                <li class="modal__text">Pro mode (clicking): move cursor over the piano key you want to refuse and click it. Move cursor over the piano key you want to assign and click it;</li>
-                <li class="modal__text">Pro mode (hotkeys): activate "Reassign" button first. Then enter note code to input field and validate it. Then press and hold "Shift" key. Finally, press one of any already assigned keyboard keys  to piano keys for reassign it to the note.</li>
+                <li class="modal__text" data-text="helpFunctionalModesBasic">Basic mode: represents three full adjacent octaves and allows to move them to the left or to the right;</li>
+                <li class="modal__text" data-text="helpFunctionalModesAdvanced">Advanced mode: represents three full adjacent octaves and allows you to reassign each of them separately;</li>
+                <li class="modal__text"data-text="helpFunctionalModesPro">Pro mode: represents three full adjacent octaves and allows you to reassign each computer's key to any of piano keys.</li>
               </ul>
             </div>
           </div>
           <div class="modal__carousel-page">
             <div class="modal__text-block">
-              <h3 class="modal__subtitle">Changing layouts</h3>
-              <p class="modal__text">For Advanced and Pro modes there are several layouts. You can edit one layout and then switch to one of other layouts of selected mode. Press and hold "Shift" key. Then press num button for changing active layout. Current active layout numbers are displayed on mode buttons on piano settings.</p>
-            </div>
-            <div class="modal__text-block">
-              <h3 class="modal__subtitle">Visual hints</h3>
-              <p class="modal__text">You can toggle visibility of different hints (assigned keys and sound) and disabled keys displaying as well by clicking corresponding buttons.</p>
-            </div>
-            <div class="modal__text-block">
-              <h3 class="modal__subtitle">Other features</h3>
+              <h3 class="modal__subtitle" data-text="helpEditing">Editing</h3>
+              <p class="modal__text" data-text="helpEditingText">There are two ways for editing for each of modes: by clicking or pressing hotkey combinations. For editing by clicks you need to activate the "Reassign" button on the piano settings first.</p>
               <ul class="modal__list">
-                <li class="modal__text">"Reset" button: resets all layouts to default; you can also use it if encounter strange behaviour;</li>
-                <li class="modal__text">"Save" button: saves all layouts to file which you can use later;</li>
-                <li class="modal__text">"Upload" button: uploads saved layouts from file to the piano.</li>
+                <li class="modal__text" data-text="helpEditingBasicClicking">Basic mode (clicking): move cursor over the octave you want to be central and click;</li>
+                <li class="modal__text" data-text="helpEditingBasicHotkeys">Basic mode (hotkeys): press and hold "Shift" and press num button with octave number you want to be central;</li>
+                <li class="modal__text" data-text="helpEditingAdvancedClicking">Advanced mode (clicking): move cursor over the octave you want to refuse and click it. Move cursor over the octave you want to assign and click it;</li>
+                <li class="modal__text" data-text="helpEditingAdvancedHotkeys">Advanced mode (hotkeys): activate "Reassign" button first. Then press and hold "Shift" key. Then press any of assigned to octaves keyboard keys for selecting an octave you want to refuse. Finally, press num button with octave number you want to assign for;</li>
+                <li class="modal__text" data-text="helpEditingProClicking">Pro mode (clicking): move cursor over the piano key you want to refuse and click it. Move cursor over the piano key you want to assign and click it;</li>
+                <li class="modal__text" data-text="helpEditingProHotkeys">Pro mode (hotkeys): activate "Reassign" button first. Then enter note code to input field and validate it. Then press and hold "Shift" key. Finally, press one of any already assigned keyboard keys to piano keys for reassign it to the note.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="modal__carousel-page">
+            <div class="modal__text-block">
+              <h3 class="modal__subtitle" data-text="helpChanging">Changing layouts</h3>
+              <p class="modal__text" data-text="helpChangingText">For Advanced and Pro modes there are several layouts. You can edit one layout and then switch to one of other layouts of selected mode. Press and hold "Shift" key. Then press num button for changing active layout. Current active layout numbers are displayed on mode buttons on piano settings.</p>
+            </div>
+            <div class="modal__text-block">
+              <h3 class="modal__subtitle" data-text="helpHints">Visual hints</h3>
+              <p class="modal__text" data-text="helpHintsText">You can toggle visibility of different hints (assigned keys and sound) and disabled keys displaying as well by clicking corresponding buttons.</p>
+            </div>
+            <div class="modal__text-block">
+              <h3 class="modal__subtitle" data-text="helpFeatures">Other features</h3>
+              <ul class="modal__list">
+                <li class="modal__text" data-text="helpFeaturesReset">"Reset" button: resets all layouts to default; you can also use it if encounter strange behaviour;</li>
+                <li class="modal__text" data-text="helpFeaturesSave">"Save" button: saves all layouts to file which you can use later;</li>
+                <li class="modal__text" data-text="helpFeaturesUpload">"Upload" button: uploads saved layouts from file to the piano.</li>
               </ul>
             </div>
           </div>
@@ -680,7 +683,7 @@
       <div class="modal__footer">
         <div class="modal__counter-cont">
           <p class="modal__text">
-            <span class="js-modal-page-num">1</span> of 3
+            <span class="js-modal-page-num">1</span> <span data-text="of">of</span> 3
           </p>
         </div>
         <div class="modal__control">
@@ -696,32 +699,32 @@
   <dialog class="modal js-dialog-app">
     <div class="modal__content modal__content--app js-dialog-app-content">
       <header class="modal__header">
-        <h2 class="modal__title">App settings</h2>
+        <h2 class="modal__title" data-text="appSettings">App settings</h2>
         <button class="modal__btn modal__btn--icon js-dialog-app-close-btn">Cl</button>
       </header>
       <div class="modal__text-block">
-        <h3 class="modal__subtitle">Language settings</h3>
+        <h3 class="modal__subtitle" data-text="appSettingsLang">Language settings</h3>
         <input class="modal__input-radio js-settings-lang-input" type="radio" name="lang" id="id-input-lang-en" value="en">
-        <label class="modal__input-label" for="id-input-lang-en">En</label>
+        <label class="modal__input-label" for="id-input-lang-en" data-text="appSettingsEn">En</label>
         <input class="modal__input-radio js-settings-lang-input" type="radio" name="lang" id="id-input-lang-ru" value="ru">
-        <label class="modal__input-label" for="id-input-lang-ru">Ru</label>
+        <label class="modal__input-label" for="id-input-lang-ru" data-text="appSettingsRu">Ru</label>
       </div>
       <div class="modal__text-block">
-        <h3 class="modal__subtitle">Style settings</h3>
+        <h3 class="modal__subtitle" data-text="appSettingsStyle">Style settings</h3>
         <input class="modal__input-radio js-settings-style-input" type="radio" name="style" id="id-input-style-classic" value="classic">
-        <label class="modal__input-label" for="id-input-style-classic">Classic</label>
+        <label class="modal__input-label" for="id-input-style-classic" data-text="appSettingsClassic">Classic</label>
         <input class="modal__input-radio js-settings-style-input" type="radio" name="style" id="id-input-style-original" value="original">
-        <label class="modal__input-label" for="id-input-style-original">Original</label>
+        <label class="modal__input-label" for="id-input-style-original" data-text="appSettingsOriginal">Original</label>
       </div>
       <div class="modal__text-block">
-        <h3 class="modal__subtitle">Other settings</h3>
+        <h3 class="modal__subtitle" data-text="appSettingsOther">Other settings</h3>
         <input class="modal__input-checkbox js-settings-intro-input" type="checkbox" name="intro" id="id-input-show-intro">
-        <label class="modal__input-label" for="id-input-show-intro">Show intro after reload
+        <label class="modal__input-label" for="id-input-show-intro" data-text="appSettingsIntro">Show intro after reload
         </label>
         <input class="modal__input-checkbox js-settings-hint-input" type="checkbox" name="hint" id="id-input-show-hint">
-        <label class="modal__input-label" for="id-input-show-hint">Show hint after reload
+        <label class="modal__input-label" for="id-input-show-hint" data-text="appSettingsHint">Show hint after reload
         </label>
-        <button class="modal__btn">Reset all app settings</button>
+        <button class="modal__btn" data-text="appSettingsReset">Reset all app settings</button>
       </div>
     </div>
   </dialog>
@@ -729,16 +732,24 @@
   <dialog class="modal js-dialog-about">
     <div class="modal__content js-dialog-about-content">
       <header class="modal__header">
-        <h2 class="modal__title">Piano app</h2>
+        <h2 class="modal__title" data-text="pianoApp">Piano app</h2>
         <button class="modal__btn modal__btn--icon js-dialog-about-close-btn">Cl</button>
       </header>
       <div class="modal__text-block">
-        <h3 class="modal__subtitle">Used:</h3>
-        <p class="modal__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam consequatur fugit magni temporibus voluptas at voluptatem numquam, molestias perspiciatis sint dolorum vitae optio cumque. Modi porro unde nesciunt molestias delectus!</p>
+        <h3 class="modal__subtitle" data-text="pianoAppUsed">Used:</h3>
+        <ul class="modal__list">
+          <li class="modal__text">JS</li>
+          <li class="modal__text">localStorage</li>
+        </ul>
       </div>
       <div class="modal__text-block">
-        <h3 class="modal__subtitle">Contacts:</h3>
-        <p class="modal__text">For any suggestions and questions please contact me </p>
+        <h3 class="modal__subtitle" data-text="pianoAppContacts">Contacts:</h3>
+        <p class="modal__text">
+          <span data-text="pianoAppContactsText">
+            For any suggestions and questions please contact me:
+          </span>
+          <a class="modal__link" href="mailto:dev.amakor@gmail.com">dev.amakor@gmail.com</a>
+        </p>
       </div>
     </div>
   </dialog>
@@ -752,6 +763,7 @@
   <script src="./src/js/possibleKeysShower.js" type="module"></script>
   <script src="./src/js/saveLoadHandler.js" type="module"></script>
   <script src="./src/js/dialogHandlers.js"></script>
-  <script src="./src/js/settingsHandler.js"></script>
+  <script src="./src/js/settingsHandler.js" type="module"></script>
+  <script src="./src/js/tranlator.js" type="module"></script>
 </body>
 </html>

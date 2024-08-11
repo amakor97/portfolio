@@ -1,12 +1,18 @@
 "use strict";
 
+import { setLang } from "./tranlator.js";
+
 const settings = {};
+
 
 
 const btnsLang = document.querySelectorAll(".js-settings-lang-input");
 btnsLang.forEach(btn => {
   btn.addEventListener("input", () => {
     settings.lang = btn.value;
+
+    setLang(settings.lang);
+
     saveSettingsToLS();
   })
 });
@@ -36,6 +42,7 @@ btnHint.addEventListener("input", () => {
 window.addEventListener("load", () => {
   readSettingsFromLS();
   initSetInputs();
+  setLang(settings.lang);
 });
 window.addEventListener("beforeunload", saveSettingsToLS);
 
