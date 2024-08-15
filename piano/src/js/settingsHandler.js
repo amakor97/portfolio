@@ -22,6 +22,9 @@ const btnsStyle = document.querySelectorAll(".js-settings-style-input");
 btnsStyle.forEach(btn => {
   btn.addEventListener("input", () => {
     settings.style = btn.value;
+
+    setStyles();
+
     saveSettingsToLS();
   })
 })
@@ -39,12 +42,25 @@ btnHint.addEventListener("input", () => {
 })
 
 
+const stylesLink = document.querySelector("#stylesLink");
+console.log(stylesLink);
+
 window.addEventListener("load", () => {
   readSettingsFromLS();
   initSetInputs();
   setLang(settings.lang);
+  setStyles();
 });
 window.addEventListener("beforeunload", saveSettingsToLS);
+
+function setStyles() {
+  if (settings.style === "classic") {
+    stylesLink.href = "pianoStylesClassic.css";
+  }
+  if (settings.style === "original") {
+    stylesLink.href = "pianoStylesOriginal.css";
+  }
+}
 
 
 function readSettingsFromLS() {
