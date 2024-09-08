@@ -1,0 +1,187 @@
+.key
+  display: flex
+  flex-direction: column
+  justify-content: end
+  padding: 
+    bottom: 8px
+  box-sizing: border-box
+
+  font:
+    size: 0.75rem
+
+  border: 2px solid $main-dark-color
+
+  transition: transform 0.05s
+
+  &--white
+    z-index: 0
+
+    width: 34.5px
+    height: 204px
+
+    color: $main-dark-color
+
+    border:
+      radius: 0 0 16px 16px
+    background: $main-white-color
+
+    @media (min-width: $screen-lg)
+      width: 46px
+      height: 272px
+
+    @media (min-width: $screen-xl)
+      width: 57.5px
+      height: 340px
+
+    @media (min-width: $screen-xxl)
+      width: 69px
+      height: 408px
+
+      font:
+        size: 1rem
+
+  &--black
+    z-index: 1
+
+    width: 19.5px
+    height: 155.5px
+
+    color: white
+
+    border:
+      radius: 0 0 12px 12px
+    background: $main-dark-color
+
+    @media (min-width: $screen-lg)
+      width: 26px
+      height: 194px
+
+    @media (min-width: $screen-xl)
+      width: 32.5px
+      height: 242.5px
+
+    @media (min-width: $screen-xxl)
+      width: 39px
+      height: 291px
+
+      font:
+        size: 1rem
+
+  &--disabled
+    background: $d2
+
+  &--empty
+    height: 60px
+    padding: 0px
+
+    opacity: 0
+
+  &--pressing
+    transform: scaleY(1.02) translateY(1%)
+    background: $main-pressed-color
+
+  &--hided
+    display: none
+
+  &--white-narrow
+    width: 1.89vw
+    height: 13vw
+
+    border:
+      radius: 0 0 8px 8px
+
+  &--white-single
+    width: 4vw
+    height: 23.65vw
+
+  &--white-full
+    width: 1.89vw
+    height: 13vw
+
+    font:
+      size: 0.75rem
+
+    border:
+      radius: 0 0 8px 8px
+
+  &--black-narrow
+    width: 1.3vw
+    height: 8vw
+
+  &--black-single
+    width: 2.26vw
+    height: 16.87vw
+
+  &--black-full
+    width: 1.3vw
+    height: 8vw
+
+    font:
+      size: 0.75rem
+
+    border:
+      radius: 0 0 6px 6px
+
+  &--a0
+    border:
+      radius: 16px 0px 16px 16px
+  
+  &--c8
+    border:
+      radius: 0px 16px 16px 16px
+
+  &--prev
+    background-image: linear-gradient(rgba(128, 0, 64, 0.5), rgba(128, 0, 64, 0.5))
+
+  &--next
+    background-image: linear-gradient(rgba(0, 128, 64, 0.5), rgba(0, 128, 64, 0.5))
+
+  &__hint
+    text:
+      align: center
+
+    user-select: none
+    pointer-events: none
+
+    &--transparent
+      opacity: 0
+
+.key--white-full.key--a0
+  border:
+    radius: 16px 0px 8px 16px
+
+.key--c3
+  border:
+    radius: 16px 0 16px 16px 
+
+.key--c3.key--white-full
+  border:
+    radius: 0px 0px 8px 8px
+
+.key--b3:not(.key--white-single, .key--white-full)
+  border:
+    radius: 0 16px 16px 16px
+
+.key--c4:not(.key--white-single, .key--white-full)
+  border:
+    radius: 16px 0px 16px 16px
+
+.key--e5:not(.key--white-single, .key--white-full)
+  border:
+    radius: 0px 16px 16px 16px
+
+.key--f5:not(.key--white-single, .key--white-full)
+  border:
+    radius: 16px 0px 16px 16px
+
+.key--c6
+  border:
+    radius: 0px 16px 16px 16px
+
+.key--c6.key--white-full
+  border:
+    radius: 0px 0px 8px 8px
+
+.key--c8.key--white-full
+  border:
+    radius: 0px 16px 16px 8px

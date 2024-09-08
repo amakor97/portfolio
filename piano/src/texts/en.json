@@ -37,7 +37,7 @@
   "helpEditingProHotkeys": "Pro mode (hotkeys): activate \"Reassign\" button first. Then enter note code to input field and validate it. Then press and hold \"Shift\" key. Finally, press one of any already assigned keyboard keys to piano keys for reassign it to the note.",
   "helpChanging": "Changing layouts",
   "helpChangingText": "For Advanced and Pro modes there are several layouts. You can edit one layout and then switch to one of other layouts of selected mode. Press and hold \"Shift\" key. Then press num button for changing active layout. Current active layout numbers are displayed on mode buttons on piano settings.",
-  "helpHints": "Визуальные подсказки",
+  "helpHints": "Visual hints",
   "helpHintsText": "You can toggle visibility of different hints (assigned keys and sound) and disabled keys displaying as well by clicking corresponding buttons.",
   "helpFeatures": "Other features",
   "helpFeaturesReset": "\"Reset\" button: resets all layouts to default; you can also use it if encounter strange behaviour;",

@@ -1,0 +1,28 @@
+.keyboard
+  position: relative
+
+  display: inline-block
+  width: fit-content
+  vertical-align: bottom
+
+  &__black
+    position: absolute
+
+    display: flex
+    justify-content: space-evenly
+    width: 100%
+    margin: auto
+
+  &__white
+    display: flex
+
+  &--3
+    width: calc(3/7*100%)
+
+  &--4
+    width: calc(4/7*100%)
+    right: 0
+
+  &--most-left
+    width: 85%
+    right: 0

@@ -1,0 +1,36 @@
+.menu
+  display: flex
+  justify-content: center
+
+  font:
+    size: 1em
+
+  &__btn
+    width: 150px
+    height: 40px
+    padding: 4px
+
+    font:
+      size: 1.5em
+      family: Montserrat
+    color: $main-white-color
+
+    border:
+      top: 2px solid $main-white-color
+      right: none
+      bottom: 2px solid $main-white-color
+      left: none
+    background: transparent
+    cursor: pointer
+
+    transition: color 0.2s, background 0.2s
+
+    &:hover
+      background: $main-dark-color
+
+    &--toggled
+      color: $main-med-color
+      background: $main-white-color
+
+      &:hover
+        color: $main-white-color

@@ -3,12 +3,12 @@
   top: 0
   right: 0
   z-index: 2
-  
+
   width: 100vw
   height: 100vh
 
-  background: rgba(64, 64, 64, 0.75)
   border: 0px solid transparent
+  background: $main-bg-modal-color
 
   &__content
     position: absolute
@@ -19,9 +19,11 @@
     padding: 20px
     transform: translate(-50%, -50%)
 
-    border: 4px solid black
-      radius: 16px
-    background: white
+    color: $main-dark-color
+
+    border: 4px solid $main-dark-color
+      radius: 24px
+    background: $main-white-color
 
     &--app
       width: max-content
@@ -74,7 +76,7 @@
   &__list
     margin: 0
 
-    list-style: inside square
+    list-style: inside disc
 
   &__text
     margin: 0 auto 4px
@@ -86,27 +88,26 @@
     font:
       size: 1.5em
 
-
   &__btn
     vertical-align: top
     width: 160px
     padding: 4px
 
     font:
-      size: 1.5em
-    color: black
+      size: 1.25em
+    color: $main-dark-color
 
-    border: 2px solid black
-      radius: 8px
+    border: 2px solid $main-dark-color
+      radius: 12px
     background: transparent
     cursor: pointer
 
     transition: color 0.2s, background-color 0.2s
 
     &:hover
-      color: white
+      color: $main-white-color
 
-      background: black
+      background: $main-dark-color
 
     &--icon
       display: inline-flex
@@ -115,6 +116,10 @@
 
       width: 40px
       height: 40px
+
+  &__icon-svg
+    width: 100%
+    height: 100%
 
   &__input-radio
     display: none
@@ -129,35 +134,46 @@
     padding: 4px
 
     font:
-      size: 1.5em
+      size: 1.25em
     text:
       align: center
 
-    border: 2px solid black
+    border: 2px solid $main-dark-color
       radius: 8px
     cursor: pointer
 
-    transition: background-color 0.2s
+    transition: color 0.2s, background-color 0.2s
 
     &:hover
-      background: grey
-      border: 2px solid grey
+      color: $main-white-color
+
+      border: 2px solid $main-med-color
+      background: $main-med-color
+
 
   &__link
-    color: black
+    color: $main-med-color
 
     &:hover
-      color: grey
+      color: $main-dark-color
 
 .modal__text-block:last-child
   margin: 0
 
 input[type=radio]:checked + .modal__input-label
-  background: black
-  color: white
-  border: 2px solid black
+  color: $main-white-color
+
+  border: 2px solid $main-dark-color
+  background: $main-dark-color
 
 input[type=checkbox]:checked + .modal__input-label
-  background: black
-  color: white
-  border: 2px solid black
+  color: $main-white-color
+
+  border: 2px solid $main-dark-color
+  background: $main-dark-color
+
+input[type=checkbox]:checked:hover + .modal__input-label
+  color: $main-white-color
+
+  border: 2px solid $main-med-color
+  background: $main-med-color

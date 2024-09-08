@@ -1,0 +1,77 @@
+.keyboard-cont
+  position: relative
+  margin: 0 auto
+
+  font:
+    size: 0
+
+  &--double-rows
+    width: fit-content
+    height: 420px
+
+    @media (min-width: $screen-lg)
+      height: 560px
+
+    @media (min-width: $screen-xl)
+      height: 700px
+
+    @media (min-width: $screen-xxl)
+      height: 840px
+      
+      transform: translateY(24px)
+
+  &--single-row
+    display: flex
+    width: fit-content
+
+  &--full-kbd
+    display: flex
+
+  &__item
+    display: inline-block
+    width: fit-content
+    
+    &--0
+      order: 0
+
+    &--1
+      order: 1
+
+    &--2
+      order: 2
+    
+    &--3
+      order: 3
+
+    &--4
+      order: 4
+
+    &--5
+      order: 5
+
+    &--left-double
+      float: left
+
+      margin:
+        right: 80px
+
+    &--left-single
+      margin:
+        right: 0
+
+    &--right-double
+      float: right
+
+    &--right-single
+      float: right
+
+    &--full-double
+      position: absolute
+      bottom: 0
+      left: 50%
+      transform: translateX(-50%)
+
+      width: max-content
+
+    &--full-single
+      margin: 0
