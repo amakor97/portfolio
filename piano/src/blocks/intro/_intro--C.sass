@@ -1,0 +1,41 @@
+.intro
+  position: absolute
+  top: 0
+  left: 0
+
+  //display: flex
+  //justify-content: center
+  //align-items: center
+  width: 100vw
+  height: 100vh
+
+  font:
+    size: 8rem
+    weight: bold
+  color: grey
+
+  border: none
+  background: black
+
+  transition: opacity 0.5s
+
+  &--piano
+    z-index: 5
+
+  &--powerfull
+    z-index: 6
+
+  &--simple
+    z-index: 7
+
+  &--fading
+    opacity: 0
+
+  &__content
+    position: absolute
+    top: 50%
+    left: 50%
+
+    transform: translate(-50%, -50%)
+
+

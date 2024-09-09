@@ -4,7 +4,7 @@
 }
 
 .body {
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   min-width: 850px;
@@ -15,6 +15,9 @@
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), transparent, rgba(0, 0, 0, 0.5)), url(/portfolio/piano/src/pics/background.jpg);
   background-size: cover, 579px 344.67px;
   background-repeat: no-repeat, repeat;
+}
+.body--content-visible {
+  display: flex;
 }
 
 .control-panel {
@@ -545,4 +548,36 @@ input[type=checkbox]:checked + .modal__input-label {
   background: black;
   color: white;
   border: 2px solid black;
+}
+
+.intro {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  font-size: 8rem;
+  font-weight: bold;
+  color: grey;
+  border: none;
+  background: black;
+  transition: opacity 0.5s;
+}
+.intro--piano {
+  z-index: 5;
+}
+.intro--powerfull {
+  z-index: 6;
+}
+.intro--simple {
+  z-index: 7;
+}
+.intro--fading {
+  opacity: 0;
+}
+.intro__content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

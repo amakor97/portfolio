@@ -4,6 +4,7 @@ import { setLang } from "./tranlator.js";
 
 const settings = {};
 
+import { introPianoDialog, introPowerfullDialog, introSimpleDialog } from "./dialogHandlers.js";
 
 
 const btnsLang = document.querySelectorAll(".js-settings-lang-input");
@@ -33,6 +34,8 @@ btnsStyle.forEach(btn => {
 const btnIntro = document.querySelector(".js-settings-intro-input");
 btnIntro.addEventListener("input", () => {
   settings.showIntro = btnIntro.checked;
+  console.log(settings);
+  saveSettingsToLS();
 })
 
 
@@ -50,6 +53,9 @@ window.addEventListener("load", () => {
   initSetInputs();
   setLang(settings.lang);
   setStyles();
+  console.log(settings);
+  console.log("dd");
+  setIntro();
 });
 window.addEventListener("beforeunload", saveSettingsToLS);
 
@@ -63,20 +69,32 @@ function setStyles() {
 }
 
 
+function setIntro() {
+  const body = document.querySelector(".body");
+  body.classList.add("body--content-visible");
+  if (settings.showIntro === false) {
+    introSimpleDialog.open = false;
+    introPowerfullDialog.open = false;
+    introPianoDialog.open = false;
+  }
+}
+
+
 function readSettingsFromLS() {
   const settingsStr = localStorage.getItem("settings");
   const settingsFromLs = JSON.parse(settingsStr) ?? {};
 
-  if (!settingsFromLs.lang) {
+  if (!Object.hasOwn(settingsFromLs, "lang")) {
     settingsFromLs.lang = "en";
   }
-  if (!settingsFromLs.style) {
+  if (!Object.hasOwn(settingsFromLs, "style")) {
     settingsFromLs.style = "classic";
   }
-  if (!settingsFromLs.showIntro) {
+
+  if (!Object.hasOwn(settingsFromLs, "showIntro")) {
     settingsFromLs.showIntro = true;
   }
-  if (!settingsFromLs.showHint) {
+  if (!Object.hasOwn(settingsFromLs, "showHint")) {
     settingsFromLs.showHint = true;
   }
 

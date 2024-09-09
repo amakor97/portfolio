@@ -98,3 +98,34 @@ function moveDialogContent(dir) {
   helpDialogCarouselInner.style.transform = 
     `translateX(${-helpDialogCarouselInnerPos * 33.333}%)`;
 }
+
+
+
+
+
+
+export const introPianoDialog = document.querySelector(".js-dialog-intro-piano");
+setTimeout(() => {
+  introPianoDialog.classList.add("intro--fading");
+}, 5000);
+setTimeout(() => {
+  introPianoDialog.open = false;
+}, 6000);
+
+export const introPowerfullDialog = document.querySelector(".js-dialog-intro-powerfull");
+setTimeout(() => {
+  introPowerfullDialog.classList.add("intro--fading");
+}, 3000);
+setTimeout(() => {
+  introPowerfullDialog.open = false;
+}, 4000);
+
+export const introSimpleDialog = document.querySelector(".js-dialog-intro-simple");
+setTimeout(() => {
+  introSimpleDialog.classList.add("intro--fading");
+}, 1000);
+setTimeout(() => {
+  introSimpleDialog.open = false;
+}, 2000);
+
+
