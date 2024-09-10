@@ -2,6 +2,7 @@
   position: absolute
   top: 0
   left: 0
+  z-index: 3
 
   width: 100vw
   height: 100vh
@@ -20,15 +21,6 @@
     opacity: 0
     transition: opacity 0s
 
-  &--piano
-    z-index: 5
-
-  &--powerfull
-    z-index: 6
-
-  &--simple
-    z-index: 7
-
   &--fading
     opacity: 0
 
@@ -42,15 +34,27 @@
   &__text
     position: absolute
     top: 50%
-    left: 50%
+    left: 10vw
 
-    transform: translate(-50%, -50%)
+    transform: translate(0, -50%)
 
     transition: opacity 1s
+
+    &--piano
+      
+      z-index: 5
+      transform: translate(0, 50%)
+
+    &--powerfull
+      z-index: 6
+
+    &--simple
+      z-index: 7
+      transform: translate(0, -150%)
 
     &--hided
       opacity: 0
       transition: opacity 0s
 
     &--fading
-      opacity: 0
+      opacity: 1
