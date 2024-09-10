@@ -101,31 +101,36 @@ function moveDialogContent(dir) {
 
 
 
+export const introSimpleDialog = document.querySelector(".js-dialog-intro-simple");
+setTimeout(() => {
+  introSimpleDialog.classList.add("intro__text--fading");
+}, 1000);
 
-
+export const introPowerfulDialog = document.querySelector(".js-dialog-intro-powerful");
+setTimeout(() => {
+  introPowerfulDialog.classList.remove("intro__text--hided");
+}, 2000);
+setTimeout(() => {
+  introPowerfulDialog.classList.add("intro__text--fading");
+}, 3000);
 
 export const introPianoDialog = document.querySelector(".js-dialog-intro-piano");
 setTimeout(() => {
-  introPianoDialog.classList.add("intro--fading");
-}, 5000);
-setTimeout(() => {
-  introPianoDialog.open = false;
-}, 6000);
-
-export const introPowerfullDialog = document.querySelector(".js-dialog-intro-powerfull");
-setTimeout(() => {
-  introPowerfullDialog.classList.add("intro--fading");
-}, 3000);
-setTimeout(() => {
-  introPowerfullDialog.open = false;
+  introPianoDialog.classList.remove("intro__text--hided");
 }, 4000);
+setTimeout(() => {
+  introPianoDialog.classList.add("intro__text--fading");
+}, 5000);
 
-export const introSimpleDialog = document.querySelector(".js-dialog-intro-simple");
+export const introDialog = document.querySelector(".js-dialog-intro");
 setTimeout(() => {
-  introSimpleDialog.classList.add("intro--fading");
-}, 1000);
+  introDialog.classList.add("intro--fading");
+}, 6000);
 setTimeout(() => {
-  introSimpleDialog.open = false;
-}, 2000);
+  introDialog.open = false;
+}, 7000);
+
+
+
 
 

@@ -4,7 +4,7 @@ import { setLang } from "./tranlator.js";
 
 const settings = {};
 
-import { introPianoDialog, introPowerfullDialog, introSimpleDialog } from "./dialogHandlers.js";
+import { introDialog, introPianoDialog, introPowerfulDialog, introSimpleDialog } from "./dialogHandlers.js";
 
 
 const btnsLang = document.querySelectorAll(".js-settings-lang-input");
@@ -73,6 +73,7 @@ function setIntro() {
   const body = document.querySelector(".body");
   body.classList.add("body--content-visible");
   if (settings.showIntro === false) {
+    introDialog.open = false;
     introSimpleDialog.open = false;
     introPowerfullDialog.open = false;
     introPianoDialog.open = false;

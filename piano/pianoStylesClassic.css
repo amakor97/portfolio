@@ -554,6 +554,7 @@ input[type=checkbox]:checked + .modal__input-label {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 3;
   width: 100vw;
   height: 100vh;
   font-size: 8rem;
@@ -561,16 +562,11 @@ input[type=checkbox]:checked + .modal__input-label {
   color: grey;
   border: none;
   background: black;
-  transition: opacity 0.5s;
+  transition: opacity 1s;
 }
-.intro--piano {
-  z-index: 5;
-}
-.intro--powerfull {
-  z-index: 6;
-}
-.intro--simple {
-  z-index: 7;
+.intro--hided {
+  opacity: 0;
+  transition: opacity 0s;
 }
 .intro--fading {
   opacity: 0;
@@ -580,4 +576,18 @@ input[type=checkbox]:checked + .modal__input-label {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.intro__text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 1s;
+}
+.intro__text--hided {
+  opacity: 0;
+  transition: opacity 0s;
+}
+.intro__text--fading {
+  opacity: 0;
 }

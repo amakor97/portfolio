@@ -2,10 +2,8 @@
   position: absolute
   top: 0
   left: 0
+  z-index: 3
 
-  //display: flex
-  //justify-content: center
-  //align-items: center
   width: 100vw
   height: 100vh
 
@@ -17,16 +15,11 @@
   border: none
   background: black
 
-  transition: opacity 0.5s
+  transition: opacity 1s
 
-  &--piano
-    z-index: 5
-
-  &--powerfull
-    z-index: 6
-
-  &--simple
-    z-index: 7
+  &--hided
+    opacity: 0
+    transition: opacity 0s
 
   &--fading
     opacity: 0
@@ -38,4 +31,18 @@
 
     transform: translate(-50%, -50%)
 
+  &__text
+    position: absolute
+    top: 50%
+    left: 50%
 
+    transform: translate(-50%, -50%)
+
+    transition: opacity 1s
+
+    &--hided
+      opacity: 0
+      transition: opacity 0s
+
+    &--fading
+      opacity: 0
