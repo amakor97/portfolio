@@ -4,7 +4,7 @@ import { setLang } from "./tranlator.js";
 
 const settings = {};
 
-import { introDialog, introPianoDialog, introPowerfulDialog, introSimpleDialog } from "./dialogHandlers.js";
+import { introDialog, hintDialog } from "./dialogHandlers.js";
 
 
 const btnsLang = document.querySelectorAll(".js-settings-lang-input");
@@ -42,6 +42,7 @@ btnIntro.addEventListener("input", () => {
 const btnHint = document.querySelector(".js-settings-hint-input");
 btnHint.addEventListener("input", () => {
   settings.showHint = btnHint.checked;
+  saveSettingsToLS();
 })
 
 
@@ -53,9 +54,8 @@ window.addEventListener("load", () => {
   initSetInputs();
   setLang(settings.lang);
   setStyles();
-  console.log(settings);
-  console.log("dd");
   setIntro();
+  setHint();
 });
 window.addEventListener("beforeunload", saveSettingsToLS);
 
@@ -74,9 +74,16 @@ function setIntro() {
   body.classList.add("body--content-visible");
   if (settings.showIntro === false) {
     introDialog.open = false;
-    introSimpleDialog.open = false;
-    introPowerfullDialog.open = false;
-    introPianoDialog.open = false;
+    //introSimpleDialog.open = false;
+    //introPowerfulDialog.open = false;
+    //introPianoDialog.open = false;
+  }
+}
+
+
+function setHint() {
+  if (settings.showHint === false) {
+    hintDialog.open = false;
   }
 }
 

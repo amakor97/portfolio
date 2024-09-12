@@ -132,5 +132,12 @@ setTimeout(() => {
 
 
 
+export const hintDialog = document.querySelector(".js-dialog-hint");
+const hintDialogContent = document.querySelector(".js-dialog-hint-content");
+const hintDialogCloseBtn = document.querySelector(
+  ".js-dialog-hint-close-btn");
 
 
+hintDialog.addEventListener("click", () => hintDialog.open = false);
+hintDialogContent.addEventListener("click", e => e.stopPropagation());
+hintDialogCloseBtn.addEventListener("click", () => hintDialog.open = false);
