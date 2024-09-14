@@ -789,13 +789,13 @@
   </dialog>
 
   <dialog class="intro js-dialog-intro" open>
-    <div class="intro__text intro__text--simple js-dialog-intro-simple">
+    <div class="intro__text intro__text--simple intro__text--hided js-dialog-intro-simple" data-text="introSimple">
       simple
     </div>
-    <div class="intro__text intro__text--powerful intro__text--hided js-dialog-intro-powerful">
+    <div class="intro__text intro__text--powerful intro__text--hided js-dialog-intro-powerful" data-text="introPowerful">
       powerful
     </div>
-    <div class="intro__text intro__text--piano intro__text--hided js-dialog-intro-piano">
+    <div class="intro__text intro__text--piano intro__text--hided js-dialog-intro-piano" data-text="introPiano">
       piano
     </div>
   </dialog>
@@ -803,7 +803,7 @@
   <dialog class="hint js-dialog-hint" open>
     <div class="hint__content js-dialog-hint-content">
       <header class="hint__header">
-        <h2 class="hint__title" data-text="hints">Hints</h2>
+        <h2 class="hint__title" data-text="hintTitle">Hints</h2>
         <button class="hint__btn hint__btn--icon js-dialog-hint-close-btn">
           <svg class="hint__icon-svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
             xmlns="http://www.w3.org/2000/svg">
@@ -815,15 +815,21 @@
       </header>
       <div class="hint__text-block">
         <ul class="hint__list">
-          <li class="hint__text">
+          <li class="hint__text" data-text="hintTextGeneral">
             Use PC/laptop keyboard keys for playing
           </li>
-          <li class="hint__text">
+          <li class="hint__text" data-text="hintTextPiano">
             You can change piano layout and functionality by accessing piano settings (click "Piano" button)
           </li>
-          <li class="hint__text">You can also change some app settings (click "App" button")</li>
-          <li class="hint__text">For detailed guide click "Help" button</li>
-          <li class="hint__text">For any suggestions contact me (click "About" button for my e-mail address)</li>
+          <li class="hint__text" data-text="hintTextApp">
+            You can also change some app settings (click "App" button)
+          </li>
+          <li class="hint__text" data-text="hintTextHelp">
+            For detailed guide click "Help" button
+          </li>
+          <li class="hint__text" data-text="hintTextAbout">
+            For any suggestions contact me (click "About" button for my e-mail address)
+          </li>
         </ul>
       </div>
     </div>

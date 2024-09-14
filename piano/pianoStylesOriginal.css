@@ -593,6 +593,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 .modal__btn {
   vertical-align: top;
   width: 160px;
+  height: 60px;
   padding: 4px;
   font-size: 1.25em;
   color: rgb(26, 26, 71);

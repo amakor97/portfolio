@@ -58,5 +58,14 @@
   "pianoApp": "Piano app",
   "pianoAppUsed": "Used",
   "pianoAppContacts": "Contacts",
-  "pianoAppContactsText": "For any suggestions and questions please contact me:"
+  "pianoAppContactsText": "For any suggestions and questions please contact me:",
+  "introSimple": "simple",
+  "introPowerful": "powerful",
+  "introPiano": "piano",
+  "hintTitle": "Hints",
+  "hintTextGeneral": "Use PC/laptop keyboard keys for playing",
+  "hintTextPiano": "You can change piano layout and functionality by accessing piano settings (click \"Piano\" button)",
+  "hintTextApp": "You can also change some app settings (click \"App\" button)",
+  "hintTextHelp": "For detailed guide click \"Help\" button",
+  "hintTextAbout": "For any suggestions contact me (click \"About\" button for my e-mail address)"
 }
