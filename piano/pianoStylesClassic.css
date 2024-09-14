@@ -260,6 +260,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   display: flex;
   flex-direction: column;
   justify-content: end;
+  padding-bottom: 8px;
   box-sizing: border-box;
   font-size: 0.75rem;
   border: 1px solid black;

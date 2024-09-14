@@ -80,6 +80,7 @@
   display: block;
   align-items: center;
   width: 160px;
+  height: 40px;
   padding: 4px;
   font-size: 1.25em;
   text-align: center;
@@ -303,6 +304,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   justify-content: end;
   padding-bottom: 8px;
   box-sizing: border-box;
+  overflow: hidden;
   font-size: 0.75rem;
   border: 2px solid rgb(26, 26, 71);
   transition: transform 0.05s;
@@ -402,7 +404,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 .key--black-full {
   width: 1.3vw;
   height: 8vw;
-  font-size: 0.75rem;
+  font-size: 0.5rem;
   border-radius: 0 0 6px 6px;
 }
 .key--a0 {
@@ -426,6 +428,22 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 }
 .key__hint--transparent {
   opacity: 0;
+}
+
+.key--white-full .key__hint:first-of-type {
+  font-size: 1rem;
+}
+
+.key--white-full .key__hint:last-of-type {
+  font-size: 0.75rem;
+}
+
+.key--black-full .key__hint:first-of-type {
+  font-size: 0.75rem;
+}
+
+.key--black-full .key__hint:last-of-type {
+  font-size: 0.5rem;
 }
 
 .key--white-full.key--a0 {

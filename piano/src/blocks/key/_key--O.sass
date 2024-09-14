@@ -5,6 +5,7 @@
   padding: 
     bottom: 8px
   box-sizing: border-box
+  overflow: hidden
 
   font:
     size: 0.75rem
@@ -68,7 +69,7 @@
         size: 1rem
 
   &--disabled
-    background: $d2
+    background: $main-disabled-color
 
   &--empty
     height: 60px
@@ -117,7 +118,7 @@
     height: 8vw
 
     font:
-      size: 0.75rem
+      size: 0.5rem
 
     border:
       radius: 0 0 6px 6px
@@ -145,6 +146,22 @@
 
     &--transparent
       opacity: 0
+
+.key--white-full .key__hint:first-of-type
+  font:
+    size: 1rem    
+
+.key--white-full .key__hint:last-of-type
+  font:
+    size: 0.75rem
+
+.key--black-full .key__hint:first-of-type
+  font:
+    size: 0.75rem    
+
+.key--black-full .key__hint:last-of-type
+  font:
+    size: 0.5rem
 
 .key--white-full.key--a0
   border:
