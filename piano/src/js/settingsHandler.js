@@ -74,9 +74,6 @@ function setIntro() {
   body.classList.add("body--content-visible");
   if (settings.showIntro === false) {
     introDialog.open = false;
-    //introSimpleDialog.open = false;
-    //introPowerfulDialog.open = false;
-    //introPianoDialog.open = false;
   }
 }
 
@@ -141,3 +138,22 @@ function initSetInputs() {
     btnHint.checked = true;
   }
 }
+
+
+function resetSettings() {
+  settings.lang = "en";
+  settings.style = "classic";
+  settings.showIntro = true;
+  settings.showHint = true;
+}
+
+
+const resetAllBtn = document.querySelector(".js-reset-all-btn");
+resetAllBtn.addEventListener("click", function() {
+  resetSettings();
+  initSetInputs();
+  setLang(settings.lang);
+  setStyles();
+  setIntro();
+  setHint();
+})
