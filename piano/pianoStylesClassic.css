@@ -11,7 +11,7 @@
   min-height: 100vh;
   margin: 0;
   overflow: hidden;
-  color: white;
+  color: rgb(255, 255, 255);
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), transparent, rgba(0, 0, 0, 0.5)), url(/portfolio/piano/src/pics/background.jpg);
   background-size: cover, 579px 344.67px;
   background-repeat: no-repeat, repeat;
@@ -80,14 +80,14 @@
   padding: 4px;
   font-size: 1.5em;
   text-align: center;
-  border: 2px solid white;
+  border: 2px solid rgb(255, 255, 255);
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.2s;
 }
 .control-panel__switch-mode-label:hover {
-  background: grey;
-  border: 2px solid grey;
+  background: rgb(128, 128, 128);
+  border: 2px solid rgb(128, 128, 128);
 }
 .control-panel__note-label {
   font-size: 1.5em;
@@ -118,32 +118,32 @@
   height: 40px;
   padding: 4px;
   font-size: 1.5em;
-  color: white;
+  color: rgb(255, 255, 255);
   text-align: center;
-  border: 2px solid white;
+  border: 2px solid rgb(255, 255, 255);
   border-radius: 8px;
   background: transparent;
   cursor: pointer;
   transition: background-color 0.2s;
 }
 .control-panel__btn:hover {
-  border: 2px solid grey;
-  background: grey;
+  border: 2px solid rgb(128, 128, 128);
+  background: rgb(128, 128, 128);
 }
 .control-panel__btn--toggled {
-  background: white;
-  color: black;
+  background: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
 }
 
 input[type=radio]:checked + .control-panel__switch-mode-label {
-  background: white;
-  color: black;
-  border: 2px solid white;
+  background: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  border: 2px solid rgb(255, 255, 255);
 }
 
 input[type=checkbox]:checked + .control-panel__switch-mode-label {
-  background: white;
-  color: black;
+  background: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
 }
 
 .keyboard-cont {
@@ -183,6 +183,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   display: inline-block;
   width: -moz-fit-content;
   width: fit-content;
+  border-top: 4px solid #900d09;
 }
 .keyboard-cont__item--0 {
   order: 0;
@@ -263,15 +264,15 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   padding-bottom: 8px;
   box-sizing: border-box;
   font-size: 0.75rem;
-  border: 1px solid black;
+  border: 1px solid rgb(0, 0, 0);
   transition: transform 0.05s;
 }
 .key--white {
   z-index: 0;
   width: 34.5px;
   height: 204px;
-  color: black;
-  background: white;
+  color: rgb(0, 0, 0);
+  background: rgb(255, 255, 255);
   border-radius: 0 0 8px 8px;
 }
 @media (min-width: 992px) {
@@ -296,7 +297,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   z-index: 1;
   width: 19.5px;
   height: 155.5px;
-  color: white;
+  color: rgb(255, 255, 255);
   background: rgb(32, 32, 32);
   border-radius: 0 0 4px 4px;
 }
@@ -319,6 +320,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   }
 }
 .key--disabled {
+  color: rgb(0, 0, 0);
   background: lightgrey;
 }
 .key--empty {
@@ -328,7 +330,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 }
 .key--pressing {
   transform: scaleY(1.02) translateY(1%);
-  background: grey;
+  background: rgb(128, 128, 128);
 }
 .key--hided {
   display: none;
@@ -393,7 +395,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 }
 .menu__btn--toggled {
   background: white;
-  color: black;
+  color: rgb(0, 0, 0);
 }
 
 .header {
@@ -422,7 +424,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   width: 50vw;
   padding: 20px;
   transform: translate(-50%, -50%);
-  border: 4px solid black;
+  border: 4px solid rgb(0, 0, 0);
   border-radius: 16px;
   background: white;
 }
@@ -488,8 +490,8 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   width: 160px;
   padding: 4px;
   font-size: 1.5em;
-  color: black;
-  border: 2px solid black;
+  color: rgb(0, 0, 0);
+  border: 2px solid rgb(0, 0, 0);
   border-radius: 8px;
   background: transparent;
   cursor: pointer;
@@ -497,7 +499,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 }
 .modal__btn:hover {
   color: white;
-  background: black;
+  background: rgb(0, 0, 0);
 }
 .modal__btn--icon {
   display: inline-flex;
@@ -523,7 +525,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   padding: 4px;
   font-size: 1.5em;
   text-align: center;
-  border: 2px solid black;
+  border: 2px solid rgb(0, 0, 0);
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.2s;
@@ -533,7 +535,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   border: 2px solid grey;
 }
 .modal__link {
-  color: black;
+  color: rgb(0, 0, 0);
 }
 .modal__link:hover {
   color: grey;
@@ -544,15 +546,15 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 }
 
 input[type=radio]:checked + .modal__input-label {
-  background: black;
+  background: rgb(0, 0, 0);
   color: white;
-  border: 2px solid black;
+  border: 2px solid rgb(0, 0, 0);
 }
 
 input[type=checkbox]:checked + .modal__input-label {
-  background: black;
+  background: rgb(0, 0, 0);
   color: white;
-  border: 2px solid black;
+  border: 2px solid rgb(0, 0, 0);
 }
 
 .intro {
@@ -564,9 +566,9 @@ input[type=checkbox]:checked + .modal__input-label {
   height: 100vh;
   font-size: 8rem;
   font-weight: bold;
-  color: grey;
+  color: rgb(128, 128, 128);
   border: none;
-  background: black;
+  background: rgb(0, 0, 0);
   transition: opacity 1s;
 }
 .intro--hided {
@@ -614,9 +616,9 @@ input[type=checkbox]:checked + .modal__input-label {
   width: 50vw;
   padding: 20px;
   transform: translate(-50%, -50%);
-  border: 4px solid black;
+  border: 4px solid rgb(0, 0, 0);
   border-radius: 16px;
-  background: white;
+  background: rgb(255, 255, 255);
 }
 .hint__header {
   display: flex;
@@ -646,16 +648,16 @@ input[type=checkbox]:checked + .modal__input-label {
   width: 160px;
   padding: 4px;
   font-size: 1.5em;
-  color: black;
-  border: 2px solid black;
+  color: rgb(0, 0, 0);
+  border: 2px solid rgb(0, 0, 0);
   border-radius: 8px;
   background: transparent;
   cursor: pointer;
   transition: color 0.2s, background-color 0.2s;
 }
 .hint__btn:hover {
-  color: white;
-  background: black;
+  color: rgb(255, 255, 255);
+  background: rgb(0, 0, 0);
 }
 .hint__btn--icon {
   display: inline-flex;

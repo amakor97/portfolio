@@ -1,6 +1,5 @@
 .control-panel
   position: absolute
-  //top: 0
   right: 0
   z-index: 2
 
@@ -18,7 +17,6 @@
   &--single-row
     top: auto
     right: auto
-    //left: 5vw
     bottom: 2vw
     margin: 0 auto
 
@@ -44,10 +42,8 @@
     display: flex
     flex-direction: column
     width: min-content
-    //min-height: 7.5vh
     gap: 10px
     justify-content: space-evenly
-    //background: red
 
     &--note
       flex-direction: column
@@ -58,7 +54,6 @@
       opacity: 0
 
   &__switch-mode-item
-    //background: pink
 
   &__switch-mode-label
     display: block
@@ -71,15 +66,15 @@
     text:
       align: center
 
-    border: 2px solid white
+    border: 2px solid $main-white-color
       radius: 8px
     cursor: pointer
 
     transition: background-color 0.2s
 
     &:hover
-      background: grey
-      border: 2px solid grey
+      background: $main-med-color
+      border: 2px solid $main-med-color
 
   &__note-label
     font:
@@ -115,11 +110,11 @@
 
     font:
       size: 1.5em
-    color: white
+    color: $main-white-color
     text:
       align: center
 
-    border: 2px solid white
+    border: 2px solid $main-white-color
       radius: 8px
     background: transparent
     cursor: pointer
@@ -127,18 +122,18 @@
     transition: background-color 0.2s
 
     &:hover
-      border: 2px solid grey
-      background: grey
+      border: 2px solid $main-med-color
+      background: $main-med-color
 
     &--toggled
-      background: white
-      color: black
+      background: $main-white-color
+      color: $main-dark-color
 
 input[type=radio]:checked + .control-panel__switch-mode-label
-  background: white
-  color: black
-  border: 2px solid white
+  background: $main-white-color
+  color: $main-dark-color
+  border: 2px solid $main-white-color
 
 input[type=checkbox]:checked + .control-panel__switch-mode-label
-  background: white
-  color: black
+  background: $main-white-color
+  color: $main-dark-color

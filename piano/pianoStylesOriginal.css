@@ -341,6 +341,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   width: 19.5px;
   height: 155.5px;
   color: white;
+  font-size: 0.5rem;
   border-radius: 0 0 12px 12px;
   background: rgb(26, 26, 71);
 }
@@ -348,6 +349,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   .key--black {
     width: 26px;
     height: 194px;
+    font-size: 0.75rem;
   }
 }
 @media (min-width: 1200px) {
@@ -364,6 +366,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   }
 }
 .key--disabled {
+  color: rgb(26, 26, 71);
   background: rgb(155, 182, 186);
 }
 .key--empty {
@@ -386,6 +389,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 .key--white-single {
   width: 4vw;
   height: 23.65vw;
+  font-weight: bold;
 }
 .key--white-full {
   width: 1.89vw;
@@ -400,6 +404,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 .key--black-single {
   width: 2.26vw;
   height: 16.87vw;
+  font-weight: bold;
 }
 .key--black-full {
   width: 1.3vw;
@@ -432,6 +437,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 
 .key--white-full .key__hint:first-of-type {
   font-size: 1rem;
+  font-weight: bold;
 }
 
 .key--white-full .key__hint:last-of-type {
@@ -440,10 +446,15 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 
 .key--black-full .key__hint:first-of-type {
   font-size: 0.75rem;
+  font-weight: bold;
 }
 
 .key--black-full .key__hint:last-of-type {
   font-size: 0.5rem;
+}
+
+.key .key__hint:first-of-type {
+  font-weight: bold;
 }
 
 .key--white-full.key--a0 {
