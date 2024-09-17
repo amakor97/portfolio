@@ -340,7 +340,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   z-index: 1;
   width: 19.5px;
   height: 155.5px;
-  color: white;
+  color: rgb(255, 255, 255);
   font-size: 0.5rem;
   border-radius: 0 0 12px 12px;
   background: rgb(26, 26, 71);
@@ -420,9 +420,11 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 }
 .key--prev {
   background-image: linear-gradient(rgba(128, 0, 64, 0.5), rgba(128, 0, 64, 0.5));
+  cursor: pointer;
 }
 .key--next {
   background-image: linear-gradient(rgba(0, 128, 64, 0.5), rgba(0, 128, 64, 0.5));
+  cursor: pointer;
 }
 .key__hint {
   text-align: center;

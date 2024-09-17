@@ -47,7 +47,7 @@
     width: 19.5px
     height: 155.5px
 
-    color: white
+    color: $main-white-color
 
     font:
       size: 0.5rem
@@ -146,10 +146,12 @@
       radius: 0px 16px 16px 16px
 
   &--prev
-    background-image: linear-gradient(rgba(128, 0, 64, 0.5), rgba(128, 0, 64, 0.5))
+    background-image: $prev-key-color
+    cursor: pointer
 
   &--next
-    background-image: linear-gradient(rgba(0, 128, 64, 0.5), rgba(0, 128, 64, 0.5))
+    background-image: $next-key-color
+    cursor: pointer
 
   &__hint
     text:
