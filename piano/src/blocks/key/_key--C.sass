@@ -45,7 +45,7 @@
 
     color: $main-white-color
 
-    background: rgb(32, 32, 32)
+    background: $main-black-key-color
     border:
       radius: 0 0 4px 4px
 
@@ -64,7 +64,7 @@
   &--disabled
     color: $main-dark-color
 
-    background: lightgrey
+    background: $main-disabled-color
 
   &--empty
     height: 60px
@@ -104,10 +104,12 @@
     height: 8vw
 
   &--prev
-    background-image: linear-gradient(rgba(128, 0, 0, 0.5), rgba(128, 0, 0, 0.5))
+    background-image: $prev-key-color
+    cursor: pointer
 
   &--next
-    background-image: linear-gradient(rgba(0, 128, 0, 0.5), rgba(0, 128, 0, 0.5))
+    background-image: $next-key-color
+    cursor: pointer
 
   &__hint
     text:
@@ -118,6 +120,3 @@
 
     &--transparent
       opacity: 0
-
-
-//4px solid #900d09
