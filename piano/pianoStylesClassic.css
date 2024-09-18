@@ -136,14 +136,14 @@
 }
 
 input[type=radio]:checked + .control-panel__switch-mode-label {
-  background: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
   border: 2px solid rgb(255, 255, 255);
+  background: rgb(255, 255, 255);
 }
 
 input[type=checkbox]:checked + .control-panel__switch-mode-label {
-  background: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
+  background: rgb(255, 255, 255);
 }
 
 .keyboard-cont {
@@ -183,7 +183,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   display: inline-block;
   width: -moz-fit-content;
   width: fit-content;
-  border-top: 4px solid #900d09;
+  border-top: 4px solid rgb(144, 13, 9);
 }
 .keyboard-cont__item--0 {
   order: 0;
@@ -220,9 +220,9 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   position: absolute;
   bottom: 0;
   left: 50%;
-  transform: translateX(-50%);
   width: -moz-max-content;
   width: max-content;
+  transform: translateX(-50%);
 }
 .keyboard-cont__item--full-single {
   margin: 0;
@@ -230,10 +230,10 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 
 .keyboard {
   position: relative;
+  vertical-align: bottom;
   display: inline-block;
   width: -moz-fit-content;
   width: fit-content;
-  vertical-align: bottom;
 }
 .keyboard__black {
   position: absolute;
@@ -249,31 +249,31 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   width: 42.8571428571%;
 }
 .keyboard--4 {
-  width: 57.1428571429%;
   right: 0;
+  width: 57.1428571429%;
 }
 .keyboard--most-left {
-  width: 85%;
   right: 0;
+  width: 85%;
 }
 
 .key {
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: flex-end;
   padding-bottom: 8px;
   box-sizing: border-box;
+  overflow: hidden;
   font-size: 0.75rem;
   border: 1px solid rgb(0, 0, 0);
   transition: transform 0.05s;
 }
 .key--white {
-  z-index: 0;
   width: 34.5px;
   height: 204px;
   color: rgb(0, 0, 0);
-  background: rgb(255, 255, 255);
   border-radius: 0 0 8px 8px;
+  background: rgb(255, 255, 255);
 }
 @media (min-width: 992px) {
   .key--white {
@@ -298,8 +298,8 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   width: 19.5px;
   height: 155.5px;
   color: rgb(255, 255, 255);
-  background: rgb(32, 32, 32);
   border-radius: 0 0 4px 4px;
+  background: rgb(32, 32, 32);
 }
 @media (min-width: 992px) {
   .key--black {
@@ -329,8 +329,8 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   opacity: 0;
 }
 .key--pressing {
-  transform: scaleY(1.02) translateY(1%);
   background: rgb(128, 128, 128);
+  transform: scaleY(1.02) translateY(1%);
 }
 .key--hided {
   display: none;
@@ -396,8 +396,8 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   background: rgb(128, 128, 128);
 }
 .menu__btn--toggled {
-  background: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
+  background: rgb(255, 255, 255);
 }
 
 .header {
@@ -416,8 +416,8 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   z-index: 2;
   width: 100vw;
   height: 100vh;
-  background: rgba(64, 64, 64, 0.75);
   border: 0px solid transparent;
+  background: rgba(64, 64, 64, 0.75);
 }
 .modal__content {
   position: absolute;
@@ -425,10 +425,10 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   left: 50%;
   width: 50vw;
   padding: 20px;
-  transform: translate(-50%, -50%);
   border: 4px solid rgb(0, 0, 0);
   border-radius: 16px;
   background: rgb(255, 255, 255);
+  transform: translate(-50%, -50%);
 }
 .modal__content--app {
   width: -moz-max-content;
@@ -533,8 +533,8 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   transition: background-color 0.2s;
 }
 .modal__input-label:hover {
-  background: rgb(128, 128, 128);
   border: 2px solid rgb(128, 128, 128);
+  background: rgb(128, 128, 128);
 }
 .modal__link {
   color: rgb(0, 0, 0);
@@ -548,15 +548,15 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 }
 
 input[type=radio]:checked + .modal__input-label {
-  background: rgb(0, 0, 0);
   color: rgb(255, 255, 255);
   border: 2px solid rgb(0, 0, 0);
+  background: rgb(0, 0, 0);
 }
 
 input[type=checkbox]:checked + .modal__input-label {
-  background: rgb(0, 0, 0);
   color: rgb(255, 255, 255);
   border: 2px solid rgb(0, 0, 0);
+  background: rgb(0, 0, 0);
 }
 
 input[type=checkbox]:checked:hover + .modal__input-label {
@@ -614,8 +614,8 @@ input[type=checkbox]:checked:hover + .modal__input-label {
   z-index: 2;
   width: 100vw;
   height: 100vh;
-  background: rgba(64, 64, 64, 0.75);
   border: 0px solid transparent;
+  background: rgba(64, 64, 64, 0.75);
 }
 .hint__content {
   position: absolute;

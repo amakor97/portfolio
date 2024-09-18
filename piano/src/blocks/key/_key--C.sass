@@ -1,10 +1,11 @@
 .key
   display: flex
   flex-direction: column
-  justify-content: end
+  justify-content: flex-end
   padding: 
     bottom: 8px
   box-sizing: border-box
+  overflow: hidden
 
   font:
     size: 0.75rem
@@ -14,16 +15,14 @@
   transition: transform 0.05s
 
   &--white
-    z-index: 0
-
     width: 34.5px
     height: 204px
 
     color: $main-dark-color
 
-    background: $main-white-color
     border:
       radius: 0 0 8px 8px
+    background: $main-white-color
 
     @media (min-width: $screen-lg)
       width: 46px
@@ -45,9 +44,9 @@
 
     color: $main-white-color
 
-    background: $main-black-key-color
     border:
       radius: 0 0 4px 4px
+    background: $main-black-key-color
 
     @media (min-width: $screen-lg)
       width: 26px
@@ -69,12 +68,12 @@
   &--empty
     height: 60px
     padding: 0px
-
     opacity: 0
 
   &--pressing
-    transform: scaleY(1.02) translateY(1%)
     background: $main-pressed-color
+
+    transform: scaleY(1.02) translateY(1%)
 
   &--hided
     display: none

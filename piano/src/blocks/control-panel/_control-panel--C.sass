@@ -53,8 +53,6 @@
     &--hided
       opacity: 0
 
-  &__switch-mode-item
-
   &__switch-mode-label
     display: block
     align-items: center
@@ -130,10 +128,12 @@
       color: $main-dark-color
 
 input[type=radio]:checked + .control-panel__switch-mode-label
-  background: $main-white-color
   color: $main-dark-color
+
   border: 2px solid $main-white-color
+  background: $main-white-color
 
 input[type=checkbox]:checked + .control-panel__switch-mode-label
-  background: $main-white-color
   color: $main-dark-color
+  
+  background: $main-white-color

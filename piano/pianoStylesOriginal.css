@@ -19,6 +19,9 @@
   overflow: hidden;
   color: rgb(26, 26, 71);
 }
+.body--content-visible {
+  display: flex;
+}
 
 .control-panel {
   position: absolute;
@@ -145,14 +148,14 @@
 
 input[type=radio]:checked + .control-panel__switch-mode-label {
   color: rgb(255, 255, 255);
-  background: rgb(26, 26, 71);
   border: 2px solid rgb(26, 26, 71);
+  background: rgb(26, 26, 71);
 }
 
 input[type=checkbox]:checked + .control-panel__switch-mode-label {
   color: rgb(255, 255, 255);
-  background: rgb(26, 26, 71);
   border: 2px solid rgb(26, 26, 71);
+  background: rgb(26, 26, 71);
 }
 
 .control-panel__switch-mode-item:first-child .control-panel__switch-mode-label {
@@ -261,9 +264,9 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   position: absolute;
   bottom: 0;
   left: 50%;
-  transform: translateX(-50%);
   width: -moz-max-content;
   width: max-content;
+  transform: translateX(-50%);
 }
 .keyboard-cont__item--full-single {
   margin: 0;
@@ -271,10 +274,10 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 
 .keyboard {
   position: relative;
+  vertical-align: bottom;
   display: inline-block;
   width: -moz-fit-content;
   width: fit-content;
-  vertical-align: bottom;
 }
 .keyboard__black {
   position: absolute;
@@ -290,18 +293,18 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   width: 42.8571428571%;
 }
 .keyboard--4 {
-  width: 57.1428571429%;
   right: 0;
+  width: 57.1428571429%;
 }
 .keyboard--most-left {
-  width: 85%;
   right: 0;
+  width: 85%;
 }
 
 .key {
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: flex-end;
   padding-bottom: 8px;
   box-sizing: border-box;
   overflow: hidden;
@@ -310,7 +313,6 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   transition: transform 0.05s;
 }
 .key--white {
-  z-index: 0;
   width: 34.5px;
   height: 204px;
   color: rgb(26, 26, 71);
@@ -375,8 +377,8 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   opacity: 0;
 }
 .key--pressing {
-  transform: scaleY(1.02) translateY(1%);
   background: rgb(140, 140, 168);
+  transform: scaleY(1.02) translateY(1%);
 }
 .key--hided {
   display: none;
@@ -558,11 +560,11 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   left: 50%;
   width: 50vw;
   padding: 20px;
-  transform: translate(-50%, -50%);
   color: rgb(26, 26, 71);
   border: 4px solid rgb(26, 26, 71);
   border-radius: 24px;
   background: rgb(255, 255, 255);
+  transform: translate(-50%, -50%);
 }
 .modal__content--app {
   width: -moz-max-content;
@@ -761,8 +763,8 @@ input[type=checkbox]:checked:hover + .modal__input-label {
   z-index: 2;
   width: 100vw;
   height: 100vh;
-  background: rgba(64, 64, 64, 0.75);
   border: 0px solid transparent;
+  background: rgba(64, 64, 64, 0.75);
 }
 .hint__content {
   position: absolute;

@@ -1,7 +1,7 @@
 .key
   display: flex
   flex-direction: column
-  justify-content: end
+  justify-content: flex-end
   padding: 
     bottom: 8px
   box-sizing: border-box
@@ -15,8 +15,6 @@
   transition: transform 0.05s
 
   &--white
-    z-index: 0
-
     width: 34.5px
     height: 204px
 
@@ -82,12 +80,12 @@
   &--empty
     height: 60px
     padding: 0px
-
     opacity: 0
 
   &--pressing
-    transform: scaleY(1.02) translateY(1%)
     background: $main-pressed-color
+
+    transform: scaleY(1.02) translateY(1%)
 
   &--hided
     display: none
