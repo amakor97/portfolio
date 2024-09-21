@@ -12,25 +12,38 @@
   padding: 6vh 1vw
   margin: auto 0
 
+  background: $main-bg-panel-color
+
   transition: right 0.5s, bottom 0.5s, transform 0.5s
 
-  &--single-row
-    top: auto
-    right: auto
-    bottom: 2vw
-    margin: 0 auto
+  @media screen and (min-width: $screen-xl)
+    background: transparent
 
-    flex-direction: row
-    width: 90vw
-    max-width: 1300px
-    height: 15vh
-    padding: 0 0vw
+  &--single-row
+    @media screen and (min-width: $screen-xl)
+      top: auto
+      right: auto
+      bottom: 2vw
+      margin: 0 auto
+
+      flex-direction: row
+      width: 90vw
+      max-width: 1300px
+      height: 15vh
+      padding: 0 0vw
 
   &--hided-right
     transform: translateX(100%)
 
   &--hided-bottom
-    bottom: -15vh
+    bottom: 0px
+
+    transform: translateX(100%)
+    
+    @media screen and (min-width: $screen-xl)
+      bottom: -15vh
+
+      transform: translateX(0)
 
   &__flex-column
     display: flex
