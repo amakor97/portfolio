@@ -34,7 +34,6 @@ btnsStyle.forEach(btn => {
 const btnIntro = document.querySelector(".js-settings-intro-input");
 btnIntro.addEventListener("input", () => {
   settings.showIntro = btnIntro.checked;
-  console.log(settings);
   saveSettingsToLS();
 })
 
@@ -47,7 +46,6 @@ btnHint.addEventListener("input", () => {
 
 
 const stylesLink = document.querySelector("#stylesLink");
-console.log(stylesLink);
 
 window.addEventListener("load", () => {
   readSettingsFromLS();
@@ -58,6 +56,7 @@ window.addEventListener("load", () => {
   setHint();
 });
 window.addEventListener("beforeunload", saveSettingsToLS);
+
 
 function setStyles() {
   if (settings.style === "classic") {
@@ -105,6 +104,7 @@ function readSettingsFromLS() {
 
   Object.assign(settings, settingsFromLs);
 }
+
 
 function saveSettingsToLS() {
   const settingsStr = JSON.stringify(settings);

@@ -2,10 +2,7 @@
 
 export function setLang(lang) {
   const html = document.getElementsByTagName("html")[0];
-  console.log(html.lang);
-
   html.lang = lang;
-
   replaceTexts();
 }
 
@@ -13,8 +10,6 @@ export function setLang(lang) {
 async function replaceTexts() {
   const html = document.getElementsByTagName("html")[0];
   const textElems = document.querySelectorAll("[data-text]");
-  console.log(textElems);
-
   const translatableTexts = document.querySelectorAll("[data-text");
 
   if (html.lang === "en") {

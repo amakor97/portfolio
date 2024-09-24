@@ -184,6 +184,10 @@ export function switchBasicModeKeyHandler() {
   let tmpDigits = [...textDigits];
   tmpDigits.splice(0, 1);
   tmpDigits.splice(-2, 2);
+  let targetDigit = tmpDigits.find(key => pressedKeys.has(key));
+  if (!targetDigit) {
+    return;
+  }
   let num = +(tmpDigits.find(key => pressedKeys.has(key)).slice(5, 6));
   if (num) {
     updateBasicMode(num);
