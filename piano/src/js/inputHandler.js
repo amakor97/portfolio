@@ -130,8 +130,38 @@ function stopPlaying(e) {
       const audio = document.querySelector(
         `audio[data-sound="${key.dataset.sound}"]`);
       if (audio) {
-        audio.load();
+        console.log(audio.currentTime);
+
+        const timme = audio.currentTime;
+
+        
+        //audio.play();
+        //soundFade(audio, timme);
+        setTimeout(() => {
+          //audio.load();
+          console.log(key.dataset.playing);
+          console.log(audio);
+          if (key.dataset.playing === "false") {
+            console.log("x");
+            audio.pause();
+          }
+          
+        }, 250);
+        //audio.load();
       }
     }
   }
+}
+
+
+function soundFade(audioElem, time) {
+  let fakeElem = audioElem.cloneNode(true);
+  console.log(fakeElem);
+  //fakeElem.fastSeek(time);
+  //fakeElem.start(time, 0);
+  fakeElem.currentTime = time;
+  fakeElem.play();
+  setTimeout(() => {
+    fakeElem.load();
+  }, 200);
 }
