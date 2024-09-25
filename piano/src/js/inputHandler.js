@@ -72,8 +72,12 @@ function playSound(e) {
 
   if (key.dataset.playing !== "true") {
     key.dataset.playing = "true";
+
     audio.load();
+    audio.volume = 1;
     audio.play();
+
+    console.log("NEW PLAYING"); 
   }
 
   const displayedKey = ((visualMode === "full") || isEditModeActive) ? 
@@ -137,16 +141,40 @@ function stopPlaying(e) {
         
         //audio.play();
         //soundFade(audio, timme);
+
+        console.log(audio.volume);
+        audio.volume = 0.66;
+        console.log(audio.volume);
+
         setTimeout(() => {
           //audio.load();
           console.log(key.dataset.playing);
           console.log(audio);
           if (key.dataset.playing === "false") {
             console.log("x");
+            //audio.pause();
+          }
+          
+        }, 125);
+
+        setTimeout(() => {
+          audio.volume = 0.33;
+          console.log(audio.volume);
+        }, 125);
+
+
+        console.log(key.dataset.playing);
+        setTimeout(() => {
+          //audio.load();
+          console.log(key.dataset.playing);
+          console.log(audio);
+          if ((key.dataset.playing === "false") && (audio.currentTime > 0.250)) {
+            console.log("x");
             audio.pause();
           }
           
         }, 250);
+
         //audio.load();
       }
     }
