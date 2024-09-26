@@ -76,8 +76,6 @@ function playSound(e) {
     audio.load();
     audio.volume = 1;
     audio.play();
-
-    console.log("NEW PLAYING"); 
   }
 
   const displayedKey = ((visualMode === "full") || isEditModeActive) ? 
@@ -134,62 +132,24 @@ function stopPlaying(e) {
       const audio = document.querySelector(
         `audio[data-sound="${key.dataset.sound}"]`);
       if (audio) {
-        console.log(audio.currentTime);
-
-        const timme = audio.currentTime;
-
-        
-        //audio.play();
-        //soundFade(audio, timme);
-
-        console.log(audio.volume);
-        audio.volume = 0.66;
-        console.log(audio.volume);
-
-        setTimeout(() => {
-          //audio.load();
-          console.log(key.dataset.playing);
-          console.log(audio);
-          if (key.dataset.playing === "false") {
-            console.log("x");
-            //audio.pause();
-          }
-          
-        }, 125);
-
-        setTimeout(() => {
-          audio.volume = 0.33;
-          console.log(audio.volume);
-        }, 125);
-
-
-        console.log(key.dataset.playing);
-        setTimeout(() => {
-          //audio.load();
-          console.log(key.dataset.playing);
-          console.log(audio);
-          if ((key.dataset.playing === "false") && (audio.currentTime > 0.250)) {
-            console.log("x");
-            audio.pause();
-          }
-          
-        }, 250);
-
-        //audio.load();
+        soundFade(audio, key);
       }
     }
   }
 }
 
 
-function soundFade(audioElem, time) {
-  let fakeElem = audioElem.cloneNode(true);
-  console.log(fakeElem);
-  //fakeElem.fastSeek(time);
-  //fakeElem.start(time, 0);
-  fakeElem.currentTime = time;
-  fakeElem.play();
+function soundFade(audioElem, key) {
+  audioElem.volume = 0.66;
+  
   setTimeout(() => {
-    fakeElem.load();
-  }, 200);
+    audioElem.volume = 0.33;
+  }, 125);
+
+  setTimeout(() => {
+    if ((key.dataset.playing === "false") && 
+      (audioElem.currentTime > 0.250)) {
+      audioElem.pause();
+    }
+  }, 250);
 }
