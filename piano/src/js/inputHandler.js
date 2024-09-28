@@ -143,7 +143,9 @@ function soundFade(audioElem, key) {
   audioElem.volume = 0.66;
   
   setTimeout(() => {
-    audioElem.volume = 0.33;
+    if (key.dataset.playing === "false") {
+      audioElem.volume = 0.33;
+    }
   }, 125);
 
   setTimeout(() => {
