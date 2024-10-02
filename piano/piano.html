@@ -839,72 +839,8 @@
 
     <button onclick="startRecording()">Start Recording</button>
     <button onclick="stopRecording()">Stop Recording</button>
-    <button onclick="initializeAudioContext()">init</button>
-    <script>
-       
-       let audioContext;
-       let mediaRecorder;
 
-       function initializeAudioContext() {
-        if (!audioContext) {  // Создаём только один раз
-          audioContext = new AudioContext();
-          let destination = audioContext.createMediaStreamDestination();
-          
-          // Привязываем аудиотеги к аудиоконтексту
-          document.querySelectorAll('audio').forEach(audioElement => {
-            const track = audioContext.createMediaElementSource(audioElement);
-            track.connect(audioContext.destination);
-            track.connect(destination);
-          });
-
-          // Инициализация MediaRecorder только после создания audioContext
-          mediaRecorder = new MediaRecorder(destination.stream);
-
-          // Обработчик получения данных записи
-          mediaRecorder.ondataavailable = event => {
-            audioChunks.push(event.data);
-          };
-
-          mediaRecorder.onstop = () => {
-            const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-            const audioURL = URL.createObjectURL(audioBlob);
-            
-            // Создание элемента для воспроизведения записи
-            const audioElement = document.createElement('audio');
-            audioElement.src = audioURL;
-            audioElement.controls = true;
-            document.body.appendChild(audioElement);
-          };
-        }
-}
-
-
-
-
-    let audioChunks = [];
-
-
-
-    function startRecording() {
-      audioChunks = [];
-      mediaRecorder.start();
-    }
-
-    function stopRecording() {
-      mediaRecorder.stop();
-      mediaRecorder.onstop = () => {
-        const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-        const audioURL = URL.createObjectURL(audioBlob);
-
-        // Создаём элемент для воспроизведения записи
-        const audioElement = document.createElement('audio');
-        audioElement.src = audioURL;
-        audioElement.controls = true;
-        document.body.appendChild(audioElement);
-      };
-    }
-    </script>
-
+    <script src="./src/js/recorder.js"></script>
     <script src="./src/js/inputHandler.js" type="module"></script>
     <script src="./src/js/layouts.js" type="module"></script>
     <script src="./src/js/keyFuncModeSwitcher.js" type="module"></script>
