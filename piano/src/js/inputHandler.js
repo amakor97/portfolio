@@ -5,7 +5,7 @@ import { visualMode } from "./visualModeSwitcher.js";
 import { switchBasicModeKeyHandler, switchAdvancedModeKeyHandler, 
   switchProModeKeyHandler, switchModeType, noteInput, 
   isEditModeActive } from "./keyFuncModeSwitcher.js";
-
+import { updateRecorder } from "./recorder.js";
 
 export let pressedKeys = new Set();
 
@@ -29,6 +29,8 @@ function kbdInputHandler(e) {
 
 
 function pressedKeysHandler(e) {
+  console.log(e.code);
+
   if ((pressedKeys.has("ShiftLeft") || (pressedKeys.has("ShiftRight"))) 
     && (pressedKeys.size > 1)) {
     switch(switchModeType) {
@@ -46,10 +48,17 @@ function pressedKeysHandler(e) {
       }
     }
   } else {
-    if (e.code === "Space") {
-      isRightPaddleActive = true;
-    } else {
-      playSound(e);
+    switch(e.code) {
+      case "Space": {
+        isRightPaddleActive = true;
+        break;
+      }
+      case "Backspace": {
+        updateRecorder("toggle");
+      }
+      default: {
+        playSound(e);
+      }
     }
   }
 }

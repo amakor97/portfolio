@@ -13,6 +13,7 @@
         <button class="menu__btn js-dialog-help-toggle-btn" data-text="help">Help</button>
         <button class="menu__btn js-dialog-app-toggle-btn" data-text="app">App</button>
         <button class="menu__btn js-control-toggle-btn" data-text="piano">Piano</button>
+        <button class="menu__btn js-dialog-recorder-toggle-btn" data-text="recorder">Recorder</button>
         <button class="menu__btn js-dialog-about-toggle-btn" data-text="about">About</button>
       </div>
     </header>
@@ -758,6 +759,18 @@
       </div>
     </dialog>
 
+    <dialog class="modal modal--recorder modal--recorder-double-rows js-dialog-recorder">
+      <div class="modal__content modal__content--recorder js-dialog-recorder-content">
+        <header class="modal__header">
+          <h2 class="modal__title" data-text="recorderTitle">Recorder</h2>
+        </header>
+        <div class="modal__control-block">
+          <button class="modal__btn js-recorder-start-btn">Start</button>
+          <button class="modal__btn js-recorder-stop-btn" disabled>Stop</button>
+        </div>
+      </div>
+    </dialog>
+
     <dialog class="modal js-dialog-about">
       <div class="modal__content js-dialog-about-content">
         <header class="modal__header">
@@ -837,10 +850,9 @@
       </div>
     </dialog>
 
-    <button onclick="startRecording()">Start Recording</button>
-    <button onclick="stopRecording()">Stop Recording</button>
 
-    <script src="./src/js/recorder.js"></script>
+
+    <script src="./src/js/recorder.js" type="module"></script>
     <script src="./src/js/inputHandler.js" type="module"></script>
     <script src="./src/js/layouts.js" type="module"></script>
     <script src="./src/js/keyFuncModeSwitcher.js" type="module"></script>

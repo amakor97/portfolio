@@ -10,6 +10,30 @@
   border: 0px solid transparent
   background: $main-bg-modal-color
 
+  &--recorder
+    width: fit-content
+    height: fit-content
+
+    background: transparent
+
+  &--recorder-single-row
+    top: initial
+    bottom: 0
+    right: auto
+    left: 0
+
+    @media screen and (min-width: $screen-xl)
+      top: 0
+      bottom: initial
+      right: 0
+      left: initial
+
+  &--recorder-double-rows
+    top: initial
+    bottom: 0
+    right: auto
+    left: 0
+
   &__content
     position: absolute
     top: 50%
@@ -26,6 +50,13 @@
 
     &--app
       width: max-content
+
+    &--recorder
+      position: static
+
+      width: 384px
+
+      transform: none
 
   &__header
     display: flex
@@ -107,6 +138,9 @@
 
       background: $main-dark-color
 
+    &:disabled
+      background: $main-med-color
+
     &--icon
       display: inline-flex
       justify-content: center
@@ -151,6 +185,16 @@
 
     &:hover
       color: $main-med-color
+
+  &__control-block
+    display: flex
+    justify-content: space-between
+    margin:
+      bottom: 8px
+
+  &__audio
+    display: block
+    margin: 0 auto 4px
 
 .modal__text-block:last-child
   margin: 0

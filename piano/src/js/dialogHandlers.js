@@ -27,8 +27,17 @@ const aboutDialogToggleBtn = document.querySelector(
 const aboutDialogCloseBtn = document.querySelector(
   ".js-dialog-about-close-btn");
 
+export const recorderDialog = document.querySelector(
+  ".js-dialog-recorder");
+const recorderDialogContent = document.querySelector(
+  ".js-dialog-recorder-content");
+const recorderDialogToggleBtn = document.querySelector(
+  ".js-dialog-recorder-toggle-btn");
+
+
 let isHelpModalShowed = false;
 let isAppModalShowed = false;
+let isRecorderModalShowed = false;
 let isAboutModalShowed = false;
 
 
@@ -41,6 +50,11 @@ appDialog.addEventListener("click", () => toggleDialog("app"));
 appDialogContent.addEventListener("click", e => e.stopPropagation());
 appDialogToggleBtn.addEventListener("click", () => toggleDialog("app"));
 appDialogCloseBtn.addEventListener("click", () => toggleDialog("app"));
+
+//recorderDialog.addEventListener("click", () => toggleDialog("recorder"));
+recorderDialogContent.addEventListener("click", e => e.stopPropagation());
+recorderDialogToggleBtn.addEventListener("click", () => toggleDialog("recorder"));
+
 
 aboutDialog.addEventListener("click", () => toggleDialog("about"));
 aboutDialogContent.addEventListener("click", e => e.stopPropagation());
@@ -63,6 +77,12 @@ function toggleDialog(dialogName) {
       toggleBtn = appDialogToggleBtn;
       dialog = appDialog;
       isAppModalShowed = !isAppModalShowed;
+      break;
+    }
+    case "recorder": {
+      toggleBtn = recorderDialogToggleBtn;
+      dialog = recorderDialog;
+      isRecorderModalShowed = !isRecorderModalShowed;
       break;
     }
     case "about": {

@@ -434,6 +434,33 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   border: 0px solid transparent;
   background: rgba(64, 64, 64, 0.75);
 }
+.modal--recorder {
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  background: transparent;
+}
+.modal--recorder-single-row {
+  top: initial;
+  bottom: 0;
+  right: auto;
+  left: 0;
+}
+@media screen and (min-width: 1200px) {
+  .modal--recorder-single-row {
+    top: 0;
+    bottom: initial;
+    right: 0;
+    left: initial;
+  }
+}
+.modal--recorder-double-rows {
+  top: initial;
+  bottom: 0;
+  right: auto;
+  left: 0;
+}
 .modal__content {
   position: absolute;
   top: 50%;
@@ -448,6 +475,11 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 .modal__content--app {
   width: -moz-max-content;
   width: max-content;
+}
+.modal__content--recorder {
+  position: static;
+  width: 384px;
+  transform: none;
 }
 .modal__header {
   display: flex;
@@ -518,6 +550,9 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   color: rgb(255, 255, 255);
   background: rgb(0, 0, 0);
 }
+.modal__btn:disabled {
+  background: rgb(128, 128, 128);
+}
 .modal__btn--icon {
   display: inline-flex;
   justify-content: center;
@@ -556,6 +591,15 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 }
 .modal__link:hover {
   color: rgb(128, 128, 128);
+}
+.modal__control-block {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.modal__audio {
+  display: block;
+  margin: 0 auto 4px;
 }
 
 .modal__text-block:last-child {
