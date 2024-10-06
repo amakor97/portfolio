@@ -37,7 +37,8 @@ function initializeAudioContext() {
      const parent = document.querySelector(
       ".js-dialog-recorder-content");
 
-     parent.appendChild(audioElem);
+      const audioDiv = createAudioBlock(audioElem);
+     parent.appendChild(audioDiv);
 
      const recordsCount = document.querySelectorAll(
       ".js-created-record").length;
@@ -77,7 +78,8 @@ export function updateRecorder(action) {
     isRecording = false;
     disableBtns();
     return;
-
+  } else {
+    enableBtns();
   }
 
   switch(action) {
@@ -95,6 +97,9 @@ export function updateRecorder(action) {
       } else {
         finishRecording();
       }
+      break;
+    }
+    default: {
       break;
     }
   }
@@ -163,6 +168,28 @@ export function toggleRecording() {
   isRecording = !isRecording;
   console.log(isRecording);
 }
+
+
+
+function createAudioBlock(audioElem) {
+  const div = document.createElement("div");
+  div.classList.add("modal__audio-cont");
+
+  const deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "X";
+  deleteBtn.addEventListener("click", () => {
+    console.log(div);
+    console.log(div.parentElement);
+    div.parentElement.removeChild(div);
+    updateRecorder("delete");
+  })
+
+  div.append(audioElem);
+  div.append(deleteBtn);
+
+  return div;
+}
+
 
 
 const startBtn = document.querySelector(".js-recorder-start-btn");

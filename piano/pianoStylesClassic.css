@@ -479,6 +479,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 .modal__content--recorder {
   position: static;
   width: 384px;
+  width: 412px;
   transform: none;
 }
 .modal__header {
@@ -597,9 +598,12 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   justify-content: space-between;
   margin-bottom: 8px;
 }
+.modal__audio-cont {
+  display: flex;
+  justify-content: space-between;
+}
 .modal__audio {
-  display: block;
-  margin: 0 auto 4px;
+  display: inline-block;
 }
 
 .modal__text-block:last-child {
