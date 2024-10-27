@@ -1,5 +1,7 @@
 "use strict";
 
+import { createAudio } from "./audioPlayer.js";
+
 let audioContext = undefined;
 let mediaRecorder = undefined;
 let audioChunks = [];
@@ -34,11 +36,15 @@ function initializeAudioContext() {
      audioElem.src = audioURL;
      audioElem.controls = true;
 
-     const parent = document.querySelector(
+      let audioCont = createAudio(audioURL);
+
+
+      const parent = document.querySelector(
       ".js-dialog-recorder-content");
 
       const audioDiv = createAudioBlock(audioElem);
-     parent.appendChild(audioDiv);
+      parent.appendChild(audioDiv);
+        parent.append(audioCont);
 
      const recordsCount = document.querySelectorAll(
       ".js-created-record").length;
