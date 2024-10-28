@@ -8,10 +8,16 @@ let audioChunks = [];
 
 const recordsLimit = 5;
 
+let destination = null;
+
 function initializeAudioContext() {
  if (!audioContext) {
    audioContext = new AudioContext();
-   let destination = audioContext.createMediaStreamDestination();
+   destination = audioContext.createMediaStreamDestination();
+
+   console.log(audioContext);
+   console.log(audioContext.destination);
+   console.log(destination);
 
    let audioElems = document.querySelectorAll("audio");
    audioElems.forEach(audioElem => {
@@ -51,7 +57,34 @@ function initializeAudioContext() {
       if (recordsCount >= recordsLimit) {
         disableBtns();
       }
+
+      /*
+      console.log(destination);
+      const track = audioContext.createMediaElementSource(audioElem);
+      console.log(track);
+      track.connect(audioContext.destination);
+      track.connect(destination);
+      */
     };
+  } else {
+    console.log(audioContext);
+    console.log(audioContext.destination);
+    console.log(destination);
+
+    let audioElems = document.querySelectorAll("audio");
+    audioElems.forEach(audioElem => {
+      try {
+        const track = audioContext.createMediaElementSource(audioElem);
+        track.connect(audioContext.destination);
+        track.connect(destination);
+        console.log(track);
+      } catch (error) {
+        console.log(error);
+      }
+
+      //
+      //
+    });
   }
 }
 
