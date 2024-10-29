@@ -37,14 +37,12 @@ function initializeAudioContext() {
      const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
      const audioURL = URL.createObjectURL(audioBlob);
      
-     const audioElem = document.createElement("audio");
-     audioElem.classList.add("modal__audio", "js-created-record");
-     audioElem.src = audioURL;
-     audioElem.controls = true;
+      const audioElem = document.createElement("audio");
+      audioElem.classList.add("modal__audio", "js-created-record");
+      audioElem.src = audioURL;
+      audioElem.controls = true;
 
       let audioCont = createAudio(audioURL);
-
-
       const parent = document.querySelector(
       ".js-dialog-recorder-content");
 
@@ -57,20 +55,8 @@ function initializeAudioContext() {
       if (recordsCount >= recordsLimit) {
         disableBtns();
       }
-
-      /*
-      console.log(destination);
-      const track = audioContext.createMediaElementSource(audioElem);
-      console.log(track);
-      track.connect(audioContext.destination);
-      track.connect(destination);
-      */
     };
   } else {
-    console.log(audioContext);
-    console.log(audioContext.destination);
-    console.log(destination);
-
     let audioElems = document.querySelectorAll("audio");
     audioElems.forEach(audioElem => {
       try {
@@ -78,12 +64,7 @@ function initializeAudioContext() {
         track.connect(audioContext.destination);
         track.connect(destination);
         console.log(track);
-      } catch (error) {
-        console.log(error);
-      }
-
-      //
-      //
+      } catch (error) {}
     });
   }
 }
@@ -187,9 +168,7 @@ function disableBtns() {
   stopBtn.disabled = true;
 }
 
-
 let isRecording = false;
-
 
 export function toggleRecording() {
   if (isRecording) {
@@ -205,7 +184,6 @@ export function toggleRecording() {
   }
 
   isRecording = !isRecording;
-  console.log(isRecording);
 }
 
 
