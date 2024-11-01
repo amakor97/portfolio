@@ -1,0 +1,117 @@
+.audio
+  display: flex
+  justify-content: space-between
+  align-items: center
+  padding: 4px
+  margin:
+    bottom: 8px
+
+  border: 
+    radius: 12px
+  background: lightgray
+
+  &__play-btn
+    display: inline-block
+    width: 36px
+    height: 36px
+
+    border: 2px solid black
+      radius: 8px
+    cursor: pointer
+
+    &:hover
+      background: grey
+
+  &__del-btn
+    display: inline-block
+    width: 36px
+    height: 36px
+
+    border: 2px solid black
+      radius: 8px
+    cursor: pointer
+
+    &:hover
+      background: grey
+
+  &__seek-input
+    position: relative
+    -webkit-appearance: none
+    width: 80px
+
+  &__volume-input
+    position: relative
+    -webkit-appearance: none
+    width: 40px
+
+  &__volume-level
+    display: inline-block
+    width: 27px
+
+    text-align: end
+
+
+.audio__seek-input::-webkit-slider-runnable-track
+  -webkit-appearance: none
+  width: 100%
+  height: 3px
+  cursor: pointer
+  background: grey
+
+.audio__seek-input::before 
+  position: absolute
+  content: ""
+  top: 0
+  left: 0
+  width: var(--seek-before-width)
+  height: 3px
+  background-color: black
+  cursor: pointer
+
+.audio__seek-input::-webkit-slider-thumb 
+  position: relative
+  -webkit-appearance: none
+  box-sizing: border-box
+  border: 1px solid grey
+  height: 8px
+  width: 12px
+  border-radius: 4px
+  background-color: black
+  cursor: pointer
+  margin: -2.5px 0 0 0
+
+.audio__volume-input::-webkit-slider-runnable-track
+  -webkit-appearance: none
+  width: 100%
+  height: 3px
+
+  border:
+    radius: 1px
+  cursor: pointer
+  background: grey
+
+.audio__volume-input::before 
+  position: absolute
+  content: ""
+  top: 0
+  left: 0
+  width: var(--volume-before-width)
+  height: 3px
+
+  border:
+    radius: 1px
+  background-color: black
+  cursor: pointer
+
+.audio__volume-input::-webkit-slider-thumb 
+  position: relative
+  -webkit-appearance: none
+  box-sizing: border-box
+  border: 1px solid grey
+  height: 8px
+  width: 12px
+  border-radius: 4px
+  background-color: black
+  cursor: pointer
+  margin: -2.5px 0 0 0
+

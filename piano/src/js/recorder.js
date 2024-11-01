@@ -38,16 +38,17 @@ function initializeAudioContext() {
      const audioURL = URL.createObjectURL(audioBlob);
      
       const audioElem = document.createElement("audio");
-      audioElem.classList.add("modal__audio", "js-created-record");
+      //audioElem.classList.add("modal__audio", "js-created-record");
       audioElem.src = audioURL;
       audioElem.controls = true;
 
       let audioCont = createAudio(audioURL);
+      audioCont.classList.add("js-created-record");
       const parent = document.querySelector(
       ".js-dialog-recorder-content");
 
       const audioDiv = createAudioBlock(audioElem);
-      parent.appendChild(audioDiv);
+      //parent.appendChild(audioDiv);
         parent.append(audioCont);
 
      const recordsCount = document.querySelectorAll(
