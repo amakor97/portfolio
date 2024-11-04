@@ -7,8 +7,7 @@ let mediaRecorder = undefined;
 let audioChunks = [];
 
 const recordsLimit = 5;
-
-let destination = null;
+let destination = undefined;
 
 function initializeAudioContext() {
  if (!audioContext) {

@@ -11,7 +11,9 @@
   background: $main-disabled-color
 
   &__play-btn
-    display: inline-block
+    display: inline-flex
+    justify-content: center
+    align-items: center
     width: 36px
     height: 36px
 
@@ -19,20 +21,31 @@
       radius: 8px
     cursor: pointer
 
+    transition: color 0.2s, background 0.2s
+
     &:hover
-      background: $main-med-color
+      color: $main-white-color
+
+      background: $main-dark-color
 
   &__del-btn
-    display: inline-block
+    display: inline-flex
+    justify-content: center
+    align-items: center
     width: 36px
     height: 36px
+    padding: 0
 
     border: 2px solid $main-dark-color
       radius: 8px
     cursor: pointer
 
+    transition: color 0.2s, background 0.2s
+
     &:hover
-      background: $main-med-color
+      color: $main-white-color
+
+      background: $main-dark-color
 
   &__seek-input
     position: relative
@@ -58,6 +71,8 @@
   width: 100%
   height: 3px
 
+  border:
+    radius: 1px
   background: $main-med-color
   cursor: pointer
 
@@ -70,6 +85,8 @@
   width: var(--seek-before-width)
   height: 3px
 
+  border:
+    radius: 1px
   background-color: $main-dark-color
   cursor: pointer
 
