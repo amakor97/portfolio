@@ -52,9 +52,8 @@ const pauseIcon = `
     </g>
   </svg>`;
 
-export function createAudio(audioSrc) {
-  console.log("initiate creating audio controls...");
 
+export function createAudio(audioSrc) {
   let state = false;
   let rafRef = null;
 
@@ -66,51 +65,54 @@ export function createAudio(audioSrc) {
   audioCont.append(audio);
 
   const playPauseBtn = document.createElement("button");
-  playPauseBtn.classList.add("js-audio-player-play-btn", "audio__play-btn");
+  playPauseBtn.classList.add(
+    "js-audio-player-play-btn", "audio__play-btn");
   playPauseBtn.innerHTML = playIcon;
   audioCont.append(playPauseBtn);
-
 
   const timeCont = document.createElement("span");
   audioCont.append(timeCont);
 
   const curTime = document.createElement("span");
-  curTime.classList.add("js-audio-player-cur-time", "audio__cur-time");
+  curTime.classList.add(
+    "js-audio-player-cur-time", "audio__cur-time");
   curTime.textContent = "0:00";
   timeCont.append(curTime);
 
   const timeDivider = document.createElement("span");
-  timeDivider.classList.add("js-audio-player-dur-time", "audio__dur-time");
+  timeDivider.classList.add(
+    "js-audio-player-dur-time", "audio__dur-time");
   timeDivider.textContent = " / ";
   timeCont.append(timeDivider);
 
   const durTime = document.createElement("span");
-  durTime.classList.add("js-audio-player-dur-time", "audio__dur-time");
+  durTime.classList.add(
+    "js-audio-player-dur-time", "audio__dur-time");
   durTime.textContent = "0:00";
   timeCont.append(durTime);
 
-
   const seekInput = document.createElement("input");
-  seekInput.classList.add("js-audio-player-seek-input", "audio__seek-input");
+  seekInput.classList.add(
+    "js-audio-player-seek-input", "audio__seek-input");
   seekInput.type = "range";
   seekInput.max = "100";
   seekInput.value = "0";
   audioCont.append(seekInput);
 
-
   const volumeInput = document.createElement("input");
-  volumeInput.classList.add("js-audio-player-volume-input", "audio__volume-input");
+  volumeInput.classList.add(
+    "js-audio-player-volume-input", "audio__volume-input");
   volumeInput.type = "range";
   volumeInput.max = "100";
   volumeInput.value = "100";
   audioCont.append(volumeInput);
 
-
   const volumeLevelCont = document.createElement("span");
   audioCont.append(volumeLevelCont);
 
   const volumeLevel = document.createElement("span");
-  volumeLevel.classList.add("js-audio-player-volume-level", "audio__volume-level");
+  volumeLevel.classList.add(
+    "js-audio-player-volume-level", "audio__volume-level");
   volumeLevel.textContent = "100";
   volumeLevelCont.append(volumeLevel);
 
@@ -125,41 +127,38 @@ export function createAudio(audioSrc) {
 
 
   function prepareAudioHandler(obj, e) {
-    console.log(e);
-    console.log(obj);
-    console.log(prepareAudioWrapper);
-    prepareAudio(e, obj, prepareAudioWrapper, durTime);
+    prepareAudio(e, prepareAudioWrapper, durTime);
   }
 
   const prepareAudioWrapper = prepareAudioHandler.bind(null, rafRef);
+
 
   if (audio.duration === Infinity || isNaN(Number(audio.duration))) {
     audio.currentTime = 1e101;
     audio.addEventListener("timeupdate", prepareAudioWrapper);
   } else {
-    console.log("else");
     audio.addEventListener("timeupdate", prepareAudioWrapper); //???
   }
 
+
   const whilePlaying = () => {
-    console.log("playing");
     seekInput.value = Math.floor(audio.currentTime);
     curTime.textContent = calculateTime(seekInput.value);
-    seekInput.style.setProperty('--seek-before-width', `${seekInput.value / seekInput.max * 100}%`);
-
+    seekInput.style.setProperty("--seek-before-width", 
+      `${seekInput.value / seekInput.max * 100}%`);
 
     if (audio.currentTime === audio.duration) {
       cancelAnimationFrame(rafRef);
       audio.pause();
       audio.load();
       seekInput.value = 0;
-      seekInput.style.setProperty('--seek-before-width', `${0}%`);
+      seekInput.style.setProperty("--seek-before-width", `${0}%`);
       state = false;
+      playPauseBtn.innerHTML = playIcon;
     } else {
       if (audio.paused) {
         audio.play();
       }
-
       rafRef = requestAnimationFrame(whilePlaying);
     }
   }
@@ -180,7 +179,8 @@ export function createAudio(audioSrc) {
 
   seekInput.addEventListener("input", () => {
     curTime.textContent = calculateTime(seekInput.value);
-    seekInput.style.setProperty('--seek-before-width', `${seekInput.value / seekInput.max * 100}%`);
+    seekInput.style.setProperty("--seek-before-width", 
+      `${seekInput.value / seekInput.max * 100}%`);
     if (!audio.paused) {
       cancelAnimationFrame(rafRef);
     }
@@ -188,24 +188,19 @@ export function createAudio(audioSrc) {
 
   seekInput.addEventListener("change", () => {
     audio.currentTime = seekInput.value;
-    console.log(state);
     if (!audio.paused && (audio.currentTime !== audio.duration)) {
       requestAnimationFrame(whilePlaying);
-    } else {
-      console.log("paused?");
     }
   })
 
-  volumeInput.style.setProperty('--volume-before-width', "100%");
+  volumeInput.style.setProperty("--volume-before-width", "100%");
 
   volumeInput.addEventListener("input", (e) => {
     const value = e.target.value;
     volumeLevel.textContent = value;
-
     audio.volume = value / 100;
-
-
-    volumeInput.style.setProperty('--volume-before-width', value / volumeInput.max * 100 + '%');
+    volumeInput.style.setProperty("--volume-before-width", 
+      value / volumeInput.max * 100 + "%");
   })
 
   delBtn.addEventListener("click", () => {
@@ -217,22 +212,23 @@ export function createAudio(audioSrc) {
 }
 
 
-function prepareAudio(e, rafRef, prepareAudioWrapper, durTime) {
+function prepareAudio(e, prepareAudioWrapper, durTime) {
   e.target.removeEventListener("timeupdate", prepareAudioWrapper);
 
   const audioElem = e.target;
   const parentElem = audioElem.parentElement;
-  const seekInput = parentElem.querySelector(".js-audio-player-seek-input");
+  const seekInput = parentElem.querySelector(
+    ".js-audio-player-seek-input");
 
   getDuration(e, durTime);
   setSliderMax(audioElem, seekInput);
 }
 
 
-
 const setSliderMax = (audioElem, sliderElem) => {
   sliderElem.max = Math.floor(audioElem.duration);
 }
+
 
 function getDuration(e, durTime) {
   e.target.currentTime = 0;
@@ -240,6 +236,7 @@ function getDuration(e, durTime) {
   durTime.textContent = calculateTime(e.target.duration);
   return e.target.duration;
 }
+
 
 const calculateTime = (secs) => {
   const minutes = Math.floor(secs / 60);
