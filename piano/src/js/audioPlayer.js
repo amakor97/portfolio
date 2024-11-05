@@ -39,7 +39,7 @@ const crossIcon = `
   </svg>`;
 
 const pauseIcon = `
-  <svg width="800px" height="800px" viewBox="-1 0 8 8">
+  <svg width="24" height="24" viewBox="-1 0 8 8">
     <g transform="translate(-227.000000, -3765.000000)">
       <g transform="translate(56.000000, 160.000000)">
         <path d="M172 3605 C171.448,3605 171,3605.448 171,3606 L171,3612 
@@ -135,13 +135,10 @@ export function createAudio(audioSrc) {
 
   if (audio.duration === Infinity || isNaN(Number(audio.duration))) {
     audio.currentTime = 1e101;
-    audio.addEventListener("timeupdate", prepareAudioWrapper);
-  } else {
-    audio.addEventListener("timeupdate", prepareAudioWrapper); //???
   }
+  audio.addEventListener("timeupdate", prepareAudioWrapper);
 
-
-  const whilePlaying = () => {
+  function whilePlaying() {
     seekInput.value = Math.floor(audio.currentTime);
     curTime.textContent = calculateTime(seekInput.value);
     seekInput.style.setProperty("--seek-before-width", 
@@ -204,6 +201,9 @@ export function createAudio(audioSrc) {
   })
 
   delBtn.addEventListener("click", () => {
+    console.log(audio);
+    audio.pause();
+    cancelAnimationFrame(rafRef);
     audioCont.remove();
     updateRecorder("delete");
   })
@@ -225,7 +225,7 @@ function prepareAudio(e, prepareAudioWrapper, durTime) {
 }
 
 
-const setSliderMax = (audioElem, sliderElem) => {
+function setSliderMax(audioElem, sliderElem) {
   sliderElem.max = Math.floor(audioElem.duration);
 }
 
@@ -238,9 +238,9 @@ function getDuration(e, durTime) {
 }
 
 
-const calculateTime = (secs) => {
-  const minutes = Math.floor(secs / 60);
-  const seconds = Math.floor(secs % 60);
-  const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
-  return `${minutes}:${returnedSeconds}`;
+function calculateTime(timeSecs) {
+  const resultMins = Math.floor(timeSecs / 60);
+  const secs = Math.floor(timeSecs % 60);
+  const resultSecs = secs < 10 ? `0${secs}` : `${secs}`;
+  return `${resultMins}:${resultSecs}`;
 }
