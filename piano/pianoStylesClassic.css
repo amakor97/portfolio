@@ -672,6 +672,24 @@ input[type=checkbox]:checked:hover + .modal__input-label {
   color: rgb(255, 255, 255);
   background: rgb(0, 0, 0);
 }
+.audio__download-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  color: rgb(0, 0, 0);
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 8px;
+  background: rgb(255, 255, 255);
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+}
+.audio__download-btn:hover {
+  color: rgb(255, 255, 255);
+  background: rgb(0, 0, 0);
+}
 .audio__seek-input {
   position: relative;
   -webkit-appearance: none;
