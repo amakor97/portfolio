@@ -483,6 +483,10 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   width: 444px;
   transform: none;
 }
+.modal__content--alert {
+  width: -moz-fit-content;
+  width: fit-content;
+}
 .modal__header {
   display: flex;
   justify-content: space-between;

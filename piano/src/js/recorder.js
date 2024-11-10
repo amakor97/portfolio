@@ -157,15 +157,40 @@ stopBtn.addEventListener("click", updateRecorder.bind(null, "stop"));
 
 const fileInput = document.querySelector(".js-audio-file-upload");
 fileInput.addEventListener("input", function() {
-  console.log(fileInput.files[0]);
-  let audioURL = window.URL.createObjectURL(fileInput.files[0]);
-  console.log(window.URL.createObjectURL(fileInput.files[0]));
+  const isFileValid = fileInput.files[0].type.includes("audio");
 
-  let audioCont = createAudio(audioURL);
-  audioCont.classList.add("js-created-record");
-  const parent = document.querySelector(
-    ".js-dialog-recorder-content");
-  parent.append(audioCont);
+  if (isFileValid) {
+    let audioURL = window.URL.createObjectURL(fileInput.files[0]);
+    let audioCont = createAudio(audioURL);
+    audioCont.classList.add("js-created-record");
+    const parent = document.querySelector(
+      ".js-dialog-recorder-content");
+    parent.append(audioCont);
+  } else {
+    showAlert("Unsupported file!");
+  }
 
   updateRecorder();
 })
+
+
+function showAlert(msg) {
+  const alertBox = document.createElement("dialog");
+  alertBox.open = true;
+  alertBox.classList.add("modal");
+
+  const alertBoxInner = document.createElement("div");
+  alertBoxInner.classList.add("modal__content", "modal__content--alert");
+  alertBox.append(alertBoxInner);
+
+  const alertBoxMsgBox = document.createElement("h2");
+  alertBoxMsgBox.classList.add("modal__title");
+  alertBoxInner.append(alertBoxMsgBox);
+
+  alertBoxMsgBox.textContent = msg;
+  document.body.append(alertBox);
+
+  setTimeout(() => {
+    alertBox.remove();
+  }, 2000);
+}
