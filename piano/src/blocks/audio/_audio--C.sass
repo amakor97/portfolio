@@ -75,11 +75,15 @@
     -webkit-appearance: none
     width: 80px
 
+    background: transparent
+
   &__volume-input
     position: relative
 
     -webkit-appearance: none
     width: 40px
+
+    background: transparent
 
   &__volume-level
     display: inline-block
@@ -163,4 +167,74 @@
     radius: 4px
   background-color: $main-dark-color
   cursor: pointer
+
+
+.audio__seek-input::-moz-range-track
+  width: 100%
+  height: 3px
+
+  border:
+    radius: 1px
+  background: $main-med-color
+  border: 0
+  cursor: pointer
+
+.audio__seek-input::-moz-range-progress
+  background-color: $main-dark-color
+
+.audio__seek-input::-moz-focus-outer
+  border: 0
+
+.audio__seek-input::-moz-range-thumb
+  position: relative
+  
+  -webkit-appearance: none
+  height: 8px
+  width: 12px
+  margin: -2.5px 0 0 0
+  box-sizing: border-box
+  
+  border: 1px solid $main-med-color
+    radius: 4px
+  background-color: $main-dark-color
+  cursor: pointer
+
+.audio__seek-input::-moz-focusring
+  outline: 1px solid $main-white-color
+  outline-offset: -1px
+
+.audio__volume-input::-moz-range-track
+  width: 100%
+  height: 3px
+
+  border:
+    radius: 1px
+  background: $main-med-color
+  border: 0
+  cursor: pointer
+
+.audio__volume-input::-moz-range-progress
+  background-color: $main-dark-color
+
+.audio__volume-input::-moz-focus-outer
+  border: 0
+
+.audio__volume-input::-moz-range-thumb
+  position: relative
+  
+  -webkit-appearance: none
+  height: 8px
+  width: 12px
+  margin: -2.5px 0 0 0
+  box-sizing: border-box
+  
+  border: 1px solid $main-med-color
+    radius: 4px
+  background-color: $main-dark-color
+  cursor: pointer
+
+.audio__volume-input::-moz-focusring
+  outline: 1px solid $main-white-color
+  outline-offset: -1px
+
 

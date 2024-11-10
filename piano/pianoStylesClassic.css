@@ -480,6 +480,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   position: static;
   width: 384px;
   width: 412px;
+  width: 444px;
   transform: none;
 }
 .modal__header {
@@ -541,6 +542,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   padding: 4px;
   font-size: 1.5em;
   color: rgb(0, 0, 0);
+  text-align: center;
   border: 2px solid rgb(0, 0, 0);
   border-radius: 8px;
   background: transparent;
@@ -600,6 +602,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 .modal__control-block {
   display: flex;
   justify-content: space-between;
+  gap: 8px;
   margin-bottom: 8px;
 }
 .modal__audio-cont {
@@ -608,6 +611,27 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 }
 .modal__audio {
   display: inline-block;
+}
+.modal__audio-input-label {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  color: rgb(0, 0, 0);
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 8px;
+  background: rgb(255, 255, 255);
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+}
+.modal__audio-input-label:hover {
+  color: rgb(255, 255, 255);
+  background: rgb(0, 0, 0);
+}
+.modal__audio-input-file {
+  display: none;
 }
 
 .modal__text-block:last-child {
@@ -694,11 +718,13 @@ input[type=checkbox]:checked:hover + .modal__input-label {
   position: relative;
   -webkit-appearance: none;
   width: 80px;
+  background: transparent;
 }
 .audio__volume-input {
   position: relative;
   -webkit-appearance: none;
   width: 40px;
+  background: transparent;
 }
 .audio__volume-level {
   display: inline-block;
@@ -772,6 +798,76 @@ input[type=checkbox]:checked:hover + .modal__input-label {
   border-radius: 4px;
   background-color: rgb(0, 0, 0);
   cursor: pointer;
+}
+
+.audio__seek-input::-moz-range-track {
+  width: 100%;
+  height: 3px;
+  border-radius: 1px;
+  background: rgb(128, 128, 128);
+  border: 0;
+  cursor: pointer;
+}
+
+.audio__seek-input::-moz-range-progress {
+  background-color: rgb(0, 0, 0);
+}
+
+.audio__seek-input::-moz-focus-outer {
+  border: 0;
+}
+
+.audio__seek-input::-moz-range-thumb {
+  position: relative;
+  -webkit-appearance: none;
+  height: 8px;
+  width: 12px;
+  margin: -2.5px 0 0 0;
+  box-sizing: border-box;
+  border: 1px solid rgb(128, 128, 128);
+  border-radius: 4px;
+  background-color: rgb(0, 0, 0);
+  cursor: pointer;
+}
+
+.audio__seek-input::-moz-focusring {
+  outline: 1px solid rgb(255, 255, 255);
+  outline-offset: -1px;
+}
+
+.audio__volume-input::-moz-range-track {
+  width: 100%;
+  height: 3px;
+  border-radius: 1px;
+  background: rgb(128, 128, 128);
+  border: 0;
+  cursor: pointer;
+}
+
+.audio__volume-input::-moz-range-progress {
+  background-color: rgb(0, 0, 0);
+}
+
+.audio__volume-input::-moz-focus-outer {
+  border: 0;
+}
+
+.audio__volume-input::-moz-range-thumb {
+  position: relative;
+  -webkit-appearance: none;
+  height: 8px;
+  width: 12px;
+  margin: -2.5px 0 0 0;
+  box-sizing: border-box;
+  border: 1px solid rgb(128, 128, 128);
+  border-radius: 4px;
+  background-color: rgb(0, 0, 0);
+  cursor: pointer;
+}
+
+.audio__volume-input::-moz-focusring {
+  outline: 1px solid rgb(255, 255, 255);
+  outline-offset: -1px;
 }
 
 .intro {

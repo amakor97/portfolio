@@ -69,7 +69,7 @@ function stopRecording() {
 }
 
 
-export function updateRecorder(action) {
+export function updateRecorder(action = undefined) {
   const recordsCount = document.querySelectorAll(
     ".js-created-record").length;
   if (recordsCount >= recordsLimit) {
@@ -130,18 +130,21 @@ function enableBtns() {
 function enableBtnsRecording() {
   startBtn.disabled = true;
   stopBtn.disabled = false;
+  fileInput.disabled = true;
 }
 
 
 function enableBtnsIdle() {
   startBtn.disabled = false;
   stopBtn.disabled = true;
+  fileInput.disabled = false;
 }
 
 
 function disableBtns() {
   startBtn.disabled = true;
   stopBtn.disabled = true;
+  fileInput.disabled = true;
 }
 
 
@@ -150,3 +153,19 @@ startBtn.addEventListener("click", updateRecorder.bind(null, "start"));
 
 const stopBtn = document.querySelector(".js-recorder-stop-btn");
 stopBtn.addEventListener("click", updateRecorder.bind(null, "stop"));
+
+
+const fileInput = document.querySelector(".js-audio-file-upload");
+fileInput.addEventListener("input", function() {
+  console.log(fileInput.files[0]);
+  let audioURL = window.URL.createObjectURL(fileInput.files[0]);
+  console.log(window.URL.createObjectURL(fileInput.files[0]));
+
+  let audioCont = createAudio(audioURL);
+  audioCont.classList.add("js-created-record");
+  const parent = document.querySelector(
+    ".js-dialog-recorder-content");
+  parent.append(audioCont);
+
+  updateRecorder();
+})
