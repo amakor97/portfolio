@@ -563,6 +563,33 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   border: 0px solid transparent;
   background: rgba(64, 64, 64, 0.75);
 }
+.modal--recorder {
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  background: transparent;
+}
+.modal--recorder-single-row {
+  top: initial;
+  bottom: 0;
+  right: auto;
+  left: 0;
+}
+@media screen and (min-width: 1200px) {
+  .modal--recorder-single-row {
+    top: 0;
+    bottom: initial;
+    right: 0;
+    left: initial;
+  }
+}
+.modal--recorder-double-rows {
+  top: initial;
+  bottom: 0;
+  right: auto;
+  left: 0;
+}
 .modal__content {
   position: absolute;
   top: 50%;
@@ -578,6 +605,15 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 .modal__content--app {
   width: -moz-max-content;
   width: max-content;
+}
+.modal__content--recorder {
+  position: static;
+  width: 460px;
+  transform: none;
+}
+.modal__content--alert {
+  width: -moz-fit-content;
+  width: fit-content;
 }
 .modal__header {
   display: flex;
@@ -639,6 +675,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   padding: 4px;
   font-size: 1.25em;
   color: rgb(26, 26, 71);
+  text-align: center;
   border: 2px solid rgb(26, 26, 71);
   border-radius: 12px;
   background: transparent;
@@ -649,12 +686,20 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   color: rgb(255, 255, 255);
   background: rgb(26, 26, 71);
 }
+.modal__btn:disabled {
+  color: rgb(26, 26, 71);
+  background: rgb(35, 106, 138);
+}
 .modal__btn--icon {
   display: inline-flex;
   justify-content: center;
   align-items: center;
   width: 40px;
   height: 40px;
+}
+.modal__btn--audio {
+  height: auto;
+  background: rgb(255, 255, 255);
 }
 .modal__icon-svg {
   width: 100%;
@@ -689,6 +734,22 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 .modal__link:hover {
   color: rgb(26, 26, 71);
 }
+.modal__control-block {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.modal__audio-cont {
+  display: flex;
+  justify-content: space-between;
+}
+.modal__audio {
+  display: inline-block;
+}
+.modal__audio-input-file {
+  display: none;
+}
 
 .modal__text-block:last-child {
   margin: 0;
@@ -710,6 +771,165 @@ input[type=checkbox]:checked:hover + .modal__input-label {
   color: rgb(255, 255, 255);
   border: 2px solid rgb(35, 106, 138);
   background: rgb(35, 106, 138);
+}
+
+.modal__audio-input-file:disabled + .modal__btn--audio {
+  color: rgb(26, 26, 71);
+  background: rgb(35, 106, 138);
+}
+
+.audio {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 20px;
+  background: rgb(155, 182, 186);
+}
+.audio__play-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgb(26, 26, 71);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+}
+.audio__play-btn:hover {
+  color: rgb(255, 255, 255);
+  background: rgb(26, 26, 71);
+}
+.audio__del-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 2px solid rgb(26, 26, 71);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+}
+.audio__del-btn:hover {
+  color: rgb(255, 255, 255);
+  background: rgb(26, 26, 71);
+}
+.audio__download-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  color: rgb(26, 26, 71);
+  border: 2px solid rgb(26, 26, 71);
+  border-radius: 12px;
+  background: rgb(255, 255, 255);
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+}
+.audio__download-btn:hover {
+  color: rgb(255, 255, 255);
+  background: rgb(26, 26, 71);
+}
+.audio__seek-input {
+  position: relative;
+  -webkit-appearance: none;
+  width: 80px;
+  background: transparent;
+}
+.audio__volume-input {
+  position: relative;
+  -webkit-appearance: none;
+  width: 40px;
+  background: transparent;
+}
+.audio__cur-time {
+  display: inline-block;
+  width: 40px;
+  text-align: end;
+}
+.audio__dur-time {
+  display: inline-block;
+  width: 40px;
+  text-align: start;
+}
+.audio__volume-level {
+  display: inline-block;
+  width: 27px;
+  text-align: end;
+}
+
+.audio__seek-input::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: rgb(35, 106, 138);
+  cursor: pointer;
+}
+
+.audio__seek-input::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  width: var(--seek-before-width);
+  height: 6px;
+  border-radius: 3px;
+  background-color: rgb(26, 26, 71);
+  cursor: pointer;
+}
+
+.audio__seek-input::-webkit-slider-thumb {
+  position: relative;
+  -webkit-appearance: none;
+  height: 12px;
+  width: 12px;
+  margin: -2.5px 0 0 0;
+  box-sizing: border-box;
+  border: 1.5px solid rgb(26, 26, 71);
+  border-radius: 4px;
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+.audio__volume-input::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: rgb(35, 106, 138);
+  cursor: pointer;
+}
+
+.audio__volume-input::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  width: var(--volume-before-width);
+  height: 6px;
+  border-radius: 3px;
+  background-color: rgb(26, 26, 71);
+  cursor: pointer;
+}
+
+.audio__volume-input::-webkit-slider-thumb {
+  position: relative;
+  -webkit-appearance: none;
+  height: 12px;
+  width: 12px;
+  margin: -2.5px 0 0 0;
+  box-sizing: border-box;
+  border: 1.5px solid rgb(26, 26, 71);
+  border-radius: 4px;
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
 }
 
 .intro {

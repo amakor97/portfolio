@@ -90,8 +90,6 @@ export function createAudio(audioSrc) {
   timeCont.append(curTime);
 
   const timeDivider = document.createElement("span");
-  timeDivider.classList.add(
-    "js-audio-player-dur-time", "audio__dur-time");
   timeDivider.textContent = " / ";
   timeCont.append(timeDivider);
 

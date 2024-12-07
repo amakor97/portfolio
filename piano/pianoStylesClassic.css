@@ -478,8 +478,6 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 }
 .modal__content--recorder {
   position: static;
-  width: 384px;
-  width: 412px;
   width: 444px;
   transform: none;
 }
@@ -660,6 +658,11 @@ input[type=checkbox]:checked:hover + .modal__input-label {
   background: rgb(128, 128, 128);
 }
 
+.modal__audio-input-file:disabled + .modal__btn--audio {
+  color: rgb(0, 0, 0);
+  background: rgb(128, 128, 128);
+}
+
 .audio {
   display: flex;
   justify-content: space-between;
@@ -729,6 +732,16 @@ input[type=checkbox]:checked:hover + .modal__input-label {
   -webkit-appearance: none;
   width: 40px;
   background: transparent;
+}
+.audio__cur-time {
+  display: inline-block;
+  width: 40px;
+  text-align: end;
+}
+.audio__dur-time {
+  display: inline-block;
+  width: 40px;
+  text-align: start;
 }
 .audio__volume-level {
   display: inline-block;
