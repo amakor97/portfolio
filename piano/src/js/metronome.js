@@ -2,7 +2,7 @@ const metronomeAudioFile = document.querySelector(".metron");
 
 const pb = document.querySelector(".plus");
 const mb = document.querySelector(".minus");
-
+const startStopBtn = document.querySelector(".js-toggle");
 
 let length = metronomeAudioFile.duration;
 let freq = 60/length;
@@ -21,7 +21,7 @@ let targetBpm = 60;
 
 console.log("upd pbRate:", metronomeAudioFile.playbackRate);
 
-metronomeAudioFile.playbackRate = 1.0125 * metronomeAudioFile.duration;
+metronomeAudioFile.playbackRate = 1.0125 * targetBpm * metronomeAudioFile.duration / 60;
 
 console.log("compens pbRate: ", metronomeAudioFile.playbackRate);
 
@@ -29,6 +29,8 @@ console.log("bpm: ", metronomeAudioFile.playbackRate * 60 * 1.15/metronomeAudioF
 
 let audioLength = metronomeAudioFile.duration / metronomeAudioFile.playbackRate;
 console.log({audioLength});
+
+metronomeAudioFile.playbackRate = 0.25;
 
 console.log(metronomeAudioFile.duration);
 
@@ -39,7 +41,8 @@ pb.addEventListener("click", () => {
   targetBpm += 10;
 
   //metronomeAudioFile.playbackRate += step10;
-  metronomeAudioFile.playbackRate = metronomeAudioFile.playbackRate * targetBpm / freq;
+  metronomeAudioFile.playbackRate = 1.0125 * targetBpm * metronomeAudioFile.duration / 60;
+  console.log(targetBpm);
   console.log("freq: ", 60/(metronomeAudioFile.duration*metronomeAudioFile.playbackRate));
   console.log("bpm: ", metronomeAudioFile.playbackRate * 60/metronomeAudioFile.duration);
 })
@@ -48,4 +51,23 @@ pb.addEventListener("click", () => {
 metronomeAudioFile.addEventListener("ended", function(){
   //this.currentTime = 0;
   //this.play();
+})
+
+
+let int = undefined;
+
+startStopBtn.addEventListener("click", function(){
+  if (!int) {
+    console.log("starting");
+    int = setInterval(() => {
+      metronomeAudioFile.currentTime = 0;
+      metronomeAudioFile.play();
+    }, 1000);
+  } else {
+    console.log("stopping");
+    clearInterval(int);
+    int = undefined;
+    metronomeAudioFile.pause();
+    metronomeAudioFile.currentTime = 0;
+  }
 })
