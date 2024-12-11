@@ -461,6 +461,33 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   right: auto;
   left: 0;
 }
+.modal--metronome {
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  background: transparent;
+}
+.modal--metronome-single-row {
+  top: initial;
+  bottom: 0;
+  right: auto;
+  left: 0;
+}
+@media screen and (min-width: 1200px) {
+  .modal--metronome-single-row {
+    top: 0;
+    bottom: initial;
+    right: 0;
+    left: initial;
+  }
+}
+.modal--metronome-double-rows {
+  top: initial;
+  bottom: 0;
+  right: auto;
+  left: 0;
+}
 .modal__content {
   position: absolute;
   top: 50%;
@@ -479,6 +506,11 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 .modal__content--recorder {
   position: static;
   width: 444px;
+  transform: none;
+}
+.modal__content--metronome {
+  position: static;
+  width: 200px;
   transform: none;
 }
 .modal__content--alert {

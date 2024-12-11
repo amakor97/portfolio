@@ -35,9 +35,17 @@ const recorderDialogToggleBtn = document.querySelector(
   ".js-dialog-recorder-toggle-btn");
 
 
+export const metronomeDialog = document.querySelector(
+  ".js-dialog-metronome");
+const metronomeDialogContent = document.querySelector(
+  ".js-dialog-metronome-content");
+const metronomeDialogToggleBtn = document.querySelector(
+  ".js-dialog-metronome-toggle-btn");
+
 let isHelpModalShowed = false;
 let isAppModalShowed = false;
 let isRecorderModalShowed = false;
+let isMetronomeModalShowed = false;
 let isAboutModalShowed = false;
 
 
@@ -55,6 +63,8 @@ appDialogCloseBtn.addEventListener("click", () => toggleDialog("app"));
 recorderDialogContent.addEventListener("click", e => e.stopPropagation());
 recorderDialogToggleBtn.addEventListener("click", () => toggleDialog("recorder"));
 
+metronomeDialogContent.addEventListener("click", e => e.stopPropagation());
+metronomeDialogToggleBtn.addEventListener("click", () => toggleDialog("metronome"));
 
 aboutDialog.addEventListener("click", () => toggleDialog("about"));
 aboutDialogContent.addEventListener("click", e => e.stopPropagation());
@@ -83,6 +93,12 @@ function toggleDialog(dialogName) {
       toggleBtn = recorderDialogToggleBtn;
       dialog = recorderDialog;
       isRecorderModalShowed = !isRecorderModalShowed;
+      break;
+    }
+    case "metronome": {
+      toggleBtn = metronomeDialogToggleBtn;
+      dialog = metronomeDialog;
+      isMetronomeModalShowed = !isMetronomeModalShowed;
       break;
     }
     case "about": {

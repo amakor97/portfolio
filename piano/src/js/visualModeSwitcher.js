@@ -7,7 +7,7 @@ import { isEditModeActive, setEditMode,
   editModeToggler, setPressedOctaveName } from "./keyFuncModeSwitcher.js";
 import { resetClickedProKeyElem} from "./clickFuncModeSwitcher.js";
 import { resetClickedVisualProKeyElem } from "./possibleKeysShower.js";
-import { recorderDialog } from "./dialogHandlers.js";
+import { recorderDialog, metronomeDialog } from "./dialogHandlers.js";
 
 export let visualMode = "double";
 export const noteInputCont = document.querySelector(
@@ -64,6 +64,9 @@ function changeStylesForOneRow() {
 
   recorderDialog.classList.remove("modal--recorder-double-rows");
   recorderDialog.classList.add("modal--recorder-single-row");
+
+  metronomeDialog.classList.remove("modal--metronome-double-rows");
+  metronomeDialog.classList.add("modal--metronome-single-row");
 }
 
 
@@ -86,6 +89,9 @@ function changeStylesForTwoRows() {
 
   recorderDialog.classList.remove("modal--recorder-single-row");
   recorderDialog.classList.add("modal--recorder-double-rows");
+
+  metronomeDialog.classList.remove("modal--metronome-single-rows");
+  metronomeDialog.classList.add("modal--metronome-double-rows");
 }
 
 

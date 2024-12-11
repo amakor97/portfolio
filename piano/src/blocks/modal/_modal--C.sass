@@ -33,6 +33,30 @@
     bottom: 0
     right: auto
     left: 0
+  
+  &--metronome
+    width: fit-content
+    height: fit-content
+
+    background: transparent
+
+  &--metronome-single-row
+    top: initial
+    bottom: 0
+    right: auto
+    left: 0
+
+    @media screen and (min-width: $screen-xl)
+      top: 0
+      bottom: initial
+      right: 0
+      left: initial
+
+  &--metronome-double-rows
+    top: initial
+    bottom: 0
+    right: auto
+    left: 0
 
   &__content
     position: absolute
@@ -55,6 +79,13 @@
       position: static
 
       width: 444px
+
+      transform: none
+
+    &--metronome
+      position: static
+
+      width: 200px
 
       transform: none
 

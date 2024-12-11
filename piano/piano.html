@@ -14,6 +14,7 @@
         <button class="menu__btn js-dialog-app-toggle-btn" data-text="app">App</button>
         <button class="menu__btn js-control-toggle-btn" data-text="piano">Piano</button>
         <button class="menu__btn js-dialog-recorder-toggle-btn" data-text="recorder">Recorder</button>
+        <button class="menu__btn js-dialog-metronome-toggle-btn" data-text="metronome">Metronome</button>
         <button class="menu__btn js-dialog-about-toggle-btn" data-text="about">About</button>
       </div>
     </header>
@@ -789,6 +790,17 @@
       </div>
     </dialog>
 
+    <dialog class="modal modal--metronome modal--metronome-double-rows js-dialog-metronome">
+      <div class="modal__content modal__content--metronome js-dialog-metronome-content">
+        <header class="modal__header">
+          <h2 class="modal__title" data-text="metronomeTitle">Metronome</h2>
+        </header>
+        <audio class="metron" src="./src/samples/metronome.wav" controls loop></audio>
+        <button class="plus">+</button>
+        <button class="minus">-</button>
+      </div>
+    </dialog>
+
     <dialog class="modal js-dialog-about">
       <div class="modal__content js-dialog-about-content">
         <header class="modal__header">
@@ -881,5 +893,6 @@
     <script src="./src/js/dialogHandlers.js" type="module"></script>
     <script src="./src/js/settingsHandler.js" type="module"></script>
     <script src="./src/js/tranlator.js" type="module"></script>
+    <script src="./src/js/metronome.js" type="module"></script>
   </body>
 </html>

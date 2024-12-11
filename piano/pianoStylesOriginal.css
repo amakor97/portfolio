@@ -516,7 +516,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   font-size: 1em;
 }
 .menu__btn {
-  width: 150px;
+  width: 180px;
   height: 40px;
   padding: 4px;
   font-size: 1.5em;
@@ -578,7 +578,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 }
 @media screen and (min-width: 1200px) {
   .modal--recorder-single-row {
-    top: 0;
+    top: 64px;
     bottom: initial;
     right: 0;
     left: initial;
