@@ -795,11 +795,39 @@
         <header class="modal__header">
           <h2 class="modal__title" data-text="metronomeTitle">Metronome</h2>
         </header>
-        <div class="js-metronome-bpm-number">60</div>
+        <div class="modal__bpm-cont">
+          <span class="js-metronome-bpm-number">60</span>&nbsp;
+          <span class="js-bpm-text">bpm</span>
+        </div>
         <audio class="js-metronome-audiofile" src="./src/samples/metronome2.wav" ></audio>
-        <button class="js-metronome-toggle-sound">toggle</button>
-        <button class="js-metronome-plus-btn">+</button>
-        <button class="js-metronome-minus-btn">-</button>
+        <button class="modal__btn modal__btn--icon js-metronome-toggle-sound">
+          <svg
+            fill="none"
+            height="24"
+            width="24"
+            viewBox="0 0 24 24">
+            <polygon points="4.5,2 21,12 4.5,22" stroke="currentColor" stroke-width="3" stroke-linejoin="round" />
+          </svg>
+        </button>
+        <button class="modal__btn modal__btn--icon js-metronome-plus-btn">
+          <svg
+            fill="none"
+            height="24"
+            width="24"
+            viewBox="0 0 24 24">
+            <line x1="11.5" y1="4" x2="11.5" y2="20" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+            <line x1="4" y1="11.5" x2="20" y2="11.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+        </svg>
+        </button>
+        <button class="modal__btn modal__btn--icon js-metronome-minus-btn">
+          <svg
+          fill="none"
+          height="24"
+          width="24"
+          viewBox="0 0 24 24">
+          <line x1="4" y1="11.5" x2="20" y2="11.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+      </svg>
+        </button>
       </div>
     </dialog>
 

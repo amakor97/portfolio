@@ -483,8 +483,8 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   }
 }
 .modal--metronome-double-rows {
-  top: initial;
-  bottom: 0;
+  top: 64px;
+  bottom: initial;
   right: auto;
   left: 0;
 }
@@ -510,7 +510,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 }
 .modal__content--metronome {
   position: static;
-  width: 200px;
+  width: 220px;
   transform: none;
 }
 .modal__content--alert {
@@ -666,6 +666,10 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 }
 .modal__audio-input-file {
   display: none;
+}
+.modal__bpm-cont {
+  margin-bottom: 0.5rem;
+  font-size: 2em;
 }
 
 .modal__text-block:last-child {
