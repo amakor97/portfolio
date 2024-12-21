@@ -80,7 +80,16 @@ resetLayoutsBtn.addEventListener("click", function() {
 noteValidateBtn.addEventListener("click", function() {
   if (noteValidatorRegEx.test(noteInput.value)) {
     noteForProMode = noteInput.value;
+    noteInput.classList.add("control-panel__note-input--correct");
+  } else {
+    noteInput.classList.add("control-panel__note-input--incorrect");
   }
+})
+
+
+noteInput.addEventListener("input", () => {
+    noteInput.classList.remove("control-panel__note-input--incorrect");
+    noteInput.classList.remove("control-panel__note-input--correct");
 })
 
 

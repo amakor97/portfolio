@@ -111,6 +111,7 @@
   width: 160px;
   height: 40px;
   font-size: 1.5em;
+  text-align: center;
   border-radius: 8px;
 }
 .control-panel__note-input::-moz-placeholder {
@@ -118,6 +119,14 @@
 }
 .control-panel__note-input::placeholder {
   text-align: center;
+}
+.control-panel__note-input--incorrect {
+  color: rgb(255, 255, 255);
+  background: linear-gradient(rgba(128, 0, 0, 0.5), rgba(128, 0, 0, 0.5));
+}
+.control-panel__note-input--correct {
+  color: rgb(255, 255, 255);
+  background: linear-gradient(rgba(0, 128, 0, 0.5), rgba(0, 128, 0, 0.5));
 }
 .control-panel__radio-input {
   display: none;
