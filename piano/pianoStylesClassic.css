@@ -476,10 +476,10 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 }
 @media screen and (min-width: 1200px) {
   .modal--metronome-single-row {
-    top: 0;
+    top: 64px;
     bottom: initial;
-    right: 0;
-    left: initial;
+    right: initial;
+    left: 0;
   }
 }
 .modal--metronome-double-rows {

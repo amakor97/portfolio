@@ -16,7 +16,7 @@ function initializeAudioContext() {
     audioContext = new AudioContext();
     destination = audioContext.createMediaStreamDestination();
 
-    let audioElems = document.querySelectorAll("audio");
+    let audioElems = document.querySelectorAll(".js-audio-recordable");
     audioElems.forEach(audioElem => {
       const track = audioContext.createMediaElementSource(audioElem);
       track.connect(audioContext.destination);
@@ -45,7 +45,7 @@ function initializeAudioContext() {
       }
     };
   } else {
-    let audioElems = document.querySelectorAll("audio");
+    let audioElems = document.querySelectorAll(".js-audio-recordable");
     audioElems.forEach(audioElem => {
       try {
         const track = audioContext.createMediaElementSource(audioElem);
