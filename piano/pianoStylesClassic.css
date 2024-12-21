@@ -546,8 +546,8 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
 }
 .modal__carousel-inner {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  width: 300%;
+  grid-template-columns: repeat(4, 1fr);
+  width: 400%;
   height: 100%;
   transform: translateX(0);
   transition: transform 0.4s;

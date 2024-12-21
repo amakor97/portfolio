@@ -61,16 +61,20 @@ function updateInterval() {
 
 
 plusBtn.addEventListener("click", () => {
-  targetBpm += 10;
-  bpmCont.textContent = targetBpm;
-  updateBpm();
+  if (targetBpm < 200) {
+    targetBpm += 10;
+    bpmCont.textContent = targetBpm;
+    updateBpm();
+  }
 })
 
 
 minusBtn.addEventListener("click", () => {
-  targetBpm -= 10;
-  bpmCont.textContent = targetBpm;
-  updateBpm();
+  if (targetBpm > 30) {
+    targetBpm -= 10;
+    bpmCont.textContent = targetBpm;
+    updateBpm();
+  }
 })
 
 

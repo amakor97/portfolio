@@ -135,14 +135,14 @@ function updateDialogContentPos(dir) {
 
 
 function moveDialogContent(dir) {
-  if ((dir === "r") && (helpDialogCarouselInnerPos < 2)) {
+  if ((dir === "r") && (helpDialogCarouselInnerPos < 3)) {
     helpDialogCarouselInnerPos += 1;
   }
   if ((dir === "l") && (helpDialogCarouselInnerPos > 0)) {
     helpDialogCarouselInnerPos -= 1;
   }
   helpDialogCarouselInner.style.transform = 
-    `translateX(${-helpDialogCarouselInnerPos * 33.333}%)`;
+    `translateX(${-helpDialogCarouselInnerPos * 25}%)`;
 }
 
 
