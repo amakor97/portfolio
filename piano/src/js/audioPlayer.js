@@ -72,6 +72,7 @@ export function createAudio(audioSrc) {
 
   const audio = document.createElement("audio");
   audio.src = audioSrc;
+  audio.classList.add("js-audio-recordable");
   audioCont.append(audio);
 
   const playPauseBtn = document.createElement("button");

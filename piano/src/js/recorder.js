@@ -162,7 +162,7 @@ fileInput.addEventListener("input", function() {
   if (isFileValid) {
     let audioURL = window.URL.createObjectURL(fileInput.files[0]);
     let audioCont = createAudio(audioURL);
-    audioCont.classList.add("js-created-record");
+    audioCont.classList.add("js-created-record", "js-audio-recordable");
     const parent = document.querySelector(
       ".js-dialog-recorder-content");
     parent.append(audioCont);
