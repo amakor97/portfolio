@@ -564,13 +564,14 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   position: absolute;
   top: 0;
   right: 0;
-  z-index: 2;
+  z-index: 3;
   width: 100vw;
   height: 100vh;
   border: 0px solid transparent;
   background: rgba(64, 64, 64, 0.75);
 }
 .modal--recorder {
+  z-index: 2;
   width: -moz-fit-content;
   width: fit-content;
   height: -moz-fit-content;
@@ -598,6 +599,7 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   left: 0;
 }
 .modal--metronome {
+  z-index: 2;
   width: -moz-fit-content;
   width: fit-content;
   height: -moz-fit-content;
