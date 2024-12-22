@@ -42,6 +42,9 @@ const metronomeDialogContent = document.querySelector(
 const metronomeDialogToggleBtn = document.querySelector(
   ".js-dialog-metronome-toggle-btn");
 
+const alertDialog = document.querySelector(
+  ".js-dialog-alert");
+
 let isHelpModalShowed = false;
 let isAppModalShowed = false;
 let isRecorderModalShowed = false;
@@ -193,3 +196,12 @@ const hintDialogCloseBtn = document.querySelector(
 hintDialog.addEventListener("click", () => hintDialog.open = false);
 hintDialogContent.addEventListener("click", e => e.stopPropagation());
 hintDialogCloseBtn.addEventListener("click", () => hintDialog.open = false);
+
+
+export function showAlert() {
+  alertDialog.open = true;
+
+  setTimeout(() => {
+    alertDialog.open = false;
+  }, 2000);
+}

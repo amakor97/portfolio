@@ -786,24 +786,11 @@
           <h2 class="modal__title" data-text="recorderTitle">Recorder</h2>
         </header>
         <div class="modal__control-block">
-          <button class="modal__btn modal__btn--audio js-recorder-start-btn">Start</button>
-          <button class="modal__btn modal__btn--audio js-recorder-stop-btn" disabled>Stop</button>
+          <button class="modal__btn modal__btn--audio js-recorder-start-btn" data-text="recorderStart">Start</button>
+          <button class="modal__btn modal__btn--audio js-recorder-stop-btn" data-text="recorderStop" disabled>Stop</button>
           <input class="modal__audio-input-file js-audio-file-upload" type="file" name="" id="id-audio-file-upload">
-          <label class="modal__btn modal__btn--audio" for="id-audio-file-upload">
+          <label class="modal__btn modal__btn--audio" for="id-audio-file-upload" data-text="recorderUpload">
             Upload
-            <!--
-            <svg height="24" width="24px" viewBox="0 0 384.97 384.97">
-              <g fill="currentColor">
-                <path d="M372.939,264.641c-6.641,0-12.03,5.39-12.03,12.03v84.212H24.061v-84.212c0-6.641-5.39-12.03-12.03-12.03
-                  S0,270.031,0,276.671v96.242c0,6.641,5.39,12.03,12.03,12.03h360.909c6.641,0,12.03-5.39,12.03-12.03v-96.242
-                  C384.97,270.019,379.58,264.641,372.939,264.641z"/>
-                <path d="M117.067,103.507l63.46-62.558v235.71c0,6.641,5.438,12.03,12.151,12.03c6.713,0,12.151-5.39,12.151-12.03V40.95
-                  l63.46,62.558c4.74,4.704,12.439,4.704,17.179,0c4.74-4.704,4.752-12.319,0-17.011l-84.2-82.997
-                  c-4.692-4.656-12.584-4.608-17.191,0L99.888,86.496c-4.752,4.704-4.74,12.319,0,17.011
-                  C104.628,108.211,112.327,108.211,117.067,103.507z"/>
-              </g>
-            </svg>
-          -->
           </label>
         </div>
       </div>
@@ -816,7 +803,7 @@
         </header>
         <div class="modal__bpm-cont">
           <span class="js-metronome-bpm-number">60</span>&nbsp;
-          <span class="js-bpm-text">bpm</span>
+          <span data-text="bpm">bpm</span>
         </div>
         <audio class="js-metronome-audiofile" src="./src/samples/metronome2.wav" ></audio>
         <button class="modal__btn modal__btn--icon js-metronome-toggle-sound">
@@ -926,6 +913,12 @@
             </li>
           </ul>
         </div>
+      </div>
+    </dialog>
+
+    <dialog class="modal modal--alert js-dialog-alert">
+      <div class="modal__content modal__content--alert">
+        <h2 class="modal__title" data-text="fileAlert">Unsupported file!</h2>
       </div>
     </dialog>
 

@@ -68,6 +68,12 @@
   "appSettingsIntro": "Show intro after reload",
   "appSettingsHint": "Show hint after reload",
   "appSettingsReset": "Reset all app settings",
+  "recorderTitle": "Recorder",
+  "recorderStart": "Start",
+  "recorderStop": "Stop",
+  "recorderUpload": "Upload",
+  "metronomeTitle": "Metronome",
+  "bpm": "bpm",
   "pianoApp": "Piano app",
   "pianoAppUsed": "Used",
   "pianoAppContacts": "Contacts",
@@ -80,5 +86,6 @@
   "hintTextPiano": "You can change piano layout and functionality by accessing piano settings (click \"Piano\" button)",
   "hintTextApp": "You can also change some app settings (click \"App\" button)",
   "hintTextHelp": "For detailed guide click \"Help\" button",
-  "hintTextAbout": "For any suggestions contact me (click \"About\" button for my e-mail address)"
+  "hintTextAbout": "For any suggestions contact me (click \"About\" button for my e-mail address)",
+  "fileAlert": "Unsupported file!"
 }

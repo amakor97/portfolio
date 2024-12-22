@@ -1,7 +1,7 @@
 "use strict";
 
 import { createAudio } from "./audioPlayer.js";
-
+import { showAlert } from "./dialogHandlers.js";
 
 let audioContext = undefined;
 let mediaRecorder = undefined;
@@ -167,30 +167,8 @@ fileInput.addEventListener("input", function() {
       ".js-dialog-recorder-content");
     parent.append(audioCont);
   } else {
-    showAlert("Unsupported file!");
+    showAlert();
   }
 
   updateRecorder();
 })
-
-
-function showAlert(msg) {
-  const alertBox = document.createElement("dialog");
-  alertBox.open = true;
-  alertBox.classList.add("modal");
-
-  const alertBoxInner = document.createElement("div");
-  alertBoxInner.classList.add("modal__content", "modal__content--alert");
-  alertBox.append(alertBoxInner);
-
-  const alertBoxMsgBox = document.createElement("h2");
-  alertBoxMsgBox.classList.add("modal__title");
-  alertBoxInner.append(alertBoxMsgBox);
-
-  alertBoxMsgBox.textContent = msg;
-  document.body.append(alertBox);
-
-  setTimeout(() => {
-    alertBox.remove();
-  }, 2000);
-}

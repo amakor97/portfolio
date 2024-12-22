@@ -499,6 +499,9 @@ input[type=checkbox]:checked + .control-panel__switch-mode-label {
   right: auto;
   left: 0;
 }
+.modal--alert {
+  z-index: 4;
+}
 .modal__content {
   position: absolute;
   top: 50%;
