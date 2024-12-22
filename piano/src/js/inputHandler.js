@@ -29,8 +29,6 @@ function kbdInputHandler(e) {
 
 
 function pressedKeysHandler(e) {
-  console.log(e.code);
-
   if ((pressedKeys.has("ShiftLeft") || (pressedKeys.has("ShiftRight"))) 
     && (pressedKeys.size > 1)) {
     switch(switchModeType) {

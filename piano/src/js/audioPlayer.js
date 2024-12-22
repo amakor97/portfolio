@@ -218,7 +218,6 @@ export function createAudio(audioSrc) {
   })
 
   delBtn.addEventListener("click", () => {
-    console.log(audio);
     audio.pause();
     cancelAnimationFrame(rafRef);
     audioCont.remove();
